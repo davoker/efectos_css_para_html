@@ -2,7 +2,7 @@
 <!-- ================================================================
      SHOWCASE UNIFICADO DE EFECTOS DE TEXTO (CSS puro, sin JS)
      ----------------------------------------------------------------
-     UNA SOLA PÁGINA con los 10 efectos. A la izquierda hay una
+     UNA SOLA PÁGINA con los 11 efectos. A la izquierda hay una
      lista: clic en un efecto → la página salta a su demostración
      (scroll suave). Debajo de cada demo están el código de uso y
      los enlaces a su carpeta (CSS portátil + doc "cómo aplicar").
@@ -11,7 +11,7 @@
        1) <link rel="stylesheet" href="carpeta/efecto.css">  en el <head>
        2) un <li><a href="#carpeta">…</a></li> en la lista .indice
        3) un <section id="carpeta">…</section> en .contenido
-     (Los 10 CSS conviven sin conflictos: cada uno solo define su
+     (Los 11 CSS conviven sin conflictos: cada uno solo define su
       propia clase .efecto-xxx y sus propios @keyframes.)
      ================================================================ -->
 <html lang="es">
@@ -20,7 +20,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Efectos de texto CSS - Showcase unificado</title>
 
-    <!-- ============ LOS 10 EFECTOS (cada uno portable) ============ -->
+    <!-- ============ LOS 11 EFECTOS (cada uno portable) ============ -->
     <link rel="stylesheet" href="glitch/glitch.css">
     <link rel="stylesheet" href="arcoiris/arcoiris.css">
     <link rel="stylesheet" href="fuego/fuego.css">
@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="holograma/holograma.css">
     <link rel="stylesheet" href="vhs/vhs.css">
     <link rel="stylesheet" href="gelatina/gelatina.css">
+    <link rel="stylesheet" href="nebulosa/nebulosa.css">
 
     <style>
         /* ============================================================
@@ -195,6 +196,7 @@
         .c-holograma  { color: #00e5ff; font-family: "Courier New", monospace; }
         .c-vhs        { color: #ff9ecb; }
         .c-gelatina   { color: #ff80ab; }
+        .c-nebulosa   { color: #b388ff; }
 
         footer {
             padding: 2rem 0 1rem;
@@ -230,7 +232,7 @@
 
     <!-- ======================= ÍNDICE ======================= -->
     <aside class="indice">
-        <h3>Efectos <span class="contador">10 disponibles</span></h3>
+        <h3>Efectos <span class="contador">11 disponibles</span></h3>
         <ol class="lista">
             <li><a href="#glitch">⚡ Glitch</a></li>
             <li><a href="#arcoiris">🌈 Arcoíris</a></li>
@@ -242,6 +244,7 @@
             <li><a href="#holograma">📟 Holograma</a></li>
             <li><a href="#vhs">📼 VHS</a></li>
             <li><a href="#gelatina">🍬 Gelatina</a></li>
+            <li><a href="#nebulosa">🌌 Nebulosa</a></li>
         </ol>
     </aside>
 
@@ -251,7 +254,7 @@
         <header class="intro">
             <h1>🔥 Efectos de texto CSS</h1>
             <p>
-                Los 10 efectos en <strong>una sola página</strong>: haz clic en la
+                Los 11 efectos en <strong>una sola página</strong>: haz clic en la
                 lista de la izquierda para saltar al que quieras ver. Todo es
                 <strong>CSS puro</strong> — sin JavaScript, en bucle infinito.
             </p>
@@ -463,8 +466,29 @@
             </p>
         </section>
 
+        <!-- ============ 11. NEBULOSA ============ -->
+        <section id="nebulosa">
+            <h2 class="c-nebulosa">🌌 Nebulosa <small>Espacio profundo</small></h2>
+            <p class="desc">
+                Las letras son una <strong>ventana al vacío</strong>: gas magenta, cian y
+                violeta fluyendo, doble campo de estrellas con parallax y una estrella
+                fugaz que cruza el texto cada 16 s. Fondo oscuro recomendado.
+            </p>
+            <div class="demo">
+                <span class="efecto-nebulosa grande">NEBULOSA</span>
+                <span class="efecto-nebulosa mediano">más allá de la galaxia</span>
+                <span class="efecto-nebulosa peq">texto pequeño</span>
+            </div>
+            <pre><code>&lt;span class="efecto-nebulosa"&gt;Tu texto&lt;/span&gt;</code></pre>
+            <p class="enlaces">
+                <a href="nebulosa/index.html" target="_blank" rel="noopener">Showcase completo</a> ·
+                <a href="nebulosa/nebulosa.css" target="_blank" rel="noopener">nebulosa.css</a> ·
+                <a href="nebulosa/como-aplicar-nebulosa.txt" target="_blank" rel="noopener">Cómo aplicarlo</a>
+            </p>
+        </section>
+
         <footer>
-            10 efectos · CSS puro sin JavaScript · cada efecto es portable:
+            11 efectos · CSS puro sin JavaScript · cada efecto es portable:
             copia su archivo .css a tu proyecto y usa su clase en cualquier texto.
         </footer>
 
