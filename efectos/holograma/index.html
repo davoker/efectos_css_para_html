@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     SHOWCASE DEL EFECTO HOLOGRAMA
+     Abre este archivo con doble clic para ver el efecto en vivo.
+     · holograma.css  → el efecto (portable a cualquier CSS)
+     · <style> de abajo → solo la maquetación de ESTA página
+     ============================================================ -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efecto Holograma - Showcase</title>
+
+    <!-- EL EFECTO (este archivo es el que copias a tu proyecto) -->
+    <link rel="stylesheet" href="holograma.css">
+
+    <style>
+        /* Maquetación del showcase (NO forma parte del efecto) */
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 2rem;
+            background-color: #05080a;   /* casi negro: la proyección destaca */
+            color: #9fb8bd;
+            font-family: "Courier New", Courier, monospace;
+            line-height: 1.6;
+        }
+        h1 { font-size: 2.6rem; margin-top: 0; color: #18ffff; }
+        h2 {
+            color: #00e5ff;
+            border-bottom: 2px solid #0e2a30;
+            padding-bottom: .4rem;
+            margin-top: 2.5rem;
+        }
+        .demo {
+            background-color: #080e11;
+            border: 1px dashed #10323a;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .grande { font-size: 3rem; font-weight: 800; }
+        .mediano { font-size: 1.6rem; font-weight: 800; }
+        .peq { font-size: 1rem; font-weight: bold; }
+        pre {
+            background-color: #080e11;
+            border: 1px solid #10323a;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            color: #a9f5ff;
+            font-size: .95rem;
+        }
+        code { color: #a9f5ff; }
+        .nota { color: #00e5ff; font-weight: bold; }
+        nav a { color: #4dd0e1; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="../index.html"><strong>Todos los efectos</strong></a> ·
+        <a href="../glitch/index.html">Glitch</a> ·
+        <a href="../arcoiris/index.html">Arcoíris</a> ·
+        <a href="../fuego/index.html">Fuego</a> ·
+        <a href="../radiacion/index.html">Radiación</a> ·
+        <a href="../nubes/index.html">Nubes</a> ·
+        <a href="../hielo/index.html">Hielo</a> ·
+        <a href="../lava/index.html">Lava</a> ·
+        <a href="../vhs/index.html">VHS</a> ·
+        <a href="../gelatina/index.html">Gelatina</a>
+    </nav>
+
+    <h1>EFECTO HOLOGRAMA</h1>
+    <p>
+        Las letras parecen una <strong>proyección holográfica</strong> cian:
+        líneas de barrido que ruedan hacia arriba sin parar y
+        <strong>parpadeos con caídas de señal</strong>: cada pocos segundos el
+        holograma titila y un instante parece apagarse antes de recupararse.
+        Solo CSS, sin JavaScript, en bucle infinito.
+    </p>
+
+    <h2>1. Demo grande</h2>
+    <div class="demo">
+        <span class="efecto-holograma grande">PROYECCIÓN</span>
+    </div>
+
+    <h2>2. Título de página</h2>
+    <div class="demo">
+        <span class="efecto-holograma mediano">Mensaje entrante</span>
+    </div>
+
+    <h2>3. Texto pequeño (también funciona)</h2>
+    <div class="demo">
+        <span class="efecto-holograma peq">señal débil, aguantando</span>
+    </div>
+
+    <h2>4. Varias palabras en la misma línea</h2>
+    <div class="demo">
+        <span class="efecto-holograma mediano">REALIDAD</span>
+        <span class="efecto-holograma mediano">AUMENTADA</span>
+    </div>
+
+    <h2>Cómo aplicarlo a cualquier archivo .css</h2>
+    <p>
+        <strong>Paso 1:</strong> copia <strong>todo</strong> el contenido de
+        <code>holograma.css</code> dentro de tu hoja de estilos
+        (o guárdalo como archivo y enlázalo con <code>&lt;link&gt;</code>).
+    </p>
+    <p><strong>Paso 2:</strong> en tu HTML, envuelve el texto en esta etiqueta:</p>
+    <pre><code>&lt;span class="efecto-holograma"&gt;Tu texto&lt;/span&gt;</code></pre>
+    <p class="nota">
+        ✓ No necesita ningún atributo extra: basta con la clase.
+        Usa fondo casi negro: la proyección se ve sobre oscuridad.
+    </p>
+    <p>
+        También tienes las instrucciones en el archivo
+        <code>como-aplicar-holograma.txt</code> de esta misma carpeta.
+    </p>
+
+</body>
+</html>

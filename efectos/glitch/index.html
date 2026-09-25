@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     SHOWCASE DEL EFECTO GLITCH
+     Abre este archivo con doble clic para ver el efecto en vivo.
+     · glitch.css      → el efecto (portable a cualquier CSS)
+     · <style> de abajo → solo la maquetación de ESTA página
+     ============================================================ -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efecto Glitch - Showcase</title>
+
+    <!-- EL EFECTO (este archivo es el que copias a tu proyecto) -->
+    <link rel="stylesheet" href="glitch.css">
+
+    <style>
+        /* Maquetación del showcase (NO forma parte del efecto) */
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 2rem;
+            background-color: #0b0b12;
+            color: #cfd8dc;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+        h1 { font-size: 2.6rem; margin-top: 0; color: #ff2a6d; }
+        h2 {
+            color: #05d9e8;
+            border-bottom: 2px solid #1c2733;
+            padding-bottom: .4rem;
+            margin-top: 2.5rem;
+        }
+        .demo {
+            background-color: #11111c;
+            border: 1px dashed #2a2a40;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .grande { font-size: 3rem; }
+        .mediano { font-size: 1.6rem; }
+        .peq { font-size: 1rem; }
+        pre {
+            background-color: #11111c;
+            border: 1px solid #2a2a40;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            color: #ffe9a8;
+            font-size: .95rem;
+        }
+        code { color: #ffe9a8; }
+        .nota { color: #ff8095; font-weight: bold; }
+        nav a { color: #05d9e8; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="../index.html"><strong>Todos los efectos</strong></a> ·
+        <a href="../arcoiris/index.html">Arcoíris</a> ·
+        <a href="../fuego/index.html">Fuego</a> ·
+        <a href="../radiacion/index.html">Radiación</a> ·
+        <a href="../nubes/index.html">Nubes</a> ·
+        <a href="../hielo/index.html">Hielo</a> ·
+        <a href="../lava/index.html">Lava</a> ·
+        <a href="../holograma/index.html">Holograma</a> ·
+        <a href="../vhs/index.html">VHS</a> ·
+        <a href="../gelatina/index.html">Gelatina</a>
+    </nav>
+
+    <h1>EFECTO GLITCH</h1>
+    <p>
+        Interferencia tipo "señal rota" con bandas RGB cortadas, ráfagas fuerte
+        y <strong>vibración al final</strong>. Se repite <strong>en bucle constante</strong>
+        cada 4,5 segundos. Solo CSS, sin JavaScript.
+    </p>
+
+    <h2>1. Demo grande</h2>
+    <div class="demo">
+        <span class="efecto-glitch grande" data-text="INTERFERENCIA">INTERFERENCIA</span>
+    </div>
+
+    <h2>2. Título de página</h2>
+    <div class="demo">
+        <span class="efecto-glitch mediano" data-text="Bienvenido a la web">Bienvenido a la web</span>
+    </div>
+
+    <h2>3. Texto pequeño (también funciona)</h2>
+    <div class="demo">
+        <span class="efecto-glitch" data-text="Error 404: señal perdida">Error 404: señal perdida</span>
+    </div>
+
+    <h2>4. Varias palabras en la misma línea</h2>
+    <div class="demo">
+        <span class="efecto-glitch" data-text="SYSTEM">SYSTEM</span>
+        <span class="efecto-glitch" data-text="FAILURE">FAILURE</span>
+    </div>
+
+    <h2>Cómo aplicarlo a cualquier archivo .css</h2>
+    <p>
+        <strong>Paso 1:</strong> copia <strong>todo</strong> el contenido de
+        <code>glitch.css</code> dentro de tu hoja de estilos
+        (o guárdalo como archivo y enlázalo con <code>&lt;link&gt;</code>).
+    </p>
+    <p><strong>Paso 2:</strong> en tu HTML, envuelve el texto en esta etiqueta:</p>
+    <pre><code>&lt;span class="efecto-glitch" data-text="Tu texto"&gt;Tu texto&lt;/span&gt;</code></pre>
+    <p class="nota">
+        ⚠ El atributo data-text es obligatorio y debe repetir exactamente el
+        texto visible: las capas de interferencia lo leen de ahí.
+    </p>
+    <p>
+        También tienes las instrucciones en el archivo
+        <code>como-aplicar-glitch.txt</code> de esta misma carpeta.
+    </p>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     SHOWCASE DEL EFECTO LAVA
+     Abre este archivo con doble clic para ver el efecto en vivo.
+     · lava.css      → el efecto (portable a cualquier CSS)
+     · <style> de abajo → solo la maquetación de ESTA página
+     ============================================================ -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efecto Lava - Showcase</title>
+
+    <!-- EL EFECTO (este archivo es el que copias a tu proyecto) -->
+    <link rel="stylesheet" href="lava.css">
+
+    <style>
+        /* Maquetación del showcase (NO forma parte del efecto) */
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 2rem;
+            background-color: #100a07;   /* negro volcánico: resaltan las grietas */
+            color: #d8c3a5;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+        h1 { font-size: 2.6rem; margin-top: 0; color: #ff6d00; }
+        h2 {
+            color: #ff8f00;
+            border-bottom: 2px solid #3a2415;
+            padding-bottom: .4rem;
+            margin-top: 2.5rem;
+        }
+        .demo {
+            background-color: #191009;
+            border: 1px dashed #3a2415;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .grande { font-size: 3rem; font-weight: 800; }
+        .mediano { font-size: 1.6rem; font-weight: 800; }
+        .peq { font-size: 1rem; font-weight: bold; }
+        pre {
+            background-color: #191009;
+            border: 1px solid #3a2415;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            color: #ffd9a0;
+            font-size: .95rem;
+        }
+        code { color: #ffd9a0; }
+        .nota { color: #ff8f00; font-weight: bold; }
+        nav a { color: #ffb74d; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="../index.html"><strong>Todos los efectos</strong></a> ·
+        <a href="../glitch/index.html">Glitch</a> ·
+        <a href="../arcoiris/index.html">Arcoíris</a> ·
+        <a href="../fuego/index.html">Fuego</a> ·
+        <a href="../radiacion/index.html">Radiación</a> ·
+        <a href="../nubes/index.html">Nubes</a> ·
+        <a href="../hielo/index.html">Hielo</a> ·
+        <a href="../holograma/index.html">Holograma</a> ·
+        <a href="../vhs/index.html">VHS</a> ·
+        <a href="../gelatina/index.html">Gelatina</a>
+    </nav>
+
+    <h1>EFECTO LAVA</h1>
+    <p>
+        Las letras son <strong>corteza volcánica</strong>: roca negra con grietas
+        naranjas y amarillas por las que <strong>fluye el magma</strong> lentamente,
+        mientras todo el conjunto <strong>late</strong> con un resplandor de brasas
+        que sube y baja de intensidad. Solo CSS, sin JavaScript, en bucle infinito.
+    </p>
+
+    <h2>1. Demo grande</h2>
+    <div class="demo">
+        <span class="efecto-lava grande">VULCANO</span>
+    </div>
+
+    <h2>2. Título de página</h2>
+    <div class="demo">
+        <span class="efecto-lava mediano">Corazón de magma</span>
+    </div>
+
+    <h2>3. Texto pequeño (también funciona)</h2>
+    <div class="demo">
+        <span class="efecto-lava peq">la tierra respira</span>
+    </div>
+
+    <h2>4. Varias palabras en la misma línea</h2>
+    <div class="demo">
+        <span class="efecto-lava mediano">FUEGO</span>
+        <span class="efecto-lava mediano">INTERIOR</span>
+    </div>
+
+    <h2>Cómo aplicarlo a cualquier archivo .css</h2>
+    <p>
+        <strong>Paso 1:</strong> copia <strong>todo</strong> el contenido de
+        <code>lava.css</code> dentro de tu hoja de estilos
+        (o guárdalo como archivo y enlázalo con <code>&lt;link&gt;</code>).
+    </p>
+    <p><strong>Paso 2:</strong> en tu HTML, envuelve el texto en esta etiqueta:</p>
+    <pre><code>&lt;span class="efecto-lava"&gt;Tu texto&lt;/span&gt;</code></pre>
+    <p class="nota">
+        ✓ No necesita ningún atributo extra: basta con la clase.
+        Usa siempre fondo oscuro: sobre fondo claro la roca negra no se ve.
+    </p>
+    <p>
+        También tienes las instrucciones en el archivo
+        <code>como-aplicar-lava.txt</code> de esta misma carpeta.
+    </p>
+
+</body>
+</html>

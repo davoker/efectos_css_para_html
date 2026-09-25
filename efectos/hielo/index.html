@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     SHOWCASE DEL EFECTO HIELO
+     Abre este archivo con doble clic para ver el efecto en vivo.
+     · hielo.css      → el efecto (portable a cualquier CSS)
+     · <style> de abajo → solo la maquetación de ESTA página
+     ============================================================ -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efecto Hielo - Showcase</title>
+
+    <!-- EL EFECTO (este archivo es el que copias a tu proyecto) -->
+    <link rel="stylesheet" href="hielo.css">
+
+    <style>
+        /* Maquetación del showcase (NO forma parte del efecto) */
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 2rem;
+            background-color: #0a1420;   /* azul casi negro, cueva glaciar */
+            color: #a9c7db;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+        h1 { font-size: 2.6rem; margin-top: 0; color: #7fd4ff; }
+        h2 {
+            color: #7fd4ff;
+            border-bottom: 2px solid #17293a;
+            padding-bottom: .4rem;
+            margin-top: 2.5rem;
+        }
+        .demo {
+            background-color: #0e1b2a;
+            border: 1px dashed #1e3448;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .grande { font-size: 3rem; font-weight: 800; }
+        .mediano { font-size: 1.6rem; font-weight: 800; }
+        .peq { font-size: 1rem; font-weight: bold; }
+        pre {
+            background-color: #0e1b2a;
+            border: 1px solid #1e3448;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            color: #d7f4ff;
+            font-size: .95rem;
+        }
+        code { color: #d7f4ff; }
+        .nota { color: #7fd4ff; font-weight: bold; }
+        nav a { color: #8ed8f8; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="../index.html"><strong>Todos los efectos</strong></a> ·
+        <a href="../glitch/index.html">Glitch</a> ·
+        <a href="../arcoiris/index.html">Arcoíris</a> ·
+        <a href="../fuego/index.html">Fuego</a> ·
+        <a href="../radiacion/index.html">Radiación</a> ·
+        <a href="../nubes/index.html">Nubes</a> ·
+        <a href="../lava/index.html">Lava</a> ·
+        <a href="../holograma/index.html">Holograma</a> ·
+        <a href="../vhs/index.html">VHS</a> ·
+        <a href="../gelatina/index.html">Gelatina</a>
+    </nav>
+
+    <h1>EFECTO HIELO</h1>
+    <p>
+        Texto glacial: un <strong>destello de escarcha</strong> blanco sube
+        lentamente por las letras cada 5 segundos, como la luz rebotando en el
+        hielo, mientras un resplandor azul <strong>frío respira</strong> de forma
+        constante. Solo CSS, sin JavaScript, en bucle infinito.
+    </p>
+
+    <h2>1. Demo grande</h2>
+    <div class="demo">
+        <span class="efecto-hielo grande">CONGELADO</span>
+    </div>
+
+    <h2>2. Título de página</h2>
+    <div class="demo">
+        <span class="efecto-hielo mediano">La edad de hielo</span>
+    </div>
+
+    <h2>3. Texto pequeño (también funciona)</h2>
+    <div class="demo">
+        <span class="efecto-hielo peq">no toques, está helado</span>
+    </div>
+
+    <h2>4. Varias palabras en la misma línea</h2>
+    <div class="demo">
+        <span class="efecto-hielo mediano">HIELO</span>
+        <span class="efecto-hielo mediano">ETerno</span>
+    </div>
+
+    <h2>Cómo aplicarlo a cualquier archivo .css</h2>
+    <p>
+        <strong>Paso 1:</strong> copia <strong>todo</strong> el contenido de
+        <code>hielo.css</code> dentro de tu hoja de estilos
+        (o guárdalo como archivo y enlázalo con <code>&lt;link&gt;</code>).
+    </p>
+    <p><strong>Paso 2:</strong> en tu HTML, envuelve el texto en esta etiqueta:</p>
+    <pre><code>&lt;span class="efecto-hielo"&gt;Tu texto&lt;/span&gt;</code></pre>
+    <p class="nota">
+        ✓ No necesita ningún atributo extra: basta con la clase.
+        Funciona sobre cualquier texto (h1, h2, enlaces, botones...).
+    </p>
+    <p>
+        También tienes las instrucciones en el archivo
+        <code>como-aplicar-hielo.txt</code> de esta misma carpeta.
+    </p>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     SHOWCASE DEL EFECTO GELATINA
+     Abre este archivo con doble clic para ver el efecto en vivo.
+     · gelatina.css  → el efecto (portable a cualquier CSS)
+     · <style> de abajo → solo la maquetación de ESTA página
+     ============================================================ -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efecto Gelatina - Showcase</title>
+
+    <!-- EL EFECTO (este archivo es el que copias a tu proyecto) -->
+    <link rel="stylesheet" href="gelatina.css">
+
+    <style>
+        /* Maquetación del showcase (NO forma parte del efecto) */
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 2rem;
+            background-color: #170d18;   /* ciruela oscura: resalta el caramelo */
+            color: #e0c3e2;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+        h1 { font-size: 2.6rem; margin-top: 0; color: #ff80ab; }
+        h2 {
+            color: #ff80ab;
+            border-bottom: 2px solid #3a1f3c;
+            padding-bottom: .4rem;
+            margin-top: 2.5rem;
+        }
+        .demo {
+            background-color: #1f1122;
+            border: 1px dashed #3a1f3c;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .grande { font-size: 3rem; font-weight: 800; }
+        .mediano { font-size: 1.6rem; font-weight: 800; }
+        .peq { font-size: 1rem; font-weight: bold; }
+        pre {
+            background-color: #1f1122;
+            border: 1px solid #3a1f3c;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            color: #ffd9ec;
+            font-size: .95rem;
+        }
+        code { color: #ffd9ec; }
+        .nota { color: #ff80ab; font-weight: bold; }
+        nav a { color: #f48fb1; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="../index.html"><strong>Todos los efectos</strong></a> ·
+        <a href="../glitch/index.html">Glitch</a> ·
+        <a href="../arcoiris/index.html">Arcoíris</a> ·
+        <a href="../fuego/index.html">Fuego</a> ·
+        <a href="../radiacion/index.html">Radiación</a> ·
+        <a href="../nubes/index.html">Nubes</a> ·
+        <a href="../hielo/index.html">Hielo</a> ·
+        <a href="../lava/index.html">Lava</a> ·
+        <a href="../holograma/index.html">Holograma</a> ·
+        <a href="../vhs/index.html">VHS</a>
+    </nav>
+
+    <h1>EFECTO GELATINA</h1>
+    <p>
+        El texto se comporta como una <strong>gominola</strong> recién sacada
+        del paquete: se <strong>aplasta</strong> al caer, se <strong>estira</strong>
+        al rebotar y va amortiguando el movimiento sobre su línea de base.
+        Relleno de caramelo rosa-naranja con brillo. Solo CSS, sin JavaScript,
+        en bucle infinito.
+    </p>
+
+    <h2>1. Demo grande</h2>
+    <div class="demo">
+        <span class="efecto-gelatina grande">MORDISCO</span>
+    </div>
+
+    <h2>2. Título de página</h2>
+    <div class="demo">
+        <span class="efecto-gelatina mediano">Dulcería el Rebote</span>
+    </div>
+
+    <h2>3. Texto pequeño (también funciona)</h2>
+    <div class="demo">
+        <span class="efecto-gelatina peq">masticable favorito</span>
+    </div>
+
+    <h2>4. Varias palabras en la misma línea</h2>
+    <div class="demo">
+        <span class="efecto-gelatina mediano">SALTA</span>
+        <span class="efecto-gelatina mediano">Y</span>
+        <span class="efecto-gelatina mediano">REBOTA</span>
+    </div>
+
+    <h2>Cómo aplicarlo a cualquier archivo .css</h2>
+    <p>
+        <strong>Paso 1:</strong> copia <strong>todo</strong> el contenido de
+        <code>gelatina.css</code> dentro de tu hoja de estilos
+        (o guárdalo como archivo y enlázalo con <code>&lt;link&gt;</code>).
+    </p>
+    <p><strong>Paso 2:</strong> en tu HTML, envuelve el texto en esta etiqueta:</p>
+    <pre><code>&lt;span class="efecto-gelatina"&gt;Tu texto&lt;/span&gt;</code></pre>
+    <p class="nota">
+        ✓ No necesita ningún atributo extra: basta con la clase.
+        Recomendado: negrita y tamaño medio/grande.
+    </p>
+    <p>
+        También tienes las instrucciones en el archivo
+        <code>como-aplicar-gelatina.txt</code> de esta misma carpeta.
+    </p>
+
+</body>
+</html>

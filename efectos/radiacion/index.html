@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     SHOWCASE DEL EFECTO RADIACIÓN (estética S.T.A.L.K.E.R.)
+     Abre este archivo con doble clic para ver el efecto en vivo.
+     · radiacion.css   → el efecto (portable a cualquier CSS)
+     · <style> de abajo → solo la maquetación de ESTA página
+     ============================================================ -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efecto Radiación - Showcase</title>
+
+    <!-- EL EFECTO (este archivo es el que copias a tu proyecto) -->
+    <link rel="stylesheet" href="radiacion.css">
+
+    <style>
+        /* Maquetación del showcase (NO forma parte del efecto) */
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 2rem;
+            background-color: #0c0f07;   /* verde muy oscuro, humo de la Zona */
+            color: #a8b89a;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+        h1 { font-size: 2.6rem; margin-top: 0; color: #9bcc32; }
+        h2 {
+            color: #9bcc32;
+            border-bottom: 2px solid #24301a;
+            padding-bottom: .4rem;
+            margin-top: 2.5rem;
+        }
+        .demo {
+            background-color: #11150b;
+            border: 1px dashed #2c3a1d;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .grande { font-size: 3rem; font-weight: 800; }
+        .mediano { font-size: 1.6rem; font-weight: 800; }
+        .peq { font-size: 1rem; font-weight: bold; }
+        pre {
+            background-color: #11150b;
+            border: 1px solid #2c3a1d;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            color: #d6ff45;
+            font-size: .95rem;
+        }
+        code { color: #d6ff45; }
+        .nota { color: #9bcc32; font-weight: bold; }
+        .aviso {
+            background-color: #1a2210;
+            border-left: 4px solid #9bcc32;
+            padding: .8rem 1rem;
+            border-radius: 4px;
+        }
+        nav a { color: #ff7043; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="../index.html"><strong>Todos los efectos</strong></a> ·
+        <a href="../glitch/index.html">Glitch</a> ·
+        <a href="../arcoiris/index.html">Arcoíris</a> ·
+        <a href="../fuego/index.html">Fuego</a> ·
+        <a href="../nubes/index.html">Nubes</a> ·
+        <a href="../hielo/index.html">Hielo</a> ·
+        <a href="../lava/index.html">Lava</a> ·
+        <a href="../holograma/index.html">Holograma</a> ·
+        <a href="../vhs/index.html">VHS</a> ·
+        <a href="../gelatina/index.html">Gelatina</a>
+    </nav>
+
+    <h1>EFECTO RADIACIÓN</h1>
+    <p>
+        Texto irradiado con tres capas: <strong>cintas de peligro</strong> negras en
+        diagonal, <strong>energía tóxica</strong> verde que fluye sin parar dentro de
+        las letras y un <strong>contador Geiger</strong> que destella de forma irregular
+        (brillo + micro-temblor de 1px) como cuando detecta una medida.
+        Solo CSS, sin JavaScript, en bucle infinito.
+    </p>
+
+    <h2>1. Demo grande</h2>
+    <div class="demo">
+        <span class="efecto-radiacion grande">ЗОНА</span>
+    </div>
+
+    <h2>2. Título de página</h2>
+    <div class="demo">
+        <span class="efecto-radiacion mediano">Zona de Exclusión</span>
+    </div>
+
+    <h2>3. Texto pequeño (también funciona)</h2>
+    <div class="demo">
+        <span class="efecto-radiacion peq">El contador no para de tic-taquear...</span>
+    </div>
+
+    <h2>4. Símbolo de peligro</h2>
+    <div class="demo">
+        <span class="efecto-radiacion mediano">☢ PELIGRO RADIACIÓN</span>
+    </div>
+
+    <p class="aviso">
+        Consejo: el efecto se aprecia mejor con <strong>fondo oscuro</strong> y texto
+        en <strong>negrita</strong>, porque el resplandor verde necesita contraste.
+    </p>
+
+    <h2>Cómo aplicarlo a cualquier archivo .css</h2>
+    <p>
+        <strong>Paso 1:</strong> copia <strong>todo</strong> el contenido de
+        <code>radiacion.css</code> dentro de tu hoja de estilos
+        (o guárdalo como archivo y enlázalo con <code>&lt;link&gt;</code>).
+    </p>
+    <p><strong>Paso 2:</strong> en tu HTML, envuelve el texto en esta etiqueta:</p>
+    <pre><code>&lt;span class="efecto-radiacion"&gt;Tu texto&lt;/span&gt;</code></pre>
+    <p class="nota">
+        ✓ No necesita ningún atributo extra: basta con la clase.
+        Funciona sobre cualquier texto (h1, h2, enlaces, botones...).
+    </p>
+    <p>
+        También tienes las instrucciones en el archivo
+        <code>como-aplicar-radiacion.txt</code> de esta misma carpeta.
+    </p>
+
+</body>
+</html>
