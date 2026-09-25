@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     SHOWCASE DEL EFECTO NUBES
+     Abre este archivo con doble clic para ver el efecto en vivo.
+     · nubes.css      → el efecto (portable a cualquier CSS)
+     · <style> de abajo → solo la maquetación de ESTA página
+     ============================================================ -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efecto Nubes - Showcase</title>
+
+    <!-- EL EFECTO (este archivo es el que copias a tu proyecto) -->
+    <link rel="stylesheet" href="nubes.css">
+
+    <style>
+        /* Maquetación del showcase (NO forma parte del efecto) */
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 2rem;
+            background-color: #0d1725;   /* cielo nocturno: resalta el cielo de las letras */
+            color: #b9cde0;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+        h1 { font-size: 2.6rem; margin-top: 0; color: #7fc9f7; }
+        h2 {
+            color: #7fc9f7;
+            border-bottom: 2px solid #1d2c40;
+            padding-bottom: .4rem;
+            margin-top: 2.5rem;
+        }
+        .demo {
+            background-color: #111e30;
+            border: 1px dashed #24374f;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .grande { font-size: 3rem; font-weight: 800; }
+        .mediano { font-size: 1.6rem; font-weight: 800; }
+        .peq { font-size: 1rem; font-weight: bold; }
+        pre {
+            background-color: #111e30;
+            border: 1px solid #24374f;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            color: #c9ebff;
+            font-size: .95rem;
+        }
+        code { color: #c9ebff; }
+        .nota { color: #7fc9f7; font-weight: bold; }
+    
+        /* --- BOTÓN "TODOS LOS EFECTOS" (centrado arriba) ---
+           Clicable y con estado pulsado; mientras se mantiene sale el
+           destello TEMÁTICO de este efecto y, al soltar, salta a
+           transicion.html#nubes: allí estalla la escena del propio
+           efecto (la elige :target) y, tras ~1,6 s de retardo (meta
+           refresh), se llega a la portada. --- */
+        nav.barra-volver {
+            text-align: center;
+            margin: 0 0 1.4rem;
+        }
+        .btn-volver {
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+            padding: .65rem 1.7rem;
+            background-color: #161b24;
+            border: 1px solid #2c3a4d;
+            border-radius: 999px;
+            color: #cfd8dc;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 3px 0 #07090e, 0 6px 14px rgba(0,0,0,.45);
+            transition: transform .1s, background-color .15s, box-shadow .1s;
+        }
+        .btn-volver:hover {
+            background-color: #1d2430;
+            color: #ffffff;
+        }
+        .btn-volver:active {
+            transform: translateY(3px) scale(.97);
+            background-color: #10141b;
+            box-shadow: 0 0 0 #07090e, inset 0 3px 8px rgba(0,0,0,.75);
+        }
+                .btn-volver::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 170px;
+            height: 170px;
+            margin: -85px 0 0 -85px;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            background: radial-gradient(circle, #ffffff 0%, rgba(255,255,255,.9) 35%, rgba(214,235,255,.5) 60%, rgba(214,235,255,0) 78%);
+            transform: scale(.2);
+        }
+        .btn-volver:active::after {
+            animation: btn-nubes .55s cubic-bezier(.25,1.4,.4,1) infinite;
+        }
+        @keyframes btn-nubes {
+            0%   { opacity: 0;   transform: scale(.2); }
+            40%  { opacity: 1;   transform: scale(1.1); }
+            70%  { transform: scale(.82); }
+            100% { opacity: 0;   transform: scale(.95); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="barra-volver">
+        <a class="btn-volver" href="../../transicion.html#nubes">← Todos los efectos</a>
+    </nav>
+
+    <h1>EFECTO NUBES</h1>
+    <p>
+        Las letras son un <strong>trozo de cielo</strong>: dentro se ven 4 capas de
+        nubes blancas que cruzan a <strong>distinta velocidad</strong> (las grandes
+        pasan por delante de las pequeñas, como el parallax de un paisaje) mientras
+        el texto <strong>flota</strong> suavemente. Solo CSS, sin JavaScript,
+        en bucle infinito.
+    </p>
+
+    <h2>1. Demo grande</h2>
+    <div class="demo">
+        <span class="efecto-nubes grande">CIELO</span>
+    </div>
+
+    <h2>2. Título de página</h2>
+    <div class="demo">
+        <span class="efecto-nubes mediano">Sobre las nubes</span>
+    </div>
+
+    <h2>3. Texto pequeño (también funciona)</h2>
+    <div class="demo">
+        <span class="efecto-nubes peq">hoy no se ve el suelo</span>
+    </div>
+
+    <h2>4. Varias palabras en la misma línea</h2>
+    <div class="demo">
+        <span class="efecto-nubes mediano">DÍA</span>
+        <span class="efecto-nubes mediano">DE</span>
+        <span class="efecto-nubes mediano">NUBES</span>
+    </div>
+
+    <h2>Cómo aplicarlo a cualquier archivo .css</h2>
+    <p>
+        <strong>Paso 1:</strong> copia <strong>todo</strong> el contenido de
+        <code>nubes.css</code> dentro de tu hoja de estilos
+        (o guárdalo como archivo y enlázalo con <code>&lt;link&gt;</code>).
+    </p>
+    <p><strong>Paso 2:</strong> en tu HTML, envuelve el texto en esta etiqueta:</p>
+    <pre><code>&lt;span class="efecto-nubes"&gt;Tu texto&lt;/span&gt;</code></pre>
+    <p class="nota">
+        ✓ No necesita ningún atributo extra: basta con la clase.
+        Recomendado: negrita y tamaño medio/grande para ver bien las nubes.
+    </p>
+    <p>
+        También tienes las instrucciones en el archivo
+        <code>como-aplicar-nubes.txt</code> de esta misma carpeta.
+    </p>
+
+</body>
+</html>

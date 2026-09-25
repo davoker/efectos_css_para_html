@@ -2,8 +2,10 @@
 <!-- ================================================================
      SHOWCASE UNIFICADO DE EFECTOS DE TEXTO (CSS puro, sin JS)
      ----------------------------------------------------------------
-     UNA SOLA PÁGINA con los 20 efectos. A la izquierda hay una
-     lista: clic en un efecto → la página salta a su tarjeta
+     UNA SOLA PÁGINA con los 20 efectos agrupados en CATEGORÍAS: en el
+     índice de la izquierda hay un desplegable que filtra por categoría
+     (con :has(), sin JS) y, debajo, la lista: clic en un efecto → la
+     página salta a su tarjeta
      (scroll suave). El contenido va en una CUADRÍCULA de círculos
      (3 por fila) para que el scroll sea corto: cada círculo es una
      muestra del efecto, debajo está su nombre y dos botones:
@@ -18,21 +20,35 @@
      — el retardo es un <meta refresh>, seguimos sin JS.
 
      CÓMO AÑADIR UN EFECTO NUEVO (de aquí en adelante):
-       1) <link rel="stylesheet" href="carpeta/efecto.css">  en el <head>
-       2) un <li><a href="#carpeta">…</a></li> en la lista .indice
-       3) un <section id="carpeta" class="tarjeta">…</section> en .galeria
-       4) su descargable: carpeta/efecto.zip con estos 3 archivos dentro
-          (efecto.css, index.html y como-aplicar-efecto.txt). P. ej. en
-          PowerShell: Compress-Archive -Force -Path carpeta\efecto.css,
-          carpeta\index.html, carpeta\como-aplicar-efecto.txt `
-          -DestinationPath carpeta\efecto.zip
+       1) <link rel="stylesheet" href="categoria/efecto/efecto.css">  en el <head>
+       2) un <li data-cat="categoria"><a href="#efecto">…</a></li> en .lista
+       3) un <section id="efecto" class="tarjeta" data-cat="categoria">…</section>
+          dentro de .galeria
+       4) su descargable: categoria/efecto/efecto.zip con estos 3 archivos
+          dentro (efecto.css, index.html y como-aplicar-efecto.txt). P. ej.
+          en PowerShell:
+            Compress-Archive -Force `
+              -Path categoria\efecto\efecto.css, categoria\efecto\index.html, `
+              categoria\efecto\como-aplicar-efecto.txt `
+              -DestinationPath categoria\efecto\efecto.zip
           Si cambias el CSS o el HTML después, ¡vuelve a crear el zip!
-       5) su escena temática: .tema-carpeta + sus @keyframes en
-          transicion.css, su <div class="escena tema-carpeta"> con
-          id="carpeta" en transicion.html, y OTRA copia sin id tras su
-          botón de descarga (aquí, dentro de su <section id="carpeta">).
-     (Los 20 CSS conviven sin conflictos: cada uno solo define su
-      propia clase .efecto-xxx y sus propios @keyframes.)
+       5) su escena temática: .tema-efecto + sus @keyframes en
+          transicion.css, su <div class="escena tema-efecto"> con
+          id="efecto" en transicion.html, y OTRA copia sin id tras su
+          botón de descarga (aquí, dentro de su <section id="efecto">).
+          Las escenas viven SIEMPRE en transicion.* de la raíz, jamás en
+          la carpeta de la categoría.
+
+     CÓMO AÑADIR UNA CATEGORÍA NUEVA:
+       1) crea efectos/categoria/ y mete dentro sus efectos (los 20 de
+          hoy están en efectos/miscelanea/, la categoría "Miscelánea")
+       2) aquí: su <option value="categoria">Nombre (n)</option> en #filtro-cat
+       3) aquí: su bloque "FILTRADO POR CATEGORÍA" del <style> (copia el de
+          miscelanea y cambia valor y data-cat)
+       4) sus <link>, <li data-cat> y <section data-cat> con rutas
+          categoria/efecto/…
+      (Los 20 CSS conviven sin conflictos: cada uno solo define su
+       propia clase .efecto-xxx y sus propios @keyframes.)
      ================================================================ -->
 <html lang="es">
 <head>
@@ -41,26 +57,26 @@
     <title>Efectos de texto CSS - Showcase unificado</title>
 
     <!-- ============ LOS 20 EFECTOS (cada uno portable) ============ -->
-    <link rel="stylesheet" href="glitch/glitch.css">
-    <link rel="stylesheet" href="arcoiris/arcoiris.css">
-    <link rel="stylesheet" href="fuego/fuego.css">
-    <link rel="stylesheet" href="radiacion/radiacion.css">
-    <link rel="stylesheet" href="nubes/nubes.css">
-    <link rel="stylesheet" href="hielo/hielo.css">
-    <link rel="stylesheet" href="lava/lava.css">
-    <link rel="stylesheet" href="holograma/holograma.css">
-    <link rel="stylesheet" href="vhs/vhs.css">
-    <link rel="stylesheet" href="gelatina/gelatina.css">
-    <link rel="stylesheet" href="nebulosa/nebulosa.css">
-    <link rel="stylesheet" href="orbita/orbita.css">
-    <link rel="stylesheet" href="eclipse/eclipse.css">
-    <link rel="stylesheet" href="brote/brote.css">
-    <link rel="stylesheet" href="viento/viento.css">
-    <link rel="stylesheet" href="marea/marea.css">
-    <link rel="stylesheet" href="corriente/corriente.css">
-    <link rel="stylesheet" href="rayo/rayo.css">
-    <link rel="stylesheet" href="chispa/chispa.css">
-    <link rel="stylesheet" href="grieta/grieta.css">
+    <link rel="stylesheet" href="miscelanea/glitch/glitch.css">
+    <link rel="stylesheet" href="miscelanea/arcoiris/arcoiris.css">
+    <link rel="stylesheet" href="miscelanea/fuego/fuego.css">
+    <link rel="stylesheet" href="miscelanea/radiacion/radiacion.css">
+    <link rel="stylesheet" href="miscelanea/nubes/nubes.css">
+    <link rel="stylesheet" href="miscelanea/hielo/hielo.css">
+    <link rel="stylesheet" href="miscelanea/lava/lava.css">
+    <link rel="stylesheet" href="miscelanea/holograma/holograma.css">
+    <link rel="stylesheet" href="miscelanea/vhs/vhs.css">
+    <link rel="stylesheet" href="miscelanea/gelatina/gelatina.css">
+    <link rel="stylesheet" href="miscelanea/nebulosa/nebulosa.css">
+    <link rel="stylesheet" href="miscelanea/orbita/orbita.css">
+    <link rel="stylesheet" href="miscelanea/eclipse/eclipse.css">
+    <link rel="stylesheet" href="miscelanea/brote/brote.css">
+    <link rel="stylesheet" href="miscelanea/viento/viento.css">
+    <link rel="stylesheet" href="miscelanea/marea/marea.css">
+    <link rel="stylesheet" href="miscelanea/corriente/corriente.css">
+    <link rel="stylesheet" href="miscelanea/rayo/rayo.css">
+    <link rel="stylesheet" href="miscelanea/chispa/chispa.css">
+    <link rel="stylesheet" href="miscelanea/grieta/grieta.css">
 
     <!-- Escenas temáticas (transición + botones de descarga) -->
     <link rel="stylesheet" href="transicion.css">
@@ -119,7 +135,7 @@
             list-style: none;
             margin: 0;
             padding: 0 6px 0 0;
-            max-height: calc(100vh - 7rem);
+            max-height: calc(100vh - 10rem);
             overflow-y: auto;
             scrollbar-width: thin;                              /* Firefox */
             scrollbar-color: #232a34 transparent;
@@ -364,6 +380,33 @@
         @media (max-width: 560px) {
             .galeria { grid-template-columns: 1fr; }
         }
+
+        /* --- SELECTOR DE CATEGORÍA (desplegable arriba del índice) --- */
+        .cat-sel {
+            width: 100%;
+            margin: .4rem 0 .9rem;
+            padding: .5rem .6rem;
+            background-color: #12161c;
+            color: #c7cdd6;
+            border: 1px solid #232a34;
+            border-radius: 6px;
+            font: inherit;
+            font-size: .9rem;
+            cursor: pointer;
+        }
+        .cat-sel:hover { border-color: #3a4452; }
+        .cat-sel:focus { outline: none; border-color: #5d6774; }
+
+        /* --- FILTRADO POR CATEGORÍA (sin JavaScript) ---
+           Cuando el desplegable marca una categoría, la lista lateral y las
+           tarjetas de las DEMÁS categorías se ocultan con :has().
+           PARA AÑADIR UNA CATEGORÍA: copia este bloque y cambia el valor del
+           <option> y el data-cat (receta completa en la cabecera). */
+        body:has(#filtro-cat option[value="miscelanea"]:checked) .indice li:not([data-cat="miscelanea"]),
+        body:has(#filtro-cat option[value="miscelanea"]:checked) .galeria .tarjeta:not([data-cat="miscelanea"]) {
+            display: none;
+        }
+
     </style>
 </head>
 <body>
@@ -373,27 +416,34 @@
     <!-- ======================= ÍNDICE ======================= -->
     <aside class="indice">
         <h3>Efectos <span class="contador">20 disponibles</span></h3>
+
+        <!-- Desplegable de categorías: filtra lista y tarjetas -->
+        <select id="filtro-cat" class="cat-sel"
+                aria-label="Filtrar por categoría">
+            <option value="todas" selected>Todas las categorías (20)</option>
+            <option value="miscelanea">Miscelánea (20)</option>
+        </select>
         <ol class="lista">
-            <li><a href="#glitch">⚡ Glitch</a></li>
-            <li><a href="#arcoiris">🌈 Arcoíris</a></li>
-            <li><a href="#fuego">🔥 Fuego</a></li>
-            <li><a href="#radiacion">☢️ Radiación</a></li>
-            <li><a href="#nubes">☁️ Nubes</a></li>
-            <li><a href="#hielo">🧊 Hielo</a></li>
-            <li><a href="#lava">🌋 Lava</a></li>
-            <li><a href="#holograma">📟 Holograma</a></li>
-            <li><a href="#vhs">📼 VHS</a></li>
-            <li><a href="#gelatina">🍬 Gelatina</a></li>
-            <li><a href="#nebulosa">🌌 Nebulosa</a></li>
-            <li><a href="#orbita">🪐 Órbita</a></li>
-            <li><a href="#eclipse">🌑 Eclipse</a></li>
-            <li><a href="#brote">🌱 Brote</a></li>
-            <li><a href="#viento">🍃 Viento</a></li>
-            <li><a href="#marea">🌊 Marea</a></li>
-            <li><a href="#corriente">💧 Corriente</a></li>
-            <li><a href="#rayo">🌩️ Rayo</a></li>
-            <li><a href="#chispa">✨ Chispa</a></li>
-            <li><a href="#grieta">🗿 Grieta</a></li>
+            <li data-cat="miscelanea"><a href="#glitch">⚡ Glitch</a></li>
+            <li data-cat="miscelanea"><a href="#arcoiris">🌈 Arcoíris</a></li>
+            <li data-cat="miscelanea"><a href="#fuego">🔥 Fuego</a></li>
+            <li data-cat="miscelanea"><a href="#radiacion">☢️ Radiación</a></li>
+            <li data-cat="miscelanea"><a href="#nubes">☁️ Nubes</a></li>
+            <li data-cat="miscelanea"><a href="#hielo">🧊 Hielo</a></li>
+            <li data-cat="miscelanea"><a href="#lava">🌋 Lava</a></li>
+            <li data-cat="miscelanea"><a href="#holograma">📟 Holograma</a></li>
+            <li data-cat="miscelanea"><a href="#vhs">📼 VHS</a></li>
+            <li data-cat="miscelanea"><a href="#gelatina">🍬 Gelatina</a></li>
+            <li data-cat="miscelanea"><a href="#nebulosa">🌌 Nebulosa</a></li>
+            <li data-cat="miscelanea"><a href="#orbita">🪐 Órbita</a></li>
+            <li data-cat="miscelanea"><a href="#eclipse">🌑 Eclipse</a></li>
+            <li data-cat="miscelanea"><a href="#brote">🌱 Brote</a></li>
+            <li data-cat="miscelanea"><a href="#viento">🍃 Viento</a></li>
+            <li data-cat="miscelanea"><a href="#marea">🌊 Marea</a></li>
+            <li data-cat="miscelanea"><a href="#corriente">💧 Corriente</a></li>
+            <li data-cat="miscelanea"><a href="#rayo">🌩️ Rayo</a></li>
+            <li data-cat="miscelanea"><a href="#chispa">✨ Chispa</a></li>
+            <li data-cat="miscelanea"><a href="#grieta">🗿 Grieta</a></li>
         </ol>
     </aside>
 
@@ -404,7 +454,8 @@
             <h1>🔥 Efectos de texto CSS</h1>
             <p>
                 Los 20 efectos en <strong>una sola página</strong>: haz clic en la
-                lista de la izquierda para saltar al que quieras ver. Todo es
+                lista de la izquierda para saltar al que quieras ver, y el
+                desplegable de la izquierda filtra por categoría. Todo es
                 <strong>CSS puro</strong> — sin JavaScript, en bucle infinito.
             </p>
             <p class="resumen">
@@ -420,13 +471,13 @@
         <div class="galeria">
 
         <!-- ============ 1. GLITCH ============ -->
-        <section id="glitch" class="tarjeta">
+        <section id="glitch" class="tarjeta" data-cat="miscelanea">
             <div class="muestra">
                 <span class="efecto-glitch" data-text="GLITCH">GLITCH</span>
             </div>
             <h2 class="c-glitch">⚡ Glitch <small>Interferencia + vibración</small></h2>
-            <a class="btn" href="glitch/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="glitch/glitch.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="miscelanea/glitch/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="miscelanea/glitch/glitch.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-glitch">
                 <div class="gl-banda gl-banda-1"></div>
                 <div class="gl-texto">GLITCH</div>
@@ -435,13 +486,13 @@
         </section>
 
         <!-- ============ 2. ARCOÍRIS ============ -->
-        <section id="arcoiris" class="tarjeta">
+        <section id="arcoiris" class="tarjeta" data-cat="miscelanea">
             <div class="muestra">
                 <span class="efecto-arcoiris">ARCOÍRIS</span>
             </div>
             <h2 class="c-arcoiris">🌈 Arcoíris <small>Color en movimiento</small></h2>
-            <a class="btn" href="arcoiris/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="arcoiris/arcoiris.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="miscelanea/arcoiris/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="miscelanea/arcoiris/arcoiris.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-arcoiris">
                 <div class="ar-onda ar-onda-1"></div>
                 <div class="ar-onda ar-onda-2"></div>
@@ -449,13 +500,13 @@
         </section>
 
         <!-- ============ 3. FUEGO ============ -->
-        <section id="fuego" class="tarjeta">
+        <section id="fuego" class="tarjeta" data-cat="miscelanea">
             <div class="muestra">
                 <span class="efecto-fuego">FUEGO</span>
             </div>
             <h2 class="c-fuego">🔥 Fuego <small>Quemando con parpadeo</small></h2>
-            <a class="btn" href="fuego/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="fuego/fuego.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="miscelanea/fuego/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="miscelanea/fuego/fuego.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-fuego">
                 <div class="fu-bola"></div>
                 <div class="fu-llamas"></div>
@@ -464,13 +515,13 @@
         </section>
 
         <!-- ============ 4. RADIACIÓN ============ -->
-        <section id="radiacion" class="tarjeta">
+        <section id="radiacion" class="tarjeta" data-cat="miscelanea">
             <div class="muestra">
                 <span class="efecto-radiacion">RADIACIÓN</span>
             </div>
             <h2 class="c-radiacion">☢️ Radiación <small>Tema S.T.A.L.K.E.R.</small></h2>
-            <a class="btn" href="radiacion/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="radiacion/radiacion.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="miscelanea/radiacion/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="miscelanea/radiacion/radiacion.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-radiacion">
                 <div class="ra-simbolo"></div>
                 <div class="ra-anillo ra-anillo-1"></div>
@@ -479,13 +530,13 @@
         </section>
 
         <!-- ============ 5. NUBES ============ -->
-        <section id="nubes" class="tarjeta">
+        <section id="nubes" class="tarjeta" data-cat="miscelanea">
             <div class="muestra">
                 <span class="efecto-nubes">CIELO</span>
             </div>
             <h2 class="c-nubes">☁️ Nubes <small>Cielo con parallax</small></h2>
-            <a class="btn" href="nubes/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="nubes/nubes.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="miscelanea/nubes/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="miscelanea/nubes/nubes.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-nubes">
                 <div class="nu-mini-a"></div>
                 <div class="nu-nube"></div>
@@ -494,13 +545,13 @@
         </section>
 
         <!-- ============ 6. HIELO ============ -->
-        <section id="hielo" class="tarjeta">
+        <section id="hielo" class="tarjeta" data-cat="miscelanea">
             <div class="muestra">
                 <span class="efecto-hielo">CONGELADO</span>
             </div>
             <h2 class="c-hielo">🧊 Hielo <small>Escarcha helada</small></h2>
-            <a class="btn" href="hielo/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="hielo/hielo.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="miscelanea/hielo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="miscelanea/hielo/hielo.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-hielo">
                 <div class="hi-copo"></div>
                 <div class="hi-escarcha"></div>
@@ -508,13 +559,13 @@
         </section>
 
         <!-- ============ 7. LAVA ============ -->
-        <section id="lava" class="tarjeta">
+        <section id="lava" class="tarjeta" data-cat="miscelanea">
             <div class="muestra">
                 <span class="efecto-lava">VULCANO</span>
             </div>
             <h2 class="c-lava">🌋 Lava <small>Corteza volcánica</small></h2>
-            <a class="btn" href="lava/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="lava/lava.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="miscelanea/lava/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="miscelanea/lava/lava.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-lava">
                 <div class="la-magma"></div>
                 <div class="la-chispas"></div>
@@ -522,13 +573,13 @@
         </section>
 
         <!-- ============ 8. HOLOGRAMA ============ -->
-        <section id="holograma" class="tarjeta">
+        <section id="holograma" class="tarjeta" data-cat="miscelanea">
             <div class="muestra">
                 <span class="efecto-holograma">PROYECCIÓN</span>
             </div>
             <h2 class="c-holograma">📟 Holograma <small>Proyección con scanlines</small></h2>
-            <a class="btn" href="holograma/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="holograma/holograma.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="miscelanea/holograma/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="miscelanea/holograma/holograma.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-holograma">
                 <div class="ho-rejilla"></div>
                 <div class="ho-barrido"></div>
@@ -537,13 +588,13 @@
         </section>
 
         <!-- ============ 9. VHS ============ -->
-        <section id="vhs" class="tarjeta">
+        <section id="vhs" class="tarjeta" data-cat="miscelanea">
             <div class="muestra">
                 <span class="efecto-vhs">REC 1994</span>
             </div>
             <h2 class="c-vhs">📼 VHS <small>Cinta de vídeo</small></h2>
-            <a class="btn" href="vhs/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="vhs/vhs.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="miscelanea/vhs/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="miscelanea/vhs/vhs.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-vhs">
                 <div class="vh-banda vh-banda-1"></div>
                 <div class="vh-texto">PLAY ▶</div>
@@ -552,13 +603,13 @@
         </section>
 
         <!-- ============ 10. GELATINA ============ -->
-        <section id="gelatina" class="tarjeta">
+        <section id="gelatina" class="tarjeta" data-cat="miscelanea">
             <div class="muestra">
                 <span class="efecto-gelatina">MORDISCO</span>
             </div>
             <h2 class="c-gelatina">🍬 Gelatina <small>Gominola con rebote</small></h2>
-            <a class="btn" href="gelatina/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="gelatina/gelatina.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="miscelanea/gelatina/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="miscelanea/gelatina/gelatina.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-gelatina">
                 <div class="ge-onda ge-onda-1"></div>
                 <div class="ge-bola"></div>
@@ -567,13 +618,13 @@
         </section>
 
         <!-- ============ 11. NEBULOSA ============ -->
-        <section id="nebulosa" class="tarjeta">
+        <section id="nebulosa" class="tarjeta" data-cat="miscelanea">
             <div class="muestra">
                 <span class="efecto-nebulosa">NEBULOSA</span>
             </div>
             <h2 class="c-nebulosa">🌌 Nebulosa <small>Espacio profundo</small></h2>
-            <a class="btn" href="nebulosa/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="nebulosa/nebulosa.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="miscelanea/nebulosa/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="miscelanea/nebulosa/nebulosa.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-nebulosa">
                 <div class="ne-humo"></div>
                 <div class="ne-estrellas"></div>
@@ -583,13 +634,13 @@
 
 
         <!-- ============ 12. ORBITA ============ -->
-        <section id="orbita" class="tarjeta">
+        <section id="orbita" class="tarjeta" data-cat="miscelanea">
             <div class="muestra">
                 <span class="efecto-orbita">ORBITA</span>
             </div>
             <h2 class="c-orbita">🪐 Órbita <small>Planeta satélite</small></h2>
-            <a class="btn" href="orbita/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="orbita/orbita.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="miscelanea/orbita/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="miscelanea/orbita/orbita.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-orbita">
                 <div class="or-estrellas"></div>
                 <div class="or-anillo"></div>
@@ -598,13 +649,13 @@
         </section>
 
         <!-- ============ 13. ECLIPSE ============ -->
-        <section id="eclipse" class="tarjeta">
+        <section id="eclipse" class="tarjeta" data-cat="miscelanea">
             <div class="muestra">
                 <span class="efecto-eclipse">ECLIPSE</span>
             </div>
             <h2 class="c-eclipse">🌑 Eclipse <small>Corona eclipsada</small></h2>
-            <a class="btn" href="eclipse/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="eclipse/eclipse.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="miscelanea/eclipse/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="miscelanea/eclipse/eclipse.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-eclipse">
                 <div class="ec-corona"></div>
                 <div class="ec-disco"></div>
@@ -613,13 +664,13 @@
         </section>
 
         <!-- ============ 14. BROTE ============ -->
-        <section id="brote" class="tarjeta">
+        <section id="brote" class="tarjeta" data-cat="miscelanea">
             <div class="muestra">
                 <span class="efecto-brote">BROTE</span>
             </div>
             <h2 class="c-brote">🌱 Brote <small>Germinación viva</small></h2>
-            <a class="btn" href="brote/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="brote/brote.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="miscelanea/brote/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="miscelanea/brote/brote.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-brote">
                 <div class="br-tierra"></div>
                 <div class="br-tallo"></div>
@@ -628,13 +679,13 @@
         </section>
 
         <!-- ============ 15. VIENTO ============ -->
-        <section id="viento" class="tarjeta">
+        <section id="viento" class="tarjeta" data-cat="miscelanea">
             <div class="muestra">
                 <span class="efecto-viento">VIENTO</span>
             </div>
             <h2 class="c-viento">🍃 Viento <small>Ráfagas y hojas</small></h2>
-            <a class="btn" href="viento/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="viento/viento.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="miscelanea/viento/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="miscelanea/viento/viento.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-viento">
                 <div class="vi-racha vi-racha-1"></div>
                 <div class="vi-racha vi-racha-2"></div>
@@ -643,13 +694,13 @@
         </section>
 
         <!-- ============ 16. MAREA ============ -->
-        <section id="marea" class="tarjeta">
+        <section id="marea" class="tarjeta" data-cat="miscelanea">
             <div class="muestra">
                 <span class="efecto-marea">MAREA</span>
             </div>
             <h2 class="c-marea">🌊 Marea <small>Sube y baja</small></h2>
-            <a class="btn" href="marea/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="marea/marea.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="miscelanea/marea/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="miscelanea/marea/marea.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-marea">
                 <div class="ma-ola"></div>
                 <div class="ma-espuma"></div>
@@ -658,13 +709,13 @@
         </section>
 
         <!-- ============ 17. CORRIENTE ============ -->
-        <section id="corriente" class="tarjeta">
+        <section id="corriente" class="tarjeta" data-cat="miscelanea">
             <div class="muestra">
                 <span class="efecto-corriente">CORRIENTE</span>
             </div>
             <h2 class="c-corriente">💧 Corriente <small>Caústicas de luz</small></h2>
-            <a class="btn" href="corriente/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="corriente/corriente.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="miscelanea/corriente/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="miscelanea/corriente/corriente.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-corriente">
                 <div class="co-rayos"></div>
                 <div class="co-caustica"></div>
@@ -673,13 +724,13 @@
         </section>
 
         <!-- ============ 18. RAYO ============ -->
-        <section id="rayo" class="tarjeta">
+        <section id="rayo" class="tarjeta" data-cat="miscelanea">
             <div class="muestra">
                 <span class="efecto-rayo">RAYO</span>
             </div>
             <h2 class="c-rayo">🌩️ Rayo <small>Descarga eléctrica</small></h2>
-            <a class="btn" href="rayo/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="rayo/rayo.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="miscelanea/rayo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="miscelanea/rayo/rayo.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-rayo">
                 <div class="ry-rayo"></div>
                 <div class="ry-rayo2"></div>
@@ -688,13 +739,13 @@
         </section>
 
         <!-- ============ 19. CHISPA ============ -->
-        <section id="chispa" class="tarjeta">
+        <section id="chispa" class="tarjeta" data-cat="miscelanea">
             <div class="muestra">
                 <span class="efecto-chispa">CHISPA</span>
             </div>
             <h2 class="c-chispa">✨ Chispa <small>Chispas volando</small></h2>
-            <a class="btn" href="chispa/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="chispa/chispa.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="miscelanea/chispa/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="miscelanea/chispa/chispa.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-chispa">
                 <div class="ch-estallido ch-estallido-1"></div>
                 <div class="ch-estallido ch-estallido-2"></div>
@@ -703,13 +754,13 @@
         </section>
 
         <!-- ============ 20. GRIETA ============ -->
-        <section id="grieta" class="tarjeta">
+        <section id="grieta" class="tarjeta" data-cat="miscelanea">
             <div class="muestra">
                 <span class="efecto-grieta">GRIETA</span>
             </div>
             <h2 class="c-grieta">🗿 Grieta <small>Piedra agrietada</small></h2>
-            <a class="btn" href="grieta/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="grieta/grieta.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="miscelanea/grieta/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="miscelanea/grieta/grieta.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-grieta">
                 <div class="gr-hendidura"></div>
                 <div class="gr-esquirlas"></div>
