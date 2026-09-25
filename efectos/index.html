@@ -2,7 +2,7 @@
 <!-- ================================================================
      SHOWCASE UNIFICADO DE EFECTOS DE TEXTO (CSS puro, sin JS)
      ----------------------------------------------------------------
-     UNA SOLA PÁGINA con los 11 efectos. A la izquierda hay una
+     UNA SOLA PÁGINA con los 20 efectos. A la izquierda hay una
      lista: clic en un efecto → la página salta a su tarjeta
      (scroll suave). El contenido va en una CUADRÍCULA de círculos
      (3 por fila) para que el scroll sea corto: cada círculo es una
@@ -31,7 +31,7 @@
           transicion.css, su <div class="escena tema-carpeta"> con
           id="carpeta" en transicion.html, y OTRA copia sin id tras su
           botón de descarga (aquí, dentro de su <section id="carpeta">).
-     (Los 11 CSS conviven sin conflictos: cada uno solo define su
+     (Los 20 CSS conviven sin conflictos: cada uno solo define su
       propia clase .efecto-xxx y sus propios @keyframes.)
      ================================================================ -->
 <html lang="es">
@@ -40,7 +40,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Efectos de texto CSS - Showcase unificado</title>
 
-    <!-- ============ LOS 11 EFECTOS (cada uno portable) ============ -->
+    <!-- ============ LOS 20 EFECTOS (cada uno portable) ============ -->
     <link rel="stylesheet" href="glitch/glitch.css">
     <link rel="stylesheet" href="arcoiris/arcoiris.css">
     <link rel="stylesheet" href="fuego/fuego.css">
@@ -52,6 +52,15 @@
     <link rel="stylesheet" href="vhs/vhs.css">
     <link rel="stylesheet" href="gelatina/gelatina.css">
     <link rel="stylesheet" href="nebulosa/nebulosa.css">
+    <link rel="stylesheet" href="orbita/orbita.css">
+    <link rel="stylesheet" href="eclipse/eclipse.css">
+    <link rel="stylesheet" href="brote/brote.css">
+    <link rel="stylesheet" href="viento/viento.css">
+    <link rel="stylesheet" href="marea/marea.css">
+    <link rel="stylesheet" href="corriente/corriente.css">
+    <link rel="stylesheet" href="rayo/rayo.css">
+    <link rel="stylesheet" href="chispa/chispa.css">
+    <link rel="stylesheet" href="grieta/grieta.css">
 
     <!-- Escenas temáticas (transición + botones de descarga) -->
     <link rel="stylesheet" href="transicion.css">
@@ -311,6 +320,15 @@
         .c-vhs        { color: #ff9ecb; }
         .c-gelatina   { color: #ff80ab; }
         .c-nebulosa   { color: #b388ff; }
+        .c-orbita     { color: #7c8cff; }
+        .c-eclipse    { color: #ffd54f; }
+        .c-brote      { color: #7cb342; }
+        .c-viento     { color: #a8e6cf; }
+        .c-marea      { color: #29b6f6; }
+        .c-corriente  { color: #1de9b6; }
+        .c-rayo       { color: #ffee58; }
+        .c-chispa     { color: #ffd740; }
+        .c-grieta     { color: #a1887f; }
 
         footer {
             padding: 2rem 0 1rem;
@@ -354,7 +372,7 @@
 
     <!-- ======================= ÍNDICE ======================= -->
     <aside class="indice">
-        <h3>Efectos <span class="contador">11 disponibles</span></h3>
+        <h3>Efectos <span class="contador">20 disponibles</span></h3>
         <ol class="lista">
             <li><a href="#glitch">⚡ Glitch</a></li>
             <li><a href="#arcoiris">🌈 Arcoíris</a></li>
@@ -367,6 +385,15 @@
             <li><a href="#vhs">📼 VHS</a></li>
             <li><a href="#gelatina">🍬 Gelatina</a></li>
             <li><a href="#nebulosa">🌌 Nebulosa</a></li>
+            <li><a href="#orbita">🪐 Órbita</a></li>
+            <li><a href="#eclipse">🌑 Eclipse</a></li>
+            <li><a href="#brote">🌱 Brote</a></li>
+            <li><a href="#viento">🍃 Viento</a></li>
+            <li><a href="#marea">🌊 Marea</a></li>
+            <li><a href="#corriente">💧 Corriente</a></li>
+            <li><a href="#rayo">🌩️ Rayo</a></li>
+            <li><a href="#chispa">✨ Chispa</a></li>
+            <li><a href="#grieta">🗿 Grieta</a></li>
         </ol>
     </aside>
 
@@ -376,7 +403,7 @@
         <header class="intro">
             <h1>🔥 Efectos de texto CSS</h1>
             <p>
-                Los 11 efectos en <strong>una sola página</strong>: haz clic en la
+                Los 20 efectos en <strong>una sola página</strong>: haz clic en la
                 lista de la izquierda para saltar al que quieras ver. Todo es
                 <strong>CSS puro</strong> — sin JavaScript, en bucle infinito.
             </p>
@@ -554,10 +581,145 @@
             </div>
         </section>
 
+
+        <!-- ============ 12. ORBITA ============ -->
+        <section id="orbita" class="tarjeta">
+            <div class="muestra">
+                <span class="efecto-orbita">ORBITA</span>
+            </div>
+            <h2 class="c-orbita">🪐 Órbita <small>Planeta satélite</small></h2>
+            <a class="btn" href="orbita/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="orbita/orbita.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-orbita">
+                <div class="or-estrellas"></div>
+                <div class="or-anillo"></div>
+                <div class="or-planeta"></div>
+            </div>
+        </section>
+
+        <!-- ============ 13. ECLIPSE ============ -->
+        <section id="eclipse" class="tarjeta">
+            <div class="muestra">
+                <span class="efecto-eclipse">ECLIPSE</span>
+            </div>
+            <h2 class="c-eclipse">🌑 Eclipse <small>Corona eclipsada</small></h2>
+            <a class="btn" href="eclipse/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="eclipse/eclipse.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-eclipse">
+                <div class="ec-corona"></div>
+                <div class="ec-disco"></div>
+                <div class="ec-diamante"></div>
+            </div>
+        </section>
+
+        <!-- ============ 14. BROTE ============ -->
+        <section id="brote" class="tarjeta">
+            <div class="muestra">
+                <span class="efecto-brote">BROTE</span>
+            </div>
+            <h2 class="c-brote">🌱 Brote <small>Germinación viva</small></h2>
+            <a class="btn" href="brote/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="brote/brote.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-brote">
+                <div class="br-tierra"></div>
+                <div class="br-tallo"></div>
+                <div class="br-hojas"></div>
+            </div>
+        </section>
+
+        <!-- ============ 15. VIENTO ============ -->
+        <section id="viento" class="tarjeta">
+            <div class="muestra">
+                <span class="efecto-viento">VIENTO</span>
+            </div>
+            <h2 class="c-viento">🍃 Viento <small>Ráfagas y hojas</small></h2>
+            <a class="btn" href="viento/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="viento/viento.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-viento">
+                <div class="vi-racha vi-racha-1"></div>
+                <div class="vi-racha vi-racha-2"></div>
+                <div class="vi-hoja"></div>
+            </div>
+        </section>
+
+        <!-- ============ 16. MAREA ============ -->
+        <section id="marea" class="tarjeta">
+            <div class="muestra">
+                <span class="efecto-marea">MAREA</span>
+            </div>
+            <h2 class="c-marea">🌊 Marea <small>Sube y baja</small></h2>
+            <a class="btn" href="marea/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="marea/marea.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-marea">
+                <div class="ma-ola"></div>
+                <div class="ma-espuma"></div>
+                <div class="ma-burbujas"></div>
+            </div>
+        </section>
+
+        <!-- ============ 17. CORRIENTE ============ -->
+        <section id="corriente" class="tarjeta">
+            <div class="muestra">
+                <span class="efecto-corriente">CORRIENTE</span>
+            </div>
+            <h2 class="c-corriente">💧 Corriente <small>Caústicas de luz</small></h2>
+            <a class="btn" href="corriente/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="corriente/corriente.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-corriente">
+                <div class="co-rayos"></div>
+                <div class="co-caustica"></div>
+                <div class="co-luz"></div>
+            </div>
+        </section>
+
+        <!-- ============ 18. RAYO ============ -->
+        <section id="rayo" class="tarjeta">
+            <div class="muestra">
+                <span class="efecto-rayo">RAYO</span>
+            </div>
+            <h2 class="c-rayo">🌩️ Rayo <small>Descarga eléctrica</small></h2>
+            <a class="btn" href="rayo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="rayo/rayo.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-rayo">
+                <div class="ry-rayo"></div>
+                <div class="ry-rayo2"></div>
+                <div class="ry-suelo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 19. CHISPA ============ -->
+        <section id="chispa" class="tarjeta">
+            <div class="muestra">
+                <span class="efecto-chispa">CHISPA</span>
+            </div>
+            <h2 class="c-chispa">✨ Chispa <small>Chispas volando</small></h2>
+            <a class="btn" href="chispa/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="chispa/chispa.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-chispa">
+                <div class="ch-estallido ch-estallido-1"></div>
+                <div class="ch-estallido ch-estallido-2"></div>
+                <div class="ch-arco"></div>
+            </div>
+        </section>
+
+        <!-- ============ 20. GRIETA ============ -->
+        <section id="grieta" class="tarjeta">
+            <div class="muestra">
+                <span class="efecto-grieta">GRIETA</span>
+            </div>
+            <h2 class="c-grieta">🗿 Grieta <small>Piedra agrietada</small></h2>
+            <a class="btn" href="grieta/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="grieta/grieta.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-grieta">
+                <div class="gr-hendidura"></div>
+                <div class="gr-esquirlas"></div>
+                <div class="gr-brasas"></div>
+            </div>
+        </section>
         </div><!-- /.galeria -->
 
         <footer>
-            11 efectos · CSS puro sin JavaScript · cada efecto es portable:
+            20 efectos · CSS puro sin JavaScript · cada efecto es portable:
             copia su archivo .css a tu proyecto y usa su clase en cualquier texto.
         </footer>
 
