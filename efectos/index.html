@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <!-- ================================================================
-     SHOWCASE UNIFICADO DE EFECTOS DE TEXTO (CSS puro, sin JS)
+     SHOWCASE UNIFICADO DE EFECTOS DE TEXTO (efectos en CSS puro)
      ----------------------------------------------------------------
-     UNA SOLA PÁGINA con los 20 efectos agrupados en CATEGORÍAS: en el
-     índice de la izquierda hay un desplegable que filtra por categoría
-     (con :has(), sin JS) y, debajo, la lista: clic en un efecto → la
-     página salta a su tarjeta
+     UNA SOLA PÁGINA con los 20 efectos agrupados en CATEGORÍAS: cada
+     categoría es una CARPETA PLEGABLE en el índice de la izquierda
+     (<details>): sus efectos están ocultos hasta abrirla y, al hacerlo,
+     se despliegan su lista y sus tarjetas (con :has()). Con ninguna
+     categoría abierta, un GUION al final del fichero sortea una MUESTRA
+     de 12 efectos al azar de entre todos (única página con JS del repo:
+     los efectos en sí siguen siendo CSS puro)
      (scroll suave). El contenido va en una CUADRÍCULA de círculos
      (3 por fila) para que el scroll sea corto: cada círculo es una
      muestra del efecto, debajo está su nombre y dos botones:
@@ -21,7 +24,8 @@
 
      CÓMO AÑADIR UN EFECTO NUEVO (de aquí en adelante):
        1) <link rel="stylesheet" href="categoria/efecto/efecto.css">  en el <head>
-       2) un <li data-cat="categoria"><a href="#efecto">…</a></li> en .lista
+       2) un <li data-cat="categoria"><a href="#efecto">…</a></li> dentro
+          de la <ol class="lista"> de la carpeta de su categoría
        3) un <section id="efecto" class="tarjeta" data-cat="categoria">…</section>
           dentro de .galeria
        4) su descargable: categoria/efecto/efecto.zip con estos 3 archivos
@@ -42,11 +46,14 @@
      CÓMO AÑADIR UNA CATEGORÍA NUEVA:
        1) crea efectos/categoria/ y mete dentro sus efectos (los 20 de
           hoy están en efectos/miscelanea/, la categoría "Miscelánea")
-       2) aquí: su <option value="categoria">Nombre (n)</option> en #filtro-cat
-       3) aquí: su bloque "FILTRADO POR CATEGORÍA" del <style> (copia el de
-          miscelanea y cambia valor y data-cat)
+       2) aquí: su <details class="grupo" id="g-categoria" data-cat="categoria">
+          con <summary class="grupo-titulo">Nombre (n)</summary> y su
+          <ol class="lista"> dentro, en el índice lateral
+       3) aquí: su bloque de CARPETAS del <style> (copia el de
+          g-miscelanea y cambia id y data-cat)
        4) sus <link>, <li data-cat> y <section data-cat> con rutas
-          categoria/efecto/…
+          categoria/efecto/…       (La muestra aleatoria no se toca al añadir categorías: el guion
+        del final sortea de todas las tarjetas; tamaño en var N = 12.)
       (Los 20 CSS conviven sin conflictos: cada uno solo define su
        propia clase .efecto-xxx y sus propios @keyframes.)
      ================================================================ -->
@@ -381,31 +388,66 @@
             .galeria { grid-template-columns: 1fr; }
         }
 
-        /* --- SELECTOR DE CATEGORÍA (desplegable arriba del índice) --- */
-        .cat-sel {
-            width: 100%;
-            margin: .4rem 0 .9rem;
-            padding: .5rem .6rem;
+        /* --- CATEGORÍAS COMO CARPETAS PLEGABLES (sin JavaScript) ---
+           Cada categoría es un <details> en el índice: está plegada por
+           defecto y, mientras su carpeta siga cerrada, su lista (va
+           dentro) y sus tarjetas quedan ocultas.
+           PARA AÑADIR UNA CATEGORÍA: copia su <details> en el índice y
+           aquí su bloque de tarjetas (cambia id y data-cat); la receta
+           completa está en la cabecera. */
+        .grupo {
+            margin: 0 0 .5rem;
+        }
+        .grupo-titulo {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .45rem .6rem;
             background-color: #12161c;
-            color: #c7cdd6;
+            color: #ffffff;
             border: 1px solid #232a34;
             border-radius: 6px;
-            font: inherit;
             font-size: .9rem;
+            letter-spacing: .06em;
             cursor: pointer;
+            list-style: none;              /* sin la marca del navegador */
         }
-        .cat-sel:hover { border-color: #3a4452; }
-        .cat-sel:focus { outline: none; border-color: #5d6774; }
+        .grupo-titulo::-webkit-details-marker { display: none; }
+        .grupo-titulo::before {
+            content: "\25B8";              /* caret que gira al abrir */
+            color: #5d6774;
+            transition: transform .2s;
+        }
+        .grupo[open] .grupo-titulo::before { transform: rotate(90deg); }
+        .grupo-titulo:hover { border-color: #3a4452; }
+        .grupo-n {
+            margin-left: auto;
+            color: #5d6774;
+            font-size: .8rem;
+            font-weight: normal;
+        }
 
-        /* --- FILTRADO POR CATEGORÍA (sin JavaScript) ---
-           Cuando el desplegable marca una categoría, la lista lateral y las
-           tarjetas de las DEMÁS categorías se ocultan con :has().
-           PARA AÑADIR UNA CATEGORÍA: copia este bloque y cambia el valor del
-           <option> y el data-cat (receta completa en la cabecera). */
-        body:has(#filtro-cat option[value="miscelanea"]:checked) .indice li:not([data-cat="miscelanea"]),
-        body:has(#filtro-cat option[value="miscelanea"]:checked) .galeria .tarjeta:not([data-cat="miscelanea"]) {
+        /* ninguna categoría abierta: solo la muestra aleatoria (la
+           marca el guion del final con la clase .sorteada; sin guion no
+           se ve ninguna tarjeta) */
+        body:not(:has(.grupo[open])) .galeria .tarjeta:not(.sorteada) {
             display: none;
         }
+        /* categoría abierta: las de las demás categorías quedan ocultas
+           (regla por categoría: copia el bloque y cambia id/data-cat) */
+        body:has(.grupo[open]):not(:has(#g-miscelanea[open]))
+            .galeria .tarjeta[data-cat="miscelanea"] {
+            display: none;
+        }
+
+        /* aviso mientras no haya ninguna categoría abierta */
+        .aviso-grupo {
+            margin: 0 0 1rem;
+            color: #5d6774;
+            font-size: .9rem;
+        }
+        .aviso-grupo { display: none; }
+        body:not(:has(.grupo[open])) .aviso-grupo { display: block; }
 
     </style>
 </head>
@@ -417,34 +459,33 @@
     <aside class="indice">
         <h3>Efectos <span class="contador">20 disponibles</span></h3>
 
-        <!-- Desplegable de categorías: filtra lista y tarjetas -->
-        <select id="filtro-cat" class="cat-sel"
-                aria-label="Filtrar por categoría">
-            <option value="todas" selected>Todas las categorías (20)</option>
-            <option value="miscelanea">Miscelánea (20)</option>
-        </select>
-        <ol class="lista">
-            <li data-cat="miscelanea"><a href="#glitch">⚡ Glitch</a></li>
-            <li data-cat="miscelanea"><a href="#arcoiris">🌈 Arcoíris</a></li>
-            <li data-cat="miscelanea"><a href="#fuego">🔥 Fuego</a></li>
-            <li data-cat="miscelanea"><a href="#radiacion">☢️ Radiación</a></li>
-            <li data-cat="miscelanea"><a href="#nubes">☁️ Nubes</a></li>
-            <li data-cat="miscelanea"><a href="#hielo">🧊 Hielo</a></li>
-            <li data-cat="miscelanea"><a href="#lava">🌋 Lava</a></li>
-            <li data-cat="miscelanea"><a href="#holograma">📟 Holograma</a></li>
-            <li data-cat="miscelanea"><a href="#vhs">📼 VHS</a></li>
-            <li data-cat="miscelanea"><a href="#gelatina">🍬 Gelatina</a></li>
-            <li data-cat="miscelanea"><a href="#nebulosa">🌌 Nebulosa</a></li>
-            <li data-cat="miscelanea"><a href="#orbita">🪐 Órbita</a></li>
-            <li data-cat="miscelanea"><a href="#eclipse">🌑 Eclipse</a></li>
-            <li data-cat="miscelanea"><a href="#brote">🌱 Brote</a></li>
-            <li data-cat="miscelanea"><a href="#viento">🍃 Viento</a></li>
-            <li data-cat="miscelanea"><a href="#marea">🌊 Marea</a></li>
-            <li data-cat="miscelanea"><a href="#corriente">💧 Corriente</a></li>
-            <li data-cat="miscelanea"><a href="#rayo">🌩️ Rayo</a></li>
-            <li data-cat="miscelanea"><a href="#chispa">✨ Chispa</a></li>
-            <li data-cat="miscelanea"><a href="#grieta">🗿 Grieta</a></li>
-        </ol>
+        <!-- Carpeta de categoría: plegada por defecto; al abrirla se
+             despliegan su lista y sus tarjetas (CSS puro, sin JS) -->
+        <details class="grupo" id="g-miscelanea" data-cat="miscelanea">
+            <summary class="grupo-titulo">Miscelánea <span class="grupo-n">20</span></summary>
+            <ol class="lista">
+                <li data-cat="miscelanea"><a href="#glitch">⚡ Glitch</a></li>
+                <li data-cat="miscelanea"><a href="#arcoiris">🌈 Arcoíris</a></li>
+                <li data-cat="miscelanea"><a href="#fuego">🔥 Fuego</a></li>
+                <li data-cat="miscelanea"><a href="#radiacion">☢️ Radiación</a></li>
+                <li data-cat="miscelanea"><a href="#nubes">☁️ Nubes</a></li>
+                <li data-cat="miscelanea"><a href="#hielo">🧊 Hielo</a></li>
+                <li data-cat="miscelanea"><a href="#lava">🌋 Lava</a></li>
+                <li data-cat="miscelanea"><a href="#holograma">📟 Holograma</a></li>
+                <li data-cat="miscelanea"><a href="#vhs">📼 VHS</a></li>
+                <li data-cat="miscelanea"><a href="#gelatina">🍬 Gelatina</a></li>
+                <li data-cat="miscelanea"><a href="#nebulosa">🌌 Nebulosa</a></li>
+                <li data-cat="miscelanea"><a href="#orbita">🪐 Órbita</a></li>
+                <li data-cat="miscelanea"><a href="#eclipse">🌑 Eclipse</a></li>
+                <li data-cat="miscelanea"><a href="#brote">🌱 Brote</a></li>
+                <li data-cat="miscelanea"><a href="#viento">🍃 Viento</a></li>
+                <li data-cat="miscelanea"><a href="#marea">🌊 Marea</a></li>
+                <li data-cat="miscelanea"><a href="#corriente">💧 Corriente</a></li>
+                <li data-cat="miscelanea"><a href="#rayo">🌩️ Rayo</a></li>
+                <li data-cat="miscelanea"><a href="#chispa">✨ Chispa</a></li>
+                <li data-cat="miscelanea"><a href="#grieta">🗿 Grieta</a></li>
+            </ol>
+        </details>
     </aside>
 
     <!-- ====================== CONTENIDO ====================== -->
@@ -453,12 +494,13 @@
         <header class="intro">
             <h1>🔥 Efectos de texto CSS</h1>
             <p>
-                Los 20 efectos en <strong>una sola página</strong>: haz clic en la
-                lista de la izquierda para saltar al que quieras ver, y el
-                desplegable de la izquierda filtra por categoría. Todo es
-                <strong>CSS puro</strong> — sin JavaScript, en bucle infinito.
-            </p>
-            <p class="resumen">
+                Los 20 efectos en <strong>una sola página</strong>: al cargar
+                verás una muestra de 12 al azar; abre una categoría en el
+                panel de la izquierda para desplegar todos sus efectos y
+                haz clic en el que quieras ver. Los efectos son
+                <strong>CSS puro</strong> — sin JavaScript, en bucle
+                infinito (solo esta portada sortea la muestra con un
+                guion).
                 Cada efecto es una clase portable: <code>&lt;span class="efecto-xxx"&gt;…&lt;/span&gt;</code>
                 (solo el glitch necesita además <code>data-text</code>). Verás una
                 muestra circular de cada uno con dos botones: <em>Showcase completo</em>
@@ -467,6 +509,9 @@
                 vuelves con <em>Todos los efectos</em>.
             </p>
         </header>
+
+        <p class="aviso-grupo">Abre una categoría en el panel de la
+            izquierda para ver sus efectos.</p>
 
         <div class="galeria">
 
@@ -777,5 +822,50 @@
     </main>
 </div>
 
+
+    <script>
+        // Muestra aleatoria de la portada (aquí SÍ hay JS: es solo esta
+        // página; los efectos siguen siendo CSS puro). Con ninguna
+        // categoría abierta se muestran N tarjetas sorteadas al azar de
+        // TODAS las categorías; al abrir una se ve la suya completa y,
+        // al cerrarla, sortea otra muestra nueva.
+        (function () {
+            var N = 12;                       // tamaño de la muestra
+            var tarjetas = Array.prototype.slice.call(
+                document.querySelectorAll(".galeria .tarjeta"));
+            var aviso = document.querySelector(".aviso-grupo");
+
+            function sortear() {
+                var barajadas = tarjetas.slice();
+                for (var i = barajadas.length - 1; i > 0; i--) {
+                    var j = Math.floor(Math.random() * (i + 1));
+                    var t = barajadas[i];
+                    barajadas[i] = barajadas[j];
+                    barajadas[j] = t;
+                }
+                tarjetas.forEach(function (el) {
+                    el.classList.remove("sorteada");
+                });
+                barajadas.slice(0, N).forEach(function (el) {
+                    el.classList.add("sorteada");
+                });
+                if (aviso) {
+                    aviso.textContent = "Muestra de " + N + " efectos al azar "
+                        + "de todas las categorías — abre una categoría en el "
+                        + "panel de la izquierda para ver todos los suyos.";
+                }
+            }
+
+            sortear();                        // sorteo inicial
+            Array.prototype.forEach.call(
+                document.querySelectorAll(".grupo"), function (g) {
+                    g.addEventListener("toggle", function () {
+                        if (!document.querySelector(".grupo[open]")) {
+                            sortear();         // nueva muestra al cerrar
+                        }
+                    });
+                });
+        })();
+    </script>
 </body>
 </html>
