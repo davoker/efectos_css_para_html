@@ -3,14 +3,34 @@
      SHOWCASE UNIFICADO DE EFECTOS DE TEXTO (CSS puro, sin JS)
      ----------------------------------------------------------------
      UNA SOLA PÁGINA con los 11 efectos. A la izquierda hay una
-     lista: clic en un efecto → la página salta a su demostración
-     (scroll suave). Debajo de cada demo están el código de uso y
-     los enlaces a su carpeta (CSS portátil + doc "cómo aplicar").
+     lista: clic en un efecto → la página salta a su tarjeta
+     (scroll suave). El contenido va en una CUADRÍCULA de círculos
+     (3 por fila) para que el scroll sea corto: cada círculo es una
+     muestra del efecto, debajo está su nombre y dos botones:
+     "Showcase completo" (misma pestaña) y "Descargar efecto (.zip)",
+     que guarda el pack del efecto: su CSS, el HTML de su showcase y
+     las instrucciones; al soltarlo, la portada estalla con la MISMA
+     escena temática que el botón "Todos los efectos" del showcase
+     (sus escenas viven en detonacion.css, aquí dentro de cada
+     tarjeta). Desde el showcase se vuelve con "Todos los efectos":
+     ese botón pasa antes por detonacion.html#efecto (la escena del
+     propio efecto, ~1,6 s de retardo) y de ahí sigue a esta portada
+     — el retardo es un <meta refresh>, seguimos sin JS.
 
      CÓMO AÑADIR UN EFECTO NUEVO (de aquí en adelante):
        1) <link rel="stylesheet" href="carpeta/efecto.css">  en el <head>
        2) un <li><a href="#carpeta">…</a></li> en la lista .indice
-       3) un <section id="carpeta">…</section> en .contenido
+       3) un <section id="carpeta" class="tarjeta">…</section> en .galeria
+       4) su descargable: carpeta/efecto.zip con estos 3 archivos dentro
+          (efecto.css, index.html y como-aplicar-efecto.txt). P. ej. en
+          PowerShell: Compress-Archive -Force -Path carpeta\efecto.css,
+          carpeta\index.html, carpeta\como-aplicar-efecto.txt `
+          -DestinationPath carpeta\efecto.zip
+          Si cambias el CSS o el HTML después, ¡vuelve a crear el zip!
+       5) su escena de detonación: .tema-carpeta + sus @keyframes en
+          detonacion.css, su <div class="escena tema-carpeta"> con
+          id="carpeta" en detonacion.html, y OTRA copia sin id tras su
+          botón de descarga (aquí, dentro de su <section id="carpeta">).
      (Los 11 CSS conviven sin conflictos: cada uno solo define su
       propia clase .efecto-xxx y sus propios @keyframes.)
      ================================================================ -->
@@ -32,6 +52,9 @@
     <link rel="stylesheet" href="vhs/vhs.css">
     <link rel="stylesheet" href="gelatina/gelatina.css">
     <link rel="stylesheet" href="nebulosa/nebulosa.css">
+
+    <!-- Escenas de detonación (transición + botones de descarga) -->
+    <link rel="stylesheet" href="detonacion.css">
 
     <style>
         /* ============================================================
@@ -132,54 +155,145 @@
         .resumen { color: #8b97a6; font-size: .92rem; }
         .resumen code { color: #d7e2ef; background: #151a21; padding: 0 4px; border-radius: 4px; }
 
-        section {
-            scroll-margin-top: 1.5rem;   /* deja aire arriba al saltar */
-            padding: 1.8rem 0;
-            border-bottom: 1px dashed #1c222b;
+        /* --- CUADRÍCULA DE TARJETAS: 3 círculos por fila --- */
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.2rem 1.5rem;
+            margin-top: 1.4rem;
         }
-        section h2 { margin: 0 0 .3rem; font-size: 1.6rem; }
-        section h2 small {
+
+        .tarjeta {
+            text-align: center;
+            scroll-margin-top: 1.5rem;   /* deja aire arriba al saltar */
+        }
+
+        /* Muestra circular (fondo neutro oscuro; cada efecto pinta lo
+           suyo DENTRO de sus letras y overflow recorta todo a círculo) */
+        .muestra {
+            box-sizing: border-box;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #111418;
+            border: 1px dashed #232a34;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        .muestra span {
+            font-size: 1.35rem;
+            font-weight: 800;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        .tarjeta h2 { margin: 1rem 0 .2rem; font-size: 1.3rem; }
+        .tarjeta h2 small {
             display: block;
             color: #5d6774;
-            font-size: .82rem;
+            font-size: .74rem;
             font-weight: normal;
             letter-spacing: .08em;
             text-transform: uppercase;
         }
-        section p.desc { margin: .5rem 0 1rem; color: #aeb8c5; }
 
-        /* Caja de demostración (fondo neutro oscuro; cada efecto
-           pinta lo suyo DENTRO de sus letras) */
-        .demo {
-            background-color: #111418;
-            border: 1px dashed #232a34;
-            border-radius: 10px;
-            padding: 1.8rem 1.4rem;
-            text-align: center;
-            margin: 0 0 1rem;
+        /* Botones de cada tarjeta (mismo sitio, misma pestaña; se
+           vuelve con "Todos los efectos" desde el showcase) */
+        .btn {
+            display: block;
+            width: fit-content;
+            margin: .7rem auto 0;
+            padding: .45rem 1.1rem;
+            background-color: #151a21;
+            border: 1px solid #2c3a4d;
+            border-radius: 999px;
+            color: #8ec8ff;
+            font-size: .85rem;
+            font-weight: bold;
+            text-decoration: none;
+            position: relative;
+            z-index: 2;
+            transition: background-color .15s, border-color .15s,
+                        color .15s, transform .15s;
         }
-        .demo + .demo { margin-top: -0.2rem; }
-
-        /* Tamaños de muestra (comunes a todos los efectos) */
-        .grande  { display: block; font-size: 2.7rem; font-weight: 800; margin-bottom: 1.1rem; }
-        .mediano { display: inline-block; font-size: 1.4rem; font-weight: 800; margin: 0 .8rem .6rem 0; }
-        .peq     { display: inline-block; font-size: .95rem; font-weight: bold; }
-
-        /* Uso en código */
-        pre {
-            background-color: #111418;
-            border: 1px solid #232a34;
-            border-radius: 8px;
-            padding: .9rem 1rem;
-            margin: .6rem 0;
-            overflow-x: auto;
-            font-size: .9rem;
+        .btn:hover,
+        .btn:focus {
+            background-color: #1d2735;
+            border-color: #4fa3ff;
+            color: #ffffff;
+            transform: translateY(-2px);
         }
-        pre code { color: #d7e2ef; }
 
-        .enlaces { font-size: .9rem; margin: .7rem 0 0; }
-        .enlaces a { color: #6db6ff; text-decoration: none; }
-        .enlaces a:hover { text-decoration: underline; }
+        /* Botón de descarga: baja el pack del efecto en un .zip
+           (su CSS + el HTML de su showcase + sus instrucciones) y,
+           al soltarlo, estalla la escena temática del efecto — la
+           MISMA de su "Todos los efectos" (reglas más abajo) */
+        .btn-descarga {
+            margin-top: .6rem;
+            background-color: #1d1710;
+            border-color: #5a4526;
+            color: #ffd581;
+        }
+        .btn-descarga:hover,
+        .btn-descarga:focus {
+            background-color: #2a2013;
+            border-color: #a37b3a;
+            color: #ffe9bd;
+        }
+
+        /* Se ven pulsados al hacer clic (regla a propósito la
+           última: así el estado activo gana a los :hover/:focus) */
+        .btn:active {
+            transform: translateY(1px) scale(.96);
+            background-color: #0e131a;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,.65);
+        }
+        .btn-descarga:active { background-color: #151009; }
+
+        /* --- ESCENA TEMÁTICA al pulsar la descarga ---
+           Cada tarjeta lleva tras de su botón una copia de la
+           <div class="escena …"> de detonacion.html (sin id: aquí no
+           manda el fragmento, manda el botón). En reposo está en
+           display:none y congelada (animation-play-state: paused).
+           Al SOLTAR el clic (:focus) se despliega y arranca de cero
+           mientras baja el .zip; mantener pulsado la apaga, y así
+           CADA soltada la reinicia (display:none → block y el cambio
+           de animation-name reinician todas sus animaciones, incluso
+           las de los elementos internos); a los ~1,7 s se desvanece. */
+        .galeria .escena {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            pointer-events: none;
+            animation: escena-fade 1.7s ease both;
+            animation-play-state: paused;
+        }
+        .galeria .escena * { animation-play-state: paused; }
+
+        /* Al soltarlo sobre el botón: la escena se ve y arranca */
+        .btn-descarga:focus ~ .escena {
+            display: block;
+            animation-play-state: running;
+        }
+        .btn-descarga:focus ~ .escena * { animation-play-state: running; }
+
+        /* Manteniendo pulsado: apagada — esta regla va después del
+           :focus para ganarle y reiniciar así en CADA pulsación */
+        .btn-descarga:active ~ .escena,
+        .btn-descarga:active ~ .escena * {
+            display: none;
+            animation-name: none;
+        }
+
+        @keyframes escena-fade {
+            0%   { opacity: 1; }
+            88%  { opacity: 1; }
+            100% { opacity: 0; }
+        }
 
         /* --- Color de cada título de efecto --- */
         .c-glitch     { color: #ff4fa3; }
@@ -204,7 +318,13 @@
             font-size: .85rem;
         }
 
-        /* --- Móvil: el índice pasa arriba como píldoras --- */
+        /* --- Mediana: 2 círculos por fila --- */
+        @media (max-width: 1020px) {
+            .galeria { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* --- Móvil: el índice pasa arriba como píldoras y la
+               cuadrícula baja a un círculo por fila --- */
         @media (max-width: 860px) {
             .layout { flex-direction: column; padding: 1rem; gap: 1.2rem; }
             .indice { position: static; width: auto; }
@@ -222,7 +342,9 @@
                 font-size: .85rem;
             }
             .lista a:hover { transform: none; }
-            .grande { font-size: 2rem; }
+        }
+        @media (max-width: 560px) {
+            .galeria { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -260,232 +382,179 @@
             </p>
             <p class="resumen">
                 Cada efecto es una clase portable: <code>&lt;span class="efecto-xxx"&gt;…&lt;/span&gt;</code>
-                (solo el glitch necesita además <code>data-text</code>). Debajo de cada demo
-                tienes el código exacto y los enlaces a su CSS y su documentación.
+                (solo el glitch necesita además <code>data-text</code>). Verás una
+                muestra circular de cada uno con dos botones: <em>Showcase completo</em>
+                abre sus ejemplos grandes y <em>Descargar efecto (.zip)</em> guarda su
+                pack completo (CSS + HTML + instrucciones). Desde el showcase
+                vuelves con <em>Todos los efectos</em>.
             </p>
         </header>
 
+        <div class="galeria">
+
         <!-- ============ 1. GLITCH ============ -->
-        <section id="glitch">
-            <h2 class="c-glitch">⚡ Glitch <small>Interferencia + vibración</small></h2>
-            <p class="desc">
-                Ciclo de 4,5 s: ráfagas de interferencia RGB cortadas, una ráfaga fuerte
-                a mitad y <strong>vibración constante al final</strong>. Se repite sin parar.
-            </p>
-            <div class="demo">
-                <span class="efecto-glitch grande" data-text="GLITCH">GLITCH</span>
-                <span class="efecto-glitch mediano" data-text="señal perdida">señal perdida</span>
-                <span class="efecto-glitch peq" data-text="texto pequeño">texto pequeño</span>
+        <section id="glitch" class="tarjeta">
+            <div class="muestra">
+                <span class="efecto-glitch" data-text="GLITCH">GLITCH</span>
             </div>
-            <pre><code>&lt;span class="efecto-glitch" data-text="Tu texto"&gt;Tu texto&lt;/span&gt;</code></pre>
-            <p class="enlaces">
-                <a href="glitch/index.html" target="_blank" rel="noopener">Showcase completo</a> ·
-                <a href="glitch/glitch.css" target="_blank" rel="noopener">glitch.css</a> ·
-                <a href="glitch/como-aplicar-glitch.txt" target="_blank" rel="noopener">Cómo aplicarlo</a>
-                — <em>⚠ requiere el atributo data-text</em>
-            </p>
+            <h2 class="c-glitch">⚡ Glitch <small>Interferencia + vibración</small></h2>
+            <a class="btn" href="glitch/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="glitch/glitch.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-glitch">
+                <div class="gl-banda gl-banda-1"></div>
+                <div class="gl-texto">GLITCH</div>
+                <div class="gl-banda gl-banda-2"></div>
+            </div>
         </section>
 
         <!-- ============ 2. ARCOÍRIS ============ -->
-        <section id="arcoiris">
-            <h2 class="c-arcoiris">🌈 Arcoíris <small>Color en movimiento</small></h2>
-            <p class="desc">
-                Un arcoíris recorre las letras de forma <strong>constante y continua</strong>,
-                sin pausas, como si el texto tuviera vida.
-            </p>
-            <div class="demo">
-                <span class="efecto-arcoiris grande">ARCOÍRIS</span>
-                <span class="efecto-arcoiris mediano">los 7 colores</span>
-                <span class="efecto-arcoiris peq">texto pequeño</span>
+        <section id="arcoiris" class="tarjeta">
+            <div class="muestra">
+                <span class="efecto-arcoiris">ARCOÍRIS</span>
             </div>
-            <pre><code>&lt;span class="efecto-arcoiris"&gt;Tu texto&lt;/span&gt;</code></pre>
-            <p class="enlaces">
-                <a href="arcoiris/index.html" target="_blank" rel="noopener">Showcase completo</a> ·
-                <a href="arcoiris/arcoiris.css" target="_blank" rel="noopener">arcoiris.css</a> ·
-                <a href="arcoiris/como-aplicar-arcoiris.txt" target="_blank" rel="noopener">Cómo aplicarlo</a>
-            </p>
+            <h2 class="c-arcoiris">🌈 Arcoíris <small>Color en movimiento</small></h2>
+            <a class="btn" href="arcoiris/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="arcoiris/arcoiris.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-arcoiris">
+                <div class="ar-onda ar-onda-1"></div>
+                <div class="ar-onda ar-onda-2"></div>
+            </div>
         </section>
 
         <!-- ============ 3. FUEGO ============ -->
-        <section id="fuego">
-            <h2 class="c-fuego">🔥 Fuego <small>Quemando con parpadeo</small></h2>
-            <p class="desc">
-                Las letras arden: capas de llama con <strong>destellos irregulares</strong> y
-                temblor de calor. Fondo oscuro recomendado.
-            </p>
-            <div class="demo">
-                <span class="efecto-fuego grande">FUEGO</span>
-                <span class="efecto-fuego mediano">que arde por dentro</span>
-                <span class="efecto-fuego peq">texto pequeño</span>
+        <section id="fuego" class="tarjeta">
+            <div class="muestra">
+                <span class="efecto-fuego">FUEGO</span>
             </div>
-            <pre><code>&lt;span class="efecto-fuego"&gt;Tu texto&lt;/span&gt;</code></pre>
-            <p class="enlaces">
-                <a href="fuego/index.html" target="_blank" rel="noopener">Showcase completo</a> ·
-                <a href="fuego/fuego.css" target="_blank" rel="noopener">fuego.css</a> ·
-                <a href="fuego/como-aplicar-fuego.txt" target="_blank" rel="noopener">Cómo aplicarlo</a>
-            </p>
+            <h2 class="c-fuego">🔥 Fuego <small>Quemando con parpadeo</small></h2>
+            <a class="btn" href="fuego/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="fuego/fuego.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-fuego">
+                <div class="fu-bola"></div>
+                <div class="fu-llamas"></div>
+                <div class="fu-ascuas"></div>
+            </div>
         </section>
 
         <!-- ============ 4. RADIACIÓN ============ -->
-        <section id="radiacion">
-            <h2 class="c-radiacion">☢️ Radiación <small>Tema S.T.A.L.K.E.R.</small></h2>
-            <p class="desc">
-                Las letras parecen <strong>radioactivas</strong>: verde tóxico, bandas de
-                peligro y chasquidos tipo contador Geiger a pasos.
-            </p>
-            <div class="demo">
-                <span class="efecto-radiacion grande">RADIACIÓN</span>
-                <span class="efecto-radiacion mediano">zona peligrosa</span>
-                <span class="efecto-radiacion peq">texto pequeño</span>
+        <section id="radiacion" class="tarjeta">
+            <div class="muestra">
+                <span class="efecto-radiacion">RADIACIÓN</span>
             </div>
-            <pre><code>&lt;span class="efecto-radiacion"&gt;Tu texto&lt;/span&gt;</code></pre>
-            <p class="enlaces">
-                <a href="radiacion/index.html" target="_blank" rel="noopener">Showcase completo</a> ·
-                <a href="radiacion/radiacion.css" target="_blank" rel="noopener">radiacion.css</a> ·
-                <a href="radiacion/como-aplicar-radiacion.txt" target="_blank" rel="noopener">Cómo aplicarlo</a>
-            </p>
+            <h2 class="c-radiacion">☢️ Radiación <small>Tema S.T.A.L.K.E.R.</small></h2>
+            <a class="btn" href="radiacion/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="radiacion/radiacion.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-radiacion">
+                <div class="ra-simbolo"></div>
+                <div class="ra-anillo ra-anillo-1"></div>
+                <div class="ra-anillo ra-anillo-2"></div>
+            </div>
         </section>
 
         <!-- ============ 5. NUBES ============ -->
-        <section id="nubes">
-            <h2 class="c-nubes">☁️ Nubes <small>Cielo con parallax</small></h2>
-            <p class="desc">
-                Las letras son un <strong>trozo de cielo</strong>: 4 capas de nubes cruzan a
-                distinta velocidad (las grandes por delante) y el texto flota suave.
-            </p>
-            <div class="demo">
-                <span class="efecto-nubes grande">CIELO</span>
-                <span class="efecto-nubes mediano">sobre las nubes</span>
-                <span class="efecto-nubes peq">texto pequeño</span>
+        <section id="nubes" class="tarjeta">
+            <div class="muestra">
+                <span class="efecto-nubes">CIELO</span>
             </div>
-            <pre><code>&lt;span class="efecto-nubes"&gt;Tu texto&lt;/span&gt;</code></pre>
-            <p class="enlaces">
-                <a href="nubes/index.html" target="_blank" rel="noopener">Showcase completo</a> ·
-                <a href="nubes/nubes.css" target="_blank" rel="noopener">nubes.css</a> ·
-                <a href="nubes/como-aplicar-nubes.txt" target="_blank" rel="noopener">Cómo aplicarlo</a>
-            </p>
+            <h2 class="c-nubes">☁️ Nubes <small>Cielo con parallax</small></h2>
+            <a class="btn" href="nubes/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="nubes/nubes.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-nubes">
+                <div class="nu-mini-a"></div>
+                <div class="nu-nube"></div>
+                <div class="nu-mini-b"></div>
+            </div>
         </section>
 
         <!-- ============ 6. HIELO ============ -->
-        <section id="hielo">
-            <h2 class="c-hielo">🧊 Hielo <small>Escarcha helada</small></h2>
-            <p class="desc">
-                Un <strong>destello de escarcha</strong> sube por las letras cada 5 s y un
-                resplandor azul frío respira de forma constante.
-            </p>
-            <div class="demo">
-                <span class="efecto-hielo grande">CONGELADO</span>
-                <span class="efecto-hielo mediano">la edad de hielo</span>
-                <span class="efecto-hielo peq">texto pequeño</span>
+        <section id="hielo" class="tarjeta">
+            <div class="muestra">
+                <span class="efecto-hielo">CONGELADO</span>
             </div>
-            <pre><code>&lt;span class="efecto-hielo"&gt;Tu texto&lt;/span&gt;</code></pre>
-            <p class="enlaces">
-                <a href="hielo/index.html" target="_blank" rel="noopener">Showcase completo</a> ·
-                <a href="hielo/hielo.css" target="_blank" rel="noopener">hielo.css</a> ·
-                <a href="hielo/como-aplicar-hielo.txt" target="_blank" rel="noopener">Cómo aplicarlo</a>
-            </p>
+            <h2 class="c-hielo">🧊 Hielo <small>Escarcha helada</small></h2>
+            <a class="btn" href="hielo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="hielo/hielo.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-hielo">
+                <div class="hi-copo"></div>
+                <div class="hi-escarcha"></div>
+            </div>
         </section>
 
         <!-- ============ 7. LAVA ============ -->
-        <section id="lava">
-            <h2 class="c-lava">🌋 Lava <small>Corteza volcánica</small></h2>
-            <p class="desc">
-                Roca negra con <strong>grietas incandescentes</strong> por las que fluye el
-                magma y resplandores que laten. Fondo oscuro obligatorio.
-            </p>
-            <div class="demo">
-                <span class="efecto-lava grande">VULCANO</span>
-                <span class="efecto-lava mediano">fuego interior</span>
-                <span class="efecto-lava peq">texto pequeño</span>
+        <section id="lava" class="tarjeta">
+            <div class="muestra">
+                <span class="efecto-lava">VULCANO</span>
             </div>
-            <pre><code>&lt;span class="efecto-lava"&gt;Tu texto&lt;/span&gt;</code></pre>
-            <p class="enlaces">
-                <a href="lava/index.html" target="_blank" rel="noopener">Showcase completo</a> ·
-                <a href="lava/lava.css" target="_blank" rel="noopener">lava.css</a> ·
-                <a href="lava/como-aplicar-lava.txt" target="_blank" rel="noopener">Cómo aplicarlo</a>
-            </p>
+            <h2 class="c-lava">🌋 Lava <small>Corteza volcánica</small></h2>
+            <a class="btn" href="lava/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="lava/lava.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-lava">
+                <div class="la-magma"></div>
+                <div class="la-chispas"></div>
+            </div>
         </section>
 
         <!-- ============ 8. HOLOGRAMA ============ -->
-        <section id="holograma">
-            <h2 class="c-holograma">📟 Holograma <small>Proyección con scanlines</small></h2>
-            <p class="desc">
-                Líneas de barrido que ruedan sin parar y <strong>caídas de señal</strong>:
-                el holograma titila y un instante parece apagarse.
-            </p>
-            <div class="demo">
-                <span class="efecto-holograma grande">PROYECCIÓN</span>
-                <span class="efecto-holograma mediano">mensaje entrante</span>
-                <span class="efecto-holograma peq">texto pequeño</span>
+        <section id="holograma" class="tarjeta">
+            <div class="muestra">
+                <span class="efecto-holograma">PROYECCIÓN</span>
             </div>
-            <pre><code>&lt;span class="efecto-holograma"&gt;Tu texto&lt;/span&gt;</code></pre>
-            <p class="enlaces">
-                <a href="holograma/index.html" target="_blank" rel="noopener">Showcase completo</a> ·
-                <a href="holograma/holograma.css" target="_blank" rel="noopener">holograma.css</a> ·
-                <a href="holograma/como-aplicar-holograma.txt" target="_blank" rel="noopener">Cómo aplicarlo</a>
-            </p>
+            <h2 class="c-holograma">📟 Holograma <small>Proyección con scanlines</small></h2>
+            <a class="btn" href="holograma/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="holograma/holograma.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-holograma">
+                <div class="ho-rejilla"></div>
+                <div class="ho-barrido"></div>
+                <div class="ho-anillo"></div>
+            </div>
         </section>
 
         <!-- ============ 9. VHS ============ -->
-        <section id="vhs">
-            <h2 class="c-vhs">📼 VHS <small>Cinta de vídeo</small></h2>
-            <p class="desc">
-                Color de casete desvanecido, <strong>barra de tracking</strong> subiendo por el
-                texto y micro-saltos de encuadre con destello.
-            </p>
-            <div class="demo">
-                <span class="efecto-vhs grande">REC 1994</span>
-                <span class="efecto-vhs mediano">no grabar encima</span>
-                <span class="efecto-vhs peq">texto pequeño</span>
+        <section id="vhs" class="tarjeta">
+            <div class="muestra">
+                <span class="efecto-vhs">REC 1994</span>
             </div>
-            <pre><code>&lt;span class="efecto-vhs"&gt;Tu texto&lt;/span&gt;</code></pre>
-            <p class="enlaces">
-                <a href="vhs/index.html" target="_blank" rel="noopener">Showcase completo</a> ·
-                <a href="vhs/vhs.css" target="_blank" rel="noopener">vhs.css</a> ·
-                <a href="vhs/como-aplicar-vhs.txt" target="_blank" rel="noopener">Cómo aplicarlo</a>
-            </p>
+            <h2 class="c-vhs">📼 VHS <small>Cinta de vídeo</small></h2>
+            <a class="btn" href="vhs/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="vhs/vhs.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-vhs">
+                <div class="vh-banda vh-banda-1"></div>
+                <div class="vh-texto">PLAY ▶</div>
+                <div class="vh-banda vh-banda-2"></div>
+            </div>
         </section>
 
         <!-- ============ 10. GELATINA ============ -->
-        <section id="gelatina">
-            <h2 class="c-gelatina">🍬 Gelatina <small>Gominola con rebote</small></h2>
-            <p class="desc">
-                El texto se <strong>aplasta al caer</strong>, se estira al rebotar y va
-                amortiguando sobre su línea de base. Relleno de caramelo.
-            </p>
-            <div class="demo">
-                <span class="efecto-gelatina grande">MORDISCO</span>
-                <span class="efecto-gelatina mediano">salta y rebota</span>
-                <span class="efecto-gelatina peq">texto pequeño</span>
+        <section id="gelatina" class="tarjeta">
+            <div class="muestra">
+                <span class="efecto-gelatina">MORDISCO</span>
             </div>
-            <pre><code>&lt;span class="efecto-gelatina"&gt;Tu texto&lt;/span&gt;</code></pre>
-            <p class="enlaces">
-                <a href="gelatina/index.html" target="_blank" rel="noopener">Showcase completo</a> ·
-                <a href="gelatina/gelatina.css" target="_blank" rel="noopener">gelatina.css</a> ·
-                <a href="gelatina/como-aplicar-gelatina.txt" target="_blank" rel="noopener">Cómo aplicarlo</a>
-            </p>
+            <h2 class="c-gelatina">🍬 Gelatina <small>Gominola con rebote</small></h2>
+            <a class="btn" href="gelatina/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="gelatina/gelatina.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-gelatina">
+                <div class="ge-onda ge-onda-1"></div>
+                <div class="ge-bola"></div>
+                <div class="ge-onda ge-onda-2"></div>
+            </div>
         </section>
 
         <!-- ============ 11. NEBULOSA ============ -->
-        <section id="nebulosa">
-            <h2 class="c-nebulosa">🌌 Nebulosa <small>Espacio profundo</small></h2>
-            <p class="desc">
-                Las letras son una <strong>ventana al vacío</strong>: gas magenta, cian y
-                violeta fluyendo, doble campo de estrellas con parallax y una estrella
-                fugaz que cruza el texto cada 16 s. Fondo oscuro recomendado.
-            </p>
-            <div class="demo">
-                <span class="efecto-nebulosa grande">NEBULOSA</span>
-                <span class="efecto-nebulosa mediano">más allá de la galaxia</span>
-                <span class="efecto-nebulosa peq">texto pequeño</span>
+        <section id="nebulosa" class="tarjeta">
+            <div class="muestra">
+                <span class="efecto-nebulosa">NEBULOSA</span>
             </div>
-            <pre><code>&lt;span class="efecto-nebulosa"&gt;Tu texto&lt;/span&gt;</code></pre>
-            <p class="enlaces">
-                <a href="nebulosa/index.html" target="_blank" rel="noopener">Showcase completo</a> ·
-                <a href="nebulosa/nebulosa.css" target="_blank" rel="noopener">nebulosa.css</a> ·
-                <a href="nebulosa/como-aplicar-nebulosa.txt" target="_blank" rel="noopener">Cómo aplicarlo</a>
-            </p>
+            <h2 class="c-nebulosa">🌌 Nebulosa <small>Espacio profundo</small></h2>
+            <a class="btn" href="nebulosa/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="nebulosa/nebulosa.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-nebulosa">
+                <div class="ne-humo"></div>
+                <div class="ne-estrellas"></div>
+                <div class="ne-nucleo"></div>
+            </div>
         </section>
+
+        </div><!-- /.galeria -->
 
         <footer>
             11 efectos · CSS puro sin JavaScript · cada efecto es portable:

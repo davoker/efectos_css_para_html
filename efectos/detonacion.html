@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<!-- =================================================================
+     DETONACIÓN · página de transición (SIN JavaScript)
+     -----------------------------------------------------------------
+     La abren los botones "Todos los efectos" de cada showcase, y cada
+     botón trae su FRAGMENTO: detonacion.html#radiacion,
+     detonacion.html#hielo, etc. Ese fragmento activa vía :target la
+     escena TEMÁTICA del propio efecto de la página de origen (una
+     explosión de fuego en fuego, cristal de hielo en hielo, símbolo
+     radiactivo en radiación…), y tras ~1,6 s el
+     <meta http-equiv="refresh"> nos lleva a index.html, la portada.
+     Si alguien abre la página SIN fragmento, se ve la escena por
+     defecto: la clásica seta de la bomba nuclear.
+     El "retraso" es el meta refresh: HTML + CSS puros, cero JS.
+     Las escenas viven en detonacion.css, compartido con la portada,
+     donde el botón "Descargar efecto" de cada tarjeta reproduce la
+     MISMA escena del efecto mientras se baja el .zip.
+     ================================================================= -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="1.6;url=index.html">
+    <title>Detonación… · Efectos de texto CSS</title>
+
+    <!-- Escenas temáticas (compartidas con la portada) -->
+    <link rel="stylesheet" href="detonacion.css">
+
+    <style>
+        /* Maquetación de ESTA página (no forma parte de ningún efecto):
+           fondo, la seta por defecto y el enlace de reserva. Las
+           escenas (incluida la seta) se estilan en detonacion.css. */
+        * { box-sizing: border-box; }
+        html, body { height: 100%; margin: 0; }
+        body {
+            background-color: #05030a;
+            overflow: hidden;            /* la explosión no crea scroll */
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* ============ ELEMENTOS DE LA SETA POR DEFECTO ============ */
+        /* 1) Resplandor ambiental del cielo */
+        .fondo {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 72%,
+                        rgba(255,120,20,.55) 0%, rgba(120,30,0,.35) 35%,
+                        rgba(5,3,10,0) 70%);
+            opacity: 0;
+            animation: fondo 1.6s linear both;
+        }
+
+        /* 2) Onda de choque recorriendo el suelo */
+        .onda {
+            position: absolute;
+            left: 50%;
+            top: 74%;
+            width: 74vmin;
+            height: 17vmin;
+            margin-left: -37vmin;
+            border-radius: 50%;
+            border: .7vmin solid rgba(255,224,160,.95);
+            box-shadow: 0 0 5vmin rgba(255,170,60,.85),
+                        inset 0 0 4vmin rgba(255,170,60,.7);
+            opacity: 0;
+            transform: scale(.05);
+            animation: onda 1.15s ease-out .22s both;
+        }
+
+        /* 3) Anillo de condensación que barre el capuchón */
+        .anillo {
+            position: absolute;
+            left: 50%;
+            top: 33%;
+            width: 44vmin;
+            height: 11vmin;
+            margin-left: -22vmin;
+            border-radius: 50%;
+            border: .55vmin solid rgba(255,232,185,.9);
+            opacity: 0;
+            transform: scale(.3);
+            animation: anillo 1.05s ease-out .45s both;
+        }
+
+        /* 4) Tallo: sube desde el suelo y se ensancha abajo */
+        .tallo {
+            position: absolute;
+            left: 50%;
+            top: 40%;
+            width: 15vmin;
+            height: 36vmin;
+            margin-left: -7.5vmin;
+            background:
+                repeating-linear-gradient(90deg,
+                    rgba(255,255,255,.25) 0 2px, rgba(255,255,255,0) 2px 8px),
+                linear-gradient(180deg, #ffe07a 0%, #ffa024 45%, #d9430a 100%);
+            clip-path: polygon(32% 0, 68% 0, 86% 100%, 14% 100%);
+            filter: blur(.6px);
+            transform-origin: 50% 100%;
+            animation: tallo .85s cubic-bezier(.2,.8,.3,1) .3s both;
+        }
+
+        /* 5) El capuchón: la "seta" propiamente dicha */
+        .tapon {
+            position: absolute;
+            left: 50%;
+            top: 17%;
+            width: 54vmin;
+            height: 31vmin;
+            margin-left: -27vmin;
+            border-radius: 50%;
+            background:
+                radial-gradient(circle at 30% 38%, rgba(255,255,255,.95) 0 5%, rgba(255,255,255,0) 15%),
+                radial-gradient(circle at 66% 30%, rgba(255,255,255,.9) 0 4%, rgba(255,255,255,0) 13%),
+                radial-gradient(circle at 52% 62%, rgba(255,238,170,.95) 0 6%, rgba(255,238,170,0) 18%),
+                radial-gradient(ellipse at 50% 55%, #fff2b0 0%, #ffbe38 38%, #ff7300 66%, #b12a00 100%);
+            box-shadow: 0 0 9vmin rgba(255,140,30,.8);
+            filter: blur(1.4px);
+            transform-origin: 50% 85%;
+            animation: tapon 1.05s cubic-bezier(.16,.84,.34,1) .36s both;
+        }
+
+        /* 6) Chispas radiando en todas direcciones */
+        .chispas {
+            position: absolute;
+            left: 50%;
+            top: 38%;
+            width: 78vmin;
+            height: 78vmin;
+            margin: -39vmin 0 0 -39vmin;
+            border-radius: 50%;          /* recorta los rayos a un círculo */
+            background:
+                radial-gradient(circle, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 42%),
+                repeating-conic-gradient(from 0deg,
+                    rgba(255,244,200,.95) 0 1.4deg, rgba(255,244,200,0) 1.4deg 26deg);
+            opacity: 0;
+            animation: chispas 1s ease-out .3s both;
+        }
+
+        /* ---- Enlace de reserva (por si no hay meta refresh) ---- */
+        .volver {
+            position: absolute;
+            left: 50%;
+            bottom: 5%;
+            margin: 0;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: volver .4s ease-out 1.05s both;
+        }
+        .volver a {
+            display: inline-block;
+            padding: .5rem 1.2rem;
+            background-color: rgba(10,8,16,.72);
+            border: 1px solid #2c3a4d;
+            border-radius: 999px;
+            color: #8ec8ff;
+            font-size: .9rem;
+            text-decoration: none;
+        }
+        .volver a:hover { background-color: #151a21; color: #ffffff; }
+
+        /* ---- Animaciones de la seta y del enlace (tiempo: 1,6 s) ---- */
+        @keyframes fondo {
+            0%   { opacity: .15; }
+            18%  { opacity: 1; }
+            100% { opacity: .55; }
+        }
+        @keyframes onda {
+            0%   { opacity: 0; transform: scale(.05); }
+            16%  { opacity: 1; }
+            100% { opacity: 0; transform: scale(1); }
+        }
+        @keyframes anillo {
+            0%   { opacity: 0; transform: scale(.3); }
+            25%  { opacity: .9; }
+            100% { opacity: 0; transform: scale(2.2); }
+        }
+        @keyframes tallo {
+            0%   { opacity: 0; transform: scaleY(.06) scaleX(.55); }
+            22%  { opacity: 1; }
+            100% { opacity: 1; transform: scaleY(1) scaleX(1); }
+        }
+        @keyframes tapon {
+            0%   { opacity: 0; transform: translateY(5vmin) scale(.12); }
+            30%  { opacity: 1; }
+            100% { opacity: 1; transform: translateY(-1.5vmin) scale(1); }
+        }
+        @keyframes chispas {
+            0%   { opacity: 0; transform: scale(.2) rotate(0deg); }
+            20%  { opacity: .95; }
+            100% { opacity: 0; transform: scale(1.7) rotate(14deg); }
+        }
+        @keyframes volver {
+            0%   { opacity: 0; transform: translateX(-50%) translateY(6px); }
+            100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== ESCENAS TEMÁTICAS (el fragmento elige cuál se ve) ===== -->
+    <div class="escena tema-glitch" id="glitch">
+        <div class="gl-banda gl-banda-1"></div>
+        <div class="gl-texto">GLITCH</div>
+        <div class="gl-banda gl-banda-2"></div>
+    </div>
+
+    <div class="escena tema-arcoiris" id="arcoiris">
+        <div class="ar-onda ar-onda-1"></div>
+        <div class="ar-onda ar-onda-2"></div>
+    </div>
+
+    <div class="escena tema-fuego" id="fuego">
+        <div class="fu-bola"></div>
+        <div class="fu-llamas"></div>
+        <div class="fu-ascuas"></div>
+    </div>
+
+    <div class="escena tema-radiacion" id="radiacion">
+        <div class="ra-simbolo"></div>
+        <div class="ra-anillo ra-anillo-1"></div>
+        <div class="ra-anillo ra-anillo-2"></div>
+    </div>
+
+    <div class="escena tema-nubes" id="nubes">
+        <div class="nu-mini-a"></div>
+        <div class="nu-nube"></div>
+        <div class="nu-mini-b"></div>
+    </div>
+
+    <div class="escena tema-hielo" id="hielo">
+        <div class="hi-copo"></div>
+        <div class="hi-escarcha"></div>
+    </div>
+
+    <div class="escena tema-lava" id="lava">
+        <div class="la-magma"></div>
+        <div class="la-chispas"></div>
+    </div>
+
+    <div class="escena tema-holograma" id="holograma">
+        <div class="ho-rejilla"></div>
+        <div class="ho-barrido"></div>
+        <div class="ho-anillo"></div>
+    </div>
+
+    <div class="escena tema-vhs" id="vhs">
+        <div class="vh-banda vh-banda-1"></div>
+        <div class="vh-texto">PLAY ▶</div>
+        <div class="vh-banda vh-banda-2"></div>
+    </div>
+
+    <div class="escena tema-gelatina" id="gelatina">
+        <div class="ge-onda ge-onda-1"></div>
+        <div class="ge-bola"></div>
+        <div class="ge-onda ge-onda-2"></div>
+    </div>
+
+    <div class="escena tema-nebulosa" id="nebulosa">
+        <div class="ne-humo"></div>
+        <div class="ne-estrellas"></div>
+        <div class="ne-nucleo"></div>
+    </div>
+
+    <!-- ===== ESCENA POR DEFECTO (sin fragmento): la seta ===== -->
+    <div class="escena escena-seta">
+        <div class="fondo"></div>
+        <div class="chispas"></div>
+        <div class="tallo"></div>
+        <div class="tapon"></div>
+        <div class="anillo"></div>
+        <div class="onda"></div>
+    </div>
+
+    <p class="volver"><a href="index.html">Todos los efectos →</a></p>
+</body>
+</html>

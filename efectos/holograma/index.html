@@ -54,23 +54,68 @@
         }
         code { color: #a9f5ff; }
         .nota { color: #00e5ff; font-weight: bold; }
-        nav a { color: #4dd0e1; }
+    
+        /* --- BOTÓN "TODOS LOS EFECTOS" (centrado arriba) ---
+           Clicable y con estado pulsado; mientras se mantiene sale el
+           destello TEMÁTICO de este efecto y, al soltar, salta a
+           detonacion.html#holograma: allí estalla la escena del propio
+           efecto (la elige :target) y, tras ~1,6 s de retardo (meta
+           refresh), se llega a la portada. --- */
+        nav.barra-volver {
+            text-align: center;
+            margin: 0 0 1.4rem;
+        }
+        .btn-volver {
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+            padding: .65rem 1.7rem;
+            background-color: #161b24;
+            border: 1px solid #2c3a4d;
+            border-radius: 999px;
+            color: #cfd8dc;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 3px 0 #07090e, 0 6px 14px rgba(0,0,0,.45);
+            transition: transform .1s, background-color .15s, box-shadow .1s;
+        }
+        .btn-volver:hover {
+            background-color: #1d2430;
+            color: #ffffff;
+        }
+        .btn-volver:active {
+            transform: translateY(3px) scale(.97);
+            background-color: #10141b;
+            box-shadow: 0 0 0 #07090e, inset 0 3px 8px rgba(0,0,0,.75);
+        }
+                .btn-volver::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 170px;
+            height: 170px;
+            margin: -85px 0 0 -85px;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            background: radial-gradient(circle, #e9feff 0%, rgba(0,229,255,.85) 28%, rgba(0,229,255,.3) 55%, rgba(0,229,255,0) 76%), repeating-linear-gradient(0deg, rgba(0,229,255,.35) 0 2px, rgba(0,229,255,0) 2px 8px);
+            transform: scale(.3) translateY(-8px);
+        }
+        .btn-volver:active::after {
+            animation: btn-holograma .48s linear infinite;
+        }
+        @keyframes btn-holograma {
+            0%   { opacity: 0;   transform: scale(.3) translateY(-8px); }
+            30%  { opacity: .95; }
+            100% { opacity: 0;   transform: scale(.85) translateY(8px); }
+        }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="../index.html"><strong>Todos los efectos</strong></a> ·
-        <a href="../glitch/index.html">Glitch</a> ·
-        <a href="../arcoiris/index.html">Arcoíris</a> ·
-        <a href="../fuego/index.html">Fuego</a> ·
-        <a href="../radiacion/index.html">Radiación</a> ·
-        <a href="../nubes/index.html">Nubes</a> ·
-        <a href="../hielo/index.html">Hielo</a> ·
-        <a href="../lava/index.html">Lava</a> ·
-        <a href="../vhs/index.html">VHS</a> ·
-        <a href="../gelatina/index.html">Gelatina</a> ·
-        <a href="../nebulosa/index.html">Nebulosa</a>
+    <nav class="barra-volver">
+        <a class="btn-volver" href="../detonacion.html#holograma">← Todos los efectos</a>
     </nav>
 
     <h1>EFECTO HOLOGRAMA</h1>
