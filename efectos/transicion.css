@@ -1,9 +1,9 @@
 /* ==================================================================
-   ESCENAS TEMÁTICAS DE DETONACIÓN (compartidas · CSS puro)
+   ESCENAS TEMÁTICAS (compartidas · CSS puro)
    ------------------------------------------------------------------
    Las usan DOS páginas, para que el efecto sea idéntico en los dos
    sitios sin duplicar código:
-     · detonacion.html → cada botón "Todos los efectos" llega con su
+     · transicion.html → cada botón "Todos los efectos" llega con su
        fragmento (#radiacion, #hielo…) y la regla .escena:target
        elige la escena del propio efecto de la página de origen.
      · index.html (portada) → cada botón "Descargar efecto (.zip)"

@@ -11,9 +11,9 @@
      que guarda el pack del efecto: su CSS, el HTML de su showcase y
      las instrucciones; al soltarlo, la portada estalla con la MISMA
      escena temática que el botón "Todos los efectos" del showcase
-     (sus escenas viven en detonacion.css, aquí dentro de cada
+     (sus escenas viven en transicion.css, aquí dentro de cada
      tarjeta). Desde el showcase se vuelve con "Todos los efectos":
-     ese botón pasa antes por detonacion.html#efecto (la escena del
+     ese botón pasa antes por transicion.html#efecto (la escena del
      propio efecto, ~1,6 s de retardo) y de ahí sigue a esta portada
      — el retardo es un <meta refresh>, seguimos sin JS.
 
@@ -27,9 +27,9 @@
           carpeta\index.html, carpeta\como-aplicar-efecto.txt `
           -DestinationPath carpeta\efecto.zip
           Si cambias el CSS o el HTML después, ¡vuelve a crear el zip!
-       5) su escena de detonación: .tema-carpeta + sus @keyframes en
-          detonacion.css, su <div class="escena tema-carpeta"> con
-          id="carpeta" en detonacion.html, y OTRA copia sin id tras su
+       5) su escena temática: .tema-carpeta + sus @keyframes en
+          transicion.css, su <div class="escena tema-carpeta"> con
+          id="carpeta" en transicion.html, y OTRA copia sin id tras su
           botón de descarga (aquí, dentro de su <section id="carpeta">).
      (Los 11 CSS conviven sin conflictos: cada uno solo define su
       propia clase .efecto-xxx y sus propios @keyframes.)
@@ -53,8 +53,8 @@
     <link rel="stylesheet" href="gelatina/gelatina.css">
     <link rel="stylesheet" href="nebulosa/nebulosa.css">
 
-    <!-- Escenas de detonación (transición + botones de descarga) -->
-    <link rel="stylesheet" href="detonacion.css">
+    <!-- Escenas temáticas (transición + botones de descarga) -->
+    <link rel="stylesheet" href="transicion.css">
 
     <style>
         /* ============================================================
@@ -256,7 +256,7 @@
 
         /* --- ESCENA TEMÁTICA al pulsar la descarga ---
            Cada tarjeta lleva tras de su botón una copia de la
-           <div class="escena …"> de detonacion.html (sin id: aquí no
+           <div class="escena …"> de transicion.html (sin id: aquí no
            manda el fragmento, manda el botón). En reposo está en
            display:none y congelada (animation-play-state: paused).
            Al SOLTAR el clic (:focus) se despliega y arranca de cero

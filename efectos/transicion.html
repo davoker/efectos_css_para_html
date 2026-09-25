@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <!-- =================================================================
-     DETONACIÓN · página de transición (SIN JavaScript)
+     TRANSICIÓN · página de paso a la portada (SIN JavaScript)
      -----------------------------------------------------------------
      La abren los botones "Todos los efectos" de cada showcase, y cada
-     botón trae su FRAGMENTO: detonacion.html#radiacion,
-     detonacion.html#hielo, etc. Ese fragmento activa vía :target la
+     botón trae su FRAGMENTO: transicion.html#radiacion,
+     transicion.html#hielo, etc. Ese fragmento activa vía :target la
      escena TEMÁTICA del propio efecto de la página de origen (una
      explosión de fuego en fuego, cristal de hielo en hielo, símbolo
      radiactivo en radiación…), y tras ~1,6 s el
@@ -12,7 +12,7 @@
      Si alguien abre la página SIN fragmento, se ve la escena por
      defecto: la clásica seta de la bomba nuclear.
      El "retraso" es el meta refresh: HTML + CSS puros, cero JS.
-     Las escenas viven en detonacion.css, compartido con la portada,
+     Las escenas viven en transicion.css, compartido con la portada,
      donde el botón "Descargar efecto" de cada tarjeta reproduce la
      MISMA escena del efecto mientras se baja el .zip.
      ================================================================= -->
@@ -21,15 +21,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="1.6;url=index.html">
-    <title>Detonación… · Efectos de texto CSS</title>
+    <title>Transición… · Efectos de texto CSS</title>
 
     <!-- Escenas temáticas (compartidas con la portada) -->
-    <link rel="stylesheet" href="detonacion.css">
+    <link rel="stylesheet" href="transicion.css">
 
     <style>
         /* Maquetación de ESTA página (no forma parte de ningún efecto):
            fondo, la seta por defecto y el enlace de reserva. Las
-           escenas (incluida la seta) se estilan en detonacion.css. */
+           escenas (incluida la seta) se estilan en transicion.css. */
         * { box-sizing: border-box; }
         html, body { height: 100%; margin: 0; }
         body {
