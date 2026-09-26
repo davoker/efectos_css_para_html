@@ -2,7 +2,7 @@
 <!-- ================================================================
      SHOWCASE UNIFICADO DE EFECTOS DE TEXTO (efectos en CSS puro)
      ----------------------------------------------------------------
-     UNA SOLA PÁGINA con los 33 efectos agrupados en CATEGORÍAS: cada
+     UNA SOLA PÁGINA con los 46 efectos agrupados en CATEGORÍAS: cada
      categoría es una CARPETA PLEGABLE en el índice de la izquierda
      (<details>): sus efectos están ocultos hasta abrirla y, al hacerlo,
      se despliegan su lista y sus tarjetas (con :has()). Con ninguna
@@ -55,7 +55,7 @@
        4) sus <link>, <li data-cat> y <section data-cat> con rutas
           categoria/efecto/…       (La muestra aleatoria no se toca al añadir categorías: el guion
         del final sortea de todas las tarjetas; tamaño en var N = 12.)
-      (Los 33 CSS conviven sin conflictos: cada uno solo define su
+      (Los 46 CSS conviven sin conflictos: cada uno solo define su
        propia clase .efecto-xxx y sus propios @keyframes.)
      ================================================================ -->
 <html lang="es">
@@ -64,7 +64,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Efectos de texto CSS - Showcase unificado</title>
 
-    <!-- ============ LOS 33 EFECTOS (cada uno portable) ============ -->
+    <!-- ============ LOS 46 EFECTOS (cada uno portable) ============ -->
     <link rel="stylesheet" href="miscelanea/glitch/glitch.css">
     <link rel="stylesheet" href="miscelanea/arcoiris/arcoiris.css">
     <link rel="stylesheet" href="miscelanea/fuego/fuego.css">
@@ -98,6 +98,19 @@
     <link rel="stylesheet" href="the_division/bengala/bengala.css">
     <link rel="stylesheet" href="the_division/graffiti/graffiti.css">
     <link rel="stylesheet" href="the_division/stencil/stencil.css">
+    <link rel="stylesheet" href="star_wars/sable/sable.css">
+    <link rel="stylesheet" href="star_wars/fuerza/fuerza.css">
+    <link rel="stylesheet" href="star_wars/hiperespacio/hiperespacio.css">
+    <link rel="stylesheet" href="star_wars/estrellas/estrellas.css">
+    <link rel="stylesheet" href="star_wars/torpedo/torpedo.css">
+    <link rel="stylesheet" href="star_wars/respiracion/respiracion.css">
+    <link rel="stylesheet" href="star_wars/dunas/dunas.css">
+    <link rel="stylesheet" href="star_wars/carbono/carbono.css">
+    <link rel="stylesheet" href="star_wars/superlaser/superlaser.css">
+    <link rel="stylesheet" href="star_wars/clon/clon.css">
+    <link rel="stylesheet" href="star_wars/apuntar/apuntar.css">
+    <link rel="stylesheet" href="star_wars/espiritu/espiritu.css">
+    <link rel="stylesheet" href="star_wars/rebelion/rebelion.css">
 
     <!-- Escenas temáticas (transición + botones de descarga) -->
     <link rel="stylesheet" href="transicion.css">
@@ -367,18 +380,31 @@
         .c-chispa     { color: #ffd740; }
         .c-grieta     { color: #a1887f; }
         .c-hud        { color: #ff9d2e; font-family: "Courier New", monospace; }
-.c-rogue      { color: #ff5252; }
-.c-impacto    { color: #ffd54f; }
-.c-botin      { color: #ffb300; }
-.c-apagon     { color: #ff5252; }
-.c-abatido    { color: #ff5252; }
-.c-nevada     { color: #b3e5fc; }
-.c-neon       { color: #ff80ab; }
-.c-blindaje   { color: #b0bec5; }
-.c-pulso      { color: #40c4ff; }
-.c-bengala    { color: #ff6e40; }
-.c-graffiti   { color: #e040fb; }
-.c-stencil    { color: #9ccc65; font-family: "Courier New", monospace; }
+        .c-rogue      { color: #ff5252; }
+        .c-impacto    { color: #ffd54f; }
+        .c-botin      { color: #ffb300; }
+        .c-apagon     { color: #ff5252; }
+        .c-abatido    { color: #ff5252; }
+        .c-nevada     { color: #b3e5fc; }
+        .c-neon       { color: #ff80ab; }
+        .c-blindaje   { color: #b0bec5; }
+        .c-pulso      { color: #40c4ff; }
+        .c-bengala    { color: #ff6e40; }
+        .c-graffiti   { color: #e040fb; }
+        .c-stencil    { color: #9ccc65; font-family: "Courier New", monospace; }
+        .c-sable      { color: #00e676; }
+        .c-fuerza     { color: #90caf9; }
+        .c-hiperespacio { color: #b388ff; }
+        .c-estrellas  { color: #c5cae9; }
+        .c-torpedo    { color: #ff5252; }
+        .c-respiracion { color: #ff1744; }
+        .c-dunas      { color: #ffb300; }
+        .c-carbono    { color: #90a4ae; }
+        .c-superlaser { color: #00e676; }
+        .c-clon       { color: #64b5f6; }
+        .c-apuntar    { color: #76ff03; font-family: "Courier New", monospace; }
+        .c-espiritu   { color: #b3e5fc; }
+        .c-rebelion   { color: #ff6d00; }
 
         footer {
             padding: 2rem 0 1rem;
@@ -472,6 +498,11 @@
             display: none;
         }
 
+        body:has(.grupo[open]):not(:has(#g-star_wars[open]))
+            .galeria .tarjeta[data-cat="star_wars"] {
+            display: none;
+        }
+
         /* aviso mientras no haya ninguna categoría abierta */
         .aviso-grupo {
             margin: 0 0 1rem;
@@ -489,7 +520,7 @@
 
     <!-- ======================= ÍNDICE ======================= -->
     <aside class="indice">
-        <h3>Efectos <span class="contador">33 disponibles</span></h3>
+        <h3>Efectos <span class="contador">46 disponibles</span></h3>
 
         <!-- Carpeta de categoría: plegada por defecto; al abrirla se
              despliegan su lista y sus tarjetas (CSS puro, sin JS) -->
@@ -538,6 +569,25 @@
                 <li data-cat="the_division"><a href="#stencil">🔫 Stencil</a></li>
             </ol>
         </details>
+        <!-- Star Wars (La guerra de las galaxias) -->
+        <details class="grupo" id="g-star_wars" data-cat="star_wars">
+            <summary class="grupo-titulo">Star Wars <span class="grupo-n">13</span></summary>
+            <ol class="lista">
+                <li data-cat="star_wars"><a href="#sable">⚔️ Sable</a></li>
+                <li data-cat="star_wars"><a href="#fuerza">🌀 Fuerza</a></li>
+                <li data-cat="star_wars"><a href="#hiperespacio">🚀 Hiperespacio</a></li>
+                <li data-cat="star_wars"><a href="#estrellas">✨ Estrellas</a></li>
+                <li data-cat="star_wars"><a href="#torpedo">🔴 Torpedo</a></li>
+                <li data-cat="star_wars"><a href="#respiracion">😷 Respiración</a></li>
+                <li data-cat="star_wars"><a href="#dunas">🏜️ Dunas</a></li>
+                <li data-cat="star_wars"><a href="#carbono">🧊 Carbono</a></li>
+                <li data-cat="star_wars"><a href="#superlaser">🟢 Superláser</a></li>
+                <li data-cat="star_wars"><a href="#clon">👥 Clon</a></li>
+                <li data-cat="star_wars"><a href="#apuntar">🎯 Apuntar</a></li>
+                <li data-cat="star_wars"><a href="#espiritu">👻 Espíritu</a></li>
+                <li data-cat="star_wars"><a href="#rebelion">⭐ Rebelión</a></li>
+            </ol>
+        </details>
     </aside>
 
     <!-- ====================== CONTENIDO ====================== -->
@@ -546,7 +596,7 @@
         <header class="intro">
             <h1>🔥 Efectos de texto CSS</h1>
             <p>
-                Los 33 efectos en <strong>una sola página</strong>: al cargar
+                Los 46 efectos en <strong>una sola página</strong>: al cargar
                 verás una muestra de 12 al azar; abre una categoría en el
                 panel de la izquierda para desplegar todos sus efectos y
                 haz clic en el que quieras ver. Los efectos son
@@ -1061,10 +1111,206 @@
             </div>
         </section>
 
+        <!-- ============ 34. SABLE ============ -->
+        <section id="sable" class="tarjeta" data-cat="star_wars">
+            <div class="muestra">
+                <span class="efecto-sable">SABLE</span>
+            </div>
+            <h2 class="c-sable">⚔️ Sable <small>Encendido de sable láser</small></h2>
+            <a class="btn" href="star_wars/sable/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="star_wars/sable/sable.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-sable">
+                <div class="sa-hoja sa-hoja-1"></div>
+                <div class="sa-hoja sa-hoja-2"></div>
+                <div class="sa-resplandor"></div>
+            </div>
+        </section>
+
+        <!-- ============ 35. FUERZA ============ -->
+        <section id="fuerza" class="tarjeta" data-cat="star_wars">
+            <div class="muestra">
+                <span class="efecto-fuerza">FUERZA</span>
+            </div>
+            <h2 class="c-fuerza">🌀 Fuerza <small>La Fuerza te acompaña</small></h2>
+            <a class="btn" href="star_wars/fuerza/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="star_wars/fuerza/fuerza.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-fuerza">
+                <div class="fu-anillo fu-anillo-1"></div>
+                <div class="fu-anillo fu-anillo-2"></div>
+                <div class="fu-motas"></div>
+            </div>
+        </section>
+
+        <!-- ============ 36. HIPERESPACIO ============ -->
+        <section id="hiperespacio" class="tarjeta" data-cat="star_wars">
+            <div class="muestra">
+                <span class="efecto-hiperespacio">HIPER</span>
+            </div>
+            <h2 class="c-hiperespacio">🚀 Hiperespacio <small>Salto a velocidad luz</small></h2>
+            <a class="btn" href="star_wars/hiperespacio/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="star_wars/hiperespacio/hiperespacio.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-hiperespacio">
+                <div class="hi-estelas"></div>
+                <div class="hi-rastro"></div>
+                <div class="hi-flash"></div>
+            </div>
+        </section>
+
+        <!-- ============ 37. ESTRELLAS ============ -->
+        <section id="estrellas" class="tarjeta" data-cat="star_wars">
+            <div class="muestra">
+                <span class="efecto-estrellas">ESTRELLAS</span>
+            </div>
+            <h2 class="c-estrellas">✨ Estrellas <small>Campo estelar</small></h2>
+            <a class="btn" href="star_wars/estrellas/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="star_wars/estrellas/estrellas.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-estrellas">
+                <div class="es-campo es-campo-1"></div>
+                <div class="es-campo es-campo-2"></div>
+                <div class="es-via"></div>
+            </div>
+        </section>
+
+        <!-- ============ 38. TORPEDO ============ -->
+        <section id="torpedo" class="tarjeta" data-cat="star_wars">
+            <div class="muestra">
+                <span class="efecto-torpedo">PEW</span>
+            </div>
+            <h2 class="c-torpedo">🔴 Torpedo <small>Rayo de bláster</small></h2>
+            <a class="btn" href="star_wars/torpedo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="star_wars/torpedo/torpedo.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-torpedo">
+                <div class="to-rayo to-rayo-1"></div>
+                <div class="to-rayo to-rayo-2"></div>
+                <div class="to-impacto"></div>
+            </div>
+        </section>
+
+        <!-- ============ 39. RESPIRACIÓN ============ -->
+        <section id="respiracion" class="tarjeta" data-cat="star_wars">
+            <div class="muestra">
+                <span class="efecto-respiracion">VADER</span>
+            </div>
+            <h2 class="c-respiracion">😷 Respiración <small>El lado oscuro</small></h2>
+            <a class="btn" href="star_wars/respiracion/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="star_wars/respiracion/respiracion.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-respiracion">
+                <div class="rs-latido"></div>
+                <div class="rs-slit"></div>
+                <div class="rs-polvo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 40. DUNAS ============ -->
+        <section id="dunas" class="tarjeta" data-cat="star_wars">
+            <div class="muestra">
+                <span class="efecto-dunas">TATOOINE</span>
+            </div>
+            <h2 class="c-dunas">🏜️ Dunas <small>Espejismo de Tatooine</small></h2>
+            <a class="btn" href="star_wars/dunas/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="star_wars/dunas/dunas.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-dunas">
+                <div class="du-soles"></div>
+                <div class="du-arena"></div>
+                <div class="du-espejismo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 41. CARBONO ============ -->
+        <section id="carbono" class="tarjeta" data-cat="star_wars">
+            <div class="muestra">
+                <span class="efecto-carbono">CARBONITA</span>
+            </div>
+            <h2 class="c-carbono">🧊 Carbono <small>Congelado en carbonita</small></h2>
+            <a class="btn" href="star_wars/carbono/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="star_wars/carbono/carbono.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-carbono">
+                <div class="ca-placa"></div>
+                <div class="ca-brillo"></div>
+                <div class="ca-vapor"></div>
+            </div>
+        </section>
+
+        <!-- ============ 42. SUPERLÁSER ============ -->
+        <section id="superlaser" class="tarjeta" data-cat="star_wars">
+            <div class="muestra">
+                <span class="efecto-superlaser">DISPARO</span>
+            </div>
+            <h2 class="c-superlaser">🟢 Superláser <small>Estación de la Muerte</small></h2>
+            <a class="btn" href="star_wars/superlaser/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="star_wars/superlaser/superlaser.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-superlaser">
+                <div class="sl-haz"></div>
+                <div class="sl-carga"></div>
+                <div class="sl-anillo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 43. CLON ============ -->
+        <section id="clon" class="tarjeta" data-cat="star_wars">
+            <div class="muestra">
+                <span class="efecto-clon">×2</span>
+            </div>
+            <h2 class="c-clon">👥 Clon <small>Ejército de copias</small></h2>
+            <a class="btn" href="star_wars/clon/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="star_wars/clon/clon.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-clon">
+                <div class="cl-marca cl-marca-1"></div>
+                <div class="cl-marca cl-marca-2"></div>
+                <div class="cl-rejilla"></div>
+            </div>
+        </section>
+
+        <!-- ============ 44. APUNTAR ============ -->
+        <section id="apuntar" class="tarjeta" data-cat="star_wars">
+            <div class="muestra">
+                <span class="efecto-apuntar">BLK</span>
+            </div>
+            <h2 class="c-apuntar">🎯 Apuntar <small>Ordenador de puntería</small></h2>
+            <a class="btn" href="star_wars/apuntar/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="star_wars/apuntar/apuntar.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-apuntar">
+                <div class="ap-marca"></div>
+                <div class="ap-punto"></div>
+                <div class="ap-barrido"></div>
+            </div>
+        </section>
+
+        <!-- ============ 45. ESPÍRITU ============ -->
+        <section id="espiritu" class="tarjeta" data-cat="star_wars">
+            <div class="muestra">
+                <span class="efecto-espiritu">ONE WITH THE FORCE</span>
+            </div>
+            <h2 class="c-espiritu">👻 Espíritu <small>El espíritu de la Fuerza</small></h2>
+            <a class="btn" href="star_wars/espiritu/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="star_wars/espiritu/espiritu.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-espiritu">
+                <div class="es-aura"></div>
+                <div class="es-motas"></div>
+                <div class="es-hazo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 46. REBELIÓN ============ -->
+        <section id="rebelion" class="tarjeta" data-cat="star_wars">
+            <div class="muestra">
+                <span class="efecto-rebelion">ALIANZA</span>
+            </div>
+            <h2 class="c-rebelion">⭐ Rebelión <small>Alianza Rebelde</small></h2>
+            <a class="btn" href="star_wars/rebelion/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="star_wars/rebelion/rebelion.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-rebelion">
+                <div class="rb-banda"></div>
+                <div class="rb-estrella rb-estrella-1"></div>
+                <div class="rb-estrella rb-estrella-2"></div>
+                <div class="rb-luz"></div>
+            </div>
+        </section>
+
         </div><!-- /.galeria -->
 
         <footer>
-            33 efectos · CSS puro sin JavaScript · cada efecto es portable:
+            46 efectos · CSS puro sin JavaScript · cada efecto es portable:
             copia su archivo .css a tu proyecto y usa su clase en cualquier texto.
         </footer>
 
