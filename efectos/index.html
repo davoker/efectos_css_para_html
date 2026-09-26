@@ -2,7 +2,7 @@
 <!-- ================================================================
      SHOWCASE UNIFICADO DE EFECTOS DE TEXTO (efectos en CSS puro)
      ----------------------------------------------------------------
-     UNA SOLA PÁGINA con los 21 efectos agrupados en CATEGORÍAS: cada
+     UNA SOLA PÁGINA con los 33 efectos agrupados en CATEGORÍAS: cada
      categoría es una CARPETA PLEGABLE en el índice de la izquierda
      (<details>): sus efectos están ocultos hasta abrirla y, al hacerlo,
      se despliegan su lista y sus tarjetas (con :has()). Con ninguna
@@ -55,7 +55,7 @@
        4) sus <link>, <li data-cat> y <section data-cat> con rutas
           categoria/efecto/…       (La muestra aleatoria no se toca al añadir categorías: el guion
         del final sortea de todas las tarjetas; tamaño en var N = 12.)
-      (Los 21 CSS conviven sin conflictos: cada uno solo define su
+      (Los 33 CSS conviven sin conflictos: cada uno solo define su
        propia clase .efecto-xxx y sus propios @keyframes.)
      ================================================================ -->
 <html lang="es">
@@ -64,7 +64,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Efectos de texto CSS - Showcase unificado</title>
 
-    <!-- ============ LOS 21 EFECTOS (cada uno portable) ============ -->
+    <!-- ============ LOS 33 EFECTOS (cada uno portable) ============ -->
     <link rel="stylesheet" href="miscelanea/glitch/glitch.css">
     <link rel="stylesheet" href="miscelanea/arcoiris/arcoiris.css">
     <link rel="stylesheet" href="miscelanea/fuego/fuego.css">
@@ -86,6 +86,18 @@
     <link rel="stylesheet" href="miscelanea/chispa/chispa.css">
     <link rel="stylesheet" href="miscelanea/grieta/grieta.css">
     <link rel="stylesheet" href="the_division/hud/hud.css">
+    <link rel="stylesheet" href="the_division/rogue/rogue.css">
+    <link rel="stylesheet" href="the_division/impacto/impacto.css">
+    <link rel="stylesheet" href="the_division/botin/botin.css">
+    <link rel="stylesheet" href="the_division/apagon/apagon.css">
+    <link rel="stylesheet" href="the_division/abatido/abatido.css">
+    <link rel="stylesheet" href="the_division/nevada/nevada.css">
+    <link rel="stylesheet" href="the_division/neon/neon.css">
+    <link rel="stylesheet" href="the_division/blindaje/blindaje.css">
+    <link rel="stylesheet" href="the_division/pulso/pulso.css">
+    <link rel="stylesheet" href="the_division/bengala/bengala.css">
+    <link rel="stylesheet" href="the_division/graffiti/graffiti.css">
+    <link rel="stylesheet" href="the_division/stencil/stencil.css">
 
     <!-- Escenas temáticas (transición + botones de descarga) -->
     <link rel="stylesheet" href="transicion.css">
@@ -355,6 +367,18 @@
         .c-chispa     { color: #ffd740; }
         .c-grieta     { color: #a1887f; }
         .c-hud        { color: #ff9d2e; font-family: "Courier New", monospace; }
+.c-rogue      { color: #ff5252; }
+.c-impacto    { color: #ffd54f; }
+.c-botin      { color: #ffb300; }
+.c-apagon     { color: #ff5252; }
+.c-abatido    { color: #ff5252; }
+.c-nevada     { color: #b3e5fc; }
+.c-neon       { color: #ff80ab; }
+.c-blindaje   { color: #b0bec5; }
+.c-pulso      { color: #40c4ff; }
+.c-bengala    { color: #ff6e40; }
+.c-graffiti   { color: #e040fb; }
+.c-stencil    { color: #9ccc65; font-family: "Courier New", monospace; }
 
         footer {
             padding: 2rem 0 1rem;
@@ -465,7 +489,7 @@
 
     <!-- ======================= ÍNDICE ======================= -->
     <aside class="indice">
-        <h3>Efectos <span class="contador">21 disponibles</span></h3>
+        <h3>Efectos <span class="contador">33 disponibles</span></h3>
 
         <!-- Carpeta de categoría: plegada por defecto; al abrirla se
              despliegan su lista y sus tarjetas (CSS puro, sin JS) -->
@@ -497,9 +521,21 @@
 
         <!-- The Division (The Division 1 y 2) -->
         <details class="grupo" id="g-the_division" data-cat="the_division">
-            <summary class="grupo-titulo">The Division <span class="grupo-n">1</span></summary>
+            <summary class="grupo-titulo">The Division <span class="grupo-n">13</span></summary>
             <ol class="lista">
                 <li data-cat="the_division"><a href="#hud">📡 HUD</a></li>
+                <li data-cat="the_division"><a href="#rogue">🏴 Rogue</a></li>
+                <li data-cat="the_division"><a href="#impacto">💥 Impacto</a></li>
+                <li data-cat="the_division"><a href="#botin">💎 Botín</a></li>
+                <li data-cat="the_division"><a href="#apagon">🔌 Apagón</a></li>
+                <li data-cat="the_division"><a href="#abatido">💓 Abatido</a></li>
+                <li data-cat="the_division"><a href="#nevada">❄️ Nevada</a></li>
+                <li data-cat="the_division"><a href="#neon">💡 Neón</a></li>
+                <li data-cat="the_division"><a href="#blindaje">🛡️ Blindaje</a></li>
+                <li data-cat="the_division"><a href="#pulso">📶 Pulso</a></li>
+                <li data-cat="the_division"><a href="#bengala">🔦 Bengala</a></li>
+                <li data-cat="the_division"><a href="#graffiti">🎨 Graffiti</a></li>
+                <li data-cat="the_division"><a href="#stencil">🔫 Stencil</a></li>
             </ol>
         </details>
     </aside>
@@ -510,7 +546,7 @@
         <header class="intro">
             <h1>🔥 Efectos de texto CSS</h1>
             <p>
-                Los 21 efectos en <strong>una sola página</strong>: al cargar
+                Los 33 efectos en <strong>una sola página</strong>: al cargar
                 verás una muestra de 12 al azar; abre una categoría en el
                 panel de la izquierda para desplegar todos sus efectos y
                 haz clic en el que quieras ver. Los efectos son
@@ -844,10 +880,191 @@
                 <div class="hu-linea"></div>
             </div>
         </section>
+
+        <!-- ============ 22. ROGUE ============ -->
+        <section id="rogue" class="tarjeta" data-cat="the_division">
+            <div class="muestra">
+                <span class="efecto-rogue">ROGUE</span>
+            </div>
+            <h2 class="c-rogue">🏴 Rogue <small>Estado de agente</small></h2>
+            <a class="btn" href="the_division/rogue/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="the_division/rogue/rogue.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-rogue">
+                <div class="rg-faro"></div>
+                <div class="rg-alerta"></div>
+                <div class="rg-suelo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 23. IMPACTO ============ -->
+        <section id="impacto" class="tarjeta" data-cat="the_division">
+            <div class="muestra">
+                <span class="efecto-impacto">CRÍTICO</span>
+            </div>
+            <h2 class="c-impacto">💥 Impacto <small>Números de daño</small></h2>
+            <a class="btn" href="the_division/impacto/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="the_division/impacto/impacto.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-impacto">
+                <div class="im-floater im-floater-1"></div>
+                <div class="im-floater im-floater-2"></div>
+                <div class="im-golpe"></div>
+            </div>
+        </section>
+
+        <!-- ============ 24. BOTÍN ============ -->
+        <section id="botin" class="tarjeta" data-cat="the_division">
+            <div class="muestra">
+                <span class="efecto-botin">EXÓTICO</span>
+            </div>
+            <h2 class="c-botin">💎 Botín <small>Haz legendaria</small></h2>
+            <a class="btn" href="the_division/botin/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="the_division/botin/botin.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-botin">
+                <div class="bt-haz"></div>
+                <div class="bt-oro"></div>
+                <div class="bt-estrella"></div>
+            </div>
+        </section>
+
+        <!-- ============ 25. APAGÓN ============ -->
+        <section id="apagon" class="tarjeta" data-cat="the_division">
+            <div class="muestra">
+                <span class="efecto-apagon">APAGÓN</span>
+            </div>
+            <h2 class="c-apagon">🔌 Apagón <small>Directiva de emergencia</small></h2>
+            <a class="btn" href="the_division/apagon/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="the_division/apagon/apagon.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-apagon">
+                <div class="ap-luz"></div>
+                <div class="ap-sirena"></div>
+                <div class="ap-linea"></div>
+            </div>
+        </section>
+
+        <!-- ============ 26. ABATIDO ============ -->
+        <section id="abatido" class="tarjeta" data-cat="the_division">
+            <div class="muestra">
+                <span class="efecto-abatido">ABATIDO</span>
+            </div>
+            <h2 class="c-abatido">💓 Abatido <small>Signos vitales</small></h2>
+            <a class="btn" href="the_division/abatido/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="the_division/abatido/abatido.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-abatido">
+                <div class="ab-corazon"></div>
+                <div class="ab-pulso"></div>
+                <div class="ab-rojo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 27. NEVADA ============ -->
+        <section id="nevada" class="tarjeta" data-cat="the_division">
+            <div class="muestra">
+                <span class="efecto-nevada">NIEVE</span>
+            </div>
+            <h2 class="c-nevada">❄️ Nevada <small>Nieve en Central Park</small></h2>
+            <a class="btn" href="the_division/nevada/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="the_division/nevada/nevada.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-nevada">
+                <div class="nv-capa nv-capa-1"></div>
+                <div class="nv-capa nv-capa-2"></div>
+                <div class="nv-suelo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 28. NEÓN ============ -->
+        <section id="neon" class="tarjeta" data-cat="the_division">
+            <div class="muestra">
+                <span class="efecto-neon">NEÓN</span>
+            </div>
+            <h2 class="c-neon">💡 Neón <small>Letrero de calle</small></h2>
+            <a class="btn" href="the_division/neon/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="the_division/neon/neon.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-neon">
+                <div class="nn-letrero"></div>
+                <div class="nn-reflejo"></div>
+                <div class="nn-chispa"></div>
+            </div>
+        </section>
+
+        <!-- ============ 29. BLINDAJE ============ -->
+        <section id="blindaje" class="tarjeta" data-cat="the_division">
+            <div class="muestra">
+                <span class="efecto-blindaje">NIVEL 6</span>
+            </div>
+            <h2 class="c-blindaje">🛡️ Blindaje <small>Placas de armadura</small></h2>
+            <a class="btn" href="the_division/blindaje/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="the_division/blindaje/blindaje.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-blindaje">
+                <div class="bl-malla"></div>
+                <div class="bl-barrido"></div>
+                <div class="bl-cinta"></div>
+            </div>
+        </section>
+
+        <!-- ============ 30. PULSO ============ -->
+        <section id="pulso" class="tarjeta" data-cat="the_division">
+            <div class="muestra">
+                <span class="efecto-pulso">PULSO</span>
+            </div>
+            <h2 class="c-pulso">📶 Pulso <small>Ping de escáner</small></h2>
+            <a class="btn" href="the_division/pulso/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="the_division/pulso/pulso.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-pulso">
+                <div class="pl-anillo pl-anillo-1"></div>
+                <div class="pl-anillo pl-anillo-2"></div>
+                <div class="pl-rejilla"></div>
+            </div>
+        </section>
+
+        <!-- ============ 31. BENGALA ============ -->
+        <section id="bengala" class="tarjeta" data-cat="the_division">
+            <div class="muestra">
+                <span class="efecto-bengala">BENGALA</span>
+            </div>
+            <h2 class="c-bengala">🔦 Bengala <small>Luz de extracción</small></h2>
+            <a class="btn" href="the_division/bengala/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="the_division/bengala/bengala.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-bengala">
+                <div class="bg-humo"></div>
+                <div class="bg-nucleo"></div>
+                <div class="bg-chispas"></div>
+            </div>
+        </section>
+
+        <!-- ============ 32. GRAFFITI ============ -->
+        <section id="graffiti" class="tarjeta" data-cat="the_division">
+            <div class="muestra">
+                <span class="efecto-graffiti">MURAL</span>
+            </div>
+            <h2 class="c-graffiti">🎨 Graffiti <small>Muro de aerosol</small></h2>
+            <a class="btn" href="the_division/graffiti/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="the_division/graffiti/graffiti.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-graffiti">
+                <div class="gf-salpicadura gf-salpicadura-1"></div>
+                <div class="gf-salpicadura gf-salpicadura-2"></div>
+                <div class="gf-goteo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 33. STENCIL ============ -->
+        <section id="stencil" class="tarjeta" data-cat="the_division">
+            <div class="muestra">
+                <span class="efecto-stencil">SECRETO</span>
+            </div>
+            <h2 class="c-stencil">🔫 Stencil <small>Orden de misión</small></h2>
+            <a class="btn" href="the_division/stencil/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="the_division/stencil/stencil.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-stencil">
+                <div class="st-cajon"></div>
+                <div class="st-polvo"></div>
+                <div class="st-barrido"></div>
+            </div>
+        </section>
+
         </div><!-- /.galeria -->
 
         <footer>
-            21 efectos · CSS puro sin JavaScript · cada efecto es portable:
+            33 efectos · CSS puro sin JavaScript · cada efecto es portable:
             copia su archivo .css a tu proyecto y usa su clase en cualquier texto.
         </footer>
 

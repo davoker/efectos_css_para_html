@@ -1333,3 +1333,703 @@
     92%  { opacity: .9; }
     100% { top: 104%; opacity: 0; }
 }
+
+/* ============ 22. ROGUE — luces de estado ============ */
+.tema-rogue {
+    background: radial-gradient(circle at 50% 55%, #2a080d 0%, #0d0406 76%);
+}
+.tema-rogue::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,120,130,.55) 0%, rgba(255,23,68,.3) 34%,
+                transparent 74%);
+}
+.rg-faro {
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    width: 90vmin;
+    height: 90vmin;
+    margin: -45vmin 0 0 -45vmin;
+    background: conic-gradient(from 0deg, rgba(255,23,68,0) 0 70%,
+                rgba(255,82,82,.5) 84%, rgba(255,23,68,0) 96%);
+    border-radius: 50%;
+    opacity: .6;
+    animation: rg-faro 4s linear infinite;
+}
+.rg-alerta {
+    position: absolute;
+    left: 50%;
+    top: 46%;
+    width: 14vmin;
+    height: 14vmin;
+    margin: -7vmin 0 0 -7vmin;
+    background: linear-gradient(135deg, #ff1744 0 46%, transparent 46% 54%,
+                #ff1744 54%);
+    transform: rotate(45deg);
+    opacity: 0;
+    animation: rg-alerta 1.6s ease-in-out infinite;
+}
+.rg-suelo {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 26%;
+    background: linear-gradient(0deg, rgba(255,23,68,.4), transparent);
+    animation: rg-suelo 1.6s ease-in-out infinite;
+}
+@keyframes rg-faro {
+    0%   { transform: rotate(0deg); opacity: .5; }
+    50%  { opacity: .85; }
+    100% { transform: rotate(360deg); opacity: .5; }
+}
+@keyframes rg-alerta {
+    0%, 30%   { opacity: .9; transform: rotate(45deg) scale(1); }
+    31%, 60%  { opacity: .25; transform: rotate(45deg) scale(.92); }
+    61%, 100% { opacity: .9; transform: rotate(45deg) scale(1); }
+}
+@keyframes rg-suelo {
+    0%, 34%   { opacity: .8; }
+    35%, 64%  { opacity: .3; }
+    65%, 100% { opacity: .8; }
+}
+
+/* ============ 23. IMPACTO — números de daño ============ */
+.tema-impacto {
+    background: radial-gradient(circle at 50% 58%, #241a06 0%, #0a0803 78%);
+}
+.tema-impacto::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,240,180,.55) 0%, rgba(255,213,79,.26) 34%,
+                transparent 74%);
+    animation: im-brillo 2.8s ease-in-out infinite;
+}
+.im-floater {
+    position: absolute;
+    width: 16vmin;
+    height: 11vmin;
+    background: linear-gradient(180deg, #fff59d, rgba(255,179,0,0));
+    clip-path: polygon(8% 100%, 92% 100%, 78% 0, 22% 0);
+    opacity: 0;
+}
+.im-floater-1 {
+    left: 30%;
+    top: 50%;
+    animation: im-floater 2.8s ease-out infinite;
+}
+.im-floater-2 {
+    left: 54%;
+    top: 40%;
+    animation: im-floater 2.8s ease-out .7s infinite;
+}
+.im-golpe {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 44vmin;
+    height: 44vmin;
+    margin: -22vmin 0 0 -22vmin;
+    border: .7vmin solid rgba(255,234,87,.9);
+    border-radius: 50%;
+    opacity: 0;
+    animation: im-golpe 2.8s ease-out infinite;
+}
+@keyframes im-brillo {
+    0%, 100% { opacity: .25; }
+    8%       { opacity: .9; }
+    42%      { opacity: .55; }
+    70%      { opacity: .3; }
+}
+@keyframes im-floater {
+    0%, 6%  { opacity: 0; transform: translateY(.6em) scale(.8); }
+    8%      { opacity: 1; transform: translateY(0) scale(1); }
+    46%     { opacity: .9; transform: translateY(-7em) scale(1); }
+    54%     { opacity: 0; transform: translateY(-8.5em) scale(.9); }
+    100%    { opacity: 0; transform: translateY(-8.5em) scale(.9); }
+}
+@keyframes im-golpe {
+    0%, 6%  { opacity: 0; transform: scale(.2); }
+    8%      { opacity: .9; transform: scale(.3); }
+    55%     { opacity: .25; transform: scale(1.05); }
+    70%     { opacity: 0; transform: scale(1.15); }
+    100%    { opacity: 0; transform: scale(1.15); }
+}
+
+/* ============ 24. BOTIN — el tesoro brilla ============ */
+.tema-botin {
+    background: radial-gradient(circle at 50% 62%, #1f1604 0%, #0a0702 76%);
+}
+.tema-botin::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,244,196,.55) 0%, rgba(255,193,7,.3) 34%,
+                transparent 74%);
+}
+.bt-haz {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 22vmin;
+    height: 100%;
+    margin-left: -11vmin;
+    background: linear-gradient(0deg, rgba(255,213,0,.75) 0%,
+                rgba(255,193,7,.3) 55%, rgba(255,193,7,0));
+    filter: blur(1.5vmin);
+    animation: bt-haz 2.6s ease-in-out infinite;
+}
+.bt-oro {
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    bottom: -6%;
+    height: 30%;
+    background: radial-gradient(ellipse at 50% 100%,
+                rgba(255,213,0,.7), transparent 70%);
+    animation: bt-oro 2.6s ease-in-out infinite;
+}
+.bt-estrella {
+    position: absolute;
+    left: 62%;
+    top: 26%;
+    width: 4vmin;
+    height: 4vmin;
+    background: radial-gradient(circle, #fffde7 0 12%,
+                rgba(255,238,88,.9) 26%, transparent 60%);
+    border-radius: 50%;
+    opacity: 0;
+    animation: bt-estrella 1.6s steps(1, end) infinite;
+}
+@keyframes bt-haz {
+    0%, 100% { opacity: .6; transform: scaleY(.94) translateX(-2%); }
+    50%      { opacity: 1; transform: scaleY(1.04) translateX(2%); }
+}
+@keyframes bt-oro {
+    0%, 100% { opacity: .5; transform: scaleX(.9); }
+    50%      { opacity: 1; transform: scaleX(1.1); }
+}
+@keyframes bt-estrella {
+    0%, 58%   { opacity: 0; transform: scale(.3); }
+    59%, 66%  { opacity: 1; transform: scale(1); }
+    67%, 74%  { opacity: .35; transform: scale(.7); }
+    75%, 100% { opacity: 0; transform: scale(.3); }
+}
+
+/* ============ 25. APAGÓN — ciudad sin luz ============ */
+.tema-apagon {
+    background: #060607;
+}
+.tema-apagon::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,90,90,.5) 0%, rgba(255,40,40,.22) 30%,
+                transparent 70%);
+}
+.ap-luz {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 46%,
+                rgba(255,82,82,.55) 0%, rgba(255,82,82,0) 52%);
+    opacity: 0;
+    animation: ap-luz 4.6s steps(1, end) infinite;
+}
+.ap-sirena {
+    position: absolute;
+    left: -20%;
+    right: -20%;
+    top: 34%;
+    height: 34%;
+    background: linear-gradient(90deg, transparent,
+                rgba(255,23,68,.5) 45%, rgba(255,120,120,.7) 50%,
+                rgba(255,23,68,.5) 55%, transparent);
+    transform: translateX(-70%);
+    opacity: 0;
+    animation: ap-sirena 4.6s steps(1, end) infinite;
+}
+.ap-linea {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 12%;
+    height: .7vmin;
+    background: #ff1744;
+    box-shadow: 0 0 2vmin rgba(255,23,68,.9);
+    opacity: 0;
+    animation: ap-linea 4.6s steps(1, end) infinite;
+}
+@keyframes ap-luz {
+    0%, 17%   { opacity: 0; }
+    18%, 20%  { opacity: 1; }
+    21%, 32%  { opacity: 0; }
+    33%, 36%  { opacity: .7; }
+    37%, 57%  { opacity: 0; }
+    58%, 60%  { opacity: 1; }
+    61%, 80%  { opacity: 0; }
+    81%, 84%  { opacity: .7; }
+    85%, 100% { opacity: 0; }
+}
+@keyframes ap-sirena {
+    0%, 30%   { opacity: 0; transform: translateX(-70%); }
+    33%, 36%  { opacity: .8; transform: translateX(-10%); }
+    37%, 100% { opacity: 0; transform: translateX(40%); }
+}
+@keyframes ap-linea {
+    0%, 17%   { opacity: 0; }
+    18%, 60%  { opacity: .9; }
+    61%, 80%  { opacity: .2; }
+    81%, 84%  { opacity: 1; }
+    85%, 100% { opacity: 0; }
+}
+
+/* ============ 26. ABATIDO — monitor de latidos ============ */
+.tema-abatido {
+    background: radial-gradient(circle at 50% 55%, #1c0a0a 0%, #090404 78%);
+}
+.tema-abatido::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,140,140,.5) 0%, rgba(255,60,60,.26) 34%,
+                transparent 74%);
+}
+.ab-corazon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 30vmin;
+    height: 30vmin;
+    margin: -15vmin 0 0 -15vmin;
+    border: .7vmin solid rgba(255,82,82,.85);
+    border-radius: 50%;
+    opacity: 0;
+    animation: ab-corazon 3.2s ease-out infinite;
+}
+.ab-pulso {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(50% - .4vmin);
+    height: .8vmin;
+    background: linear-gradient(90deg, transparent, #ff5252 12%,
+                #ff5252 88%, transparent);
+    opacity: 0;
+    animation: ab-pulso 3.2s ease-in-out infinite;
+}
+.ab-rojo {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, transparent 30%,
+                rgba(160,0,0,.55));
+    opacity: .5;
+    animation: ab-rojo 3.2s ease-in-out infinite;
+}
+@keyframes ab-corazon {
+    0%, 8%   { opacity: 0; transform: scale(.3); }
+    14%      { opacity: .9; transform: scale(.5); }
+    40%      { opacity: 0; transform: scale(1.05); }
+    100%     { opacity: 0; transform: scale(1.05); }
+}
+@keyframes ab-pulso {
+    0%, 40%  { opacity: 0; }
+    46%, 92% { opacity: .75; }
+    100%     { opacity: 0; }
+}
+@keyframes ab-rojo {
+    0%, 40%   { opacity: .45; }
+    55%, 90%  { opacity: .16; }
+    100%      { opacity: .45; }
+}
+
+/* ============ 27. NEVADA — cae la nieve ============ */
+.tema-nevada {
+    background: linear-gradient(180deg, #0d2b46 0%, #07182a 70%,
+                #10304a 100%);
+}
+.tema-nevada::after {
+    background: radial-gradient(circle at 50% 40%,
+                rgba(215,242,255,.6) 0%, rgba(120,200,255,.3) 34%,
+                transparent 76%);
+}
+.nv-capa {
+    position: absolute;
+    inset: -8%;
+    background-image:
+        radial-gradient(circle 1.6px at 12px 14px, #ffffff 96%, transparent),
+        radial-gradient(circle 2.4px at 40px 46px, #9fdcff 96%, transparent);
+    background-size: 60px 70px, 130px 150px;
+}
+.nv-capa-1 { animation: nv-capa1 7s linear infinite; }
+.nv-capa-2 { opacity: .65; animation: nv-capa2 4.6s linear infinite; }
+.nv-suelo {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 22%;
+    background: linear-gradient(0deg, rgba(130,210,255,.6), transparent);
+    animation: nv-suelo 5s ease-in-out infinite;
+}
+@keyframes nv-capa1 {
+    0%   { background-position: 0 0, 0 0; }
+    100% { background-position: -60px 70px, -130px 150px; }
+}
+@keyframes nv-capa2 {
+    0%   { background-position: 0 0, 0 0; }
+    100% { background-position: 60px 70px, 130px 150px; }
+}
+@keyframes nv-suelo {
+    0%, 100% { opacity: .55; }
+    50%      { opacity: .95; }
+}
+
+/* ============ 28. NEON — letrero parpadeante ============ */
+.tema-neon {
+    background: linear-gradient(180deg, #120f1a 0%, #0a0810 60%,
+                #141020 100%);
+}
+.tema-neon::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,128,171,.5) 0%, rgba(213,0,245,.24) 34%,
+                transparent 74%);
+}
+.nn-letrero {
+    position: absolute;
+    left: 50%;
+    top: 44%;
+    width: 70vmin;
+    height: 46vmin;
+    margin: -23vmin 0 0 -35vmin;
+    background: radial-gradient(ellipse at 50% 50%,
+                rgba(255,64,129,.5), rgba(255,64,129,0) 70%);
+    animation: nn-letrero 2.6s steps(1, end) infinite;
+}
+.nn-reflejo {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: -8%;
+    height: 30%;
+    background: linear-gradient(0deg, rgba(255,64,129,.42), transparent);
+    filter: blur(1.2vmin);
+    animation: nn-reflejo 3.4s ease-in-out infinite;
+}
+.nn-chispa {
+    position: absolute;
+    left: 58%;
+    top: 30%;
+    width: 1.4vmin;
+    height: 1.4vmin;
+    background: #e1f5fe;
+    border-radius: 50%;
+    box-shadow: 0 0 3vmin #18ffff;
+    opacity: 0;
+    animation: nn-chispa 2.6s steps(1, end) infinite;
+}
+@keyframes nn-letrero {
+    0%, 100% { opacity: .85; }
+    8%       { opacity: .3; }
+    10%      { opacity: .9; }
+    44%      { opacity: .85; }
+    46%      { opacity: .2; }
+    47%      { opacity: .95; }
+    70%      { opacity: .85; }
+    72%      { opacity: .35; }
+    74%      { opacity: .9; }
+}
+@keyframes nn-reflejo {
+    0%, 100% { opacity: .5; }
+    50%      { opacity: .85; }
+}
+@keyframes nn-chispa {
+    0%, 45%   { opacity: 0; }
+    46%, 47%  { opacity: 1; }
+    48%, 89%  { opacity: 0; }
+    90%, 91%  { opacity: .9; }
+    92%, 100% { opacity: 0; }
+}
+
+/* ============ 29. BLINDAJE — placas y cinta ============ */
+.tema-blindaje {
+    background:
+        repeating-linear-gradient(60deg, rgba(255,255,255,.03) 0 6px,
+                          transparent 6px 18px),
+        repeating-linear-gradient(-60deg, rgba(0,0,0,.25) 0 6px,
+                          transparent 6px 18px),
+        linear-gradient(180deg, #171b1f 0%, #0c0e11 70%, #12161a 100%);
+}
+.tema-blindaje::after {
+    background: radial-gradient(circle at 50% 50%,
+                rgba(220,230,236,.5) 0%, rgba(144,164,174,.26) 34%,
+                transparent 74%);
+}
+.bl-malla {
+    position: absolute;
+    inset: -10%;
+    background: repeating-linear-gradient(90deg,
+                rgba(176,190,197,.14) 0 2px, transparent 2px 30px);
+    transform: skewX(-12deg);
+    animation: bl-malla 6s linear infinite;
+}
+.bl-barrido {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -30%;
+    width: 26%;
+    background: linear-gradient(90deg, transparent,
+                rgba(236,239,241,.5), transparent);
+    transform: skewX(-16deg);
+    animation: bl-barrido 5s ease-in-out infinite;
+}
+.bl-cinta {
+    position: absolute;
+    left: -10%;
+    right: -10%;
+    bottom: 16%;
+    height: 7%;
+    background: repeating-linear-gradient(-45deg, #ffd600 0 3vmin,
+                #1c1c1c 3vmin 6vmin);
+    transform: rotate(-4deg);
+    animation: bl-cinta 3.6s linear infinite;
+}
+@keyframes bl-malla {
+    0%   { transform: skewX(-12deg) translateX(0); }
+    100% { transform: skewX(-12deg) translateX(30px); }
+}
+@keyframes bl-barrido {
+    0%   { left: -30%; opacity: .7; }
+    55%  { left: 120%; opacity: .7; }
+    56%  { opacity: 0; }
+    100% { left: 120%; opacity: 0; }
+}
+@keyframes bl-cinta {
+    0%   { background-position: 0 0; }
+    100% { background-position: -8.485vmin 0; }
+}
+
+/* ============ 30. PULSO — ping de sonar ============ */
+.tema-pulso {
+    background: radial-gradient(circle at 50% 55%, #07182a 0%, #040a12 76%);
+}
+.tema-pulso::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(120,220,255,.5) 0%, rgba(64,196,255,.26) 34%,
+                transparent 74%);
+}
+.pl-anillo {
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    width: 60vmin;
+    height: 60vmin;
+    margin: -30vmin 0 0 -30vmin;
+    border: .7vmin solid rgba(64,196,255,.85);
+    border-radius: 50%;
+    opacity: 0;
+}
+.pl-anillo-1 { animation: pl-anillo 3s ease-out infinite; }
+.pl-anillo-2 { animation: pl-anillo 3s ease-out 1.5s infinite; }
+.pl-rejilla {
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(0deg, rgba(64,196,255,.16) 0 1px,
+                          transparent 1px 7vmin),
+        repeating-linear-gradient(90deg, rgba(64,196,255,.16) 0 1px,
+                          transparent 1px 7vmin);
+    animation: pl-rejilla 3s ease-out infinite;
+}
+@keyframes pl-anillo {
+    0%   { opacity: .9; transform: scale(.06); }
+    75%  { opacity: .3; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.12); }
+}
+@keyframes pl-rejilla {
+    0%   { opacity: .8; }
+    30%  { opacity: .35; }
+    100% { opacity: .8; }
+}
+
+/* ============ 31. BENGALA — luz de bengala ============ */
+.tema-bengala {
+    background: radial-gradient(circle at 50% 42%, #241006 0%, #0b0503 74%);
+}
+.tema-bengala::after {
+    background: radial-gradient(circle at 50% 45%,
+                rgba(255,200,140,.6) 0%, rgba(255,110,64,.3) 34%,
+                transparent 74%);
+}
+.bg-humo {
+    position: absolute;
+    left: 50%;
+    top: -6%;
+    width: 44%;
+    height: 60%;
+    margin-left: -22%;
+    background: linear-gradient(180deg, rgba(255,255,255,.28),
+                rgba(255,255,255,0));
+    filter: blur(2.4vmin);
+    animation: bg-humo 4.2s ease-in-out infinite;
+}
+.bg-nucleo {
+    position: absolute;
+    left: 50%;
+    top: 38%;
+    width: 26vmin;
+    height: 26vmin;
+    margin: -13vmin 0 0 -13vmin;
+    background: radial-gradient(circle, #fff3e0 0%,
+                rgba(255,110,64,.7) 34%, transparent 70%);
+    animation: bg-nucleo .9s steps(1, end) infinite;
+}
+.bg-chispas {
+    position: absolute;
+    left: 54%;
+    top: 30%;
+    width: 2vmin;
+    height: 2vmin;
+    background: #ffea00;
+    border-radius: 50%;
+    box-shadow: -6vmin 8vmin 0 -.4vmin #ffab40,
+                4vmin 12vmin 0 -.4vmin #ff6e40,
+                -2vmin 16vmin 0 -.5vmin #ffe082;
+    opacity: 0;
+    animation: bg-chispas 1.7s steps(1, end) infinite;
+}
+@keyframes bg-humo {
+    0%, 100% { opacity: .4; transform: translateY(6%) skewX(-5deg); }
+    50%      { opacity: .8; transform: translateY(-6%) skewX(7deg); }
+}
+@keyframes bg-nucleo {
+    0%   { opacity: .75; transform: scale(.97); }
+    20%  { opacity: 1; transform: scale(1.06); }
+    40%  { opacity: .7; transform: scale(.98); }
+    55%  { opacity: 1; transform: scale(1.1); }
+    75%  { opacity: .8; transform: scale(1); }
+    100% { opacity: .75; transform: scale(.97); }
+}
+@keyframes bg-chispas {
+    0%, 60%   { opacity: 0; transform: translateY(0); }
+    61%, 68%  { opacity: 1; transform: translateY(-2%); }
+    69%, 84%  { opacity: 0; transform: translateY(-6%); }
+    85%, 92%  { opacity: .9; transform: translateY(-8%); }
+    93%, 100% { opacity: 0; transform: translateY(-10%); }
+}
+
+/* ============ 32. GRAFFITI — el muro habla ============ */
+.tema-graffiti {
+    background:
+        repeating-linear-gradient(0deg, rgba(0, 0, 0, .35) 0 1px,
+                          transparent 1px 8%),
+        repeating-linear-gradient(90deg, rgba(0, 0, 0, .35) 0 1px,
+                          transparent 1px 14%),
+        linear-gradient(180deg, #1a1622 0%, #12101a 100%);
+}
+.tema-graffiti::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(224,64,251,.5) 0%, rgba(101,31,255,.26) 34%,
+                transparent 74%);
+}
+.gf-salpicadura {
+    position: absolute;
+    width: 26vmin;
+    height: 26vmin;
+    background: radial-gradient(circle at 50% 50%,
+                rgba(224,64,251,.75) 0 18%, rgba(124,77,255,.5) 30%,
+                transparent 62%);
+    border-radius: 46% 54% 58% 42% / 52% 44% 56% 48%;
+    opacity: 0;
+}
+.gf-salpicadura-1 {
+    left: 16%;
+    top: 24%;
+    animation: gf-salpicadura 4.6s ease-in-out infinite;
+}
+.gf-salpicadura-2 {
+    right: 14%;
+    bottom: 20%;
+    animation: gf-salpicadura 4.6s ease-in-out 2.3s infinite;
+}
+.gf-goteo {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -12%;
+    height: 34%;
+    background: linear-gradient(180deg, rgba(176,51,255,.65), transparent);
+    filter: blur(.8vmin);
+    animation: gf-goteo 5.2s linear infinite;
+}
+@keyframes gf-salpicadura {
+    0%   { opacity: 0; transform: scale(.4) rotate(0deg); }
+    18%  { opacity: .95; transform: scale(1) rotate(18deg); }
+    62%  { opacity: .7; transform: scale(1.06) rotate(24deg); }
+    78%  { opacity: 0; transform: scale(1.1) rotate(30deg); }
+    100% { opacity: 0; transform: scale(1.1) rotate(30deg); }
+}
+@keyframes gf-goteo {
+    0%   { transform: translateY(-40%); opacity: 0; }
+    10%  { opacity: .7; }
+    80%  { opacity: .5; }
+    100% { transform: translateY(190%); opacity: 0; }
+}
+
+/* ============ 33. STENCIL — cajas marcadas ============ */
+.tema-stencil {
+    background:
+        repeating-linear-gradient(0deg, rgba(0, 0, 0, .3) 0 2px,
+                          transparent 2px 9%),
+        linear-gradient(180deg, #141a0e 0%, #0b0e08 100%);
+}
+.tema-stencil::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(190,220,150,.45) 0%, rgba(104,159,56,.24) 34%,
+                transparent 74%);
+}
+.st-cajon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 58%;
+    height: 44%;
+    margin: -22% 0 0 -29%;
+    border: .7vmin solid #7cb342;
+    opacity: 0;
+    clip-path: inset(0 100% 100% 0);
+    animation: st-cajon 5s steps(1, end) infinite;
+}
+.st-polvo {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle 1.4px at 30px 40px,
+                rgba(200,224,170,.6) 96%, transparent),
+        radial-gradient(circle 1.8px at 90px 110px,
+                rgba(200,224,170,.4) 96%, transparent);
+    background-size: 140px 150px, 240px 260px;
+    animation: st-polvo 9s linear infinite;
+}
+.st-barrido {
+    position: absolute;
+    left: -30%;
+    top: 20%;
+    width: 40%;
+    height: 60%;
+    background: linear-gradient(90deg, transparent,
+                rgba(156,204,101,.4), transparent);
+    transform: skewX(-18deg);
+    animation: st-barrido 6s linear infinite;
+}
+@keyframes st-cajon {
+    0%, 8%    { opacity: 0; clip-path: inset(0 100% 100% 0); }
+    9%        { opacity: 1; clip-path: inset(0 100% 100% 0); }
+    25%       { opacity: 1; clip-path: inset(0 0 100% 0); }
+    50%       { opacity: 1; clip-path: inset(0 0 0 0); }
+    88%       { opacity: 1; clip-path: inset(0 0 0 0); }
+    89%, 100% { opacity: 0; clip-path: inset(0 0 0 0); }
+}
+@keyframes st-polvo {
+    0%   { background-position: 0 0, 0 0; }
+    100% { background-position: -140px 150px, 240px 260px; }
+}
+@keyframes st-barrido {
+    0%   { left: -45%; opacity: .7; }
+    70%  { left: 120%; opacity: .7; }
+    71%  { opacity: 0; }
+    100% { left: 120%; opacity: 0; }
+}
