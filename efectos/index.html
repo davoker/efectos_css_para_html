@@ -45,7 +45,8 @@
 
      CÓMO AÑADIR UNA CATEGORÍA NUEVA:
        1) crea efectos/categoria/ y mete dentro sus efectos (los 20 de
-          hoy están en efectos/miscelanea/, la categoría "Miscelánea")
+          hoy están en efectos/miscelanea/, la categoría "Miscelánea";
+          "The Division" (efectos/the_division/) está aún vacía)
        2) aquí: su <details class="grupo" id="g-categoria" data-cat="categoria">
           con <summary class="grupo-titulo">Nombre (n)</summary> y su
           <ol class="lista"> dentro, en el índice lateral
@@ -440,6 +441,11 @@
             display: none;
         }
 
+        body:has(.grupo[open]):not(:has(#g-the_division[open]))
+            .galeria .tarjeta[data-cat="the_division"] {
+            display: none;
+        }
+
         /* aviso mientras no haya ninguna categoría abierta */
         .aviso-grupo {
             margin: 0 0 1rem;
@@ -448,6 +454,16 @@
         }
         .aviso-grupo { display: none; }
         body:not(:has(.grupo[open])) .aviso-grupo { display: block; }
+
+        /* categoría abierta pero todavía sin efectos */
+        .lista-vacia {
+            margin: .3rem .2rem .6rem;
+            color: #5d6774;
+            font-size: .85rem;
+            font-style: italic;
+        }
+        .aviso-vacio { display: none; }
+        body:has(#g-the_division[open]) .aviso-vacio { display: block; }
 
     </style>
 </head>
@@ -486,6 +502,13 @@
                 <li data-cat="miscelanea"><a href="#grieta">🗿 Grieta</a></li>
             </ol>
         </details>
+
+        <!-- The Division (1 y 2): categoría aún sin efectos -->
+        <details class="grupo" id="g-the_division" data-cat="the_division">
+            <summary class="grupo-titulo">The Division <span class="grupo-n">0</span></summary>
+            <p class="lista-vacia">Todavía sin efectos: aquí entrarán
+                los de The Division 1 y 2.</p>
+        </details>
     </aside>
 
     <!-- ====================== CONTENIDO ====================== -->
@@ -512,6 +535,10 @@
 
         <p class="aviso-grupo">Abre una categoría en el panel de la
             izquierda para ver sus efectos.</p>
+
+        <p class="aviso-vacio">La categoría <strong>The Division</strong>
+            todavía no tiene efectos: los de The Division 1 y 2
+            aparecerán aquí.</p>
 
         <div class="galeria">
 
