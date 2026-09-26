@@ -8,9 +8,11 @@
      se despliegan su lista y sus tarjetas (con :has()). Con ninguna
      categoría abierta, un GUION al final del fichero sortea una MUESTRA
      de 12 efectos al azar de entre todos (única página con JS del repo:
-     los efectos en sí siguen siendo CSS puro)
+     ese guion pinta el FONDO ESPACIAL (nebulosa, estrellas y fugaces
+     sobre dos canvas) y reparte los EFECTOS AL CLICAR desde un mazo de
+     46 barajado; los efectos en sí siguen siendo CSS puro)
      (scroll suave). El contenido va en una CUADRÍCULA de círculos
-     (3 por fila) para que el scroll sea corto: cada círculo es una
+     (4 por fila) para que el scroll sea corto: cada círculo es una
      muestra del efecto, debajo está su nombre y dos botones:
      "Showcase completo" (misma pestaña) y "Descargar efecto (.zip)",
      que guarda el pack del efecto: su CSS, el HTML de su showcase y
@@ -134,7 +136,7 @@
         .layout {
             display: flex;
             gap: 2rem;
-            max-width: 1180px;
+            max-width: 1240px;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -214,10 +216,13 @@
         .resumen { color: #8b97a6; font-size: .92rem; }
         .resumen code { color: #d7e2ef; background: #151a21; padding: 0 4px; border-radius: 4px; }
 
-        /* --- CUADRÍCULA DE TARJETAS: 3 círculos por fila --- */
+        /* --- CUADRÍCULA DE TARJETAS: 4 círculos por fila ---
+           (4 x 200px de muestra + 3 huecos de 24px caben de sobra en el
+           ancho de 1240px: columna ~211px; si la ventana baja de 1210px
+           ya no, y ahí el responsive de más abajo pasa a 3) */
         .galeria {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 2.2rem 1.5rem;
             margin-top: 1.4rem;
         }
@@ -410,6 +415,12 @@
             padding: 2rem 0 1rem;
             color: #5d6774;
             font-size: .85rem;
+        }
+
+        /* --- Menos ancho: 3 círculos por fila (debajo de 1210px ya
+               no caben 4 muestras de 200px con el índice de 225px) --- */
+        @media (max-width: 1210px) {
+            .galeria { grid-template-columns: repeat(3, 1fr); }
         }
 
         /* --- Mediana: 2 círculos por fila --- */
@@ -606,9 +617,37 @@
             }
         }
 
+
+        /* --- FONDO ESPACIAL Y EFECTOS AL CLICAR (canvas de esta
+           portada, no son ninguno de los 46 efectos) ---
+           #fondo-espacio va DETRÁS de todo el contenido (z-index -1,
+           por encima del color de body) y se estira al ALTO del
+           documento, así el cielo de nebulosa y estrellas llega hasta
+           el pie sin cortarse; #efectos va SOBRE la página (40), por debajo de
+           las escenas (200) y del botón de tema (150), y solo pinta
+           cuando se cliquea en cualquier parte: la animación vive en
+           el guion de esta página y pointer-events:none no deja que
+           estorbe los clics ni el scroll. */
+        #fondo-espacio {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+        #efectos {
+            position: fixed;
+            inset: 0;
+            z-index: 40;
+            pointer-events: none;
+        }
+
     </style>
 </head>
 <body>
+
+<canvas id="fondo-espacio" aria-hidden="true"></canvas>
+<canvas id="efectos" aria-hidden="true"></canvas>
 
 <button id="btn-tema" class="btn-tema" type="button"
         title="Modo claro"
@@ -1445,6 +1484,1515 @@
         })();
 
 
+        // ===== FONDO ESPACIAL (canvas tras <body>, z-index -1) =====
+        // Pinta DETRÁS de todo el contenido un cielo del espacio: base
+        // en degradado, nebulosas y banda galáctica pre-renderizadas en
+        // un canvas aparte, estrellas con parpadeo y paralaje suave del
+        // ratón, y alguna estrella fugaz. El botón de tema sigue
+        // mandando: cada fotograma se lee el data-tema y, si cambia, se
+        // regenera la paleta (oscuro: azul/violeta/magenta fríos;
+        // claro: pastel lavanda-azul para no estorbar la lectura).
+        // headless no avanza frames sin capturar: el primer fotograma
+        // se pinta ya mismo y window.__fondo.repinta() fuerza otro (lo
+        // usa el botón de tema y las pruebas).
+        (function () {
+            var lienzo = document.getElementById("fondo-espacio");
+            if (!lienzo || !lienzo.getContext) { return; }
+            var fx = lienzo.getContext("2d");
+            var capa = document.createElement("canvas");   // nebulosa
+            var cb = capa.getContext("2d");
+            var an = 0, al = 0;
+            var dpr = Math.min(window.devicePixelRatio || 1, 2);
+            var tema = "";
+            var estrellas = [], fugaces = [];
+            var px = 0, py = 0, ox = 0, oy = 0;   // paralaje real/objetivo
+            var reloj = 0, ult = 0;
+
+            // nubes fijas: [x, y, radio] en fracción del canvas
+            var NUB = [[.14, .2, .5], [.6, .14, .44], [.4, .66, .55],
+                       [.86, .56, .46], [.18, .86, .42], [.7, .9, .4]];
+
+            function claro() {
+                return document.documentElement
+                        .getAttribute("data-tema") === "claro";
+            }
+
+            function medir() {
+                // alto del documento, no de la ventana: el cielo tiene
+                // que llegar hasta el pie en las capturas de página
+                // completa (el lienzo no estira el body: va absolute)
+                an = Math.max(window.innerWidth,
+                              document.documentElement.scrollWidth);
+                al = Math.max(window.innerHeight,
+                              document.documentElement.scrollHeight);
+                lienzo.style.width = an + "px";
+                lienzo.style.height = al + "px";
+                lienzo.width = Math.round(an * dpr);
+                lienzo.height = Math.round(al * dpr);
+                fx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            }
+
+            function nube() {
+                var c = claro();
+                var w = an + 90, h = al + 90;
+                capa.width = Math.round(w * dpr);
+                capa.height = Math.round(h * dpr);
+                cb.setTransform(dpr, 0, 0, dpr, 0, 0);
+                var g = cb.createLinearGradient(0, 0, 0, h);
+                g.addColorStop(0, c ? "#fdfeff" : "#04060c");
+                g.addColorStop(1, c ? "#eef2f8" : "#0a0c12");
+                cb.fillStyle = g;
+                cb.fillRect(0, 0, w, h);
+                var cols = c
+                    ? ["rgba(255,175,205,.5)", "rgba(150,185,255,.5)",
+                       "rgba(205,175,255,.42)", "rgba(150,235,245,.38)",
+                       "rgba(255,225,175,.4)", "rgba(190,255,215,.35)"]
+                    : ["rgba(120,45,190,.5)", "rgba(25,80,175,.5)",
+                       "rgba(185,35,130,.42)", "rgba(30,140,150,.38)",
+                       "rgba(90,25,150,.46)", "rgba(40,110,220,.36)"];
+                var i, n, x, y, r, gg;
+                for (i = 0; i < NUB.length; i++) {
+                    n = NUB[i];
+                    x = n[0] * w;
+                    y = n[1] * h;
+                    r = n[2] * Math.max(w, h) * .55;
+                    gg = cb.createRadialGradient(x, y, 0, x, y, r);
+                    gg.addColorStop(0, cols[i]);
+                    gg.addColorStop(1, "rgba(0,0,0,0)");
+                    cb.fillStyle = gg;
+                    cb.fillRect(x - r, y - r, r * 2, r * 2);
+                }
+                // banda galáctica: elipse de luz inclinada
+                cb.save();
+                cb.translate(w / 2, h / 2);
+                cb.rotate(-0.5);
+                cb.scale(1, 0.2);
+                var bg = cb.createRadialGradient(0, 0, 0, 0, 0, w * .7);
+                bg.addColorStop(0, c ? "rgba(215,225,255,.8)"
+                                     : "rgba(150,175,255,.3)");
+                bg.addColorStop(.45, c ? "rgba(230,235,255,.35)"
+                                       : "rgba(110,125,225,.14)");
+                bg.addColorStop(1, "rgba(0,0,0,0)");
+                cb.fillStyle = bg;
+                cb.fillRect(-w, -h, w * 2, h * 2);
+                cb.restore();
+                // polvo estelar
+                cb.fillStyle = c ? "rgba(130,150,205,.4)"
+                                 : "rgba(255,255,255,.35)";
+                for (i = 0; i < 420; i++) {
+                    cb.fillRect(Math.random() * w, Math.random() * h,
+                                1.4, 1.4);
+                }
+            }
+
+            function siembra() {
+                estrellas = [];
+                var cols = claro()
+                    ? ["#8fa6cc", "#a8b8de", "#c9b6d8", "#9fc0d8", "#b0a8c8"]
+                    : ["#ffffff", "#cfe0ff", "#ffe9c7", "#ffd8ec", "#c8fff2"];
+                var n = Math.min(1300, Math.round(an * al / 1200));
+                for (var i = 0; i < n; i++) {
+                    var grande = Math.random() < .15;
+                    estrellas.push({
+                        x: Math.random(), y: Math.random(),
+                        r: grande ? 1 + Math.random() * 1.3
+                                  : .35 + Math.random() * .8,
+                        a: .3 + Math.random() * .7,
+                        f: .4 + Math.random() * 2.6,
+                        o: Math.random() * 6.28,
+                        c: cols[(Math.random() * cols.length) | 0],
+                        k: (Math.random() * 3) | 0,
+                        cruz: grande && Math.random() < .3
+                    });
+                }
+            }
+
+            function cielo() {
+                tema = claro() ? "claro" : "oscuro";
+                medir();
+                nube();
+                siembra();
+            }
+
+            function fotograma(ts) {
+                var dt = ult ? Math.min(120, ts - ult) : 16;
+                ult = ts;
+                reloj += dt;
+                var nuevo = claro() ? "claro" : "oscuro";
+                if (nuevo !== tema) {
+                    tema = nuevo;
+                    nube();
+                    siembra();
+                }
+                px += (ox - px) * .06;
+                py += (oy - py) * .06;
+                fx.clearRect(0, 0, an, al);
+                fx.drawImage(capa, px * 12 - 45, py * 12 - 45, w0(), h0());
+                var tt = reloj / 1000, i, s, x, y, a;
+                for (i = 0; i < estrellas.length; i++) {
+                    s = estrellas[i];
+                    x = s.x * an + px * (10 + s.k * 12);
+                    y = s.y * al + py * (10 + s.k * 12);
+                    if (x < -4 || x > an + 4 || y < -4 || y > al + 4) {
+                        continue;
+                    }
+                    a = s.a * (.55 + .45 * Math.sin(tt * s.f + s.o));
+                    fx.globalAlpha = a < 0 ? 0 : (a > 1 ? 1 : a);
+                    fx.fillStyle = s.c;
+                    if (s.cruz) {
+                        fx.fillRect(x - s.r * 3, y - .5, s.r * 6, 1);
+                        fx.fillRect(x - .5, y - s.r * 3, 1, s.r * 6);
+                    }
+                    fx.beginPath();
+                    fx.arc(x, y, s.r, 0, 6.283);
+                    fx.fill();
+                }
+                fx.globalAlpha = 1;
+                // estrellas fugaces
+                if (Math.random() < dt / 7000 && fugaces.length < 3) {
+                    fugaces.push({
+                        x: Math.random() * an * .8 - an * .1,
+                        y: (window.pageYOffset || 0)
+                           + Math.random() * window.innerHeight * .45,
+                        vx: 420 + Math.random() * 420,
+                        vy: 190 + Math.random() * 240,
+                        t: 0, vida: 700 + Math.random() * 700
+                    });
+                }
+                for (i = fugaces.length - 1; i >= 0; i--) {
+                    var f = fugaces[i];
+                    f.t += dt;
+                    if (f.t >= f.vida) {
+                        fugaces.splice(i, 1);
+                        continue;
+                    }
+                    f.x += f.vx * dt / 1000;
+                    f.y += f.vy * dt / 1000;
+                    var grd = fx.createLinearGradient(
+                        f.x, f.y, f.x - f.vx * .18, f.y - f.vy * .18);
+                    grd.addColorStop(0, claro() ? "#5f7bd8" : "#eaf4ff");
+                    grd.addColorStop(1, "rgba(0,0,0,0)");
+                    fx.globalAlpha = Math.sin(Math.PI * f.t / f.vida);
+                    fx.strokeStyle = grd;
+                    fx.lineWidth = 1.7;
+                    fx.beginPath();
+                    fx.moveTo(f.x, f.y);
+                    fx.lineTo(f.x - f.vx * .18, f.y - f.vy * .18);
+                    fx.stroke();
+                }
+                fx.globalAlpha = 1;
+            }
+
+            function w0() { return an + 90; }
+            function h0() { return al + 90; }
+
+            window.addEventListener("mousemove", function (e) {
+                ox = (e.clientX / (an || 1)) * 2 - 1;
+                oy = (e.clientY / (al || 1)) * 2 - 1;
+            });
+            window.addEventListener("resize", function () {
+                cielo();
+                fotograma((window.performance && performance.now()) || 0);
+            });
+            // abrir o cerrar una carpeta del índice cambia la altura del
+            // body: ahí el cielo se vuelve a estirar (solo en ese caso)
+            if (window.ResizeObserver) {
+                new ResizeObserver(function () {
+                    cielo();
+                    fotograma((window.performance && performance.now()) || 0);
+                }).observe(document.body);
+            }
+            window.__fondo = {
+                repinta: function () {
+                    tema = "";
+                    fotograma((window.performance && performance.now()) || 0);
+                }
+            };
+            cielo();
+            fotograma(0);        // primer plano sin esperar a rAF
+            requestAnimationFrame(function bucle(ts) {
+                fotograma(ts);
+                requestAnimationFrame(bucle);
+            });
+        })();
+
+        // ===== EFECTOS AL CLICAR (canvas #efectos, sobre el contenido) =====
+        // Un clic en CUALQUIER punto de la página lanza un efecto ahí
+        // mismo: sale de un mazo barajado con 46 efectos, así que no se
+        // repite ninguno hasta agotarlo y, al rebarajar, el primero
+        // nunca es el que cerró el mazo anterior. Todo se dibuja en el
+        // canvas (partículas, anillos, destellos, líneas y textos) con
+        // un único requestAnimationFrame; el tema solo cambia el modo de
+        // fusión (aditivo en oscuro; normal en claro, que si no los
+        // tonos claros no se ven sobre blanco). No toca el DOM de la
+        // galería: pointer-events:none en el CSS. La pruebas usan
+        // window.__efectos (dispara/paso/limpiar) porque headless no
+        // avanza frames sin capturar.
+        (function () {
+            var lienzo = document.getElementById("efectos");
+            if (!lienzo || !lienzo.getContext) { return; }
+            var ex = lienzo.getContext("2d");
+            var dpr = Math.min(window.devicePixelRatio || 1, 2);
+            var an = 0, al = 0;
+            var P = [], AN = [], FL = [], TX = [], LN = [], CO = [], KL = [];
+            var reloj = 0, ult = 0;
+            var usados = [], mazo = [];
+            var ux = 0, uy = 0;     // último clic: donde estalla la luz
+
+            function medir() {
+                an = window.innerWidth;
+                al = window.innerHeight;
+                lienzo.width = Math.round(an * dpr);
+                lienzo.height = Math.round(al * dpr);
+                ex.setTransform(dpr, 0, 0, dpr, 0, 0);
+            }
+
+            // ---------------- creación ----------------
+            function np(o) {
+                var p = {
+                    x: o.x, y: o.y,
+                    vx: o.vx || 0, vy: o.vy || 0,
+                    g: o.g || 0, rz: o.rz || 0,
+                    vida: o.vida || 1, t: 0,
+                    tam: o.tam || 3, col: o.col || "#fff",
+                    tipo: o.tipo || "punto", txt: o.txt || "",
+                    rot: o.rot || 0, vr: o.vr || 0,
+                    fase: o.fase || 0,
+                    alfa: o.alfa === undefined ? 1 : o.alfa,
+                    halo: o.halo || 0, prox: o.prox || 0,
+                    fue: 0, fn: o.fn || null
+                };
+                P.push(p);
+                if (P.length > 1500) { P.splice(0, P.length - 1500); }
+                return p;
+            }
+
+            function est(x, y, n, v1, v2, cols, op) {
+                op = op || {};
+                for (var i = 0; i < n; i++) {
+                    var a = Math.random() * 6.283;
+                    var v = v1 + Math.random() * (v2 - v1);
+                    np({
+                        x: x, y: y,
+                        vx: Math.cos(a) * v, vy: Math.sin(a) * v,
+                        g: op.g || 0, rz: op.rz || 0,
+                        vida: (op.vida || 1) * (.6 + Math.random() * .7),
+                        tam: (op.tam || 3) * (.6 + Math.random() * .8),
+                        col: cols[(Math.random() * cols.length) | 0],
+                        tipo: op.tipo || "punto",
+                        alfa: op.alfa, halo: op.halo,
+                        vr: op.vr ? (Math.random() - .5) * op.vr : 0
+                    });
+                }
+            }
+
+            function anillo(x, y, o) {
+                o = o || {};
+                AN.push({
+                    x: x, y: y, t: 0,
+                    vida: o.vida || .7,
+                    r0: o.r0 === undefined ? 8 : o.r0,
+                    r1: o.r1 || 200,
+                    col: o.col || "#fff",
+                    ancho: o.ancho || 3,
+                    tipo: o.tipo || "anillo",
+                    a0: o.a0 || 0,
+                    giro: o.giro || 0
+                });
+            }
+
+            function destello(col, alfa, vida, x, y) {
+                FL.push({ col: col, alfa: alfa === undefined ? .4 : alfa,
+                          vida: vida || .35, t: 0,
+                          x: x === undefined ? ux : x,
+                          y: y === undefined ? uy : y });
+            }
+
+            function texto(x, y, txt, o) {
+                o = o || {};
+                TX.push({ x: x, y: y, txt: txt, t: 0,
+                          vida: o.vida || .9, col: o.col || "#fff",
+                          tam: o.tam || 54, rot: o.rot || 0 });
+            }
+
+            function linea(o) {
+                o.t = 0;
+                o.vida = o.vida || .6;
+                o.ancho = o.ancho || 2;
+                o.alfa = o.alfa === undefined ? 1 : o.alfa;
+                o.col = o.col || "#fff";
+                o.tipo = o.tipo || "raya";
+                o.len = o.len || 120;
+                o.ang = o.ang || 0;
+                LN.push(o);
+                return o;
+            }
+
+            function corte(o) {
+                o.t = 0;
+                o.vida = o.vida || .3;
+                o.f = o.f || 0;
+                CO.push(o);
+                return o;
+            }
+
+            function cola(ms, fn) {
+                KL.push({ t: reloj + ms / 1000, fn: fn });
+            }
+
+            // ---------------- simulación ----------------
+            function avanza(ds) {
+                reloj += ds;
+                var i, j, p, arr;
+                if (KL.length) {
+                    arr = [];
+                    for (i = 0; i < KL.length; i++) {
+                        if (KL[i].t <= reloj) { KL[i].fn(); }
+                        else { arr.push(KL[i]); }
+                    }
+                    KL = arr;
+                }
+                for (i = P.length - 1; i >= 0; i--) {
+                    p = P[i];
+                    p.t += ds;
+                    if (p.t >= p.vida) { P.splice(i, 1); continue; }
+                    if (p.fn) { p.fn(p, ds); }
+                    p.vy += p.g * ds;
+                    var f = 1 - p.rz * ds;
+                    if (f < 0) { f = 0; }
+                    p.vx *= f;
+                    p.vy *= f;
+                    p.x += p.vx * ds;
+                    p.y += p.vy * ds;
+                    p.rot += p.vr * ds;
+                }
+                var listas = [AN, FL, TX, LN, CO];
+                for (j = 0; j < listas.length; j++) {
+                    arr = listas[j];
+                    for (i = arr.length - 1; i >= 0; i--) {
+                        arr[i].t += ds;
+                        if (arr[i].t >= arr[i].vida) { arr.splice(i, 1); }
+                    }
+                }
+            }
+
+            // ---------------- dibujo ----------------
+            function dibujaParticula(p) {
+                var k = p.t / p.vida;
+                var a = p.alfa * Math.min(1, (1 - k) * 2.5);
+                if (a <= .01) { return; }
+                ex.fillStyle = p.col;
+                ex.strokeStyle = p.col;
+                if (p.halo) {
+                    ex.globalAlpha = a * .3;
+                    ex.beginPath();
+                    ex.arc(p.x, p.y, p.tam * 2.6, 0, 6.283);
+                    ex.fill();
+                }
+                ex.globalAlpha = a;
+                switch (p.tipo) {
+                case "punto":
+                    ex.beginPath();
+                    ex.arc(p.x, p.y, p.tam, 0, 6.283);
+                    ex.fill();
+                    break;
+                case "chispa": {
+                    var v = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+                    if (v < 1) { v = 1; }
+                    var d = Math.min(30, v * .06);
+                    ex.lineWidth = Math.max(1, p.tam * .55);
+                    ex.beginPath();
+                    ex.moveTo(p.x, p.y);
+                    ex.lineTo(p.x - p.vx / v * d, p.y - p.vy / v * d);
+                    ex.stroke();
+                    break; }
+                case "estrella": {
+                    ex.save();
+                    ex.translate(p.x, p.y);
+                    ex.rotate(p.rot);
+                    ex.beginPath();
+                    for (var q = 0; q < 10; q++) {
+                        var rr = q % 2 ? p.tam * .45 : p.tam;
+                        var aa = q * Math.PI / 5 - Math.PI / 2;
+                        if (q) {
+                            ex.lineTo(Math.cos(aa) * rr, Math.sin(aa) * rr);
+                        } else {
+                            ex.moveTo(Math.cos(aa) * rr, Math.sin(aa) * rr);
+                        }
+                    }
+                    ex.closePath();
+                    ex.fill();
+                    ex.restore();
+                    break; }
+                case "corazon":
+                    ex.save();
+                    ex.translate(p.x, p.y);
+                    ex.rotate(p.rot);
+                    ex.scale(p.tam / 9, p.tam / 9);
+                    ex.beginPath();
+                    ex.moveTo(0, 3);
+                    ex.bezierCurveTo(-9, -4, -4, -12, 0, -5);
+                    ex.bezierCurveTo(4, -12, 9, -4, 0, 3);
+                    ex.closePath();
+                    ex.fill();
+                    ex.restore();
+                    break;
+                case "papel":
+                    ex.save();
+                    ex.translate(p.x, p.y);
+                    ex.rotate(p.rot);
+                    ex.fillRect(-p.tam, -p.tam * .55,
+                                p.tam * 2, p.tam * 1.1);
+                    ex.restore();
+                    break;
+                case "diamante":
+                    ex.save();
+                    ex.translate(p.x, p.y);
+                    ex.rotate(p.rot);
+                    ex.beginPath();
+                    ex.moveTo(0, -p.tam);
+                    ex.lineTo(p.tam * .7, 0);
+                    ex.lineTo(0, p.tam);
+                    ex.lineTo(-p.tam * .7, 0);
+                    ex.closePath();
+                    ex.fill();
+                    ex.restore();
+                    break;
+                case "tri":
+                    ex.save();
+                    ex.translate(p.x, p.y);
+                    ex.rotate(p.rot);
+                    ex.beginPath();
+                    ex.moveTo(0, -p.tam);
+                    ex.lineTo(p.tam * .9, p.tam * .8);
+                    ex.lineTo(-p.tam * .9, p.tam * .8);
+                    ex.closePath();
+                    ex.fill();
+                    ex.restore();
+                    break;
+                case "cubo":
+                    ex.save();
+                    ex.translate(p.x, p.y);
+                    ex.rotate(p.rot);
+                    ex.lineWidth = Math.max(1, p.tam * .3);
+                    ex.strokeRect(-p.tam, -p.tam, p.tam * 2, p.tam * 2);
+                    ex.restore();
+                    break;
+                case "moneda":
+                    ex.save();
+                    ex.translate(p.x, p.y);
+                    ex.scale(Math.cos(p.rot * 1.7) * .8 + .2, 1);
+                    ex.rotate(p.rot * .3);
+                    ex.lineWidth = Math.max(1, p.tam * .3);
+                    ex.beginPath();
+                    ex.arc(0, 0, p.tam, 0, 6.283);
+                    ex.stroke();
+                    ex.beginPath();
+                    ex.arc(0, 0, p.tam * .5, 0, 6.283);
+                    ex.stroke();
+                    ex.restore();
+                    break;
+                case "burbuja":
+                    ex.lineWidth = 1.5;
+                    ex.beginPath();
+                    ex.arc(p.x, p.y, p.tam, 0, 6.283);
+                    ex.stroke();
+                    ex.beginPath();
+                    ex.arc(p.x - p.tam * .35, p.y - p.tam * .35,
+                           Math.max(.8, p.tam * .25), 0, 6.283);
+                    ex.fill();
+                    break;
+                case "gota":
+                    ex.save();
+                    ex.translate(p.x, p.y);
+                    ex.rotate(Math.atan2(p.vy, p.vx) - Math.PI / 2);
+                    ex.beginPath();
+                    ex.ellipse(0, 0, p.tam * .55, p.tam * 1.3, 0, 0, 6.283);
+                    ex.fill();
+                    ex.restore();
+                    break;
+                case "hoja":
+                    ex.save();
+                    ex.translate(p.x, p.y);
+                    ex.rotate(p.rot + Math.sin(reloj * 3 + p.fase));
+                    ex.beginPath();
+                    ex.ellipse(0, 0, p.tam * .5, p.tam, 0, 0, 6.283);
+                    ex.fill();
+                    ex.globalAlpha = a * .5;
+                    ex.lineWidth = 1;
+                    ex.beginPath();
+                    ex.moveTo(0, -p.tam);
+                    ex.lineTo(0, p.tam);
+                    ex.stroke();
+                    ex.restore();
+                    break;
+                case "glifo":
+                    ex.save();
+                    ex.translate(p.x, p.y);
+                    ex.font = "bold " + Math.round(p.tam)
+                              + "px 'Courier New', monospace";
+                    ex.textAlign = "center";
+                    ex.textBaseline = "middle";
+                    ex.fillText(p.txt, 0, 0);
+                    ex.restore();
+                    break;
+                case "blobo": {
+                    var r = p.tam * (1 + k * 1.6);
+                    var gg = ex.createRadialGradient(p.x, p.y, 0,
+                                                     p.x, p.y, r);
+                    gg.addColorStop(0, p.col);
+                    gg.addColorStop(1, "rgba(0,0,0,0)");
+                    ex.globalAlpha = a * .75;
+                    ex.fillStyle = gg;
+                    ex.beginPath();
+                    ex.arc(p.x, p.y, r, 0, 6.283);
+                    ex.fill();
+                    break; }
+                }
+            }
+
+            function pinta() {
+                ex.clearRect(0, 0, an, al);
+                if (!P.length && !AN.length && !FL.length && !TX.length
+                        && !LN.length && !CO.length) { return; }
+                var oscuro = document.documentElement
+                        .getAttribute("data-tema") !== "claro";
+                ex.globalCompositeOperation =
+                    oscuro ? "lighter" : "source-over";
+                ex.lineCap = "round";
+                ex.lineJoin = "round";
+                var i, k, a;
+                for (i = 0; i < FL.length; i++) {
+                    var D = FL[i];
+                    k = D.t / D.vida;
+                    var rf = ex.createRadialGradient(D.x, D.y, 0,
+                                                     D.x, D.y, 460);
+                    rf.addColorStop(0, D.col);
+                    rf.addColorStop(1, "rgba(0,0,0,0)");
+                    ex.globalAlpha = D.alfa * (1 - k);
+                    ex.fillStyle = rf;
+                    ex.fillRect(D.x - 460, D.y - 460, 920, 920);
+                }
+                for (i = 0; i < CO.length; i++) {
+                    var C = CO[i];
+                    k = C.t / C.vida;
+                    ex.globalAlpha = Math.max(0, 1 - k) * .9;
+                    ex.fillStyle = C.col;
+                    var des = Math.sin((C.t + C.f) * 60) * 30;
+                    ex.fillRect(C.x0 + des, C.y, C.w, C.h);
+                }
+                for (i = 0; i < P.length; i++) { dibujaParticula(P[i]); }
+                for (i = 0; i < AN.length; i++) {
+                    var R = AN[i];
+                    k = R.t / R.vida;
+                    a = Math.min(1, (1 - k) * 2.5);
+                    var r = R.r0 + (R.r1 - R.r0) * (1 - Math.pow(1 - k, 2));
+                    ex.globalAlpha = a;
+                    ex.strokeStyle = R.col;
+                    ex.lineWidth = Math.max(1, R.ancho * (1 - k));
+                    if (R.tipo === "arco") {
+                        for (var s = 0; s < 3; s++) {
+                            var a0 = R.a0 + reloj * R.giro + s * 2.094;
+                            ex.beginPath();
+                            ex.arc(R.x, R.y, r, a0, a0 + 1.3);
+                            ex.stroke();
+                        }
+                    } else {
+                        ex.beginPath();
+                        if (R.tipo === "cuadro") {
+                            ex.rect(R.x - r, R.y - r, r * 2, r * 2);
+                        } else {
+                            ex.arc(R.x, R.y, r, 0, 6.283);
+                        }
+                        ex.stroke();
+                    }
+                }
+                for (i = 0; i < LN.length; i++) {
+                    var L = LN[i];
+                    k = L.t / L.vida;
+                    ex.globalAlpha = Math.min(1, (1 - k) * 2.5) * L.alfa;
+                    ex.strokeStyle = L.col;
+                    ex.lineWidth = L.ancho;
+                    if (L.tipo === "onda") {
+                        var largo = L.largo || 300;
+                        ex.beginPath();
+                        for (var q = 0; q <= largo; q += 8) {
+                            var yy = L.y + Math.sin(
+                                q / 40 + reloj * (L.vel || 12))
+                                * (L.amp || 30) * (1 - k * .5);
+                            if (q === 0) { ex.moveTo(L.x - largo / 2, yy); }
+                            else { ex.lineTo(L.x - largo / 2 + q, yy); }
+                        }
+                        ex.stroke();
+                    } else if (L.tipo === "rayo") {
+                        ex.beginPath();
+                        ex.moveTo(L.pts[0], L.pts[1]);
+                        for (var q2 = 2; q2 < L.pts.length; q2 += 2) {
+                            ex.lineTo(L.pts[q2], L.pts[q2 + 1]);
+                        }
+                        ex.stroke();
+                    } else if (L.tipo === "lazo") {
+                        ex.beginPath();
+                        ex.moveTo(L.x, L.y);
+                        ex.lineTo(L.x2, L.y2);
+                        ex.stroke();
+                    } else {
+                        ex.beginPath();
+                        ex.moveTo(L.x, L.y);
+                        ex.lineTo(L.x + Math.cos(L.ang) * L.len,
+                                 L.y + Math.sin(L.ang) * L.len);
+                        ex.stroke();
+                    }
+                }
+                for (i = 0; i < TX.length; i++) {
+                    var W = TX[i];
+                    k = W.t / W.vida;
+                    ex.globalAlpha = k < .7 ? 1 : Math.max(0, (1 - k) / .3);
+                    ex.save();
+                    ex.translate(W.x, W.y - k * 46);
+                    ex.rotate(W.rot);
+                    var sc = .5 + Math.min(1.5, k * 3);
+                    ex.scale(sc, sc);
+                    ex.font = "bold " + W.tam + "px Arial, Helvetica, sans-serif";
+                    ex.textAlign = "center";
+                    ex.textBaseline = "middle";
+                    ex.fillStyle = W.col;
+                    ex.fillText(W.txt, 0, 0);
+                    ex.restore();
+                }
+                ex.globalAlpha = 1;
+                ex.globalCompositeOperation = "source-over";
+            }
+
+            // ---------------- los 46 efectos ----------------
+            var EF = {
+                supernova: function (x, y) {
+                    destello("rgba(225,240,255,.85)", .5, .3);
+                    anillo(x, y, { col: "#bcd9ff", r1: 300, vida: .7, ancho: 5 });
+                    cola(120, function () {
+                        anillo(x, y, { col: "#7fb6ff", r1: 400,
+                                       vida: .8, ancho: 3 });
+                    });
+                    est(x, y, 70, 120, 560, ["#ffffff", "#cfe4ff", "#8fd0ff"],
+                        { tipo: "chispa", rz: .9, vida: .9, tam: 3 });
+                    est(x, y, 26, 30, 170, ["#ffffff", "#9ecbff"],
+                        { tam: 4.5, vida: 1.1, halo: 1 });
+                },
+                confeti: function (x, y) {
+                    var cols = ["#ff4d6d", "#ffd166", "#06d6a0", "#4cc9f0",
+                                "#b388ff", "#ff9f1c"];
+                    for (var i = 0; i < 70; i++) {
+                        var a = -Math.PI / 2 + (Math.random() - .5) * 2.4;
+                        var v = 160 + Math.random() * 380;
+                        np({ x: x, y: y,
+                             vx: Math.cos(a) * v, vy: Math.sin(a) * v,
+                             g: 620, rz: .3,
+                             vida: 1.4 + Math.random(),
+                             tam: 3 + Math.random() * 3,
+                             col: cols[(Math.random() * cols.length) | 0],
+                             tipo: "papel",
+                             vr: (Math.random() - .5) * 14 });
+                    }
+                    destello("rgba(255,255,255,.5)", .3, .25);
+                },
+                chispas: function (x, y) {
+                    est(x, y, 90, 90, 520,
+                        ["#ffd54f", "#ffb300", "#fff8e1", "#ffe082"],
+                        { tipo: "chispa", rz: 1.1, g: 420, vida: .85, tam: 2.6 });
+                    anillo(x, y, { col: "#ffd54f", r1: 150, vida: .5, ancho: 2 });
+                },
+                fuegos_artificiales: function (x, y) {
+                    var paletas = [
+                        ["#ff4d6d", "#ffd166", "#ffffff"],
+                        ["#4cc9f0", "#90e0ef", "#ffffff"],
+                        ["#06d6a0", "#b388ff", "#ffffff"]];
+                    var paleta = paletas[(Math.random() * paletas.length) | 0];
+                    var co = np({ x: x, y: y,
+                                  vx: (Math.random() - .5) * 60,
+                                  vy: -620 - Math.random() * 200,
+                                  vida: .55, tam: 3, col: "#fff7c0",
+                                  halo: 1,
+                                  fn: function (p, ds) {
+                                      if (Math.random() < .6) {
+                                          np({ x: p.x, y: p.y, vx: 0,
+                                               vy: 30, vida: .3, tam: 2,
+                                               col: "#ffdca0" });
+                                      }
+                                  } });
+                    cola(520, function () {
+                        destello("rgba(255,255,255,.6)", .35, .3,
+                                 co.x, co.y);
+                        anillo(co.x, co.y, { col: paleta[0], r1: 190,
+                                             vida: .6 });
+                        est(co.x, co.y, 60, 60, 340, paleta,
+                            { tipo: "chispa", rz: .8, vida: 1.1, tam: 3 });
+                        est(co.x, co.y, 18, 20, 130, paleta,
+                            { tam: 4, vida: 1.3, halo: 1 });
+                    });
+                },
+                onda: function (x, y) {
+                    [0, 150, 300].forEach(function (d, i) {
+                        cola(d, function () {
+                            anillo(x, y, { col: i % 2 ? "#7fd1ff" : "#ffffff",
+                                           r1: 340, vida: .7,
+                                           ancho: 5 - i });
+                        });
+                    });
+                    est(x, y, 24, 20, 90, ["#ffffff", "#7fd1ff"],
+                        { vida: .9, tam: 2.6 });
+                },
+                lluvia_estrellas: function (x, y) {
+                    for (var i = 0; i < 45; i++) {
+                        np({ x: x + (Math.random() - .5) * 520,
+                             // un 40 % nace ya DENTRO de la ventana y el
+                             // resto justo encima: el clic se ve en seguida
+                             y: Math.random() * 720 - 420,
+                             vx: (Math.random() - .5) * 40,
+                             vy: 140 + Math.random() * 240,
+                             g: 60, vida: 2.2 + Math.random(),
+                             tam: 3 + Math.random() * 4,
+                             col: ["#fff3c4", "#ffffff", "#cfe4ff"][
+                                 (Math.random() * 3) | 0],
+                             tipo: "estrella",
+                             vr: (Math.random() - .5) * 4 });
+                    }
+                },
+                corazones: function (x, y) {
+                    for (var i = 0; i < 26; i++) {
+                        np({ x: x + (Math.random() - .5) * 340,
+                             y: y + (Math.random() - .5) * 140,
+                             vy: -70 - Math.random() * 130,
+                             vida: 1.6 + Math.random() * .9,
+                             tam: 7 + Math.random() * 9,
+                             col: ["#ff4d6d", "#ff8fa3", "#ff2d55",
+                                   "#ffd1e0"][(Math.random() * 4) | 0],
+                             tipo: "corazon",
+                             vr: (Math.random() - .5) * 3,
+                             fase: Math.random() * 6.28,
+                             fn: function (q, ds) {
+                                 q.x += Math.sin(reloj * 3 + q.fase) * 55 * ds;
+                             } });
+                    }
+                    destello("rgba(255,77,109,.4)", .25, .3);
+                },
+                nebulosa: function (x, y) {
+                    var cols = ["rgba(160,80,255,.95)", "rgba(255,90,200,.95)",
+                                "rgba(80,200,255,.95)", "rgba(120,255,220,.95)",
+                                "rgba(255,170,90,.95)"];
+                    for (var i = 0; i < 9; i++) {
+                        var a = Math.random() * 6.283;
+                        var r = Math.random() * 120;
+                        np({ x: x + Math.cos(a) * r, y: y + Math.sin(a) * r,
+                             vx: Math.cos(a) * (14 + Math.random() * 46),
+                             vy: Math.sin(a) * (14 + Math.random() * 46) - 10,
+                             vida: 1.6 + Math.random() * .8,
+                             tam: 30 + Math.random() * 40,
+                             col: cols[(Math.random() * cols.length) | 0],
+                             tipo: "blobo", alfa: .8 });
+                    }
+                    for (i = 0; i < 40; i++) {
+                        np({ x: x + (Math.random() - .5) * 300,
+                             y: y + (Math.random() - .5) * 240,
+                             vx: (Math.random() - .5) * 30,
+                             vy: (Math.random() - .5) * 30,
+                             vida: 1.6, tam: 1.6 + Math.random() * 2,
+                             col: "#ffffff", alfa: .9 });
+                    }
+                },
+                rayo: function (x, y) {
+                    function trazo(x0) {
+                        var pts = [x0, -20];
+                        var cx = x0, cy = -20;
+                        for (var i = 1; i <= 7; i++) {
+                            cx = x0 + (Math.random() - .5) * 90;
+                            cy = -20 + (y + 20) * (i / 7);
+                            pts.push(cx, cy);
+                        }
+                        pts.push(x, y);
+                        linea({ tipo: "rayo", pts: pts, col: "#eaf6ff",
+                                ancho: 3, vida: .35 });
+                    }
+                    trazo(x + (Math.random() - .5) * 60);
+                    cola(90, function () {
+                        trazo(x + (Math.random() - .5) * 90);
+                    });
+                    destello("rgba(190,225,255,.8)", .4, .28);
+                    est(x, y, 40, 60, 320, ["#ffffff", "#bcd9ff"],
+                        { tipo: "chispa", rz: 1.2, vida: .6, tam: 2.4 });
+                    anillo(x, y, { col: "#bcd9ff", r1: 120, vida: .4, ancho: 2 });
+                },
+                galaxia: function (x, y) {
+                    np({ x: x, y: y, tam: 26, col: "#eaffff",
+                         vida: 1.6, tipo: "blobo", alfa: .9 });
+                    for (var i = 0; i < 130; i++) {
+                        var r = 24 + Math.pow(Math.random(), .7) * 190;
+                        var a = Math.random() * 6.283;
+                        var v = 50 + Math.random() * 90;
+                        np({ x: x + Math.cos(a) * r,
+                             y: y + Math.sin(a) * r * .62,
+                             vx: -Math.sin(a) * v,
+                             vy: Math.cos(a) * v * .62,
+                             vida: 1.5 + Math.random() * .6,
+                             tam: 1.6 + Math.random() * 2.4,
+                             col: ["#ffffff", "#9ecbff", "#c9a7ff",
+                                   "#7fffd4"][(Math.random() * 4) | 0],
+                             alfa: .9,
+                             fn: function (p, ds) {
+                                 var dx = p.x - x, dy = p.y - y;
+                                 var d = Math.sqrt(dx * dx + dy * dy) || 1;
+                                 var g = 90 * ds;
+                                 p.vx -= dx / d * g;
+                                 p.vy -= dy / d * g;
+                             } });
+                    }
+                },
+                cristal: function (x, y) {
+                    est(x, y, 34, 70, 320,
+                        ["#e0ffff", "#8fe8ff", "#ffffff", "#a5f2ff"],
+                        { tipo: "diamante", rz: .5, g: 260, vida: 1.2,
+                          tam: 6, vr: 8 });
+                    anillo(x, y, { col: "#e0ffff", r1: 210, vida: .5, ancho: 2 });
+                    destello("rgba(180,240,255,.7)", .3, .25);
+                },
+                glitch: function (x, y) {
+                    var cols = ["#ff2bd6", "#00e5ff", "#7cff3d", "#ffffff"];
+                    for (var i = 0; i < 12; i++) {
+                        corte({ y: Math.random() * al,
+                                h: 6 + Math.random() * 34,
+                                w: 60 + Math.random() * an * .7,
+                                x0: Math.random() * an,
+                                col: cols[(Math.random() * cols.length) | 0],
+                                vida: .25 + Math.random() * .35,
+                                f: Math.random() * 40 });
+                    }
+                    texto(x, y, "ERR", { col: "#ff2bd6", tam: 44, vida: .5 });
+                },
+                matrix: function (x, y) {
+                    for (var i = 0; i < 46; i++) {
+                        np({ x: x + (Math.random() - .5) * 260,
+                             y: y - 60 - Math.random() * 340,
+                             vx: 0, vy: 220 + Math.random() * 420,
+                             vida: 1.4 + Math.random() * .8,
+                             tam: 12 + Math.random() * 14,
+                             col: ["#00ff66", "#39ff88", "#00c853",
+                                   "#00913c"][(Math.random() * 4) | 0],
+                             tipo: "glifo",
+                             txt: "01".charAt((Math.random() * 2) | 0) });
+                    }
+                    destello("rgba(0,255,120,.4)", .25, .3);
+                },
+                emojis: function (x, y) {
+                    var g = ["✨", "🌟", "💫", "🎉", "🎈", "⭐", "🎇"];
+                    for (var i = 0; i < 16; i++) {
+                        np({ x: x + (Math.random() - .5) * 320,
+                             y: y + (Math.random() - .5) * 200,
+                             vy: -60 - Math.random() * 150,
+                             vida: 1.6 + Math.random(),
+                             tam: 20 + Math.random() * 18,
+                             col: "#ffffff", tipo: "glifo",
+                             txt: g[(Math.random() * g.length) | 0],
+                             vr: (Math.random() - .5) * 2,
+                             fase: Math.random() * 6.28,
+                             fn: function (q, ds) {
+                                 q.x += Math.sin(reloj * 3 + q.fase) * 60 * ds;
+                             } });
+                    }
+                    est(x, y, 30, 40, 200,
+                        ["#ffd166", "#ff8fab", "#4cc9f0"],
+                        { vida: .8, tam: 3 });
+                },
+                cometa: function (x, y) {
+                    var a = 3.6 + (Math.random() - .5) * .8;
+                    var d = 900;
+                    np({ x: x - Math.cos(a) * d, y: y - Math.sin(a) * d,
+                         vx: Math.cos(a) * 900, vy: Math.sin(a) * 900,
+                         vida: .9, tam: 5, col: "#eaffff", halo: 1,
+                         fn: function (p, ds) {
+                             np({ x: p.x, y: p.y,
+                                  vx: (Math.random() - .5) * 40,
+                                  vy: (Math.random() - .5) * 40,
+                                  vida: .5, tam: 2.6,
+                                  col: ["#9fd8ff", "#ffffff",
+                                        "#ffd9a0"][(Math.random() * 3) | 0] });
+                         } });
+                    cola(900, function () {
+                        destello("rgba(200,235,255,.7)", .35, .3);
+                        anillo(x, y, { col: "#eaffff", r1: 160, vida: .5 });
+                        est(x, y, 36, 50, 300, ["#ffffff", "#9fd8ff"],
+                            { tipo: "chispa", rz: 1, vida: .8, tam: 2.6 });
+                    });
+                },
+                arcoiris: function (x, y) {
+                    var arco = ["#ff4d6d", "#ff9f1c", "#ffd166", "#06d6a0",
+                                "#4cc9f0", "#4361ee", "#b388ff"];
+                    arco.forEach(function (c, i) {
+                        cola(i * 90, function () {
+                            anillo(x, y, { col: c, r1: 320, vida: .7,
+                                           ancho: 5, r0: 20 + i * 10 });
+                        });
+                        est(x, y, 8, 60, 260, [c], { vida: .9, tam: 3 });
+                    });
+                },
+                burbujas: function (x, y) {
+                    for (var i = 0; i < 34; i++) {
+                        np({ x: x + (Math.random() - .5) * 300,
+                             y: y + (Math.random() - .5) * 160,
+                             vy: -70 - Math.random() * 130,
+                             vida: 1.5 + Math.random() * 1.2,
+                             tam: 5 + Math.random() * 15,
+                             col: ["#bfe9ff", "#9fdcff",
+                                   "#e0f7ff"][(Math.random() * 3) | 0],
+                             tipo: "burbuja", alfa: .95,
+                             fase: Math.random() * 6.28,
+                             fn: function (q, ds) {
+                                 q.x += Math.sin(reloj * 2.5 + q.fase) * 55 * ds;
+                             } });
+                    }
+                },
+                humo: function (x, y) {
+                    for (var i = 0; i < 20; i++) {
+                        np({ x: x + (Math.random() - .5) * 120,
+                             y: y + (Math.random() - .5) * 80,
+                             vx: (Math.random() - .5) * 50,
+                             vy: -50 - Math.random() * 90,
+                             vida: 1.6 + Math.random(),
+                             tam: 16 + Math.random() * 22,
+                             col: ["rgba(200,205,215,.9)",
+                                   "rgba(160,168,180,.9)",
+                                   "rgba(230,235,245,.9)"][
+                                 (Math.random() * 3) | 0],
+                             tipo: "blobo", alfa: .8 });
+                    }
+                },
+                llama: function (x, y) {
+                    destello("rgba(255,140,40,.7)", .3, .3);
+                    for (var i = 0; i < 46; i++) {
+                        var a = -Math.PI / 2 + (Math.random() - .5) * .9;
+                        var v = 90 + Math.random() * 190;
+                        np({ x: x + (Math.random() - .5) * 70, y: y,
+                             vx: Math.cos(a) * v, vy: Math.sin(a) * v,
+                             rz: .6,
+                             vida: .5 + Math.random() * .5,
+                             tam: 4 + Math.random() * 6,
+                             col: ["#ff9500", "#ffcc33", "#ff5a1f",
+                                   "#fff3b0"][(Math.random() * 4) | 0],
+                             halo: 1 });
+                    }
+                },
+                nieve: function (x, y) {
+                    for (var i = 0; i < 60; i++) {
+                        np({ x: x + (Math.random() - .5) * 560,
+                             y: y - 120 - Math.random() * 320,
+                             vx: (Math.random() - .5) * 30,
+                             vy: 40 + Math.random() * 110,
+                             vida: 2.4 + Math.random() * 1.6,
+                             tam: 1.6 + Math.random() * 3,
+                             col: ["#ffffff", "#e8f4ff",
+                                   "#d8ecff"][(Math.random() * 3) | 0],
+                             alfa: .95,
+                             fase: Math.random() * 6.28,
+                             fn: function (q, ds) {
+                                 q.x += Math.sin(reloj * 2 + q.fase) * 40 * ds;
+                             } });
+                    }
+                },
+                salpicadura: function (x, y) {
+                    for (var i = 0; i < 44; i++) {
+                        var a = -Math.PI / 2 + (Math.random() - .5) * 2.2;
+                        var v = 220 + Math.random() * 420;
+                        np({ x: x, y: y,
+                             vx: Math.cos(a) * v, vy: Math.sin(a) * v,
+                             g: 1050, rz: .15,
+                             vida: 1 + Math.random() * .7,
+                             tam: 3 + Math.random() * 4,
+                             col: ["#4cc9f0", "#90e0ef", "#ffffff",
+                                   "#3a86ff"][(Math.random() * 4) | 0],
+                             tipo: "gota" });
+                    }
+                    anillo(x, y, { col: "#4cc9f0", r1: 130, vida: .45, ancho: 3 });
+                    destello("rgba(76,201,240,.5)", .25, .25);
+                },
+                polvo: function (x, y) {
+                    destello("rgba(225,210,180,.6)", .25, .25);
+                    est(x, y, 60, 40, 260,
+                        ["#d9c9a8", "#bfae8c", "#f0e6d2", "#8f8574"],
+                        { rz: 3.2, vida: 1.1, tam: 3.4, alfa: .85 });
+                },
+                estelas: function (x, y) {
+                    destello("rgba(255,255,255,.45)", .3, .2);
+                    est(x, y, 42, 480, 1150,
+                        ["#ffffff", "#d6f0ff", "#9fd8ff"],
+                        { tipo: "chispa", rz: 1.6, vida: .55, tam: 3.4 });
+                    anillo(x, y, { col: "#ffffff", r1: 90, vida: .35, ancho: 4 });
+                },
+                vortice: function (x, y) {
+                    var t0 = reloj;
+                    for (var i = 0; i < 90; i++) {
+                        var a = Math.random() * 6.283;
+                        var r = 150 + Math.random() * 140;
+                        np({ x: x + Math.cos(a) * r,
+                             y: y + Math.sin(a) * r,
+                             vx: -Math.sin(a) * (110 + Math.random() * 90),
+                             vy: Math.cos(a) * (110 + Math.random() * 90),
+                             vida: 1.5, tam: 2 + Math.random() * 2.4,
+                             col: ["#b388ff", "#7fffd4", "#ffffff",
+                                   "#ff7bdb"][(Math.random() * 4) | 0],
+                             alfa: .95,
+                             fn: function (p, ds) {
+                                 var dx = p.x - x, dy = p.y - y;
+                                 var d = Math.sqrt(dx * dx + dy * dy) || 1;
+                                 if (reloj - t0 > .55 && !p.fue) {
+                                     p.fue = 1;
+                                     p.vx = dx / d * (300 + Math.random() * 400);
+                                     p.vy = dy / d * (300 + Math.random() * 400);
+                                     p.rz = 1.2;
+                                     return;
+                                 }
+                                 if (!p.fue) {
+                                     var g = 260 * ds;
+                                     p.vx -= dx / d * g;
+                                     p.vy -= dy / d * g;
+                                 }
+                             } });
+                    }
+                    np({ x: x, y: y, tam: 34, col: "#d9c7ff",
+                         vida: .7, tipo: "blobo", alfa: .9 });
+                    cola(560, function () {
+                        destello("rgba(220,200,255,.7)", .4, .3);
+                        anillo(x, y, { col: "#ffffff", r1: 260,
+                                       vida: .5, ancho: 4 });
+                    });
+                },
+                imantado: function (x, y) {
+                    var vivos = [];
+                    for (var i = 0; i < 70; i++) {
+                        var a = Math.random() * 6.283;
+                        var r = 220 + Math.random() * 160;
+                        vivos.push(np({ x: x + Math.cos(a) * r,
+                                        y: y + Math.sin(a) * r,
+                                        vx: -Math.cos(a) * 420,
+                                        vy: -Math.sin(a) * 420,
+                                        rz: .3, vida: 1.1,
+                                        tam: 2.4 + Math.random() * 2.4,
+                                        col: ["#ffd166", "#ffffff",
+                                              "#4cc9f0"][(Math.random() * 3) | 0] }));
+                    }
+                    cola(420, function () {
+                        destello("rgba(255,255,255,.6)", .35, .28);
+                        anillo(x, y, { col: "#ffd166", r1: 240,
+                                       vida: .5, ancho: 3 });
+                        vivos.forEach(function (p) {
+                            if (p.t >= p.vida) { return; }
+                            var dx = p.x - x, dy = p.y - y;
+                            var d = Math.sqrt(dx * dx + dy * dy) || 1;
+                            p.vx = dx / d * (500 + Math.random() * 350);
+                            p.vy = dy / d * (500 + Math.random() * 350);
+                            p.rz = .6;
+                        });
+                    });
+                },
+                prisma: function (x, y) {
+                    destello("rgba(255,255,255,.7)", .4, .3);
+                    var cols = ["#ff4d6d", "#ff9f1c", "#ffd166", "#06d6a0",
+                                "#4cc9f0", "#4361ee", "#b388ff", "#ff4d6d"];
+                    for (var i = 0; i < 8; i++) {
+                        linea({ tipo: "raya", x: x, y: y,
+                                ang: i * .785, len: 260 + Math.random() * 90,
+                                col: cols[i], ancho: 7, vida: .7, alfa: .8 });
+                    }
+                    est(x, y, 24, 60, 240, cols,
+                        { tipo: "diamante", vida: 1.1, tam: 5, vr: 6, rz: .4 });
+                    anillo(x, y, { col: "#ffffff", r1: 170, vida: .5, ancho: 3 });
+                },
+                palabra: function (x, y) {
+                    var frases = ["¡PUM!", "BOOM!", "¡ZAS!", "WOW!", "¡PLOF!"];
+                    texto(x, y, frases[(Math.random() * frases.length) | 0],
+                          { col: "#ff5a1f", tam: 58, vida: .9 });
+                    destello("rgba(255,209,102,.6)", .3, .25);
+                    anillo(x, y, { col: "#ffd166", r1: 190, vida: .5, ancho: 4 });
+                    est(x, y, 30, 60, 300, ["#ffd166", "#ffffff"],
+                        { tipo: "chispa", rz: 1, vida: .7, tam: 2.6 });
+                },
+                cubos: function (x, y) {
+                    est(x, y, 26, 60, 260,
+                        ["#4cc9f0", "#b388ff", "#ffffff", "#7fffd4"],
+                        { tipo: "cubo", vida: 1.3, tam: 7, vr: 7, rz: .4, g: 120 });
+                },
+                triangulos: function (x, y) {
+                    est(x, y, 30, 70, 280,
+                        ["#ff9f1c", "#06d6a0", "#ffffff", "#ff4d6d"],
+                        { tipo: "tri", vida: 1.4, tam: 8, vr: 9, rz: .3, g: 300 });
+                    destello("rgba(255,159,28,.4)", .2, .2);
+                },
+                destellos: function (x, y) {
+                    for (var i = 0; i < 11; i++) {
+                        var a = Math.random() * 6.283;
+                        var r = 40 + Math.random() * 150;
+                        np({ x: x + Math.cos(a) * r,
+                             y: y + Math.sin(a) * r,
+                             vida: .9 + Math.random() * .5,
+                             tam: 8 + Math.random() * 9,
+                             col: ["#ffffff", "#ffe9a8",
+                                   "#cfe4ff"][(Math.random() * 3) | 0],
+                             tipo: "estrella",
+                             fase: Math.random() * 6.28,
+                             fn: function (q, ds) {
+                                 q.tam = 6 + Math.abs(
+                                     Math.sin(reloj * 14 + q.fase)) * 12;
+                             } });
+                    }
+                    anillo(x, y, { col: "#ffffff", r1: 220, vida: .6, ancho: 2 });
+                },
+                meteoro: function (x, y) {
+                    for (var i = 0; i < 6; i++) {
+                        (function (retraso) {
+                            var a = 3.5 + (Math.random() - .5) * .7;
+                            var d = 500 + Math.random() * 300;
+                            cola(retraso, function () {
+                                np({ x: x - Math.cos(a) * d,
+                                     y: y - Math.sin(a) * d,
+                                     vx: Math.cos(a) * 950,
+                                     vy: Math.sin(a) * 950,
+                                     vida: d / 950, tam: 3.4,
+                                     col: ["#ffffff", "#ffd9a0",
+                                           "#9fd8ff"][(Math.random() * 3) | 0],
+                                     tipo: "chispa", halo: 1 });
+                            });
+                        })(i * 70);
+                    }
+                    cola(450, function () {
+                        destello("rgba(255,180,120,.5)", .3, .3);
+                        est(x, y, 30, 60, 340, ["#ffd9a0", "#ffffff"],
+                            { tipo: "chispa", rz: 1, vida: .7, tam: 2.8 });
+                        anillo(x, y, { col: "#ffd9a0", r1: 170, vida: .5 });
+                    });
+                },
+                constelacion: function (x, y) {
+                    var pts = [], i;
+                    for (i = 0; i < 9; i++) {
+                        var a = Math.random() * 6.283;
+                        var r = 40 + Math.random() * 130;
+                        pts.push([x + Math.cos(a) * r, y + Math.sin(a) * r]);
+                    }
+                    function lazo(p1, p2) {
+                        linea({ tipo: "lazo", x: p1[0], y: p1[1],
+                                x2: p2[0], y2: p2[1], col: "#9fd8ff",
+                                ancho: 1.4, vida: 1.2, alfa: .9 });
+                    }
+                    for (i = 1; i < pts.length; i++) { lazo(pts[i - 1], pts[i]); }
+                    lazo(pts[pts.length - 1], pts[0]);
+                    pts.forEach(function (q) {
+                        np({ x: q[0], y: q[1], vida: 1.4, tam: 3.4,
+                             col: "#eaffff", halo: 1 });
+                    });
+                    destello("rgba(159,216,255,.35)", .2, .25);
+                },
+                luciernagas: function (x, y) {
+                    for (var i = 0; i < 18; i++) {
+                        var a = Math.random() * 6.283;
+                        var r = 30 + Math.random() * 170;
+                        np({ x: x + Math.cos(a) * r, y: y + Math.sin(a) * r,
+                             vx: (Math.random() - .5) * 70,
+                             vy: (Math.random() - .5) * 70,
+                             vida: 2.4 + Math.random() * 1.4,
+                             tam: 6 + Math.random() * 7,
+                             col: ["#eaffb0", "#c8ff7a",
+                                   "#fff7c0"][(Math.random() * 3) | 0],
+                             tipo: "blobo", alfa: .95,
+                             fase: Math.random() * 6.28,
+                             fn: function (q, ds) {
+                                 q.vx += Math.sin(reloj * 2.6 + q.fase) * 120 * ds;
+                                 q.vy += Math.cos(reloj * 2.1 + q.fase) * 120 * ds;
+                                 q.rz = .6;
+                             } });
+                    }
+                },
+                electricidad: function (x, y) {
+                    function rayos() {
+                        for (var i = 0; i < 7; i++) {
+                            var a = Math.random() * 6.283;
+                            var len = 90 + Math.random() * 150;
+                            var pts = [x, y];
+                            for (var j = 1; j <= 4; j++) {
+                                pts.push(x + Math.cos(a) * len * (j / 4)
+                                              + (Math.random() - .5) * 55,
+                                         y + Math.sin(a) * len * (j / 4)
+                                              + (Math.random() - .5) * 55);
+                            }
+                            linea({ tipo: "rayo", pts: pts,
+                                    col: ["#eaf6ff", "#7fffd4",
+                                          "#9fd8ff"][(Math.random() * 3) | 0],
+                                    ancho: 2.5, vida: .3 });
+                        }
+                    }
+                    rayos();
+                    cola(110, rayos);
+                    cola(250, rayos);
+                    destello("rgba(170,240,255,.6)", .35, .25);
+                },
+                pulso: function (x, y) {
+                    [0, 180, 340].forEach(function (d, i) {
+                        cola(d, function () {
+                            anillo(x, y, { col: i === 1 ? "#ff8fa3" : "#ff2d55",
+                                           r1: 260, vida: .6,
+                                           ancho: 6 - i, r0: 30 });
+                        });
+                    });
+                    destello("rgba(255,45,85,.45)", .3, .3);
+                    est(x, y, 22, 50, 190, ["#ff2d55", "#ff8fa3"],
+                        { vida: .9, tam: 3.6 });
+                },
+                monedas: function (x, y) {
+                    destello("rgba(255,200,60,.5)", .3, .25);
+                    est(x, y, 24, 90, 320,
+                        ["#ffd700", "#ffb300", "#fff3b0", "#e6ac00"],
+                        { tipo: "moneda", vida: 1.5, tam: 7, vr: 14,
+                          rz: .5, g: 650 });
+                    anillo(x, y, { col: "#ffd700", r1: 150, vida: .45, ancho: 3 });
+                },
+                serpiente: function (x, y) {
+                    linea({ tipo: "onda", x: x, y: y, largo: 420, amp: 46,
+                            vel: 16, col: "#7fffd4", ancho: 6, vida: 1.3 });
+                    cola(90, function () {
+                        linea({ tipo: "onda", x: x, y: y - 40, largo: 340,
+                                amp: 34, vel: 20, col: "#b388ff", ancho: 4,
+                                vida: 1.1 });
+                    });
+                    est(x, y, 24, 60, 300, ["#7fffd4", "#b388ff"],
+                        { tipo: "chispa", rz: 1.4, vida: .6, tam: 2.4 });
+                },
+                teletransporte: function (x, y) {
+                    for (var i = 0; i < 34; i++) {
+                        np({ x: x + (Math.random() - .5) * 46,
+                             y: y + 140 + Math.random() * 260,
+                             vx: 0, vy: -380 - Math.random() * 320,
+                             rz: .4,
+                             vida: .55 + Math.random() * .2,
+                             tam: 2.4 + Math.random() * 2.4,
+                             col: ["#7fffd4", "#ffffff",
+                                   "#4cc9f0"][(Math.random() * 3) | 0],
+                             halo: 1 });
+                    }
+                    cola(360, function () {
+                        destello("rgba(127,255,212,.6)", .35, .3);
+                        anillo(x, y, { col: "#7fffd4", r1: 230,
+                                       vida: .5, ancho: 4 });
+                        est(x, y, 50, 120, 620,
+                            ["#7fffd4", "#ffffff", "#4cc9f0"],
+                            { tipo: "chispa", rz: .8, vida: .7, tam: 2.8 });
+                    });
+                },
+                caramelo: function (x, y) {
+                    for (var i = 0; i < 34; i++) {
+                        var a = Math.random() * 6.283;
+                        var v = 140 + Math.random() * 320;
+                        np({ x: x, y: y,
+                             vx: Math.cos(a) * v, vy: Math.sin(a) * v - 120,
+                             g: 900, vr: (Math.random() - .5) * 10,
+                             vida: 1.6 + Math.random() * .6,
+                             tam: 3.6 + Math.random() * 4,
+                             col: ["#ff4d6d", "#ffd166", "#06d6a0",
+                                   "#4cc9f0",
+                                   "#b388ff"][(Math.random() * 5) | 0],
+                             halo: 1,
+                             fn: function (q, ds) {
+                                 if (q.y > y + 130 && q.vy > 0) {
+                                     q.vy = -Math.abs(q.vy) * .55;
+                                 }
+                             } });
+                    }
+                },
+                sismico: function (x, y) {
+                    destello("rgba(255,60,50,.5)", .35, .3);
+                    for (var i = 0; i < 12; i++) {
+                        linea({ tipo: "raya", x: x, y: y,
+                                ang: i * .524 + Math.random() * .3,
+                                len: 90 + Math.random() * 160,
+                                col: ["#ff3c32", "#ffffff",
+                                      "#ffd0ce"][(Math.random() * 3) | 0],
+                                ancho: 6, vida: .45 });
+                    }
+                    for (i = 0; i < 6; i++) {
+                        corte({ y: Math.random() * al,
+                                h: 10 + Math.random() * 40,
+                                x0: 0, w: an,
+                                col: "rgba(255,60,50,.55)",
+                                vida: .3 + Math.random() * .3,
+                                f: Math.random() * 30 });
+                    }
+                    anillo(x, y, { col: "#ff3c32", r1: 300, vida: .6, ancho: 5 });
+                },
+                hojas: function (x, y) {
+                    for (var i = 0; i < 30; i++) {
+                        np({ x: x + (Math.random() - .5) * 420,
+                             y: y - 100 - Math.random() * 240,
+                             vx: (Math.random() - .5) * 60,
+                             vy: 40 + Math.random() * 90,
+                             g: 40, rz: .5,
+                             vida: 2 + Math.random() * 1.2,
+                             tam: 6 + Math.random() * 7,
+                             col: ["#8bc34a", "#ffb300", "#ff7043",
+                                   "#d4e157"][(Math.random() * 4) | 0],
+                             tipo: "hoja",
+                             vr: (Math.random() - .5) * 6,
+                             fase: Math.random() * 6.28,
+                             fn: function (q, ds) {
+                                 q.x += Math.sin(reloj * 2.4 + q.fase) * 70 * ds;
+                             } });
+                    }
+                },
+                bengala: function (x, y) {
+                    np({ x: x, y: y,
+                         vy: -150 - Math.random() * 70,
+                         vx: (Math.random() - .5) * 50,
+                         vida: 2.1, tam: 7, col: "#ff5a3c", halo: 1,
+                         rz: .2,
+                         fn: function (q, ds) {
+                             if (reloj > q.prox) {
+                                 q.prox = reloj + .05;
+                                 est(q.x, q.y, 4, 10, 90,
+                                     ["#ff9500", "#ff5a3c", "#ffe082"],
+                                     { vida: .5, tam: 2.4, g: 60 });
+                             }
+                         } });
+                },
+                cascada: function (x, y) {
+                    for (var i = 0; i < 64; i++) {
+                        np({ x: x + (Math.random() - .5) * 260,
+                             y: y - 60 - Math.random() * 330,
+                             vx: (Math.random() - .5) * 30,
+                             vy: 200 + Math.random() * 330,
+                             g: 220,
+                             vida: 1.3 + Math.random() * .8,
+                             tam: 3 + Math.random() * 4,
+                             col: ["#4cc9f0", "#90e0ef", "#ffffff",
+                                   "#3a86ff"][(Math.random() * 4) | 0],
+                             tipo: "gota" });
+                    }
+                    anillo(x, y, { col: "#4cc9f0", r1: 200, vida: .5, ancho: 3 });
+                },
+                ruleta: function (x, y) {
+                    var cols = ["#ff4d6d", "#ffd166", "#06d6a0", "#4cc9f0",
+                                "#b388ff", "#ffffff"];
+                    for (var i = 0; i < 6; i++) {
+                        anillo(x, y, { col: cols[i], tipo: "arco",
+                                       r0: 40 + i * 26, r1: 50 + i * 30,
+                                       vida: 1.1 + i * .12, ancho: 5,
+                                       a0: i * 1.05,
+                                       giro: i % 2 ? 3.2 : -3.2 });
+                    }
+                    est(x, y, 14, 40, 160, cols, { vida: .8, tam: 3 });
+                },
+                eco: function (x, y) {
+                    for (var i = 0; i < 6; i++) {
+                        (function (n) {
+                            cola(n * 110, function () {
+                                anillo(x, y, {
+                                    col: ["#ffffff", "#b388ff",
+                                          "#4cc9f0"][n % 3],
+                                    tipo: "cuadro", r0: 300, r1: 30,
+                                    vida: .7, ancho: 4 });
+                            });
+                        })(i);
+                    }
+                    destello("rgba(179,136,255,.5)", .3, .3);
+                },
+                impacto: function (x, y) {
+                    destello("rgba(255,255,255,.7)", .45, .25);
+                    for (var i = 0; i < 14; i++) {
+                        linea({ tipo: "raya", x: x, y: y,
+                                ang: i * .449 + Math.random() * .2,
+                                len: 70 + Math.random() * 120,
+                                col: ["#ffffff", "#ffd54f",
+                                      "#ff6d00"][(Math.random() * 3) | 0],
+                                ancho: 8, vida: .5 });
+                    }
+                    np({ x: x, y: y, vida: .6, tam: 40, col: "#ffd54f",
+                         tipo: "estrella", vr: 6,
+                         fn: function (q, ds) {
+                             q.tam = 34 + Math.abs(
+                                 Math.sin(reloj * 18)) * 26;
+                         } });
+                    anillo(x, y, { col: "#ffd54f", r1: 200, vida: .4, ancho: 6 });
+                }
+            };
+
+            var nombres = Object.keys(EF);
+
+            function barajar() {
+                mazo = nombres.slice();
+                for (var i = mazo.length - 1; i > 0; i--) {
+                    var j = Math.floor(Math.random() * (i + 1));
+                    var tmp = mazo[i];
+                    mazo[i] = mazo[j];
+                    mazo[j] = tmp;
+                }
+                // el primero del mazo nuevo nunca repite el último usado
+                if (usados.length
+                        && mazo[mazo.length - 1] === usados[usados.length - 1]) {
+                    var u = mazo[mazo.length - 1];
+                    mazo[mazo.length - 1] = mazo[0];
+                    mazo[0] = u;
+                }
+            }
+
+            function dispara(x, y) {
+                ux = x;
+                uy = y;
+                if (!mazo.length) { barajar(); }
+                var nom = mazo.pop();
+                usados.push(nom);
+                EF[nom](x, y);
+                pinta();        // se ve ya, aunque rAF no corra
+            }
+
+            function bucle(ts) {
+                var dt = ult ? Math.min(.05, (ts - ult) / 1000) : .016;
+                ult = ts;
+                avanza(dt);
+                pinta();
+                requestAnimationFrame(bucle);
+            }
+
+            document.addEventListener("click", function (e) {
+                var x = e.clientX, y = e.clientY;
+                if (!x && !y) {      // clics sin coordenadas: centro
+                    x = an / 2;
+                    y = al / 2;
+                }
+                dispara(x, y);
+            });
+
+            window.__efectos = {
+                nombres: nombres,
+                usados: usados,
+                dispara: dispara,
+                paso: function (ms) {
+                    avanza(Math.min(.2, ms / 1000));
+                    pinta();
+                },
+                limpiar: function () {
+                    P.length = 0;
+                    AN.length = 0;
+                    FL.length = 0;
+                    TX.length = 0;
+                    LN.length = 0;
+                    CO.length = 0;
+                    KL.length = 0;
+                    ex.clearRect(0, 0, an, al);
+                },
+                activas: function () {
+                    return P.length + AN.length + FL.length + TX.length
+                           + LN.length + CO.length;
+                }
+            };
+
+            medir();
+            window.addEventListener("resize", medir);
+            requestAnimationFrame(bucle);
+        })();
+
+
         // Cambio de tema (solo esta portada): alterna el fondo entre
         // negro y blanco y recuerda la eleccion en localStorage.
         (function () {
@@ -1455,6 +3003,7 @@
                 boton.textContent = claro ? "🌙" : "☀️";
                 boton.title = claro ? "Modo oscuro" : "Modo claro";
                 boton.setAttribute("aria-label", boton.title);
+                if (window.__fondo) { window.__fondo.repinta(); }
             }
             try {
                 if (localStorage.getItem("efectos-tema") === "claro") {
