@@ -12,8 +12,8 @@ Copia TODO el archivo "impacto.css" dentro de tu hoja de estilos
 Contenido del archivo:
   · La clase .efecto-impacto
   · Sus pseudo-elementos ::before y ::after
-    (el número de daño que brota arriba)
-  ·   · impacto-golpe, impacto-flota
+    (onda expansiva + sacudida)
+  ·   · impacto-golpe, impacto-onda
 
 
 PASO 2 - AÑADE EL TEXTO EN TU HTML
@@ -22,28 +22,26 @@ PASO 2 - AÑADE EL TEXTO EN TU HTML
 
 Ejemplo real:
 
-    <h1><span class="efecto-impacto">CRÍTICO</span></h1>
+    <h1><span class="efecto-impacto">IMPACTO</span></h1>
 
 
 QUÉ HACE
 --------
-Dos animaciones sincronizadas en bucle infinito:
-  · impacto-golpe (2,8 s, steps(1)) → justo cuando nace el
-    número, el texto se sacude, crece un 6% y destella un
-    instante, seco, como un impacto real.
-  · impacto-flota (2,8 s, ease-out) → el ::after con el
-    número -12.487 aparece sobre el texto, asciende y se
-    apaga; luego espera al próximo golpe.
-El color base es un degradado blanco-dorado de daño crítico.
+Dos animaciones en bucle infinito:
+  · impacto-golpe (1,2 s) → el texto se inclina (skewX)
+    y destella blanco al recibir el golpe.
+  · impacto-onda (1,2 s) → una barra amarilla cruza
+    el texto de izquierda a derecha como onda de choque.
+El truco está en combinar skewX con un pseudo-elemento
+que tiene un degradado lineal animado.
 
-TÉCNICA: background-clip: text + transform/filter del golpe y
-    ::after con el número flotante (content, opacity y
-    transform) con steps() y ease-out.
+TÉCNICA: transform: skewX + text-shadow animados +
+    pseudo-elemento para la onda expansiva.
 
 
 AJUSTES FÁCILES
 ---------------
-· Golpes más frecuentes: 2.8s → 1.6s.
-· Número más grande: .55em → .8em en ::after.
-· Otro número: cambia content: '-12.487' por el que quieras.
-· Más subida: -.9em → -1.4em en el 25% de impacto-flota.
+· Golpe más fuerte: sube el skewX de 12deg a 18deg.
+· Onda más rápida: 1.2s → 0.8s.
+· Destello más intenso: #fff8e1 → #ffffff en text-shadow.
+· Onda más ancha: width 120% → 160% en ::before.

@@ -1,0 +1,157 @@
+EFECTO GÓTICA (miscelanea) — cómo aplicarlo
+
+=============================================
+
+
+
+ARCHIVOS INCLUIDOS
+
+------------------
+
+gotica.css          → hoja de estilos con el efecto completo
+
+index.html          → showcase con ejemplos (este archivo)
+
+como-aplicar-gotica.txt → estas instrucciones
+
+gotica.zip          → los 3 archivos anteriores en un .zip
+
+
+
+
+
+CÓMO USARLO EN TU PROYECTO
+
+--------------------------
+
+
+
+OPCIÓN A: Copiar el CSS directamente
+
+------------------------------------
+
+1. Abre gotica.css y copia TODO su contenido.
+
+2. Pégalo al final de tu hoja de estilos principal (styles.css, main.css, etc.).
+
+   O guárdalo como gotica.css y enlázalo en tu HTML:
+
+      <link rel="stylesheet" href="gotica.css">
+
+
+
+OPCIÓN B: Usar el .zip
+
+----------------------
+
+1. Descomprime gotica.css del archivo gotica.zip.
+
+2. Sigue los pasos de la OPCIÓN A.
+
+
+
+
+
+HTML NECESARIO
+
+--------------
+
+Envuelve tu texto en un <span> con la clase .efecto-gotica
+
+y AÑADE el atributo data-text con el MISMO texto:
+
+
+
+    <span class="efecto-gotica" data-text="Tu texto">Tu texto</span>
+
+El CSS define la clase .efecto-gotica con el efecto completo.
+
+
+
+⚠ IMPORTANTE: data-text ES OBLIGATORIO y debe coincidir exactamente
+
+con el texto visible. Los pseudo-elementos ::before y ::after lo
+
+usan para crear las capas de sombra.
+
+
+
+
+
+RECOMENDACIONES
+
+---------------
+
+• Fuente: el efecto usa font-family: Georgia, "Times New Roman", serif.
+
+  Funciona mejor con fuentes serif (letra antigua/gótica).
+
+• Fondo: usa fondo oscuro (negro, #0f080f, #1a0a1a, etc.).
+
+  El efecto está diseñado para brillar sobre fondo oscuro.
+
+• Tamaño: se ve bien desde 1rem (texto) hasta 3rem+ (títulos).
+
+• Peso: font-weight: 700 (negrita) da mejor contraste.
+
+
+
+
+
+PERSONALIZACIÓN RÁPIDA
+
+----------------------
+
+En gotica.css, busca estos valores y cámbialos:
+
+
+
+• Colores del degradado principal (líneas 29-37):
+
+  #8b1a1a → burdeos inicial
+
+  #3d083d → púrpura medio
+
+  #1a0a1a → negro teñido
+
+  #2d1a0a → oro viejo
+
+  #0d050d → negro final
+
+
+
+• Colores de las sombras (líneas 74-82):
+
+  #5a0d0d / #240424 / #0a030a / #1a1005 / #040104
+
+
+
+• Velocidad del degradado (línea 163):
+
+  8s linear infinite  → más rápido: 5s, más lento: 12s
+
+
+
+• Velocidad de las sombras (líneas 170, 183):
+
+  6s / 7s ease-in-out infinite alternate
+
+
+
+• Intensidad del resplandor (línea 195):
+
+  drop-shadow(0 0 0.02em ...) / 0.08em
+
+  brightness(1) / brightness(1.12)
+
+
+
+
+
+LICENCIA
+
+--------
+
+MIT — Úsalo libremente en proyectos personales o comerciales.
+
+Crédito opcional: "Efecto GÓTICA de efectos-css-para-html"

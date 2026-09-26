@@ -12,8 +12,8 @@ Copia TODO el archivo "nevada.css" dentro de tu hoja de estilos
 Contenido del archivo:
   · La clase .efecto-nevada
   · Sus pseudo-elementos ::before y ::after
-    (dos capas de copos cayendo)
-  ·   · nevada-brillo, nevada-capa1, nevada-capa2
+    (copos de nieve cayendo)
+  ·   · nevada-copo, nevada-acumula
 
 
 PASO 2 - AÑADE EL TEXTO EN TU HTML
@@ -22,29 +22,27 @@ PASO 2 - AÑADE EL TEXTO EN TU HTML
 
 Ejemplo real:
 
-    <h1><span class="efecto-nevada">NIEVE</span></h1>
+    <h1><span class="efecto-nevada">NEVADA</span></h1>
 
 
 QUÉ HACE
 --------
-Tres animaciones en bucle infinito:
-  · nevada-brillo (3 s) → el resplandor helado respira
-    con suavidad en las letras.
-  · nevada-capa1 (6 s) → la capa fina de copos ::before
-    cae en diagonal; su desplazamiento coincide con el
-    tamaño de la tesela, así que el bucle no se nota.
-  · nevada-capa2 (4,4 s) → la capa gruesa de copos
-    ::after cae más rápido y en sentido contrario.
-El color base es un degradado blanco-azulado de nieve.
+Dos animaciones en bucle infinito:
+  · nevada-copo (4 s) → copos ❄ caen de arriba abajo
+    en pseudo-elementos ::before/::after con content.
+  · nevada-acumula (8 s) → una capa blanca se acumula
+    en la base del texto (gradiente animado en ::after).
+El truco está en background-clip: text para el color
+base y pseudo-elementos con content ❄ para los copos.
 
-TÉCNICA: background-clip: text (nieve) + pseudo-elementos con
-    radial-gradient de copos en dos capas cuyas
-    background-position cae en bucle (tamaño = período).
+TÉCNICA: background-clip: text (azul hielo) +
+    pseudo-elementos con content de copos ❄ ️ +
+    animación de caída y acumulación.
 
 
 AJUSTES FÁCILES
 ---------------
-· Caída más rápida: 6s/4.4s → 3s/2.2s.
-· Copos más grandes: 1.5px/2px → 2.5px/3px en los radial-gradient.
-· Más lentas y etéreas: añade ease-in-out a las capas.
-· Tinte azul más fuerte: #81d4fa → #40c4ff en el degradado.
+· Más copos: añade más ❄ al content de ::before/::after.
+· Caída más lenta: 4s → 6s en nevada-copo.
+· Azul más intenso: #81d4fa → #4fc3f7 en pal.bg.
+· Sin acumulación: elimina ::after y nevada-acumula.

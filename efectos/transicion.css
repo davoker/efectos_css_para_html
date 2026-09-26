@@ -1277,7 +1277,65 @@
     100% { opacity: .9; transform: translateY(-3vmin); }
 }
 
-/* ============ 21. HUD — barrido de escena ============ */
+/* ============ 21. GÓTICA — sombras en catedral ============ */
+.tema-gotica {
+    background: radial-gradient(ellipse at 50% 45%, #2d082d 0%, #140414 55%, #080108 100%);
+}
+.tema-gotica::after {
+    background: radial-gradient(ellipse at 50% 50%,
+                #c8a0c8 0%, rgba(200,160,200,.4) 35%, transparent 75%);
+}
+.go-sombra {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 85vmin;
+    height: 85vmin;
+    margin: -42.5vmin 0 0 -42.5vmin;
+    border-radius: 50%;
+    opacity: 0;
+}
+.go-sombra-1 {
+    background:
+        radial-gradient(ellipse at 40% 40%, rgba(139,26,26,.35) 0%, transparent 55%),
+        radial-gradient(ellipse at 60% 60%, rgba(61,8,61,.3) 0%, transparent 50%);
+    filter: blur(2.5vmin);
+    transform: translate(-1.5vmin, 2vmin) scale(.95);
+    opacity: .65;
+    animation: go-sombra1 6s ease-in-out infinite alternate;
+}
+.go-sombra-2 {
+    background:
+        radial-gradient(ellipse at 35% 55%, rgba(45,26,45,.25) 0%, transparent 60%),
+        radial-gradient(ellipse at 65% 35%, rgba(26,16,26,.2) 0%, transparent 55%);
+    filter: blur(4vmin);
+    transform: translate(1vmin, -1vmin) scale(1.05);
+    opacity: .45;
+    animation: go-sombra2 7s ease-in-out infinite alternate-reverse;
+}
+.go-resplandor {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%,
+        rgba(200,160,200,.12) 0%, rgba(139,80,139,.06) 40%, transparent 78%);
+    animation: go-resplandor 4s ease-in-out infinite;
+}
+@keyframes go-sombra1 {
+    0%   { transform: translate(-1.5vmin, 2vmin) scale(.95); filter: blur(2.5vmin); opacity: .65; }
+    50%  { transform: translate(-3vmin, 4vmin) scale(.98); filter: blur(3vmin); opacity: .5; }
+    100% { transform: translate(-0.5vmin, 1vmin) scale(.93); filter: blur(2vmin); opacity: .75; }
+}
+@keyframes go-sombra2 {
+    0%   { transform: translate(1vmin, -1vmin) scale(1.05); filter: blur(4vmin); opacity: .45; }
+    50%  { transform: translate(2vmin, -2vmin) scale(1.08); filter: blur(5vmin); opacity: .3; }
+    100% { transform: translate(0.5vmin, -0.5vmin) scale(1.02); filter: blur(3.5vmin); opacity: .55; }
+}
+@keyframes go-resplandor {
+    0%   { opacity: .6; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.02); }
+}
+
+/* ============ 22. HUD — barrido de escena ============ */
 .tema-hud {
     background: radial-gradient(circle at 50% 58%, #241503 0%, #120a01 74%);
 }
@@ -1334,7 +1392,7 @@
     100% { top: 104%; opacity: 0; }
 }
 
-/* ============ 22. ROGUE — luces de estado ============ */
+/* ============ 23. ROGUE — luces de estado ============ */
 .tema-rogue {
     background: radial-gradient(circle at 50% 55%, #2a080d 0%, #0d0406 76%);
 }
@@ -1394,7 +1452,7 @@
     65%, 100% { opacity: .8; }
 }
 
-/* ============ 23. IMPACTO — números de daño ============ */
+/* ============ 24. IMPACTO — números de daño ============ */
 .tema-impacto {
     background: radial-gradient(circle at 50% 58%, #241a06 0%, #0a0803 78%);
 }
@@ -1455,7 +1513,7 @@
     100%    { opacity: 0; transform: scale(1.15); }
 }
 
-/* ============ 24. BOTIN — el tesoro brilla ============ */
+/* ============ 25. BOTÍN — el tesoro brilla ============ */
 .tema-botin {
     background: radial-gradient(circle at 50% 62%, #1f1604 0%, #0a0702 76%);
 }
@@ -1513,7 +1571,7 @@
     75%, 100% { opacity: 0; transform: scale(.3); }
 }
 
-/* ============ 25. APAGÓN — ciudad sin luz ============ */
+/* ============ 26. APAGÓN — ciudad sin luz ============ */
 .tema-apagon {
     background: #060607;
 }
@@ -1578,7 +1636,7 @@
     85%, 100% { opacity: 0; }
 }
 
-/* ============ 26. ABATIDO — monitor de latidos ============ */
+/* ============ 27. ABATIDO — monitor de latidos ============ */
 .tema-abatido {
     background: radial-gradient(circle at 50% 55%, #1c0a0a 0%, #090404 78%);
 }
@@ -1635,7 +1693,7 @@
     100%      { opacity: .45; }
 }
 
-/* ============ 27. NEVADA — cae la nieve ============ */
+/* ============ 28. NEVADA — cae la nieve ============ */
 .tema-nevada {
     background: linear-gradient(180deg, #0d2b46 0%, #07182a 70%,
                 #10304a 100%);
@@ -1677,7 +1735,7 @@
     50%      { opacity: .95; }
 }
 
-/* ============ 28. NEON — letrero parpadeante ============ */
+/* ============ 29. NEON — letrero parpadeante ============ */
 .tema-neon {
     background: linear-gradient(180deg, #120f1a 0%, #0a0810 60%,
                 #141020 100%);
@@ -1743,7 +1801,7 @@
     92%, 100% { opacity: 0; }
 }
 
-/* ============ 29. BLINDAJE — placas y cinta ============ */
+/* ============ 30. BLINDAJE — placas y cinta ============ */
 .tema-blindaje {
     background:
         repeating-linear-gradient(60deg, rgba(255,255,255,.03) 0 6px,
@@ -1802,7 +1860,7 @@
     100% { background-position: -8.485vmin 0; }
 }
 
-/* ============ 30. PULSO — ping de sonar ============ */
+/* ============ 31. PULSO — ping de sonar ============ */
 .tema-pulso {
     background: radial-gradient(circle at 50% 55%, #07182a 0%, #040a12 76%);
 }
@@ -1845,7 +1903,7 @@
     100% { opacity: .8; }
 }
 
-/* ============ 31. BENGALA — luz de bengala ============ */
+/* ============ 32. BENGALA — luz de bengala ============ */
 .tema-bengala {
     background: radial-gradient(circle at 50% 42%, #241006 0%, #0b0503 74%);
 }
@@ -1911,7 +1969,7 @@
     93%, 100% { opacity: 0; transform: translateY(-10%); }
 }
 
-/* ============ 32. GRAFFITI — el muro habla ============ */
+/* ============ 33. GRAFFITI — el muro habla ============ */
 .tema-graffiti {
     background:
         repeating-linear-gradient(0deg, rgba(0, 0, 0, .35) 0 1px,
@@ -1969,7 +2027,7 @@
     100% { transform: translateY(190%); opacity: 0; }
 }
 
-/* ============ 33. STENCIL — cajas marcadas ============ */
+/* ============ 34. STENCIL — cajas marcadas ============ */
 .tema-stencil {
     background:
         repeating-linear-gradient(0deg, rgba(0, 0, 0, .3) 0 2px,
@@ -2034,7 +2092,7 @@
     100% { left: 120%; opacity: 0; }
 }
 
-/* ============ 34. SABLE — encendido de la hoja ============ */
+/* ============ 35. SABLE — encendido de la hoja ============ */
 .tema-sable {
     background: radial-gradient(circle at 50% 55%, #04140a 0%, #020806 78%);
 }
@@ -2081,7 +2139,7 @@
     96%, 100% { opacity: .3; }
 }
 
-/* ============ 35. FUERZA — la onda ============ */
+/* ============ 36. FUERZA — la onda ============ */
 .tema-fuerza {
     background: radial-gradient(circle at 50% 52%, #0e2036 0%, #050a10 78%);
 }
@@ -2129,7 +2187,7 @@
     100% { background-position: -220px -260px, 380px 420px; }
 }
 
-/* ============ 36. HIPERESPACIO — salto a velocidad luz ============ */
+/* ============ 37. HIPERESPACIO — salto a velocidad luz ============ */
 .tema-hiperespacio {
     background: radial-gradient(circle at 50% 50%, #120a24 0%, #060312 76%);
 }
@@ -2182,7 +2240,7 @@
     75%, 100% { opacity: 0; }
 }
 
-/* ============ 37. ESTRELLAS — campo estelar ============ */
+/* ============ 38. ESTRELLAS — campo estelar ============ */
 .tema-estrellas {
     background: radial-gradient(circle at 50% 50%, #101f4a 0%, #050a1a 78%);
 }
@@ -2229,7 +2287,7 @@
     100% { transform: rotate(-7deg) translateX(14%); opacity: 0; }
 }
 
-/* ============ 38. TORPEDO — rayos de bláster ============ */
+/* ============ 39. TORPEDO — rayos de bláster ============ */
 .tema-torpedo {
     background: radial-gradient(circle at 50% 55%, #1b242e 0%, #05070a 78%);
 }
@@ -2286,7 +2344,7 @@
     96%, 100% { opacity: 1; transform: scale(1.1); }
 }
 
-/* ============ 39. RESPIRACION — el aliento del lado oscuro ============ */
+/* ============ 40. RESPIRACION — el aliento del lado oscuro ============ */
 .tema-respiracion {
     background: radial-gradient(circle at 50% 55%, #1d050a 0%, #060203 80%);
 }
@@ -2349,7 +2407,7 @@
     100% { background-position: 300px -340px, -520px 560px; }
 }
 
-/* ============ 40. DUNAS — espejismo de Tatooine ============ */
+/* ============ 41. DUNAS — espejismo de Tatooine ============ */
 .tema-dunas {
     background: linear-gradient(180deg, #2b1a08 0%, #45280c 55%, #1d1105 100%);
 }
@@ -2405,7 +2463,7 @@
     50%      { opacity: .85; transform: skewX(3deg) scaleY(1.15); }
 }
 
-/* ============ 41. CARBONO — congelado en carbonita ============ */
+/* ============ 42. CARBONO — congelado en carbonita ============ */
 .tema-carbono {
     background: linear-gradient(180deg, #123040 0%, #081720 70%, #102a38 100%);
 }
@@ -2464,7 +2522,7 @@
     50%      { opacity: .75; transform: translateY(-14%) scaleY(1.2); }
 }
 
-/* ============ 42. SUPERLASER — disparo ============ */
+/* ============ 43. SUPERLASER — disparo ============ */
 .tema-superlaser {
     background: radial-gradient(circle at 50% 50%, #07130a 0%, #030705 78%);
 }
@@ -2542,7 +2600,7 @@
     100%  { opacity: 0; transform: scale(1.25); }
 }
 
-/* ============ 43. CLON — ejército de copias ============ */
+/* ============ 44. CLON — ejército de copias ============ */
 .tema-clon {
     background: linear-gradient(180deg, #0b1420 0%, #060b12 70%, #0e1a28 100%);
 }
@@ -2585,7 +2643,7 @@
     66%, 100% { opacity: .5; }
 }
 
-/* ============ 44. APUNTAR — ordenador de puntería ============ */
+/* ============ 45. APUNTAR — ordenador de puntería ============ */
 .tema-apuntar {
     background: radial-gradient(circle at 50% 55%, #07140a 0%, #030804 78%);
 }
@@ -2661,7 +2719,7 @@
     100% { top: 100%; opacity: 0; }
 }
 
-/* ============ 45. ESPIRITU — el espíritu de la Fuerza ============ */
+/* ============ 46. ESPÍRITU — el espíritu de la Fuerza ============ */
 .tema-espiritu {
     background: radial-gradient(circle at 50% 60%, #0d2438 0%, #050e18 78%);
 }
@@ -2727,7 +2785,7 @@
     78%, 100% { opacity: .15; }
 }
 
-/* ============ 46. REBELION — franja de la Alianza ============ */
+/* ============ 47. REBELIÓN — franja de la Alianza ============ */
 .tema-rebelion {
     background: radial-gradient(circle at 50% 55%, #170d05 0%, #070502 78%);
 }
@@ -2793,7 +2851,7 @@
 }
 
 
-/* ============ 47. CÓDIGO — lluvia binaria ============ */
+/* ============ 48. CÓDIGO — lluvia binaria ============ */
 .tema-codigo {
     background: radial-gradient(circle at 50% 55%, #04170b 0%, #010604 78%);
 }
@@ -2826,7 +2884,7 @@
     100% { transform: translateY(50%); }
 }
 
-/* ============ 48. PILDORA — el momento de elegir ============ */
+/* ============ 49. PÍLDORA — el momento de elegir ============ */
 .tema-pildora {
     background: radial-gradient(circle at 50% 55%, #140611 0%, #05020a 80%);
 }
@@ -2883,7 +2941,7 @@
     100%     { opacity: .35; transform: scaleY(.7); }
 }
 
-/* ============ 49. CUCHARA — no hay cuchara ============ */
+/* ============ 50. CUCHARA — no hay cuchara ============ */
 .tema-cuchara {
     background: radial-gradient(circle at 50% 60%, #4a2c12 0%, #0a0709 80%);
 }
@@ -2943,7 +3001,7 @@
     50%      { transform: translateX(16%) skewX(8deg); opacity: .7; }
 }
 
-/* ============ 50. DEJAVU — ya vi esto ============ */
+/* ============ 51. DEJAVU — ya vi esto ============ */
 .tema-dejavu {
     background: radial-gradient(circle at 50% 55%, #0d4a24 0%, #020705 78%);
 }
@@ -3004,7 +3062,7 @@
     79%, 100% { opacity: .3; }
 }
 
-/* ============ 51. AGENTE — copia realizada ============ */
+/* ============ 52. AGENTE — copia realizada ============ */
 .tema-agente {
     background: radial-gradient(circle at 50% 55%, #14395e 0%, #04070a 80%);
 }
@@ -3063,7 +3121,7 @@
     83%,100% { opacity: .55; transform: scale(.72); }
 }
 
-/* ============ 52. ESPEJO — entrar en la superficie ============ */
+/* ============ 53. ESPEJO — entrar en la superficie ============ */
 .tema-espejo {
     background: radial-gradient(circle at 50% 55%, #15304a 0%, #05070a 80%);
 }
@@ -3124,7 +3182,7 @@
     66%,100% { opacity: 0; transform: translateX(3700%); }
 }
 
-/* ============ 53. TIEMPO BALA — el disparo lento ============ */
+/* ============ 54. TIEMPO BALA — el disparo lento ============ */
 .tema-tiempo {
     background: radial-gradient(circle at 50% 55%, #050d18 0%, #020509 80%);
 }
@@ -3180,7 +3238,7 @@
     74%      { filter: blur(1px); opacity: .6; }
 }
 
-/* ============ 54. DODGE — se abren los caminos ============ */
+/* ============ 55. DODGE — se abren los caminos ============ */
 .tema-dodge {
     background: radial-gradient(circle at 50% 55%, #5a2f12 0%, #0a0608 80%);
 }
@@ -3241,7 +3299,7 @@
     66%,100% { opacity: .35; transform: scale(1.3); }
 }
 
-/* ============ 55. MUNDO — la construcción se ve ============ */
+/* ============ 56. MUNDO — la construcción se ve ============ */
 .tema-mundo {
     background: radial-gradient(circle at 50% 55%, #5c4712 0%, #0a0805 80%);
 }
@@ -3299,7 +3357,7 @@
     86%,100% { opacity: .35; transform: translateX(6%); }
 }
 
-/* ============ 56. ORACLE — la cocina del Oráculo ============ */
+/* ============ 57. ORACLE — la cocina del Oráculo ============ */
 .tema-oracle {
     background: radial-gradient(circle at 50% 58%, #1a1006 0%, #070403 80%);
 }
@@ -3355,7 +3413,7 @@
     100% { transform: translateY(33%); opacity: .85; }
 }
 
-/* ============ 57. DESCONEXION — se cae la señal ============ */
+/* ============ 58. DESCONEXION — se cae la señal ============ */
 .tema-desconexion {
     background: radial-gradient(circle at 50% 55%, #0e4f46 0%, #030607 80%);
 }
@@ -3412,7 +3470,7 @@
     77%,100% { opacity: 0; }
 }
 
-/* ============ 58. CONEJO — síguelo ============ */
+/* ============ 59. CONEJO — síguelo ============ */
 .tema-conejo {
     background: radial-gradient(circle at 50% 55%, #1a2b52 0%, #040507 80%);
 }
@@ -3475,7 +3533,7 @@
     76%,100% { opacity: 0; }
 }
 
-/* ============ 59. PODER — se abre el fogonazo ============ */
+/* ============ 60. PODER — se abre el fogonazo ============ */
 .tema-poder {
     background: radial-gradient(circle at 50% 62%, #04140c 0%, #010604 80%);
 }
@@ -3538,7 +3596,7 @@
     100%     { opacity: 0; transform: translateY(-52%); }
 }
 
-/* ============ 60. CENTINELA — barrido del sensor ============ */
+/* ============ 61. CENTINELA — barrido del sensor ============ */
 .tema-sentinela {
     background: radial-gradient(circle at 50% 55%, #14060d 0%, #040309 80%);
 }
@@ -3602,7 +3660,7 @@
     89%,100% { opacity: .2; }
 }
 
-/* ============ 61. FILO — la barra de filo ============ */
+/* ============ 62. FILO — la barra de filo ============ */
 .tema-filo {
     background: radial-gradient(circle at 50% 55%, #2a4f74 0%, #05070a 78%);
 }
@@ -3661,7 +3719,7 @@
     50%      { opacity: 1; transform: scaleX(1); }
 }
 
-/* ============ 62. EMBLEMA — el blasón del cazador ============ */
+/* ============ 63. EMBLEMA — el blasón del cazador ============ */
 .tema-emblema {
     background: radial-gradient(circle at 50% 55%, #6b4a12 0%, #06050a 78%);
 }
@@ -3723,7 +3781,7 @@
     84%,100% { opacity: 0; transform: translateX(340%); }
 }
 
-/* ============ 63. SALUD — la barra baja ============ */
+/* ============ 64. SALUD — la barra baja ============ */
 .tema-salud {
     background: radial-gradient(circle at 50% 55%, #3f6b12 0%, #05070a 78%);
 }
@@ -3791,7 +3849,7 @@
     100% { background-position: 0 90%; }
 }
 
-/* ============ 64. RUGIDO — la bestia ruge ============ */
+/* ============ 65. RUGIDO — la bestia ruge ============ */
 .tema-rugido {
     background: radial-gradient(circle at 50% 55%, #7a3410 0%, #06040a 78%);
 }
@@ -3832,7 +3890,7 @@
     100% { opacity: 0; transform: translateY(-9%) scale(1.18); }
 }
 
-/* ============ 65. GARRAS — el zarpazo ============ */
+/* ============ 66. GARRAS — el zarpazo ============ */
 .tema-garras {
     background: radial-gradient(circle at 50% 55%, #6b1f34 0%, #06040a 78%);
 }
@@ -3891,7 +3949,7 @@
     100% { opacity: .05; transform: translateY(-10%) scale(1.2); }
 }
 
-/* ============ 66. ESCAMAS — la coraza ============ */
+/* ============ 67. ESCAMAS — la coraza ============ */
 .tema-escamas {
     background: radial-gradient(circle at 50% 55%, #0f5a4a 0%, #05070a 78%);
 }
@@ -3946,7 +4004,7 @@
     50%      { opacity: 1; }
 }
 
-/* ============ 67. VENENO — la nube ============ */
+/* ============ 68. VENENO — la nube ============ */
 .tema-veneno {
     background: radial-gradient(circle at 50% 55%, #4f1270 0%, #05040a 78%);
 }
@@ -4003,7 +4061,7 @@
     78%,100% { opacity: 0; transform: translateY(52%) scaleY(.5); }
 }
 
-/* ============ 68. PARALISIS — el calambre ============ */
+/* ============ 69. PARALISIS — el calambre ============ */
 .tema-paralisis {
     background: radial-gradient(circle at 50% 55%, #7a6a10 0%, #06060a 78%);
 }
@@ -4067,7 +4125,7 @@
     70%,100% { opacity: .35; }
 }
 
-/* ============ 69. FAUCES — la mordida ============ */
+/* ============ 70. FAUCES — la mordida ============ */
 .tema-fauces {
     background: radial-gradient(circle at 50% 55%, #5f1a14 0%, #06040a 78%);
 }
@@ -4133,7 +4191,7 @@
     74%,100% { opacity: 0; transform: scale(1.9); }
 }
 
-/* ============ 70. BARRO — el fango ============ */
+/* ============ 71. BARRO — el fango ============ */
 .tema-barro {
     background: radial-gradient(circle at 50% 55%, #6b4a1f 0%, #0a0703 78%);
 }
@@ -4193,7 +4251,7 @@
     80%,100% { opacity: .4; transform: translateX(330%); }
 }
 
-/* ============ 71. WIREBUG — la seda ============ */
+/* ============ 72. WIREBUG — la seda ============ */
 .tema-wirebug {
     background: radial-gradient(circle at 50% 55%, #1e5f9e 0%, #04090f 78%);
 }
@@ -4253,7 +4311,7 @@
     100% { background-position: 8vmin -5vmin, -8vmin 5vmin; }
 }
 
-/* ============ 72. PALICO — el compañero ============ */
+/* ============ 73. PALICO — el compañero ============ */
 .tema-palico {
     background: radial-gradient(circle at 50% 55%, #a8631a 0%, #0a0602 78%);
 }
@@ -4320,7 +4378,7 @@
     60%      { transform: translateY(4%) scale(.95); opacity: .7; }
 }
 
-/* ============ 73. FORJA — el yunque ============ */
+/* ============ 74. FORJA — el yunque ============ */
 .tema-forja {
     background: radial-gradient(circle at 50% 55%, #a33a06 0%, #0a0402 78%);
 }
@@ -4380,7 +4438,7 @@
     78%,100% { opacity: .6; transform: scale(.9); }
 }
 
-/* ============ 74. CAZA — señalizar ============ */
+/* ============ 75. CAZA — señalizar ============ */
 .tema-caza {
     background: radial-gradient(circle at 50% 55%, #1f6b4a 0%, #030805 78%);
 }
@@ -4442,7 +4500,7 @@
     70%,100% { opacity: .4; }
 }
 
-/* ============ 75. SIGILO — a la sombra ============ */
+/* ============ 76. SIGILO — a la sombra ============ */
 .tema-sigilo {
     background: radial-gradient(circle at 50% 55%, #2c3a6b 0%, #04050a 78%);
 }
@@ -4500,7 +4558,7 @@
     70%,100% { opacity: .35; }
 }
 
-/* ============ 76. SUEÑO — se duermen ============ */
+/* ============ 77. SUEÑO — se duermen ============ */
 .tema-sueno {
     background: radial-gradient(circle at 50% 55%, #452a86 0%, #05040c 78%);
 }
@@ -4560,7 +4618,7 @@
     50%      { opacity: 1; transform: rotate(-8deg); }
 }
 
-/* ============ 77. EMBESTIDA — el embate ============ */
+/* ============ 78. EMBESTIDA — el embate ============ */
 .tema-embestida {
     background: radial-gradient(circle at 50% 55%, #8a1f1f 0%, #0a0304 78%);
 }
@@ -4619,7 +4677,7 @@
     50%      { opacity: .95; }
 }
 
-/* ============ 78. BESTIA — la bestia despierta ============ */
+/* ============ 79. BESTIA — la bestia despierta ============ */
 .tema-bestia {
     background: radial-gradient(circle at 50% 55%, #6b1230 0%, #0a0306 78%);
 }

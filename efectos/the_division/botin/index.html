@@ -20,21 +20,21 @@
         body {
             margin: 0;
             padding: 2rem;
-            background-color: #100d05;
-            color: #f7ecd2;
+            background-color: #1a1200;
+            color: #ffe082;
             font-family: Arial, Helvetica, sans-serif;
             line-height: 1.6;
         }
-        h1 { font-size: 2.6rem; margin-top: 0; color: #ffd54f; }
+        h1 { font-size: 2.6rem; margin-top: 0; color: #ffb300; }
         h2 {
-            color: #ffd54f;
-            border-bottom: 2px solid #3a3112;
+            color: #ffb300;
+            border-bottom: 2px solid #4a3a00;
             padding-bottom: .4rem;
             margin-top: 2.5rem;
         }
         .demo {
-            background-color: #191508;
-            border: 1px dashed #3a3112;
+            background-color: #251800;
+            border: 1px dashed #4a3a00;
             border-radius: 10px;
             padding: 2rem;
             margin: 1rem 0;
@@ -44,16 +44,16 @@
         .mediano { font-size: 1.6rem; font-weight: 800; }
         .peq { font-size: 1rem; font-weight: bold; }
         pre {
-            background-color: #191508;
-            border: 1px solid #3a3112;
+            background-color: #251800;
+            border: 1px solid #4a3a00;
             border-radius: 8px;
             padding: 1rem;
             overflow-x: auto;
-            color: #ffe9a8;
+            color: #fff8e1;
             font-size: .95rem;
         }
-        code { color: #ffe9a8; }
-        .nota { color: #ffd54f; font-weight: bold; }
+        code { color: #fff8e1; }
+        .nota { color: #ffb300; font-weight: bold; }
 
         /* --- BOTÓN "TODOS LOS EFECTOS" (centrado arriba) ---
            Clicable y con estado pulsado; mientras se mantiene sale el
@@ -99,7 +99,7 @@
             border-radius: 3px;
             opacity: 0;
             pointer-events: none;
-            background: linear-gradient(90deg, rgba(255,213,79,0), rgba(255,213,79,.55) 20%, rgba(255,255,255,.85) 50%, rgba(255,213,79,.55) 80%, rgba(255,213,79,0));
+            background: linear-gradient(90deg, rgba(255,179,0,0), rgba(255,179,0,.55) 20%, rgba(255,255,255,.85) 50%, rgba(255,179,0,.55) 80%, rgba(255,179,0,0));
             transform: scale(.4) translateX(0);
         }
         .btn-volver:active::after {
@@ -157,33 +157,31 @@
 
     <h1>EFECTO BOTÍN</h1>
     <p>
-        Las letras son <strong>botín legendario</strong>: dorado
-        brillante con un <strong>destello que barre</strong> el
-        texto, un <strong>haz de luz</strong> que sube y respira y
-        una <strong>estrella de rareza</strong> que destella en la
-        esquina.
+        Las letras son un <strong>cofre legendario</strong>:
+        se abren con <strong>flash dorado</strong> y
+        <strong>partículas de loot</strong> ascendiendo.
     </p>
 
     <h2>1. Demo grande</h2>
     <div class="demo">
-        <span class="efecto-botin grande">EXÓTICO</span>
+        <span class="efecto-botin grande">BOTÍN</span>
     </div>
 
     <h2>2. Título de página</h2>
     <div class="demo">
-        <span class="efecto-botin mediano">botín legendaria</span>
+        <span class="efecto-botin mediano">legendario</span>
     </div>
 
     <h2>3. Texto pequeño</h2>
     <div class="demo">
-        <span class="efecto-botin peq">calibrado</span>
+        <span class="efecto-botin peq">exótico</span>
     </div>
 
     <h2>4. Varias palabras en la misma línea</h2>
     <div class="demo">
-        <span class="efecto-botin mediano">DORADO</span>
+        <span class="efecto-botin mediano">★</span>
         <span class="efecto-botin mediano">◆</span>
-        <span class="efecto-botin mediano">LEYENDA</span>
+        <span class="efecto-botin mediano">◇</span>
     </div>
 
     <h2>Cómo aplicarlo a cualquier archivo .css</h2>
