@@ -2,7 +2,7 @@
 <!-- ================================================================
      SHOWCASE UNIFICADO DE EFECTOS DE TEXTO (efectos en CSS puro)
      ----------------------------------------------------------------
-     UNA SOLA PÁGINA con los 46 efectos agrupados en CATEGORÍAS: cada
+     UNA SOLA PÁGINA con los 78 efectos agrupados en CATEGORÍAS: cada
      categoría es una CARPETA PLEGABLE en el índice de la izquierda
      (<details>): sus efectos están ocultos hasta abrirla y, al hacerlo,
      se despliegan su lista y sus tarjetas (con :has()). Con ninguna
@@ -57,7 +57,7 @@
        4) sus <link>, <li data-cat> y <section data-cat> con rutas
           categoria/efecto/…       (La muestra aleatoria no se toca al añadir categorías: el guion
         del final sortea de todas las tarjetas; tamaño en var N = 12.)
-      (Los 46 CSS conviven sin conflictos: cada uno solo define su
+      (Los 78 CSS conviven sin conflictos: cada uno solo define su
        propia clase .efecto-xxx y sus propios @keyframes.)
      ================================================================ -->
 <html lang="es">
@@ -66,7 +66,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Efectos de texto CSS - Showcase unificado</title>
 
-    <!-- ============ LOS 46 EFECTOS (cada uno portable) ============ -->
+    <!-- ============ LOS 78 EFECTOS (cada uno portable) ============ -->
     <link rel="stylesheet" href="miscelanea/glitch/glitch.css">
     <link rel="stylesheet" href="miscelanea/arcoiris/arcoiris.css">
     <link rel="stylesheet" href="miscelanea/fuego/fuego.css">
@@ -113,6 +113,38 @@
     <link rel="stylesheet" href="star_wars/apuntar/apuntar.css">
     <link rel="stylesheet" href="star_wars/espiritu/espiritu.css">
     <link rel="stylesheet" href="star_wars/rebelion/rebelion.css">
+    <link rel="stylesheet" href="matrix/codigo/codigo.css">
+    <link rel="stylesheet" href="matrix/pildora/pildora.css">
+    <link rel="stylesheet" href="matrix/cuchara/cuchara.css">
+    <link rel="stylesheet" href="matrix/dejavu/dejavu.css">
+    <link rel="stylesheet" href="matrix/agente/agente.css">
+    <link rel="stylesheet" href="matrix/espejo/espejo.css">
+    <link rel="stylesheet" href="matrix/tiempo/tiempo.css">
+    <link rel="stylesheet" href="matrix/dodge/dodge.css">
+    <link rel="stylesheet" href="matrix/mundo/mundo.css">
+    <link rel="stylesheet" href="matrix/oracle/oracle.css">
+    <link rel="stylesheet" href="matrix/desconexion/desconexion.css">
+    <link rel="stylesheet" href="matrix/conejo/conejo.css">
+    <link rel="stylesheet" href="matrix/poder/poder.css">
+    <link rel="stylesheet" href="matrix/sentinela/sentinela.css">
+    <link rel="stylesheet" href="monster_hunter/filo/filo.css">
+    <link rel="stylesheet" href="monster_hunter/emblema/emblema.css">
+    <link rel="stylesheet" href="monster_hunter/salud/salud.css">
+    <link rel="stylesheet" href="monster_hunter/rugido/rugido.css">
+    <link rel="stylesheet" href="monster_hunter/garras/garras.css">
+    <link rel="stylesheet" href="monster_hunter/escamas/escamas.css">
+    <link rel="stylesheet" href="monster_hunter/veneno/veneno.css">
+    <link rel="stylesheet" href="monster_hunter/paralisis/paralisis.css">
+    <link rel="stylesheet" href="monster_hunter/fauces/fauces.css">
+    <link rel="stylesheet" href="monster_hunter/barro/barro.css">
+    <link rel="stylesheet" href="monster_hunter/wirebug/wirebug.css">
+    <link rel="stylesheet" href="monster_hunter/palico/palico.css">
+    <link rel="stylesheet" href="monster_hunter/forja/forja.css">
+    <link rel="stylesheet" href="monster_hunter/caza/caza.css">
+    <link rel="stylesheet" href="monster_hunter/sigilo/sigilo.css">
+    <link rel="stylesheet" href="monster_hunter/sueno/sueno.css">
+    <link rel="stylesheet" href="monster_hunter/embestida/embestida.css">
+    <link rel="stylesheet" href="monster_hunter/bestia/bestia.css">
 
     <!-- Escenas temáticas (transición + botones de descarga) -->
     <link rel="stylesheet" href="transicion.css">
@@ -410,6 +442,38 @@
         .c-apuntar    { color: #76ff03; font-family: "Courier New", monospace; }
         .c-espiritu   { color: #b3e5fc; }
         .c-rebelion   { color: #ff6d00; }
+        .c-codigo     { color: #00ff41; }
+        .c-pildora    { color: #ff5252; }
+        .c-cuchara    { color: #cfd8dc; }
+        .c-dejavu     { color: #b9f6ca; }
+        .c-agente     { color: #cfd8dc; }
+        .c-espejo     { color: #b0bec5; }
+        .c-tiempo     { color: #80d8ff; }
+        .c-dodge      { color: #ffab40; }
+        .c-mundo      { color: #ffd740; }
+        .c-oracle     { color: #ffcc80; }
+        .c-desconexion { color: #80cbc4; }
+        .c-conejo     { color: #eceff1; }
+        .c-poder      { color: #69f0ae; }
+        .c-sentinela  { color: #ff5252; }
+        .c-filo       { color: #90caf9; }
+        .c-emblema    { color: #ffd54f; }
+        .c-salud      { color: #66bb6a; }
+        .c-rugido     { color: #ffb300; }
+        .c-garras     { color: #ef9a9a; }
+        .c-escamas    { color: #4db6ac; }
+        .c-veneno     { color: #ce93d8; }
+        .c-paralisis  { color: #fff59d; }
+        .c-fauces     { color: #ffab91; }
+        .c-barro      { color: #d2a15c; }
+        .c-wirebug    { color: #4dd0e1; }
+        .c-palico     { color: #ffb74d; }
+        .c-forja      { color: #ff8a3d; }
+        .c-caza       { color: #69f0ae; }
+        .c-sigilo     { color: #90a4ae; }
+        .c-sueno      { color: #b39ddb; }
+        .c-embestida  { color: #ef5350; }
+        .c-bestia     { color: #ff5c67; }
 
         footer {
             padding: 2rem 0 1rem;
@@ -506,6 +570,16 @@
 
         body:has(.grupo[open]):not(:has(#g-the_division[open]))
             .galeria .tarjeta[data-cat="the_division"] {
+            display: none;
+        }
+
+        body:has(.grupo[open]):not(:has(#g-monster_hunter[open]))
+            .galeria .tarjeta[data-cat="monster_hunter"] {
+            display: none;
+        }
+
+        body:has(.grupo[open]):not(:has(#g-matrix[open]))
+            .galeria .tarjeta[data-cat="matrix"] {
             display: none;
         }
 
@@ -657,7 +731,7 @@
 
     <!-- ======================= ÍNDICE ======================= -->
     <aside class="indice">
-        <h3>Efectos <span class="contador">46 disponibles</span></h3>
+        <h3>Efectos <span class="contador">78 disponibles</span></h3>
 
         <!-- Carpeta de categoría: plegada por defecto; al abrirla se
              despliegan su lista y sus tarjetas (CSS puro, sin JS) -->
@@ -723,6 +797,50 @@
                 <li data-cat="star_wars"><a href="#apuntar">🎯 Apuntar</a></li>
                 <li data-cat="star_wars"><a href="#espiritu">👻 Espíritu</a></li>
                 <li data-cat="star_wars"><a href="#rebelion">⭐ Rebelión</a></li>
+            </ol>
+        </details>
+        <!-- Matrix -->
+        <details class="grupo" id="g-matrix" data-cat="matrix">
+            <summary class="grupo-titulo">Matrix <span class="grupo-n">14</span></summary>
+            <ol class="lista">
+                <li data-cat="matrix"><a href="#codigo">💻 Código</a></li>
+                <li data-cat="matrix"><a href="#pildora">💊 Píldora</a></li>
+                <li data-cat="matrix"><a href="#cuchara">🪛 Cuchara</a></li>
+                <li data-cat="matrix"><a href="#dejavu">🐈 DejaVu</a></li>
+                <li data-cat="matrix"><a href="#agente">😎 Agente</a></li>
+                <li data-cat="matrix"><a href="#espejo">🪞 Espejo líquido</a></li>
+                <li data-cat="matrix"><a href="#tiempo">⏱️ Tiempo bala</a></li>
+                <li data-cat="matrix"><a href="#dodge">🎯 Dodge</a></li>
+                <li data-cat="matrix"><a href="#mundo">🌍 Mundo tiembla</a></li>
+                <li data-cat="matrix"><a href="#oracle">🍪 Oracle</a></li>
+                <li data-cat="matrix"><a href="#desconexion">🔌 Desconexión</a></li>
+                <li data-cat="matrix"><a href="#conejo">🐰 Conejo blanco</a></li>
+                <li data-cat="matrix"><a href="#poder">💫 Poder</a></li>
+                <li data-cat="matrix"><a href="#sentinela">👀 Sentinela</a></li>
+            </ol>
+        </details>
+        <!-- Monster Hunter -->
+        <details class="grupo" id="g-monster_hunter" data-cat="monster_hunter">
+            <summary class="grupo-titulo">Monster Hunter <span class="grupo-n">18</span></summary>
+            <ol class="lista">
+                <li data-cat="monster_hunter"><a href="#filo">🔪 Filo</a></li>
+                <li data-cat="monster_hunter"><a href="#emblema">🏅 Emblema</a></li>
+                <li data-cat="monster_hunter"><a href="#salud">💚 Salud</a></li>
+                <li data-cat="monster_hunter"><a href="#rugido">🦁 Rugido</a></li>
+                <li data-cat="monster_hunter"><a href="#garras">🐾 Garras</a></li>
+                <li data-cat="monster_hunter"><a href="#escamas">🐉 Escamas</a></li>
+                <li data-cat="monster_hunter"><a href="#veneno">💀 Veneno</a></li>
+                <li data-cat="monster_hunter"><a href="#paralisis">⚡ Parálisis</a></li>
+                <li data-cat="monster_hunter"><a href="#fauces">🦷 Fauces</a></li>
+                <li data-cat="monster_hunter"><a href="#barro">💧 Barro</a></li>
+                <li data-cat="monster_hunter"><a href="#wirebug">🪲 Wirebug</a></li>
+                <li data-cat="monster_hunter"><a href="#palico">🐱 Palico</a></li>
+                <li data-cat="monster_hunter"><a href="#forja">🔨 Forja</a></li>
+                <li data-cat="monster_hunter"><a href="#caza">🎯 Caza</a></li>
+                <li data-cat="monster_hunter"><a href="#sigilo">👁️ Sigilo</a></li>
+                <li data-cat="monster_hunter"><a href="#sueno">😴 Sueño</a></li>
+                <li data-cat="monster_hunter"><a href="#embestida">🐅 Embestida</a></li>
+                <li data-cat="monster_hunter"><a href="#bestia">🐲 Bestia</a></li>
             </ol>
         </details>
     </aside>
@@ -1431,6 +1549,486 @@
                 <div class="rb-estrella rb-estrella-1"></div>
                 <div class="rb-estrella rb-estrella-2"></div>
                 <div class="rb-luz"></div>
+            </div>
+        </section>
+
+        <!-- ============ 47. CÓDIGO ============ -->
+        <section id="codigo" class="tarjeta" data-cat="matrix">
+            <div class="muestra">
+                <span class="efecto-codigo">MATRIX</span>
+            </div>
+            <h2 class="c-codigo">💻 Código <small>Lluvia binaria</small></h2>
+            <a class="btn" href="matrix/codigo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="matrix/codigo/codigo.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-codigo">
+                <div class="cg-lluvia cg-lluvia-1"></div>
+                <div class="cg-lluvia cg-lluvia-2"></div>
+                <div class="cg-marco"></div>
+            </div>
+        </section>
+
+        <!-- ============ 48. PÍLDORA ============ -->
+        <section id="pildora" class="tarjeta" data-cat="matrix">
+            <div class="muestra">
+                <span class="efecto-pildora">ELIGE</span>
+            </div>
+            <h2 class="c-pildora">💊 Píldora <small>Roja o azul</small></h2>
+            <a class="btn" href="matrix/pildora/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="matrix/pildora/pildora.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-pildora">
+                <div class="pd-roja"></div>
+                <div class="pd-azul"></div>
+                <div class="pd-eleccion"></div>
+            </div>
+        </section>
+
+        <!-- ============ 49. NO HAY CUCHARA ============ -->
+        <section id="cuchara" class="tarjeta" data-cat="matrix">
+            <div class="muestra">
+                <span class="efecto-cuchara">CUCHARA</span>
+            </div>
+            <h2 class="c-cuchara">🪛 Cuchara <small>No hay cuchara</small></h2>
+            <a class="btn" href="matrix/cuchara/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="matrix/cuchara/cuchara.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-cuchara">
+                <div class="cu-acero"></div>
+                <div class="cu-mesa"></div>
+                <div class="cu-reflejo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 50. DÉJÀ VU ============ -->
+        <section id="dejavu" class="tarjeta" data-cat="matrix">
+            <div class="muestra">
+                <span class="efecto-dejavu">OTRA VEZ</span>
+            </div>
+            <h2 class="c-dejavu">🐈 DejaVu <small>El gato negro</small></h2>
+            <a class="btn" href="matrix/dejavu/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="matrix/dejavu/dejavu.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-dejavu">
+                <div class="dv-eco"></div>
+                <div class="dv-ojos"></div>
+                <div class="dv-rasgo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 51. AGENTE ============ -->
+        <section id="agente" class="tarjeta" data-cat="matrix">
+            <div class="muestra">
+                <span class="efecto-agente">AGENTE</span>
+            </div>
+            <h2 class="c-agente">😎 Agente <small>El agente toma el control</small></h2>
+            <a class="btn" href="matrix/agente/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="matrix/agente/agente.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-agente">
+                <div class="ae-gris"></div>
+                <div class="ae-reflejo"></div>
+                <div class="ae-marca"></div>
+            </div>
+        </section>
+
+        <!-- ============ 52. ESPEJO LÍQUIDO ============ -->
+        <section id="espejo" class="tarjeta" data-cat="matrix">
+            <div class="muestra">
+                <span class="efecto-espejo">ESPEJO</span>
+            </div>
+            <h2 class="c-espejo">🪞 Espejo líquido <small>Entrar en el espejo</small></h2>
+            <a class="btn" href="matrix/espejo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="matrix/espejo/espejo.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-espejo">
+                <div class="ep-onda"></div>
+                <div class="ep-plata"></div>
+                <div class="ep-banda"></div>
+            </div>
+        </section>
+
+        <!-- ============ 53. TIEMPO BALA ============ -->
+        <section id="tiempo" class="tarjeta" data-cat="matrix">
+            <div class="muestra">
+                <span class="efecto-tiempo">LENTO</span>
+            </div>
+            <h2 class="c-tiempo">⏱️ Tiempo bala <small>Bala en cámara lenta</small></h2>
+            <a class="btn" href="matrix/tiempo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="matrix/tiempo/tiempo.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-tiempo">
+                <div class="tp-rastro"></div>
+                <div class="tp-bala"></div>
+                <div class="tp-foco"></div>
+            </div>
+        </section>
+
+        <!-- ============ 54. ESQUIVAR ============ -->
+        <section id="dodge" class="tarjeta" data-cat="matrix">
+            <div class="muestra">
+                <span class="efecto-dodge">ESQUIVA</span>
+            </div>
+            <h2 class="c-dodge">🎯 Dodge <small>Esquivar las balas</small></h2>
+            <a class="btn" href="matrix/dodge/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="matrix/dodge/dodge.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-dodge">
+                <div class="dg-estela"></div>
+                <div class="dg-marca"></div>
+                <div class="dg-resalto"></div>
+            </div>
+        </section>
+
+        <!-- ============ 55. EL MUNDO TIEMBLA ============ -->
+        <section id="mundo" class="tarjeta" data-cat="matrix">
+            <div class="muestra">
+                <span class="efecto-mundo">MUNDO</span>
+            </div>
+            <h2 class="c-mundo">🌍 Mundo tiembla <small>El mundo se descompone</small></h2>
+            <a class="btn" href="matrix/mundo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="matrix/mundo/mundo.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-mundo">
+                <div class="mo-rejilla"></div>
+                <div class="mo-rojo"></div>
+                <div class="mo-azul"></div>
+            </div>
+        </section>
+
+        <!-- ============ 56. EL ORÁCULO ============ -->
+        <section id="oracle" class="tarjeta" data-cat="matrix">
+            <div class="muestra">
+                <span class="efecto-oracle">GALLETA</span>
+            </div>
+            <h2 class="c-oracle">🍪 Oracle <small>La galleta</small></h2>
+            <a class="btn" href="matrix/oracle/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="matrix/oracle/oracle.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-oracle">
+                <div class="oc-luz"></div>
+                <div class="oc-humo"></div>
+                <div class="oc-migajas"></div>
+            </div>
+        </section>
+
+        <!-- ============ 57. DESCONEXIÓN ============ -->
+        <section id="desconexion" class="tarjeta" data-cat="matrix">
+            <div class="muestra">
+                <span class="efecto-desconexion">SIN SEÑAL</span>
+            </div>
+            <h2 class="c-desconexion">🔌 Desconexión <small>Se cae la señal</small></h2>
+            <a class="btn" href="matrix/desconexion/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="matrix/desconexion/desconexion.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-desconexion">
+                <div class="ds-linea"></div>
+                <div class="ds-ruido"></div>
+                <div class="ds-caida"></div>
+            </div>
+        </section>
+
+        <!-- ============ 58. CONEJO BLANCO ============ -->
+        <section id="conejo" class="tarjeta" data-cat="matrix">
+            <div class="muestra">
+                <span class="efecto-conejo">CONEJO</span>
+            </div>
+            <h2 class="c-conejo">🐰 Conejo blanco <small>Sigue al conejo</small></h2>
+            <a class="btn" href="matrix/conejo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="matrix/conejo/conejo.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-conejo">
+                <div class="cj-ruta"></div>
+                <div class="cj-destello"></div>
+                <div class="cj-huellas"></div>
+            </div>
+        </section>
+
+        <!-- ============ 59. EL PODER ============ -->
+        <section id="poder" class="tarjeta" data-cat="matrix">
+            <div class="muestra">
+                <span class="efecto-poder">DESPIERTA</span>
+            </div>
+            <h2 class="c-poder">💫 Poder <small>Despierta el poder</small></h2>
+            <a class="btn" href="matrix/poder/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="matrix/poder/poder.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-poder">
+                <div class="pw-hazo"></div>
+                <div class="pw-anillo"></div>
+                <div class="pw-motas"></div>
+            </div>
+        </section>
+
+        <!-- ============ 60. CENTINELA ============ -->
+        <section id="sentinela" class="tarjeta" data-cat="matrix">
+            <div class="muestra">
+                <span class="efecto-sentinela">CENTINELA</span>
+            </div>
+            <h2 class="c-sentinela">👀 Sentinela <small>Ojo rojo de centinela</small></h2>
+            <a class="btn" href="matrix/sentinela/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="matrix/sentinela/sentinela.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-sentinela">
+                <div class="sn-ojo"></div>
+                <div class="sn-barrido"></div>
+                <div class="sn-rejilla"></div>
+            </div>
+        </section>
+
+        <!-- ============ 61. FILO ============ -->
+        <section id="filo" class="tarjeta" data-cat="monster_hunter">
+            <div class="muestra">
+                <span class="efecto-filo">FILO</span>
+            </div>
+            <h2 class="c-filo">🔪 Filo <small>Barra de filo</small></h2>
+            <a class="btn" href="monster_hunter/filo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="monster_hunter/filo/filo.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-filo">
+                <div class="fl-filo"></div>
+                <div class="fl-chispa"></div>
+                <div class="fl-borde"></div>
+            </div>
+        </section>
+
+        <!-- ============ 62. EMBLEMA ============ -->
+        <section id="emblema" class="tarjeta" data-cat="monster_hunter">
+            <div class="muestra">
+                <span class="efecto-emblema">BLASÓN</span>
+            </div>
+            <h2 class="c-emblema">🏅 Emblema <small>Blasón del cazador</small></h2>
+            <a class="btn" href="monster_hunter/emblema/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="monster_hunter/emblema/emblema.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-emblema">
+                <div class="em-marco"></div>
+                <div class="em-laurel"></div>
+                <div class="em-brillo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 63. SALUD ============ -->
+        <section id="salud" class="tarjeta" data-cat="monster_hunter">
+            <div class="muestra">
+                <span class="efecto-salud">SALUD</span>
+            </div>
+            <h2 class="c-salud">💚 Salud <small>La barra baja</small></h2>
+            <a class="btn" href="monster_hunter/salud/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="monster_hunter/salud/salud.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-salud">
+                <div class="sd-barra"></div>
+                <div class="sd-latido"></div>
+                <div class="sd-gotas"></div>
+            </div>
+        </section>
+
+        <!-- ============ 64. RUGIDO ============ -->
+        <section id="rugido" class="tarjeta" data-cat="monster_hunter">
+            <div class="muestra">
+                <span class="efecto-rugido">RUGIDO</span>
+            </div>
+            <h2 class="c-rugido">🦁 Rugido <small>Rugido de bestia</small></h2>
+            <a class="btn" href="monster_hunter/rugido/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="monster_hunter/rugido/rugido.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-rugido">
+                <div class="ru-onda ru-onda-1"></div>
+                <div class="ru-onda ru-onda-2"></div>
+                <div class="ru-polvo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 65. GARRAS ============ -->
+        <section id="garras" class="tarjeta" data-cat="monster_hunter">
+            <div class="muestra">
+                <span class="efecto-garras">GARRAS</span>
+            </div>
+            <h2 class="c-garras">🐾 Garras <small>Zarpazo</small></h2>
+            <a class="btn" href="monster_hunter/garras/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="monster_hunter/garras/garras.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-garras">
+                <div class="ga-tajos"></div>
+                <div class="ga-golpe"></div>
+                <div class="ga-humo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 66. ESCAMAS ============ -->
+        <section id="escamas" class="tarjeta" data-cat="monster_hunter">
+            <div class="muestra">
+                <span class="efecto-escamas">ESCAMAS</span>
+            </div>
+            <h2 class="c-escamas">🐉 Escamas <small>Coraza de escamas</small></h2>
+            <a class="btn" href="monster_hunter/escamas/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="monster_hunter/escamas/escamas.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-escamas">
+                <div class="sc-malla"></div>
+                <div class="sc-brillo"></div>
+                <div class="sc-borde"></div>
+            </div>
+        </section>
+
+        <!-- ============ 67. VENENO ============ -->
+        <section id="veneno" class="tarjeta" data-cat="monster_hunter">
+            <div class="muestra">
+                <span class="efecto-veneno">VENENO</span>
+            </div>
+            <h2 class="c-veneno">💀 Veneno <small>Estado de veneno</small></h2>
+            <a class="btn" href="monster_hunter/veneno/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="monster_hunter/veneno/veneno.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-veneno">
+                <div class="vn-burbujas"></div>
+                <div class="vn-nube"></div>
+                <div class="vn-gota"></div>
+            </div>
+        </section>
+
+        <!-- ============ 68. PARÁLISIS ============ -->
+        <section id="paralisis" class="tarjeta" data-cat="monster_hunter">
+            <div class="muestra">
+                <span class="efecto-paralisis">PARÁLISIS</span>
+            </div>
+            <h2 class="c-paralisis">⚡ Parálisis <small>Parálisis eléctrica</small></h2>
+            <a class="btn" href="monster_hunter/paralisis/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="monster_hunter/paralisis/paralisis.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-paralisis">
+                <div class="pa-chispa"></div>
+                <div class="pa-destello"></div>
+                <div class="pa-rejilla"></div>
+            </div>
+        </section>
+
+        <!-- ============ 69. FAUCES ============ -->
+        <section id="fauces" class="tarjeta" data-cat="monster_hunter">
+            <div class="muestra">
+                <span class="efecto-fauces">FAUCES</span>
+            </div>
+            <h2 class="c-fauces">🦷 Fauces <small>Mordida</small></h2>
+            <a class="btn" href="monster_hunter/fauces/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="monster_hunter/fauces/fauces.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-fauces">
+                <div class="fc-fauces"></div>
+                <div class="fc-osamenta"></div>
+                <div class="fc-golpe"></div>
+            </div>
+        </section>
+
+        <!-- ============ 70. BARRO ============ -->
+        <section id="barro" class="tarjeta" data-cat="monster_hunter">
+            <div class="muestra">
+                <span class="efecto-barro">BARRO</span>
+            </div>
+            <h2 class="c-barro">💧 Barro <small>Fango</small></h2>
+            <a class="btn" href="monster_hunter/barro/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="monster_hunter/barro/barro.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-barro">
+                <div class="bo-charco"></div>
+                <div class="bo-copos"></div>
+                <div class="bo-humedad"></div>
+            </div>
+        </section>
+
+        <!-- ============ 71. WIREBUG ============ -->
+        <section id="wirebug" class="tarjeta" data-cat="monster_hunter">
+            <div class="muestra">
+                <span class="efecto-wirebug">WIREBUG</span>
+            </div>
+            <h2 class="c-wirebug">🪲 Wirebug <small>Seda del wirebug</small></h2>
+            <a class="btn" href="monster_hunter/wirebug/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="monster_hunter/wirebug/wirebug.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-wirebug">
+                <div class="wb-hilo"></div>
+                <div class="wb-luz"></div>
+                <div class="wb-malla"></div>
+            </div>
+        </section>
+
+        <!-- ============ 72. PALICO ============ -->
+        <section id="palico" class="tarjeta" data-cat="monster_hunter">
+            <div class="muestra">
+                <span class="efecto-palico">PALICO</span>
+            </div>
+            <h2 class="c-palico">🐱 Palico <small>Ayudante felino</small></h2>
+            <a class="btn" href="monster_hunter/palico/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="monster_hunter/palico/palico.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-palico">
+                <div class="pc-manos"></div>
+                <div class="pc-garras"></div>
+                <div class="pc-cascabel"></div>
+            </div>
+        </section>
+
+        <!-- ============ 73. FORJA ============ -->
+        <section id="forja" class="tarjeta" data-cat="monster_hunter">
+            <div class="muestra">
+                <span class="efecto-forja">FORJA</span>
+            </div>
+            <h2 class="c-forja">🔨 Forja <small>El yunque</small></h2>
+            <a class="btn" href="monster_hunter/forja/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="monster_hunter/forja/forja.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-forja">
+                <div class="fj-brasa"></div>
+                <div class="fj-chispas"></div>
+                <div class="fj-golpe"></div>
+            </div>
+        </section>
+
+        <!-- ============ 74. CAZA ============ -->
+        <section id="caza" class="tarjeta" data-cat="monster_hunter">
+            <div class="muestra">
+                <span class="efecto-caza">CAZA</span>
+            </div>
+            <h2 class="c-caza">🎯 Caza <small>Señalizar al monstruo</small></h2>
+            <a class="btn" href="monster_hunter/caza/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="monster_hunter/caza/caza.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-caza">
+                <div class="cz-reticula"></div>
+                <div class="cz-barrido"></div>
+                <div class="cz-marcas"></div>
+            </div>
+        </section>
+
+        <!-- ============ 75. SIGILO ============ -->
+        <section id="sigilo" class="tarjeta" data-cat="monster_hunter">
+            <div class="muestra">
+                <span class="efecto-sigilo">SIGILO</span>
+            </div>
+            <h2 class="c-sigilo">👁️ Sigilo <small>A la sombra</small></h2>
+            <a class="btn" href="monster_hunter/sigilo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="monster_hunter/sigilo/sigilo.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-sigilo">
+                <div class="sg-sombra"></div>
+                <div class="sg-ojo"></div>
+                <div class="sg-rejilla"></div>
+            </div>
+        </section>
+
+        <!-- ============ 76. SUEÑO ============ -->
+        <section id="sueno" class="tarjeta" data-cat="monster_hunter">
+            <div class="muestra">
+                <span class="efecto-sueno">SUEÑO</span>
+            </div>
+            <h2 class="c-sueno">😴 Sueño <small>Estado de sueño</small></h2>
+            <a class="btn" href="monster_hunter/sueno/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="monster_hunter/sueno/sueno.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-sueno">
+                <div class="so-zetas"></div>
+                <div class="so-nube"></div>
+                <div class="so-luna"></div>
+            </div>
+        </section>
+
+        <!-- ============ 77. EMBESTIDA ============ -->
+        <section id="embestida" class="tarjeta" data-cat="monster_hunter">
+            <div class="muestra">
+                <span class="efecto-embestida">EMBESTIDA</span>
+            </div>
+            <h2 class="c-embestida">🐅 Embestida <small>El embate</small></h2>
+            <a class="btn" href="monster_hunter/embestida/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="monster_hunter/embestida/embestida.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-embestida">
+                <div class="eb-estelas"></div>
+                <div class="eb-impacto"></div>
+                <div class="eb-rastro"></div>
+            </div>
+        </section>
+
+        <!-- ============ 78. BESTIA ============ -->
+        <section id="bestia" class="tarjeta" data-cat="monster_hunter">
+            <div class="muestra">
+                <span class="efecto-bestia">BESTIA</span>
+            </div>
+            <h2 class="c-bestia">🐲 Bestia <small>La bestia despierta</small></h2>
+            <a class="btn" href="monster_hunter/bestia/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="monster_hunter/bestia/bestia.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-bestia">
+                <div class="bs-ojo"></div>
+                <div class="bs-piel"></div>
+                <div class="bs-polvillo"></div>
             </div>
         </section>
 
@@ -2605,7 +3203,7 @@
                     anillo(x, y, { col: "#ffffff", r1: 170, vida: .5, ancho: 3 });
                 },
                 palabra: function (x, y) {
-                    var frases = ["¡PUM!", "BOOM!", "¡ZAS!", "WOW!", "¡PLOF!"];
+                    var frases = ["¡PUM!", "¡BOOM!", "¡ZAS!", "¡WOW!", "¡PLOF!", "¡YEAH!", "¡WTF!"];
                     texto(x, y, frases[(Math.random() * frases.length) | 0],
                           { col: "#ff5a1f", tam: 58, vida: .9 });
                     destello("rgba(255,209,102,.6)", .3, .25);

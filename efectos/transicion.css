@@ -2791,3 +2791,1891 @@
     0%, 100% { opacity: .5; }
     50%      { opacity: .9; }
 }
+
+
+/* ============ 47. CÓDIGO — lluvia binaria ============ */
+.tema-codigo {
+    background: radial-gradient(circle at 50% 55%, #04170b 0%, #010604 78%);
+}
+.tema-codigo::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(0,255,110,.4) 0%, rgba(0,190,80,.22) 34%,
+                transparent 74%);
+}
+.cg-lluvia {
+    position: absolute;
+    left: 0;
+    top: -100%;
+    width: 22%;
+    height: 200%;
+    background: repeating-linear-gradient(180deg,
+                rgba(0,255,110,.8) 0 5%, transparent 5% 10%);
+    animation: cg-lluvia 2.8s linear infinite;
+}
+.cg-lluvia-1 { left: 8%; }
+.cg-lluvia-2 { left: 64%; animation-duration: 3.6s; animation-delay: -1.5s; }
+.cg-marco {
+    position: absolute;
+    inset: 9% 7%;
+    border: 2px solid rgba(0,255,110,.32);
+    box-shadow: 0 0 4vmin rgba(0,255,110,.28),
+                inset 0 0 7vmin rgba(0,170,70,.22);
+}
+@keyframes cg-lluvia {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(50%); }
+}
+
+/* ============ 48. PILDORA — el momento de elegir ============ */
+.tema-pildora {
+    background: radial-gradient(circle at 50% 55%, #140611 0%, #05020a 80%);
+}
+.tema-pildora::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.42) 0%, rgba(255,70,110,.3) 32%,
+                rgba(50,120,255,.28) 60%, transparent 78%);
+}
+.pd-roja {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: radial-gradient(ellipse at 30% 50%,
+                rgba(255,23,68,.5), transparent 70%);
+    animation: pd-roja 4.4s ease-in-out infinite;
+}
+.pd-azul {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: radial-gradient(ellipse at 70% 50%,
+                rgba(41,121,255,.5), transparent 70%);
+    animation: pd-azul 4.4s ease-in-out infinite;
+}
+.pd-eleccion {
+    position: absolute;
+    left: 49%;
+    top: 14%;
+    width: 2%;
+    height: 72%;
+    background: linear-gradient(180deg, transparent, #ffffff 45%,
+                #ffffff 55%, transparent);
+    opacity: .8;
+    animation: pd-eleccion 4.4s ease-in-out infinite;
+}
+@keyframes pd-roja {
+    0%, 14%  { opacity: 1; }
+    50%, 64% { opacity: .2; }
+    100%     { opacity: 1; }
+}
+@keyframes pd-azul {
+    0%, 14%  { opacity: .2; }
+    50%, 64% { opacity: 1; }
+    100%     { opacity: .2; }
+}
+@keyframes pd-eleccion {
+    0%, 36%  { opacity: .35; transform: scaleY(.7); }
+    46%      { opacity: 1; transform: scaleY(1); }
+    56%      { opacity: .35; transform: scaleY(.7); }
+    100%     { opacity: .35; transform: scaleY(.7); }
+}
+
+/* ============ 49. CUCHARA — no hay cuchara ============ */
+.tema-cuchara {
+    background: radial-gradient(circle at 50% 60%, #4a2c12 0%, #0a0709 80%);
+}
+.tema-cuchara::after {
+    background: radial-gradient(circle at 50% 60%,
+                rgba(255,255,255,.4) 0%, rgba(176,190,197,.3) 34%,
+                transparent 76%);
+}
+.cu-acero {
+    position: absolute;
+    left: 50%;
+    top: 16%;
+    width: 46vmin;
+    height: 46vmin;
+    margin-left: -23vmin;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg,
+                rgba(255,255,255,.5), rgba(120,144,160,.12) 30%,
+                rgba(255,255,255,.45) 55%, rgba(120,144,160,.12) 80%,
+                rgba(255,255,255,.5));
+    animation: cu-acero 6s linear infinite;
+}
+.cu-mesa {
+    position: absolute;
+    left: 12%;
+    right: 12%;
+    bottom: 16%;
+    height: .8vmin;
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent, #b0bec5 25%,
+                #ffffff 50%, #b0bec5 75%, transparent);
+    animation: cu-mesa 4s ease-in-out infinite;
+}
+.cu-reflejo {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 46%;
+    height: 10%;
+    background: linear-gradient(90deg, transparent,
+                rgba(255,255,255,.75) 50%, transparent);
+    filter: blur(1.4vmin);
+    opacity: .5;
+    animation: cu-reflejo 4s ease-in-out infinite;
+}
+@keyframes cu-acero {
+    0%   { transform: rotate(0); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes cu-mesa {
+    0%, 100% { transform: scaleX(1); opacity: .6; }
+    30%      { transform: scaleX(.82) skewX(-6deg); opacity: 1; }
+    64%      { transform: scaleX(.88) skewX(5deg); opacity: .85; }
+}
+@keyframes cu-reflejo {
+    0%, 100% { transform: translateX(-16%) skewX(-8deg); opacity: .35; }
+    50%      { transform: translateX(16%) skewX(8deg); opacity: .7; }
+}
+
+/* ============ 50. DEJAVU — ya vi esto ============ */
+.tema-dejavu {
+    background: radial-gradient(circle at 50% 55%, #0d4a24 0%, #020705 78%);
+}
+.tema-dejavu::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(160,255,120,.4) 0%, rgba(0,255,110,.22) 36%,
+                transparent 74%);
+}
+.dv-eco {
+    position: absolute;
+    left: 8%;
+    top: 0;
+    width: 84%;
+    height: 100%;
+    background: repeating-linear-gradient(90deg,
+                rgba(0,255,110,.5) 0 2px, transparent 2px 14px);
+    opacity: 0;
+    animation: dv-eco 3.4s steps(1, end) infinite;
+}
+.dv-ojos {
+    position: absolute;
+    right: 16%;
+    top: 22%;
+    width: 16vmin;
+    height: 9vmin;
+    background:
+        radial-gradient(ellipse at 26% 50%, #ffffff 0 32%, transparent 38%),
+        radial-gradient(ellipse at 74% 50%, #ffffff 0 32%, transparent 38%);
+    filter: drop-shadow(0 0 3vmin rgba(255,255,255,.9));
+    opacity: 0;
+    animation: dv-ojos 3.4s steps(1, end) infinite;
+}
+.dv-rasgo {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 18%;
+    height: 10%;
+    background: linear-gradient(90deg, transparent, rgba(120,255,160,.5) 45%,
+                rgba(120,255,160,.5) 55%, transparent);
+    opacity: .35;
+    animation: dv-rasgo 3.4s steps(1, end) infinite;
+}
+@keyframes dv-eco {
+    0%, 60%   { opacity: .4; transform: translateX(0); }
+    61%, 69%  { opacity: .75; transform: translateX(-2%); }
+    70%, 78%  { opacity: .75; transform: translateX(2%); }
+    79%, 100% { opacity: .4; transform: translateX(0); }
+}
+@keyframes dv-ojos {
+    0%, 60%   { opacity: .7; }
+    61%, 78%  { opacity: 1; }
+    79%, 100% { opacity: .7; }
+}
+@keyframes dv-rasgo {
+    0%, 60%   { opacity: .3; }
+    61%, 78%  { opacity: .85; }
+    79%, 100% { opacity: .3; }
+}
+
+/* ============ 51. AGENTE — copia realizada ============ */
+.tema-agente {
+    background: radial-gradient(circle at 50% 55%, #14395e 0%, #04070a 80%);
+}
+.tema-agente::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(230,240,245,.4) 0%, rgba(140,160,170,.28) 34%,
+                transparent 76%);
+}
+.ae-gris {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(210,228,240,.4),
+                rgba(140,165,180,.14) 60%, transparent);
+    opacity: 0;
+    animation: ae-gris 5.2s steps(1, end) infinite;
+}
+.ae-reflejo {
+    position: absolute;
+    left: -20%;
+    top: 10%;
+    width: 8%;
+    height: 80%;
+    background: linear-gradient(90deg, transparent, #ffffff 45%,
+                #ffffff 55%, transparent);
+    transform: rotate(16deg);
+    opacity: 0;
+    animation: ae-reflejo 5.2s ease-in-out infinite;
+}
+.ae-marca {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 30vmin;
+    height: 30vmin;
+    margin: -15vmin 0 0 -15vmin;
+    border: 2px solid rgba(230,240,245,.6);
+    border-radius: 50%;
+    opacity: 0;
+    animation: ae-marca 5.2s steps(1, end) infinite;
+}
+@keyframes ae-gris {
+    0%, 52%  { opacity: .5; }
+    53%, 82% { opacity: 1; }
+    83%,100% { opacity: .5; }
+}
+@keyframes ae-reflejo {
+    0%, 54%  { opacity: 0; transform: translateX(0) rotate(16deg); }
+    56%      { opacity: .9; transform: translateX(160%) rotate(16deg); }
+    74%      { opacity: .9; transform: translateX(1450%) rotate(16deg); }
+    76%,100% { opacity: 0; transform: translateX(1550%) rotate(16deg); }
+}
+@keyframes ae-marca {
+    0%, 52%  { opacity: .55; transform: scale(.72); }
+    53%, 60% { opacity: .95; transform: scale(1); }
+    61%, 82% { opacity: .4; transform: scale(1.14); }
+    83%,100% { opacity: .55; transform: scale(.72); }
+}
+
+/* ============ 52. ESPEJO — entrar en la superficie ============ */
+.tema-espejo {
+    background: radial-gradient(circle at 50% 55%, #15304a 0%, #05070a 80%);
+}
+.tema-espejo::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.42) 0%, rgba(176,190,197,.3) 36%,
+                transparent 76%);
+}
+.ep-plata {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 62vmin;
+    height: 62vmin;
+    margin: -31vmin 0 0 -31vmin;
+    border-radius: 50%;
+    background: conic-gradient(from 40deg,
+                rgba(255,255,255,.35), rgba(96,125,139,.1) 25%,
+                rgba(255,255,255,.32) 50%, rgba(96,125,139,.1) 75%,
+                rgba(255,255,255,.35));
+    animation: ep-plata 7s linear infinite;
+}
+.ep-onda {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 55%,
+                transparent 0 34%, rgba(255,255,255,.18) 37%,
+                transparent 41%, transparent 47%,
+                rgba(255,255,255,.12) 50%, transparent 54%);
+    opacity: .7;
+    animation: ep-onda 3.6s ease-out infinite;
+}
+.ep-banda {
+    position: absolute;
+    left: -14%;
+    top: 6%;
+    width: 3%;
+    height: 88%;
+    background: linear-gradient(180deg, transparent, #ffffff 45%,
+                #ffffff 55%, transparent);
+    box-shadow: 0 0 4vmin rgba(255,255,255,.9);
+    opacity: 0;
+    animation: ep-banda 3.6s ease-in-out infinite;
+}
+@keyframes ep-plata {
+    0%   { transform: rotate(0); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes ep-onda {
+    0%   { transform: scale(.6); opacity: .8; }
+    70%  { transform: scale(1.25); opacity: .2; }
+    100% { transform: scale(1.3); opacity: 0; }
+}
+@keyframes ep-banda {
+    0%, 12%  { opacity: 0; transform: translateX(0); }
+    18%      { opacity: 1; transform: translateX(400%); }
+    62%      { opacity: 1; transform: translateX(3600%); }
+    66%,100% { opacity: 0; transform: translateX(3700%); }
+}
+
+/* ============ 53. TIEMPO BALA — el disparo lento ============ */
+.tema-tiempo {
+    background: radial-gradient(circle at 50% 55%, #050d18 0%, #020509 80%);
+}
+.tema-tiempo::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(180,230,255,.4) 0%, rgba(90,180,255,.24) 34%,
+                transparent 76%);
+}
+.tp-rastro {
+    position: absolute;
+    left: -10%;
+    right: -10%;
+    top: 44%;
+    height: 12%;
+    background: linear-gradient(90deg, transparent,
+                rgba(128,216,255,.55) 45%, rgba(255,255,255,.75) 62%,
+                transparent);
+    filter: blur(1.6vmin);
+    opacity: .5;
+    animation: tp-rastro 6s ease-in-out infinite;
+}
+.tp-bala {
+    position: absolute;
+    left: -12%;
+    top: 47%;
+    width: 7vmin;
+    height: 2vmin;
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(255,255,255,.15), #ffffff);
+    box-shadow: 0 0 3vmin rgba(255,255,255,.9);
+    animation: tp-bala 6s ease-in-out infinite;
+}
+.tp-foco {
+    position: absolute;
+    inset: 14% 10%;
+    border: 2px solid rgba(128,216,255,.45);
+    filter: blur(0px);
+    animation: tp-foco 6s ease-in-out infinite;
+}
+@keyframes tp-rastro {
+    0%, 100% { transform: translateX(-8%) scaleX(.8); opacity: .3; }
+    50%      { transform: translateX(8%) scaleX(1.1); opacity: .7; }
+}
+@keyframes tp-bala {
+    0%, 8%   { transform: translateX(0) scaleX(.7); opacity: 0; }
+    14%      { transform: translateX(160%) scaleX(1); opacity: 1; }
+    56%      { transform: translateX(1180%) scaleX(1.5); opacity: 1; }
+    62%,100% { transform: translateX(1560%) scaleX(1.9); opacity: 0; }
+}
+@keyframes tp-foco {
+    0%, 100% { filter: blur(0); opacity: .8; }
+    38%      { filter: blur(3px); opacity: .35; }
+    74%      { filter: blur(1px); opacity: .6; }
+}
+
+/* ============ 54. DODGE — se abren los caminos ============ */
+.tema-dodge {
+    background: radial-gradient(circle at 50% 55%, #5a2f12 0%, #0a0608 80%);
+}
+.tema-dodge::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,190,110,.4) 0%, rgba(255,90,60,.24) 36%,
+                transparent 76%);
+}
+.dg-estela {
+    position: absolute;
+    left: -22%;
+    right: -22%;
+    top: 40%;
+    height: 20%;
+    background: repeating-linear-gradient(90deg,
+                rgba(255,255,255,.5) 0 3%, transparent 3% 9%);
+    opacity: 0;
+    animation: dg-estela 3.2s ease-out infinite;
+}
+.dg-marca {
+    position: absolute;
+    left: -20%;
+    top: 47%;
+    width: 140%;
+    height: .9vmin;
+    background: linear-gradient(90deg, transparent, #ff5252 42%,
+                #ffffff 54%, transparent);
+    transform: rotate(-13deg);
+    opacity: .2;
+    animation: dg-marca 3.2s linear infinite;
+}
+.dg-resalto {
+    position: absolute;
+    left: 50%;
+    top: 54%;
+    width: 46vmin;
+    height: 46vmin;
+    margin: -23vmin 0 0 -23vmin;
+    background: radial-gradient(circle, rgba(255,255,255,.55),
+                transparent 62%);
+    opacity: 0;
+    animation: dg-resalto 3.2s ease-out infinite;
+}
+@keyframes dg-estela {
+    0%, 40%  { opacity: .45; transform: translateX(0); }
+    45%      { opacity: .9; transform: translateX(-7%); }
+    66%      { opacity: .9; transform: translateX(7%); }
+    72%,100% { opacity: .45; transform: translateX(0); }
+}
+@keyframes dg-marca {
+    0%, 38%  { opacity: .6; }
+    44%, 66% { opacity: 1; }
+    72%,100% { opacity: .6; }
+}
+@keyframes dg-resalto {
+    0%, 40%  { opacity: .35; transform: scale(.6); }
+    47%      { opacity: .9; transform: scale(1); }
+    66%,100% { opacity: .35; transform: scale(1.3); }
+}
+
+/* ============ 55. MUNDO — la construcción se ve ============ */
+.tema-mundo {
+    background: radial-gradient(circle at 50% 55%, #5c4712 0%, #0a0805 80%);
+}
+.tema-mundo::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,234,120,.36) 0%, rgba(255,180,60,.2) 36%,
+                transparent 76%);
+}
+.mo-rejilla {
+    position: absolute;
+    inset: -8%;
+    background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,.5) 0 1px,
+                                  transparent 1px 6%),
+        repeating-linear-gradient(180deg, rgba(255,255,255,.44) 0 1px,
+                                  transparent 1px 7%);
+    opacity: .6;
+    animation: mo-rejilla 4.6s ease-in-out infinite;
+}
+.mo-rojo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 54%;
+    height: 100%;
+    background: radial-gradient(ellipse at 78% 50%,
+                rgba(255,60,60,.45), transparent 70%);
+    opacity: 0;
+    animation: mo-rojo 4.6s ease-in-out infinite;
+}
+.mo-azul {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 54%;
+    height: 100%;
+    background: radial-gradient(ellipse at 22% 50%,
+                rgba(60,190,255,.42), transparent 70%);
+    opacity: 0;
+    animation: mo-azul 4.6s ease-in-out infinite;
+}
+@keyframes mo-rejilla {
+    0%, 100% { opacity: .6; transform: translateX(0); }
+    44%      { opacity: 1; transform: translateX(-1.5%); }
+    70%      { opacity: .85; transform: translateX(1.5%); }
+}
+@keyframes mo-rojo {
+    0%, 26%  { opacity: .35; transform: translateX(-6%); }
+    44%, 70% { opacity: 1; transform: translateX(0); }
+    86%,100% { opacity: .35; transform: translateX(-6%); }
+}
+@keyframes mo-azul {
+    0%, 26%  { opacity: .35; transform: translateX(6%); }
+    44%, 70% { opacity: 1; transform: translateX(0); }
+    86%,100% { opacity: .35; transform: translateX(6%); }
+}
+
+/* ============ 56. ORACLE — la cocina del Oráculo ============ */
+.tema-oracle {
+    background: radial-gradient(circle at 50% 58%, #1a1006 0%, #070403 80%);
+}
+.tema-oracle::after {
+    background: radial-gradient(circle at 50% 58%,
+                rgba(255,205,130,.44) 0%, rgba(230,140,60,.26) 36%,
+                transparent 76%);
+}
+.oc-luz {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 62%,
+                rgba(255,190,110,.5), transparent 66%);
+    opacity: .6;
+    animation: oc-luz 3.8s ease-in-out infinite;
+}
+.oc-humo {
+    position: absolute;
+    left: 50%;
+    bottom: 8%;
+    width: 48vmin;
+    height: 66vmin;
+    margin-left: -24vmin;
+    background: radial-gradient(ellipse at 50% 100%,
+                rgba(255,225,180,.34), transparent 62%);
+    filter: blur(3vmin);
+    opacity: .5;
+    animation: oc-humo 5s ease-out infinite;
+}
+.oc-migajas {
+    position: absolute;
+    left: 14%;
+    right: 14%;
+    top: -66%;
+    height: 166%;
+    background-image: radial-gradient(circle, #d7a86e 0 22%,
+                      rgba(215,168,110,0) 26%);
+    background-size: 9% 33%;
+    opacity: .8;
+    animation: oc-migajas 3.8s linear infinite;
+}
+@keyframes oc-luz {
+    0%, 100% { opacity: .35; }
+    50%      { opacity: .95; }
+}
+@keyframes oc-humo {
+    0%   { transform: translateY(6%) scale(.9); opacity: .3; }
+    60%  { transform: translateY(-8%) scale(1.1); opacity: .7; }
+    100% { transform: translateY(-14%) scale(1.18); opacity: 0; }
+}
+@keyframes oc-migajas {
+    0%   { transform: translateY(0); opacity: .85; }
+    100% { transform: translateY(33%); opacity: .85; }
+}
+
+/* ============ 57. DESCONEXION — se cae la señal ============ */
+.tema-desconexion {
+    background: radial-gradient(circle at 50% 55%, #0e4f46 0%, #030607 80%);
+}
+.tema-desconexion::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(140,160,155,.34) 0%, rgba(80,120,105,.2) 36%,
+                transparent 76%);
+}
+.ds-linea {
+    position: absolute;
+    left: -6%;
+    right: -6%;
+    top: 38%;
+    height: 9%;
+    background: #03070a;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.14);
+    opacity: 0;
+    animation: ds-linea 4.2s steps(1, end) infinite;
+}
+.ds-ruido {
+    position: absolute;
+    inset: -4%;
+    background-image: radial-gradient(circle, rgba(215,255,242,.75) 0 18%,
+                      rgba(215,255,242,0) 22%);
+    background-size: 4% 6%;
+    opacity: .5;
+    animation: ds-ruido 4.2s steps(1, end) infinite;
+}
+.ds-caida {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(120,135,130,.28),
+                rgba(60,70,66,.4) 55%, rgba(120,135,130,.2));
+    opacity: 0;
+    animation: ds-caida 4.2s steps(1, end) infinite;
+}
+@keyframes ds-linea {
+    0%, 58%  { opacity: 0; }
+    59%, 76% { opacity: 1; }
+    77%,100% { opacity: 0; }
+}
+@keyframes ds-ruido {
+    0%, 52%  { opacity: .5; transform: translateX(0); }
+    53%, 64% { opacity: .8; transform: translateX(-2%); }
+    65%, 76% { opacity: .6; transform: translateX(2%); }
+    77%,100% { opacity: .5; transform: translateX(0); }
+}
+@keyframes ds-caida {
+    0%, 58%  { opacity: 0; }
+    59%, 76% { opacity: 1; }
+    77%,100% { opacity: 0; }
+}
+
+/* ============ 58. CONEJO — síguelo ============ */
+.tema-conejo {
+    background: radial-gradient(circle at 50% 55%, #1a2b52 0%, #040507 80%);
+}
+.tema-conejo::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.4) 0%, rgba(180,205,235,.24) 34%,
+                transparent 76%);
+}
+.cj-ruta {
+    position: absolute;
+    left: 6%;
+    right: 6%;
+    top: 52%;
+    height: 1.2vmin;
+    background: repeating-linear-gradient(90deg,
+                rgba(255,255,255,.45) 0 2vmin, transparent 2vmin 5vmin);
+    opacity: .5;
+    animation: cj-ruta 4.4s ease-in-out infinite;
+}
+.cj-destello {
+    position: absolute;
+    left: 2%;
+    top: 44%;
+    width: 9vmin;
+    height: 9vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffffff 0 26%,
+                rgba(255,255,255,.55) 44%, transparent 72%);
+    filter: blur(.6vmin);
+    opacity: 0;
+    animation: cj-destello 4.4s ease-out infinite;
+}
+.cj-huellas {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    top: 30%;
+    height: 40%;
+    background-image: radial-gradient(circle, rgba(255,255,255,.7) 0 20%,
+                      rgba(255,255,255,0) 24%);
+    background-size: 14% 33%;
+    opacity: 0;
+    animation: cj-huellas 4.4s ease-out infinite;
+}
+@keyframes cj-ruta {
+    0%, 100% { opacity: .3; }
+    50%      { opacity: .75; }
+}
+@keyframes cj-destello {
+    0%, 10%  { opacity: 0; left: 2%; transform: translateY(0) scale(.6); }
+    16%      { opacity: 1; left: 8%; transform: translateY(-40%) scale(1); }
+    34%      { opacity: 1; left: 32%; transform: translateY(40%) scale(.9); }
+    52%      { opacity: 1; left: 56%; transform: translateY(-36%) scale(1.1); }
+    70%      { opacity: 1; left: 84%; transform: translateY(30%) scale(.85); }
+    76%,100% { opacity: 0; left: 94%; transform: translateY(0) scale(.6); }
+}
+@keyframes cj-huellas {
+    0%, 14%  { opacity: 0; }
+    30%, 66% { opacity: .6; }
+    76%,100% { opacity: 0; }
+}
+
+/* ============ 59. PODER — se abre el fogonazo ============ */
+.tema-poder {
+    background: radial-gradient(circle at 50% 62%, #04140c 0%, #010604 80%);
+}
+.tema-poder::after {
+    background: radial-gradient(circle at 50% 62%,
+                rgba(0,255,150,.44) 0%, rgba(0,210,120,.24) 36%,
+                transparent 76%);
+}
+.pw-hazo {
+    position: absolute;
+    left: 40%;
+    right: 40%;
+    bottom: -10%;
+    height: 120%;
+    background: linear-gradient(0deg, rgba(0,255,150,.55),
+                rgba(0,255,150,.1) 58%, transparent);
+    filter: blur(3vmin);
+    transform-origin: 50% 100%;
+    opacity: 0;
+    animation: pw-hazo 5s ease-out infinite;
+}
+.pw-anillo {
+    position: absolute;
+    left: 50%;
+    top: 56%;
+    width: 40vmin;
+    height: 40vmin;
+    margin: -20vmin 0 0 -20vmin;
+    border: 2px solid rgba(0,255,150,.75);
+    border-radius: 50%;
+    opacity: 0;
+    animation: pw-anillo 5s ease-out infinite;
+}
+.pw-motas {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: -30%;
+    height: 90%;
+    background-image: radial-gradient(circle, rgba(140,255,200,.85) 0 18%,
+                      rgba(140,255,200,0) 22%);
+    background-size: 11% 16%;
+    opacity: 0;
+    animation: pw-motas 5s ease-out infinite;
+}
+@keyframes pw-hazo {
+    0%, 14%  { opacity: 0; transform: scaleY(.35); }
+    46%      { opacity: .9; transform: scaleY(1); }
+    86%,100% { opacity: 0; transform: scaleY(1.2); }
+}
+@keyframes pw-anillo {
+    0%, 24%  { opacity: 0; transform: scale(.4); }
+    46%      { opacity: .9; transform: scale(1); }
+    78%,100% { opacity: 0; transform: scale(1.6); }
+}
+@keyframes pw-motas {
+    0%, 20%  { opacity: 0; transform: translateY(0); }
+    46%      { opacity: .8; transform: translateY(-14%); }
+    86%      { opacity: .3; transform: translateY(-40%); }
+    100%     { opacity: 0; transform: translateY(-52%); }
+}
+
+/* ============ 60. CENTINELA — barrido del sensor ============ */
+.tema-sentinela {
+    background: radial-gradient(circle at 50% 55%, #14060d 0%, #040309 80%);
+}
+.tema-sentinela::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,110,130,.4) 0%, rgba(255,23,68,.26) 34%,
+                transparent 76%);
+}
+.sn-ojo {
+    position: absolute;
+    right: 16%;
+    top: 20%;
+    width: 14vmin;
+    height: 14vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffffff 0 14%, #ff1744 36%,
+                rgba(255,23,68,.4) 60%, transparent 74%);
+    box-shadow: 0 0 8vmin rgba(255,23,68,.9);
+    opacity: .5;
+    animation: sn-ojo 2.6s steps(1, end) infinite;
+}
+.sn-barrido {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 3%;
+    background: linear-gradient(180deg, rgba(255,80,110,0),
+                rgba(255,80,110,.75), rgba(255,80,110,0));
+    animation: sn-barrido 2.6s linear infinite;
+}
+.sn-rejilla {
+    position: absolute;
+    inset: 10%;
+    background:
+        repeating-linear-gradient(90deg, rgba(255,120,140,.24) 0 1px,
+                                  transparent 1px 7%),
+        repeating-linear-gradient(180deg, rgba(255,120,140,.2) 0 1px,
+                                  transparent 1px 8%);
+    opacity: .35;
+    animation: sn-rejilla 2.6s steps(1, end) infinite;
+}
+@keyframes sn-ojo {
+    0%, 46%  { opacity: .45; transform: scale(.9); }
+    47%, 60% { opacity: 1; transform: scale(1.1); }
+    61%, 74% { opacity: .5; transform: scale(.95); }
+    75%, 88% { opacity: 1; transform: scale(1.25); }
+    89%,100% { opacity: .45; transform: scale(.9); }
+}
+@keyframes sn-barrido {
+    0%   { transform: translateY(0); opacity: 0; }
+    8%   { opacity: .9; }
+    92%  { opacity: .9; }
+    100% { transform: translateY(3200%); opacity: 0; }
+}
+@keyframes sn-rejilla {
+    0%, 46%  { opacity: .2; }
+    47%, 60% { opacity: .55; }
+    61%, 74% { opacity: .2; }
+    75%, 88% { opacity: .7; }
+    89%,100% { opacity: .2; }
+}
+
+/* ============ 61. FILO — la barra de filo ============ */
+.tema-filo {
+    background: radial-gradient(circle at 50% 55%, #2a4f74 0%, #05070a 78%);
+}
+.tema-filo::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(190, 230, 255, .42) 0%, rgba(90, 170, 255, .24) 36%,
+                transparent 76%);
+}
+.fl-filo {
+    position: absolute;
+    left: -22%;
+    right: -22%;
+    top: 43%;
+    height: 9%;
+    background: linear-gradient(90deg, #ef5350 0%, #ffb300 17%, #76ff03 34%,
+                #2979ff 51%, #f5f5f5 67%, rgba(245, 245, 245, 0) 86%);
+    transform: rotate(-7deg);
+    opacity: .5;
+    animation: fl-filo 4.4s ease-in-out infinite;
+}
+.fl-chispa {
+    position: absolute;
+    left: 58%;
+    top: 26%;
+    width: 18vmin;
+    height: 18vmin;
+    background: radial-gradient(circle, #ffffff 0%, #ffe082 32%,
+                rgba(255, 224, 130, 0) 68%);
+    opacity: 0;
+    animation: fl-chispa 4.4s ease-out infinite;
+}
+.fl-borde {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: 14%;
+    height: .5vmin;
+    background: linear-gradient(90deg, transparent, rgba(226, 240, 255, .9) 30%,
+                rgba(226, 240, 255, .9) 70%, transparent);
+    box-shadow: 0 0 3vmin rgba(160, 210, 255, .8);
+    opacity: .55;
+    animation: fl-borde 4.4s ease-in-out infinite;
+}
+@keyframes fl-filo {
+    0%, 14%  { transform: rotate(-7deg) translateX(0); opacity: .45; }
+    58%      { transform: rotate(-7deg) translateX(16%); opacity: 1; }
+    74%,100% { transform: rotate(-7deg) translateX(0); opacity: .45; }
+}
+@keyframes fl-chispa {
+    0%, 54%  { opacity: 0; transform: scale(.3); }
+    62%      { opacity: 1; transform: scale(.9); }
+    80%,100% { opacity: 0; transform: scale(2.1); }
+}
+@keyframes fl-borde {
+    0%, 100% { opacity: .4; transform: scaleX(.72); }
+    50%      { opacity: 1; transform: scaleX(1); }
+}
+
+/* ============ 62. EMBLEMA — el blasón del cazador ============ */
+.tema-emblema {
+    background: radial-gradient(circle at 50% 55%, #6b4a12 0%, #06050a 78%);
+}
+.tema-emblema::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255, 224, 130, .45) 0%, rgba(255, 160, 40, .26) 36%,
+                transparent 76%);
+}
+.em-marco {
+    position: absolute;
+    inset: 13% 17%;
+    border: .7vmin solid rgba(255, 213, 79, .9);
+    box-shadow: inset 0 0 7vmin rgba(255, 193, 7, .32),
+                0 0 6vmin rgba(255, 193, 7, .38);
+    clip-path: polygon(0 13%, 6% 0, 94% 0, 100% 13%,
+                       100% 87%, 94% 100%, 6% 100%, 0 87%);
+    opacity: .85;
+    animation: em-marco 5s ease-in-out infinite;
+}
+.em-laurel {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 52vmin;
+    height: 52vmin;
+    margin: -26vmin 0 0 -26vmin;
+    background: conic-gradient(from 0deg,
+                rgba(255, 213, 79, 0) 0 7%, rgba(255, 213, 79, .8) 9%,
+                rgba(255, 213, 79, 0) 13% 40%, rgba(255, 213, 79, .8) 42%,
+                rgba(255, 213, 79, 0) 46% 73%, rgba(255, 213, 79, .8) 75%,
+                rgba(255, 213, 79, 0) 79%);
+    border-radius: 50%;
+    opacity: .7;
+    animation: em-laurel 14s linear infinite;
+}
+.em-brillo {
+    position: absolute;
+    left: -32%;
+    top: 44%;
+    width: 55%;
+    height: 13%;
+    background: linear-gradient(90deg, transparent,
+                rgba(255, 255, 255, .9) 50%, transparent);
+    filter: blur(1.2vmin);
+    opacity: 0;
+    animation: em-brillo 5s ease-in-out infinite;
+}
+@keyframes em-marco {
+    0%, 100% { opacity: .6; }
+    50%      { opacity: 1; }
+}
+@keyframes em-laurel {
+    0%   { transform: rotate(0); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes em-brillo {
+    0%, 58%  { opacity: 0; transform: translateX(0); }
+    66%      { opacity: .95; transform: translateX(150%); }
+    84%,100% { opacity: 0; transform: translateX(340%); }
+}
+
+/* ============ 63. SALUD — la barra baja ============ */
+.tema-salud {
+    background: radial-gradient(circle at 50% 55%, #3f6b12 0%, #05070a 78%);
+}
+.tema-salud::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(165, 255, 120, .4) 0%, rgba(76, 175, 80, .26) 36%,
+                transparent 76%);
+}
+.sd-barra {
+    position: absolute;
+    left: 15%;
+    right: 15%;
+    top: 24%;
+    height: 8vmin;
+    background: rgba(3, 8, 5, .55);
+    border: .5vmin solid rgba(255, 255, 255, .4);
+    box-shadow: 0 0 4vmin rgba(120, 220, 130, .35);
+    overflow: hidden;
+}
+.sd-barra::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #e53935, #ff8f00 45%, #76ff03 100%);
+    transform-origin: 0 50%;
+    animation: sd-barra 5s ease-in-out infinite;
+}
+.sd-latido {
+    position: absolute;
+    left: 50%;
+    top: 64%;
+    width: 30vmin;
+    height: 30vmin;
+    margin: -15vmin 0 0 -15vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(239, 83, 80, .8) 0%,
+                rgba(239, 83, 80, 0) 66%);
+    opacity: .55;
+    animation: sd-latido 1.4s ease-in-out infinite;
+}
+.sd-gotas {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255, 82, 82, .95) 0 1.2vmin,
+                      rgba(255, 82, 82, 0) 1.7vmin);
+    background-size: 18% 30%;
+    opacity: .35;
+    animation: sd-gotas 6s linear infinite;
+}
+@keyframes sd-barra {
+    0%, 14%  { transform: scaleX(.88); }
+    52%, 64% { transform: scaleX(.15); }
+    90%,100% { transform: scaleX(.88); }
+}
+@keyframes sd-latido {
+    0%, 100% { transform: scale(.8); opacity: .35; }
+    30%      { transform: scale(1.15); opacity: .9; }
+    55%      { transform: scale(.9); opacity: .5; }
+}
+@keyframes sd-gotas {
+    0%   { background-position: 0 0; }
+    100% { background-position: 0 90%; }
+}
+
+/* ============ 64. RUGIDO — la bestia ruge ============ */
+.tema-rugido {
+    background: radial-gradient(circle at 50% 55%, #7a3410 0%, #06040a 78%);
+}
+.tema-rugido::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255, 176, 120, .44) 0%, rgba(255, 87, 34, .26) 36%,
+                transparent 76%);
+}
+.ru-onda {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 34vmin;
+    height: 34vmin;
+    margin: -17vmin 0 0 -17vmin;
+    border: .7vmin solid rgba(255, 214, 170, .85);
+    border-radius: 50%;
+    opacity: .7;
+    animation: ru-onda 3.6s ease-out infinite;
+}
+.ru-onda-2 { border-width: .4vmin; animation-delay: -1.8s; }
+.ru-polvo {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255, 206, 158, .85) 0 1vmin,
+                      rgba(255, 206, 158, 0) 1.5vmin);
+    background-size: 12% 20%;
+    opacity: .4;
+    animation: ru-polvo 4.6s ease-out infinite;
+}
+@keyframes ru-onda {
+    0%, 6%   { opacity: .9; transform: scale(.35); }
+    70%      { opacity: 0; transform: scale(2.4); }
+    100%     { opacity: 0; transform: scale(2.4); }
+}
+@keyframes ru-polvo {
+    0%   { opacity: .35; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-9%) scale(1.18); }
+}
+
+/* ============ 65. GARRAS — el zarpazo ============ */
+.tema-garras {
+    background: radial-gradient(circle at 50% 55%, #6b1f34 0%, #06040a 78%);
+}
+.tema-garras::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255, 150, 170, .42) 0%, rgba(239, 83, 80, .26) 36%,
+                transparent 76%);
+}
+.ga-tajos {
+    position: absolute;
+    left: -30%;
+    right: -30%;
+    top: -10%;
+    bottom: -10%;
+    background: repeating-linear-gradient(114deg,
+                rgba(255, 255, 255, 0) 0 5vmin,
+                rgba(255, 232, 236, .85) 5vmin 6.4vmin,
+                rgba(255, 255, 255, 0) 6.4vmin 17vmin);
+    opacity: .35;
+    animation: ga-tajos 3.8s ease-out infinite;
+}
+.ga-golpe {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 40vmin;
+    height: 40vmin;
+    margin: -20vmin 0 0 -20vmin;
+    background: radial-gradient(circle, rgba(255, 255, 255, .95) 0%,
+                rgba(255, 112, 67, .55) 38%, rgba(255, 112, 67, 0) 72%);
+    opacity: 0;
+    animation: ga-golpe 3.8s ease-out infinite;
+}
+.ga-humo {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255, 171, 145, .8) 0 1vmin,
+                      rgba(255, 171, 145, 0) 1.6vmin);
+    background-size: 14% 24%;
+    opacity: .3;
+    animation: ga-humo 5.2s ease-out infinite;
+}
+@keyframes ga-tajos {
+    0%, 18%  { opacity: .3; transform: translateX(0); }
+    26%      { opacity: .95; transform: translateX(6%); }
+    56%      { opacity: .6; transform: translateX(14%); }
+    68%,100% { opacity: .3; transform: translateX(20%); }
+}
+@keyframes ga-golpe {
+    0%, 20%  { opacity: 0; transform: scale(.4); }
+    28%      { opacity: 1; transform: scale(.95); }
+    56%,100% { opacity: 0; transform: scale(2.1); }
+}
+@keyframes ga-humo {
+    0%   { opacity: .3; transform: translateY(0) scale(1); }
+    100% { opacity: .05; transform: translateY(-10%) scale(1.2); }
+}
+
+/* ============ 66. ESCAMAS — la coraza ============ */
+.tema-escamas {
+    background: radial-gradient(circle at 50% 55%, #0f5a4a 0%, #05070a 78%);
+}
+.tema-escamas::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(140, 255, 220, .4) 0%, rgba(0, 200, 160, .24) 36%,
+                transparent 76%);
+}
+.sc-malla {
+    position: absolute;
+    inset: -10%;
+    background:
+        repeating-linear-gradient(58deg,
+            rgba(190, 255, 235, .3) 0 1.6vmin, transparent 1.6vmin 7vmin),
+        repeating-linear-gradient(-58deg,
+            rgba(190, 255, 235, .22) 0 1.6vmin, transparent 1.6vmin 7vmin);
+    opacity: .7;
+    animation: sc-malla 9s linear infinite;
+}
+.sc-brillo {
+    position: absolute;
+    left: -35%;
+    top: 42%;
+    width: 45%;
+    height: 16%;
+    background: linear-gradient(90deg, transparent,
+                rgba(255, 255, 255, .95) 50%, transparent);
+    filter: blur(1.6vmin);
+    opacity: .5;
+    animation: sc-brillo 4.6s ease-in-out infinite;
+}
+.sc-borde {
+    position: absolute;
+    inset: 8% 6%;
+    border: .4vmin solid rgba(140, 255, 220, .5);
+    box-shadow: inset 0 0 6vmin rgba(0, 230, 180, .3),
+                0 0 5vmin rgba(0, 230, 180, .3);
+    opacity: .8;
+    animation: sc-borde 4.6s ease-in-out infinite;
+}
+@keyframes sc-malla {
+    0%   { background-position: 0 0, 0 0; }
+    100% { background-position: 7vmin 4vmin, -7vmin -4vmin; }
+}
+@keyframes sc-brillo {
+    0%, 56%  { opacity: .35; transform: translateX(0); }
+    68%      { opacity: 1; transform: translateX(180%); }
+    88%,100% { opacity: .35; transform: translateX(360%); }
+}
+@keyframes sc-borde {
+    0%, 100% { opacity: .5; }
+    50%      { opacity: 1; }
+}
+
+/* ============ 67. VENENO — la nube ============ */
+.tema-veneno {
+    background: radial-gradient(circle at 50% 55%, #4f1270 0%, #05040a 78%);
+}
+.tema-veneno::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(216, 160, 255, .44) 0%, rgba(156, 39, 176, .26) 36%,
+                transparent 76%);
+}
+.vn-burbujas {
+    position: absolute;
+    inset: -8%;
+    background-image:
+        radial-gradient(circle, rgba(230, 190, 255, .95) 0 1.4vmin,
+                        rgba(230, 190, 255, 0) 2.1vmin),
+        radial-gradient(circle, rgba(206, 147, 216, .85) 0 1vmin,
+                        rgba(206, 147, 216, 0) 1.6vmin);
+    background-size: 14% 22%, 22% 34%;
+    opacity: .5;
+    animation: vn-burbujas 6s linear infinite;
+}
+.vn-nube {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 62%,
+                rgba(186, 104, 200, .55) 0%, rgba(120, 40, 150, .3) 44%,
+                rgba(120, 40, 150, 0) 74%);
+    filter: blur(2vmin);
+    opacity: .7;
+    animation: vn-nube 5.4s ease-in-out infinite;
+}
+.vn-gota {
+    position: absolute;
+    left: 26%;
+    top: 30%;
+    width: 3vmin;
+    height: 4.4vmin;
+    border-radius: 999px 999px 60% 60%;
+    background: linear-gradient(180deg, #e1bee7, #8e24aa);
+    box-shadow: 0 0 3vmin rgba(206, 147, 216, .8);
+    opacity: .8;
+    animation: vn-gota 3.4s ease-in infinite;
+}
+@keyframes vn-burbujas {
+    0%   { background-position: 0 0, 0 0; }
+    100% { background-position: 0 -22%, 0 -34%; }
+}
+@keyframes vn-nube {
+    0%, 100% { opacity: .5; transform: scale(1); }
+    50%      { opacity: .95; transform: scale(1.1); }
+}
+@keyframes vn-gota {
+    0%, 46%  { opacity: .8; transform: translateY(0) scaleY(.8); }
+    74%      { opacity: 1; transform: translateY(46%) scaleY(1.25); }
+    78%,100% { opacity: 0; transform: translateY(52%) scaleY(.5); }
+}
+
+/* ============ 68. PARALISIS — el calambre ============ */
+.tema-paralisis {
+    background: radial-gradient(circle at 50% 55%, #7a6a10 0%, #06060a 78%);
+}
+.tema-paralisis::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255, 249, 196, .42) 0%, rgba(255, 193, 7, .26) 36%,
+                transparent 76%);
+}
+.pa-chispa {
+    position: absolute;
+    left: -10%;
+    right: -10%;
+    top: 34%;
+    height: 32%;
+    background: linear-gradient(180deg, #fffde7, #ffca28);
+    clip-path: polygon(0 46%, 8% 26%, 16% 54%, 24% 30%, 32% 56%, 40% 28%,
+                       48% 54%, 56% 30%, 64% 56%, 72% 28%, 80% 54%,
+                       88% 30%, 100% 48%, 100% 56%, 88% 42%, 80% 64%,
+                       72% 40%, 64% 66%, 56% 42%, 48% 64%, 40% 40%,
+                       32% 66%, 24% 42%, 16% 64%, 8% 40%, 0 56%);
+    opacity: .55;
+    animation: pa-chispa 1.8s steps(1, end) infinite;
+}
+.pa-destello {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 46vmin;
+    height: 46vmin;
+    margin: -23vmin 0 0 -23vmin;
+    background: radial-gradient(circle, rgba(255, 253, 231, .9) 0%,
+                rgba(255, 193, 7, .5) 34%, rgba(255, 193, 7, 0) 70%);
+    opacity: 0;
+    animation: pa-destello 1.8s steps(1, end) infinite;
+}
+.pa-rejilla {
+    position: absolute;
+    inset: -6%;
+    background:
+        repeating-linear-gradient(90deg, rgba(255, 245, 157, .32) 0 1px,
+                                  transparent 1px 5%),
+        repeating-linear-gradient(180deg, rgba(255, 245, 157, .22) 0 1px,
+                                  transparent 1px 6%);
+    opacity: .5;
+    animation: pa-rejilla 1.8s steps(1, end) infinite;
+}
+@keyframes pa-chispa {
+    0%, 44%  { opacity: .45; transform: translateX(0); }
+    48%, 66% { opacity: 1; transform: translateX(3%); }
+    70%, 78% { opacity: .2; transform: translateX(-3%); }
+    82%,100% { opacity: .45; transform: translateX(0); }
+}
+@keyframes pa-destello {
+    0%, 46%  { opacity: 0; transform: scale(.7); }
+    50%, 62% { opacity: 1; transform: scale(1); }
+    66%,100% { opacity: 0; transform: scale(1.3); }
+}
+@keyframes pa-rejilla {
+    0%, 44%  { opacity: .35; }
+    48%, 66% { opacity: .85; }
+    70%,100% { opacity: .35; }
+}
+
+/* ============ 69. FAUCES — la mordida ============ */
+.tema-fauces {
+    background: radial-gradient(circle at 50% 55%, #5f1a14 0%, #06040a 78%);
+}
+.tema-fauces::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255, 170, 150, .42) 0%, rgba(239, 63, 46, .26) 36%,
+                transparent 76%);
+}
+.fc-fauces {
+    position: absolute;
+    left: -4%;
+    right: -4%;
+    top: 16%;
+    bottom: 16%;
+    background: linear-gradient(180deg, #eceff1 0%, #b0bec5 14%,
+                rgba(176, 190, 197, 0) 16% 84%, #b0bec5 86%, #eceff1 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 14%, 96% 0, 92% 14%, 88% 0,
+                       84% 14%, 80% 0, 76% 14%, 72% 0, 68% 14%, 64% 0,
+                       60% 14%, 56% 0, 52% 14%, 48% 0, 44% 14%, 40% 0,
+                       36% 14%, 32% 0, 28% 14%, 24% 0, 20% 14%, 16% 0,
+                       12% 14%, 8% 0, 4% 14%, 0 0);
+    opacity: .75;
+    animation: fc-fauces 3.4s ease-in-out infinite;
+}
+.fc-osamenta {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 56vmin;
+    height: 56vmin;
+    margin: -28vmin 0 0 -28vmin;
+    border: .5vmin solid rgba(255, 210, 190, .45);
+    border-radius: 46% 46% 40% 40%;
+    box-shadow: inset 0 0 8vmin rgba(120, 20, 10, .5);
+    opacity: .7;
+    animation: fc-osamenta 3.4s ease-in-out infinite;
+}
+.fc-golpe {
+    position: absolute;
+    left: 50%;
+    top: 48%;
+    width: 34vmin;
+    height: 34vmin;
+    margin: -17vmin 0 0 -17vmin;
+    background: radial-gradient(circle, rgba(255, 255, 255, .9) 0%,
+                rgba(255, 87, 57, .5) 36%, rgba(255, 87, 57, 0) 72%);
+    opacity: 0;
+    animation: fc-golpe 3.4s ease-out infinite;
+}
+@keyframes fc-fauces {
+    0%, 44%  { transform: translateY(0); }
+    52%, 66% { transform: translateY(6%); }
+    84%,100% { transform: translateY(0); }
+}
+@keyframes fc-osamenta {
+    0%, 44%  { transform: scale(1); opacity: .6; }
+    52%, 66% { transform: scale(.9); opacity: .95; }
+    84%,100% { transform: scale(1); opacity: .6; }
+}
+@keyframes fc-golpe {
+    0%, 46%  { opacity: 0; transform: scale(.5); }
+    54%      { opacity: 1; transform: scale(1); }
+    74%,100% { opacity: 0; transform: scale(1.9); }
+}
+
+/* ============ 70. BARRO — el fango ============ */
+.tema-barro {
+    background: radial-gradient(circle at 50% 55%, #6b4a1f 0%, #0a0703 78%);
+}
+.tema-barro::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255, 214, 150, .44) 0%, rgba(190, 120, 40, .26) 36%,
+                transparent 76%);
+}
+.bo-charco {
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    bottom: 8%;
+    height: 26%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at 50% 40%, #7a4f1c 0%,
+                #4a2d0e 52%, rgba(30, 18, 6, .2) 84%);
+    box-shadow: 0 0 8vmin rgba(190, 130, 60, .45);
+    opacity: .85;
+    animation: bo-charco 5s ease-in-out infinite;
+}
+.bo-copos {
+    position: absolute;
+    inset: -6%;
+    background-image:
+        radial-gradient(circle, rgba(210, 161, 92, .95) 0 1.2vmin,
+                rgba(210, 161, 92, 0) 1.9vmin),
+        radial-gradient(circle, rgba(160, 110, 50, .9) 0 .9vmin,
+                rgba(160, 110, 50, 0) 1.5vmin);
+    background-size: 17% 26%, 26% 34%;
+    opacity: .55;
+    animation: bo-copos 6s linear infinite;
+}
+.bo-humedad {
+    position: absolute;
+    left: -30%;
+    top: 44%;
+    width: 46%;
+    height: 14%;
+    background: linear-gradient(90deg, transparent,
+                rgba(255, 236, 200, .9) 50%, transparent);
+    filter: blur(1.4vmin);
+    opacity: .55;
+    animation: bo-humedad 5s ease-in-out infinite;
+}
+@keyframes bo-charco {
+    0%, 100% { transform: scale(1); opacity: .7; }
+    50%      { transform: scale(1.05); opacity: 1; }
+}
+@keyframes bo-copos {
+    0%   { background-position: 0 0, 0 0; opacity: .5; }
+    100% { background-position: 0 -26%, 0 -34%; opacity: .55; }
+}
+@keyframes bo-humedad {
+    0%, 44%  { opacity: .4; transform: translateX(0); }
+    56%      { opacity: .95; transform: translateX(150%); }
+    80%,100% { opacity: .4; transform: translateX(330%); }
+}
+
+/* ============ 71. WIREBUG — la seda ============ */
+.tema-wirebug {
+    background: radial-gradient(circle at 50% 55%, #1e5f9e 0%, #04090f 78%);
+}
+.tema-wirebug::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(150, 240, 255, .45) 0%, rgba(0, 180, 220, .26) 36%,
+                transparent 76%);
+}
+.wb-hilo {
+    position: absolute;
+    left: -12%;
+    right: -12%;
+    top: 48%;
+    height: .6vmin;
+    background: linear-gradient(90deg, rgba(224, 247, 250, 0),
+                #e0f7fa 25%, #80deea 60%, rgba(224, 247, 250, 0));
+    box-shadow: 0 0 3vmin rgba(0, 229, 255, .9);
+    transform: rotate(-8deg);
+    opacity: .85;
+    animation: wb-hilo 4.4s ease-in-out infinite;
+}
+.wb-luz {
+    position: absolute;
+    left: -8%;
+    top: 32%;
+    width: 16vmin;
+    height: 16vmin;
+    background: radial-gradient(circle, #ffffff 0 12%, #84ffff 34%,
+                rgba(0, 229, 255, .45) 56%, rgba(0, 229, 255, 0) 74%);
+    box-shadow: 0 0 10vmin rgba(0, 229, 255, .8);
+    opacity: .85;
+    animation: wb-luz 4.4s ease-in-out infinite;
+}
+.wb-malla {
+    position: absolute;
+    inset: -12%;
+    background:
+        repeating-linear-gradient(56deg, rgba(190, 245, 255, .32) 0 1.4vmin,
+                                  transparent 1.4vmin 8vmin),
+        repeating-linear-gradient(-56deg, rgba(190, 245, 255, .24) 0 1.4vmin,
+                                  transparent 1.4vmin 8vmin);
+    opacity: .65;
+    animation: wb-malla 9s linear infinite;
+}
+@keyframes wb-hilo {
+    0%, 100% { transform: rotate(-8deg) translateY(0); opacity: .6; }
+    50%      { transform: rotate(-6deg) translateY(-3%); opacity: 1; }
+}
+@keyframes wb-luz {
+    0%   { transform: translate(0, 0); opacity: .55; }
+    30%  { transform: translate(40vw, -8vh); opacity: 1; }
+    60%  { transform: translate(75vw, 6vh); opacity: .9; }
+    100% { transform: translate(0, 0); opacity: .55; }
+}
+@keyframes wb-malla {
+    0%   { background-position: 0 0, 0 0; }
+    100% { background-position: 8vmin -5vmin, -8vmin 5vmin; }
+}
+
+/* ============ 72. PALICO — el compañero ============ */
+.tema-palico {
+    background: radial-gradient(circle at 50% 55%, #a8631a 0%, #0a0602 78%);
+}
+.tema-palico::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255, 224, 160, .46) 0%, rgba(255, 140, 40, .26) 36%,
+                transparent 76%);
+}
+.pc-manos {
+    position: absolute;
+    inset: -8%;
+    background-image:
+        radial-gradient(ellipse at 50% 74%, rgba(255, 240, 220, .9) 0 2.4vmin,
+                rgba(255, 240, 220, 0) 3.2vmin),
+        radial-gradient(circle at 26% 34%, rgba(255, 240, 220, .85) 0 1.2vmin,
+                rgba(255, 240, 220, 0) 1.8vmin),
+        radial-gradient(circle at 50% 22%, rgba(255, 240, 220, .85) 0 1.2vmin,
+                rgba(255, 240, 220, 0) 1.8vmin),
+        radial-gradient(circle at 74% 34%, rgba(255, 240, 220, .85) 0 1.2vmin,
+                rgba(255, 240, 220, 0) 1.8vmin);
+    background-size: 22% 26%;
+    opacity: .55;
+    animation: pc-manos 7s linear infinite;
+}
+.pc-garras {
+    position: absolute;
+    left: -20%;
+    right: -20%;
+    top: -12%;
+    bottom: -12%;
+    background: repeating-linear-gradient(112deg,
+                rgba(255, 255, 255, 0) 0 6vmin,
+                rgba(255, 236, 210, .8) 6vmin 7.4vmin,
+                rgba(255, 255, 255, 0) 7.4vmin 20vmin);
+    opacity: .5;
+    animation: pc-garras 4.6s ease-out infinite;
+}
+.pc-cascabel {
+    position: absolute;
+    left: 66%;
+    top: 64%;
+    width: 14vmin;
+    height: 14vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffffff 0 16%, #ffd54f 40%,
+                rgba(255, 193, 7, .5) 64%, rgba(255, 193, 7, 0) 80%);
+    box-shadow: 0 0 8vmin rgba(255, 193, 7, .7);
+    opacity: .85;
+    animation: pc-cascabel 2.6s ease-in-out infinite;
+}
+@keyframes pc-manos {
+    0%   { background-position: 0 0, 0 0, 0 0, 0 0; opacity: .5; }
+    100% { background-position: 0 -26%, 0 -26%, 0 -26%, 0 -26%; opacity: .6; }
+}
+@keyframes pc-garras {
+    0%, 30%  { opacity: .4; transform: translateX(0); }
+    44%      { opacity: .95; transform: translateX(5%); }
+    70%      { opacity: .55; transform: translateX(12%); }
+    86%,100% { opacity: .4; transform: translateX(18%); }
+}
+@keyframes pc-cascabel {
+    0%, 100% { transform: translateY(0) scale(.9); opacity: .6; }
+    30%      { transform: translateY(-14%) scale(1.1); opacity: 1; }
+    60%      { transform: translateY(4%) scale(.95); opacity: .7; }
+}
+
+/* ============ 73. FORJA — el yunque ============ */
+.tema-forja {
+    background: radial-gradient(circle at 50% 55%, #a33a06 0%, #0a0402 78%);
+}
+.tema-forja::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255, 200, 130, .46) 0%, rgba(255, 87, 34, .28) 36%,
+                transparent 76%);
+}
+.fj-brasa {
+    position: absolute;
+    left: -12%;
+    right: -12%;
+    bottom: -18%;
+    height: 55%;
+    background: radial-gradient(ellipse at 50% 100%,
+                rgba(255, 111, 0, .9) 0%, rgba(191, 54, 12, .6) 40%,
+                rgba(120, 20, 4, 0) 78%);
+    filter: blur(2vmin);
+    opacity: .85;
+    animation: fj-brasa 3.4s ease-in-out infinite;
+}
+.fj-chispas {
+    position: absolute;
+    inset: -6%;
+    background-image:
+        radial-gradient(circle, rgba(255, 235, 180, .95) 0 1.2vmin,
+                rgba(255, 152, 0, 0) 1.9vmin),
+        radial-gradient(circle, rgba(255, 213, 79, .9) 0 .9vmin,
+                rgba(255, 87, 38, 0) 1.5vmin);
+    background-size: 15% 22%, 23% 30%;
+    opacity: .7;
+    animation: fj-chispas 4.6s linear infinite;
+}
+.fj-golpe {
+    position: absolute;
+    left: 50%;
+    top: 44%;
+    width: 52vmin;
+    height: 52vmin;
+    margin: -26vmin 0 0 -26vmin;
+    background: radial-gradient(circle, rgba(255, 255, 255, .95) 0%,
+                rgba(255, 193, 7, .5) 32%, rgba(255, 87, 34, 0) 70%);
+    opacity: .7;
+    animation: fj-golpe 3.4s ease-out infinite;
+}
+@keyframes fj-brasa {
+    0%, 100% { opacity: .7; transform: scale(1); }
+    50%      { opacity: 1; transform: scale(1.08); }
+}
+@keyframes fj-chispas {
+    0%   { background-position: 0 0, 0 0; opacity: .6; }
+    100% { background-position: 0 -22%, 0 -30%; opacity: .8; }
+}
+@keyframes fj-golpe {
+    0%, 46%  { opacity: .6; transform: scale(.9); }
+    54%      { opacity: 1; transform: scale(1); }
+    78%,100% { opacity: .6; transform: scale(.9); }
+}
+
+/* ============ 74. CAZA — señalizar ============ */
+.tema-caza {
+    background: radial-gradient(circle at 50% 55%, #1f6b4a 0%, #030805 78%);
+}
+.tema-caza::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(150, 255, 205, .44) 0%, rgba(0, 200, 100, .26) 36%,
+                transparent 76%);
+}
+.cz-reticula {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 46vmin;
+    height: 46vmin;
+    margin: -23vmin 0 0 -23vmin;
+    border: .7vmin solid rgba(165, 255, 200, .9);
+    border-right-color: rgba(105, 240, 174, .3);
+    border-radius: 50%;
+    box-shadow: inset 0 0 8vmin rgba(0, 200, 83, .35),
+                0 0 7vmin rgba(0, 200, 83, .45);
+    opacity: .85;
+    animation: cz-reticula 6s linear infinite;
+}
+.cz-barrido {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 30%;
+    height: 16%;
+    background: linear-gradient(90deg, rgba(150, 255, 205, 0),
+                rgba(224, 255, 240, .85) 50%, rgba(150, 255, 205, 0));
+    filter: blur(1vmin);
+    opacity: .75;
+    animation: cz-barrido 4s ease-in-out infinite;
+}
+.cz-marcas {
+    position: absolute;
+    inset: 8%;
+    background:
+        repeating-linear-gradient(90deg, rgba(165, 255, 200, .3) 0 2px,
+                                  transparent 2px 6%),
+        repeating-linear-gradient(180deg, rgba(165, 255, 200, .24) 0 2px,
+                                  transparent 2px 7%);
+    opacity: .55;
+    animation: cz-marcas 4s steps(1, end) infinite;
+}
+@keyframes cz-reticula {
+    0%   { transform: rotate(0) scale(.94); opacity: .65; }
+    50%  { transform: rotate(180deg) scale(1.06); opacity: 1; }
+    100% { transform: rotate(360deg) scale(.94); opacity: .65; }
+}
+@keyframes cz-barrido {
+    0%, 100% { transform: translateX(-42%) skewX(-14deg); opacity: .55; }
+    50%      { transform: translateX(42%) skewX(-14deg); opacity: 1; }
+}
+@keyframes cz-marcas {
+    0%, 44%  { opacity: .4; }
+    48%, 66% { opacity: .85; }
+    70%,100% { opacity: .4; }
+}
+
+/* ============ 75. SIGILO — a la sombra ============ */
+.tema-sigilo {
+    background: radial-gradient(circle at 50% 55%, #2c3a6b 0%, #04050a 78%);
+}
+.tema-sigilo::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(180, 205, 255, .42) 0%, rgba(70, 100, 190, .26) 36%,
+                transparent 76%);
+}
+.sg-sombra {
+    position: absolute;
+    inset: -20% -60%;
+    background: linear-gradient(104deg, rgba(4, 5, 10, 0) 0 40%,
+                rgba(4, 5, 10, .88) 50%, rgba(4, 5, 10, 0) 60%);
+    opacity: .85;
+    animation: sg-sombra 5s ease-in-out infinite;
+}
+.sg-ojo {
+    position: absolute;
+    left: 12%;
+    right: 12%;
+    top: 24%;
+    height: 9%;
+    background: radial-gradient(ellipse at 50% 50%,
+                #ffffff 0 6%, #b3e5fc 24%, rgba(3, 169, 244, .7) 52%,
+                rgba(3, 169, 244, 0) 78%);
+    border-radius: 50%;
+    box-shadow: 0 0 8vmin rgba(3, 169, 244, .6);
+    opacity: .8;
+    animation: sg-ojo 5s ease-in-out infinite;
+}
+.sg-rejilla {
+    position: absolute;
+    inset: 6%;
+    background:
+        repeating-linear-gradient(90deg, rgba(150, 175, 235, .28) 0 2px,
+                                  transparent 2px 5%),
+        repeating-linear-gradient(180deg, rgba(150, 175, 235, .22) 0 2px,
+                                  transparent 2px 6%);
+    opacity: .5;
+    animation: sg-rejilla 5s steps(1, end) infinite;
+}
+@keyframes sg-sombra {
+    0%   { transform: translateX(-46%); opacity: .55; }
+    50%  { transform: translateX(46%); opacity: .95; }
+    100% { transform: translateX(-46%); opacity: .55; }
+}
+@keyframes sg-ojo {
+    0%, 100% { opacity: .4; transform: scaleY(.35); }
+    40%      { opacity: 1; transform: scaleY(1.1); }
+    64%      { opacity: .55; transform: scaleY(.5); }
+}
+@keyframes sg-rejilla {
+    0%, 44%  { opacity: .35; }
+    48%, 66% { opacity: .8; }
+    70%,100% { opacity: .35; }
+}
+
+/* ============ 76. SUEÑO — se duermen ============ */
+.tema-sueno {
+    background: radial-gradient(circle at 50% 55%, #452a86 0%, #05040c 78%);
+}
+.tema-sueno::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(200, 180, 255, .44) 0%, rgba(120, 80, 220, .26) 36%,
+                transparent 76%);
+}
+.so-zetas {
+    position: absolute;
+    inset: -8%;
+    background-image:
+        radial-gradient(circle, rgba(209, 196, 233, .95) 0 1.4vmin,
+                rgba(209, 196, 233, 0) 2.1vmin),
+        radial-gradient(circle, rgba(179, 157, 221, .85) 0 1vmin,
+                rgba(179, 157, 221, 0) 1.6vmin);
+    background-size: 18% 26%, 27% 34%;
+    opacity: .55;
+    animation: so-zetas 6s linear infinite;
+}
+.so-nube {
+    position: absolute;
+    left: -10%;
+    right: -10%;
+    bottom: -14%;
+    height: 46%;
+    background: radial-gradient(ellipse at 50% 70%,
+                rgba(140, 100, 230, .7) 0%, rgba(90, 60, 180, .42) 46%,
+                rgba(60, 40, 130, 0) 78%);
+    filter: blur(2vmin);
+    opacity: .75;
+    animation: so-nube 6s ease-in-out infinite;
+}
+.so-luna {
+    position: absolute;
+    right: 13%;
+    top: 13%;
+    width: 16vmin;
+    height: 16vmin;
+    border-radius: 50%;
+    background: #fff3b0;
+    box-shadow: inset -5vmin -1.4vmin 0 #07050f,
+                0 0 9vmin rgba(255, 243, 176, .6);
+    opacity: .85;
+    animation: so-luna 6s ease-in-out infinite;
+}
+@keyframes so-zetas {
+    0%   { background-position: 0 0, 0 0; opacity: .5; }
+    100% { background-position: 0 -26%, 0 -34%; opacity: .58; }
+}
+@keyframes so-nube {
+    0%, 100% { opacity: .6; transform: scale(1) translateY(0); }
+    50%      { opacity: .95; transform: scale(1.12) translateY(-4%); }
+}
+@keyframes so-luna {
+    0%, 100% { opacity: .7; transform: rotate(0); }
+    50%      { opacity: 1; transform: rotate(-8deg); }
+}
+
+/* ============ 77. EMBESTIDA — el embate ============ */
+.tema-embestida {
+    background: radial-gradient(circle at 50% 55%, #8a1f1f 0%, #0a0304 78%);
+}
+.tema-embestida::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255, 170, 150, .44) 0%, rgba(230, 50, 40, .26) 36%,
+                transparent 76%);
+}
+.eb-estelas {
+    position: absolute;
+    left: -30%;
+    right: -30%;
+    top: 30%;
+    height: 40%;
+    background: repeating-linear-gradient(90deg,
+                rgba(255, 235, 230, 0) 0 4vmin,
+                rgba(255, 235, 230, .75) 4vmin 5.4vmin,
+                rgba(255, 235, 230, 0) 5.4vmin 16vmin);
+    transform: skewX(-16deg);
+    opacity: .75;
+    animation: eb-estelas 2.8s ease-out infinite;
+}
+.eb-impacto {
+    position: absolute;
+    left: 58%;
+    top: 46%;
+    width: 44vmin;
+    height: 44vmin;
+    margin: -22vmin 0 0 -22vmin;
+    background: radial-gradient(circle, rgba(255, 255, 255, .95) 0%,
+                rgba(255, 112, 96, .55) 34%, rgba(198, 40, 40, 0) 72%);
+    opacity: .7;
+    animation: eb-impacto 2.8s ease-out infinite;
+}
+.eb-rastro {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(120, 10, 10, .6) 0%,
+                rgba(120, 10, 10, 0) 34%,
+                rgba(120, 10, 10, 0) 66%, rgba(120, 10, 10, .6) 100%);
+    opacity: .75;
+    animation: eb-rastro 2.8s ease-in-out infinite;
+}
+@keyframes eb-estelas {
+    0%, 26%  { transform: translateX(0) skewX(-16deg); opacity: .6; }
+    58%      { transform: translateX(16%) skewX(-16deg); opacity: 1; }
+    76%,100% { transform: translateX(0) skewX(-16deg); opacity: .6; }
+}
+@keyframes eb-impacto {
+    0%, 46%  { opacity: .6; transform: scale(.8); }
+    56%      { opacity: 1; transform: scale(1.05); }
+    78%,100% { opacity: .6; transform: scale(.8); }
+}
+@keyframes eb-rastro {
+    0%, 100% { opacity: .6; }
+    50%      { opacity: .95; }
+}
+
+/* ============ 78. BESTIA — la bestia despierta ============ */
+.tema-bestia {
+    background: radial-gradient(circle at 50% 55%, #6b1230 0%, #0a0306 78%);
+}
+.tema-bestia::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255, 150, 160, .44) 0%, rgba(220, 40, 70, .26) 36%,
+                transparent 76%);
+}
+.bs-ojo {
+    position: absolute;
+    right: 15%;
+    top: 21%;
+    width: 20vmin;
+    height: 11vmin;
+    background: radial-gradient(ellipse at 50% 50%,
+                #ffffff 0 8%, #ff5252 30%, rgba(255, 23, 68, .8) 56%,
+                rgba(255, 23, 68, 0) 78%);
+    border-radius: 50%;
+    box-shadow: 0 0 10vmin rgba(255, 23, 68, .8);
+    opacity: .85;
+    animation: bs-ojo 4.4s ease-in-out infinite;
+}
+.bs-piel {
+    position: absolute;
+    inset: -8%;
+    background:
+        repeating-linear-gradient(78deg, rgba(0, 0, 0, .45) 0 2px,
+                                  transparent 2px 8px),
+        repeating-linear-gradient(-78deg, rgba(255, 170, 175, .32) 0 2px,
+                                  transparent 2px 8px);
+    opacity: .6;
+    animation: bs-piel 9s linear infinite;
+}
+.bs-polvillo {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle, rgba(255, 190, 195, .9) 0 1.1vmin,
+                rgba(255, 120, 130, 0) 1.8vmin),
+        radial-gradient(circle, rgba(200, 60, 80, .85) 0 .9vmin,
+                rgba(200, 60, 80, 0) 1.5vmin);
+    background-size: 16% 24%, 25% 32%;
+    opacity: .55;
+    animation: bs-polvillo 7s linear infinite;
+}
+@keyframes bs-ojo {
+    0%, 100% { opacity: .55; transform: scaleY(.45); }
+    26%      { opacity: 1; transform: scaleY(1); }
+    48%      { opacity: .95; transform: scaleY(1.08); }
+    64%      { opacity: .6; transform: scaleY(.6); }
+}
+@keyframes bs-piel {
+    0%   { background-position: 0 0, 0 0; }
+    100% { background-position: 8px -4px, -8px 4px; }
+}
+@keyframes bs-polvillo {
+    0%   { background-position: 0 0, 0 0; opacity: .5; }
+    100% { background-position: 0 -24%, 0 -32%; opacity: .6; }
+}
