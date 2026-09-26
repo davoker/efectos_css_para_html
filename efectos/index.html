@@ -2,7 +2,7 @@
 <!-- ================================================================
      SHOWCASE UNIFICADO DE EFECTOS DE TEXTO (efectos en CSS puro)
      ----------------------------------------------------------------
-     UNA SOLA PÁGINA con los 20 efectos agrupados en CATEGORÍAS: cada
+     UNA SOLA PÁGINA con los 21 efectos agrupados en CATEGORÍAS: cada
      categoría es una CARPETA PLEGABLE en el índice de la izquierda
      (<details>): sus efectos están ocultos hasta abrirla y, al hacerlo,
      se despliegan su lista y sus tarjetas (con :has()). Con ninguna
@@ -44,9 +44,9 @@
           la carpeta de la categoría.
 
      CÓMO AÑADIR UNA CATEGORÍA NUEVA:
-       1) crea efectos/categoria/ y mete dentro sus efectos (los 20 de
-          hoy están en efectos/miscelanea/, la categoría "Miscelánea";
-          "The Division" (efectos/the_division/) está aún vacía)
+       1) crea efectos/categoria/ y mete dentro sus efectos (los de
+          Miscelánea están en efectos/miscelanea/ y los de The Division
+          en efectos/the_division/)
        2) aquí: su <details class="grupo" id="g-categoria" data-cat="categoria">
           con <summary class="grupo-titulo">Nombre (n)</summary> y su
           <ol class="lista"> dentro, en el índice lateral
@@ -55,7 +55,7 @@
        4) sus <link>, <li data-cat> y <section data-cat> con rutas
           categoria/efecto/…       (La muestra aleatoria no se toca al añadir categorías: el guion
         del final sortea de todas las tarjetas; tamaño en var N = 12.)
-      (Los 20 CSS conviven sin conflictos: cada uno solo define su
+      (Los 21 CSS conviven sin conflictos: cada uno solo define su
        propia clase .efecto-xxx y sus propios @keyframes.)
      ================================================================ -->
 <html lang="es">
@@ -64,7 +64,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Efectos de texto CSS - Showcase unificado</title>
 
-    <!-- ============ LOS 20 EFECTOS (cada uno portable) ============ -->
+    <!-- ============ LOS 21 EFECTOS (cada uno portable) ============ -->
     <link rel="stylesheet" href="miscelanea/glitch/glitch.css">
     <link rel="stylesheet" href="miscelanea/arcoiris/arcoiris.css">
     <link rel="stylesheet" href="miscelanea/fuego/fuego.css">
@@ -85,6 +85,7 @@
     <link rel="stylesheet" href="miscelanea/rayo/rayo.css">
     <link rel="stylesheet" href="miscelanea/chispa/chispa.css">
     <link rel="stylesheet" href="miscelanea/grieta/grieta.css">
+    <link rel="stylesheet" href="the_division/hud/hud.css">
 
     <!-- Escenas temáticas (transición + botones de descarga) -->
     <link rel="stylesheet" href="transicion.css">
@@ -353,6 +354,7 @@
         .c-rayo       { color: #ffee58; }
         .c-chispa     { color: #ffd740; }
         .c-grieta     { color: #a1887f; }
+        .c-hud        { color: #ff9d2e; font-family: "Courier New", monospace; }
 
         footer {
             padding: 2rem 0 1rem;
@@ -455,16 +457,6 @@
         .aviso-grupo { display: none; }
         body:not(:has(.grupo[open])) .aviso-grupo { display: block; }
 
-        /* categoría abierta pero todavía sin efectos */
-        .lista-vacia {
-            margin: .3rem .2rem .6rem;
-            color: #5d6774;
-            font-size: .85rem;
-            font-style: italic;
-        }
-        .aviso-vacio { display: none; }
-        body:has(#g-the_division[open]) .aviso-vacio { display: block; }
-
     </style>
 </head>
 <body>
@@ -473,7 +465,7 @@
 
     <!-- ======================= ÍNDICE ======================= -->
     <aside class="indice">
-        <h3>Efectos <span class="contador">20 disponibles</span></h3>
+        <h3>Efectos <span class="contador">21 disponibles</span></h3>
 
         <!-- Carpeta de categoría: plegada por defecto; al abrirla se
              despliegan su lista y sus tarjetas (CSS puro, sin JS) -->
@@ -503,11 +495,12 @@
             </ol>
         </details>
 
-        <!-- The Division (1 y 2): categoría aún sin efectos -->
+        <!-- The Division (The Division 1 y 2) -->
         <details class="grupo" id="g-the_division" data-cat="the_division">
-            <summary class="grupo-titulo">The Division <span class="grupo-n">0</span></summary>
-            <p class="lista-vacia">Todavía sin efectos: aquí entrarán
-                los de The Division 1 y 2.</p>
+            <summary class="grupo-titulo">The Division <span class="grupo-n">1</span></summary>
+            <ol class="lista">
+                <li data-cat="the_division"><a href="#hud">📡 HUD</a></li>
+            </ol>
         </details>
     </aside>
 
@@ -517,7 +510,7 @@
         <header class="intro">
             <h1>🔥 Efectos de texto CSS</h1>
             <p>
-                Los 20 efectos en <strong>una sola página</strong>: al cargar
+                Los 21 efectos en <strong>una sola página</strong>: al cargar
                 verás una muestra de 12 al azar; abre una categoría en el
                 panel de la izquierda para desplegar todos sus efectos y
                 haz clic en el que quieras ver. Los efectos son
@@ -535,10 +528,6 @@
 
         <p class="aviso-grupo">Abre una categoría en el panel de la
             izquierda para ver sus efectos.</p>
-
-        <p class="aviso-vacio">La categoría <strong>The Division</strong>
-            todavía no tiene efectos: los de The Division 1 y 2
-            aparecerán aquí.</p>
 
         <div class="galeria">
 
@@ -839,10 +828,26 @@
                 <div class="gr-brasas"></div>
             </div>
         </section>
+
+        <!-- ============ 21. HUD ============ -->
+        <section id="hud" class="tarjeta" data-cat="the_division">
+            <div class="muestra">
+                <span class="efecto-hud">HUD</span>
+            </div>
+            <h2 class="c-hud">📡 HUD <small>Escáner de agente</small></h2>
+            <a class="btn" href="the_division/hud/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="the_division/hud/hud.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-hud">
+                <div class="hu-brillo"></div>
+                <div class="hu-anel hu-anel-1"></div>
+                <div class="hu-anel hu-anel-2"></div>
+                <div class="hu-linea"></div>
+            </div>
+        </section>
         </div><!-- /.galeria -->
 
         <footer>
-            20 efectos · CSS puro sin JavaScript · cada efecto es portable:
+            21 efectos · CSS puro sin JavaScript · cada efecto es portable:
             copia su archivo .css a tu proyecto y usa su clase en cualquier texto.
         </footer>
 

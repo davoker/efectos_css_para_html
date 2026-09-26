@@ -1276,3 +1276,60 @@
     75%  { opacity: .8; }
     100% { opacity: .9; transform: translateY(-3vmin); }
 }
+
+/* ============ 21. HUD — barrido de escena ============ */
+.tema-hud {
+    background: radial-gradient(circle at 50% 58%, #241503 0%, #120a01 74%);
+}
+.tema-hud::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,213,140,.5) 0%, rgba(255,157,46,.32) 32%, transparent 74%);
+}
+.hu-brillo {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255, 215, 150, .9) 0%, rgba(255, 157, 46, .55) 34%,
+                rgba(255, 157, 46, 0) 74%);
+    animation: hu-brillo 3s ease-in-out infinite;
+}
+.hu-anel {
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    width: 36vmin;
+    height: 36vmin;
+    margin: -18vmin 0 0 -18vmin;
+    border: .5vmin solid #ff9d2e;
+    box-shadow: 0 0 2vmin rgba(255, 157, 46, .75);
+    border-radius: 50%;
+    opacity: 0;
+}
+.hu-anel-1 { animation: hu-anel 2.4s ease-out infinite; }
+.hu-anel-2 { animation: hu-anel 2.4s ease-out 1.2s infinite; }
+.hu-linea {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -8%;
+    height: 4%;
+    background: linear-gradient(180deg, rgba(255,232,184,0),
+                rgba(255,232,184,.9) 50%, rgba(255,232,184,0));
+    opacity: 0;
+    animation: hu-linea 3s linear infinite;
+}
+@keyframes hu-brillo {
+    0%, 100% { opacity: .7; }
+    50%      { opacity: 1; }
+}
+@keyframes hu-anel {
+    0%   { opacity: .9; transform: scale(.12); }
+    70%  { opacity: .3; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.12); }
+}
+@keyframes hu-linea {
+    0%   { top: -8%; opacity: 0; }
+    6%   { opacity: .9; }
+    92%  { opacity: .9; }
+    100% { top: 104%; opacity: 0; }
+}
