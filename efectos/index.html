@@ -503,18 +503,116 @@
             display: none;
         }
 
-        /* aviso mientras no haya ninguna categoría abierta */
-        .aviso-grupo {
-            margin: 0 0 1rem;
-            color: #5d6774;
-            font-size: .9rem;
+        /* --- CAMBIO DE TEMA (solo esta portada) ---
+           El boton de arriba a la derecha alterna el fondo de la
+           pagina entre negro (por defecto) y blanco, y recuerda la
+           eleccion en localStorage. Las muestras circulares se quedan
+           oscuras a proposit: son la vista previa de cada efecto y
+           los efectos estan pensados sobre fondo negro. */
+        .btn-tema {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 150;
+            width: 2.5rem;
+            height: 2.5rem;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #2a3341;
+            border-radius: 50%;
+            background-color: #151a21;
+            font-size: 1.15rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: transform .15s, border-color .15s,
+                        background-color .15s;
         }
-        .aviso-grupo { display: none; }
-        body:not(:has(.grupo[open])) .aviso-grupo { display: block; }
+        .btn-tema:hover { border-color: #4fa3ff; transform: translateY(-2px); }
+        .btn-tema:active { transform: scale(.92); }
+        .btn-tema:focus-visible {
+            outline: 2px solid #4fa3ff;
+            outline-offset: 2px;
+        }
+
+        /* --- MODO CLARO: fondo blanco y texto oscuro en toda la
+           pagina (las .muestra y las escenas siguen oscuras) --- */
+        html[data-tema="claro"] body {
+            background-color: #ffffff;
+            color: #1c232c;
+        }
+        html[data-tema="claro"] .btn-tema {
+            background-color: #ffffff;
+            border-color: #c9d2dc;
+        }
+        html[data-tema="claro"] .indice h3,
+        html[data-tema="claro"] header.intro h1 { color: #101418; }
+        html[data-tema="claro"] header.intro { border-bottom-color: #dde3ea; }
+        html[data-tema="claro"] .lista a { color: #3d4756; }
+        html[data-tema="claro"] .lista a:hover,
+        html[data-tema="claro"] .lista a:focus {
+            background-color: #eef1f5;
+            color: #0b0d10;
+        }
+        html[data-tema="claro"] .tarjeta h2 { color: #101418; }
+        html[data-tema="claro"] .c-arcoiris {
+            -webkit-text-fill-color: #101418;
+        }
+        html[data-tema="claro"] .c-arcoiris small {
+            -webkit-text-fill-color: #5d6774;
+        }
+        html[data-tema="claro"] .btn {
+            background-color: #ffffff;
+            border-color: #c9d2dc;
+            color: #0d5fbe;
+        }
+        html[data-tema="claro"] .btn:hover,
+        html[data-tema="claro"] .btn:focus {
+            background-color: #eef4fb;
+            border-color: #4fa3ff;
+            color: #0b4f9e;
+        }
+        html[data-tema="claro"] .btn-descarga {
+            background-color: #fffaf0;
+            border-color: #e0cf9f;
+            color: #8a5a00;
+        }
+        html[data-tema="claro"] .btn-descarga:hover,
+        html[data-tema="claro"] .btn-descarga:focus {
+            background-color: #fdf3dd;
+            border-color: #a37b3a;
+            color: #6d4700;
+        }
+        html[data-tema="claro"] .btn:active {
+            background-color: #e2e9f2;
+            box-shadow: none;
+        }
+        html[data-tema="claro"] .btn-descarga:active {
+            background-color: #f6e9d0;
+        }
+        html[data-tema="claro"] .grupo-titulo {
+            background-color: #f4f6f9;
+            color: #101418;
+            border-color: #d6dde5;
+        }
+        html[data-tema="claro"] .grupo-titulo:hover { border-color: #9fabb9; }
+        /* en movil la lista son pildeoras con fondo oscuro: aqui claras */
+        @media (max-width: 860px) {
+            html[data-tema="claro"] .lista a { background-color: #eef1f5; }
+            html[data-tema="claro"] .lista a:hover,
+            html[data-tema="claro"] .lista a:focus {
+                background-color: #dde5ee;
+            }
+        }
 
     </style>
 </head>
 <body>
+
+<button id="btn-tema" class="btn-tema" type="button"
+        title="Modo claro"
+        aria-label="Cambiar entre tema claro y oscuro">☀️</button>
 
 <div class="layout">
 
@@ -596,16 +694,14 @@
         <header class="intro">
             <h1>🔥 Efectos de texto CSS</h1>
             <p>
-                Los 46 efectos en <strong>una sola página</strong>: lo que ves
-                en cada tarjeta es una muestra circular del efecto, 12 al azar
-                al cargar. <em>Showcase completo</em> abre los ejemplos
-                grandes del efecto y <em>Descargar efecto (.zip)</em> guarda
-                su pack (CSS + HTML + instrucciones).
+                Cada tarjeta es una muestra circular del efecto.<br>
+                El botón showcase muestra ejemplos aplicados a textos
+                de diferentes tamaños.<br>
+                El botón "Descargar Efecto" descarga: (CSS + HTML
+                + instrucciones), todo lo necesario para aplicar el
+                efecto en tus archivos.
             </p>
         </header>
-
-        <p class="aviso-grupo">Abre una categoría en el panel de la
-            izquierda para ver sus efectos.</p>
 
         <div class="galeria">
 
@@ -1302,8 +1398,8 @@
         </div><!-- /.galeria -->
 
         <footer>
-            46 efectos · CSS puro sin JavaScript · cada efecto es portable:
-            copia su archivo .css a tu proyecto y usa su clase en cualquier texto.
+            Actualizado el 26 de septiembre de 2026 · © 2026 davoker ·
+            Licencia MIT
         </footer>
 
     </main>
@@ -1320,7 +1416,6 @@
             var N = 12;                       // tamaño de la muestra
             var tarjetas = Array.prototype.slice.call(
                 document.querySelectorAll(".galeria .tarjeta"));
-            var aviso = document.querySelector(".aviso-grupo");
 
             function sortear() {
                 var barajadas = tarjetas.slice();
@@ -1336,11 +1431,6 @@
                 barajadas.slice(0, N).forEach(function (el) {
                     el.classList.add("sorteada");
                 });
-                if (aviso) {
-                    aviso.textContent = "Muestra de " + N + " efectos al azar "
-                        + "de todas las categorías — abre una categoría en el "
-                        + "panel de la izquierda para ver todos los suyos.";
-                }
             }
 
             sortear();                        // sorteo inicial
@@ -1352,6 +1442,37 @@
                         }
                     });
                 });
+        })();
+
+
+        // Cambio de tema (solo esta portada): alterna el fondo entre
+        // negro y blanco y recuerda la eleccion en localStorage.
+        (function () {
+            var boton = document.getElementById("btn-tema");
+            function refresca() {
+                var claro = document.documentElement
+                        .getAttribute("data-tema") === "claro";
+                boton.textContent = claro ? "🌙" : "☀️";
+                boton.title = claro ? "Modo oscuro" : "Modo claro";
+                boton.setAttribute("aria-label", boton.title);
+            }
+            try {
+                if (localStorage.getItem("efectos-tema") === "claro") {
+                    document.documentElement
+                        .setAttribute("data-tema", "claro");
+                }
+            } catch (e) { /* sin almacenamiento: modo oscuro */ }
+            refresca();
+            boton.addEventListener("click", function () {
+                var claro = document.documentElement
+                        .getAttribute("data-tema") === "claro";
+                var nuevo = claro ? "oscuro" : "claro";
+                document.documentElement.setAttribute("data-tema", nuevo);
+                try {
+                    localStorage.setItem("efectos-tema", nuevo);
+                } catch (e) { /* sin almacenamiento */ }
+                refresca();
+            });
         })();
     </script>
 </body>
