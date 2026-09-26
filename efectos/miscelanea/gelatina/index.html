@@ -111,6 +111,42 @@
             65%  { transform: scale(.85,1.12); }
             100% { opacity: 0;   transform: scale(.95,.95); }
         }
+        /* --- INTERACCION DE RATON (solo la pagina; el efecto de arriba
+           sigue siendo CSS puro y no se toca) ---
+           A REPOSO NO SE VE NADA NUEVO: las dos capas arrancan con
+           opacity 0 y solo aparecen cuando mueves el puntero. La luz
+           lleva el color del titulo del efecto y el fondo hace un
+           paralaje suave. */
+        .capa-fondo, .luz-raton {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity .5s ease;
+        }
+        .capa-fondo {
+            z-index: -2;
+            background:
+                radial-gradient(48% 42% at 16% 10%,
+                                rgba(120, 90, 255, .14), transparent 66%),
+                radial-gradient(44% 38% at 86% 76%,
+                                rgba(255, 90, 170, .12), transparent 66%),
+                radial-gradient(40% 36% at 62% 34%,
+                                rgba(60, 200, 255, .10), transparent 66%);
+            transform: translate3d(var(--px, 0px), var(--py, 0px), 0)
+                       scale(1.1);
+        }
+        .luz-raton {
+            z-index: -1;
+            background: radial-gradient(
+                    330px 330px at var(--rx, 50%) var(--ry, 50%),
+                    rgba(var(--luz, 150, 185, 255), .22),
+                    rgba(var(--luz, 150, 185, 255), 0) 72%);
+        }
+        .moviendo .capa-fondo,
+        .moviendo .luz-raton {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -166,5 +202,68 @@
         <code>como-aplicar-gelatina.txt</code> de esta misma carpeta.
     </p>
 
+    <script>
+        // Interaccion de raton de ESTE showcase: una luz con el color
+        // del titulo sigue al puntero y el fondo hace un paralaje
+        // suave. El efecto no se toca (sigue siendo CSS puro) y a
+        // REPOSO las dos capas estan invisibles, asi que la pagina se
+        // ve igual que sin este guion.
+        (function () {
+            var raiz = document.documentElement;
+            var mx = 50, my = 50, lx = 50, ly = 50;
+            var px = 0, py = 0, corriendo = false, ult = 0;
+            var capa = document.createElement("div");
+            var luz = document.createElement("div");
+            capa.className = "capa-fondo";
+            luz.className = "luz-raton";
+            capa.setAttribute("aria-hidden", "true");
+            luz.setAttribute("aria-hidden", "true");
+            document.body.appendChild(capa);
+            document.body.appendChild(luz);
+
+            // la luz toma el color del titulo del efecto
+            var h1 = document.querySelector("h1");
+            if (h1) {
+                var c = getComputedStyle(h1).color;
+                var n = c.slice(c.indexOf("(") + 1, c.indexOf(")")).split(",");
+                if (n.length >= 3
+                        && (n.length < 4 || parseFloat(n[3]) > .2)) {
+                    raiz.style.setProperty("--luz",
+                                           n[0] + "," + n[1] + "," + n[2]);
+                }
+            }
+
+            function paso(ts) {
+                var dt = ult ? Math.min(64, ts - ult) : 16;
+                ult = ts;
+                var k = Math.min(1, dt / 170);
+                lx += (mx - lx) * k;
+                ly += (my - ly) * k;
+                px += ((mx - 50) * -0.34 - px) * k;
+                py += ((my - 50) * -0.26 - py) * k;
+                raiz.style.setProperty("--rx", lx.toFixed(1) + "%");
+                raiz.style.setProperty("--ry", ly.toFixed(1) + "%");
+                raiz.style.setProperty("--px", px.toFixed(1) + "px");
+                raiz.style.setProperty("--py", py.toFixed(1) + "px");
+                if (Math.abs(mx - lx) < .05 && Math.abs(my - ly) < .05
+                        && Math.abs(px) < .1 && Math.abs(py) < .1) {
+                    corriendo = false;
+                    ult = 0;
+                    return;
+                }
+                requestAnimationFrame(paso);
+            }
+
+            document.addEventListener("mousemove", function (e) {
+                mx = e.clientX * 100 / Math.max(1, raiz.clientWidth);
+                my = e.clientY * 100 / Math.max(1, raiz.clientHeight);
+                document.body.classList.add("moviendo");
+                if (!corriendo) {
+                    corriendo = true;
+                    requestAnimationFrame(paso);
+                }
+            }, { passive: true });
+        })();
+    </script>
 </body>
 </html>
