@@ -2,7 +2,7 @@
 <!-- ================================================================
      SHOWCASE UNIFICADO DE EFECTOS DE TEXTO (efectos en CSS puro)
      ----------------------------------------------------------------
-     UNA SOLA PÁGINA con los 79 efectos agrupados en CATEGORÍAS: cada
+     UNA SOLA PÁGINA con los 99 efectos agrupados en CATEGORÍAS: cada
      categoría es una CARPETA PLEGABLE en el índice de la izquierda
      (<details>): sus efectos están ocultos hasta abrirla y, al hacerlo,
      se despliegan su lista y sus tarjetas (con :has()). Con ninguna
@@ -57,7 +57,7 @@
        4) sus <link>, <li data-cat> y <section data-cat> con rutas
           categoria/efecto/…       (La muestra aleatoria no se toca al añadir categorías: el guion
         del final sortea de todas las tarjetas; tamaño en var N = 12.)
-      (Los 79 CSS conviven sin conflictos: cada uno solo define su
+      (Los 99 CSS conviven sin conflictos: cada uno solo define su
        propia clase .efecto-xxx y sus propios @keyframes.)
      ================================================================ -->
 <html lang="es">
@@ -66,7 +66,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Efectos de texto CSS - Showcase unificado</title>
 
-    <!-- ============ LOS 79 EFECTOS (cada uno portable) ============ -->
+    <!-- ============ LOS 99 EFECTOS (cada uno portable) ============ -->
     <link rel="stylesheet" href="miscelanea/glitch/glitch.css">
     <link rel="stylesheet" href="miscelanea/arcoiris/arcoiris.css">
     <link rel="stylesheet" href="miscelanea/fuego/fuego.css">
@@ -146,6 +146,26 @@
     <link rel="stylesheet" href="monster_hunter/sueno/sueno.css">
     <link rel="stylesheet" href="monster_hunter/embestida/embestida.css">
     <link rel="stylesheet" href="monster_hunter/bestia/bestia.css">
+    <link rel="stylesheet" href="harry_potter/gryffindor/gryffindor.css">
+    <link rel="stylesheet" href="harry_potter/hufflepuff/hufflepuff.css">
+    <link rel="stylesheet" href="harry_potter/ravenclaw/ravenclaw.css">
+    <link rel="stylesheet" href="harry_potter/slytherin/slytherin.css">
+    <link rel="stylesheet" href="harry_potter/patronus/patronus.css">
+    <link rel="stylesheet" href="harry_potter/plataforma/plataforma.css">
+    <link rel="stylesheet" href="harry_potter/snitch/snitch.css">
+    <link rel="stylesheet" href="harry_potter/varita/varita.css">
+    <link rel="stylesheet" href="harry_potter/pocion/pocion.css">
+    <link rel="stylesheet" href="harry_potter/arena/arena.css">
+    <link rel="stylesheet" href="harry_potter/capa/capa.css">
+    <link rel="stylesheet" href="harry_potter/pluma/pluma.css">
+    <link rel="stylesheet" href="harry_potter/habas/habas.css">
+    <link rel="stylesheet" href="harry_potter/sello/sello.css">
+    <link rel="stylesheet" href="harry_potter/sapo/sapo.css">
+    <link rel="stylesheet" href="harry_potter/boggart/boggart.css">
+    <link rel="stylesheet" href="harry_potter/polvo/polvo.css">
+    <link rel="stylesheet" href="harry_potter/azkaban/azkaban.css">
+    <link rel="stylesheet" href="harry_potter/profecia/profecia.css">
+    <link rel="stylesheet" href="harry_potter/pensieve/pensieve.css">
 
     <!-- Escenas temáticas (transición + botones de descarga) -->
     <link rel="stylesheet" href="transicion.css">
@@ -476,6 +496,26 @@
         .c-sueno      { color: #b39ddb; }
         .c-embestida  { color: #ef5350; }
         .c-bestia     { color: #ff5c67; }
+        .c-gryffindor { color: #ff5a3c; }
+        .c-hufflepuff { color: #ffca28; }
+        .c-ravenclaw  { color: #5c93ff; }
+        .c-slytherin  { color: #3ddc84; }
+        .c-patronus   { color: #9edcff; }
+        .c-plataforma { color: #ff7043; }
+        .c-snitch     { color: #ffc400; }
+        .c-varita     { color: #b388ff; }
+        .c-pocion     { color: #64ffda; }
+        .c-arena      { color: #f0c070; }
+        .c-capa       { color: #b0bec5; }
+        .c-pluma      { color: #8c9eff; }
+        .c-habas      { color: #ff4081; }
+        .c-sello      { color: #ef5350; }
+        .c-sapo       { color: #ba68c8; }
+        .c-boggart    { color: #bcaaa4; }
+        .c-polvo      { color: #64ffd2; }
+        .c-azkaban    { color: #78909c; }
+        .c-profecia   { color: #ffd166; }
+        .c-pensieve   { color: #4fc3f7; }
 
         footer {
             padding: 2rem 0 1rem;
@@ -572,6 +612,11 @@
 
         body:has(.grupo[open]):not(:has(#g-the_division[open]))
             .galeria .tarjeta[data-cat="the_division"] {
+            display: none;
+        }
+
+        body:has(.grupo[open]):not(:has(#g-harry_potter[open]))
+            .galeria .tarjeta[data-cat="harry_potter"] {
             display: none;
         }
 
@@ -733,7 +778,7 @@
 
     <!-- ======================= ÍNDICE ======================= -->
     <aside class="indice">
-        <h3>Efectos <span class="contador">79 disponibles</span></h3>
+        <h3>Efectos <span class="contador">99 disponibles</span></h3>
 
         <!-- Carpeta de categoría: plegada por defecto; al abrirla se
              despliegan su lista y sus tarjetas (CSS puro, sin JS) -->
@@ -844,6 +889,32 @@
                 <li data-cat="monster_hunter"><a href="#sueno">😴 Sueño</a></li>
                 <li data-cat="monster_hunter"><a href="#embestida">🐅 Embestida</a></li>
                 <li data-cat="monster_hunter"><a href="#bestia">🐲 Bestia</a></li>
+            </ol>
+        </details>
+        <!-- Harry Potter -->
+        <details class="grupo" id="g-harry_potter" data-cat="harry_potter">
+            <summary class="grupo-titulo">Harry Potter <span class="grupo-n">20</span></summary>
+            <ol class="lista">
+                <li data-cat="harry_potter"><a href="#gryffindor">🦁 Gryffindor</a></li>
+                <li data-cat="harry_potter"><a href="#hufflepuff">🦡 Hufflepuff</a></li>
+                <li data-cat="harry_potter"><a href="#ravenclaw">🦅 Ravenclaw</a></li>
+                <li data-cat="harry_potter"><a href="#slytherin">🐍 Slytherin</a></li>
+                <li data-cat="harry_potter"><a href="#patronus">🦌 Patronus</a></li>
+                <li data-cat="harry_potter"><a href="#plataforma">🚂 Plataforma</a></li>
+                <li data-cat="harry_potter"><a href="#snitch">🏅 Snitch</a></li>
+                <li data-cat="harry_potter"><a href="#varita">🪄 Varita</a></li>
+                <li data-cat="harry_potter"><a href="#pocion">🧪 Poción</a></li>
+                <li data-cat="harry_potter"><a href="#arena">⏳ Arena</a></li>
+                <li data-cat="harry_potter"><a href="#capa">🥷 Capa</a></li>
+                <li data-cat="harry_potter"><a href="#pluma">✒️ Pluma</a></li>
+                <li data-cat="harry_potter"><a href="#habas">🍬 Habas</a></li>
+                <li data-cat="harry_potter"><a href="#sello">📛 Sello</a></li>
+                <li data-cat="harry_potter"><a href="#sapo">🐸 Sapo</a></li>
+                <li data-cat="harry_potter"><a href="#boggart">🚪 Boggart</a></li>
+                <li data-cat="harry_potter"><a href="#polvo">🌀 Polvo</a></li>
+                <li data-cat="harry_potter"><a href="#azkaban">🔒 Azkaban</a></li>
+                <li data-cat="harry_potter"><a href="#profecia">🔮 Profecía</a></li>
+                <li data-cat="harry_potter"><a href="#pensieve">🌊 Pensieve</a></li>
             </ol>
         </details>
     </aside>
@@ -2047,6 +2118,306 @@
                 <div class="bs-ojo"></div>
                 <div class="bs-piel"></div>
                 <div class="bs-polvillo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 80. GRYFFINDOR ============ -->
+        <section id="gryffindor" class="tarjeta" data-cat="harry_potter">
+            <div class="muestra">
+                <span class="efecto-gryffindor">GRYFFINDOR</span>
+            </div>
+            <h2 class="c-gryffindor">🦁 Gryffindor <small>Oro y escarlata</small></h2>
+            <a class="btn" href="harry_potter/gryffindor/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="harry_potter/gryffindor/gryffindor.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-gryffindor">
+                <div class="hp-gry-destello"></div>
+                <div class="hp-gry-motas"></div>
+                <div class="hp-gry-halo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 81. HUFFLEPUFF ============ -->
+        <section id="hufflepuff" class="tarjeta" data-cat="harry_potter">
+            <div class="muestra">
+                <span class="efecto-hufflepuff">HUFFLEPUFF</span>
+            </div>
+            <h2 class="c-hufflepuff">🦡 Hufflepuff <small>Miel y lealtad</small></h2>
+            <a class="btn" href="harry_potter/hufflepuff/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="harry_potter/hufflepuff/hufflepuff.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-hufflepuff">
+                <div class="hp-huf-panal"></div>
+                <div class="hp-huf-polvo"></div>
+                <div class="hp-huf-gota"></div>
+            </div>
+        </section>
+
+        <!-- ============ 82. RAVENCLAW ============ -->
+        <section id="ravenclaw" class="tarjeta" data-cat="harry_potter">
+            <div class="muestra">
+                <span class="efecto-ravenclaw">RAVENCLAW</span>
+            </div>
+            <h2 class="c-ravenclaw">🦅 Ravenclaw <small>Azul y bronce</small></h2>
+            <a class="btn" href="harry_potter/ravenclaw/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="harry_potter/ravenclaw/ravenclaw.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-ravenclaw">
+                <div class="hp-rav-estela hp-rav-estela-1"></div>
+                <div class="hp-rav-estela hp-rav-estela-2"></div>
+                <div class="hp-rav-lumen"></div>
+            </div>
+        </section>
+
+        <!-- ============ 83. SLYTHERIN ============ -->
+        <section id="slytherin" class="tarjeta" data-cat="harry_potter">
+            <div class="muestra">
+                <span class="efecto-slytherin">SLYTHERIN</span>
+            </div>
+            <h2 class="c-slytherin">🐍 Slytherin <small>Esmeralda y plata</small></h2>
+            <a class="btn" href="harry_potter/slytherin/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="harry_potter/slytherin/slytherin.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-slytherin">
+                <div class="hp-sly-serpiente"></div>
+                <div class="hp-sly-brillo"></div>
+                <div class="hp-sly-bruma"></div>
+            </div>
+        </section>
+
+        <!-- ============ 84. PATRONUS ============ -->
+        <section id="patronus" class="tarjeta" data-cat="harry_potter">
+            <div class="muestra">
+                <span class="efecto-patronus">PATRONO</span>
+            </div>
+            <h2 class="c-patronus">🦌 Patronus <small>Plata de guardián</small></h2>
+            <a class="btn" href="harry_potter/patronus/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="harry_potter/patronus/patronus.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-patronus">
+                <div class="hp-pat-niebla"></div>
+                <div class="hp-pat-destello"></div>
+                <div class="hp-pat-onda"></div>
+            </div>
+        </section>
+
+        <!-- ============ 85. PLATAFORMA ============ -->
+        <section id="plataforma" class="tarjeta" data-cat="harry_potter">
+            <div class="muestra">
+                <span class="efecto-plataforma">PLATAFORMA 9¾</span>
+            </div>
+            <h2 class="c-plataforma">🚂 Plataforma <small>9¾ y ladrillo</small></h2>
+            <a class="btn" href="harry_potter/plataforma/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="harry_potter/plataforma/plataforma.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-plataforma">
+                <div class="hp-pla-vapor"></div>
+                <div class="hp-pla-tren"></div>
+                <div class="hp-pla-farol"></div>
+            </div>
+        </section>
+
+        <!-- ============ 86. SNITCH ============ -->
+        <section id="snitch" class="tarjeta" data-cat="harry_potter">
+            <div class="muestra">
+                <span class="efecto-snitch">SNITCH</span>
+            </div>
+            <h2 class="c-snitch">🏅 Snitch <small>Oro de ala</small></h2>
+            <a class="btn" href="harry_potter/snitch/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="harry_potter/snitch/snitch.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-snitch">
+                <div class="hp-sni-estela"></div>
+                <div class="hp-sni-centella"></div>
+                <div class="hp-sni-anillo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 87. VARITA ============ -->
+        <section id="varita" class="tarjeta" data-cat="harry_potter">
+            <div class="muestra">
+                <span class="efecto-varita">VARITA</span>
+            </div>
+            <h2 class="c-varita">🪄 Varita <small>Chispa de hechizo</small></h2>
+            <a class="btn" href="harry_potter/varita/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="harry_potter/varita/varita.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-varita">
+                <div class="hp-var-chispa"></div>
+                <div class="hp-var-rastro"></div>
+                <div class="hp-var-destello"></div>
+            </div>
+        </section>
+
+        <!-- ============ 88. POCIÓN ============ -->
+        <section id="pocion" class="tarjeta" data-cat="harry_potter">
+            <div class="muestra">
+                <span class="efecto-pocion">POCIÓN</span>
+            </div>
+            <h2 class="c-pocion">🧪 Poción <small>Brebaje hirviente</small></h2>
+            <a class="btn" href="harry_potter/pocion/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="harry_potter/pocion/pocion.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-pocion">
+                <div class="hp-poc-burbuja"></div>
+                <div class="hp-poc-espuma"></div>
+                <div class="hp-poc-vaho"></div>
+            </div>
+        </section>
+
+        <!-- ============ 89. ARENA ============ -->
+        <section id="arena" class="tarjeta" data-cat="harry_potter">
+            <div class="muestra">
+                <span class="efecto-arena">ARENA</span>
+            </div>
+            <h2 class="c-arena">⏳ Arena <small>Reloj de Arena</small></h2>
+            <a class="btn" href="harry_potter/arena/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="harry_potter/arena/arena.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-arena">
+                <div class="hp-are-hilo"></div>
+                <div class="hp-are-grano"></div>
+                <div class="hp-are-fulgor"></div>
+            </div>
+        </section>
+
+        <!-- ============ 90. CAPA ============ -->
+        <section id="capa" class="tarjeta" data-cat="harry_potter">
+            <div class="muestra">
+                <span class="efecto-capa">CAPA</span>
+            </div>
+            <h2 class="c-capa">🥷 Capa <small>Capa de Invisibilidad</small></h2>
+            <a class="btn" href="harry_potter/capa/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="harry_potter/capa/capa.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-capa">
+                <div class="hp-cap-pliegue"></div>
+                <div class="hp-cap-mota"></div>
+                <div class="hp-cap-borde"></div>
+            </div>
+        </section>
+
+        <!-- ============ 91. PLUMA ============ -->
+        <section id="pluma" class="tarjeta" data-cat="harry_potter">
+            <div class="muestra">
+                <span class="efecto-pluma">PLUMA</span>
+            </div>
+            <h2 class="c-pluma">✒️ Pluma <small>Pluma de Tinta</small></h2>
+            <a class="btn" href="harry_potter/pluma/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="harry_potter/pluma/pluma.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-pluma">
+                <div class="hp-plu-trazo"></div>
+                <div class="hp-plu-gota"></div>
+                <div class="hp-plu-fibra"></div>
+            </div>
+        </section>
+
+        <!-- ============ 92. HABAS ============ -->
+        <section id="habas" class="tarjeta" data-cat="harry_potter">
+            <div class="muestra">
+                <span class="efecto-habas">HABAS</span>
+            </div>
+            <h2 class="c-habas">🍬 Habas <small>Habas de Todos los Sabores</small></h2>
+            <a class="btn" href="harry_potter/habas/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="harry_potter/habas/habas.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-habas">
+                <div class="hp-hab-grano"></div>
+                <div class="hp-hab-azucar"></div>
+                <div class="hp-hab-arco"></div>
+            </div>
+        </section>
+
+        <!-- ============ 93. SELLO ============ -->
+        <section id="sello" class="tarjeta" data-cat="harry_potter">
+            <div class="muestra">
+                <span class="efecto-sello">SELLO</span>
+            </div>
+            <h2 class="c-sello">📛 Sello <small>Lacre Carmesí</small></h2>
+            <a class="btn" href="harry_potter/sello/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="harry_potter/sello/sello.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-sello">
+                <div class="hp-sel-lacre"></div>
+                <div class="hp-sel-anillo"></div>
+                <div class="hp-sel-brillo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 94. SAPO ============ -->
+        <section id="sapo" class="tarjeta" data-cat="harry_potter">
+            <div class="muestra">
+                <span class="efecto-sapo">SAPO</span>
+            </div>
+            <h2 class="c-sapo">🐸 Sapo <small>Sapo de Chocolate</small></h2>
+            <a class="btn" href="harry_potter/sapo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="harry_potter/sapo/sapo.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-sapo">
+                <div class="hp-sap-polvo"></div>
+                <div class="hp-sap-sombra"></div>
+                <div class="hp-sap-destello"></div>
+            </div>
+        </section>
+
+        <!-- ============ 95. BOGGART ============ -->
+        <section id="boggart" class="tarjeta" data-cat="harry_potter">
+            <div class="muestra">
+                <span class="efecto-boggart">BOGGART</span>
+            </div>
+            <h2 class="c-boggart">🚪 Boggart <small>Sombra Cambiante</small></h2>
+            <a class="btn" href="harry_potter/boggart/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="harry_potter/boggart/boggart.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-boggart">
+                <div class="hp-bog-sombra"></div>
+                <div class="hp-bog-ojos"></div>
+                <div class="hp-bog-velo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 96. POLVO ============ -->
+        <section id="polvo" class="tarjeta" data-cat="harry_potter">
+            <div class="muestra">
+                <span class="efecto-polvo">POLVO</span>
+            </div>
+            <h2 class="c-polvo">🌀 Polvo <small>Polvo de Floo</small></h2>
+            <a class="btn" href="harry_potter/polvo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="harry_potter/polvo/polvo.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-polvo">
+                <div class="hp-pol-voluta"></div>
+                <div class="hp-pol-chispa"></div>
+                <div class="hp-pol-anillo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 97. AZKABAN ============ -->
+        <section id="azkaban" class="tarjeta" data-cat="harry_potter">
+            <div class="muestra">
+                <span class="efecto-azkaban">AZKABAN</span>
+            </div>
+            <h2 class="c-azkaban">🔒 Azkaban <small>Entre Rejas</small></h2>
+            <a class="btn" href="harry_potter/azkaban/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="harry_potter/azkaban/azkaban.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-azkaban">
+                <div class="hp-azk-reja"></div>
+                <div class="hp-azk-niebla"></div>
+                <div class="hp-azk-latido"></div>
+            </div>
+        </section>
+
+        <!-- ============ 98. PROFECÍA ============ -->
+        <section id="profecia" class="tarjeta" data-cat="harry_potter">
+            <div class="muestra">
+                <span class="efecto-profecia">PROFECIA</span>
+            </div>
+            <h2 class="c-profecia">🔮 Profecía <small>Bola de Niebla</small></h2>
+            <a class="btn" href="harry_potter/profecia/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="harry_potter/profecia/profecia.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-profecia">
+                <div class="hp-pro-bruma"></div>
+                <div class="hp-pro-eco"></div>
+                <div class="hp-pro-mota"></div>
+            </div>
+        </section>
+
+        <!-- ============ 99. PENSIEVE ============ -->
+        <section id="pensieve" class="tarjeta" data-cat="harry_potter">
+            <div class="muestra">
+                <span class="efecto-pensieve">PENSIEVE</span>
+            </div>
+            <h2 class="c-pensieve">🌊 Pensieve <small>Memoria Plateada</small></h2>
+            <a class="btn" href="harry_potter/pensieve/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="harry_potter/pensieve/pensieve.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-pensieve">
+                <div class="hp-pen-onda"></div>
+                <div class="hp-pen-hilo"></div>
+                <div class="hp-pen-destello"></div>
             </div>
         </section>
 
