@@ -2,7 +2,7 @@
 <!-- ================================================================
      SHOWCASE UNIFICADO DE EFECTOS DE TEXTO (efectos en CSS puro)
      ----------------------------------------------------------------
-     UNA SOLA PÁGINA con los 99 efectos agrupados en CATEGORÍAS: cada
+     UNA SOLA PÁGINA con los 119 efectos agrupados en CATEGORÍAS: cada
      categoría es una CARPETA PLEGABLE en el índice de la izquierda
      (<details>): sus efectos están ocultos hasta abrirla y, al hacerlo,
      se despliegan su lista y sus tarjetas (con :has()). Con ninguna
@@ -57,7 +57,7 @@
        4) sus <link>, <li data-cat> y <section data-cat> con rutas
           categoria/efecto/…       (La muestra aleatoria no se toca al añadir categorías: el guion
         del final sortea de todas las tarjetas; tamaño en var N = 12.)
-      (Los 99 CSS conviven sin conflictos: cada uno solo define su
+      (Los 119 CSS conviven sin conflictos: cada uno solo define su
        propia clase .efecto-xxx y sus propios @keyframes.)
      ================================================================ -->
 <html lang="es">
@@ -66,7 +66,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Efectos de texto CSS - Showcase unificado</title>
 
-    <!-- ============ LOS 99 EFECTOS (cada uno portable) ============ -->
+    <!-- ============ LOS 119 EFECTOS (cada uno portable) ============ -->
     <link rel="stylesheet" href="miscelanea/glitch/glitch.css">
     <link rel="stylesheet" href="miscelanea/arcoiris/arcoiris.css">
     <link rel="stylesheet" href="miscelanea/fuego/fuego.css">
@@ -166,6 +166,26 @@
     <link rel="stylesheet" href="harry_potter/azkaban/azkaban.css">
     <link rel="stylesheet" href="harry_potter/profecia/profecia.css">
     <link rel="stylesheet" href="harry_potter/pensieve/pensieve.css">
+    <link rel="stylesheet" href="stalker/solitarios/solitarios.css">
+    <link rel="stylesheet" href="stalker/deber/deber.css">
+    <link rel="stylesheet" href="stalker/libertad/libertad.css">
+    <link rel="stylesheet" href="stalker/cielodespejado/cielodespejado.css">
+    <link rel="stylesheet" href="stalker/bandidos/bandidos.css">
+    <link rel="stylesheet" href="stalker/mercenarios/mercenarios.css">
+    <link rel="stylesheet" href="stalker/militares/militares.css">
+    <link rel="stylesheet" href="stalker/ecologistas/ecologistas.css">
+    <link rel="stylesheet" href="stalker/monolito/monolito.css">
+    <link rel="stylesheet" href="stalker/renegados/renegados.css">
+    <link rel="stylesheet" href="stalker/pecado/pecado.css">
+    <link rel="stylesheet" href="stalker/unisg/unisg.css">
+    <link rel="stylesheet" href="stalker/ultimodia/ultimodia.css">
+    <link rel="stylesheet" href="stalker/emision/emision.css">
+    <link rel="stylesheet" href="stalker/anomalia/anomalia.css">
+    <link rel="stylesheet" href="stalker/artefacto/artefacto.css">
+    <link rel="stylesheet" href="stalker/tormenta/tormenta.css">
+    <link rel="stylesheet" href="stalker/detector/detector.css">
+    <link rel="stylesheet" href="stalker/fauna/fauna.css">
+    <link rel="stylesheet" href="stalker/lazona/lazona.css">
 
     <!-- Escenas temáticas (transición + botones de descarga) -->
     <link rel="stylesheet" href="transicion.css">
@@ -516,6 +536,26 @@
         .c-azkaban    { color: #78909c; }
         .c-profecia   { color: #ffd166; }
         .c-pensieve   { color: #4fc3f7; }
+        .c-solitarios { color: #c8a86a; }
+        .c-deber      { color: #ef5350; }
+        .c-libertad   { color: #8bc34a; }
+        .c-cielodespejado { color: #4fc3f7; }
+        .c-bandidos   { color: #d7ccc8; }
+        .c-mercenarios { color: #26c6da; }
+        .c-militares  { color: #9ccc65; }
+        .c-ecologistas { color: #ffb74d; }
+        .c-monolito   { color: #b2ebf2; }
+        .c-renegados  { color: #ff7043; }
+        .c-pecado     { color: #d32f2f; }
+        .c-unisg      { color: #4a90d9; }
+        .c-ultimodia  { color: #ffa000; }
+        .c-emision    { color: #7fd8f7; }
+        .c-anomalia   { color: #b388ff; }
+        .c-artefacto  { color: #6ef0e0; }
+        .c-tormenta   { color: #ce93d8; }
+        .c-detector   { color: #dcd28a; }
+        .c-fauna      { color: #e0a96d; }
+        .c-lazona     { color: #ffd54f; }
 
         footer {
             padding: 2rem 0 1rem;
@@ -612,6 +652,11 @@
 
         body:has(.grupo[open]):not(:has(#g-the_division[open]))
             .galeria .tarjeta[data-cat="the_division"] {
+            display: none;
+        }
+
+        body:has(.grupo[open]):not(:has(#g-stalker[open]))
+            .galeria .tarjeta[data-cat="stalker"] {
             display: none;
         }
 
@@ -778,7 +823,7 @@
 
     <!-- ======================= ÍNDICE ======================= -->
     <aside class="indice">
-        <h3>Efectos <span class="contador">99 disponibles</span></h3>
+        <h3>Efectos <span class="contador">119 disponibles</span></h3>
 
         <!-- Carpeta de categoría: plegada por defecto; al abrirla se
              despliegan su lista y sus tarjetas (CSS puro, sin JS) -->
@@ -915,6 +960,32 @@
                 <li data-cat="harry_potter"><a href="#azkaban">🔒 Azkaban</a></li>
                 <li data-cat="harry_potter"><a href="#profecia">🔮 Profecía</a></li>
                 <li data-cat="harry_potter"><a href="#pensieve">🌊 Pensieve</a></li>
+            </ol>
+        </details>
+        <!-- Stalker -->
+        <details class="grupo" id="g-stalker" data-cat="stalker">
+            <summary class="grupo-titulo">Stalker <span class="grupo-n">20</span></summary>
+            <ol class="lista">
+                <li data-cat="stalker"><a href="#solitarios">🎒 Solitarios</a></li>
+                <li data-cat="stalker"><a href="#deber">🛡 Deber</a></li>
+                <li data-cat="stalker"><a href="#libertad">🌿 Libertad</a></li>
+                <li data-cat="stalker"><a href="#cielodespejado">🌤 Cielo Despejado</a></li>
+                <li data-cat="stalker"><a href="#bandidos">💀 Bandidos</a></li>
+                <li data-cat="stalker"><a href="#mercenarios">🎯 Mercenarios</a></li>
+                <li data-cat="stalker"><a href="#militares">🪖 Militares</a></li>
+                <li data-cat="stalker"><a href="#ecologistas">🧪 Ecologistas</a></li>
+                <li data-cat="stalker"><a href="#monolito">🗿 Monolito</a></li>
+                <li data-cat="stalker"><a href="#renegados">🏴 Renegados</a></li>
+                <li data-cat="stalker"><a href="#pecado">☦ Pecado</a></li>
+                <li data-cat="stalker"><a href="#unisg">🔬 UNISG</a></li>
+                <li data-cat="stalker"><a href="#ultimodia">⏳ Último Día</a></li>
+                <li data-cat="stalker"><a href="#emision">🌊 Emisión</a></li>
+                <li data-cat="stalker"><a href="#anomalia">🔮 Anomalía</a></li>
+                <li data-cat="stalker"><a href="#artefacto">💎 Artefacto</a></li>
+                <li data-cat="stalker"><a href="#tormenta">🧠 Tormenta Psi</a></li>
+                <li data-cat="stalker"><a href="#detector">📟 Detector</a></li>
+                <li data-cat="stalker"><a href="#fauna">🐾 Fauna</a></li>
+                <li data-cat="stalker"><a href="#lazona">☢ La Zona</a></li>
             </ol>
         </details>
     </aside>
@@ -2418,6 +2489,306 @@
                 <div class="hp-pen-onda"></div>
                 <div class="hp-pen-hilo"></div>
                 <div class="hp-pen-destello"></div>
+            </div>
+        </section>
+
+        <!-- ============ 100. SOLITARIOS ============ -->
+        <section id="solitarios" class="tarjeta" data-cat="stalker">
+            <div class="muestra">
+                <span class="efecto-solitarios">SOLITARIOS</span>
+            </div>
+            <h2 class="c-solitarios">🎒 Solitarios <small>Polvo y caminos</small></h2>
+            <a class="btn" href="stalker/solitarios/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="stalker/solitarios/solitarios.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-solitarios">
+                <div class="stk-sol-linterna"></div>
+                <div class="stk-sol-motas"></div>
+                <div class="stk-sol-surco"></div>
+            </div>
+        </section>
+
+        <!-- ============ 101. DEBER ============ -->
+        <section id="deber" class="tarjeta" data-cat="stalker">
+            <div class="muestra">
+                <span class="efecto-deber">DEBER</span>
+            </div>
+            <h2 class="c-deber">🛡 Deber <small>Orden y contención</small></h2>
+            <a class="btn" href="stalker/deber/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="stalker/deber/deber.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-deber">
+                <div class="stk-deb-guardia"></div>
+                <div class="stk-deb-latido"></div>
+                <div class="stk-deb-aviso"></div>
+            </div>
+        </section>
+
+        <!-- ============ 102. LIBERTAD ============ -->
+        <section id="libertad" class="tarjeta" data-cat="stalker">
+            <div class="muestra">
+                <span class="efecto-libertad">LIBERTAD</span>
+            </div>
+            <h2 class="c-libertad">🌿 Libertad <small>Verde y sin jefe</small></h2>
+            <a class="btn" href="stalker/libertad/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="stalker/libertad/libertad.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-libertad">
+                <div class="stk-lib-humo"></div>
+                <div class="stk-lib-mota"></div>
+                <div class="stk-lib-brisa"></div>
+            </div>
+        </section>
+
+        <!-- ============ 103. CIELO DESPEJADO ============ -->
+        <section id="cielodespejado" class="tarjeta" data-cat="stalker">
+            <div class="muestra">
+                <span class="efecto-cielodespejado">CIELO DESPEJADO</span>
+            </div>
+            <h2 class="c-cielodespejado">🌤 Cielo Despejado <small>Horizonte despejado</small></h2>
+            <a class="btn" href="stalker/cielodespejado/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="stalker/cielodespejado/cielodespejado.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-cielodespejado">
+                <div class="stk-cie-nube"></div>
+                <div class="stk-cie-estela"></div>
+                <div class="stk-cie-alba"></div>
+            </div>
+        </section>
+
+        <!-- ============ 104. BANDIDOS ============ -->
+        <section id="bandidos" class="tarjeta" data-cat="stalker">
+            <div class="muestra">
+                <span class="efecto-bandidos">BANDIDOS</span>
+            </div>
+            <h2 class="c-bandidos">💀 Bandidos <small>Cero escrúpulos</small></h2>
+            <a class="btn" href="stalker/bandidos/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="stalker/bandidos/bandidos.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-bandidos">
+                <div class="stk-ban-temblo"></div>
+                <div class="stk-ban-humo"></div>
+                <div class="stk-ban-marcas"></div>
+            </div>
+        </section>
+
+        <!-- ============ 105. MERCENARIOS ============ -->
+        <section id="mercenarios" class="tarjeta" data-cat="stalker">
+            <div class="muestra">
+                <span class="efecto-mercenarios">MERCENARIOS</span>
+            </div>
+            <h2 class="c-mercenarios">🎯 Mercenarios <small>Punto en la mira</small></h2>
+            <a class="btn" href="stalker/mercenarios/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="stalker/mercenarios/mercenarios.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-mercenarios">
+                <div class="stk-mer-reticula"></div>
+                <div class="stk-mer-trazadora"></div>
+                <div class="stk-mer-punto"></div>
+            </div>
+        </section>
+
+        <!-- ============ 106. MILITARES ============ -->
+        <section id="militares" class="tarjeta" data-cat="stalker">
+            <div class="muestra">
+                <span class="efecto-militares">MILITARES</span>
+            </div>
+            <h2 class="c-militares">🪖 Militares <small>Uniforme y celo</small></h2>
+            <a class="btn" href="stalker/militares/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="stalker/militares/militares.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-militares">
+                <div class="stk-mil-faro"></div>
+                <div class="stk-mil-camo"></div>
+                <div class="stk-mil-laser"></div>
+            </div>
+        </section>
+
+        <!-- ============ 107. ECOLOGISTAS ============ -->
+        <section id="ecologistas" class="tarjeta" data-cat="stalker">
+            <div class="muestra">
+                <span class="efecto-ecologistas">ECOLOGISTAS</span>
+            </div>
+            <h2 class="c-ecologistas">🧪 Ecologistas <small>Ciencia con bata</small></h2>
+            <a class="btn" href="stalker/ecologistas/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="stalker/ecologistas/ecologistas.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-ecologistas">
+                <div class="stk-eco-barrido"></div>
+                <div class="stk-eco-gota"></div>
+                <div class="stk-eco-led"></div>
+            </div>
+        </section>
+
+        <!-- ============ 108. MONOLITO ============ -->
+        <section id="monolito" class="tarjeta" data-cat="stalker">
+            <div class="muestra">
+                <span class="efecto-monolito">MONOLITO</span>
+            </div>
+            <h2 class="c-monolito">🗿 Monolito <small>Psi y piedra blanca</small></h2>
+            <a class="btn" href="stalker/monolito/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="stalker/monolito/monolito.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-monolito">
+                <div class="stk-mon-halo"></div>
+                <div class="stk-mon-anillo"></div>
+                <div class="stk-mon-bruma"></div>
+            </div>
+        </section>
+
+        <!-- ============ 109. RENEGADOS ============ -->
+        <section id="renegados" class="tarjeta" data-cat="stalker">
+            <div class="muestra">
+                <span class="efecto-renegados">RENEGADOS</span>
+            </div>
+            <h2 class="c-renegados">🏴 Renegados <small>Cisma y herrumbre</small></h2>
+            <a class="btn" href="stalker/renegados/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="stalker/renegados/renegados.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-renegados">
+                <div class="stk-ren-goteo"></div>
+                <div class="stk-ren-pintura"></div>
+                <div class="stk-ren-fisura"></div>
+            </div>
+        </section>
+
+        <!-- ============ 110. PECADO ============ -->
+        <section id="pecado" class="tarjeta" data-cat="stalker">
+            <div class="muestra">
+                <span class="efecto-pecado">PECADO</span>
+            </div>
+            <h2 class="c-pecado">☦ Pecado <small>Ascua y confessionario</small></h2>
+            <a class="btn" href="stalker/pecado/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="stalker/pecado/pecado.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-pecado">
+                <div class="stk-pec-velo"></div>
+                <div class="stk-pec-brasa"></div>
+                <div class="stk-pec-runa"></div>
+            </div>
+        </section>
+
+        <!-- ============ 111. UNISG ============ -->
+        <section id="unisg" class="tarjeta" data-cat="stalker">
+            <div class="muestra">
+                <span class="efecto-unisg">UNISG</span>
+            </div>
+            <h2 class="c-unisg">🔬 UNISG <small>Informe sin alma</small></h2>
+            <a class="btn" href="stalker/unisg/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="stalker/unisg/unisg.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-unisg">
+                <div class="stk-uni-marco"></div>
+                <div class="stk-uni-linea"></div>
+                <div class="stk-uni-seguro"></div>
+            </div>
+        </section>
+
+        <!-- ============ 112. ÚLTIMO DÍA ============ -->
+        <section id="ultimodia" class="tarjeta" data-cat="stalker">
+            <div class="muestra">
+                <span class="efecto-ultimodia">ÚLTIMO DÍA</span>
+            </div>
+            <h2 class="c-ultimodia">⏳ Último Día <small>Arena que se acaba</small></h2>
+            <a class="btn" href="stalker/ultimodia/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="stalker/ultimodia/ultimodia.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-ultimodia">
+                <div class="stk-ult-cuenta"></div>
+                <div class="stk-ult-arena"></div>
+                <div class="stk-ult-vela"></div>
+            </div>
+        </section>
+
+        <!-- ============ 113. EMISIÓN ============ -->
+        <section id="emision" class="tarjeta" data-cat="stalker">
+            <div class="muestra">
+                <span class="efecto-emision">EMISIÓN</span>
+            </div>
+            <h2 class="c-emision">🌊 Emisión <small>El frente que sube</small></h2>
+            <a class="btn" href="stalker/emision/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="stalker/emision/emision.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-emision">
+                <div class="stk-emi-frente"></div>
+                <div class="stk-emi-golpe"></div>
+                <div class="stk-emi-ceniza"></div>
+            </div>
+        </section>
+
+        <!-- ============ 114. ANOMALÍA ============ -->
+        <section id="anomalia" class="tarjeta" data-cat="stalker">
+            <div class="muestra">
+                <span class="efecto-anomalia">ANOMALÍA</span>
+            </div>
+            <h2 class="c-anomalia">🔮 Anomalía <small>El espacio doblado</small></h2>
+            <a class="btn" href="stalker/anomalia/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="stalker/anomalia/anomalia.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-anomalia">
+                <div class="stk-ano-anillo"></div>
+                <div class="stk-ano-chispa"></div>
+                <div class="stk-ano-bruma"></div>
+            </div>
+        </section>
+
+        <!-- ============ 115. ARTEFACTO ============ -->
+        <section id="artefacto" class="tarjeta" data-cat="stalker">
+            <div class="muestra">
+                <span class="efecto-artefacto">ARTEFACTO</span>
+            </div>
+            <h2 class="c-artefacto">💎 Artefacto <small>Reliquia radiactiva</small></h2>
+            <a class="btn" href="stalker/artefacto/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="stalker/artefacto/artefacto.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-artefacto">
+                <div class="stk-art-resplandor"></div>
+                <div class="stk-art-destello"></div>
+                <div class="stk-art-rastro"></div>
+            </div>
+        </section>
+
+        <!-- ============ 116. TORMENTA PSI ============ -->
+        <section id="tormenta" class="tarjeta" data-cat="stalker">
+            <div class="muestra">
+                <span class="efecto-tormenta">TORMENTA PSI</span>
+            </div>
+            <h2 class="c-tormenta">🧠 Tormenta Psi <small>Zumbido en la cabeza</small></h2>
+            <a class="btn" href="stalker/tormenta/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="stalker/tormenta/tormenta.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-tormenta">
+                <div class="stk-tor-raya"></div>
+                <div class="stk-tor-zumbido"></div>
+                <div class="stk-tor-centella"></div>
+            </div>
+        </section>
+
+        <!-- ============ 117. DETECTOR ============ -->
+        <section id="detector" class="tarjeta" data-cat="stalker">
+            <div class="muestra">
+                <span class="efecto-detector">DETECTOR</span>
+            </div>
+            <h2 class="c-detector">📟 Detector <small>Pitido tras pitido</small></h2>
+            <a class="btn" href="stalker/detector/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="stalker/detector/detector.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-detector">
+                <div class="stk-det-aguja"></div>
+                <div class="stk-det-tic"></div>
+                <div class="stk-det-testigo"></div>
+            </div>
+        </section>
+
+        <!-- ============ 118. FAUNA ============ -->
+        <section id="fauna" class="tarjeta" data-cat="stalker">
+            <div class="muestra">
+                <span class="efecto-fauna">FAUNA</span>
+            </div>
+            <h2 class="c-fauna">🐾 Fauna <small>Algo respira en la maleza</small></h2>
+            <a class="btn" href="stalker/fauna/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="stalker/fauna/fauna.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-fauna">
+                <div class="stk-fau-esporas"></div>
+                <div class="stk-fau-colmillo"></div>
+                <div class="stk-fau-temblor"></div>
+            </div>
+        </section>
+
+        <!-- ============ 119. LA ZONA ============ -->
+        <section id="lazona" class="tarjeta" data-cat="stalker">
+            <div class="muestra">
+                <span class="efecto-lazona">LA ZONA</span>
+            </div>
+            <h2 class="c-lazona">☢ La Zona <small>Radiación y aviso</small></h2>
+            <a class="btn" href="stalker/lazona/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="stalker/lazona/lazona.zip" download>Descargar efecto (.zip)</a>
+            <div class="escena tema-lazona">
+                <div class="stk-laz-cinta"></div>
+                <div class="stk-laz-pulso"></div>
+                <div class="stk-laz-alambre"></div>
             </div>
         </section>
 
