@@ -12,8 +12,8 @@ Copia TODO el archivo "botin.css" dentro de tu hoja de estilos
 Contenido del archivo:
   · La clase .efecto-botin
   · Sus pseudo-elementos ::before y ::after
-    (partículas de loot ascendentes)
-  ·   · botin-destello, botin-particulas
+    (haz de luz y estrella de rareza)
+  ·   · botin-brillo, botin-haz, botin-destello
 
 
 PASO 2 - AÑADE EL TEXTO EN TU HTML
@@ -22,28 +22,28 @@ PASO 2 - AÑADE EL TEXTO EN TU HTML
 
 Ejemplo real:
 
-    <h1><span class="efecto-botin">BOTÍN</span></h1>
+    <h1><span class="efecto-botin">EXÓTICO</span></h1>
 
 
 QUÉ HACE
 --------
-Dos animaciones en bucle infinito:
-  · botin-destello (2 s) → flash dorado que se expande
-    desde el centro (radial-gradient animado).
-  · botin-particulas (3 s) → símbolos ★ ◆ ◇ ascienden
-    y se desvanecen (pseudo-elementos con content y
-    transform Y negativo).
-El truco está en background-clip: text para el flash
-y pseudo-elementos con content de símbolos Unicode.
+Tres animaciones en bucle infinito:
+  · botin-brillo (4 s) → un destello blanco barre el
+    texto en diagonal por dentro de los glifos.
+  · botin-haz (2,6 s) → el haz de botín dorado sube,
+    respira y ondea sobre las letras.
+  · botin-destello (1,4 s, steps(1)) → la estrella ✦ de
+    rareza destella y gira en la esquina superior.
+El color base es un degradado dorado de objeto exótico.
 
-TÉCNICA: background-clip: text (degradado oro) +
-    pseudo-elementos con content de símbolos +
-    animación de partículas ascendentes.
+TÉCNICA: background-clip: text con degradado dorado y destello
+    deslizante + pseudo-elementos (haz y estrella) con
+    opacity/transform/filter animados.
 
 
 AJUSTES FÁCILES
 ---------------
-· Flash más rápido: 2s → 1.2s.
-· Más partículas: añade más símbolos al content.
-· Oro más brillante: #ffb300 → #ffd600.
-· Partículas más lentas: 3s → 5s.
+· Barrido más rápido: 4s → 2.4s.
+· Haz más ancho: 1.5em → 2.4em en ::before.
+· Estrella en la otra esquina: right -.5em → left -.5em en ::after.
+· Dorado más rojizo: #ff8f00 → #ff6d00 en el degradado base.

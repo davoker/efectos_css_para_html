@@ -1,5 +1,5 @@
 /* ================================================================
-   EFECTO 27: ABATIDO - latido de corazón moribundo (CSS puro)
+   EFECTO 27: ABATIDO - electrocardiograma de agente abatido (CSS puro)
    ----------------------------------------------------------------
    CÓMO USARLO EN CUALQUIER HTML:
      <span class="efecto-abatido">Tu texto</span>
@@ -8,56 +8,82 @@
 
    CÓMO APLICARLO A OTRO ARCHIVO .CSS:
      Copia TODO este archivo dentro de tu hoja de estilos
-     (o como mínimo: la clase .efecto-abatido, sus pseudo-elementos y los 2 @keyframes).
+     (o como mínimo: la clase .efecto-abatido, sus pseudo-elementos y los 3 @keyframes).
 
    QUÉ HACE:
-      Las letras laten como un CORAZÓN MORIBUNDO: dos
-      golpes débiles y una pausa larga, el color rojo se
-      desvanece y vuelve con cada latido. Fondo casi
-      negro obligatorio.
+      Las letras laten con un ELECTROCARDIOGRAMA: una línea
+      con su pico cruza el texto de izquierda a derecha y
+      deja un trazo plano (línea de base) en el que el texto
+      se apaga a gris durante unos segundos… y vuelve a
+      latir. Como un monitor de signos vitales.
+      Fondo casi negro recomendado.
 
-   TÉCNICA: text-shadow + color animados con steps() para
-    latido irregular + pseudo-elemento para gota
-    de sangre que cae.
+   TÉCNICA: background-clip: text + ::before (línea de base) y
+    ::after recortado con clip-path (el pico) viajando
+    con left animado; filter grayscale en el paro.
    ================================================================ */
 
 
 .efecto-abatido {
     display: inline-block;
     position: relative;
-    color: #ff5252;
-    font-weight: 800;
-    animation: abatido-latido 2.2s ease-in-out infinite;
+
+    background-image: linear-gradient(90deg, #ff8a80, #f44336 55%, #7f0000);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+
+    animation: abatido-estado 3.2s ease-in-out infinite;
 }
+
+/* línea de base: solo se ve durante la fase de paro */
+.efecto-abatido::before {
+    content: "";
+    position: absolute;
+    left: -.4em;
+    right: -.4em;
+    top: 50%;
+    height: 2px;
+    background: #ff5252;
+    opacity: 0;
+    animation: abatido-linea 3.2s ease-in-out infinite;
+}
+
+/* el pico del ECG: una barra recortada en forma de latido */
 .efecto-abatido::after {
     content: "";
     position: absolute;
-    left: 50%;
-    top: 100%;
-    width: .12em;
-    height: .12em;
-    margin-left: -.06em;
-    background: #ff5252;
-    border-radius: 50%;
-    animation: abatido-gota 2.2s ease-out infinite;
-    pointer-events: none;
+    top: 20%;
+    bottom: 20%;
+    left: -10%;
+    width: .5em;
+    background: #ffea00;
+    box-shadow: 0 0 6px rgba(255, 234, 0, .8);
+    clip-path: polygon(
+        0% 49%, 44% 49%, 50% 5%, 56% 49%, 76% 49%, 80% 96%, 84% 49%,
+        100% 49%, 100% 53%, 84% 53%, 80% 99%, 76% 53%, 56% 53%,
+        50% 8%, 44% 53%, 0% 53%);
+    opacity: 0;
+    animation: abatido-trazo 3.2s linear infinite;
 }
-@keyframes abatido-latido {
-    0%, 100% { color: #ff5252;
-               text-shadow: 0 0 10px rgba(255, 82, 82, .5); }
-    6%       { color: #ff1744;
-               text-shadow: 0 0 20px rgba(255, 255, 255, .9),
-                           0 0 30px rgba(255, 23, 68, .8); }
-    12%      { color: #ff5252;
-               text-shadow: 0 0 10px rgba(255, 82, 82, .5); }
-    18%      { color: #ff1744;
-               text-shadow: 0 0 20px rgba(255, 255, 255, .9),
-                           0 0 30px rgba(255, 23, 68, .8); }
-    24%, 100% { color: #ff5252;
-                text-shadow: 0 0 10px rgba(255, 82, 82, .5); }
+
+@keyframes abatido-estado {
+    0%, 50%  { filter: grayscale(0) brightness(1); }
+    55%      { filter: grayscale(0) brightness(1.4); }
+    60%      { filter: grayscale(.85) brightness(.7); }
+    95%      { filter: grayscale(.85) brightness(.7); }
+    100%     { filter: grayscale(0) brightness(1); }
 }
-@keyframes abatido-gota {
-    0%   { transform: translateY(0) scale(1); opacity: 1; }
-    50%  { transform: translateY(3em) scale(1.2); opacity: .8; }
-    100% { transform: translateY(6em) scale(.8); opacity: 0; }
+@keyframes abatido-linea {
+    0%, 44%  { opacity: 0; }
+    46%, 92% { opacity: .9; }
+    100%     { opacity: 0; }
+}
+@keyframes abatido-trazo {
+    0%    { left: -10%; opacity: 0; }
+    4%    { opacity: 1; }
+    40%   { left: 105%; opacity: 1; }
+    44%   { left: 105%; opacity: 0; }
+    100%  { left: 105%; opacity: 0; }
 }

@@ -1,5 +1,5 @@
 /* ================================================================
-   EFECTO 28: NEVADA - copos de nieve sobre las letras (CSS puro)
+   EFECTO 28: NEVADA - nevada sobre el texto (CSS puro)
    ----------------------------------------------------------------
    CÓMO USARLO EN CUALQUIER HTML:
      <span class="efecto-nevada">Tu texto</span>
@@ -8,54 +8,62 @@
 
    CÓMO APLICARLO A OTRO ARCHIVO .CSS:
      Copia TODO este archivo dentro de tu hoja de estilos
-     (o como mínimo: la clase .efecto-nevada, sus pseudo-elementos y los 2 @keyframes).
+     (o como mínimo: la clase .efecto-nevada, sus pseudo-elementos y los 3 @keyframes).
 
    QUÉ HACE:
-      Las letras están cubiertas de NIEVE: copos blancos
-      caen suavemente y se acumulan sobre los glifos,
-      con un resplandor azulado tenue. Fondo oscuro
-      recomendado.
+      El texto es de hielo (blanco-azulado) y DOS CAPAS de
+      COPOS caen en diagonal por delante: una gruesa y
+      rápida y otra fina y lenta, mientras un brillo suave
+      respira en las letras. Nieve cayendo sobre la ciudad.
+      Fondo azul noche o casi negro recomendado.
 
-   TÉCNICA: background-clip: text (azul hielo) +
-    pseudo-elementos con content de copos ❄ ️ +
-    animación de caída y acumulación.
+   TÉCNICA: background-clip: text (nieve) + pseudo-elementos con
+    radial-gradient de copos en dos capas cuyas
+    background-position cae en bucle (tamaño = período).
    ================================================================ */
 
 
 .efecto-nevada {
     display: inline-block;
     position: relative;
-    background-image: linear-gradient(180deg,
-        #e1f5fe 0%, #81d4fa 40%, #4fc3f7 70%, #0288d1 100%);
+
+    background-image: linear-gradient(90deg, #ffffff, #b3e5fc 55%, #81d4fa);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(179, 229, 252, .5);
+
+    animation: nevada-brillo 3s ease-in-out infinite;
 }
+
+/* dos capas de copos: la segunda (más gruesa) va más rápido */
 .efecto-nevada::before,
 .efecto-nevada::after {
-    content: "❄ ❅ ❆ ❄ ❅ ❆";
+    content: "";
     position: absolute;
-    left: 0;
-    right: 0;
-    top: -2em;
-    font-size: .7em;
-    line-height: 1.5;
-    color: #e1f5fe;
-    animation: nevada-copo 4s linear infinite;
-    pointer-events: none;
+    inset: -.6em -.5em;
+    background-image:
+        radial-gradient(circle 1.5px at 10px 10px, #ffffff 96%, transparent),
+        radial-gradient(circle 2px at 27px 31px, #e1f5fe 96%, transparent);
+    background-size: 36px 48px, 56px 70px;
+    animation: nevada-capa1 6s linear infinite;
 }
 .efecto-nevada::after {
-    animation-delay: -2s;
-    animation-name: nevada-acumula;
+    background-size: 44px 60px, 66px 84px;
+    opacity: .7;
+    animation: nevada-capa2 4.4s linear infinite;
 }
-@keyframes nevada-copo {
-    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(4em) rotate(360deg); opacity: 0; }
+
+@keyframes nevada-brillo {
+    0%, 100% { text-shadow: 0 0 8px rgba(179, 229, 252, .35); }
+    50%      { text-shadow: 0 0 18px rgba(179, 229, 252, .85); }
 }
-@keyframes nevada-acumula {
-    0%   { background: transparent; }
-    50%  { background: linear-gradient(0deg,
-        rgba(225,245,254,.6) 0%, transparent 40%); }
-    100% { background: transparent; }
+@keyframes nevada-capa1 {
+    0%   { background-position: 0 0, 0 0; }
+    100% { background-position: -36px 48px, -56px 70px; }
+}
+@keyframes nevada-capa2 {
+    0%   { background-position: 0 0, 0 0; }
+    100% { background-position: 44px 60px, 66px 84px; }
 }

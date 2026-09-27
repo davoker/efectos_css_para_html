@@ -20,21 +20,21 @@
         body {
             margin: 0;
             padding: 2rem;
-            background-color: #061a2a;
-            color: #b3e5fc;
+            background-color: #0a0f14;
+            color: #dfeaf2;
             font-family: Arial, Helvetica, sans-serif;
             line-height: 1.6;
         }
-        h1 { font-size: 2.6rem; margin-top: 0; color: #81d4fa; }
+        h1 { font-size: 2.6rem; margin-top: 0; color: #b3e5fc; }
         h2 {
-            color: #81d4fa;
-            border-bottom: 2px solid #1a3a5a;
+            color: #b3e5fc;
+            border-bottom: 2px solid #1d3242;
             padding-bottom: .4rem;
             margin-top: 2.5rem;
         }
         .demo {
-            background-color: #0a1e2e;
-            border: 1px dashed #1a3a5a;
+            background-color: #111a22;
+            border: 1px dashed #1d3242;
             border-radius: 10px;
             padding: 2rem;
             margin: 1rem 0;
@@ -44,16 +44,16 @@
         .mediano { font-size: 1.6rem; font-weight: 800; }
         .peq { font-size: 1rem; font-weight: bold; }
         pre {
-            background-color: #0a1e2e;
-            border: 1px solid #1a3a5a;
+            background-color: #111a22;
+            border: 1px solid #1d3242;
             border-radius: 8px;
             padding: 1rem;
             overflow-x: auto;
-            color: #e1f5fe;
+            color: #d7f1ff;
             font-size: .95rem;
         }
-        code { color: #e1f5fe; }
-        .nota { color: #81d4fa; font-weight: bold; }
+        code { color: #d7f1ff; }
+        .nota { color: #b3e5fc; font-weight: bold; }
 
         /* --- BOTÓN "TODOS LOS EFECTOS" (centrado arriba) ---
            Clicable y con estado pulsado; mientras se mantiene sale el
@@ -99,7 +99,7 @@
             border-radius: 3px;
             opacity: 0;
             pointer-events: none;
-            background: linear-gradient(90deg, rgba(129,212,250,0), rgba(129,212,250,.55) 20%, rgba(255,255,255,.85) 50%, rgba(129,212,250,.55) 80%, rgba(129,212,250,0));
+            background: linear-gradient(90deg, rgba(179,229,252,0), rgba(179,229,252,.55) 20%, rgba(255,255,255,.85) 50%, rgba(179,229,252,.55) 80%, rgba(179,229,252,0));
             transform: scale(.4) translateX(0);
         }
         .btn-volver:active::after {
@@ -157,30 +157,31 @@
 
     <h1>EFECTO NEVADA</h1>
     <p>
-        Las letras están bajo una <strong>nevada suave</strong>:
-        copos ❄ cayendo y acumulándose en la base.
+        Las letras son de <strong>hielo</strong> y <strong>dos capas de
+        copos</strong> caen en diagonal por delante, una fina y
+        otra gruesa, con un brillo que respira.
     </p>
 
     <h2>1. Demo grande</h2>
     <div class="demo">
-        <span class="efecto-nevada grande">NEVADA</span>
+        <span class="efecto-nevada grande">NIEVE</span>
     </div>
 
     <h2>2. Título de página</h2>
     <div class="demo">
-        <span class="efecto-nevada mediano">invierno nuclear</span>
+        <span class="efecto-nevada mediano">central park</span>
     </div>
 
     <h2>3. Texto pequeño</h2>
     <div class="demo">
-        <span class="efecto-nevada peq">zona contaminada</span>
+        <span class="efecto-nevada peq">tormenta invernal</span>
     </div>
 
     <h2>4. Varias palabras en la misma línea</h2>
     <div class="demo">
+        <span class="efecto-nevada mediano">CALMA</span>
         <span class="efecto-nevada mediano">❄</span>
-        <span class="efecto-nevada mediano">❅</span>
-        <span class="efecto-nevada mediano">❆</span>
+        <span class="efecto-nevada mediano">BLANCA</span>
     </div>
 
     <h2>Cómo aplicarlo a cualquier archivo .css</h2>
