@@ -1,0 +1,105 @@
+================================================================
+EFECTO APAGÓN - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "apagon.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/apagon.css">
+
+Contenido del archivo:
+  · La clase .efecto-apagon
+  · Sus pseudo-elementos ::before y ::after
+    (barras de respaldo arriba y abajo)
+  ·   · apagon-parpadeo, apagon-respaldo
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-apagon">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-apagon">APAGÓN</span></h1>
+
+
+QUÉ HACE
+--------
+Dos animaciones en bucle infinito, con saltos secos:
+  · apagon-parpadeo (4,6 s, steps(1)) → el texto casi
+    apagado salta a rojo de emergencia tres veces por
+    ciclo y vuelve a la oscuridad sin transición.
+  · apagon-respaldo (4,6 s, steps(1)) → las dos barras
+    rojas de respaldo (arriba y abajo) se encienden en
+    los mismos instantes que el texto.
+Fondo oscuro casi negro recomendado (el efecto es la
+oscuridad condestellos).
+
+TÉCNICA: color/text-shadow con steps(1) (encendidos secos) y
+    pseudo-elementos con barras de respaldo
+    sincronizadas.
+
+
+AJUSTES FÁCILES
+---------------
+· Destellos más seguidos: 4.6s → 3s.
+· Más apagada: #4a0f0f → #2a0707 (estado base).
+· Destello más fuerte: sube el text-shadow a 30px.
+· Barras más gruesas: .12em → .2em en ::before y ::after.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+BLACKOUT EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "apagon.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/apagon.css">
+
+What the file contains:
+  · The .efecto-apagon class
+  · Its pseudo-elements ::before and ::after
+    (backup bars top and bottom)
+  ·   · apagon-parpadeo, apagon-respaldo
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-apagon">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-apagon">APAGÓN</span></h1>
+
+
+WHAT IT DOES
+--------
+Two animations on an infinite loop, with abrupt steps:
+  · apagon-parpadeo (4.6 s, steps(1)) → the almost
+    dead text jumps to emergency red three times per
+    cycle and returns to darkness with no transition.
+  · apagon-respaldo (4.6 s, steps(1)) → the two red
+    backup bars (top and bottom) light up at
+    the same moments as the text.
+Near-black dark background recommended (the effect is the
+darkness with bright flashes).
+
+TECHNIQUE: color/text-shadow with steps(1) (abrupt turn-ons) and
+    pseudo-elements with backup bars
+    synchronized.
+
+
+EASY TWEAKS
+---------------
+· More frequent flashes: 4.6s → 3s.
+· Dimmer: #4a0f0f → #2a0707 (base state).
+· Stronger flash: raise the text-shadow to 30px.
+· Thicker bars: .12em → .2em in ::before and ::after.

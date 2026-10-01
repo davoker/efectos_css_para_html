@@ -1,0 +1,113 @@
+================================================================
+EFECTO HIELO - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "hielo.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/hielo.css">
+
+Contenido del archivo:
+  · La clase .efecto-hielo
+  · 2 @keyframes: hielo-escarcha y hielo-frio
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-hielo">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-hielo">Hielo</span></h1>
+
+
+VENTAJAS
+--------
+· NO necesita ningún atributo extra: solo la clase.
+· Funciona sobre cualquier texto (h1, h2, enlaces, botones...).
+· Recomendado: fondo oscuro para que el resplandor azul
+  se aprecie bien.
+
+
+QUÉ HACE
+--------
+Dos animaciones simultáneas en bucle infinito:
+  · hielo-escarcha (5 s) → una banda blanca de destello sube
+    por dentro de las letras (degradado de 300% con mosaico
+    vertical: el bucle es invisible).
+  · hielo-frio (2,5 s)  → el resplandor azul de los bordes
+    se intensifica y suaviza, como un "respirar" helado.
+
+
+AJUSTES FÁCILES
+---------------
+· Destello más rápido: cambia 5s por 2.5s.
+· Respiración más marcada: sube los valores de opacidad
+  (0.9 → 1) y de desenfoque (48px → 70px) de hielo-frio.
+· Hielo más oscuro: cambia #a7e4ff / #8fdcff por
+  #4a90c4 / #2f6f9e.
+· Destello casi blanco: alarga la zona blanca del
+  degradado (#ffffff 45% → 40% y 55% → 60%).
+· Quitar la respiración: borra hielo-frio de la animation
+  y añade un text-shadow fijo en la clase.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+ICE EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "hielo.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/hielo.css">
+
+What the file contains:
+  · The .efecto-hielo class
+  · 2 @keyframes: hielo-escarcha and hielo-frio
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-hielo">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-hielo">Hielo</span></h1>
+
+
+ADVANTAGES
+--------
+· NO extra attribute needed: just the class.
+· Works on any text (h1, h2, links, buttons...).
+· Recommended: dark background so the blue glow
+  shows up well.
+
+
+WHAT IT DOES
+--------
+Two simultaneous animations on an infinite loop:
+  · hielo-escarcha (5 s) → a white flash band rises
+    inside the letters (a 300% gradient with a tile
+    vertical: el bucle es invisible).
+  · hielo-frio (2.5 s)  → the blue glow on the edges
+    intensifies and softens, like an icy "breath".
+
+
+EASY TWEAKS
+---------------
+· Faster flash: change 5s to 2.5s.
+· Stronger breathing: raise the opacity values
+  (0.9 → 1) and blur values (48px → 70px) of hielo-frio.
+· Darker ice: change #a7e4ff / #8fdcff to
+  #4a90c4 / #2f6f9e.
+· Nearly white flash: widen the white area of the
+  gradient (#ffffff 45% → 40% and 55% → 60%).
+· Remove the breathing: delete hielo-frio from the animation
+  and add a fixed text-shadow in the class.

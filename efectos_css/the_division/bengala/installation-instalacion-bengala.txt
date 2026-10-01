@@ -1,0 +1,103 @@
+================================================================
+EFECTO BENGALA - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "bengala.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/bengala.css">
+
+Contenido del archivo:
+  · La clase .efecto-bengala
+  · Sus pseudo-elementos ::before y ::after
+    (humo que sube y chispas del arder)
+  ·   · bengala-ardor, bengala-humo, bengala-chispa
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-bengala">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-bengala">BENGALA</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones en bucle infinito:
+  · bengala-ardor (0,9 s, steps(1)) → el brillo y la
+    saturación saltan como una llama que chisporrotea.
+  · bengala-humo (3,4 s) → la columna de humo ::before
+    sube, se ensancha y se tuerce con suavidad.
+  · bengala-chispa (1,7 s, steps(1)) → las chispas de la
+    esquina aparecen y desaparecen en racimos secos.
+El color base es un degradado blanco-calcinado a naranja.
+
+TÉCNICA: background-clip: text (blanco-calcinado) + filter
+    brightness/saturate con steps(1) para la llama, y
+    pseudo-elementos de humo (blur) y chispas.
+
+
+AJUSTES FÁCILES
+---------------
+· Llamas más frecuentes: .9s → .55s en bengala-ardor.
+· Humo más tenue: opacity .5 → .3 en ::before.
+· Chispas más seguidas: 1.7s → 1s.
+· Rojo más puro: #ff3d00 → #ff1744 en el degradado.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+FLARE EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "bengala.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/bengala.css">
+
+What the file contains:
+  · The .efecto-bengala class
+  · Its pseudo-elements ::before and ::after
+    (rising smoke and sparks from the burn)
+  ·   · bengala-ardor, bengala-humo, bengala-chispa
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-bengala">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-bengala">BENGALA</span></h1>
+
+
+WHAT IT DOES
+--------
+Three animations on an infinite loop:
+  · bengala-ardor (0.9 s, steps(1)) → the brightness and
+    saturation jump like a crackling flame.
+  · bengala-humo (3.4 s) → the ::before smoke column
+    rises, widens and twists gently.
+  · bengala-chispa (1.7 s, steps(1)) → the sparks in the
+    corner appear and disappear in abrupt clusters.
+The base color is a scorched-white to orange gradient.
+
+TECHNIQUE: background-clip: text (scorched white) + filter
+    brightness/saturate with steps(1) for the flame, and
+    smoke (blur) and spark pseudo-elements.
+
+
+EASY TWEAKS
+---------------
+· More frequent flames: .9s → .55s in bengala-ardor.
+· Fainter smoke: opacity .5 → .3 in ::before.
+· More frequent sparks: 1.7s → 1s.
+· Purer red: #ff3d00 → #ff1744 in the gradient.

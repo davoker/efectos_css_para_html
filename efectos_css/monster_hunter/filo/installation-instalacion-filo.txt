@@ -1,0 +1,103 @@
+================================================================
+EFECTO FILO - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "filo.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/filo.css">
+
+Contenido del archivo:
+  · La clase .efecto-filo
+  · Sus pseudo-elementos ::before y ::after
+    (chispa de afilado que salta en el borde derecho)
+  ·   · mh-filo-borde, mh-filo-chispa
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-filo">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-filo">FILO</span></h1>
+
+
+QUÉ HACE
+--------
+Dos animaciones en bucle infinito:
+  · mh-filo-borde (3,6 s) → la banda de colores recorre
+    las letras de derecha a izquierda y vuelve: es el filo
+    gastándose y recuperándose.
+  · mh-filo-chispa (3,6 s) → justo cuando la banda llega
+    al final salta una chispa blanca en el borde.
+El orden de las capas es lo importante: la banda de color
+va DELANTE del acero, así que solo se ve mientras pasa.
+
+TÉCNICA: dos background-image con background-clip: text (acero
+    fijo + banda de colores con background-position
+    animado) y ::after de destello radial.
+
+
+AJUSTES FÁCILES
+---------------
+· Filo más rápido: 3.6s → 2.2s en mh-filo-borde.
+· Otros niveles: edita los colores de la banda.
+· Sin chispa: borra el ::after y mh-filo-chispa.
+· Acero más claro: sube el #e3edf5 del segundo degradado.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+EDGE EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "filo.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/filo.css">
+
+What the file contains:
+  · The .efecto-filo class
+  · Its pseudo-elements ::before and ::after
+    (sharpening spark that leaps at the right edge)
+  ·   · mh-filo-borde, mh-filo-chispa
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-filo">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-filo">FILO</span></h1>
+
+
+WHAT IT DOES
+--------
+Two animations on an infinite loop:
+  · mh-filo-borde (3.6 s) → the color band travels across
+    the letters from right to left and returns: it is the edge
+    wearing down and recovering.
+  · mh-filo-chispa (3.6 s) → just as the band reaches the
+    end, a white spark leaps at the edge.
+The layer order is what matters: the color band
+sits IN FRONT of the steel, so it is only visible as it passes.
+
+TECHNIQUE: two background-image with background-clip: text (steel
+    fixed + color band with background-position
+    animated) and radial flash ::after.
+
+
+EASY TWEAKS
+---------------
+· Faster edge: 3.6s → 2.2s in mh-filo-borde.
+· Other levels: edit the band's colors.
+· No spark: delete the ::after and mh-filo-chispa.
+· Lighter steel: raise the second gradient's #e3edf5.

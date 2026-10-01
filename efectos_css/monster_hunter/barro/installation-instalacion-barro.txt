@@ -1,0 +1,111 @@
+================================================================
+EFECTO BARRO - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "barro.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/barro.css">
+
+Contenido del archivo:
+  · La clase .efecto-barro
+  · Sus pseudo-elementos ::before y ::after
+    (salpicadura de fango ::before y gota ::after)
+  ·   · mh-barro-chapoteo, mh-barro-salpicadura, mh-barro-gota
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-barro">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-barro">BARRO</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones en bucle infinito:
+  · mh-barro-chapoteo (4 s) → las moteas y el degradado se
+    desplazan: el barro se revuelve dentro de las letras.
+    El salto final es exactamente el tamaño del mosaico,
+    por eso el bucle cierra sin costura.
+  · mh-barro-salpicadura (4 s) → una mancha de fango
+    golpea el texto desde la izquierda y se abre.
+  · mh-barro-gota (4 s) → del borde inferior cae una gota
+    que se estira al despegarse (scaleY).
+Las moteas son radial-gradient con background-size en em:
+el patrón escala con el tamaño de la letra.
+
+TÉCNICA: tres background-image con background-clip: text (dos
+    moteas radial-gradient en tile + degradado de fango)
+    con background-position animado, salpicadura ::before
+    con radial-gradient y gota ::after redondeada.
+
+
+AJUSTES FÁCILES
+---------------
+· Barro más oscuro: sube el #7a4f1c del degradado a #45280c.
+· Más revuelto: 4s → 2.4s en mh-barro-chapoteo.
+· Sin salpicadura: borra el ::before y mh-barro-salpicadura.
+· Gotas más seguidas: baja el 54% inicial de mh-barro-gota.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+MUD EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "barro.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/barro.css">
+
+What the file contains:
+  · The .efecto-barro class
+  · Its pseudo-elements ::before and ::after
+    (mud splash ::before and droplet ::after)
+  ·   · mh-barro-chapoteo, mh-barro-salpicadura, mh-barro-gota
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-barro">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-barro">BARRO</span></h1>
+
+
+WHAT IT DOES
+--------
+Three animations on an infinite loop:
+  · mh-barro-chapoteo (4 s) → the speckles and the gradient
+    desplazan: el barro se revuelve dentro de las letras.
+    The final jump is exactly the size of the tile,
+    so the loop closes seamlessly.
+  · mh-barro-salpicadura (4 s) → a blob of mud
+    hits the text from the left and splatters open.
+  · mh-barro-gota (4 s) → a droplet falls from the bottom edge
+    that stretches as it detaches (scaleY).
+The speckles are radial-gradient with background-size in em:
+the pattern scales with the letter size.
+
+TECHNIQUE: three background-image with background-clip: text (two
+    radial-gradient speckles in a tile + mud gradient)
+    with animated background-position, splash ::before
+    with radial-gradient and rounded droplet ::after.
+
+
+EASY TWEAKS
+---------------
+· Darker mud: raise the gradient's #7a4f1c to #45280c.
+· More churn: 4s → 2.4s in mh-barro-chapoteo.
+· No splash: delete the ::before and mh-barro-salpicadura.
+· More frequent droplets: lower the initial 54% of mh-barro-gota.

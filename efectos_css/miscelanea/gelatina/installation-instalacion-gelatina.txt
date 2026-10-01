@@ -1,0 +1,117 @@
+================================================================
+EFECTO GELATINA - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "gelatina.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/gelatina.css">
+
+Contenido del archivo:
+  · La clase .efecto-gelatina
+  · 1 @keyframes: gelatina-bote
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-gelatina">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-gelatina">Gominola</span></h1>
+
+Recomendado: negrita y tamaño medio/grande para que se vea
+el aplastamiento.
+
+
+QUÉ HACE
+--------
+Un solo @keyframes (gelatina-bote, 1,4 s en bucle) que
+aplica scale() con transform-origin abajo:
+  · 12% → se aplasta (más ancha y más baja) al caer
+  · 24% → se estira (más estrecha y más alta) al rebotar
+  · y así sucesivamente con cada vez MENOS amplitud,
+    como una gominola asentándose... y vuelta a empezar.
+El relleno es un degradado de caramelo (rosa → naranja)
+pintado dentro de las letras con background-clip: text.
+
+TÉCNICA: transform + background-clip: text. Nada más.
+
+
+AJUSTES FÁCILES
+---------------
+· Bote más fuerte: sube los valores de scale
+  (1.12/0.86 → 1.2/0.8, etc.).
+· Bote más suave: acerca los valores de 1 (1.05/0.95).
+· Más rápido: 1.4s → 0.9s.
+· Más pesada (goma): 1.4s → 2s y usa ease-in.
+· Otro color de caramelo: cambia el linear-gradient
+  (menta: #c8ffe0 → #4ade80 → #0ea5e9;
+   limón: #f0ffe0 → #d4ff4f → #84cc16).
+· Quitar el brillo: borra la línea text-shadow.
+· Ojo: transform-origin: 50% 100% ancla el bote abajo;
+  si lo cambias a 50% 50% el texto "respirará" desde el
+  centro en vez de rebotar.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+JELLY EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "gelatina.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/gelatina.css">
+
+What the file contains:
+  · The .efecto-gelatina class
+  · 1 @keyframes: gelatina-bote
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-gelatina">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-gelatina">Gominola</span></h1>
+
+Recommended: bold and medium/large size so you can see
+the squashing.
+
+
+WHAT IT DOES
+--------
+A single @keyframes (gelatina-bote, 1.4 s looping) that
+applies scale() with transform-origin at the bottom:
+  · 12% → it squashes (wider and shorter) as it falls
+  · 24% → it stretches (narrower and taller) as it bounces
+  · and so on with less and less amplitude,
+    like a gummy settling down... and back to the start.
+The fill is a candy gradient (pink → orange)
+painted inside the letters with background-clip: text.
+
+TECHNIQUE: transform + background-clip: text. Nothing else.
+
+
+EASY TWEAKS
+---------------
+· Stronger bounce: raise the scale values
+  (1.12/0.86 → 1.2/0.8, etc.).
+· Softer bounce: bring the values closer to 1 (1.05/0.95).
+· Faster: 1.4s → 0.9s.
+· Heavier (rubber): 1.4s → 2s and use ease-in.
+· Another candy color: change the linear-gradient
+  (mint: #c8ffe0 → #4ade80 → #0ea5e9;
+   lemon: #f0ffe0 → #d4ff4f → #84cc16).
+· Remove the shine: delete the text-shadow line.
+· Careful: transform-origin: 50% 100% anchors the bounce at the bottom;
+  if you change it to 50% 50% the text will "breathe" from the
+  center instead of bouncing.

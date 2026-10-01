@@ -1,0 +1,187 @@
+================================================================
+EFECTO MATRIX - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "matrix.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/matrix.css">
+
+Contenido del archivo:
+  · Las clases .ef-matrix y .ef-matrix-fino
+  · Sus keyframes de lluvia (ef-matrix-lluvia y
+    ef-matrix-fino-lluvia, 7,5 s)
+  · Sus rellenos recortados a los glifos (background-clip)
+  · Fallbacks: prefers-reduced-motion y @media print
+
+NO hace falta JS ni bloque SVG: todo va en el CSS.
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="ef-matrix">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="ef-matrix-fino">MATRIX</span></h1>
+
+    <p>Párrafo entero con
+       <span class="ef-matrix">lluvia dentro</span>.</p>
+
+
+QUÉ HACE
+--------
+Dos capas de "0 y 1" caen dentro de las letras y solo se
+encienden donde hay tinta, como si el código dibujara el
+texto: una capa rápida con cabezas brillantes y otra lenta
+de fondo, sobre un verde de fósforo legible, con resplandor.
+El patrón es continuo: aunque el texto se parta en varias
+líneas, la lluvia fluye sin cortes y FUERA del texto no se
+ve absolutamente nada.
+
+TÉCNICA: dos tiles SVG en data-URI animados con
+    background-position sobre un gradiente de fósforo, todo
+    recortado con background-clip: text + drop-shadow de
+    resplandor. El blend no puede aclarar el texto, así que
+    la lluvia solo se enciende dentro de los glifos.
+
+
+VARIANTES Y TAMAÑO DEL TEXTO (importante)
+-----------------------------------------
+· .ef-matrix-fino → títulos grandes (≥24px): usa el mismo
+  patrón a TAMAÑO MITAD (tiles de 36/48px), para que los
+  dígitos caídos se vean finos y no gordos; el ritmo de
+  caída queda idéntico.
+· .ef-matrix → párrafos, fragmentos inline y texto pequeño
+  (funciona legible desde 13px).
+Si dudas, aplica por tamaño: fino en títulos, matrix en el
+resto. El efecto es SOLO del texto: sin caja ni fondo
+visible detrás (el "relleno" va recortado a las letras y
+solo existe dentro de ellas).
+
+
+REGLA DEL FONDO
+---------------
+El elemento con la clase no debe llevar fondo propio (lo
+pintaría y arruinaría el efecto). Si tu bloque necesita
+fondo, ponlo en el PADRE y la clase en un <span> interior:
+
+    <div class="mi-caja">
+        <span class="ef-matrix">efecto dentro, caja fuera</span>
+    </div>
+
+
+SELECCIÓN, IMPRESIÓN Y MOVIMIENTO
+---------------------------------
+· El texto es texto real del DOM: legible, seleccionable y
+  con los saltos de línea normales de tu página.
+· Al imprimir, @media print deja todo en negro liso sin
+  efectos (sigue siendo texto).
+· Con prefers-reduced-motion la lluvia se detiene.
+
+
+AJUSTES FÁCILES
+---------------
+· Lluvia más rápida: 7.5s → 4.5s en la animation.
+· Más brillo: cambia #48ff94 por #b9ffcf en los tiles.
+· Verde más oscuro/claro: toca el gradiente
+  rgba(14,96,46,.95) → rgba(5,54,26,.95).
+· Resplandor más grande: drop-shadow 4px → 8px.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+MATRIX EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "matrix.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/matrix.css">
+
+What the file contains:
+  · The .ef-matrix and .ef-matrix-fino classes
+  · Its rain keyframes (ef-matrix-lluvia and
+    ef-matrix-fino-lluvia, 7.5 s)
+  · Its fills clipped to the glyphs (background-clip)
+  · Fallbacks: prefers-reduced-motion and @media print
+
+No JS or SVG block needed: it's all in the CSS.
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="ef-matrix">Tu texto</span>
+
+Real example:
+
+    <h1><span class="ef-matrix-fino">MATRIX</span></h1>
+
+    <p>Párrafo entero con
+       <span class="ef-matrix">lluvia dentro</span>.</p>
+
+
+WHAT IT DOES
+--------
+Two layers of "0 and 1" fall inside the letters and only
+light up where there's ink, as if the code were drawing the
+text: a fast layer with bright heads and another slow one
+in the background, over a readable phosphor green, with glow.
+The pattern is continuous: even if the text breaks across several
+lines, the rain flows without a break and OUTSIDE the text you
+see absolutely nothing.
+
+TECHNIQUE: two SVG tiles in data-URI animated with
+    background-position over a phosphor gradient, all
+    clipped with background-clip: text + a drop-shadow
+    glow. The blend can't lighten the text, so the
+    rain only lights up inside the glyphs.
+
+
+VARIANTS AND TEXT SIZE (important)
+-----------------------------------------
+· .ef-matrix-fino → large titles (≥24px): uses the same
+  pattern at HALF SIZE (36/48px tiles), so the fallen
+  digits look thin and not fat; the fall rhythm
+  stays identical.
+· .ef-matrix → paragraphs, inline fragments and small text
+  (readable from 13px up).
+If in doubt, apply by size: fino on titles, matrix on the
+rest. The effect is ONLY on the text: no box or background
+visible behind (the "fill" is clipped to the letters and
+only exists inside them).
+
+
+BACKGROUND RULE
+---------------
+The element with the class must not have its own background (it
+would paint over it and ruin the effect). If your block needs a
+background, put it on the PARENT and the class on an inner <span>:
+
+    <div class="mi-caja">
+        <span class="ef-matrix">efecto dentro, caja fuera</span>
+    </div>
+
+
+SELECTION, PRINTING AND MOTION
+---------------------------------
+· The text is real DOM text: readable, selectable and
+  with your page's normal line breaks.
+· When printing, @media print leaves everything flat black with no
+  effects (it's still text).
+· With prefers-reduced-motion the rain stops.
+
+
+EASY TWEAKS
+---------------
+· Faster rain: 7.5s → 4.5s in the animation.
+· More glow: swap #48ff94 for #b9ffcf in the tiles.
+· Darker/lighter green: tweak the gradient
+  rgba(14,96,46,.95) → rgba(5,54,26,.95).
+· Bigger glow: drop-shadow 4px → 8px.

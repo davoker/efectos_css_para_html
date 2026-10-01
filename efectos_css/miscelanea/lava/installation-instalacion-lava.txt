@@ -1,0 +1,115 @@
+================================================================
+EFECTO LAVA - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "lava.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/lava.css">
+
+Contenido del archivo:
+  · La clase .efecto-lava
+  · 2 @keyframes: lava-flujo y lava-pulso
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-lava">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-lava">Lava</span></h1>
+
+IMPORTANTE: usa SIEMPRE fondo oscuro. Sobre fondo claro la
+roca negra de las letras no se distingue.
+
+
+QUÉ HACE
+--------
+Dos animaciones simultáneas en bucle infinito:
+  · lava-flujo (7 s)   → la capa de grietas se desplaza en
+    horizontal. Como es un repeating-linear-gradient de 65°,
+    el mosaico real mide 48px / sen(65°) ≈ 53px, así que
+    mover -106px (= 2 mosaicos) hace el bucle invisible.
+    El resultado: el magma "fluye" bajo la corteza.
+  · lava-pulso (3,2 s) → el resplandor naranja de los bordes
+    sube y baja con 4 puntos de intensidad (brasas que chispean).
+
+TÉCNICA: background-clip: text + text-shadow animado.
+
+
+AJUSTES FÁCILES
+---------------
+· Grietas más finas: baja los números del repeating
+  (ej: 0 16px / 16px 18px / 18px 20px / 20px 32px).
+· Grietas más densas: acorta el mosaico (48px → 30px) y
+  ajusta el desplazamiento de lava-flujo en proporción
+  (nuevo ciclo = ancho / sen(65°)).
+· Fluido más rápido: cambia 7s por 3.5s.
+· Pulsación más furiosa: cambia 3.2s por 1.5s.
+· Roca más oscura: cambia los colores del linear-gradient
+  por tonos #0d0805 / #1a100a.
+· Grieta amarilla más viva: sube la opacidad (0.95 → 1)
+  o añade una parada más clara (#fff9c4).
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+LAVA EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "lava.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/lava.css">
+
+What the file contains:
+  · The .efecto-lava class
+  · 2 @keyframes: lava-flujo and lava-pulso
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-lava">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-lava">Lava</span></h1>
+
+IMPORTANT: ALWAYS use a dark background. On a light background the
+black rock of the letters cannot be seen.
+
+
+WHAT IT DOES
+--------
+Two simultaneous animations on an infinite loop:
+  · lava-flujo (7 s)   → the crack layer shifts
+    horizontally. Since it is a repeating-linear-gradient of 65°,
+    the real tile measures 48px / sin(65°) ≈ 53px, so
+    moving -106px (= 2 tiles) makes the loop invisible.
+    The result: the magma "flows" under the crust.
+  · lava-pulso (3.2 s) → the orange glow on the edges
+    rises and falls with 4 intensity peaks (sparkling embers).
+
+TECHNIQUE: background-clip: text + animated text-shadow.
+
+
+EASY TWEAKS
+---------------
+· Thinner cracks: lower the numbers of the repeating
+  (e.g.: 0 16px / 16px 18px / 18px 20px / 20px 32px).
+· Denser cracks: shorten the tile (48px → 30px) and
+  adjust the lava-flujo offset in proportion
+  (new cycle = width / sin(65°)).
+· Faster flow: change 7s to 3.5s.
+· Fiercer pulsing: change 3.2s to 1.5s.
+· Darker rock: change the colors of the linear-gradient
+  to shades #0d0805 / #1a100a.
+· Brighter yellow crack: raise the opacity (0.95 → 1)
+  or add a lighter stop (#fff9c4).

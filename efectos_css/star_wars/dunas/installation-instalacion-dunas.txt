@@ -1,0 +1,105 @@
+================================================================
+EFECTO DUNAS - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "dunas.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/dunas.css">
+
+Contenido del archivo:
+  · La clase .efecto-dunas
+  · Sus pseudo-elementos ::before y ::after
+    (sol doble de Tatooine arriba del texto)
+  ·   · dunas-espejismo, dunas-soles
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-dunas">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-dunas">TATOOINE</span></h1>
+
+
+QUÉ HACE
+--------
+Dos animaciones en bucle infinito:
+  · dunas-espejismo (3,8 s) → el texto vibra con un
+    espejismo: se inclina, se desplaza unos cientos de
+    em y se desenfoca un pelín, como el aire caliente
+    del desierto.
+  · dunas-soles (3,8 s) → los dos soles gemelos
+    ::before y ::after (uno más pequeño y tenue) laten
+    con el mismo calor, con .4s de desfase.
+El color base es un degradado arena de Tatooine.
+
+TÉCNICA: background-clip: text (arena) + transform skewY/
+    translateY y filter blur en la misma onda, con
+    soles gemelos en ::before/::after.
+
+
+AJUSTES FÁCILES
+---------------
+· Espejismo más marcado: skew(1.2deg) → skew(2.4deg).
+· Más calor: blur(.5px) → blur(1.4px) en el 25% de la onda.
+· Ciclo más lento: 3.8s → 6s (desierto perezoso).
+· Sol púrpura (Aturi): #ffb300 → #d500f9 en los soles.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+DUNES EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "dunas.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/dunas.css">
+
+What the file contains:
+  · The .efecto-dunas class
+  · Its pseudo-elements ::before and ::after
+    (Tatooine double sun above the text)
+  ·   · dunas-espejismo, dunas-soles
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-dunas">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-dunas">TATOOINE</span></h1>
+
+
+WHAT IT DOES
+--------
+Two animations on an infinite loop:
+  · dunas-espejismo (3.8 s) → the text wobbles by an
+    espejismo: se inclina, se desplaza unos cientos de
+    em and blurs a tad, like the hot air
+    of the desert.
+  · dunas-soles (3.8 s) → the twin suns
+    ::before and ::after (one smaller and fainter) pulse
+    with the same heat, .4s out of phase.
+The base color is a Tatooine sand gradient.
+
+TECHNIQUE: background-clip: text (sand) + transform skewY/
+    translateY and filter blur on the same wave, with
+    twin suns in ::before/::after.
+
+
+EASY TWEAKS
+---------------
+· Stronger mirage: skew(1.2deg) → skew(2.4deg).
+· More heat: blur(.5px) → blur(1.4px) at 25% of the wave.
+· Slower cycle: 3.8s → 6s (lazy desert).
+· Purple sun (Aturi): #ffb300 → #d500f9 in the suns.

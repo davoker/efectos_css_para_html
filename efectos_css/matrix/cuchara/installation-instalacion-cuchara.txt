@@ -1,0 +1,103 @@
+================================================================
+EFECTO CUCHARA - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "cuchara.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/cuchara.css">
+
+Contenido del archivo:
+  · La clase .efecto-cuchara
+  · Sus pseudo-elementos ::before y ::after
+    (línea metálica de la mesa bajo el texto)
+  ·   · mx-cuchara, mx-cuchara-mesa
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-cuchara">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-cuchara">CUCHARA</span></h1>
+
+
+QUÉ HACE
+--------
+Dos animaciones en bucle infinito:
+  · mx-cuchara (4 s) → el texto se inclina con skewX y
+    rotate: primero de un lado y después del otro, con
+    easing suave, como una hoja de metal flexando.
+  · mx-cuchara-mesa (4 s) → la línea plateada de abajo
+    se arquea en el mismo compás, así que parece apoyada
+    sobre una mesa que también cede.
+El degradado vertical da el reflejo del acero.
+
+TÉCNICA: background-clip: text (degradado metálico) +
+    transform con skewX/rotate en la clase y
+    pseudo-elemento de la línea arqueándose.
+
+
+AJUSTES FÁCILES
+---------------
+· Doblez más marcada: sube el skewX de 7deg a 12deg.
+· Ciclo más lento: 4s → 6s en las dos animaciones.
+· Acero más oscuro: #90a4ae → #607d8b en el degradado.
+· Quitar la mesa: borra el ::after.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+SPOON EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "cuchara.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/cuchara.css">
+
+What the file contains:
+  · The .efecto-cuchara class
+  · Its pseudo-elements ::before and ::after
+    (metallic table line under the text)
+  ·   · mx-cuchara, mx-cuchara-mesa
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-cuchara">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-cuchara">CUCHARA</span></h1>
+
+
+WHAT IT DOES
+--------
+Two animations on an infinite loop:
+  · mx-cuchara (4 s) → the text tilts with skewX and
+    rotate: primero de un lado y después del otro, con
+    smooth easing, like a sheet of metal flexing.
+  · mx-cuchara-mesa (4 s) → the silvery line at the bottom
+    arcs to the same beat, so it looks like it's resting
+    on a table that also gives way.
+The vertical gradient gives the steel reflection.
+
+TECHNIQUE: background-clip: text (metallic gradient) +
+    transform with skewX/rotate in the class and
+    the line's pseudo-element arcing.
+
+
+EASY TWEAKS
+---------------
+· Sharper fold: raise the skewX from 7deg to 12deg.
+· Slower cycle: 4s → 6s in both animations.
+· Darker steel: #90a4ae → #607d8b in the gradient.
+· Remove the table: delete the ::after.

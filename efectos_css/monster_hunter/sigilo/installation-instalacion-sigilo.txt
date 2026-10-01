@@ -1,0 +1,113 @@
+================================================================
+EFECTO SIGILO - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "sigilo.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/sigilo.css">
+
+Contenido del archivo:
+  · La clase .efecto-sigilo
+  · Sus pseudo-elementos ::before y ::after
+    (rendija de ojo ::before y estela ::after)
+  ·   · mh-sigilo-sombra, mh-sigilo-ojo, mh-sigilo-estela
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-sigilo">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-sigilo">SIGILO</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones en bucle infinito:
+  · mh-sigilo-sombra (5 s) → la banda oscura entra por la
+    izquierda, apaga las letras y sale por la derecha; el
+    degradado mide 240%, así que la sombra siempre cabe
+    dentro del texto y no se cuela por los bordes.
+  · mh-sigilo-ojo (5 s) → la rendija se abre, late y se
+    vuelve a cerrar con transform: scaleY desde el centro.
+  · mh-sigilo-estela (5 s) → la estela cruza el texto sin
+    tocarlo y desaparece por el otro lado.
+Al principio de bucle las letras están limpias: si la
+escena se congela ahí, se ve el texto normal.
+
+TÉCNICA: dos linear-gradient con background-clip: text (banda de
+    sombra de 240% de ancho con background-position
+    animado + degradado base), rendija ::before con
+    radial-gradient y scaleY, estela ::after con
+    translateX y rotate.
+
+
+AJUSTES FÁCILES
+---------------
+· Más sigilo: sube el rgba(6, 10, 20, .93) a 1.
+· Sombra más lenta: 5s → 7s en mh-sigilo-sombra.
+· Sin ojo: borra el ::before y mh-sigilo-ojo.
+· Estela más marcada: sube el .75 del alfa a .95.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+STEALTH EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "sigilo.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/sigilo.css">
+
+What the file contains:
+  · The .efecto-sigilo class
+  · Its pseudo-elements ::before and ::after
+    (eye slit ::before and wake ::after)
+  ·   · mh-sigilo-sombra, mh-sigilo-ojo, mh-sigilo-estela
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-sigilo">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-sigilo">SIGILO</span></h1>
+
+
+WHAT IT DOES
+--------
+Three animations on an infinite loop:
+  · mh-sigilo-sombra (5 s) → the dark band enters from the
+    left, switches off the letters and exits on the right; the
+    gradient is 240% wide, so the shadow always fits
+    inside the text and never sneaks in at the edges.
+  · mh-sigilo-ojo (5 s) → the slit opens, beats and
+    closes again with transform: scaleY from the center.
+  · mh-sigilo-estela (5 s) → the wake crosses the text without
+    touching it and disappears on the other side.
+At the start of the loop the letters are clean: if the
+scene freezes there, you see the normal text.
+
+TECHNIQUE: two linear-gradient with background-clip: text (band of
+    shadow 240% wide with background-position
+    animated + base gradient), slit ::before with
+    radial-gradient and scaleY, wake ::after with
+    translateX and rotate.
+
+
+EASY TWEAKS
+---------------
+· More stealth: raise the rgba(6, 10, 20, .93) to 1.
+· Slower shadow: 5s → 7s in mh-sigilo-sombra.
+· No eye: delete the ::before and mh-sigilo-ojo.
+· More pronounced wake: raise the .75 alpha to .95.

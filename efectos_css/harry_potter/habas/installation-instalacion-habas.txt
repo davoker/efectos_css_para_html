@@ -1,0 +1,109 @@
+================================================================
+EFECTO HABAS - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "habas.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/habas.css">
+
+Contenido del archivo:
+  · La clase .efecto-habas
+  · Sus pseudo-elementos ::before y ::after
+    (haba ::before y azúcar ::after)
+  ·   · hp-habas-sabor, hp-habas-bote, hp-habas-azucar
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-habas">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-habas">HABAS</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones en bucle infinito (2,4 s):
+  · hp-habas-sabor → seis keyframes con steps(1, end): el
+    matiz salta 70° cada paso y la letra se estira un 5%.
+    Sin fundidos: el cambio de sabor es seco.
+  · hp-habas-bote → la haba sale, da un salto con
+    estirón y cae fuera de escena.
+  · hp-habas-azucar → dos granos de azúcar titilan a
+    saltos, también en steps.
+Ojo: hue-rotate afecta al degradado recortado en el texto,
+no a la página.
+
+TÉCNICA: degradado vivo con background-clip: text y
+    hue-rotate + scale en steps(1, end) sobre el propio
+    elemento, haba ::before con degradado bicolor que
+    salta y azúcar ::after con dos radial-gradient.
+
+
+AJUSTES FÁCILES
+---------------
+· Más sabores: añade keyframes a hp-habas-sabor y sube a 3s.
+· Base más rosa: cambia la última parada #448aff por #ff4081.
+· Sin haba: borra el ::before y hp-habas-bote.
+· Salto más grande: scale(1.05) → scale(1.12).
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+FAVA BEANS EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "habas.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/habas.css">
+
+What the file contains:
+  · The .efecto-habas class
+  · Its pseudo-elements ::before and ::after
+    (bean ::before and sugar ::after)
+  ·   · hp-habas-sabor, hp-habas-bote, hp-habas-azucar
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-habas">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-habas">HABAS</span></h1>
+
+
+WHAT IT DOES
+--------
+Three animations on an infinite loop (2.4 s):
+  · hp-habas-sabor → six keyframes with steps(1, end): the
+    hue jumps 70° each step and the letter stretches by 5%.
+    No fades: the flavor switch is abrupt.
+  · hp-habas-bote → the bean pops out, jumps with a
+    stretch and falls off screen.
+  · hp-habas-azucar → two sugar grains flicker in
+    bursts, also in steps.
+Careful: hue-rotate affects the gradient clipped into the text,
+not the page.
+
+TECHNIQUE: vivid gradient with background-clip: text and
+    hue-rotate + scale in steps(1, end) on the element
+    itself, bean ::before with a two-tone gradient that
+    jumps and sugar ::after with two radial-gradients.
+
+
+EASY TWEAKS
+---------------
+· More flavors: add keyframes to hp-habas-sabor and raise it to 3s.
+· Pinker base: change the last stop #448aff to #ff4081.
+· No bean: delete the ::before and hp-habas-bote.
+· Bigger jump: scale(1.05) → scale(1.12).

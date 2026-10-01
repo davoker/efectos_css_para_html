@@ -1,0 +1,111 @@
+================================================================
+EFECTO PENSIEVE - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "pensieve.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/pensieve.css">
+
+Contenido del archivo:
+  · La clase .efecto-pensieve
+  · Sus pseudo-elementos ::before y ::after
+    (recuerdos ::before y onda ::after)
+  ·   · hp-pensieve-ondas, hp-pensieve-recuerdo,
+    hp-pensieve-onda
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-pensieve">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-pensieve">PENSIEVE</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones en bucle infinito (5,4 s):
+  · hp-pensieve-ondas → las bandas bajan exactamente una
+    altura de banda (background-size 100% .3em y salto de
+    .3em): la superficie fluye sin costura.
+  · hp-pensieve-recuerdo → dos hebras de memoria suben
+    desde la base y se deshacen.
+  · hp-pensieve-onda → la onda elíptica se abre desde el
+    centro, como al meter la pluma.
+La capa de degradado no se mueve: solo corren las bandas.
+
+TÉCNICA: dos capas con background-clip: text (bandas horizontales
+    en repeating-linear-gradient de un solo .3em de alto
+    + degradado azul plata) con background-position
+    animado, recuerdos ::before ascendentes y onda
+    ::after elíptica que escala.
+
+
+AJUSTES FÁCILES
+---------------
+· Bandas más finas: .3em → .22em (size y salto).
+· Agua más azul: #4fc3f7 → #29b6f6 en el degradado.
+· Sin hebras: borra el ::before y hp-pensieve-recuerdo.
+· Onda más ancha: width 2.6em → 4em del ::after.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+PENSIEVE EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "pensieve.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/pensieve.css">
+
+What the file contains:
+  · The .efecto-pensieve class
+  · Its pseudo-elements ::before and ::after
+    (memories ::before and wave ::after)
+  ·   · hp-pensieve-ondas, hp-pensieve-recuerdo,
+    hp-pensieve-onda
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-pensieve">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-pensieve">PENSIEVE</span></h1>
+
+
+WHAT IT DOES
+--------
+Three animations on an infinite loop (5.4 s):
+  · hp-pensieve-ondas → the bands drop exactly one
+    band height (background-size 100% .3em and a jump of
+    .3em): the surface flows without a seam.
+  · hp-pensieve-recuerdo → two strands of memory rise
+    from the base and dissolve.
+  · hp-pensieve-onda → the elliptical wave opens from the
+    center, as when dipping the quill.
+The gradient layer doesn't move: only the bands run.
+
+TECHNIQUE: two layers with background-clip: text (horizontal bands
+    in a repeating-linear-gradient just .3em tall
+    + silver-blue gradient) with background-position
+    animated, memories ::before rising and the elliptical
+    wave ::after that scales.
+
+
+EASY TWEAKS
+---------------
+· Thinner bands: .3em → .22em (size and jump).
+· Bluer water: #4fc3f7 → #29b6f6 in the gradient.
+· No strands: delete the ::before and hp-pensieve-recuerdo.
+· Wider wave: width 2.6em → 4em of the ::after.

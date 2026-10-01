@@ -1,0 +1,81 @@
+/* =============================================================
+   MERCURIO (SVG) · cromado líquido
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás. El cromo es un relleno recortado a los glifos
+     (background-clip: text) que solo existe dentro de las
+     letras: fuera del texto no se ve nada.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-mercurio.txt) 2) enlazar este CSS 3) poner
+     la clase en el texto. JS opcional (mercurio.js): la onda
+     crece SUAVE al interactuar, sin salto.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+   ef-mercurio — cromado líquido
+   Relleno cromo (gradiente recortado al texto) + filtro SVG:
+   turbulencia que ondula las letras + brillo especular
+   metálico que recorre el glifo. Dos variantes: .ef-mercurio
+   (ondulación fuerte, ≥24px) y .ef-mercurio-mini (onda fina,
+   ±1,5px) para párrafos y texto pequeño. Al interactuar la
+   onda crece SUAVE (tween JS del scale, sin salto) y el
+   hover solo sube el brillo.
+   ============================================================= */
+.ef-mercurio {
+    color: #cfd9e6;                    /* respaldo si no hay clip */
+    background: linear-gradient(180deg,
+        #ffffff 4%, #dbe4f0 24%, #93a6bd 45%,
+        #fbfdff 54%, #a1b4cb 74%, #ecf2f9 96%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-mercurio);
+    transition: filter .25s ease;
+}
+.ef-mercurio:hover,
+.ef-mercurio:focus-visible {
+    /* sin cambio de filtro (eso daba el salto instantáneo):
+       solo brillo; la onda la hace crecer mercurio.js, suave */
+    filter: url(#ef-mercurio) brightness(1.12);
+}
+
+/* variante MINI: desplazamiento ±1,5px (scale=3) y onda fina,
+   para que párrafos, inline y 13px sigan siendo legibles */
+.ef-mercurio-mini {
+    color: #cfd9e6;                    /* respaldo si no hay clip */
+    background: linear-gradient(180deg,
+        #ffffff 4%, #dbe4f0 24%, #93a6bd 45%,
+        #fbfdff 54%, #a1b4cb 74%, #ecf2f9 96%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-mercurio-mini);
+    transition: filter .25s ease;
+}
+.ef-mercurio-mini:hover,
+.ef-mercurio-mini:focus-visible {
+    filter: url(#ef-mercurio-mini) brightness(1.15);
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-mercurio,
+    .ef-mercurio-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+    }
+}

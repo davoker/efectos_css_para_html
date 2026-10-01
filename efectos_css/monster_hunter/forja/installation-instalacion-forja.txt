@@ -1,0 +1,119 @@
+================================================================
+EFECTO FORJA - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "forja.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/forja.css">
+
+Contenido del archivo:
+  · La clase .efecto-forja
+  · Sus pseudo-elementos ::before y ::after
+    (chispas ::before y fogonazo del martillo ::after)
+  ·   · mh-forja-calor, mh-forja-golpe, mh-forja-chispas,
+    mh-forja-martillo
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-forja">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-forja">FORJA</span></h1>
+
+
+QUÉ HACE
+--------
+Cuatro animaciones en bucle infinito, con la misma duración
+para que caigan todas en el mismo golpe:
+  · mh-forja-calor (3,4 s) → el degradado sube por las
+    letras: el metal pasa de blanco a rojo vivo y de ahí
+    al rojo oscuro del hierro ya frío.
+  · mh-forja-golpe (3,4 s) → las letras se encogen en el
+    instante del martillazo (transform: scale).
+  · mh-forja-chispas (3,4 s) → dos capas de chispas caen en
+    sentido contrario dentro del texto.
+  · mh-forja-martillo (3,4 s) → el fogonazo blanco se abre
+    por encima y se apaga.
+El truco es repetir la duración: calor, golpe, chispas y
+destello comparten reloj.
+
+TÉCNICA: linear-gradient vertical con background-clip: text y
+    background-position animado (el calor sube), chispas
+    ::before con dos radial-gradient en tile, fogonazo
+    ::after y una segunda animación de escala en la clase
+    para el golpe de martillo.
+
+
+AJUSTES FÁCILES
+---------------
+· Calor más rápido: 3.4s → 2s en mh-forja-calor.
+· Pieza más fría: cambia el #ff6d00 por #bf360c.
+· Sin chispas: borra el ::before y mh-forja-chispas.
+· Golpe doble: duplica mh-forja-martillo con delay: -.9s.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+FORGE EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "forja.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/forja.css">
+
+What the file contains:
+  · The .efecto-forja class
+  · Its pseudo-elements ::before and ::after
+    (sparks ::before and hammer blow flash ::after)
+  ·   · mh-forja-calor, mh-forja-golpe, mh-forja-chispas,
+    mh-forja-martillo
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-forja">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-forja">FORJA</span></h1>
+
+
+WHAT IT DOES
+--------
+Four animations on an infinite loop, with the same duration
+so they all land on the same hit:
+  · mh-forja-calor (3.4 s) → the gradient rises through the
+    letras: el metal pasa de blanco a rojo vivo y de ahí
+    to the dark red of cooled iron.
+  · mh-forja-golpe (3.4 s) → the letters shrink at the
+    instant of the hammer blow (transform: scale).
+  · mh-forja-chispas (3.4 s) → two layers of sparks fall in
+    opposite directions inside the text.
+  · mh-forja-martillo (3.4 s) → the white blow flash opens
+    above and fades out.
+The trick is repeating the duration: heat, hit, sparks and
+flash share the same clock.
+
+TECHNIQUE: vertical linear-gradient with background-clip: text and
+    animated background-position (the heat rises), sparks
+    ::before with two radial-gradient in a tile, blow flash
+    ::after and a second scale animation in the class
+    for the hammer hit.
+
+
+EASY TWEAKS
+---------------
+· Faster heat: 3.4s → 2s in mh-forja-calor.
+· Cooler piece: change #ff6d00 to #bf360c.
+· No sparks: delete the ::before and mh-forja-chispas.
+· Double hit: duplicate mh-forja-martillo with delay: -.9s.

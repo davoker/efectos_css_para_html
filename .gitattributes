@@ -2,5 +2,5 @@
 # disco y en el repo, aunque core.autocrlf=true convierta el resto a
 # CRLF al hacer checkout. La portada y los efectos se quedan a cargo
 # de autocrlf (CRLF en disco), que es como ya los tiene el repo.
-efectos/transicion.html text eol=lf
-efectos/transicion.css text eol=lf
+transicion.html text eol=lf
+transicion.css text eol=lf

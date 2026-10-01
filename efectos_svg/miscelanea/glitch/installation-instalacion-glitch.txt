@@ -1,0 +1,359 @@
+================================================================
+EFECTO GLITCH - CÓMO APLICARLO A CUALQUIER ARCHIVO .HTML/.CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "glitch.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/glitch.css">
+
+Contenido del archivo:
+  · La clase .ef-glitch (estado base suave)
+  · Los estados .rafaga / :hover / .forzado / .sin-glitch
+  · Fallbacks: prefers-reduced-motion y @media print
+
+
+PASO 2 - PEGA EL BLOQUE SVG DE FILTROS (UNA VEZ)
+-------------------------------------------------
+Este efecto usa filtros SVG (turbulencia de bandas +
+separación de canales): pega el siguiente bloque UNA sola
+vez en la página que quiera usarlo —es el equivalente a
+quien pega el <style> de los efectos CSS. Lo tienes listo
+para copiar en el index.html de este efecto y en este mismo
+archivo:
+
+    <!-- ============================================================
+         BLOQUE SVG DE FILTROS — se pega UNA VEZ en la página
+         ============================================================ -->
+    <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+        <defs>
+            <!-- 3a · glitch SUAVE — estado por defecto: bandas finas
+                 (±1,5px) y separación RGB leve, estático y legible -->
+            <filter id="ef-glitch-suave" x="-10%" y="-40%" width="120%" height="180%"
+                    color-interpolation-filters="sRGB">
+                <feTurbulence type="turbulence" baseFrequency="0 0.09"
+                              numOctaves="1" seed="6" result="bandas"/>
+                <feDisplacementMap in="SourceGraphic" in2="bandas" scale="3"
+                                   xChannelSelector="R" yChannelSelector="G" result="desp"/>
+                <feOffset in="desp" dx="-1.2" dy="0" result="o1"/>
+                <feColorMatrix in="o1" type="matrix" result="rojo"
+                               values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/>
+                <feOffset in="desp" dx="1.2" dy="0.4" result="o2"/>
+                <feColorMatrix in="o2" type="matrix" result="cian"
+                               values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+                <feBlend in="rojo" in2="cian" mode="screen"/>
+            </filter>
+
+            <!-- 3 · glitch (desgarro de bandas + separación RGB,
+                 animado con SMIL; el hover y las ráfagas lo encienden) -->
+            <filter id="ef-glitch" x="-15%" y="-60%" width="130%" height="220%"
+                    color-interpolation-filters="sRGB">
+                <feTurbulence type="turbulence" baseFrequency="0 0.09"
+                              numOctaves="1" seed="4" result="bandas">
+                    <animate attributeName="seed" calcMode="discrete" dur="0.35s"
+                             values="4;11;7;19;2;15;9;22" repeatCount="indefinite"/>
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="bandas" scale="16"
+                                   xChannelSelector="R" yChannelSelector="G" result="desp">
+                    <animate attributeName="scale" calcMode="discrete" dur="0.3s"
+                             values="10;24;14;28;12" repeatCount="indefinite"/>
+                </feDisplacementMap>
+                <feOffset in="desp" dx="-4" dy="0" result="o1">
+                    <animate attributeName="dx" calcMode="discrete" dur="0.28s"
+                             values="-6;3;-2;5;-5" repeatCount="indefinite"/>
+                </feOffset>
+                <feColorMatrix in="o1" type="matrix" result="rojo"
+                               values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/>
+                <feOffset in="desp" dx="4" dy="1" result="o2">
+                    <animate attributeName="dx" calcMode="discrete" dur="0.26s"
+                             values="5;-3;6;-6;2" repeatCount="indefinite"/>
+                </feOffset>
+                <feColorMatrix in="o2" type="matrix" result="cian"
+                               values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+                <feBlend in="rojo" in2="cian" mode="screen"/>
+            </filter>
+        </defs>
+    </svg>
+
+Si la página usa varios de estos efectos (glitch y mercurio),
+con UN solo bloque <svg> en la página vale para todos: cada
+efecto trae sus filtros dentro de <defs>.
+
+
+PASO 3 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="ef-glitch">Texto con glitch</span>
+
+También vale en enlaces, títulos o párrafos completos:
+    <h1 class="ef-glitch">Señal comprometida</h1>
+    <p class="ef-glitch">Párrafo entero...</p>
+
+
+PASO 4 (OPCIONAL) - EL JAVASCRIPT
+----------------------------------
+    <script src="ruta/glitch.js"></script>
+
+Sin él: el glitch suave base y el hover fuerte siguen siendo
+CSS+SVG, pero no hay ráfagas periódicas ni cortes.
+Con él: cada 3-4 s una ráfaga del fuerte (180-400 ms) y, al
+interactuar, cortes aleatorios a texto normal. También
+respeta prefers-reduced-motion (sin ráfagas ni cortes) y
+pausa las ondas SMIL.
+
+Truco para capturas: añade ?glitch=1 a la URL de la página
+y todos los ejemplos arrancan en fuerte (fuerza .forzado).
+
+
+ESTADOS DEL EFECTO
+-------------------
+· base        → suave estático (bandas ±1,5px + RGB leve)
+· .rafaga     → fuerte 180-400 ms (lo pone el JS cada 3-4 s)
+· :hover /    → fuerte mientras dure (más los cortes del
+  :focus        JS)
+· .forzado    → fuerte a mano (botones de demo / capturas)
+· .sin-glitch → vuelve al texto normal (corte del JS)
+
+
+QUÉ HACE
+--------
+Por defecto el texto ya lleva su glitch suave: bandas finas
+y separación rojo/cian siempre presentes, estático y
+legible. Cada pocos segundos salta una ráfaga del desgarro
+fuerte animado; al pasar el ratón el fuerte se queda. Efecto
+SOLO del texto: no hay caja ni fondo detrás; la separación
+de canales es del propio glifo.
+
+TÉCNICA: dos filtros SVG — #ef-glitch-suave
+    (feTurbulence estático + feDisplacementMap suave +
+    feOffset/feColorMatrix con feBlend screen) y
+    #ef-glitch (lo mismo con SMIL animando seed, scale y dx).
+    CSS cambia de filtro con transition; el JS solo añade
+    clases.
+
+
+VARIANTES Y TAMAÑO DEL TEXTO (importante)
+-----------------------------------------
+· No hace falta variante por tamaño: el suave usa
+  desplazamientos de ±1,5px y separación ±1,2px, así que se
+  lee bien desde 13px hasta títulos.
+· El fuerte (hover/ráfaga) es espectacular en títulos y
+  párrafos; en texto muy pequeño dura poco (por eso las
+  ráfagas son de 180-400 ms).
+· El efecto es SOLO del texto: sin caja ni fondo visible
+  detrás.
+
+
+REGLA DEL FONDO
+---------------
+El elemento con la clase no debe llevar fondo propio: el
+filtro se calcula sobre TODO lo que pinta el elemento y
+desgarraría la caja también. Si tu bloque necesita fondo,
+ponlo en el PADRE y la clase en un <span> interior:
+
+    <div class="mi-caja">
+        <span class="ef-glitch">efecto dentro, caja fuera</span>
+    </div>
+
+
+SELECCIÓN, IMPRESIÓN Y MOVIMIENTO
+---------------------------------
+· El texto es texto real del DOM: legible, seleccionable y
+  con los saltos de línea normales de tu página.
+· Al imprimir, @media print deja todo en negro liso sin
+  efectos (sigue siendo texto).
+· Con prefers-reduced-motion no hay ráfagas ni cortes y el
+  fuerte se mapea al suave (quieto).
+
+
+AJUSTES FÁCILES
+---------------
+· Suave más notorio: scale="3" → 5 en #ef-glitch-suave.
+· Fuerte más loco: values="10;24;14;28;12" → más dispares.
+· Ráfaga más frecuente: 3000 + rand*1000 → 1800 + rand*700
+  en glitch.js.
+· Franjas de color: los rgba(255,40,110,.55) y
+  rgba(0,225,255,.5) de .ef-glitch (text-shadow base).
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+GLITCH EFFECT - HOW TO APPLY IT TO ANY .HTML/.CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "glitch.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/glitch.css">
+
+What the file contains:
+  · The .ef-glitch class (soft base state)
+  · The states .rafaga / :hover / .forzado / .sin-glitch
+  · Fallbacks: prefers-reduced-motion and @media print
+
+
+STEP 2 - PASTE THE SVG FILTER BLOCK (ONCE)
+-------------------------------------------------
+This effect uses SVG filters (band turbulence +
+channel separation): paste the block below just ONCE
+on the page that will use it —it's the equivalent of
+pasting the <style> of the CSS effects. You have it
+ready to copy into this effect's index.html and into
+this same file:
+
+    <!-- ============================================================
+         SVG FILTER BLOCK — paste ONCE on the page
+         ============================================================ -->
+    <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+        <defs>
+            <!-- 3a · glitch SUAVE — estado por defecto: bandas finas
+                 (±1.5px) and slight RGB separation, static and readable -->
+            <filter id="ef-glitch-suave" x="-10%" y="-40%" width="120%" height="180%"
+                    color-interpolation-filters="sRGB">
+                <feTurbulence type="turbulence" baseFrequency="0 0.09"
+                              numOctaves="1" seed="6" result="bandas"/>
+                <feDisplacementMap in="SourceGraphic" in2="bandas" scale="3"
+                                   xChannelSelector="R" yChannelSelector="G" result="desp"/>
+                <feOffset in="desp" dx="-1.2" dy="0" result="o1"/>
+                <feColorMatrix in="o1" type="matrix" result="rojo"
+                               values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/>
+                <feOffset in="desp" dx="1.2" dy="0.4" result="o2"/>
+                <feColorMatrix in="o2" type="matrix" result="cian"
+                               values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+                <feBlend in="rojo" in2="cian" mode="screen"/>
+            </filter>
+
+            <!-- 3 · glitch (desgarro de bandas + separación RGB,
+                  animated with SMIL; hover and the bursts turn it on) -->
+            <filter id="ef-glitch" x="-15%" y="-60%" width="130%" height="220%"
+                    color-interpolation-filters="sRGB">
+                <feTurbulence type="turbulence" baseFrequency="0 0.09"
+                              numOctaves="1" seed="4" result="bandas">
+                    <animate attributeName="seed" calcMode="discrete" dur="0.35s"
+                             values="4;11;7;19;2;15;9;22" repeatCount="indefinite"/>
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="bandas" scale="16"
+                                   xChannelSelector="R" yChannelSelector="G" result="desp">
+                    <animate attributeName="scale" calcMode="discrete" dur="0.3s"
+                             values="10;24;14;28;12" repeatCount="indefinite"/>
+                </feDisplacementMap>
+                <feOffset in="desp" dx="-4" dy="0" result="o1">
+                    <animate attributeName="dx" calcMode="discrete" dur="0.28s"
+                             values="-6;3;-2;5;-5" repeatCount="indefinite"/>
+                </feOffset>
+                <feColorMatrix in="o1" type="matrix" result="rojo"
+                               values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/>
+                <feOffset in="desp" dx="4" dy="1" result="o2">
+                    <animate attributeName="dx" calcMode="discrete" dur="0.26s"
+                             values="5;-3;6;-6;2" repeatCount="indefinite"/>
+                </feOffset>
+                <feColorMatrix in="o2" type="matrix" result="cian"
+                               values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+                <feBlend in="rojo" in2="cian" mode="screen"/>
+            </filter>
+        </defs>
+    </svg>
+
+If the page uses several of these effects (glitch and mercury),
+with ONE single <svg> block on the page works for all: each
+effect carries its filters inside <defs>.
+
+
+STEP 3 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="ef-glitch">Texto con glitch</span>
+
+It also works on links, titles or full paragraphs:
+    <h1 class="ef-glitch">Señal comprometida</h1>
+    <p class="ef-glitch">Párrafo entero...</p>
+
+
+STEP 4 (OPTIONAL) - THE JAVASCRIPT
+----------------------------------
+    <script src="ruta/glitch.js"></script>
+
+Without it: the soft base glitch and the strong hover are still
+CSS+SVG, but there are no periodic bursts or cuts.
+With it: every 3-4 s a burst of the strong one (180-400 ms) and, on
+interaction, random cuts back to normal text. It also
+respects prefers-reduced-motion (no bursts or cuts) and
+pauses the SMIL waves.
+
+Tip for screenshots: add ?glitch=1 to the page URL and
+every example starts in strong mode (force .forzado).
+
+
+EFFECT STATES
+-------------------
+· base        → static soft (bands ±1.5px + slight RGB)
+· .rafaga     → strong 180-400 ms (set by the JS every 3-4 s)
+· :hover /    → strong while it lasts (plus the cuts of the
+  :focus        JS)
+· .forzado    → strong by hand (demo buttons / screenshots)
+· .sin-glitch → back to normal text (cut by the JS)
+
+
+WHAT IT DOES
+--------
+By default the text already has its soft glitch: fine bands
+and red/cyan separation always present, static and
+readable. Every few seconds a burst of the strong
+animated tear pops; on mouseover the strong one stays. The effect is
+ONLY on the text: no box or background behind; the channel
+separation belongs to the glyph itself.
+
+TECHNIQUE: two SVG filters — #ef-glitch-suave
+    (static feTurbulence + soft feDisplacementMap +
+    feOffset/feColorMatrix with feBlend screen) and
+    #ef-glitch (lo mismo con SMIL animando seed, scale y dx).
+    CSS switches filters with transition; the JS only adds
+    classes.
+
+
+VARIANTS AND TEXT SIZE (important)
+-----------------------------------------
+· No size variant needed: the soft one uses
+  shifts of ±1.5px and ±1.2px separation, so it reads
+  well from 13px up to titles.
+· The strong one (hover/burst) is spectacular on titles and
+  paragraphs; on very small text it lasts little (hence the
+  bursts are 180-400 ms).
+· The effect is ONLY on the text: no visible box or background
+  behind.
+
+
+BACKGROUND RULE
+---------------
+The element with the class must not have its own background: the
+filter is computed over EVERYTHING the element paints and
+it would tear the box too. If your block needs a background,
+put it on the PARENT and the class on an inner <span>:
+
+    <div class="mi-caja">
+        <span class="ef-glitch">efecto dentro, caja fuera</span>
+    </div>
+
+
+SELECTION, PRINTING AND MOTION
+---------------------------------
+· The text is real DOM text: readable, selectable and
+  with your page's normal line breaks.
+· When printing, @media print leaves everything flat black with no
+  effects (it's still text).
+· With prefers-reduced-motion there are no bursts or cuts and the
+  strong one maps to the soft one (still).
+
+
+EASY TWEAKS
+---------------
+· More noticeable soft: scale="3" → 5 in #ef-glitch-suave.
+· Wilder strong: values="10;24;14;28;12" → more scattered.
+· More frequent burst: 3000 + rand*1000 → 1800 + rand*700
+  in glitch.js.
+· Color stripes: the rgba(255,40,110,.55) and
+  rgba(0,225,255,.5) of .ef-glitch (base text-shadow).

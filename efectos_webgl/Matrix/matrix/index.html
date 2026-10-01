@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     SHOWCASE WEBGL · MATRIX
+     Dirección de diseño: "HUD de laboratorio".
+     · El efecto ocupa la pantalla entera (iframe).
+     · Todo el chrome FLOTA encima en vidrio esmerilado:
+         - placa de identidad arriba a la izquierda
+         - Portada y Descarga centradas arriba al medio
+         - tira de datos técnicos abajo a la izquierda
+         - Instalar abajo a la derecha
+     · "Portada" pasa por transicion.html#…: allí estalla la
+       escena de la MISMA temática y, tras ~1,6 s, llegas a
+       la portada (como en los showcases CSS).
+     · showcase.css y showcase.js son COMUNES a los showcases.
+     ------------------------------------------------------------
+     ESTE ARCHIVO no es el efecto: el efecto es matrix.html
+     ============================================================ -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATRIX · Showcase WebGL</title>
+    <link rel="stylesheet" href="../../showcase.css">
+</head>
+<body class="showcase" data-tema="matrix" data-efecto="matrix"
+      style="--acento-rgb: 0, 255, 65">
+
+    <!-- EL EFECTO, A PANTALLA COMPLETA -->
+    <iframe class="escenario" src="matrix.html?demo=1"
+            title="Efecto MATRIX en marcha"></iframe>
+
+    <!-- capa ambiental en canvas 2D (la dibuja showcase.js) -->
+    <canvas class="ambiental" aria-hidden="true"></canvas>
+
+    <!-- ============ HUD SUPERIOR ============ -->
+    <header class="hud hud-cima">
+        <div class="placa">
+            <span class="chip"><span class="punto"></span>WebGL 1</span>
+            <div>
+                <p class="miga">efectos_webgl / matrix · temática <b>matrix</b></p>
+                <h1 class="titulo">MATRIX</h1>
+                <p class="descr">La lluvia cae dentro de las letras: parallax, onda por clic y texto editable.</p>
+            </div>
+        </div>
+        <nav class="acciones" aria-label="Navegación del showcase">
+            <a class="btn btn-primario" href="../../../transicion.html#codigo">⟵ Portada</a>
+            <a class="btn" href="matrix.zip" download>Descarga</a>
+        </nav>
+    </header>
+
+    <!-- ============ HUD INFERIOR ============ -->
+    <footer class="hud hud-pie">
+        <p class="datos">
+            <span>GLSL ES 1.00</span><span>1 pasada</span>
+            <span>atlas 16×8</span><span>parallax + onda</span>
+            <span>canvas 2D + shaders</span>
+        </p>
+        <div class="acciones">
+            <button class="btn" id="btn-instalar" type="button"
+                    aria-expanded="false" aria-controls="cajon">Instalar</button>
+        </div>
+    </footer>
+
+    <p class="atajos" aria-hidden="true">I instalar · ESC cerrar</p>
+
+    <!-- ============ CAJÓN INSTALAR ============ -->
+    <div class="velo" id="velo" hidden></div>
+    <aside class="cajon" id="cajon" aria-label="Cómo instalar el efecto">
+        <button class="btn cierra" id="cerrar-instalar" type="button">✕ esc</button>
+        <p class="miga">instalación</p>
+        <h2 class="cajon-titulo">CÓMO APLICARLO</h2>
+        <ol class="pasos">
+            <li><b>Paso 1 — copia el archivo.</b> <code>matrix.html</code> es
+                autocontenido: dentro van el CSS, el JavaScript, los shaders
+                GLSL y el atlas de glifos (se dibuja en un canvas, sin
+                imágenes ni ficheros externos).</li>
+            <li><b>Paso 2 — añádelo a tu página.</b> Ábrelo a pantalla
+                completa o emprétalo en un iframe:</li>
+        </ol>
+        <pre><code>&lt;iframe src="ruta/matrix.html"
+        title="Efecto MATRIX"
+        style="display:block;width:100%;height:520px;
+               border:0;background:#000"&gt;&lt;/iframe&gt;</code></pre>
+        <p><b>Paso 3 — personaliza.</b> Parámetros en la URL:
+            <code>?demo=1</code> recorre el ratón solo y
+            <code>?t=TU+PALABRA</code> fija el texto inicial
+            (<code>+</code> = espacio). Dentro del efecto también
+            puedes escribir directamente en su caja.</p>
+        <p class="nota"><b>Requisitos:</b> navegador con WebGL 1.
+            <b>No necesita servidor local</b>: los shaders van dentro
+            del HTML y no se cargan con <code>fetch</code>. Si tu
+            navegador bloqueara algo al abrir con doble clic, sirve la
+            carpeta con <code>py -3 -m http.server</code>.</p>
+        <div class="enlaces-cajon">
+            <a class="btn" href="installation-instalacion-matrix.txt">installation-instalacion-matrix.txt</a>
+            <a class="btn" href="matrix.zip" download>⬇ descargar zip</a>
+        </div>
+    </aside>
+
+    <script src="../../showcase.js"></script>
+<script src="../../../i18n.js"></script>
+</body>
+</html>

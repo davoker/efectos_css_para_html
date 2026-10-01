@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     SHOWCASE DEL EFECTO GLITCH
+     Abre este archivo con doble clic para ver el efecto en vivo.
+     · glitch.css     → el efecto (portable a cualquier CSS)
+     · glitch.js      → capa JS opcional (cortes + ráfagas)
+     · bloque <svg> abajo → filtros SVG: se pega UNA VEZ en la
+       página que quiera usar el efecto (está también en
+       installation-instalacion-glitch.txt)
+     · <style> → solo la maquetación de ESTA página
+     ============================================================ -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efecto GLITCH - Showcase</title>
+
+    <!-- EL EFECTO (estos archivos son los que copias a tu proyecto) -->
+    <link rel="stylesheet" href="glitch.css">
+
+    <!-- ============================================================
+         BLOQUE SVG DE FILTROS — se pega UNA VEZ en la página
+         (equivalente a quien pega el <style> de los efectos CSS)
+         ============================================================ -->
+    <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+        <defs>
+            <!-- 3a · glitch SUAVE — estado por defecto: bandas finas
+                 (±1,5px) y separación RGB leve, estático y legible -->
+            <filter id="ef-glitch-suave" x="-10%" y="-40%" width="120%" height="180%"
+                    color-interpolation-filters="sRGB">
+                <feTurbulence type="turbulence" baseFrequency="0 0.09"
+                              numOctaves="1" seed="6" result="bandas"/>
+                <feDisplacementMap in="SourceGraphic" in2="bandas" scale="3"
+                                   xChannelSelector="R" yChannelSelector="G" result="desp"/>
+                <feOffset in="desp" dx="-1.2" dy="0" result="o1"/>
+                <feColorMatrix in="o1" type="matrix" result="rojo"
+                               values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/>
+                <feOffset in="desp" dx="1.2" dy="0.4" result="o2"/>
+                <feColorMatrix in="o2" type="matrix" result="cian"
+                               values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+                <feBlend in="rojo" in2="cian" mode="screen"/>
+            </filter>
+
+            <!-- 3 · glitch (desgarro de bandas + separación RGB,
+                 animado con SMIL; el hover y las ráfagas lo encienden) -->
+            <filter id="ef-glitch" x="-15%" y="-60%" width="130%" height="220%"
+                    color-interpolation-filters="sRGB">
+                <feTurbulence type="turbulence" baseFrequency="0 0.09"
+                              numOctaves="1" seed="4" result="bandas">
+                    <animate attributeName="seed" calcMode="discrete" dur="0.35s"
+                             values="4;11;7;19;2;15;9;22" repeatCount="indefinite"/>
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="bandas" scale="16"
+                                   xChannelSelector="R" yChannelSelector="G" result="desp">
+                    <animate attributeName="scale" calcMode="discrete" dur="0.3s"
+                             values="10;24;14;28;12" repeatCount="indefinite"/>
+                </feDisplacementMap>
+                <feOffset in="desp" dx="-4" dy="0" result="o1">
+                    <animate attributeName="dx" calcMode="discrete" dur="0.28s"
+                             values="-6;3;-2;5;-5" repeatCount="indefinite"/>
+                </feOffset>
+                <feColorMatrix in="o1" type="matrix" result="rojo"
+                               values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/>
+                <feOffset in="desp" dx="4" dy="1" result="o2">
+                    <animate attributeName="dx" calcMode="discrete" dur="0.26s"
+                             values="5;-3;6;-6;2" repeatCount="indefinite"/>
+                </feOffset>
+                <feColorMatrix in="o2" type="matrix" result="cian"
+                               values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+                <feBlend in="rojo" in2="cian" mode="screen"/>
+            </filter>
+        </defs>
+    </svg>
+
+    <style>
+        /* Maquetación del showcase (NO forma parte del efecto) */
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 2rem;
+            background-color: #06070d;
+            color: #d7dae6;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+        h1 { font-size: 2.6rem; margin-top: 0; color: #ff5f8f; }
+        h2 {
+            color: #ff5f8f;
+            border-bottom: 2px solid #2b2033;
+            padding-bottom: .4rem;
+            margin-top: 2.5rem;
+        }
+        .demo {
+            background-color: #020207;
+            border: 1px dashed #2b2033;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .grande { font-size: 3rem; font-weight: 800; }
+        .mediano { font-size: 1.6rem; font-weight: 800; }
+        .peq { font-size: 1rem; font-weight: bold; color: #8fa1b5; }
+        .demo p.parrafo {
+            margin: 0 auto;
+            max-width: 62ch;
+            text-align: left;
+            font-size: 1.02rem;
+        }
+        .demo p.normal { color: #9fb0c2; font-size: .98rem; }
+        pre {
+            background-color: #020207;
+            border: 1px solid #2b2033;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            color: #7fe3ff;
+            font-size: .95rem;
+        }
+        code { color: #7fe3ff; }
+        .nota { color: #ff9dbc; font-weight: bold; }
+        .notas {
+            background-color: #0d0a13;
+            border: 1px solid #2b2033;
+            border-radius: 10px;
+            padding: .4rem 1.4rem 1rem;
+        }
+        .notas li { margin: .55rem 0; }
+        .caja-ejemplo {
+            background: #15101d;
+            border: 1px solid #31263f;
+            border-radius: 10px;
+            padding: 14px 18px;
+            color: #aebccd;
+            margin: .7rem 0;
+        }
+        .btn-fake {
+            background: #1a1422;
+            color: #d7dae6;
+            border: 1px solid #3a2b4a;
+            border-radius: 999px;
+            padding: .45rem 1.1rem;
+            font: inherit;
+            font-size: .9rem;
+            cursor: pointer;
+        }
+        .btn-fake:hover { background: #241b30; }
+
+        /* --- BOTÓN "PORTADA" (centrado arriba) ---
+           Clicable y con estado pulsado; mientras se mantiene sale el
+           destello TEMÁTICO de este efecto (tumbo de canales) y, al
+           soltar, salta a transicion.html#glitch: allí estalla la
+           escena del propio efecto (la elige :target) y, tras ~1,6 s
+           de retardo (meta refresh), se llega a la portada. --- */
+        nav.barra-volver {
+            text-align: center;
+            margin: 0 0 1.4rem;
+        }
+        nav.barra-volver a + a { margin-left: .7rem; }
+        .btn-volver {
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+            padding: .65rem 1.7rem;
+            background-color: #161b24;
+            border: 1px solid #2c3a4d;
+            border-radius: 999px;
+            color: #cfd8dc;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 3px 0 #07090e, 0 6px 14px rgba(0,0,0,.45);
+            transition: transform .1s, background-color .15s, box-shadow .1s;
+        }
+        .btn-volver:hover {
+            background-color: #1d2430;
+            color: #ffffff;
+        }
+        .btn-volver:active {
+            transform: translateY(3px) scale(.97);
+            background-color: #10141b;
+            box-shadow: 0 0 0 #07090e, inset 0 3px 8px rgba(0,0,0,.75);
+        }
+        .btn-volver::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 220px;
+            height: 46px;
+            margin: -23px 0 0 -110px;
+            border-radius: 3px;
+            opacity: 0;
+            pointer-events: none;
+            background: linear-gradient(90deg, rgba(255,40,110,0), rgba(255,40,110,.6) 20%, rgba(255,255,255,.9) 50%, rgba(0,225,255,.6) 80%, rgba(0,225,255,0));
+            transform: scale(.4) translateX(0);
+        }
+        .btn-volver:active::after {
+            animation: btn-glitch .28s steps(3, end) infinite;
+        }
+        @keyframes btn-glitch {
+            0%   { opacity: 0;   transform: scale(.5) translateX(-6px); }
+            33%  { opacity: .95; transform: scale(.85) translateX(5px); }
+            66%  { transform: scale(.8) translateX(-4px); }
+            100% { opacity: 0;   transform: scale(.9) translateX(2px); }
+        }
+        /* --- INTERACCION DE RATON (solo la pagina; el efecto no se
+           toca) --- A REPOSO NO SE VE NADA NUEVO: las dos capas
+           arrancan con opacity 0 y solo aparecen cuando mueves el
+           puntero. */
+        .capa-fondo, .luz-raton {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity .5s ease;
+        }
+        .capa-fondo {
+            z-index: -2;
+            background:
+                radial-gradient(48% 42% at 16% 10%,
+                                rgba(255, 70, 130, .12), transparent 66%),
+                radial-gradient(44% 38% at 86% 76%,
+                                rgba(0, 225, 255, .10), transparent 66%),
+                radial-gradient(40% 36% at 62% 34%,
+                                rgba(150, 90, 255, .10), transparent 66%);
+            transform: translate3d(var(--px, 0px), var(--py, 0px), 0)
+                       scale(1.1);
+        }
+        .luz-raton {
+            z-index: -1;
+            background: radial-gradient(
+                    330px 330px at var(--rx, 50%) var(--ry, 50%),
+                    rgba(var(--luz, 150, 185, 255), .22),
+                    rgba(var(--luz, 150, 185, 255), 0) 72%);
+        }
+        .moviendo .capa-fondo,
+        .moviendo .luz-raton {
+            opacity: 1;
+        }
+            .datos-show {
+            margin: 0 0 1.5rem;
+            font-size: .78rem;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: #8fa1b5;
+        }
+        .datos-show b { color: #ff5f8f; font-weight: normal; }
+</style>
+</head>
+<body>
+
+    <nav class="barra-volver">
+        <a class="btn-volver" href="../../../transicion.html#glitch">← Portada</a>
+        <a class="btn-volver" href="glitch.zip" download>Descarga</a>
+    </nav>
+
+    <h1>EFECTO GLITCH</h1>
+    <p>
+        Por defecto el texto ya lleva su <strong>glitch suave</strong>
+        —bandas finas y separación de canales siempre presentes,
+        estático y legible— y <strong>cada 3 o 4 segundos</strong> salta
+        una <strong>ráfaga del desgarro fuerte</strong> (180–400&nbsp;ms).
+        Al pasar el ratón (o al enfocarlo con teclado) el fuerte se
+        queda mientras lo tengas encima, con cortes aleatorios que
+        aporta el JavaScript. Efecto exclusivamente del texto.
+    </p>
+    <p class="datos-show">5 estados · <b>filtros SVG</b> · JS opcional</p>
+
+    <h2>1. Título grande</h2>
+    <div class="demo">
+        <span class="grande ef-glitch">Señal comprometida</span>
+    </div>
+
+    <h2>2. Párrafo completo</h2>
+    <div class="demo">
+        <p class="parrafo ef-glitch">Párrafo completo: por defecto el
+            texto ya lleva su glitch suave —bandas finas y separación de
+            canales siempre presentes— y cada 3 o 4 segundos salta una
+            ráfaga del desgarro fuerte (180–400&nbsp;ms). Al pasar el
+            ratón (o al enfocarlo con teclado) el fuerte se queda
+            mientras lo tengas encima, con cortes aleatorios a texto
+            normal que aporta el JavaScript.</p>
+    </div>
+
+    <h2>3. Inline</h2>
+    <div class="demo">
+        <p class="normal">Inline, como cualquier clase:
+            <span class="ef-glitch">pasa el ratón por aquí</span>
+            y sigue el resto del texto tranquilo.</p>
+    </div>
+
+    <h2>4. Sin ratón (para capturas)</h2>
+    <div class="demo">
+        <p class="normal">
+            <button class="btn-fake" id="btn-forzar" type="button">
+                Forzar ejemplo (sin ratón)</button>
+        </p>
+        <p class="normal" style="font-size:.85rem">Truco: añade
+            <code>?glitch=1</code> a la URL de ESTA página y todos los
+            ejemplos arrancan ya en fuerte (útil para capturas).</p>
+    </div>
+
+    <h2>Cómo aplicarlo a cualquier archivo .css</h2>
+    <p>
+        <strong>Paso 1:</strong> copia <strong>todo</strong> el contenido de
+        <code>glitch.css</code> dentro de tu hoja de estilos
+        (o guárdalo como archivo y enlázalo con <code>&lt;link&gt;</code>).
+    </p>
+    <p>
+        <strong>Paso 2:</strong> pega el <strong>bloque
+        <code>&lt;svg&gt;</code> de filtros</strong> (el que está al
+        principio de ESTE archivo) <strong>una sola vez</strong> en la
+        página que quiera usar el efecto —es el equivalente a quien pega
+        el <code>&lt;style&gt;</code> de los efectos CSS.
+    </p>
+    <p><strong>Paso 3:</strong> envuelve el texto en esta etiqueta:</p>
+    <pre><code>&lt;link rel="stylesheet" href="glitch.css"&gt;
+&lt;script src="glitch.js"&gt;&lt;/script&gt;   &lt;!-- cortes + ráfagas (opcional) --&gt;
+
+&lt;a href="#" class="ef-glitch"&gt;Enlace con glitch&lt;/a&gt;</code></pre>
+    <p class="nota">
+        ✓ El JS es opcional: sin él, glitch suave base + ráfagas no
+        ocurren (el hover fuerte sigue siendo CSS+SVG). Con él llegan
+        las ráfagas cada 3-4 s y los cortes aleatorios.
+    </p>
+    <p>
+        También tienes las instrucciones —incluido el bloque SVG para
+        copiar— en <code>installation-instalacion-glitch.txt</code> de esta misma
+        carpeta.
+    </p>
+
+    <h2>Notas de uso</h2>
+    <div class="notas">
+        <ul>
+            <li><b>Sin fondo propio en el elemento con la clase.</b> El
+                filtro se calcula sobre todo lo que pinta el elemento;
+                si la caja tuviera fondo, lo desgarraría también. Si tu
+                bloque necesita fondo, ponlo en el padre y la clase en
+                un <code>&lt;span&gt;</code> interior:
+                <div class="caja-ejemplo">
+                    <span class="ef-glitch">efecto dentro, caja fuera</span>
+                </div>
+            </li>
+            <li><b>Estados:</b> base = suave estático ·
+                <code>.rafaga</code> = fuerte 180-400&nbsp;ms (lo pone
+                el JS cada 3-4&nbsp;s) · hover/focus = fuerte mientras
+                dure · <code>.forzado</code> = fuerte a mano ·
+                <code>.sin-glitch</code> = texto normal (corte del JS).</li>
+            <li><b>Selección e impresión:</b> el texto es texto real
+                del DOM; al imprimir, <code>@media print</code> deja
+                todo en negro liso sin efectos.</li>
+            <li><b>Movimiento reducido:</b> con
+                <code>prefers-reduced-motion</code> no hay ráfagas ni
+                cortes y el fuerte se mapea al suave (quieto).</li>
+        </ul>
+    </div>
+
+    <script src="glitch.js"></script>
+    <script>
+        /* demo: botón que fuerza el glitch en todos los ejemplos */
+        (function () {
+            var btn = document.getElementById('btn-forzar');
+            if (!btn) return;
+            btn.addEventListener('click', function () {
+                var ejemplos = document.querySelectorAll('.ef-glitch');
+                var activar = !ejemplos.length || !ejemplos[0].classList.contains('forzado');
+                for (var i = 0; i < ejemplos.length; i++) {
+                    ejemplos[i].classList.toggle('forzado', activar);
+                    ejemplos[i].dispatchEvent(new Event('mouseenter'));
+                    if (!activar) ejemplos[i].dispatchEvent(new Event('mouseleave'));
+                }
+                btn.textContent = activar ? 'Desactivar ejemplo forzado' : 'Forzar ejemplo (sin ratón)';
+            });
+        })();
+    </script>
+    <script>
+        // Interaccion de raton de ESTE showcase: una luz con el color
+        // del titulo sigue al puntero y el fondo hace un paralaje
+        // suave. El efecto no se toca y a REPOSO las dos capas estan
+        // invisibles, asi que la pagina se ve igual que sin este guion.
+        (function () {
+            var raiz = document.documentElement;
+            var mx = 50, my = 50, lx = 50, ly = 50;
+            var px = 0, py = 0, corriendo = false, ult = 0;
+            var capa = document.createElement("div");
+            var luz = document.createElement("div");
+            capa.className = "capa-fondo";
+            luz.className = "luz-raton";
+            capa.setAttribute("aria-hidden", "true");
+            luz.setAttribute("aria-hidden", "true");
+            document.body.appendChild(capa);
+            document.body.appendChild(luz);
+
+            // la luz toma el color del titulo del efecto
+            var h1 = document.querySelector("h1");
+            if (h1) {
+                var c = getComputedStyle(h1).color;
+                var n = c.slice(c.indexOf("(") + 1, c.indexOf(")")).split(",");
+                if (n.length >= 3
+                        && (n.length < 4 || parseFloat(n[3]) > .2)) {
+                    raiz.style.setProperty("--luz",
+                                           n[0] + "," + n[1] + "," + n[2]);
+                }
+            }
+
+            function paso(ts) {
+                var dt = ult ? Math.min(64, ts - ult) : 16;
+                ult = ts;
+                var k = Math.min(1, dt / 170);
+                lx += (mx - lx) * k;
+                ly += (my - ly) * k;
+                px += ((mx - 50) * -0.34 - px) * k;
+                py += ((my - 50) * -0.26 - py) * k;
+                raiz.style.setProperty("--rx", lx.toFixed(1) + "%");
+                raiz.style.setProperty("--ry", ly.toFixed(1) + "%");
+                raiz.style.setProperty("--px", px.toFixed(1) + "px");
+                raiz.style.setProperty("--py", py.toFixed(1) + "px");
+                if (Math.abs(mx - lx) < .05 && Math.abs(my - ly) < .05
+                        && Math.abs(px) < .1 && Math.abs(py) < .1) {
+                    corriendo = false;
+                    ult = 0;
+                    return;
+                }
+                requestAnimationFrame(paso);
+            }
+
+            document.addEventListener("mousemove", function (e) {
+                mx = e.clientX * 100 / Math.max(1, raiz.clientWidth);
+                my = e.clientY * 100 / Math.max(1, raiz.clientHeight);
+                document.body.classList.add("moviendo");
+                if (!corriendo) {
+                    corriendo = true;
+                    requestAnimationFrame(paso);
+                }
+            }, { passive: true });
+        })();
+    </script>
+<script src="../../../i18n.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+- Pon otro separador diferente en el index de la portada entre la sección Efectos webgl y la efectos svg, igual que separaste la efectos css y efectos webgl, pero que el separador sea diferente pero con la misma altura que el otro.
+
+- Cada sección en el index principal (la portada) debe tener su propio texto explicativo de que vamos a encontrar, por ejemplo, esto estña escrito en Efectos CSS ahora mismo:
+
+Cada tarjeta es una muestra circular del efecto.
+El botón showcase muestra ejemplos aplicados a textos de diferentes tamaños.
+El botón "Descargar Efecto" descarga: (CSS + HTML + instrucciones), todo lo necesario para aplicar el efecto en tus archivos.
+Más abajo tienes la sección EFECTOS WEBGL: tiempo real con shaders GLSL en el navegador, y la sección EFECTOS SVG: filtros SVG sobre cualquier texto (distorsión, iluminación, canales).
+
+Eso no lo quiero la descripción de efectos webgl y efectos svg deben ir en el texto de su sección, no en el de efectos css, la estructura sería:
+
+Efectos CSS:
+
+Cada tarjeta es una muestra circular del efecto.
+El botón showcase muestra ejemplos aplicados a textos de diferentes tamaños.
+El botón "Descargar Efecto" descarga: (CSS + HTML + instrucciones), todo lo necesario para aplicar el efecto en tus archivos.
+
+Aplicaríamos lo mismo para las otras secciones, pero con las técnicas que use para crear los efectos en el texto, es decir, no vamos a poner en el texto de Efectos svg que usa solo css + html porque también usa svg, a eso me refiero, cada sección tendrá su texto explicativo siguiendo esa estructura.
+
+- Todas los index de showcase de todas las secciones tendrán dentro el botón de descarga que se llamará "Descarga", el botón estará justo a la derecha del botón "Portal" que nos lleva a la página principal, renombra los botones "zip" que están dentro de los showcase de la sección efectos svg a Descarga.
+
+- Crea una función nueva a la izquierda de botón de cambio de tema de claro a oscuro, otro botón que sea un switcher que cambie entre el idioma español al ingles, algo que ponga en plan [en-es], que se seleccione el en cuando lo pongas y se traduzca el texto de la página a ingles, y que si marcamos el "es" se vea seleccionado y traduzca el texto de toda la página a Español, la traducción se aplicará en toda la página, en los showcase, portada, en todos lados, y cambiaremos de idioma de nuevo desde la página (portada) principal volviendo a dar al botón de cambio de idioma.
+
+- Las tarjetas de muestra de efectos que vemos en la página principal de las secciones webgl y svg tienen que ser redondas igual que los de la sección css.
+
+- El efecto que vemos al pulsar el botón "Portada" dentro de cada showcase de las secciones webgl y svg debe ser un efecto basado en el efecto que estamos viendo, por ejemplo, si estamos viendo el efecto mercurio en la sección svg o webgl, cuando pulsemos el botón "Portada" dentro del showcase de ese efecto, debe verse un efecto basado en ese mismo efecto, para que todos los efectos al pulsar ese botón tengan variedad.
+
+- Las secciones deben ser "plegables", como si fuera un botón que pulsas y se abre una lista plegable, actualmente tenemos las secciones:
+
+Efectos css
+Efectos webgl
+Efectos svg
+
+Cuando pulsemos en la sección que nos interesa se abrirá la lista con todas las temáticas de efectos (Matrix, Monster hunter, etc etc) y nos mostrará 12 efectos al azar de esa sección, como hace ahora mismo, si abrimos otra sección la anterior pliega su lista y se mostrarán 12 efectos al azar de la nueva sección abierta, como funcionaba hasta ahora.
+
+- Coloca la sección Efectos webgl debajo de la sección efectos svg, el orden de la lista debe ser ahora:
+
+Efectos css
+Efectos svg
+Efectos webgl

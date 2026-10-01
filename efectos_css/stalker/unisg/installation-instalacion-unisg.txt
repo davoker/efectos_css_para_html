@@ -1,0 +1,105 @@
+================================================================
+EFECTO UNISG - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "unisg.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/unisg.css">
+
+Contenido del archivo:
+  · La clase .efecto-unisg
+  · Sus pseudo-elementos ::before y ::after
+    (línea del pliego ::before y sello ::after)
+  ·   · stk-unisg-pliego, stk-unisg-marca, stk-unisg-sello
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-unisg">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-unisg">UNISG</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones en bucle infinito:
+  · stk-unisg-marca (7 s) → el azul del expediente se
+    tiñe de blanco dentro de las letras y se enfría.
+  · stk-unisg-pliego (4,4 s) → la línea del pliego se
+    dibuja bajo la palabra de izquierda a derecha.
+  · stk-unisg-sello (4,4 s) → el cuño se estampa con un
+    golpe y se retira en la esquina.
+Línea y sello comparten duración: mismo expediente.
+
+TÉCNICA: degradado azul de expediente recortado en el texto con
+    background-position animado, línea del pliego ::before
+    dibujada con transform: scaleX y sello ::after
+    estampado con scale y opacidad.
+
+
+AJUSTES FÁCILES
+---------------
+· Sello más fuerte: sube el .95 del opacity en su keyframe.
+· Pliego más rápido: 4.4s → 2.6s en stk-unisg-pliego.
+· Sin sello: borra el ::after y stk-unisg-sello.
+· Azul más frío: #4a90d9 → #1e88e5 en el degradado base.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+UNISG EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "unisg.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/unisg.css">
+
+What the file contains:
+  · The .efecto-unisg class
+  · Its pseudo-elements ::before and ::after
+    (folio line ::before and stamp ::after)
+  ·   · stk-unisg-pliego, stk-unisg-marca, stk-unisg-sello
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-unisg">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-unisg">UNISG</span></h1>
+
+
+WHAT IT DOES
+--------
+Three animations on an infinite loop:
+  · stk-unisg-marca (7 s) → the blue of the dossier
+    turns white inside the letters and cools down.
+  · stk-unisg-pliego (4.4 s) → the folio line
+    draws itself under the word from left to right.
+  · stk-unisg-sello (4.4 s) → the stamp slams down with a
+    thump and retreats into the corner.
+Line and stamp share the same duration: same dossier.
+
+TECHNIQUE: dossier blue gradient clipped into the text with
+    animated background-position, folio line ::before
+    drawn with transform: scaleX and stamp ::after
+    pressed with scale and opacity.
+
+
+EASY TWEAKS
+---------------
+· Stronger stamp: bump the .95 opacity in its keyframe.
+· Faster folio: 4.4s → 2.6s in stk-unisg-pliego.
+· No stamp: delete the ::after and stk-unisg-sello.
+· Cooler blue: #4a90d9 → #1e88e5 in the base gradient.

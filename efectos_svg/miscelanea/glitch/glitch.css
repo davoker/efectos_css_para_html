@@ -1,0 +1,71 @@
+/* =============================================================
+   GLITCH (SVG) · tumbo de canales con suave + ráfagas
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; la separación de canales es del propio glifo.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-glitch.txt) 2) enlazar este CSS 3) poner la
+     clase. JS opcional (glitch.js): cortes aleatorios al
+     interactuar + ráfagas periódicas del fuerte.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+   ef-glitch — tumbo de canales con suave + ráfagas
+   Estado base: glitch SUAVE siempre activo (bandas finas +
+   separación RGB leve, estático y legible). Cada 3-4 s
+   glitch.js lanza una ráfaga del fuerte (.rafaga, 180-400ms).
+   Hover/focus/.forzado: desgarro fuerte mientras dure +
+   cortes aleatorios a texto normal.
+   ============================================================= */
+.ef-glitch {
+    color: #e8f6ff;
+    text-shadow: 1px 0 rgba(255, 40, 110, .55),
+                -1px 0 rgba(0, 225, 255, .5);
+    filter: url(#ef-glitch-suave);     /* estado por defecto: suave, estático */
+    transition: filter .12s ease;
+}
+.ef-glitch:hover,
+.ef-glitch:focus-visible,
+.ef-glitch.forzado,
+.ef-glitch.rafaga {
+    filter: url(#ef-glitch);
+}
+.ef-glitch.sin-glitch,
+.ef-glitch.sin-glitch:hover,
+.ef-glitch.sin-glitch:focus-visible,
+.ef-glitch.sin-glitch.forzado {
+    filter: none;                      /* corte: vuelve al texto normal */
+}
+@media (prefers-reduced-motion: reduce) {
+    .ef-glitch:hover,
+    .ef-glitch:focus-visible,
+    .ef-glitch.forzado,
+    .ef-glitch.rafaga {
+        filter: url(#ef-glitch-suave); /* movimiento reducido: solo el suave */
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-glitch,
+    .ef-glitch:hover,
+    .ef-glitch:focus-visible,
+    .ef-glitch.forzado,
+    .ef-glitch.rafaga {
+        color: #000;
+        text-shadow: none;
+        filter: none;
+    }
+}

@@ -1,0 +1,107 @@
+================================================================
+EFECTO ESPEJO LÍQUIDO - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "espejo.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/espejo.css">
+
+Contenido del archivo:
+  · La clase .efecto-espejo
+  · Sus pseudo-elementos ::before y ::after
+    (banda de luz que atraviesa el espejo)
+  ·   · mx-espejo-flujo, mx-espejo-banda
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-espejo">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-espejo">ESPEJO</span></h1>
+
+
+QUÉ HACE
+--------
+Dos animaciones en bucle infinito:
+  · mx-espejo-flujo (7 s) → el degradado cromado se
+    desplaza muy despacio: los reflejos de la plata
+    recorren las letras sin parar.
+  · mx-espejo-banda (3,6 s) → una línea de luz vertical
+    barre el texto de izquierda a derecha con su halo
+    (box-shadow) y vuelve a empezar, como la onda que
+    deja una mano al entrar en el espejo.
+La junta entre los tonos claros y oscuros da el efecto
+de metal pulido.
+
+TÉCNICA: background-clip: text con degradado cromado de
+    background-size amplio y background-position en
+    bucle + pseudo-elemento-banda con box-shadow.
+
+
+AJUSTES FÁCILES
+---------------
+· Cromo más oscuro: #78909c → #455a64 en el degradado.
+· Banda más lenta: 3.6s → 6s en mx-espejo-banda.
+· Banda más gruesa: .2em → .4em.
+· Fluido más marcado: sube background-size a 320% 100%.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+LIQUID MIRROR EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "espejo.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/espejo.css">
+
+What the file contains:
+  · The .efecto-espejo class
+  · Its pseudo-elements ::before and ::after
+    (band of light crossing the mirror)
+  ·   · mx-espejo-flujo, mx-espejo-banda
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-espejo">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-espejo">ESPEJO</span></h1>
+
+
+WHAT IT DOES
+--------
+Two animations on an infinite loop:
+  · mx-espejo-flujo (7 s) → the chrome gradient
+    shifts very slowly: the silver reflections
+    travel across the letters without stopping.
+  · mx-espejo-banda (3.6 s) → a vertical line of light
+    sweeps the text left to right with its halo
+    (box-shadow) and starts over, like the wave that
+    a hand leaves when entering the mirror.
+The seam between the light and dark tones gives the effect
+of polished metal.
+
+TECHNIQUE: background-clip: text with a chrome gradient with
+    a wide background-size and background-position on
+    a loop + band pseudo-element with box-shadow.
+
+
+EASY TWEAKS
+---------------
+· Darker chrome: #78909c → #455a64 in the gradient.
+· Slower band: 3.6s → 6s in mx-espejo-banda.
+· Thicker band: .2em → .4em.
+· Stronger fluid effect: raise background-size to 320% 100%.

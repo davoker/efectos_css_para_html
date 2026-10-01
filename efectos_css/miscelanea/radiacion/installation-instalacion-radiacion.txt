@@ -1,0 +1,129 @@
+================================================================
+EFECTO RADIACIÓN - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "radiacion.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/radiacion.css">
+
+El archivo es 100% portable: no depende de ningún otro estilo,
+de librerías ni de JavaScript. Contiene:
+  · La clase .efecto-radiacion
+  · 2 @keyframes: radiacion-energia y radiacion-geiger
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-radiacion">Tu texto</span>
+
+Ejemplo real sobre un título:
+
+    <h1><span class="efecto-radiacion">La Zona</span></h1>
+
+
+VENTAJAS
+--------
+· NO necesita ningún atributo extra: solo la clase.
+· Funciona sobre cualquier texto (h1, h2, enlaces, botones...).
+· Recomendado: fondo oscuro + texto en negrita para que el
+  resplandor verde se aprecie bien.
+
+
+QUÉ HACE (3 CAPAS)
+-------------------
+1. CINTAS DE PELIGRO → bandas diagonales negras (sombra de la
+   cinta aviso ☢) estáticas sobre las letras.
+2. ENERGÍA TÓXICA → degradado verde luminoso que fluye SIN
+   PARAR dentro de los caracteres (4 s por ciclo, sin cortes).
+3. CONTADOR GEIGER → destellos IRREGULARES cada 2,4 s:
+   brillo (filter: brightness) + golpes de resplandor (text-
+   shadow) + micro-temblor de 1px. Irregular a propósito,
+   como las medidas de un contador Geiger real.
+
+
+AJUSTES FÁCILES
+---------------
+· Menos cintas: en el repeating-linear-gradient cambia
+  "0 20px / 20px 50px" por "0 40px / 40px 80px" (bandas más
+  separadas). Si las quieres quitar, borra esa primera capa
+  del background-image.
+· Cintas más suaves: cambia rgba(0,0,0,0.55) por 0.3.
+· Energía más rápida: cambia 4s por 2s en radiacion-energia.
+· Geiger más frecuente: cambia 2.4s por 1.2s en radiacion-geiger.
+· Destellos más fuertes: sube los valores de brightness
+  (1.55 → 2) y los px de los text-shadow.
+· Sin temblor: borra las líneas "transform" de los
+  keyframes radiacion-geiger.
+· Color radiación: los verdes son #8fc000 / #d6ff45 /
+  #9aff00. Para radiación "naranja" (fuego radiactivo),
+  sustitúyelos por #ff9800 / #ffd740.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+RADIATION EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "radiacion.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/radiacion.css">
+
+The file is 100% portable: it doesn't depend on any other style,
+on libraries or on JavaScript. It contains:
+  · The .efecto-radiacion class
+  · 2 @keyframes: radiacion-energia and radiacion-geiger
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-radiacion">Tu texto</span>
+
+Real example on a title:
+
+    <h1><span class="efecto-radiacion">La Zona</span></h1>
+
+
+ADVANTAGES
+--------
+· NO extra attribute needed: just the class.
+· Works on any text (h1, h2, links, buttons...).
+· Recommended: dark background + bold text so the
+  green glow shows up well.
+
+
+WHAT IT DOES (3 LAYERS)
+-------------------
+1. DANGER TAPE → black diagonal bands (shadow of the
+   warning tape ☢) static on the letters.
+2. TOXIC ENERGY → glowing green gradient that flows WITHOUT
+   STOPPING inside the characters (4 s per cycle, no seams).
+3. GEIGER COUNTER → IRREGULAR flashes every 2.4 s:
+   brightness (filter: brightness) + glow bursts (text-
+   shadow) + 1px micro-shake. Deliberately irregular,
+   like the readings of a real Geiger counter.
+
+
+EASY TWEAKS
+---------------
+· Fewer tapes: in the repeating-linear-gradient change
+  "0 20px / 20px 50px" to "0 40px / 40px 80px" (bands farther
+  apart). If you want to remove them, delete that first layer
+  of the background-image.
+· Softer tapes: change rgba(0,0,0,0.55) to 0.3.
+· Faster energy: change 4s to 2s in radiacion-energia.
+· More frequent Geiger: change 2.4s to 1.2s in radiacion-geiger.
+· Stronger flashes: raise the brightness values
+  (1.55 → 2) and the px of the text-shadow.
+· No jitter: delete the "transform" lines of the
+  radiacion-geiger keyframes.
+· Radiation color: the greens are #8fc000 / #d6ff45 /
+  #9aff00. For "orange" radiation (radioactive fire),
+  replace them with #ff9800 / #ffd740.

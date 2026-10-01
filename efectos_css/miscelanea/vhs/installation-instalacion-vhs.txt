@@ -1,0 +1,113 @@
+================================================================
+EFECTO VHS - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "vhs.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/vhs.css">
+
+Contenido del archivo:
+  · La clase .efecto-vhs
+  · 2 @keyframes: vhs-tracking y vhs-salto
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-vhs">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-vhs">VHS</span></h1>
+
+
+QUÉ HACE
+--------
+Dos animaciones simultáneas en bucle infinito:
+  · vhs-tracking (5 s) → una barra blanca de "tracking"
+    sube por dentro de las letras (la barra está en una
+    capa de 300% de alto; al empezar y terminar el ciclo
+    está fuera del texto, así que el bucle no se nota).
+  · vhs-salto (2,4 s, steps(1)) → cada cierto tiempo el
+    texto da un tirón lateral de 2-3px con leve skew y un
+    destello de brillo, como una cámara de vídeo afectada.
+    El color base es un degradado rosa→blanco→cian de
+    casete desvanecido.
+
+TÉCNICA: background-clip: text + transform/filter animados.
+
+
+AJUSTES FÁCILES
+---------------
+· Tracking más frecuente: 5s → 2.5s.
+· Barra más gruesa: sube los % del primer linear-gradient
+  (46%/50%/54% → 42%/50%/58%).
+· Saltos más fuertes: sube los px de translate (3px → 6px)
+  y los grados de skew (.7deg → 1.5deg).
+· Saltos menos frecuentes: cambia 2.4s por 4s.
+· Vídeo más lavado: aclara el segundo linear-gradient
+  (#ff9ecb → #ffd4e6, #8ed8f8 → #cdeeff).
+· Estilo "cinta dañada": añade en .efecto-vhs un
+  animation extra o cambia steps(1) por ease-out en
+  vhs-salto (los saltos serán elásticos en vez de secos).
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+VHS EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "vhs.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/vhs.css">
+
+What the file contains:
+  · The .efecto-vhs class
+  · 2 @keyframes: vhs-tracking and vhs-salto
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-vhs">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-vhs">VHS</span></h1>
+
+
+WHAT IT DOES
+--------
+Two simultaneous animations on an infinite loop:
+  · vhs-tracking (5 s) → a white "tracking" bar
+    rises inside the letters (the bar sits in a
+    layer 300% tall; at the start and end of the cycle
+    it is outside the text, so the loop goes unnoticed).
+  · vhs-salto (2.4 s, steps(1)) → now and then the
+    text gives a sideways tug of 2-3px with a slight skew and a
+    glint of brightness, like a glitching video camera.
+    The base color is a pink→white→cyan gradient of
+    faded cassette.
+
+TECHNIQUE: background-clip: text + animated transform/filter.
+
+
+EASY TWEAKS
+---------------
+· More frequent tracking: 5s → 2.5s.
+· Thicker bar: raise the % of the first linear-gradient
+  (46%/50%/54% → 42%/50%/58%).
+· Stronger jumps: raise the translate px (3px → 6px)
+  and the skew degrees (.7deg → 1.5deg).
+· Less frequent jumps: change 2.4s to 4s.
+· Washed-out video: lighten the second linear-gradient
+  (#ff9ecb → #ffd4e6, #8ed8f8 → #cdeeff).
+· "Damaged tape" style: add to .efecto-vhs an
+  extra animation or change steps(1) to ease-out in
+  vhs-salto (the jumps will be springy instead of hard).

@@ -1,0 +1,211 @@
+================================================================
+EFECTO MATRIX 2 · CINE - CÓMO APLICARLO A CUALQUIER ARCHIVO HTML
+================================================================
+
+PASO 1 - COPIA EL ARCHIVO DEL EFECTO
+------------------------------------
+"matrix2.html" es autocontenido: CSS, JavaScript, los cuatro
+shaders GLSL, el atlas de glifos y la lógica de bloom van todo
+dentro; no hay imágenes ni ficheros externos.
+
+    cópialo a tu proyecto, por ejemplo:
+        tu-pagina/efectos/matrix2.html
+
+
+PASO 2 - AÑÁDELO A TU PÁGINA
+----------------------------
+a) Como página completa, enlazándolo:
+
+       <a href="efectos/matrix2.html">ver efecto</a>
+
+b) Empotrado con un iframe (recomendado dentro de tu diseño):
+
+       <iframe src="efectos/matrix2.html?demo=1"
+               title="Efecto MATRIX 2"
+               style="display:block;width:100%;height:520px;
+                      border:0;background:#000"></iframe>
+
+c) Como fondo de una sección: contenedor con position:relative,
+   el iframe con position:absolute; inset:0 y tu texto encima
+   (z-index mayor).
+
+
+PARÁMETROS EN LA URL
+---------------------
+    ?t=TU+TEXTO  texto inicial; "+" = espacio. RESPETA las
+                 mayúsculas y las minúsculas tal y como escribes
+                 (también acentos y ñ)
+    ?demo=1      parallax y ondas corriendo sin mover el ratón
+
+
+QUÉ HACE
+--------
+La versión "cine" del efecto CÓDIGO: la lluvia de código cae
+DENTRO de las letras sobre un fondo de un solo color, con borde
+nítido de 2-3 px, brillo (bloom) contenido y acabado cinematog-
+ráfico: aberración cromática radial, ligero barril, tonemap ACES
+y viñeta. Al escribir, la caja de la textura se recalcula con las
+métricas reales de la tinta, así que cualquier palabra (con
+ascensores, descendentes, acentos) queda centrada y sin cortarse.
+Al hacer clic, onda expansiva.
+
+
+TÉCNICA
+-------
+· Multipasada WebGL con framebuffers:
+    1) escena   → letras (máscara nítida + desenfocada → normal),
+                  código dentro con dispersión RGB, borde por
+                  gradiente de la máscara, fondo plano;
+    2) bright   → paso de brillo con umbral 0.80 a media escala;
+    3) blur     → gaussiano separable H/V a 1/2 y 1/4 de escala;
+    4) final    → suma de bloom (0.60 + 0.80), aberración radial,
+                  barril y tonemap ACES.
+· Canvas 2D: máscara del texto y atlas de glifos 16x8.
+· El código solo se calcula dentro de las letras (el fondo es un
+  color plano), así que el texto es el protagonista.
+
+
+AJUSTES FÁCILES
+---------------
+· Color del fondo: la línea "vec3 bg = vec3(...)" del shader de
+  escena (un solo color; negro puro = vec3(0.0)).
+· Brillo del interior del texto: el multiplicador de "mid"
+  (por defecto 0.40).
+· Bloom: umbral en el bright-pass (smoothstep 0.80, 1.10) y los
+  pesos 0.60 / 0.80 del paso final.
+· Aberración cromática: el 0.0040 del paso final (0 = apagada).
+· Densidad de columnas: uCells (ancho/18.6, alto/30).
+· Tipografía y grosor: la función fontFor() (Arial Black 900).
+· Texto por defecto: value="MATRIX" en el <input> o ?t=....
+
+
+REQUISITOS
+----------
+· Navegador con WebGL 1 (cualquier navegador actual).
+· NO necesita servidor local: los shaders van dentro del HTML y
+  no se cargan con fetch. Si al abrir con doble clic (file://)
+  tu navegador bloqueara algo, sirve la carpeta en local:
+
+      py -3 -m http.server 8000
+
+  y abre http://127.0.0.1:8000/matrix2.html
+· Si en tu proyecto separas los shaders a ficheros .glsl, AHÍ SÍ
+  necesitarías servidor local (fetch de archivos).
+· Rendimiento: son 4 programas y 7 dibujados por frame; en
+  pantallas muy grandes baja la escala del bloom si hace falta.
+
+
+ARCHIVOS
+--------
+    matrix2.html               el efecto (autocontenido)
+    index.html                 showcase (solo presentación)
+    installation-instalacion-matrix2.txt   este documento
+    matrix2.zip                efecto + este documento
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+MATRIX 2 · CINEMA EFFECT - HOW TO APPLY IT TO ANY HTML FILE
+================================================================
+
+STEP 1 - COPY THE EFFECT FILE
+------------------------------------
+"matrix2.html" is self-contained: CSS, JavaScript, the four
+GLSL shaders, the glyph atlas and the bloom logic all go
+inside; there are no images or external files.
+
+    copy it to your project, for example:
+        your-page/effects/matrix2.html
+
+
+STEP 2 - ADD IT TO YOUR PAGE
+----------------------------
+a) As a full page, linking to it:
+
+       <a href="efectos/matrix2.html">ver efecto</a>
+
+b) Embedded with an iframe (recommended within your design):
+
+       <iframe src="efectos/matrix2.html?demo=1"
+               title="Effect MATRIX 2"
+               style="display:block;width:100%;height:520px;
+                      border:0;background:#000"></iframe>
+
+c) As a section background: container with position:relative,
+   the iframe with position:absolute; inset:0 and your text on top
+   (higher z-index).
+
+
+URL PARAMETERS
+---------------------
+    ?t=YOUR+TEXT  initial text; "+" = space. IT KEEPS
+                  uppercase and lowercase just as you type them
+                  (accents and ñ too)
+    ?demo=1      parallax and waves running without moving the mouse
+
+
+WHAT IT DOES
+--------
+The "cinema" version of the CODE effect: the code rain falls
+INSIDE the letters on a flat background, with a crisp
+2-3 px edge, contained bloom and a cinematic
+finish: radial chromatic aberration, slight barrel, ACES tonemap
+and vignette. As you type, the texture box is recalculated with the
+real ink metrics, so any word (with
+ascenders, descenders, accents) stays centered and unbroken.
+On click, an expanding wave.
+
+
+TECHNIQUE
+-------
+· WebGL multipass with framebuffers:
+    1) scene   → letters (sharp + blurred mask → normal),
+                  code inside with RGB dispersion, edge by
+                  mask gradient, flat background;
+    2) bright   → brightness pass with threshold 0.80 at half scale;
+    3) blur     → separable Gaussian H/V at 1/2 and 1/4 scale;
+    4) final    → bloom sum (0.60 + 0.80), radial aberration,
+                  barrel and ACES tonemap.
+· Canvas 2D: text mask and 16x8 glyph atlas.
+· The code is only computed inside the letters (the background is a
+  flat color), so the text is the star.
+
+
+EASY TWEAKS
+---------------
+· Background color: the "vec3 bg = vec3(...)" line of the scene
+  shader (one color; pure black = vec3(0.0)).
+· Brightness inside the text: the "mid" multiplier
+  (0.40 by default).
+· Bloom: threshold in the bright-pass (smoothstep 0.80, 1.10) and the
+  weights 0.60 / 0.80 of the final pass.
+· Chromatic aberration: the 0.0040 of the final pass (0 = off).
+· Column density: uCells (width/18.6, height/30).
+· Typeface and weight: the fontFor() function (Arial Black 900).
+· Default text: value="MATRIX" in the <input> or ?t=....
+
+
+REQUIREMENTS
+----------
+· A browser with WebGL 1 (any current browser).
+· NO local server needed: the shaders live inside the HTML and
+  aren't loaded with fetch. If on double-click open (file://)
+  your browser blocks something, serve the folder locally:
+
+      py -3 -m http.server 8000
+
+  and open http://127.0.0.1:8000/matrix2.html
+· If your project splits the shaders into .glsl files, THEN YES
+  you'd need a local server (file fetch).
+· Performance: it's 4 programs and 7 draws per frame; on
+  very large screens lower the bloom scale if needed.
+
+
+FILES
+--------
+    matrix2.html               the effect (self-contained)
+    index.html                 showcase (presentation only)
+    installation-instalacion-matrix2.txt   this document
+    matrix2.zip                effect + this document

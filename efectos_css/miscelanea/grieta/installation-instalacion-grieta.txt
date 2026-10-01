@@ -1,0 +1,119 @@
+================================================================
+EFECTO GRIETA - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "grieta.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/grieta.css">
+
+El archivo es 100% portable: no depende de ningún otro estilo,
+de librerías ni de JavaScript. Contiene:
+  · La clase .efecto-grieta
+  · Sus pseudo-elementos ::before y ::after
+  · 3 @keyframes: grieta-grieta, grieta-esquirla y grieta-brasa
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-grieta">Tu texto</span>
+
+Ejemplo real sobre un título:
+
+    <h1><span class="efecto-grieta">Grieta</span></h1>
+
+
+VENTAJAS
+--------
+· NO necesita ningún atributo extra: solo la clase.
+· Funciona sobre cualquier texto (h1, h2, enlaces, botones...).
+· Recomendado: texto en negrita, para que la roca tenga
+  cuerpo y la grieta se vea clara.
+
+
+QUÉ HACE
+--------
+Tres animaciones simultáneas en bucle infinito (5 s):
+  · grieta-grieta  → la grieta (banda oscura con veta de brasa
+    dentro) barre las letras de derecha a izquierda y desaparece.
+  · grieta-brasa   → mientras cruza, un resplandor naranja
+    late por detrás de las letras.
+  · grieta-esquirla→ al abrirse, un fragmento de roca se
+    desprende de la esquina superior derecha y sale volando.
+
+
+AJUSTES FÁCILES
+---------------
+· Grieta más ancha: engorda los tramos de la capa 1
+  (46% 47.2% → 44% 49%, por ejemplo).
+· Brasa más intensa: sube los rgba(255,111,0,.5) de ::after
+  (último valor de cada stop) hacia .8.
+· Roca más clara u oscura: cambia los colores de la capa 2
+  (#bcaaa4, #a1887f, #795548, #5d4037).
+· Cruce más lento: cambia 5s por 8s en las 3 líneas animation
+  (y alarga la horquilla 14%-72% de grieta-grieta si quieres
+  que la grieta ocupe más tiempo en pantalla).
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+CRACK EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "grieta.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/grieta.css">
+
+The file is 100% portable: it doesn't depend on any other style,
+on libraries or on JavaScript. It contains:
+  · The .efecto-grieta class
+  · Its pseudo-elements ::before and ::after
+  · 3 @keyframes: grieta-grieta, grieta-esquirla and grieta-brasa
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-grieta">Tu texto</span>
+
+Real example on a title:
+
+    <h1><span class="efecto-grieta">Grieta</span></h1>
+
+
+ADVANTAGES
+--------
+· NO extra attribute needed: just the class.
+· Works on any text (h1, h2, links, buttons...).
+· Recommended: bold text, so the rock has
+  body and the crack shows clearly.
+
+
+WHAT IT DOES
+--------
+Three simultaneous animations on an infinite loop (5 s):
+  · grieta-grieta  → the crack (dark band with an ember vein
+    inside) sweeps the letters from right to left and disappears.
+  · grieta-brasa   → while it crosses, an orange glow
+    pulses behind the letters.
+  · grieta-esquirla→ as it opens, a chunk of rock
+    breaks off the top right corner and flies away.
+
+
+EASY TWEAKS
+---------------
+· Wider crack: fatten the segments of layer 1
+  (46% 47.2% → 44% 49%, for example).
+· Hotter embers: raise the rgba(255,111,0,.5) of ::after
+  (last value of each stop) towards .8.
+· Lighter or darker rock: change the colors of layer 2
+  (#bcaaa4, #a1887f, #795548, #5d4037).
+· Slower crossing: change 5s to 8s in the 3 animation lines
+  (and lengthen the 14%-72% span of grieta-grieta if you want
+  the crack to stay on screen longer).

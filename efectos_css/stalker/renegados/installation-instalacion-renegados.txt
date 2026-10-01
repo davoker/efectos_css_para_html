@@ -1,0 +1,105 @@
+================================================================
+EFECTO RENEGADOS - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "renegados.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/renegados.css">
+
+Contenido del archivo:
+  · La clase .efecto-renegados
+  · Sus pseudo-elementos ::before y ::after
+    (gotas de herrumbre ::before y sombra ::after)
+  ·   · stk-renegados-herrumbre, stk-renegados-goteo,
+    stk-renegados-parpadeo
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-renegados">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-renegados">RENEGADOS</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones en bucle infinito:
+  · stk-renegados-herrumbre (8 s) → el marrón oxidado se
+    reordena despacio por dentro de las letras.
+  · stk-renegados-goteo (5,6 s) → las gotas de herrumbre
+    crecen desde el borde superior y caen.
+  · stk-renegados-parpadeo (3,8 s) → una sombra de tierra
+    sube y baja de intensidad sobre el texto.
+
+TÉCNICA: degradado ferruginoso recortado en el texto con
+    background-position animado, gotas ::before
+    estiradas con transform: scaleY y sombra ::after con
+    opacidad cambiante.
+
+
+AJUSTES FÁCILES
+---------------
+· Óxido más oscuro: #bf6a3f → #8d4b2a en el degradado.
+· Goteo más frecuente: 5.6s → 3.6s en stk-renegados-goteo.
+· Sin sombra: borra el ::after y stk-renegados-parpadeo.
+· Más parpadeo: sube el .45 del opacity en su keyframe.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+RENEGADES EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "renegados.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/renegados.css">
+
+What the file contains:
+  · The .efecto-renegados class
+  · Its pseudo-elements ::before and ::after
+    (rust drops ::before and shadow ::after)
+  ·   · stk-renegados-herrumbre, stk-renegados-goteo,
+    stk-renegados-parpadeo
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-renegados">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-renegados">RENEGADOS</span></h1>
+
+
+WHAT IT DOES
+--------
+Three animations on an infinite loop:
+  · stk-renegados-herrumbre (8 s) → the rusty brown
+    rearranges slowly inside the letters.
+  · stk-renegados-goteo (5.6 s) → the rust drops
+    grow from the top edge and fall.
+  · stk-renegados-parpadeo (3.8 s) → an earth shadow
+    rises and falls in intensity over the text.
+
+TECHNIQUE: rust-toned gradient clipped into the text with
+    animated background-position, drops ::before
+    stretched with transform: scaleY and shadow ::after with
+    changing opacity.
+
+
+EASY TWEAKS
+---------------
+· Darker rust: #bf6a3f → #8d4b2a in the gradient.
+· More frequent dripping: 5.6s → 3.6s in stk-renegados-goteo.
+· No shadow: delete the ::after and stk-renegados-parpadeo.
+· More flicker: raise the .45 of the opacity in its keyframe.

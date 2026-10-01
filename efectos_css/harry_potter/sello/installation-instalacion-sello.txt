@@ -1,0 +1,111 @@
+================================================================
+EFECTO SELLO - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "sello.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/sello.css">
+
+Contenido del archivo:
+  · La clase .efecto-sello
+  · Sus pseudo-elementos ::before y ::after
+    (lacre ::before y prensa ::after)
+  ·   · hp-sello-barniz, hp-sello-lacre, hp-sello-presion
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-sello">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-sello">SELLO</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones en bucle infinito (5,2 s):
+  · hp-sello-barniz → una banda de luz barre el degradado
+    de las letras (background-position en un gradiente de
+    220%: es el brillo encerado).
+  · hp-sello-lacre → la gota de lacre se hincha y respira
+    detrás del texto.
+  · hp-sello-presion → el anillo de la prensa sale del
+    centro, se abre y se apaga: el momento de estampar.
+El borde del degradado es claro arriba y oscuro abajo: da la
+ilusión del relieve sin usar text-shadow (que no se vería
+con background-clip: text).
+
+TÉCNICA: degradado carmesí con los bordes claros simulando el
+    relieve, background-position animado para el barniz,
+    lacre ::before con radial-gradient y elipse pulada y
+    anillo de prensa ::after que escala y se desvanece.
+
+
+AJUSTES FÁCILES
+---------------
+· Lacre más oscuro: #c62828 → #8e0000 en el degradado.
+· Prensa más fuerte: sube la opacidad .95 de la onda.
+· Sin barniz: borra la animación del elemento principal.
+· Marca ovalada: redondea el ::before a 50%.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+SEAL EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "sello.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/sello.css">
+
+What the file contains:
+  · The .efecto-sello class
+  · Its pseudo-elements ::before and ::after
+    (wax seal ::before and press ::after)
+  ·   · hp-sello-barniz, hp-sello-lacre, hp-sello-presion
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-sello">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-sello">SELLO</span></h1>
+
+
+WHAT IT DOES
+--------
+Three animations on an infinite loop (5.2 s):
+  · hp-sello-barniz → a band of light sweeps the gradient
+    of the letters (background-position on a gradient at
+    220%: it's the waxy sheen).
+  · hp-sello-lacre → the wax drop swells and breathes
+    behind the text.
+  · hp-sello-presion → the press ring comes out of the
+    center, opens up and fades: the moment of stamping.
+The edge of the gradient is light on top and dark on the bottom: it gives the
+illusion of relief without using text-shadow (which wouldn't show
+with background-clip: text).
+
+TECHNIQUE: crimson gradient with light edges simulating the
+    relief, animated background-position for the varnish,
+    lacre ::before con radial-gradient y elipse pulada y
+    press ring ::after that scales and fades away.
+
+
+EASY TWEAKS
+---------------
+· Darker wax: #c62828 → #8e0000 in the gradient.
+· Stronger press: raise the .95 opacity of the wave.
+· No varnish: delete the main element's animation.
+· Oval mark: round the ::before to 50%.

@@ -1,0 +1,111 @@
+================================================================
+EFECTO STENCIL - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "stencil.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/stencil.css">
+
+Contenido del archivo:
+  · La clase .efecto-stencil
+  · Sus pseudo-elementos ::before y ::after
+    (cajón de estarcido y marca de lote)
+  ·   · stencil-desgaste, stencil-cajon, stencil-marca
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-stencil">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-stencil">SECRETO</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones en bucle infinito:
+  · stencil-desgaste (5 s) → el degradado de pintura se
+    desplaza un período entero (reinicio invisible) y a
+    mitad de ciclo el texto destella y oscurece como
+    pintura recién aplastada en la plantilla.
+  · stencil-cajon (5 s, steps(1)) → el marco ::before se
+    dibuja por etapas: primero el borde superior, luego
+    la caja completa, se sostiene y desaparece.
+  · stencil-marca (5 s, steps(1)) → la marca de lote
+    SHD-04 aparece SOLO mientras el cajón está dibujado.
+Las ranuras transparentes dejan ver el fondo: es la
+plantilla cortando los glifos.
+
+TÉCNICA: background-clip: text sobre repeating-linear-gradient
+    con tramos transparentes (las ranuras de la
+    plantilla) y filter/background-position con saltos.
+
+
+AJUSTES FÁCILES
+---------------
+· Ranuras más finas: 1.05em/1.3em → 1.15em/1.25em (hueco menor).
+· Verde más oscuro: #689f38 → #33691e en el repeating.
+· Desgaste más frecuente: 5s → 3s.
+· Cajón más grande: inset -.3em -.55em → -.6em -1em en ::before.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+STENCIL EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "stencil.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/stencil.css">
+
+What the file contains:
+  · The .efecto-stencil class
+  · Its pseudo-elements ::before and ::after
+    (stencil box and lot mark)
+  ·   · stencil-desgaste, stencil-cajon, stencil-marca
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-stencil">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-stencil">SECRETO</span></h1>
+
+
+WHAT IT DOES
+--------
+Three animations on an infinite loop:
+  · stencil-desgaste (5 s) → the paint gradient
+    shifts a whole period (invisible reset) and at
+    half cycle the text flashes and darkens like
+    paint freshly pressed onto the stencil.
+  · stencil-cajon (5 s, steps(1)) → the ::before frame
+    is drawn in stages: first the top edge, then
+    the full box, it holds, then disappears.
+  · stencil-marca (5 s, steps(1)) → the lot mark
+    SHD-04 appears ONLY while the box is drawn.
+The transparent slots let the background show through: it's the
+stencil cutting the glyphs.
+
+TECHNIQUE: background-clip: text over repeating-linear-gradient
+    with transparent stretches (the slots of the
+    stencil) and filter/background-position with jumps.
+
+
+EASY TWEAKS
+---------------
+· Thinner slots: 1.05em/1.3em → 1.15em/1.25em (smaller gap).
+· Darker green: #689f38 → #33691e in the repeating.
+· More frequent wear: 5s → 3s.
+· Bigger box: inset -.3em -.55em → -.6em -1em in ::before.

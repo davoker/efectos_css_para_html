@@ -1,0 +1,123 @@
+================================================================
+EFECTO HUD - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "hud.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/hud.css">
+
+Contenido del archivo:
+  · La clase .efecto-hud
+  · Sus pseudo-elementos ::before y ::after (los corchetes [ ])
+  · 4 @keyframes: hud-escaner, hud-latido, hud-refresco
+    y hud-marco
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-hud">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-hud">DIVISIÓN</span></h1>
+
+
+QUÉ HACE
+--------
+Cuatro animaciones simultáneas en bucle infinito:
+  · hud-escaner (4 s) → un escáner luminoso barre las letras
+    de abajo arriba (la banda vive en una capa de 300% de
+    alto; al empezar y terminar está fuera del texto, así que
+    el bucle no se nota).
+  · hud-latido (3 s) → el halo ámbar respira con suavidad.
+  · hud-refresco (5,4 s, steps(1)) → cada cierto tiempo el
+    texto se sacude 2px con destello y vuelve a su sitio, seco,
+    como un refresco de datos de la interfaz.
+  · hud-marco (3,2 s, steps(1)) → los corchetes [ ] de
+    selección parpadean y encajan con saltos secos.
+El color base es un degradado ámbar de interfaz con una
+rejilla de pantalla fina pintada dentro de las letras.
+
+TÉCNICA: background-clip: text + pseudo-elementos +
+text-shadow/transform/filter animados con steps().
+
+
+AJUSTES FÁCILES
+---------------
+· Escáner más frecuente: 4s → 2s.
+· Banda más gruesa: sube los % del primer linear-gradient
+  (46%/50%/54% → 42%/50%/58%).
+· Corchetes más pegados: -.55em → -.35em en ::before y ::after.
+· Corchetes más gruesos: sube el border de 2px a 3px.
+· Refrescos más frecuentes: 5.4s → 3s.
+· Refrescos más fuertes: sube los px de translate (2px → 4px)
+  y el brightness (1.25 → 1.6).
+· Rojo en vez de ámbar: cambia #ff9d2e por #ff4444 en toda la
+  clase y en hud-marco (el escáner deja de verse: usa #ff8080).
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+HUD EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "hud.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/hud.css">
+
+What the file contains:
+  · The .efecto-hud class
+  · Its ::before and ::after pseudo-elements (the [ ] brackets)
+  · 4 @keyframes: hud-escaner, hud-latido, hud-refresco
+    and hud-marco
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-hud">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-hud">DIVISIÓN</span></h1>
+
+
+WHAT IT DOES
+--------
+Four simultaneous animations on an infinite loop:
+  · hud-escaner (4 s) → a luminous scanner sweeps the letters
+    from bottom to top (the band lives in a layer 300%
+    tall; at the start and end it is outside the text, so the
+    loop goes unnoticed).
+  · hud-latido (3 s) → the amber halo breathes softly.
+  · hud-refresco (5.4 s, steps(1)) → every so often the
+    text shakes 2px with a flash and snaps abruptly back,
+    like a refresh of interface data.
+  · hud-marco (3.2 s, steps(1)) → the selection [ ]
+    brackets flicker and snap into place in abrupt jumps.
+The base color is an interface-amber gradient with a
+fine screen grid painted inside the letters.
+
+TECHNIQUE: background-clip: text + pseudo-elements +
+text-shadow/transform/filter animated with steps().
+
+
+EASY TWEAKS
+---------------
+· More frequent scanner: 4s → 2s.
+· Thicker band: raise the % of the first linear-gradient
+  (46%/50%/54% → 42%/50%/58%).
+· Brackets closer together: -.55em → -.35em in ::before and ::after.
+· Thicker brackets: raise the border from 2px to 3px.
+· More frequent refreshes: 5.4s → 3s.
+· Stronger refreshes: raise the translate px (2px → 4px)
+  and the brightness (1.25 → 1.6).
+· Red instead of amber: swap #ff9d2e for #ff4444 across the
+  class and hud-marco (the scanner vanishes: use #ff8080).

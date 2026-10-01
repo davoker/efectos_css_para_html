@@ -1,0 +1,87 @@
+/* =============================================================
+   MATRIX (SVG) · lluvia de código DENTRO del texto
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás. El "fondo" es un relleno recortado a los glifos
+     (background-clip: text) que solo existe dentro de las
+     letras: fuera del texto no se ve nada.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) enlazar este CSS 2) poner la clase.
+     Sin JS y sin bloque SVG: todo va en este archivo.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+   ef-matrix — lluvia de código DENTRO del texto
+   Dos capas de glifos cayendo (tiles SVG animados) sobre un
+   verde de fósforo ya legible, todo recortado a las letras +
+   resplandor de fósforo. Las capas caen a distinta velocidad.
+   Dos variantes: .ef-matrix-fino (mismo patrón a tamaño
+   mitad, para títulos ≥24px) y .ef-matrix (párrafos,
+   fragmentos inline y texto pequeño).
+   ============================================================= */
+.ef-matrix {
+    color: #1fa65c;                    /* respaldo si no hay clip */
+    background-image:
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='72' height='160'><g fill='%2348ff94'><rect x='4' y='10' width='7' height='14'/><rect x='4' y='32' width='7' height='7' opacity='.65'/><rect x='4' y='74' width='7' height='12' opacity='.85'/><rect x='4' y='112' width='7' height='6' opacity='.55'/><rect x='4' y='138' width='7' height='13'/><rect x='22' y='2' width='7' height='9' opacity='.8'/><rect x='22' y='44' width='7' height='15'/><rect x='22' y='86' width='7' height='7' opacity='.6'/><rect x='22' y='120' width='7' height='14' opacity='.9'/><rect x='40' y='18' width='7' height='12' opacity='.9'/><rect x='40' y='52' width='7' height='6' opacity='.55'/><rect x='40' y='94' width='7' height='16'/><rect x='40' y='140' width='7' height='7' opacity='.7'/><rect x='58' y='6' width='7' height='13' opacity='.85'/><rect x='58' y='38' width='7' height='7' opacity='.6'/><rect x='58' y='80' width='7' height='14'/><rect x='58' y='126' width='7' height='8' opacity='.65'/></g><g fill='%23dcfff0'><rect x='4' y='4' width='7' height='4'/><rect x='22' y='40' width='7' height='4'/><rect x='40' y='90' width='7' height='4'/><rect x='58' y='76' width='7' height='4'/></g></svg>"),
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='96' height='240'><g fill='%231aa858'><rect x='6' y='14' width='8' height='20' opacity='.9'/><rect x='6' y='58' width='8' height='9' opacity='.55'/><rect x='6' y='128' width='8' height='17' opacity='.8'/><rect x='6' y='196' width='8' height='10' opacity='.6'/><rect x='30' y='0' width='8' height='13' opacity='.7'/><rect x='30' y='74' width='8' height='22' opacity='.95'/><rect x='30' y='150' width='8' height='9' opacity='.55'/><rect x='30' y='214' width='8' height='16' opacity='.8'/><rect x='54' y='34' width='8' height='18' opacity='.85'/><rect x='54' y='104' width='8' height='9' opacity='.5'/><rect x='54' y='176' width='8' height='24' opacity='.9'/><rect x='78' y='8' width='8' height='12' opacity='.75'/><rect x='78' y='86' width='8' height='19' opacity='.85'/><rect x='78' y='158' width='8' height='9' opacity='.55'/><rect x='78' y='226' width='8' height='13' opacity='.7'/></g></svg>"),
+        linear-gradient(180deg, rgba(14, 96, 46, .95), rgba(5, 54, 26, .95));
+    background-size: 72px 160px, 96px 240px, auto;
+    background-repeat: repeat;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 4px rgba(0, 255, 110, .5));
+    animation: ef-matrix-lluvia 7.5s linear infinite;
+}
+@keyframes ef-matrix-lluvia {
+    from { background-position: 0 0, 0 0, 0 0; }
+    to   { background-position: 0 320px, 0 480px, 0 0; }
+}
+
+/* variante FINA: mismo patrón a tamaño mitad (36/48px) para
+   títulos grandes — los glifos de la lluvia se ven finos y el
+   ritmo de caída queda igual (1 vuelta = 2 alturas de tile) */
+.ef-matrix-fino {
+    color: #1fa65c;                    /* respaldo si no hay clip */
+    background-image:
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='72' height='160'><g fill='%2348ff94'><rect x='4' y='10' width='7' height='14'/><rect x='4' y='32' width='7' height='7' opacity='.65'/><rect x='4' y='74' width='7' height='12' opacity='.85'/><rect x='4' y='112' width='7' height='6' opacity='.55'/><rect x='4' y='138' width='7' height='13'/><rect x='22' y='2' width='7' height='9' opacity='.8'/><rect x='22' y='44' width='7' height='15'/><rect x='22' y='86' width='7' height='7' opacity='.6'/><rect x='22' y='120' width='7' height='14' opacity='.9'/><rect x='40' y='18' width='7' height='12' opacity='.9'/><rect x='40' y='52' width='7' height='6' opacity='.55'/><rect x='40' y='94' width='7' height='16'/><rect x='40' y='140' width='7' height='7' opacity='.7'/><rect x='58' y='6' width='7' height='13' opacity='.85'/><rect x='58' y='38' width='7' height='7' opacity='.6'/><rect x='58' y='80' width='7' height='14'/><rect x='58' y='126' width='7' height='8' opacity='.65'/></g><g fill='%23dcfff0'><rect x='4' y='4' width='7' height='4'/><rect x='22' y='40' width='7' height='4'/><rect x='40' y='90' width='7' height='4'/><rect x='58' y='76' width='7' height='4'/></g></svg>"),
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='96' height='240'><g fill='%231aa858'><rect x='6' y='14' width='8' height='20' opacity='.9'/><rect x='6' y='58' width='8' height='9' opacity='.55'/><rect x='6' y='128' width='8' height='17' opacity='.8'/><rect x='6' y='196' width='8' height='10' opacity='.6'/><rect x='30' y='0' width='8' height='13' opacity='.7'/><rect x='30' y='74' width='8' height='22' opacity='.95'/><rect x='30' y='150' width='8' height='9' opacity='.55'/><rect x='30' y='214' width='8' height='16' opacity='.8'/><rect x='54' y='34' width='8' height='18' opacity='.85'/><rect x='54' y='104' width='8' height='9' opacity='.5'/><rect x='54' y='176' width='8' height='24' opacity='.9'/><rect x='78' y='8' width='8' height='12' opacity='.75'/><rect x='78' y='86' width='8' height='19' opacity='.85'/><rect x='78' y='158' width='8' height='9' opacity='.55'/><rect x='78' y='226' width='8' height='13' opacity='.7'/></g></svg>"),
+        linear-gradient(180deg, rgba(14, 96, 46, .95), rgba(5, 54, 26, .95));
+    background-size: 36px 80px, 48px 120px, auto;
+    background-repeat: repeat;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 3px rgba(0, 255, 110, .5));
+    animation: ef-matrix-fino-lluvia 7.5s linear infinite;
+}
+@keyframes ef-matrix-fino-lluvia {
+    from { background-position: 0 0, 0 0, 0 0; }
+    to   { background-position: 0 160px, 0 240px, 0 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .ef-matrix,
+    .ef-matrix-fino { animation: none; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-matrix,
+    .ef-matrix-fino {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        animation: none;
+    }
+}

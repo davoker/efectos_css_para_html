@@ -1,0 +1,105 @@
+================================================================
+EFECTO CARBONO - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "carbono.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/carbono.css">
+
+Contenido del archivo:
+  · La clase .efecto-carbono
+  · Sus pseudo-elementos ::before y ::after
+    (molde del bloque y condensación)
+  ·   · carbono-lentitud, carbono-molde
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-carbono">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-carbono">CARBONITA</span></h1>
+
+
+QUÉ HACE
+--------
+Dos animaciones en bucle infinito:
+  · carbono-lentitud (9 s) → el brillo frío barre el
+    texto muy despacio y a mitad de ciclo el metal
+    parpadea (se oscurece y recupera, en steps).
+  · carbono-molde (9 s, steps(1)) → el marco ::before
+    se dibuja por etapas (borde superior → caja
+    completa) y la condensación ::after aparece SOLO
+    mientras el bloque está cerrado; luego todo sale.
+El color base es un degradado gris de panel imperial.
+
+TÉCNICA: background-clip: text (chapa fría) con
+    background-position lento + ::before/::after
+    con clip-path por etapas en steps(1).
+
+
+AJUSTES FÁCILES
+---------------
+· Molde antes: el 5% del molde → el 2% en carbono-molde.
+· Brillo más rápido: 9s → 5s.
+· Carbonita más oscura: #90a4ae → #546e7a en el degradado.
+· Bloque más grande: inset -.28em -.5em → -.5em -.9em.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+CARBON EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "carbono.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/carbono.css">
+
+What the file contains:
+  · The .efecto-carbono class
+  · Its pseudo-elements ::before and ::after
+    (block mold and condensation)
+  ·   · carbono-lentitud, carbono-molde
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-carbono">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-carbono">CARBONITA</span></h1>
+
+
+WHAT IT DOES
+--------
+Two animations on an infinite loop:
+  · carbono-lentitud (9 s) → the cold sheen sweeps the
+    text very slowly and halfway through the cycle the metal
+    flickers (darkens and recovers, in steps).
+  · carbono-molde (9 s, steps(1)) → the ::before frame
+    draws itself in stages (top edge → full
+    box) and the ::after condensation appears ONLY
+    while the block is sealed; then everything comes out.
+The base color is an imperial panel gray gradient.
+
+TECHNIQUE: background-clip: text (cold sheet metal) with
+    slow background-position + ::before/::after
+    with staged clip-path in steps(1).
+
+
+EASY TWEAKS
+---------------
+· Mold earlier: the 5% of the mold → the 2% in carbono-molde.
+· Faster sheen: 9s → 5s.
+· Darker carbonite: #90a4ae → #546e7a in the gradient.
+· Bigger block: inset -.28em -.5em → -.5em -.9em.

@@ -1,0 +1,103 @@
+================================================================
+EFECTO PODER - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "poder.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/poder.css">
+
+Contenido del archivo:
+  · La clase .efecto-poder
+  · Sus pseudo-elementos ::before y ::after
+    (haz de luz que sube por detrás del texto)
+  ·   · mx-poder, mx-poder-hazo
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-poder">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-poder">DESPIERTA</span></h1>
+
+
+QUÉ HACE
+--------
+Dos animaciones en bucle infinito (5 s) sincronizadas:\n  · mx-poder → el texto está pequeño y tenue, crece con
+    un fogonazo que sube su brillo y su halo verde, y
+    después se recoge poco a poco.
+  · mx-poder-hazo → la columna de luz de detrás se
+    estira desde abajo justo cuando el texto crece y se
+    desvanece al volver a su sitio.
+El easing ease-out hace que la subida sea fuerte y la
+bajada suave, como una descarga que se disipa.
+
+TÉCNICA: transform: scale + filter: brightness y text-shadow
+    en la clase + pseudo-elemento-hazo de luz que se
+    estira con scaleY desde abajo.
+
+
+AJUSTES FÁCILES
+---------------
+· Crecimiento mayor: scale(1.14) → scale(1.3).
+· Hazo más ancho: left/right 44% → 36%.
+· Fogonazo más blanco: brightness(1.7) → brightness(2.4).
+· Ciclo más lento: 5s → 8s.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+POWER EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "poder.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/poder.css">
+
+What the file contains:
+  · The .efecto-poder class
+  · Its pseudo-elements ::before and ::after
+    (beam of light rising behind the text)
+  ·   · mx-poder, mx-poder-hazo
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-poder">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-poder">DESPIERTA</span></h1>
+
+
+WHAT IT DOES
+--------
+Two synchronized animations on an infinite loop (5 s):\n  · mx-poder → the text is small and dim, it grows with
+    a flash that lifts its brightness and green halo, and
+    then it gradually shrinks back.
+  · mx-poder-hazo → the column of light behind it
+    stretches up from below just as the text grows and
+    fades as it returns to place.
+The ease-out easing makes the rise strong and the
+fall gentle, like a charge dissipating.
+
+TECHNIQUE: transform: scale + filter: brightness and text-shadow
+    in the class + light beam pseudo-element that
+    stretches with scaleY from below.
+
+
+EASY TWEAKS
+---------------
+· Bigger growth: scale(1.14) → scale(1.3).
+· Wider beam: left/right 44% → 36%.
+· Whiter flash: brightness(1.7) → brightness(2.4).
+· Slower cycle: 5s → 8s.

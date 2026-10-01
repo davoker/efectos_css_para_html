@@ -1,0 +1,105 @@
+================================================================
+EFECTO FAUCES - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "fauces.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/fauces.css">
+
+Contenido del archivo:
+  · La clase .efecto-fauces
+  · Sus pseudo-elementos ::before y ::after
+    (dos filas de dientes que muerden el texto)
+  ·   · mh-fauces-temblor, mh-fauces-arriba, mh-fauces-abajo
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-fauces">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-fauces">FAUCES</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones en bucle infinito:
+  · mh-fauces-temblor (3 s) → las letras se encogen un
+    instante cuando cierran las fauces.
+  · mh-fauces-arriba (3 s) → la fila superior baja.
+  · mh-fauces-abajo (3 s) → la fila inferior sube.
+Las filas son el mismo polígono con los dientes en
+sentido contrario: 10 picos del 5% de ancho cada uno.
+Al ir en Keyframes distintos no hace falta invertirlas.
+
+TÉCNICA: clip-path: polygon con dientes alternos para las dos
+    filas (una mirando abajo y otra arriba) y dos
+    keyframes de mordida en sentido opuesto sobre
+    ::before y ::after.
+
+
+AJUSTES FÁCILES
+---------------
+· Mordida más profunda: sube el .24em a .34em.
+· Dientes más finos: pasa los tramos del 5% al 3%.
+· Sin temblor: borra mh-fauces-temblor de la clase.
+· Dientes más oscuros: cambia el degradado de los picos.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+JAWS EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "fauces.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/fauces.css">
+
+What the file contains:
+  · The .efecto-fauces class
+  · Its pseudo-elements ::before and ::after
+    (two rows of teeth biting the text)
+  ·   · mh-fauces-temblor, mh-fauces-arriba, mh-fauces-abajo
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-fauces">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-fauces">FAUCES</span></h1>
+
+
+WHAT IT DOES
+--------
+Three animations on an infinite loop:
+  · mh-fauces-temblor (3 s) → the letters shrink for an
+    instant when the jaws close.
+  · mh-fauces-arriba (3 s) → the top row comes down.
+  · mh-fauces-abajo (3 s) → the bottom row comes up.
+The rows are the same polygon with the teeth facing
+opposite directions: 10 peaks 5% wide each.
+Since they are in different Keyframes, there is no need to flip them.
+
+TECHNIQUE: clip-path: polygon with alternating teeth for the two
+    rows (one facing down and one up) and two
+    bite keyframes running opposite each other over
+    ::before and ::after.
+
+
+EASY TWEAKS
+---------------
+· Deeper bite: raise the .24em to .34em.
+· Thinner teeth: move the stops from 5% to 3%.
+· No tremor: delete mh-fauces-temblor from the class.
+· Darker teeth: change the peaks' gradient.

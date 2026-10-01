@@ -1,0 +1,105 @@
+================================================================
+EFECTO CLON - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "clon.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/clon.css">
+
+Contenido del archivo:
+  · La clase .efecto-clon
+  · Sus pseudo-elementos ::before y ::after
+    (etiqueta ×2 y subrayado de serie)
+  ·   · clon-fan, clon-etiqueta
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-clon">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-clon">×2</span></h1>
+
+
+QUÉ HACE
+--------
+Dos animaciones en bucle infinito, con saltos secos:
+  · clon-fan (2,6 s, steps(1)) → el eco abre la copia
+    cian 5px, luego 9px con la copia coral, y vuelve
+    al texto único, de golpe.
+  · clon-etiqueta (2,6 s, steps(1)) → mientras las
+    copias existen, la etiqueta ×2 (::before) y el
+    subrayado azul (::after) aparecen y desaparecen
+    con ella.
+El color base es un degradado blanco-azulado de clonación.
+
+TÉCNICA: background-clip: text (blanco azulado) +
+    text-shadow con steps(1) que abre y cierra las dos
+    copias, y pseudos de etiqueta y subrayado.
+
+
+AJUSTES FÁCILES
+---------------
+· Más eco: 9px → 16px en el 44% de clon-fan.
+· Ciclo más rápido: 2.6s → 1.6s.
+· Copias más vivas: rgba(255,138,128) → #ff5252.
+· Etiqueta arriba-izquierda: right -.7em → left -.7em.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+CLONE EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "clon.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/clon.css">
+
+What the file contains:
+  · The .efecto-clon class
+  · Its pseudo-elements ::before and ::after
+    (×2 tag and series underline)
+  ·   · clon-fan, clon-etiqueta
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-clon">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-clon">×2</span></h1>
+
+
+WHAT IT DOES
+--------
+Two animations on an infinite loop, with abrupt steps:
+  · clon-fan (2.6 s, steps(1)) → the echo opens the cyan
+    copy 5px, then 9px with the coral copy, and returns
+    to the single text, all at once.
+  · clon-etiqueta (2.6 s, steps(1)) → while the
+    copies exist, the ×2 tag (::before) and the
+    blue underline (::after) appear and disappear
+    with it.
+The base color is a whitish-blue cloning gradient.
+
+TECHNIQUE: background-clip: text (bluish white) +
+    text-shadow with steps(1) that opens and closes the two
+    copies, plus the tag and underline pseudos.
+
+
+EASY TWEAKS
+---------------
+· More echo: 9px → 16px at 44% of clon-fan.
+· Faster cycle: 2.6s → 1.6s.
+· Brighter copies: rgba(255,138,128) → #ff5252.
+· Tag top-left: right -.7em → left -.7em.

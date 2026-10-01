@@ -1,0 +1,103 @@
+================================================================
+EFECTO FUERZA - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "fuerza.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/fuerza.css">
+
+Contenido del archivo:
+  · La clase .efecto-fuerza
+  · Sus pseudo-elementos ::before y ::after
+    (dos ondas lentas saliendo del centro)
+  ·   · fuerza-onda, fuerza-anillo
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-fuerza">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-fuerza">FUERZA</span></h1>
+
+
+QUÉ HACE
+--------
+Dos animaciones en bucle infinito:
+  · fuerza-onda (4,4 s) → la onda recorre el texto: las
+    letras se desenfocan, abren el espaciado, flotan
+    y muestran un desplazamiento cromático (azul a un
+    lado, rojo al otro) como un empujón de la Fuerza.
+  · fuerza-anillo (4,4 s) → los dos anillos ::before y
+    ::after salen del centro con 2,2 s de desfase.
+El color base es un degradado blanco-azul etéreo.
+
+TÉCNICA: background-clip: text + filter blur, letter-spacing,
+    transform y text-shadow cromático animados en la
+    misma onda; ::before/::after como anillos lentos.
+
+
+AJUSTES FÁCILES
+---------------
+· Onda más frecuente: 4.4s → 2.6s.
+· Desenfoque más marcado: blur(2.4px) → blur(5px).
+· Anillos más grandes: 3.4em/2.4em → 5em/3.4em.
+· Cromático más agresivo: sube los 4px de los text-shadow.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+FORCE EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "fuerza.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/fuerza.css">
+
+What the file contains:
+  · The .efecto-fuerza class
+  · Its pseudo-elements ::before and ::after
+    (two slow waves leaving the center)
+  ·   · fuerza-onda, fuerza-anillo
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-fuerza">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-fuerza">FUERZA</span></h1>
+
+
+WHAT IT DOES
+--------
+Two animations on an infinite loop:
+  · fuerza-onda (4.4 s) → the wave travels through the text: the
+    letters blur, open up their spacing, float
+    and show a chromatic shift (blue on one
+    side, red on the other) like a shove from the Force.
+  · fuerza-anillo (4.4 s) → the two ::before and
+    ::after rings leave the center with a 2.2 s offset.
+The base color is an ethereal white-blue gradient.
+
+TECHNIQUE: background-clip: text + filter blur, letter-spacing,
+    transform and chromatic text-shadow animated on the
+    same wave; ::before/::after as slow rings.
+
+
+EASY TWEAKS
+---------------
+· More frequent wave: 4.4s → 2.6s.
+· Stronger blur: blur(2.4px) → blur(5px).
+· Bigger rings: 3.4em/2.4em → 5em/3.4em.
+· More aggressive chromatic: raise the 4px of the text-shadows.

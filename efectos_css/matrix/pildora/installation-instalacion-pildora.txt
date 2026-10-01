@@ -1,0 +1,103 @@
+================================================================
+EFECTO PÍLDORA - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "pildora.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/pildora.css">
+
+Contenido del archivo:
+  · La clase .efecto-pildora
+  · Sus pseudo-elementos ::before y ::after
+    (línea de luz que cruza el texto al cambiar de píldora)
+  ·   · mx-pildora-ida, mx-pildora-brillo
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-pildora">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-pildora">ELIGE</span></h1>
+
+
+QUÉ HACE
+--------
+Dos animaciones en bucle infinito:
+  · mx-pildora-ida (4,4 s) → el degradado se desplaza con
+    background-position: así la mitad roja y la azul se
+    intercambian por completo y vuelven al inicio.
+  · mx-pildora-brillo (4,4 s) → una línea blanca recorre
+    las letras justo cuando la elección cambia.
+La junta lleva una banda casi blanca: es el punto exacto
+donde se separan las dos píldoras.
+
+TÉCNICA: background-clip: text con degradado rojo/azul de
+    background-size grande y background-position
+    animado + pseudo-elemento de luz cruzando.
+
+
+AJUSTES FÁCILES
+---------------
+· Cambio más rápido: 4.4s → 2.6s en mx-pildora-ida.
+· Más rojo: mueve el primer stop de 38% a 55%.
+· Sin línea de luz: borra el ::after.
+· Más contraste: sube el drop-shadow a 14px.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+PILL EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "pildora.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/pildora.css">
+
+What the file contains:
+  · The .efecto-pildora class
+  · Its pseudo-elements ::before and ::after
+    (line of light crossing the text as the pill changes)
+  ·   · mx-pildora-ida, mx-pildora-brillo
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-pildora">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-pildora">ELIGE</span></h1>
+
+
+WHAT IT DOES
+--------
+Two animations on an infinite loop:
+  · mx-pildora-ida (4.4 s) → the gradient shifts with
+    background-position: así la mitad roja y la azul se
+    swap places completely and return to the start.
+  · mx-pildora-brillo (4.4 s) → a white line travels across
+    the letters just as the choice changes.
+The seam carries an almost-white band: it's the exact point
+where the two pills part.
+
+TECHNIQUE: background-clip: text with a red/blue gradient with
+    a large background-size and background-position
+    animated + light pseudo-element crossing.
+
+
+EASY TWEAKS
+---------------
+· Faster change: 4.4s → 2.6s in mx-pildora-ida.
+· More red: move the first stop from 38% to 55%.
+· No light line: delete the ::after.
+· More contrast: raise the drop-shadow to 14px.

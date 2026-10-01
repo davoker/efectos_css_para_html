@@ -1,0 +1,105 @@
+================================================================
+EFECTO ARTEFACTO - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "artefacto.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/artefacto.css">
+
+Contenido del archivo:
+  · La clase .efecto-artefacto
+  · Sus pseudo-elementos ::before y ::after
+    (rayos ::before y fulgor ::after)
+  ·   · stk-artefacto-pulso, stk-artefacto-rayos,
+    stk-artefacto-fulgor
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-artefacto">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-artefacto">ARTEFACTO</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones en bucle infinito:
+  · stk-artefacto-pulso (4,2 s) → las letras laten con
+    su propia luz, brillan y se aplacan.
+  · stk-artefacto-rayos (12 s) → los rayos del artefacto
+    giran muy despacio alrededor de la palabra.
+  · stk-artefacto-fulgor (3,4 s) → el fulgor estalla con
+    dos golpes y se retira.
+
+TÉCNICA: degradado turquesa recortado en el texto con filter y
+    transform animados (pulso), rayos ::before con
+    conic-gradient girando 360° en 12 s y fulgor ::after
+    de opacidad intermitente.
+
+
+AJUSTES FÁCILES
+---------------
+· Rayos más lentos: 12s → 18s en stk-artefacto-rayos.
+· Pulso más suave: sube el .3 inicial del drop-shadow.
+· Sin fulgor: borra el ::after y stk-artefacto-fulgor.
+· Turquesa más pálido: #6ef0e0 → #a7ffeb en el degradado.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+ARTIFACT EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "artefacto.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/artefacto.css">
+
+What the file contains:
+  · The .efecto-artefacto class
+  · Its pseudo-elements ::before and ::after
+    (rays ::before and glare ::after)
+  ·   · stk-artefacto-pulso, stk-artefacto-rayos,
+    stk-artefacto-fulgor
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-artefacto">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-artefacto">ARTEFACTO</span></h1>
+
+
+WHAT IT DOES
+--------
+Three animations on an infinite loop:
+  · stk-artefacto-pulso (4.2 s) → the letters pulse with
+    their own light, they glow and calm down.
+  · stk-artefacto-rayos (12 s) → the artifact's rays
+    spin very slowly around the word.
+  · stk-artefacto-fulgor (3.4 s) → the glare bursts with
+    two beats and then fades away.
+
+TECHNIQUE: turquoise gradient clipped into the text with filter and
+    animated transform (pulse), rays ::before with
+    conic-gradient spinning 360° in 12 s and glare ::after
+    with intermittent opacity.
+
+
+EASY TWEAKS
+---------------
+· Slower rays: 12s → 18s in stk-artefacto-rayos.
+· Softer pulse: raise the initial .3 of the drop-shadow.
+· No glare: delete the ::after and stk-artefacto-fulgor.
+· Paler turquoise: #6ef0e0 → #a7ffeb in the gradient.

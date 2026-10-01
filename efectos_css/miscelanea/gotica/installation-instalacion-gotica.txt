@@ -1,0 +1,135 @@
+================================================================
+EFECTO GÓTICA - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "gotica.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/gotica.css">
+
+El archivo es 100% portable: no depende de ningún otro estilo,
+de librerías ni de JavaScript. Contiene:
+  · La clase .efecto-gotica
+  · Sus pseudo-elementos ::before y ::after
+  · 4 @keyframes: go-gotica-degradado, go-gotica-sombra1,
+    go-gotica-sombra2 y go-gotica-resplandor
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-gotica" data-text="Tu texto">Tu texto</span>
+
+Ejemplo real sobre un título:
+
+    <h1><span class="efecto-gotica" data-text="Gótica">Gótica</span></h1>
+
+⚠ data-text ES OBLIGATORIO y debe repetir exactamente el texto
+visible: los pseudo-elementos ::before y ::after lo copian con
+content: attr(data-text) para pintar las dos capas de sombra.
+
+
+VENTAJAS
+--------
+· Fuente serif (Georgia, "Times New Roman") con degradado gótico
+  pintado SOLO dentro de los glifos: burdeos → púrpura → oro, con
+  paradas claras que mantienen el texto legible sobre fondo oscuro.
+· Dos sombras animadas que se desplazan en direcciones opuestas
+  y se difuminan (filter: blur + opacity), dando profundidad viva.
+· Resplandor perimetral que respira con drop-shadow y brightness.
+· Funciona sobre cualquier texto (h1, h2, enlaces, botones...).
+
+
+QUÉ HACE
+--------
+Cuatro animaciones simultáneas en bucle infinito:
+  · go-gotica-degradado (8s) → el degradado sube por las letras
+    (background-position sobre un background-size de 200%).
+  · go-gotica-sombra1 (6s)   → la sombra inferior se desliza en
+    diagonal y varía su desenfoque.
+  · go-gotica-sombra2 (7s)   → la sombra superior viaja en sentido
+    opuesto, más difusa y más tenue.
+  · go-gotica-resplandor (3,5s) → el halo burdeos-oro respira y
+    aclara levemente el texto (brightness 1 → 1,14).
+
+
+AJUSTES FÁCILES
+---------------
+· Degradado más rojo: sube el primer stop #d4303c hacia #ff4a54.
+· Sombras más marcadas: alarga los translate de go-gotica-sombra1
+  y go-gotica-sombra2 (0.12em → 0.2em) y sube la opacidad de
+  ::after (0.5 → 0.7).
+· Resplandor más fuerte: sube el 0.11em y el 0.8 de
+  go-gotica-resplandor.
+· Movimiento más lento: cambia 8s por 12s en go-gotica-degradado.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+GOTHIC EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "gotica.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/gotica.css">
+
+The file is 100% portable: it doesn't depend on any other style,
+on libraries or on JavaScript. It contains:
+  · The .efecto-gotica class
+  · Its pseudo-elements ::before and ::after
+  · 4 @keyframes: go-gotica-degradado, go-gotica-sombra1,
+    go-gotica-sombra2 and go-gotica-resplandor
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-gotica" data-text="Tu texto">Tu texto</span>
+
+Real example on a title:
+
+    <h1><span class="efecto-gotica" data-text="Gótica">Gótica</span></h1>
+
+⚠ data-text IS MANDATORY and must repeat the text exactly
+visible: the ::before and ::after pseudo-elements copy it with
+content: attr(data-text) to paint the two shadow layers.
+
+
+ADVANTAGES
+--------
+· Serif font (Georgia, "Times New Roman") with a gothic gradient
+  painted ONLY inside the glyphs: burgundy → purple → gold, with
+  light stops that keep the text readable on dark backgrounds.
+· Two animated shadows that move in opposite directions
+  and blur (filter: blur + opacity), giving a living depth.
+· Perimeter glow that breathes with drop-shadow and brightness.
+· Works on any text (h1, h2, links, buttons...).
+
+
+WHAT IT DOES
+--------
+Four simultaneous animations on an infinite loop:
+  · go-gotica-degradado (8s) → the gradient climbs up the letters
+    (background-position over a 200% background-size).
+  · go-gotica-sombra1 (6s)   → the lower shadow slides in a
+    diagonal and varies its blur.
+  · go-gotica-sombra2 (7s)   → the top shadow travels the
+    opposite way, more diffuse and fainter.
+  · go-gotica-resplandor (3.5s) → the burgundy-gold halo breathes and
+    slightly brightens the text (brightness 1 → 1.14).
+
+
+EASY TWEAKS
+---------------
+· Redder gradient: push the first stop #d4303c towards #ff4a54.
+· Stronger shadows: lengthen the translate of go-gotica-sombra1
+  and go-gotica-sombra2 (0.12em → 0.2em) and raise the opacity of
+  ::after (0.5 → 0.7).
+· Stronger glow: raise the 0.11em and the 0.8 of
+  go-gotica-resplandor.
+· Slower movement: change 8s to 12s in go-gotica-degradado.

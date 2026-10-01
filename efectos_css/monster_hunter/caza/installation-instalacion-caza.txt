@@ -1,0 +1,111 @@
+================================================================
+EFECTO CAZA - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "caza.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/caza.css">
+
+Contenido del archivo:
+  · La clase .efecto-caza
+  · Sus pseudo-elementos ::before y ::after
+    (retícula ::before y marco de bloqueo ::after)
+  ·   · mh-caza-barrido, mh-caza-reticula, mh-caza-bloqueo
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-caza">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-caza">CAZA</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones en bucle infinito:
+  · mh-caza-barrido (4 s) → el haz de luz cruza las letras
+    y vuelve al principio: es el barrido del escáner.
+  · mh-caza-reticula (4 s) → la retícula gira sobre su
+    centro (transform: rotate) mientras dos de sus cuartos
+    quedan atenuados, y por eso se ve girar.
+  · mh-caza-bloqueo (4 s) → el marco se cierra sobre el
+    texto (scale de 1.5 a 1), late y se vuelve a abrir.
+El barrido es un background-position de tres capas: sin
+él, el texto solo se vería verde y estático.
+
+TÉCNICA: tres background-image con background-clip: text (haz de
+    barrido + trama fina + degradado verde) con
+    background-position animado, retícula ::before con
+    border-redondeado y bordes alternos, marco ::after
+    con transform: scale.
+
+
+AJUSTES FÁCILES
+---------------
+· Barrido más rápido: 4s → 2.4s en mh-caza-barrido.
+· Retícula más grande: sube el 1.1em de su ancho a 1.6em.
+· Sin bloqueo: borra el ::after y mh-caza-bloqueo.
+· Verde más ácido: cambia el #69f0ae por #00e676.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+HUNT EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "caza.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/caza.css">
+
+What the file contains:
+  · The .efecto-caza class
+  · Its pseudo-elements ::before and ::after
+    (reticle ::before and lock frame ::after)
+  ·   · mh-caza-barrido, mh-caza-reticula, mh-caza-bloqueo
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-caza">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-caza">CAZA</span></h1>
+
+
+WHAT IT DOES
+--------
+Three animations on an infinite loop:
+  · mh-caza-barrido (4 s) → the beam of light crosses the letters
+    and returns to the start: it is the scanner sweep.
+  · mh-caza-reticula (4 s) → the reticle spins around its
+    center (transform: rotate) while two of its quarters
+    stay dimmed, and that is why you see it spin.
+  · mh-caza-bloqueo (4 s) → the frame closes in on the
+    text (scale from 1.5 to 1), beats and opens again.
+The sweep is a three-layer background-position: without
+it, the text would only look green and static.
+
+TECHNIQUE: three background-image with background-clip: text (beam
+    of the sweep + fine texture + green gradient) with
+    animated background-position, reticle ::before with
+    rounded border and alternating edges, frame ::after
+    with transform: scale.
+
+
+EASY TWEAKS
+---------------
+· Faster sweep: 4s → 2.4s in mh-caza-barrido.
+· Bigger reticle: raise its 1.1em width to 1.6em.
+· No lock: delete the ::after and mh-caza-bloqueo.
+· Sharper green: change #69f0ae to #00e676.

@@ -1,0 +1,105 @@
+================================================================
+EFECTO TORMENTA PSI - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "tormenta.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/tormenta.css">
+
+Contenido del archivo:
+  · La clase .efecto-tormenta
+  · Sus pseudo-elementos ::before y ::after
+    (aura psi ::before y ruido ::after)
+  ·   · stk-tormenta-parpadeo, stk-tormenta-aura,
+    stk-tormenta-ruido
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-tormenta">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-tormenta">TORMENTA PSI</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones en bucle infinito:
+  · stk-tormenta-parpadeo (1,8 s) → las letras cortan su
+    brillo con steps: se encienden y apagan de golpe.
+  · stk-tormenta-aura (3,2 s) → el aura psi respira
+    detrás del texto y se agranda al exhalar.
+  · stk-tormenta-ruido (1,8 s) → la estática salta de
+    sitio sin transición, como una señal rota.
+
+TÉCNICA: rayas diagonales recortadas en el texto con
+    animation steps(1, end) para cortar el parpadeo, aura
+    ::before con radial-gradient y ruido ::after que
+    salta de sitio también a saltos fijos.
+
+
+AJUSTES FÁCILES
+---------------
+· Parpadeo más lento: 1.8s → 3.2s en stk-tormenta-parpadeo.
+· Aura más marcada: sube el .7 del opacity en su keyframe.
+· Sin ruido: borra el ::after y stk-tormenta-ruido.
+· Violeta más malva: #ce93d8 → #e1bee7 en el degradado.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+PSI STORM EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "tormenta.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/tormenta.css">
+
+What the file contains:
+  · The .efecto-tormenta class
+  · Its pseudo-elements ::before and ::after
+    (psi aura ::before and noise ::after)
+  ·   · stk-tormenta-parpadeo, stk-tormenta-aura,
+    stk-tormenta-ruido
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-tormenta">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-tormenta">TORMENTA PSI</span></h1>
+
+
+WHAT IT DOES
+--------
+Three animations on an infinite loop:
+  · stk-tormenta-parpadeo (1.8 s) → the letters cut their
+    glow with steps: they switch on and off all at once.
+  · stk-tormenta-aura (3.2 s) → the psi aura breathes
+    behind the text and grows as it exhales.
+  · stk-tormenta-ruido (1.8 s) → the static jumps
+    around with no transition, like a broken signal.
+
+TECHNIQUE: diagonal stripes clipped into the text with
+    animation steps(1, end) to cut the flicker, aura
+    ::before with radial-gradient and noise ::after that
+    also jumps around in fixed steps.
+
+
+EASY TWEAKS
+---------------
+· Slower flicker: 1.8s → 3.2s in stk-tormenta-parpadeo.
+· Stronger aura: raise the .7 of the opacity in its keyframe.
+· No noise: delete the ::after and stk-tormenta-ruido.
+· More mauve violet: #ce93d8 → #e1bee7 in the gradient.

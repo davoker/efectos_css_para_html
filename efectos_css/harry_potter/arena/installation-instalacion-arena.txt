@@ -1,0 +1,109 @@
+================================================================
+EFECTO ARENA - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "arena.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/arena.css">
+
+Contenido del archivo:
+  · La clase .efecto-arena
+  · Sus pseudo-elementos ::before y ::after
+    (hilo de arena ::before y destello de cristal ::after)
+  ·   · hp-arena-fluye, hp-arena-hilo, hp-arena-cristal
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-arena">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-arena">ARENA</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones en bucle infinito:
+  · hp-arena-fluye (6 s) → el grano desciende dentro de las
+    letras; cada capa salta exactamente una mosaica, así que
+    no se ve la costura del bucle.
+  · hp-arena-hilo (6 s) → el hilo que se derrama desde
+    arriba late mientras cae.
+  · hp-arena-cristal (6 s) → un destello blanco recorre el
+    cristal del reloj.
+El grano va en em: se ve igual de fino en títulos y en textos
+pequeños.
+
+TÉCNICA: textura de grano con dos radial-gradient en tile y
+    degradado dorado, todo con background-clip: text y
+    background-position animado, hilo ::before caído y
+    destello de cristal ::after.
+
+
+AJUSTES FÁCILES
+---------------
+· Grano más grueso: sube el .42em de los radial-gradient.
+· Caída más rápida: 6s → 4s en hp-arena-fluye.
+· Sin hilo: borra el ::before y hp-arena-hilo.
+· Arena más pálida: #e0b070 → #ffe6c0 en el degradado.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+SAND EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "arena.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/arena.css">
+
+What the file contains:
+  · The .efecto-arena class
+  · Its pseudo-elements ::before and ::after
+    (sand thread ::before and glass glint ::after)
+  ·   · hp-arena-fluye, hp-arena-hilo, hp-arena-cristal
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-arena">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-arena">ARENA</span></h1>
+
+
+WHAT IT DOES
+--------
+Three animations on an infinite loop:
+  · hp-arena-fluye (6 s) → the grain descends inside the
+    letters; each layer jumps exactly one tile, so
+    the loop seam is invisible.
+  · hp-arena-hilo (6 s) → the thread pouring from
+    above pulses as it falls.
+  · hp-arena-cristal (6 s) → a white glint sweeps across the
+    clock glass.
+The grain is in em: it looks equally fine in headings and in
+small text.
+
+TECHNIQUE: grain texture with two tiled radial-gradients and
+    golden gradient, all with background-clip: text and
+    animated background-position, thread ::before dropped and
+    glass glint ::after.
+
+
+EASY TWEAKS
+---------------
+· Coarser grain: raise the .42em of the radial-gradients.
+· Faster fall: 6s → 4s in hp-arena-fluye.
+· No thread: delete the ::before and hp-arena-hilo.
+· Paler sand: #e0b070 → #ffe6c0 in the gradient.

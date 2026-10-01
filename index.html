@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- ================================================================
-     SHOWCASE UNIFICADO DE EFECTOS DE TEXTO (efectos en CSS puro)
+     SHOWCASE UNIFICADO DE EFECTOS DE TEXTO (CSS puro · WebGL · SVG)
      ----------------------------------------------------------------
      UNA SOLA PÁGINA con los 119 efectos agrupados en CATEGORÍAS: cada
      categoría es una CARPETA PLEGABLE en el índice de la izquierda
@@ -17,25 +17,25 @@
      "Showcase completo" (misma pestaña) y "Descargar efecto (.zip)",
      que guarda el pack del efecto: su CSS, el HTML de su showcase y
      las instrucciones; al soltarlo, la portada estalla con la MISMA
-     escena temática que el botón "Todos los efectos" del showcase
+     escena temática que el botón "Portada" del showcase
      (sus escenas viven en transicion.css, aquí dentro de cada
-     tarjeta). Desde el showcase se vuelve con "Todos los efectos":
+     tarjeta). Desde el showcase se vuelve con "Portada":
      ese botón pasa antes por transicion.html#efecto (la escena del
      propio efecto, ~1,6 s de retardo) y de ahí sigue a esta portada
      — el retardo es un <meta refresh>, seguimos sin JS.
 
      CÓMO AÑADIR UN EFECTO NUEVO (de aquí en adelante):
-       1) <link rel="stylesheet" href="categoria/efecto/efecto.css">  en el <head>
+       1) <link rel="stylesheet" href="efectos_css/categoria/efecto/efecto.css">  en el <head>
        2) un <li data-cat="categoria"><a href="#efecto">…</a></li> dentro
           de la <ol class="lista"> de la carpeta de su categoría
        3) un <section id="efecto" class="tarjeta" data-cat="categoria">…</section>
           dentro de .galeria
        4) su descargable: categoria/efecto/efecto.zip con estos 3 archivos
-          dentro (efecto.css, index.html y como-aplicar-efecto.txt). P. ej.
+          dentro (efecto.css, index.html y installation-instalacion-efecto.txt). P. ej.
           en PowerShell:
             Compress-Archive -Force `
               -Path categoria\efecto\efecto.css, categoria\efecto\index.html, `
-              categoria\efecto\como-aplicar-efecto.txt `
+              categoria\efecto\installation-instalacion-efecto.txt `
               -DestinationPath categoria\efecto\efecto.zip
           Si cambias el CSS o el HTML después, ¡vuelve a crear el zip!
        5) su escena temática: .tema-efecto + sus @keyframes en
@@ -46,9 +46,9 @@
           la carpeta de la categoría.
 
      CÓMO AÑADIR UNA CATEGORÍA NUEVA:
-       1) crea efectos/categoria/ y mete dentro sus efectos (los de
-          Miscelánea están en efectos/miscelanea/ y los de The Division
-          en efectos/the_division/)
+       1) crea efectos_css/categoria/ y mete dentro sus efectos (los de
+          Miscelánea están en efectos_css/miscelanea/ y los de The Division
+          en efectos_css/the_division/)
        2) aquí: su <details class="grupo" id="g-categoria" data-cat="categoria">
           con <summary class="grupo-titulo">Nombre (n)</summary> y su
           <ol class="lista"> dentro, en el índice lateral
@@ -56,7 +56,8 @@
           g-miscelanea y cambia id y data-cat)
        4) sus <link>, <li data-cat> y <section data-cat> con rutas
           categoria/efecto/…       (La muestra aleatoria no se toca al añadir categorías: el guion
-        del final sortea de todas las tarjetas; tamaño en var N = 12.)
+        del final sortea las tarjetas de la sección desplegada —o de
+        todas si no hay ninguna—; tamaño en var N = 12.)
       (Los 119 CSS conviven sin conflictos: cada uno solo define su
        propia clase .efecto-xxx y sus propios @keyframes.)
      ================================================================ -->
@@ -66,126 +67,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Efectos de texto CSS - Showcase unificado</title>
 
-    <!-- ============ LOS 119 EFECTOS (cada uno portable) ============ -->
-    <link rel="stylesheet" href="miscelanea/glitch/glitch.css">
-    <link rel="stylesheet" href="miscelanea/arcoiris/arcoiris.css">
-    <link rel="stylesheet" href="miscelanea/fuego/fuego.css">
-    <link rel="stylesheet" href="miscelanea/radiacion/radiacion.css">
-    <link rel="stylesheet" href="miscelanea/nubes/nubes.css">
-    <link rel="stylesheet" href="miscelanea/hielo/hielo.css">
-    <link rel="stylesheet" href="miscelanea/lava/lava.css">
-    <link rel="stylesheet" href="miscelanea/holograma/holograma.css">
-    <link rel="stylesheet" href="miscelanea/vhs/vhs.css">
-    <link rel="stylesheet" href="miscelanea/gelatina/gelatina.css">
-    <link rel="stylesheet" href="miscelanea/nebulosa/nebulosa.css">
-    <link rel="stylesheet" href="miscelanea/orbita/orbita.css">
-    <link rel="stylesheet" href="miscelanea/eclipse/eclipse.css">
-    <link rel="stylesheet" href="miscelanea/brote/brote.css">
-    <link rel="stylesheet" href="miscelanea/viento/viento.css">
-    <link rel="stylesheet" href="miscelanea/marea/marea.css">
-    <link rel="stylesheet" href="miscelanea/corriente/corriente.css">
-    <link rel="stylesheet" href="miscelanea/rayo/rayo.css">
-    <link rel="stylesheet" href="miscelanea/chispa/chispa.css">
-    <link rel="stylesheet" href="miscelanea/grieta/grieta.css">
-    <link rel="stylesheet" href="miscelanea/gotica/gotica.css">
-    <link rel="stylesheet" href="the_division/hud/hud.css">
-    <link rel="stylesheet" href="the_division/rogue/rogue.css">
-    <link rel="stylesheet" href="the_division/impacto/impacto.css">
-    <link rel="stylesheet" href="the_division/botin/botin.css">
-    <link rel="stylesheet" href="the_division/apagon/apagon.css">
-    <link rel="stylesheet" href="the_division/abatido/abatido.css">
-    <link rel="stylesheet" href="the_division/nevada/nevada.css">
-    <link rel="stylesheet" href="the_division/neon/neon.css">
-    <link rel="stylesheet" href="the_division/blindaje/blindaje.css">
-    <link rel="stylesheet" href="the_division/pulso/pulso.css">
-    <link rel="stylesheet" href="the_division/bengala/bengala.css">
-    <link rel="stylesheet" href="the_division/graffiti/graffiti.css">
-    <link rel="stylesheet" href="the_division/stencil/stencil.css">
-    <link rel="stylesheet" href="star_wars/sable/sable.css">
-    <link rel="stylesheet" href="star_wars/fuerza/fuerza.css">
-    <link rel="stylesheet" href="star_wars/hiperespacio/hiperespacio.css">
-    <link rel="stylesheet" href="star_wars/estrellas/estrellas.css">
-    <link rel="stylesheet" href="star_wars/torpedo/torpedo.css">
-    <link rel="stylesheet" href="star_wars/respiracion/respiracion.css">
-    <link rel="stylesheet" href="star_wars/dunas/dunas.css">
-    <link rel="stylesheet" href="star_wars/carbono/carbono.css">
-    <link rel="stylesheet" href="star_wars/superlaser/superlaser.css">
-    <link rel="stylesheet" href="star_wars/clon/clon.css">
-    <link rel="stylesheet" href="star_wars/apuntar/apuntar.css">
-    <link rel="stylesheet" href="star_wars/espiritu/espiritu.css">
-    <link rel="stylesheet" href="star_wars/rebelion/rebelion.css">
-    <link rel="stylesheet" href="matrix/codigo/codigo.css">
-    <link rel="stylesheet" href="matrix/pildora/pildora.css">
-    <link rel="stylesheet" href="matrix/cuchara/cuchara.css">
-    <link rel="stylesheet" href="matrix/dejavu/dejavu.css">
-    <link rel="stylesheet" href="matrix/agente/agente.css">
-    <link rel="stylesheet" href="matrix/espejo/espejo.css">
-    <link rel="stylesheet" href="matrix/tiempo/tiempo.css">
-    <link rel="stylesheet" href="matrix/dodge/dodge.css">
-    <link rel="stylesheet" href="matrix/mundo/mundo.css">
-    <link rel="stylesheet" href="matrix/oracle/oracle.css">
-    <link rel="stylesheet" href="matrix/desconexion/desconexion.css">
-    <link rel="stylesheet" href="matrix/conejo/conejo.css">
-    <link rel="stylesheet" href="matrix/poder/poder.css">
-    <link rel="stylesheet" href="matrix/sentinela/sentinela.css">
-    <link rel="stylesheet" href="monster_hunter/filo/filo.css">
-    <link rel="stylesheet" href="monster_hunter/emblema/emblema.css">
-    <link rel="stylesheet" href="monster_hunter/salud/salud.css">
-    <link rel="stylesheet" href="monster_hunter/rugido/rugido.css">
-    <link rel="stylesheet" href="monster_hunter/garras/garras.css">
-    <link rel="stylesheet" href="monster_hunter/escamas/escamas.css">
-    <link rel="stylesheet" href="monster_hunter/veneno/veneno.css">
-    <link rel="stylesheet" href="monster_hunter/paralisis/paralisis.css">
-    <link rel="stylesheet" href="monster_hunter/fauces/fauces.css">
-    <link rel="stylesheet" href="monster_hunter/barro/barro.css">
-    <link rel="stylesheet" href="monster_hunter/wirebug/wirebug.css">
-    <link rel="stylesheet" href="monster_hunter/palico/palico.css">
-    <link rel="stylesheet" href="monster_hunter/forja/forja.css">
-    <link rel="stylesheet" href="monster_hunter/caza/caza.css">
-    <link rel="stylesheet" href="monster_hunter/sigilo/sigilo.css">
-    <link rel="stylesheet" href="monster_hunter/sueno/sueno.css">
-    <link rel="stylesheet" href="monster_hunter/embestida/embestida.css">
-    <link rel="stylesheet" href="monster_hunter/bestia/bestia.css">
-    <link rel="stylesheet" href="harry_potter/gryffindor/gryffindor.css">
-    <link rel="stylesheet" href="harry_potter/hufflepuff/hufflepuff.css">
-    <link rel="stylesheet" href="harry_potter/ravenclaw/ravenclaw.css">
-    <link rel="stylesheet" href="harry_potter/slytherin/slytherin.css">
-    <link rel="stylesheet" href="harry_potter/patronus/patronus.css">
-    <link rel="stylesheet" href="harry_potter/plataforma/plataforma.css">
-    <link rel="stylesheet" href="harry_potter/snitch/snitch.css">
-    <link rel="stylesheet" href="harry_potter/varita/varita.css">
-    <link rel="stylesheet" href="harry_potter/pocion/pocion.css">
-    <link rel="stylesheet" href="harry_potter/arena/arena.css">
-    <link rel="stylesheet" href="harry_potter/capa/capa.css">
-    <link rel="stylesheet" href="harry_potter/pluma/pluma.css">
-    <link rel="stylesheet" href="harry_potter/habas/habas.css">
-    <link rel="stylesheet" href="harry_potter/sello/sello.css">
-    <link rel="stylesheet" href="harry_potter/sapo/sapo.css">
-    <link rel="stylesheet" href="harry_potter/boggart/boggart.css">
-    <link rel="stylesheet" href="harry_potter/polvo/polvo.css">
-    <link rel="stylesheet" href="harry_potter/azkaban/azkaban.css">
-    <link rel="stylesheet" href="harry_potter/profecia/profecia.css">
-    <link rel="stylesheet" href="harry_potter/pensieve/pensieve.css">
-    <link rel="stylesheet" href="stalker/solitarios/solitarios.css">
-    <link rel="stylesheet" href="stalker/deber/deber.css">
-    <link rel="stylesheet" href="stalker/libertad/libertad.css">
-    <link rel="stylesheet" href="stalker/cielodespejado/cielodespejado.css">
-    <link rel="stylesheet" href="stalker/bandidos/bandidos.css">
-    <link rel="stylesheet" href="stalker/mercenarios/mercenarios.css">
-    <link rel="stylesheet" href="stalker/militares/militares.css">
-    <link rel="stylesheet" href="stalker/ecologistas/ecologistas.css">
-    <link rel="stylesheet" href="stalker/monolito/monolito.css">
-    <link rel="stylesheet" href="stalker/renegados/renegados.css">
-    <link rel="stylesheet" href="stalker/pecado/pecado.css">
-    <link rel="stylesheet" href="stalker/unisg/unisg.css">
-    <link rel="stylesheet" href="stalker/ultimodia/ultimodia.css">
-    <link rel="stylesheet" href="stalker/emision/emision.css">
-    <link rel="stylesheet" href="stalker/anomalia/anomalia.css">
-    <link rel="stylesheet" href="stalker/artefacto/artefacto.css">
-    <link rel="stylesheet" href="stalker/tormenta/tormenta.css">
-    <link rel="stylesheet" href="stalker/detector/detector.css">
-    <link rel="stylesheet" href="stalker/fauna/fauna.css">
-    <link rel="stylesheet" href="stalker/lazona/lazona.css">
+    <!-- ============ EFECTOS CSS - LOS 119 (cada uno portable) ============ -->
+    <link rel="stylesheet" href="efectos_css/miscelanea/glitch/glitch.css">
+    <link rel="stylesheet" href="efectos_css/miscelanea/arcoiris/arcoiris.css">
+    <link rel="stylesheet" href="efectos_css/miscelanea/fuego/fuego.css">
+    <link rel="stylesheet" href="efectos_css/miscelanea/radiacion/radiacion.css">
+    <link rel="stylesheet" href="efectos_css/miscelanea/nubes/nubes.css">
+    <link rel="stylesheet" href="efectos_css/miscelanea/hielo/hielo.css">
+    <link rel="stylesheet" href="efectos_css/miscelanea/lava/lava.css">
+    <link rel="stylesheet" href="efectos_css/miscelanea/holograma/holograma.css">
+    <link rel="stylesheet" href="efectos_css/miscelanea/vhs/vhs.css">
+    <link rel="stylesheet" href="efectos_css/miscelanea/gelatina/gelatina.css">
+    <link rel="stylesheet" href="efectos_css/miscelanea/nebulosa/nebulosa.css">
+    <link rel="stylesheet" href="efectos_css/miscelanea/orbita/orbita.css">
+    <link rel="stylesheet" href="efectos_css/miscelanea/eclipse/eclipse.css">
+    <link rel="stylesheet" href="efectos_css/miscelanea/brote/brote.css">
+    <link rel="stylesheet" href="efectos_css/miscelanea/viento/viento.css">
+    <link rel="stylesheet" href="efectos_css/miscelanea/marea/marea.css">
+    <link rel="stylesheet" href="efectos_css/miscelanea/corriente/corriente.css">
+    <link rel="stylesheet" href="efectos_css/miscelanea/rayo/rayo.css">
+    <link rel="stylesheet" href="efectos_css/miscelanea/chispa/chispa.css">
+    <link rel="stylesheet" href="efectos_css/miscelanea/grieta/grieta.css">
+    <link rel="stylesheet" href="efectos_css/miscelanea/gotica/gotica.css">
+    <link rel="stylesheet" href="efectos_css/the_division/hud/hud.css">
+    <link rel="stylesheet" href="efectos_css/the_division/rogue/rogue.css">
+    <link rel="stylesheet" href="efectos_css/the_division/impacto/impacto.css">
+    <link rel="stylesheet" href="efectos_css/the_division/botin/botin.css">
+    <link rel="stylesheet" href="efectos_css/the_division/apagon/apagon.css">
+    <link rel="stylesheet" href="efectos_css/the_division/abatido/abatido.css">
+    <link rel="stylesheet" href="efectos_css/the_division/nevada/nevada.css">
+    <link rel="stylesheet" href="efectos_css/the_division/neon/neon.css">
+    <link rel="stylesheet" href="efectos_css/the_division/blindaje/blindaje.css">
+    <link rel="stylesheet" href="efectos_css/the_division/pulso/pulso.css">
+    <link rel="stylesheet" href="efectos_css/the_division/bengala/bengala.css">
+    <link rel="stylesheet" href="efectos_css/the_division/graffiti/graffiti.css">
+    <link rel="stylesheet" href="efectos_css/the_division/stencil/stencil.css">
+    <link rel="stylesheet" href="efectos_css/star_wars/sable/sable.css">
+    <link rel="stylesheet" href="efectos_css/star_wars/fuerza/fuerza.css">
+    <link rel="stylesheet" href="efectos_css/star_wars/hiperespacio/hiperespacio.css">
+    <link rel="stylesheet" href="efectos_css/star_wars/estrellas/estrellas.css">
+    <link rel="stylesheet" href="efectos_css/star_wars/torpedo/torpedo.css">
+    <link rel="stylesheet" href="efectos_css/star_wars/respiracion/respiracion.css">
+    <link rel="stylesheet" href="efectos_css/star_wars/dunas/dunas.css">
+    <link rel="stylesheet" href="efectos_css/star_wars/carbono/carbono.css">
+    <link rel="stylesheet" href="efectos_css/star_wars/superlaser/superlaser.css">
+    <link rel="stylesheet" href="efectos_css/star_wars/clon/clon.css">
+    <link rel="stylesheet" href="efectos_css/star_wars/apuntar/apuntar.css">
+    <link rel="stylesheet" href="efectos_css/star_wars/espiritu/espiritu.css">
+    <link rel="stylesheet" href="efectos_css/star_wars/rebelion/rebelion.css">
+    <link rel="stylesheet" href="efectos_css/matrix/codigo/codigo.css">
+    <link rel="stylesheet" href="efectos_css/matrix/pildora/pildora.css">
+    <link rel="stylesheet" href="efectos_css/matrix/cuchara/cuchara.css">
+    <link rel="stylesheet" href="efectos_css/matrix/dejavu/dejavu.css">
+    <link rel="stylesheet" href="efectos_css/matrix/agente/agente.css">
+    <link rel="stylesheet" href="efectos_css/matrix/espejo/espejo.css">
+    <link rel="stylesheet" href="efectos_css/matrix/tiempo/tiempo.css">
+    <link rel="stylesheet" href="efectos_css/matrix/dodge/dodge.css">
+    <link rel="stylesheet" href="efectos_css/matrix/mundo/mundo.css">
+    <link rel="stylesheet" href="efectos_css/matrix/oracle/oracle.css">
+    <link rel="stylesheet" href="efectos_css/matrix/desconexion/desconexion.css">
+    <link rel="stylesheet" href="efectos_css/matrix/conejo/conejo.css">
+    <link rel="stylesheet" href="efectos_css/matrix/poder/poder.css">
+    <link rel="stylesheet" href="efectos_css/matrix/sentinela/sentinela.css">
+    <link rel="stylesheet" href="efectos_css/monster_hunter/filo/filo.css">
+    <link rel="stylesheet" href="efectos_css/monster_hunter/emblema/emblema.css">
+    <link rel="stylesheet" href="efectos_css/monster_hunter/salud/salud.css">
+    <link rel="stylesheet" href="efectos_css/monster_hunter/rugido/rugido.css">
+    <link rel="stylesheet" href="efectos_css/monster_hunter/garras/garras.css">
+    <link rel="stylesheet" href="efectos_css/monster_hunter/escamas/escamas.css">
+    <link rel="stylesheet" href="efectos_css/monster_hunter/veneno/veneno.css">
+    <link rel="stylesheet" href="efectos_css/monster_hunter/paralisis/paralisis.css">
+    <link rel="stylesheet" href="efectos_css/monster_hunter/fauces/fauces.css">
+    <link rel="stylesheet" href="efectos_css/monster_hunter/barro/barro.css">
+    <link rel="stylesheet" href="efectos_css/monster_hunter/wirebug/wirebug.css">
+    <link rel="stylesheet" href="efectos_css/monster_hunter/palico/palico.css">
+    <link rel="stylesheet" href="efectos_css/monster_hunter/forja/forja.css">
+    <link rel="stylesheet" href="efectos_css/monster_hunter/caza/caza.css">
+    <link rel="stylesheet" href="efectos_css/monster_hunter/sigilo/sigilo.css">
+    <link rel="stylesheet" href="efectos_css/monster_hunter/sueno/sueno.css">
+    <link rel="stylesheet" href="efectos_css/monster_hunter/embestida/embestida.css">
+    <link rel="stylesheet" href="efectos_css/monster_hunter/bestia/bestia.css">
+    <link rel="stylesheet" href="efectos_css/harry_potter/gryffindor/gryffindor.css">
+    <link rel="stylesheet" href="efectos_css/harry_potter/hufflepuff/hufflepuff.css">
+    <link rel="stylesheet" href="efectos_css/harry_potter/ravenclaw/ravenclaw.css">
+    <link rel="stylesheet" href="efectos_css/harry_potter/slytherin/slytherin.css">
+    <link rel="stylesheet" href="efectos_css/harry_potter/patronus/patronus.css">
+    <link rel="stylesheet" href="efectos_css/harry_potter/plataforma/plataforma.css">
+    <link rel="stylesheet" href="efectos_css/harry_potter/snitch/snitch.css">
+    <link rel="stylesheet" href="efectos_css/harry_potter/varita/varita.css">
+    <link rel="stylesheet" href="efectos_css/harry_potter/pocion/pocion.css">
+    <link rel="stylesheet" href="efectos_css/harry_potter/arena/arena.css">
+    <link rel="stylesheet" href="efectos_css/harry_potter/capa/capa.css">
+    <link rel="stylesheet" href="efectos_css/harry_potter/pluma/pluma.css">
+    <link rel="stylesheet" href="efectos_css/harry_potter/habas/habas.css">
+    <link rel="stylesheet" href="efectos_css/harry_potter/sello/sello.css">
+    <link rel="stylesheet" href="efectos_css/harry_potter/sapo/sapo.css">
+    <link rel="stylesheet" href="efectos_css/harry_potter/boggart/boggart.css">
+    <link rel="stylesheet" href="efectos_css/harry_potter/polvo/polvo.css">
+    <link rel="stylesheet" href="efectos_css/harry_potter/azkaban/azkaban.css">
+    <link rel="stylesheet" href="efectos_css/harry_potter/profecia/profecia.css">
+    <link rel="stylesheet" href="efectos_css/harry_potter/pensieve/pensieve.css">
+    <link rel="stylesheet" href="efectos_css/stalker/solitarios/solitarios.css">
+    <link rel="stylesheet" href="efectos_css/stalker/deber/deber.css">
+    <link rel="stylesheet" href="efectos_css/stalker/libertad/libertad.css">
+    <link rel="stylesheet" href="efectos_css/stalker/cielodespejado/cielodespejado.css">
+    <link rel="stylesheet" href="efectos_css/stalker/bandidos/bandidos.css">
+    <link rel="stylesheet" href="efectos_css/stalker/mercenarios/mercenarios.css">
+    <!-- ===== EFECTOS SVG (seccion 3): las clases de los 3 efectos ===== -->
+    <link rel="stylesheet" href="efectos_svg/Matrix/matrix/matrix.css">
+    <link rel="stylesheet" href="efectos_svg/miscelanea/mercurio/mercurio.css">
+    <link rel="stylesheet" href="efectos_svg/miscelanea/glitch/glitch.css">
+    <link rel="stylesheet" href="efectos_css/stalker/militares/militares.css">
+    <link rel="stylesheet" href="efectos_css/stalker/ecologistas/ecologistas.css">
+    <link rel="stylesheet" href="efectos_css/stalker/monolito/monolito.css">
+    <link rel="stylesheet" href="efectos_css/stalker/renegados/renegados.css">
+    <link rel="stylesheet" href="efectos_css/stalker/pecado/pecado.css">
+    <link rel="stylesheet" href="efectos_css/stalker/unisg/unisg.css">
+    <link rel="stylesheet" href="efectos_css/stalker/ultimodia/ultimodia.css">
+    <link rel="stylesheet" href="efectos_css/stalker/emision/emision.css">
+    <link rel="stylesheet" href="efectos_css/stalker/anomalia/anomalia.css">
+    <link rel="stylesheet" href="efectos_css/stalker/artefacto/artefacto.css">
+    <link rel="stylesheet" href="efectos_css/stalker/tormenta/tormenta.css">
+    <link rel="stylesheet" href="efectos_css/stalker/detector/detector.css">
+    <link rel="stylesheet" href="efectos_css/stalker/fauna/fauna.css">
+    <link rel="stylesheet" href="efectos_css/stalker/lazona/lazona.css">
 
     <!-- Escenas temáticas (transición + botones de descarga) -->
     <link rel="stylesheet" href="transicion.css">
@@ -222,13 +227,31 @@
             top: 1.5rem;
             align-self: flex-start;
         }
-        .indice h3 {
-            margin-top: 0;
+        .indice .seccion-titulo {
+            position: relative;
+            display: block;
+            margin: 0 0 .6rem;
+            padding-left: 1.05em;          /* hueco para el caret */
             color: #ffffff;
             font-size: 1rem;
             letter-spacing: .12em;
             text-transform: uppercase;
+            cursor: pointer;
+            list-style: none;
         }
+        .indice .seccion-titulo::-webkit-details-marker { display: none; }
+        .indice .seccion-titulo::before {
+            content: "\25B8";              /* caret que gira al abrir */
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #5d6774;
+            transition: transform .2s;
+        }
+        .indice .seccion-indice[open] > .seccion-titulo::before {
+            transform: rotate(90deg);
+        }
+        .indice .seccion-titulo:hover { color: #8ec8ff; }
         .indice .contador {
             display: block;
             color: #5d6774;
@@ -236,6 +259,13 @@
             font-weight: normal;
             letter-spacing: 0;
             text-transform: none;
+        }
+        /* las secciones 2 y 3 del índice: separadas con una línea
+           discontinua, como siempre */
+        .indice .seccion-indice + .seccion-indice > .seccion-titulo {
+            margin-top: 1.3rem;
+            padding-top: .9rem;
+            border-top: 1px dashed #232a34;
         }
         /* La lista NO crece hasta el infinito: se encoge y, si hay
            muchos efectos, aparece su propia barra de scroll interno
@@ -300,6 +330,33 @@
             margin-top: 1.4rem;
         }
 
+        /* --- VISTA GENERAL: las 12 tarjetas en UNA sola rejilla ---
+           Sin ninguna sección abierta en el índice, las tarjetas de
+           las tres secciones comparten rejilla: los contenedores se
+           disuelven (display: contents) y el <main> adopta la MISMA
+           plantilla y el MISMO hueco que .galeria, de forma que las
+           12 sorteadas quedan siempre alineadas en 3 filas de 4 (y,
+           según el ancho, en las columnas que fije el responsive de
+           más abajo). El <footer> (va dentro de main) ocupa una fila
+           entera. Cuando hay una sección abierta nada de esto se
+           aplica: cada sección vuelve a su rejilla de siempre. */
+        body:not(:has(.seccion-indice[open])) .contenido {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.2rem 1.5rem;
+            margin-top: 1.4rem;            /* el que dejaba .galeria */
+        }
+        body:not(:has(.seccion-indice[open])) .contenido footer {
+            grid-column: 1 / -1;
+        }
+        body:not(:has(.seccion-indice[open])) .galeria,
+        body:not(:has(.seccion-indice[open])) .seccion-svg,
+        body:not(:has(.seccion-indice[open])) .seccion-webgl,
+        body:not(:has(.seccion-indice[open])) .galeria-svg,
+        body:not(:has(.seccion-indice[open])) .galeria-webgl {
+            display: contents;
+        }
+
         .tarjeta {
             text-align: center;
             scroll-margin-top: 1.5rem;   /* deja aire arriba al saltar */
@@ -338,8 +395,172 @@
             text-transform: uppercase;
         }
 
+        /* ============ SECCION EFECTOS WEBGL ============
+           Tarjetas de la seccion WebGL: misma pinta que las de arriba
+           (muestra CIRCULAR de 200px, igual que la seccion CSS) y
+           acento verde-menta. La muestra es el EFECTO REAL embebido en
+           un iframe (?demo=1) escalado para CABER ENTERO dentro del
+           circulo (contain, sin recortar laterales: la palabra se ve
+           completa) y centrado. Mientras carga se ve el fondo wg-* de
+           cada tematica. */
+        .seccion-webgl {
+            margin-top: 2.4rem;
+            scroll-margin-top: 1.5rem;
+        }
+        .titulo-webgl {
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: .55rem;
+            margin: 0;
+            color: #7dffc4;
+            font-size: 2.2rem;
+        }
+        .titulo-webgl .contador-webgl {
+            color: #5d6774;
+            font-size: .85rem;
+            font-weight: normal;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+        .sub-webgl {
+            max-width: 64ch;
+            margin: .5rem 0 0;
+            color: #8b97a6;
+        }
+        .galeria-webgl {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.8rem 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .tarjeta-webgl {
+            text-align: center;
+            scroll-margin-top: 1.5rem;
+        }
+        .wg-muestra {
+            box-sizing: border-box;
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #111418;
+            border: 1px dashed #232a34;
+            border-radius: 50%;            /* circulo, igual que .muestra */
+            overflow: hidden;
+        }
+        /* el efecto REAL dentro de la tarjeta: un iframe a tamaño
+           "de escritorio" (1280x720) escalado para CABER ENTERO
+           dentro del circulo —hasta las esquinas, sin recortar la
+           escena— y centrado (lo hace un guion de esta pagina).
+           Mientras carga se ve el fondo wg-* de cada tematica. */
+        .wg-muestra iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1280px;
+            height: 720px;
+            border: 0;
+            transform-origin: 0 0;
+        }
+        /* preview de MATRIX: rejilla de lluvia + verde nitido */
+        .wg-matrix {
+            background:
+                repeating-linear-gradient(90deg,
+                    rgba(0, 255, 102, .15) 0 2px, transparent 2px 10px),
+                radial-gradient(130% 150% at 50% 0%, #05200f, #010604);
+        }
+        /* preview de MATRIX 2: aberracion cromatica + fondo cine */
+        .wg-matrix2 {
+            background: radial-gradient(120% 140% at 50% 10%, #07130f, #020504);
+        }
+        /* preview de MERCURIO: metal cromado */
+        .wg-mercurio {
+            background: linear-gradient(165deg, #0b1220, #101a2c 55%, #0a0f18);
+        }
+        .tarjeta-webgl h3 { margin: 1rem 0 .2rem; font-size: 1.3rem; }
+        .tarjeta-webgl h3 small {
+            display: block;
+            color: #5d6774;
+            font-size: .74rem;
+            font-weight: normal;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        /* ============ SECCION EFECTOS SVG ============
+           Tarjetas de la tercera seccion: misma pinta que las de
+           arriba (muestra CIRCULAR de 200px, igual que la seccion
+           CSS, acento cian) y la muestra es el EFECTO REAL en vivo
+           (clase CSS + filtros SVG embebidos en la portada), sin
+           iframe. */
+        .seccion-svg {
+            margin-top: 2.4rem;
+            scroll-margin-top: 1.5rem;
+        }
+        .titulo-svg {
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: .55rem;
+            margin: 0;
+            color: #8fd7ff;
+            font-size: 2.2rem;
+        }
+        .titulo-svg .contador-svg {
+            color: #5d6774;
+            font-size: .85rem;
+            font-weight: normal;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+        .sub-svg {
+            max-width: 64ch;
+            margin: .5rem 0 0;
+            color: #8b97a6;
+        }
+        .galeria-svg {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.8rem 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .tarjeta-svg {
+            text-align: center;
+            scroll-margin-top: 1.5rem;
+        }
+        .sv-muestra {
+            box-sizing: border-box;
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #05080d;
+            border: 1px dashed #232a34;
+            border-radius: 50%;            /* circulo, igual que .muestra */
+            overflow: hidden;
+            font-size: 1.35rem;
+            font-weight: 800;
+        }
+        .tarjeta-svg h3 { margin: 1rem 0 .2rem; font-size: 1.3rem; }
+        .tarjeta-svg h3 small {
+            display: block;
+            color: #5d6774;
+            font-size: .74rem;
+            font-weight: normal;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
         /* Botones de cada tarjeta (mismo sitio, misma pestaña; se
-           vuelve con "Todos los efectos" desde el showcase) */
+           vuelve con "Portada" desde el showcase) */
         .btn {
             display: block;
             width: fit-content;
@@ -368,7 +589,7 @@
         /* Botón de descarga: baja el pack del efecto en un .zip
            (su CSS + el HTML de su showcase + sus instrucciones) y,
            al soltarlo, estalla la escena temática del efecto — la
-           MISMA de su "Todos los efectos" (reglas más abajo) */
+           MISMA de su "Portada" (reglas más abajo) */
         .btn-descarga {
             margin-top: .6rem;
             background-color: #1d1710;
@@ -566,12 +787,18 @@
         /* --- Menos ancho: 3 círculos por fila (debajo de 1210px ya
                no caben 4 muestras de 200px con el índice de 225px) --- */
         @media (max-width: 1210px) {
-            .galeria { grid-template-columns: repeat(3, 1fr); }
+            .galeria,
+            body:not(:has(.seccion-indice[open])) .contenido {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
         /* --- Mediana: 2 círculos por fila --- */
         @media (max-width: 1020px) {
-            .galeria { grid-template-columns: repeat(2, 1fr); }
+            .galeria,
+            body:not(:has(.seccion-indice[open])) .contenido {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         /* --- Móvil: el índice pasa arriba como píldoras y la
@@ -595,7 +822,10 @@
             .lista a:hover { transform: none; }
         }
         @media (max-width: 560px) {
-            .galeria { grid-template-columns: 1fr; }
+            .galeria,
+            body:not(:has(.seccion-indice[open])) .contenido {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* --- CATEGORÍAS COMO CARPETAS PLEGABLES (sin JavaScript) ---
@@ -680,6 +910,84 @@
             display: none;
         }
 
+        /* --- SECCION WEBGL: misma receta, sobre .seccion-webgl ---
+           (con un grupo CSS abierto la seccion WebGL entera queda
+           fuera; con un grupo WebGL abierto solo se ven sus tarjetas) */
+        body:has(.grupo[open]):not(:has(#g-webgl-matrix[open]))
+            .seccion-webgl .tarjeta-webgl[data-webgl="matrix"] {
+            display: none;
+        }
+
+        body:has(.grupo[open]):not(:has(#g-webgl-miscelanea[open]))
+            .seccion-webgl .tarjeta-webgl[data-webgl="miscelanea"] {
+            display: none;
+        }
+
+        body:has(.grupo[open]):not(:has(.grupo[id^="g-webgl"]))
+            .seccion-webgl {
+            display: none;
+        }
+
+        /* --- SECCION SVG: misma receta, sobre .seccion-svg ---
+           (con un grupo CSS o WebGL abierto la seccion SVG entera
+           queda fuera; con un grupo SVG abierto solo se ven sus
+           tarjetas) */
+        body:has(.grupo[open]):not(:has(#g-svg-matrix[open]))
+            .seccion-svg .tarjeta-svg[data-svg="matrix"] {
+            display: none;
+        }
+
+        body:has(.grupo[open]):not(:has(#g-svg-miscelanea[open]))
+            .seccion-svg .tarjeta-svg[data-svg="miscelanea"] {
+            display: none;
+        }
+
+        body:has(.grupo[open]):not(:has(.grupo[id^="g-svg"]))
+            .seccion-svg {
+            display: none;
+        }
+
+        /* --- SECCIONES PLEGABLES DEL ÍNDICE (T7) ---
+           Solo se ve UNA cosa a la vez:
+           · Vista general (ninguna sección abierta): las 12
+             tarjetas sorteadas al azar de ENTRE todas las
+             secciones (CSS + SVG + WebGL) —de ahí el filtro de
+             .sorteada también sobre SVG y WebGL— y NADA más: sin
+             intro, sin títulos de sección y sin descripciones
+             (los separadores se retiraron: nunca se ven dos
+             secciones a la vez).
+           · Con una sección abierta: SU título, SU descripción y
+             sus tarjetas; las demás secciones quedan fuera. */
+        body:not(:has(.seccion-indice[open]))
+            .seccion-svg .tarjeta-svg:not(.sorteada),
+        body:not(:has(.seccion-indice[open]))
+            .seccion-webgl .tarjeta-webgl:not(.sorteada) {
+            display: none;
+        }
+        /* la intro (h1 + texto CSS): solo con la sección CSS abierta */
+        body:not(:has(#s-css[open])) header.intro {
+            display: none;
+        }
+        /* títulos y textos de SVG/WebGL: solo al abrir la suya */
+        body:not(:has(#s-svg[open])) .titulo-svg,
+        body:not(:has(#s-svg[open])) .sub-svg,
+        body:not(:has(#s-webgl[open])) .titulo-webgl,
+        body:not(:has(#s-webgl[open])) .sub-webgl {
+            display: none;
+        }
+        body:has(.seccion-indice[open]):not(:has(#s-css[open]))
+            .galeria {
+            display: none;
+        }
+        body:has(.seccion-indice[open]):not(:has(#s-svg[open]))
+            .seccion-svg {
+            display: none;
+        }
+        body:has(.seccion-indice[open]):not(:has(#s-webgl[open]))
+            .seccion-webgl {
+            display: none;
+        }
+
         /* --- CAMBIO DE TEMA (solo esta portada) ---
            El boton de arriba a la derecha alterna el fondo de la
            pagina entre negro (por defecto) y blanco, y recuerda la
@@ -723,7 +1031,7 @@
             background-color: #ffffff;
             border-color: #c9d2dc;
         }
-        html[data-tema="claro"] .indice h3,
+        html[data-tema="claro"] .indice .seccion-titulo,
         html[data-tema="claro"] header.intro h1 { color: #101418; }
         html[data-tema="claro"] header.intro { border-bottom-color: #dde3ea; }
         html[data-tema="claro"] .lista a { color: #3d4756; }
@@ -733,6 +1041,15 @@
             color: #0b0d10;
         }
         html[data-tema="claro"] .tarjeta h2 { color: #101418; }
+        html[data-tema="claro"] .titulo-webgl { color: #0e7a4a; }
+        html[data-tema="claro"] .sub-webgl { color: #46505e; }
+        html[data-tema="claro"] .titulo-svg { color: #0e6f96; }
+        html[data-tema="claro"] .sub-svg { color: #46505e; }
+        html[data-tema="claro"] .indice .seccion-indice
+            + .seccion-indice > .seccion-titulo {
+            border-top-color: #dde3ea;
+        }
+        html[data-tema="claro"] .indice .seccion-titulo:hover { color: #0d5fbe; }
         html[data-tema="claro"] .c-arcoiris {
             -webkit-text-fill-color: #101418;
         }
@@ -784,6 +1101,149 @@
         }
 
 
+        /* --- CABECERA DE FRANJA (solo esta portada) ---
+           Franja temática espacial arriba de todo: nebulosa en
+           degradado, dos campos de estrellitas que titilan, una
+           aurora que deriva y un mini fugaz que cruza cada pocos
+           segundos, todo CSS puro. El padding derecho deja libre la
+           zona del switcher [EN|ES] y del botón de tema. El texto lo
+           traduce i18n.js. */
+        .cabecera-espacial {
+            --cab-est: rgba(255,255,255,.95);
+            --cab-est2: rgba(198,220,255,.9);
+            --cab-fugaz: rgba(215,236,255,.9);
+            position: relative;
+            z-index: 30; /* sobre el contenido, bajo #efectos (40) */
+            overflow: hidden;
+            padding: .7rem 11rem .7rem 1.2rem;
+            text-align: center;
+            background:
+                radial-gradient(140% 320% at 12% -70%, rgba(120,45,190,.55), transparent 62%),
+                radial-gradient(120% 300% at 88% 170%, rgba(25,80,175,.5), transparent 60%),
+                radial-gradient(70% 260% at 55% 40%, rgba(185,35,130,.22), transparent 72%),
+                linear-gradient(180deg, #04060c, #0a0f1e);
+            border-bottom: 1px solid rgba(120,160,255,.32);
+            box-shadow: 0 1px 0 rgba(150,180,255,.14),
+                        inset 0 -16px 26px -18px rgba(120,180,255,.75);
+        }
+        .cabecera-espacial p {
+            position: relative;
+            z-index: 3;
+            margin: 0;
+            font-size: .96rem;
+            font-weight: 600;
+            letter-spacing: .3px;
+            color: #e9f1ff;
+            animation: cab-glow 5.5s ease-in-out infinite alternate;
+        }
+        @keyframes cab-glow {
+            from { text-shadow: 0 0 6px rgba(120,170,255,.45), 0 1px 2px rgba(0,0,0,.75); }
+            to   { text-shadow: 0 0 15px rgba(150,195,255,.9), 0 1px 2px rgba(0,0,0,.75); }
+        }
+        /* campos de estrellitas: dos capas con brillo desfasado */
+        .cabecera-espacial::before,
+        .cabecera-espacial::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -6px;
+            bottom: -6px;
+            pointer-events: none;
+            background-repeat: repeat;
+        }
+        .cabecera-espacial::before {
+            background-image:
+                radial-gradient(2px 2px at 16px 14px, var(--cab-est), transparent),
+                radial-gradient(1.5px 1.5px at 74px 32px, var(--cab-est), transparent),
+                radial-gradient(1.4px 1.4px at 132px 9px, var(--cab-est2), transparent),
+                radial-gradient(2.2px 2.2px at 170px 27px, var(--cab-est), transparent);
+            background-size: 196px 46px;
+            animation: cab-parp 3.4s ease-in-out infinite alternate;
+        }
+        .cabecera-espacial::after {
+            background-image:
+                radial-gradient(1.7px 1.7px at 40px 22px, var(--cab-est2), transparent),
+                radial-gradient(2.4px 2.4px at 108px 6px, var(--cab-est), transparent),
+                radial-gradient(1.3px 1.3px at 156px 38px, var(--cab-est), transparent);
+            background-size: 244px 50px;
+            opacity: .7;
+            animation: cab-parp 4.9s ease-in-out infinite alternate-reverse;
+        }
+        @keyframes cab-parp {
+            from { opacity: .3; }
+            to   { opacity: .95; }
+        }
+        /* aurora que deriva por detrás del texto */
+        .cab-aurora {
+            position: absolute;
+            top: -34px;
+            bottom: -34px;
+            left: 0;
+            width: 42%;
+            pointer-events: none;
+            z-index: 1;
+            background: radial-gradient(closest-side, rgba(64,220,190,.3),
+                        rgba(130,90,255,.16) 55%, transparent 78%);
+            filter: blur(9px);
+            animation: cab-aurora 13s ease-in-out infinite alternate;
+        }
+        @keyframes cab-aurora {
+            from { transform: translateX(-35%); }
+            to   { transform: translateX(265%); }
+        }
+        /* mini estrella fugaz que cruza la franja */
+        .cab-fugaz {
+            position: absolute;
+            top: -12%;
+            left: -14%;
+            width: 15%;
+            height: 124%;
+            z-index: 2;
+            pointer-events: none;
+            opacity: 0;
+            background: linear-gradient(104deg, transparent 0%, transparent 40%,
+                        var(--cab-fugaz) 50%, transparent 60%, transparent 100%);
+            transform: translateX(0) skewX(-16deg);
+            animation: cab-fugaz 10.5s linear infinite;
+        }
+        @keyframes cab-fugaz {
+            0%, 74%   { opacity: 0;  transform: translateX(0) skewX(-16deg); }
+            76%       { opacity: .8; }
+            90%       { opacity: .55; }
+            97%, 100% { opacity: 0;  transform: translateX(760%) skewX(-16deg); }
+        }
+        /* --- tema claro: pastel lavanda-azul legible --- */
+        html[data-tema="claro"] .cabecera-espacial {
+            --cab-est: rgba(44,64,116,.8);
+            --cab-est2: rgba(122,72,142,.62);
+            --cab-fugaz: rgba(72,104,186,.55);
+            background:
+                radial-gradient(140% 320% at 12% -70%, rgba(203,175,255,.8), transparent 62%),
+                radial-gradient(120% 300% at 88% 170%, rgba(150,185,255,.72), transparent 60%),
+                radial-gradient(70% 260% at 55% 40%, rgba(255,178,208,.5), transparent 72%),
+                linear-gradient(180deg, #f4f7ff, #e9eefb);
+            border-bottom-color: rgba(96,124,192,.4);
+            box-shadow: 0 1px 0 rgba(120,150,220,.28),
+                        inset 0 -16px 26px -18px rgba(96,150,235,.55);
+        }
+        html[data-tema="claro"] .cabecera-espacial p {
+            color: #17223a;
+            animation-name: cab-glow-claro;
+        }
+        @keyframes cab-glow-claro {
+            from { text-shadow: 0 0 5px rgba(110,160,255,.35); }
+            to   { text-shadow: 0 0 13px rgba(80,140,255,.7); }
+        }
+        html[data-tema="claro"] .cab-aurora {
+            background: radial-gradient(closest-side, rgba(140,235,215,.5),
+                        rgba(180,150,255,.3) 55%, transparent 78%);
+        }
+        @media (max-width: 720px) {
+            .cabecera-espacial { padding: .55rem 9.6rem .55rem .8rem; }
+            .cabecera-espacial p { font-size: .78rem; letter-spacing: .2px; }
+        }
+
         /* --- FONDO ESPACIAL Y EFECTOS AL CLICAR (canvas de esta
            portada, no son ninguno de los 46 efectos) ---
            #fondo-espacio va DETRÁS de todo el contenido (z-index -1,
@@ -812,8 +1272,115 @@
 </head>
 <body>
 
+<!-- ===== CABECERA DE FRANJA (solo esta portada) =====
+     Franja temática espacial con el texto de bienvenida: las
+     estrellitas, la aurora y el mini fugaz son CSS puro (los
+     selectores .cab-* viven en la hoja de esta página) y el hueco
+     de la derecha deja sitio al switcher [EN|ES] y al botón de
+     tema. El texto lo traduce i18n.js. -->
+<header class="cabecera-espacial">
+    <p>En esta página podrás encontrar efectos de texto hechos con diferentes técnicas: CSS, SVG y WebGL. Míralos en vivo, abre cada showcase y descárgalos en .zip.</p>
+    <span class="cab-aurora" aria-hidden="true"></span>
+    <span class="cab-fugaz" aria-hidden="true"></span>
+</header>
+
 <canvas id="fondo-espacio" aria-hidden="true"></canvas>
 <canvas id="efectos" aria-hidden="true"></canvas>
+
+<!-- ===== EFECTOS SVG: filtros de las muestras vivas de la portada =====
+     (el mismo bloque "pega una vez" que acompañan a los efectos) ===== -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <defs>
+        <!-- mercurio (ondulacion suave, siempre activa) -->
+        <filter id="ef-mercurio" x="-20%" y="-60%" width="140%" height="220%"
+                color-interpolation-filters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.015 0.04"
+                          numOctaves="2" seed="7" result="ruido">
+                <animate attributeName="baseFrequency" dur="12s" repeatCount="indefinite"
+                         values="0.015 0.04; 0.025 0.055; 0.015 0.04"/>
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="ruido" scale="11"
+                               xChannelSelector="R" yChannelSelector="G" result="forma"/>
+            <feSpecularLighting in="ruido" surfaceScale="3.2" specularConstant="1.15"
+                                specularExponent="24" lighting-color="#ffffff" result="brillo">
+                <feDistantLight azimuth="225" elevation="56">
+                    <animate attributeName="azimuth" dur="9s" repeatCount="indefinite"
+                             values="210;280;210"/>
+                </feDistantLight>
+            </feSpecularLighting>
+            <feComposite in="brillo" in2="forma" operator="arithmetic"
+                         k1="0" k2="1" k3="0.75" k4="0" result="suma"/>
+            <feComposite in="suma" in2="forma" operator="in"/>
+        </filter>
+
+        <!-- mercurio MINI (para la muestra no hace falta, pero el
+             bloque es el de los efectos: se pega una vez) -->
+        <filter id="ef-mercurio-mini" x="-10%" y="-45%" width="120%" height="190%"
+                color-interpolation-filters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.035 0.075"
+                          numOctaves="2" seed="7" result="ruido">
+                <animate attributeName="baseFrequency" dur="14s" repeatCount="indefinite"
+                         values="0.035 0.075; 0.05 0.1; 0.035 0.075"/>
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="ruido" scale="3"
+                               xChannelSelector="R" yChannelSelector="G" result="forma"/>
+            <feSpecularLighting in="ruido" surfaceScale="1.2" specularConstant="0.7"
+                                specularExponent="30" lighting-color="#ffffff" result="brillo">
+                <feDistantLight azimuth="225" elevation="62">
+                    <animate attributeName="azimuth" dur="11s" repeatCount="indefinite"
+                             values="215;275;215"/>
+                </feDistantLight>
+            </feSpecularLighting>
+            <feComposite in="brillo" in2="forma" operator="arithmetic"
+                         k1="0" k2="1" k3="0.7" k4="0" result="suma"/>
+            <feComposite in="suma" in2="forma" operator="in"/>
+        </filter>
+
+        <!-- glitch SUAVE (estado por defecto) -->
+        <filter id="ef-glitch-suave" x="-10%" y="-40%" width="120%" height="180%"
+                color-interpolation-filters="sRGB">
+            <feTurbulence type="turbulence" baseFrequency="0 0.09"
+                          numOctaves="1" seed="6" result="bandas"/>
+            <feDisplacementMap in="SourceGraphic" in2="bandas" scale="3"
+                               xChannelSelector="R" yChannelSelector="G" result="desp"/>
+            <feOffset in="desp" dx="-1.2" dy="0" result="o1"/>
+            <feColorMatrix in="o1" type="matrix" result="rojo"
+                           values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/>
+            <feOffset in="desp" dx="1.2" dy="0.4" result="o2"/>
+            <feColorMatrix in="o2" type="matrix" result="cian"
+                           values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+            <feBlend in="rojo" in2="cian" mode="screen"/>
+        </filter>
+
+        <!-- glitch fuerte (hover / ráfagas) -->
+        <filter id="ef-glitch" x="-15%" y="-60%" width="130%" height="220%"
+                color-interpolation-filters="sRGB">
+            <feTurbulence type="turbulence" baseFrequency="0 0.09"
+                          numOctaves="1" seed="4" result="bandas">
+                <animate attributeName="seed" calcMode="discrete" dur="0.35s"
+                         values="4;11;7;19;2;15;9;22" repeatCount="indefinite"/>
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="bandas" scale="16"
+                               xChannelSelector="R" yChannelSelector="G" result="desp">
+                <animate attributeName="scale" calcMode="discrete" dur="0.3s"
+                         values="10;24;14;28;12" repeatCount="indefinite"/>
+            </feDisplacementMap>
+            <feOffset in="desp" dx="-4" dy="0" result="o1">
+                <animate attributeName="dx" calcMode="discrete" dur="0.28s"
+                         values="-6;3;-2;5;-5" repeatCount="indefinite"/>
+            </feOffset>
+            <feColorMatrix in="o1" type="matrix" result="rojo"
+                           values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/>
+            <feOffset in="desp" dx="4" dy="1" result="o2">
+                <animate attributeName="dx" calcMode="discrete" dur="0.26s"
+                         values="5;-3;6;-6;2" repeatCount="indefinite"/>
+            </feOffset>
+            <feColorMatrix in="o2" type="matrix" result="cian"
+                           values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+            <feBlend in="rojo" in2="cian" mode="screen"/>
+        </filter>
+    </defs>
+</svg>
 
 <button id="btn-tema" class="btn-tema" type="button"
         title="Modo claro"
@@ -823,7 +1390,16 @@
 
     <!-- ======================= ÍNDICE ======================= -->
     <aside class="indice">
-        <h3>Efectos <span class="contador">119 disponibles</span></h3>
+        <!-- Cada SECCIÓN del índice es un <details>: al pulsarla se
+             despliegan sus categorías y se muestran 12 tarjetas al
+             azar de ESA sección; al abrir otra, la anterior se
+             pliega sola (atributo name + guion del final con
+             JavaScript). Con todas plegadas se ve la vista general:
+             12 tarjetas al azar de ENTRE todas las secciones, SOLO
+             tarjetas (títulos y textos de sección al abrirla). -->
+        <details class="seccion-indice" id="s-css" name="secciones">
+            <summary class="seccion-titulo">Efectos CSS
+                <span class="contador">119 disponibles</span></summary>
 
         <!-- Carpeta de categoría: plegada por defecto; al abrirla se
              despliegan su lista y sus tarjetas (CSS puro, sin JS) -->
@@ -988,13 +1564,57 @@
                 <li data-cat="stalker"><a href="#lazona">☢ La Zona</a></li>
             </ol>
         </details>
+
+        </details>
+
+        <!-- ===== EFECTOS SVG (segunda seccion del navegador) ===== -->
+        <details class="seccion-indice" id="s-svg" name="secciones">
+            <summary class="seccion-titulo">Efectos SVG
+                <span class="contador">3 disponibles</span></summary>
+
+        <details class="grupo" id="g-svg-matrix" data-cat="svg-matrix">
+            <summary class="grupo-titulo">Matrix (SVG) <span class="grupo-n">1</span></summary>
+            <ol class="lista">
+                <li><a href="efectos_svg/Matrix/matrix/index.html">🟩 Matrix</a></li>
+            </ol>
+        </details>
+
+        <details class="grupo" id="g-svg-miscelanea" data-cat="svg-miscelanea">
+            <summary class="grupo-titulo">Miscelánea (SVG) <span class="grupo-n">2</span></summary>
+            <ol class="lista">
+                <li><a href="efectos_svg/miscelanea/mercurio/index.html">💧 Mercurio</a></li>
+                <li><a href="efectos_svg/miscelanea/glitch/index.html">📡 Glitch</a></li>
+            </ol>
+        </details>
+        </details>
+
+        <!-- ===== EFECTOS WEBGL (tercera seccion del navegador) ===== -->
+        <details class="seccion-indice" id="s-webgl" name="secciones">
+            <summary class="seccion-titulo">Efectos WebGL
+                <span class="contador">3 disponibles</span></summary>
+
+        <details class="grupo" id="g-webgl-matrix" data-cat="webgl-matrix">
+            <summary class="grupo-titulo">Matrix (WebGL) <span class="grupo-n">2</span></summary>
+            <ol class="lista">
+                <li><a href="efectos_webgl/Matrix/matrix/index.html">🟢 Matrix</a></li>
+                <li><a href="efectos_webgl/Matrix/matrix2/index.html">🎬 Matrix 2 · CINE</a></li>
+            </ol>
+        </details>
+
+        <details class="grupo" id="g-webgl-miscelanea" data-cat="webgl-miscelanea">
+            <summary class="grupo-titulo">Miscelánea (WebGL) <span class="grupo-n">1</span></summary>
+            <ol class="lista">
+                <li><a href="efectos_webgl/miscelanea/mercurio/index.html">🌡 Mercurio</a></li>
+            </ol>
+        </details>
+        </details>
     </aside>
 
     <!-- ====================== CONTENIDO ====================== -->
     <main class="contenido">
 
         <header class="intro">
-            <h1>🔥 Efectos de texto CSS</h1>
+            <h1>🔥 Efectos CSS</h1>
             <p>
                 Cada tarjeta es una muestra circular del efecto.<br>
                 El botón showcase muestra ejemplos aplicados a textos
@@ -1013,8 +1633,8 @@
                 <span class="efecto-glitch" data-text="GLITCH">GLITCH</span>
             </div>
             <h2 class="c-glitch">⚡ Glitch <small>Interferencia + vibración</small></h2>
-            <a class="btn" href="miscelanea/glitch/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/glitch/glitch.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/glitch/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/glitch/glitch.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-glitch">
                 <div class="gl-banda gl-banda-1"></div>
                 <div class="gl-texto">GLITCH</div>
@@ -1028,8 +1648,8 @@
                 <span class="efecto-arcoiris">ARCOÍRIS</span>
             </div>
             <h2 class="c-arcoiris">🌈 Arcoíris <small>Color en movimiento</small></h2>
-            <a class="btn" href="miscelanea/arcoiris/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/arcoiris/arcoiris.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/arcoiris/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/arcoiris/arcoiris.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-arcoiris">
                 <div class="ar-onda ar-onda-1"></div>
                 <div class="ar-onda ar-onda-2"></div>
@@ -1042,8 +1662,8 @@
                 <span class="efecto-fuego">FUEGO</span>
             </div>
             <h2 class="c-fuego">🔥 Fuego <small>Quemando con parpadeo</small></h2>
-            <a class="btn" href="miscelanea/fuego/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/fuego/fuego.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/fuego/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/fuego/fuego.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-fuego">
                 <div class="fu-bola"></div>
                 <div class="fu-llamas"></div>
@@ -1057,8 +1677,8 @@
                 <span class="efecto-radiacion">RADIACIÓN</span>
             </div>
             <h2 class="c-radiacion">☢️ Radiación <small>Tema S.T.A.L.K.E.R.</small></h2>
-            <a class="btn" href="miscelanea/radiacion/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/radiacion/radiacion.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/radiacion/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/radiacion/radiacion.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-radiacion">
                 <div class="ra-simbolo"></div>
                 <div class="ra-anillo ra-anillo-1"></div>
@@ -1072,8 +1692,8 @@
                 <span class="efecto-nubes">CIELO</span>
             </div>
             <h2 class="c-nubes">☁️ Nubes <small>Cielo con parallax</small></h2>
-            <a class="btn" href="miscelanea/nubes/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/nubes/nubes.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/nubes/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/nubes/nubes.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-nubes">
                 <div class="nu-mini-a"></div>
                 <div class="nu-nube"></div>
@@ -1087,8 +1707,8 @@
                 <span class="efecto-hielo">CONGELADO</span>
             </div>
             <h2 class="c-hielo">🧊 Hielo <small>Escarcha helada</small></h2>
-            <a class="btn" href="miscelanea/hielo/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/hielo/hielo.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/hielo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/hielo/hielo.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-hielo">
                 <div class="hi-copo"></div>
                 <div class="hi-escarcha"></div>
@@ -1101,8 +1721,8 @@
                 <span class="efecto-lava">VULCANO</span>
             </div>
             <h2 class="c-lava">🌋 Lava <small>Corteza volcánica</small></h2>
-            <a class="btn" href="miscelanea/lava/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/lava/lava.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/lava/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/lava/lava.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-lava">
                 <div class="la-magma"></div>
                 <div class="la-chispas"></div>
@@ -1115,8 +1735,8 @@
                 <span class="efecto-holograma">PROYECCIÓN</span>
             </div>
             <h2 class="c-holograma">📟 Holograma <small>Proyección con scanlines</small></h2>
-            <a class="btn" href="miscelanea/holograma/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/holograma/holograma.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/holograma/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/holograma/holograma.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-holograma">
                 <div class="ho-rejilla"></div>
                 <div class="ho-barrido"></div>
@@ -1130,8 +1750,8 @@
                 <span class="efecto-vhs">REC 1994</span>
             </div>
             <h2 class="c-vhs">📼 VHS <small>Cinta de vídeo</small></h2>
-            <a class="btn" href="miscelanea/vhs/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/vhs/vhs.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/vhs/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/vhs/vhs.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-vhs">
                 <div class="vh-banda vh-banda-1"></div>
                 <div class="vh-texto">PLAY ▶</div>
@@ -1145,8 +1765,8 @@
                 <span class="efecto-gelatina">MORDISCO</span>
             </div>
             <h2 class="c-gelatina">🍬 Gelatina <small>Gominola con rebote</small></h2>
-            <a class="btn" href="miscelanea/gelatina/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/gelatina/gelatina.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/gelatina/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/gelatina/gelatina.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-gelatina">
                 <div class="ge-onda ge-onda-1"></div>
                 <div class="ge-bola"></div>
@@ -1160,8 +1780,8 @@
                 <span class="efecto-nebulosa">NEBULOSA</span>
             </div>
             <h2 class="c-nebulosa">🌌 Nebulosa <small>Espacio profundo</small></h2>
-            <a class="btn" href="miscelanea/nebulosa/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/nebulosa/nebulosa.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/nebulosa/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/nebulosa/nebulosa.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-nebulosa">
                 <div class="ne-humo"></div>
                 <div class="ne-estrellas"></div>
@@ -1176,8 +1796,8 @@
                 <span class="efecto-orbita">ORBITA</span>
             </div>
             <h2 class="c-orbita">🪐 Órbita <small>Planeta satélite</small></h2>
-            <a class="btn" href="miscelanea/orbita/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/orbita/orbita.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/orbita/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/orbita/orbita.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-orbita">
                 <div class="or-estrellas"></div>
                 <div class="or-anillo"></div>
@@ -1191,8 +1811,8 @@
                 <span class="efecto-eclipse">ECLIPSE</span>
             </div>
             <h2 class="c-eclipse">🌑 Eclipse <small>Corona eclipsada</small></h2>
-            <a class="btn" href="miscelanea/eclipse/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/eclipse/eclipse.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/eclipse/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/eclipse/eclipse.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-eclipse">
                 <div class="ec-corona"></div>
                 <div class="ec-disco"></div>
@@ -1206,8 +1826,8 @@
                 <span class="efecto-brote">BROTE</span>
             </div>
             <h2 class="c-brote">🌱 Brote <small>Germinación viva</small></h2>
-            <a class="btn" href="miscelanea/brote/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/brote/brote.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/brote/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/brote/brote.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-brote">
                 <div class="br-tierra"></div>
                 <div class="br-tallo"></div>
@@ -1221,8 +1841,8 @@
                 <span class="efecto-viento">VIENTO</span>
             </div>
             <h2 class="c-viento">🍃 Viento <small>Ráfagas y hojas</small></h2>
-            <a class="btn" href="miscelanea/viento/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/viento/viento.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/viento/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/viento/viento.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-viento">
                 <div class="vi-racha vi-racha-1"></div>
                 <div class="vi-racha vi-racha-2"></div>
@@ -1236,8 +1856,8 @@
                 <span class="efecto-marea">MAREA</span>
             </div>
             <h2 class="c-marea">🌊 Marea <small>Sube y baja</small></h2>
-            <a class="btn" href="miscelanea/marea/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/marea/marea.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/marea/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/marea/marea.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-marea">
                 <div class="ma-ola"></div>
                 <div class="ma-espuma"></div>
@@ -1251,8 +1871,8 @@
                 <span class="efecto-corriente">CORRIENTE</span>
             </div>
             <h2 class="c-corriente">💧 Corriente <small>Caústicas de luz</small></h2>
-            <a class="btn" href="miscelanea/corriente/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/corriente/corriente.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/corriente/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/corriente/corriente.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-corriente">
                 <div class="co-rayos"></div>
                 <div class="co-caustica"></div>
@@ -1266,8 +1886,8 @@
                 <span class="efecto-rayo">RAYO</span>
             </div>
             <h2 class="c-rayo">🌩️ Rayo <small>Descarga eléctrica</small></h2>
-            <a class="btn" href="miscelanea/rayo/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/rayo/rayo.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/rayo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/rayo/rayo.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-rayo">
                 <div class="ry-rayo"></div>
                 <div class="ry-rayo2"></div>
@@ -1281,8 +1901,8 @@
                 <span class="efecto-chispa">CHISPA</span>
             </div>
             <h2 class="c-chispa">✨ Chispa <small>Chispas volando</small></h2>
-            <a class="btn" href="miscelanea/chispa/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/chispa/chispa.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/chispa/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/chispa/chispa.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-chispa">
                 <div class="ch-estallido ch-estallido-1"></div>
                 <div class="ch-estallido ch-estallido-2"></div>
@@ -1296,8 +1916,8 @@
                 <span class="efecto-grieta">GRIETA</span>
             </div>
             <h2 class="c-grieta">🗿 Grieta <small>Piedra agrietada</small></h2>
-            <a class="btn" href="miscelanea/grieta/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/grieta/grieta.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/grieta/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/grieta/grieta.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-grieta">
                 <div class="gr-hendidura"></div>
                 <div class="gr-esquirlas"></div>
@@ -1311,8 +1931,8 @@
                 <span class="efecto-gotica" data-text="GÓTICA">GÓTICA</span>
             </div>
             <h2 class="c-gotica">🏰 Gótica <small>Sombras en letra antigua</small></h2>
-            <a class="btn" href="miscelanea/gotica/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="miscelanea/gotica/gotica.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/miscelanea/gotica/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/miscelanea/gotica/gotica.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-gotica">
                 <div class="go-sombra go-sombra-1"></div>
                 <div class="go-resplandor"></div>
@@ -1326,8 +1946,8 @@
                 <span class="efecto-hud">HUD</span>
             </div>
             <h2 class="c-hud">📡 HUD <small>Escáner de agente</small></h2>
-            <a class="btn" href="the_division/hud/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="the_division/hud/hud.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/the_division/hud/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/the_division/hud/hud.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-hud">
                 <div class="hu-brillo"></div>
                 <div class="hu-anel hu-anel-1"></div>
@@ -1342,8 +1962,8 @@
                 <span class="efecto-rogue">ROGUE</span>
             </div>
             <h2 class="c-rogue">🏴 Rogue <small>Estado de agente</small></h2>
-            <a class="btn" href="the_division/rogue/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="the_division/rogue/rogue.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/the_division/rogue/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/the_division/rogue/rogue.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-rogue">
                 <div class="rg-faro"></div>
                 <div class="rg-alerta"></div>
@@ -1357,8 +1977,8 @@
                 <span class="efecto-impacto">CRÍTICO</span>
             </div>
             <h2 class="c-impacto">💥 Impacto <small>Números de daño</small></h2>
-            <a class="btn" href="the_division/impacto/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="the_division/impacto/impacto.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/the_division/impacto/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/the_division/impacto/impacto.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-impacto">
                 <div class="im-floater im-floater-1"></div>
                 <div class="im-floater im-floater-2"></div>
@@ -1372,8 +1992,8 @@
                 <span class="efecto-botin">EXÓTICO</span>
             </div>
             <h2 class="c-botin">💎 Botín <small>Haz legendaria</small></h2>
-            <a class="btn" href="the_division/botin/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="the_division/botin/botin.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/the_division/botin/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/the_division/botin/botin.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-botin">
                 <div class="bt-haz"></div>
                 <div class="bt-oro"></div>
@@ -1387,8 +2007,8 @@
                 <span class="efecto-apagon">APAGÓN</span>
             </div>
             <h2 class="c-apagon">🔌 Apagón <small>Directiva de emergencia</small></h2>
-            <a class="btn" href="the_division/apagon/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="the_division/apagon/apagon.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/the_division/apagon/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/the_division/apagon/apagon.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-apagon">
                 <div class="ap-luz"></div>
                 <div class="ap-sirena"></div>
@@ -1402,8 +2022,8 @@
                 <span class="efecto-abatido">ABATIDO</span>
             </div>
             <h2 class="c-abatido">💓 Abatido <small>Signos vitales</small></h2>
-            <a class="btn" href="the_division/abatido/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="the_division/abatido/abatido.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/the_division/abatido/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/the_division/abatido/abatido.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-abatido">
                 <div class="ab-corazon"></div>
                 <div class="ab-pulso"></div>
@@ -1417,8 +2037,8 @@
                 <span class="efecto-nevada">NIEVE</span>
             </div>
             <h2 class="c-nevada">❄️ Nevada <small>Nieve en Central Park</small></h2>
-            <a class="btn" href="the_division/nevada/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="the_division/nevada/nevada.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/the_division/nevada/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/the_division/nevada/nevada.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-nevada">
                 <div class="nv-capa nv-capa-1"></div>
                 <div class="nv-capa nv-capa-2"></div>
@@ -1432,8 +2052,8 @@
                 <span class="efecto-neon">NEÓN</span>
             </div>
             <h2 class="c-neon">💡 Neón <small>Letrero de calle</small></h2>
-            <a class="btn" href="the_division/neon/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="the_division/neon/neon.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/the_division/neon/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/the_division/neon/neon.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-neon">
                 <div class="nn-letrero"></div>
                 <div class="nn-reflejo"></div>
@@ -1447,8 +2067,8 @@
                 <span class="efecto-blindaje">NIVEL 6</span>
             </div>
             <h2 class="c-blindaje">🛡️ Blindaje <small>Placas de armadura</small></h2>
-            <a class="btn" href="the_division/blindaje/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="the_division/blindaje/blindaje.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/the_division/blindaje/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/the_division/blindaje/blindaje.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-blindaje">
                 <div class="bl-malla"></div>
                 <div class="bl-barrido"></div>
@@ -1462,8 +2082,8 @@
                 <span class="efecto-pulso">PULSO</span>
             </div>
             <h2 class="c-pulso">📶 Pulso <small>Ping de escáner</small></h2>
-            <a class="btn" href="the_division/pulso/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="the_division/pulso/pulso.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/the_division/pulso/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/the_division/pulso/pulso.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-pulso">
                 <div class="pl-anillo pl-anillo-1"></div>
                 <div class="pl-anillo pl-anillo-2"></div>
@@ -1477,8 +2097,8 @@
                 <span class="efecto-bengala">BENGALA</span>
             </div>
             <h2 class="c-bengala">🔦 Bengala <small>Luz de extracción</small></h2>
-            <a class="btn" href="the_division/bengala/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="the_division/bengala/bengala.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/the_division/bengala/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/the_division/bengala/bengala.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-bengala">
                 <div class="bg-humo"></div>
                 <div class="bg-nucleo"></div>
@@ -1492,8 +2112,8 @@
                 <span class="efecto-graffiti">MURAL</span>
             </div>
             <h2 class="c-graffiti">🎨 Graffiti <small>Muro de aerosol</small></h2>
-            <a class="btn" href="the_division/graffiti/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="the_division/graffiti/graffiti.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/the_division/graffiti/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/the_division/graffiti/graffiti.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-graffiti">
                 <div class="gf-salpicadura gf-salpicadura-1"></div>
                 <div class="gf-salpicadura gf-salpicadura-2"></div>
@@ -1507,8 +2127,8 @@
                 <span class="efecto-stencil">SECRETO</span>
             </div>
             <h2 class="c-stencil">🔫 Stencil <small>Orden de misión</small></h2>
-            <a class="btn" href="the_division/stencil/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="the_division/stencil/stencil.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/the_division/stencil/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/the_division/stencil/stencil.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-stencil">
                 <div class="st-cajon"></div>
                 <div class="st-polvo"></div>
@@ -1522,8 +2142,8 @@
                 <span class="efecto-sable">SABLE</span>
             </div>
             <h2 class="c-sable">⚔️ Sable <small>Encendido de sable láser</small></h2>
-            <a class="btn" href="star_wars/sable/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="star_wars/sable/sable.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/star_wars/sable/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/star_wars/sable/sable.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-sable">
                 <div class="sa-hoja sa-hoja-1"></div>
                 <div class="sa-hoja sa-hoja-2"></div>
@@ -1537,8 +2157,8 @@
                 <span class="efecto-fuerza">FUERZA</span>
             </div>
             <h2 class="c-fuerza">🌀 Fuerza <small>La Fuerza te acompaña</small></h2>
-            <a class="btn" href="star_wars/fuerza/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="star_wars/fuerza/fuerza.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/star_wars/fuerza/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/star_wars/fuerza/fuerza.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-fuerza">
                 <div class="fu-anillo fu-anillo-1"></div>
                 <div class="fu-anillo fu-anillo-2"></div>
@@ -1552,8 +2172,8 @@
                 <span class="efecto-hiperespacio">HIPER</span>
             </div>
             <h2 class="c-hiperespacio">🚀 Hiperespacio <small>Salto a velocidad luz</small></h2>
-            <a class="btn" href="star_wars/hiperespacio/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="star_wars/hiperespacio/hiperespacio.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/star_wars/hiperespacio/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/star_wars/hiperespacio/hiperespacio.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-hiperespacio">
                 <div class="hi-estelas"></div>
                 <div class="hi-rastro"></div>
@@ -1567,8 +2187,8 @@
                 <span class="efecto-estrellas">ESTRELLAS</span>
             </div>
             <h2 class="c-estrellas">✨ Estrellas <small>Campo estelar</small></h2>
-            <a class="btn" href="star_wars/estrellas/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="star_wars/estrellas/estrellas.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/star_wars/estrellas/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/star_wars/estrellas/estrellas.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-estrellas">
                 <div class="es-campo es-campo-1"></div>
                 <div class="es-campo es-campo-2"></div>
@@ -1582,8 +2202,8 @@
                 <span class="efecto-torpedo">PEW</span>
             </div>
             <h2 class="c-torpedo">🔴 Torpedo <small>Rayo de bláster</small></h2>
-            <a class="btn" href="star_wars/torpedo/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="star_wars/torpedo/torpedo.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/star_wars/torpedo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/star_wars/torpedo/torpedo.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-torpedo">
                 <div class="to-rayo to-rayo-1"></div>
                 <div class="to-rayo to-rayo-2"></div>
@@ -1597,8 +2217,8 @@
                 <span class="efecto-respiracion">VADER</span>
             </div>
             <h2 class="c-respiracion">😷 Respiración <small>El lado oscuro</small></h2>
-            <a class="btn" href="star_wars/respiracion/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="star_wars/respiracion/respiracion.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/star_wars/respiracion/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/star_wars/respiracion/respiracion.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-respiracion">
                 <div class="rs-latido"></div>
                 <div class="rs-slit"></div>
@@ -1612,8 +2232,8 @@
                 <span class="efecto-dunas">TATOOINE</span>
             </div>
             <h2 class="c-dunas">🏜️ Dunas <small>Espejismo de Tatooine</small></h2>
-            <a class="btn" href="star_wars/dunas/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="star_wars/dunas/dunas.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/star_wars/dunas/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/star_wars/dunas/dunas.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-dunas">
                 <div class="du-soles"></div>
                 <div class="du-arena"></div>
@@ -1627,8 +2247,8 @@
                 <span class="efecto-carbono">CARBONITA</span>
             </div>
             <h2 class="c-carbono">🧊 Carbono <small>Congelado en carbonita</small></h2>
-            <a class="btn" href="star_wars/carbono/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="star_wars/carbono/carbono.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/star_wars/carbono/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/star_wars/carbono/carbono.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-carbono">
                 <div class="ca-placa"></div>
                 <div class="ca-brillo"></div>
@@ -1642,8 +2262,8 @@
                 <span class="efecto-superlaser">DISPARO</span>
             </div>
             <h2 class="c-superlaser">🟢 Superláser <small>Estación de la Muerte</small></h2>
-            <a class="btn" href="star_wars/superlaser/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="star_wars/superlaser/superlaser.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/star_wars/superlaser/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/star_wars/superlaser/superlaser.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-superlaser">
                 <div class="sl-haz"></div>
                 <div class="sl-carga"></div>
@@ -1657,8 +2277,8 @@
                 <span class="efecto-clon">×2</span>
             </div>
             <h2 class="c-clon">👥 Clon <small>Ejército de copias</small></h2>
-            <a class="btn" href="star_wars/clon/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="star_wars/clon/clon.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/star_wars/clon/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/star_wars/clon/clon.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-clon">
                 <div class="cl-marca cl-marca-1"></div>
                 <div class="cl-marca cl-marca-2"></div>
@@ -1672,8 +2292,8 @@
                 <span class="efecto-apuntar">BLK</span>
             </div>
             <h2 class="c-apuntar">🎯 Apuntar <small>Ordenador de puntería</small></h2>
-            <a class="btn" href="star_wars/apuntar/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="star_wars/apuntar/apuntar.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/star_wars/apuntar/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/star_wars/apuntar/apuntar.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-apuntar">
                 <div class="ap-marca"></div>
                 <div class="ap-punto"></div>
@@ -1687,8 +2307,8 @@
                 <span class="efecto-espiritu">ONE WITH THE FORCE</span>
             </div>
             <h2 class="c-espiritu">👻 Espíritu <small>El espíritu de la Fuerza</small></h2>
-            <a class="btn" href="star_wars/espiritu/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="star_wars/espiritu/espiritu.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/star_wars/espiritu/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/star_wars/espiritu/espiritu.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-espiritu">
                 <div class="es-aura"></div>
                 <div class="es-motas"></div>
@@ -1702,8 +2322,8 @@
                 <span class="efecto-rebelion">ALIANZA</span>
             </div>
             <h2 class="c-rebelion">⭐ Rebelión <small>Alianza Rebelde</small></h2>
-            <a class="btn" href="star_wars/rebelion/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="star_wars/rebelion/rebelion.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/star_wars/rebelion/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/star_wars/rebelion/rebelion.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-rebelion">
                 <div class="rb-banda"></div>
                 <div class="rb-estrella rb-estrella-1"></div>
@@ -1718,8 +2338,8 @@
                 <span class="efecto-codigo">MATRIX</span>
             </div>
             <h2 class="c-codigo">💻 Código <small>Lluvia binaria</small></h2>
-            <a class="btn" href="matrix/codigo/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="matrix/codigo/codigo.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/matrix/codigo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/matrix/codigo/codigo.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-codigo">
                 <div class="cg-lluvia cg-lluvia-1"></div>
                 <div class="cg-lluvia cg-lluvia-2"></div>
@@ -1733,8 +2353,8 @@
                 <span class="efecto-pildora">ELIGE</span>
             </div>
             <h2 class="c-pildora">💊 Píldora <small>Roja o azul</small></h2>
-            <a class="btn" href="matrix/pildora/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="matrix/pildora/pildora.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/matrix/pildora/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/matrix/pildora/pildora.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-pildora">
                 <div class="pd-roja"></div>
                 <div class="pd-azul"></div>
@@ -1748,8 +2368,8 @@
                 <span class="efecto-cuchara">CUCHARA</span>
             </div>
             <h2 class="c-cuchara">🪛 Cuchara <small>No hay cuchara</small></h2>
-            <a class="btn" href="matrix/cuchara/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="matrix/cuchara/cuchara.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/matrix/cuchara/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/matrix/cuchara/cuchara.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-cuchara">
                 <div class="cu-acero"></div>
                 <div class="cu-mesa"></div>
@@ -1763,8 +2383,8 @@
                 <span class="efecto-dejavu">OTRA VEZ</span>
             </div>
             <h2 class="c-dejavu">🐈 DejaVu <small>El gato negro</small></h2>
-            <a class="btn" href="matrix/dejavu/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="matrix/dejavu/dejavu.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/matrix/dejavu/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/matrix/dejavu/dejavu.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-dejavu">
                 <div class="dv-eco"></div>
                 <div class="dv-ojos"></div>
@@ -1778,8 +2398,8 @@
                 <span class="efecto-agente">AGENTE</span>
             </div>
             <h2 class="c-agente">😎 Agente <small>El agente toma el control</small></h2>
-            <a class="btn" href="matrix/agente/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="matrix/agente/agente.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/matrix/agente/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/matrix/agente/agente.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-agente">
                 <div class="ae-gris"></div>
                 <div class="ae-reflejo"></div>
@@ -1793,8 +2413,8 @@
                 <span class="efecto-espejo">ESPEJO</span>
             </div>
             <h2 class="c-espejo">🪞 Espejo líquido <small>Entrar en el espejo</small></h2>
-            <a class="btn" href="matrix/espejo/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="matrix/espejo/espejo.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/matrix/espejo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/matrix/espejo/espejo.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-espejo">
                 <div class="ep-onda"></div>
                 <div class="ep-plata"></div>
@@ -1808,8 +2428,8 @@
                 <span class="efecto-tiempo">LENTO</span>
             </div>
             <h2 class="c-tiempo">⏱️ Tiempo bala <small>Bala en cámara lenta</small></h2>
-            <a class="btn" href="matrix/tiempo/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="matrix/tiempo/tiempo.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/matrix/tiempo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/matrix/tiempo/tiempo.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-tiempo">
                 <div class="tp-rastro"></div>
                 <div class="tp-bala"></div>
@@ -1823,8 +2443,8 @@
                 <span class="efecto-dodge">ESQUIVA</span>
             </div>
             <h2 class="c-dodge">🎯 Dodge <small>Esquivar las balas</small></h2>
-            <a class="btn" href="matrix/dodge/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="matrix/dodge/dodge.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/matrix/dodge/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/matrix/dodge/dodge.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-dodge">
                 <div class="dg-estela"></div>
                 <div class="dg-marca"></div>
@@ -1838,8 +2458,8 @@
                 <span class="efecto-mundo">MUNDO</span>
             </div>
             <h2 class="c-mundo">🌍 Mundo tiembla <small>El mundo se descompone</small></h2>
-            <a class="btn" href="matrix/mundo/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="matrix/mundo/mundo.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/matrix/mundo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/matrix/mundo/mundo.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-mundo">
                 <div class="mo-rejilla"></div>
                 <div class="mo-rojo"></div>
@@ -1853,8 +2473,8 @@
                 <span class="efecto-oracle">GALLETA</span>
             </div>
             <h2 class="c-oracle">🍪 Oracle <small>La galleta</small></h2>
-            <a class="btn" href="matrix/oracle/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="matrix/oracle/oracle.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/matrix/oracle/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/matrix/oracle/oracle.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-oracle">
                 <div class="oc-luz"></div>
                 <div class="oc-humo"></div>
@@ -1868,8 +2488,8 @@
                 <span class="efecto-desconexion">SIN SEÑAL</span>
             </div>
             <h2 class="c-desconexion">🔌 Desconexión <small>Se cae la señal</small></h2>
-            <a class="btn" href="matrix/desconexion/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="matrix/desconexion/desconexion.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/matrix/desconexion/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/matrix/desconexion/desconexion.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-desconexion">
                 <div class="ds-linea"></div>
                 <div class="ds-ruido"></div>
@@ -1883,8 +2503,8 @@
                 <span class="efecto-conejo">CONEJO</span>
             </div>
             <h2 class="c-conejo">🐰 Conejo blanco <small>Sigue al conejo</small></h2>
-            <a class="btn" href="matrix/conejo/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="matrix/conejo/conejo.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/matrix/conejo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/matrix/conejo/conejo.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-conejo">
                 <div class="cj-ruta"></div>
                 <div class="cj-destello"></div>
@@ -1898,8 +2518,8 @@
                 <span class="efecto-poder">DESPIERTA</span>
             </div>
             <h2 class="c-poder">💫 Poder <small>Despierta el poder</small></h2>
-            <a class="btn" href="matrix/poder/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="matrix/poder/poder.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/matrix/poder/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/matrix/poder/poder.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-poder">
                 <div class="pw-hazo"></div>
                 <div class="pw-anillo"></div>
@@ -1913,8 +2533,8 @@
                 <span class="efecto-sentinela">CENTINELA</span>
             </div>
             <h2 class="c-sentinela">👀 Sentinela <small>Ojo rojo de centinela</small></h2>
-            <a class="btn" href="matrix/sentinela/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="matrix/sentinela/sentinela.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/matrix/sentinela/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/matrix/sentinela/sentinela.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-sentinela">
                 <div class="sn-ojo"></div>
                 <div class="sn-barrido"></div>
@@ -1928,8 +2548,8 @@
                 <span class="efecto-filo">FILO</span>
             </div>
             <h2 class="c-filo">🔪 Filo <small>Barra de filo</small></h2>
-            <a class="btn" href="monster_hunter/filo/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="monster_hunter/filo/filo.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/monster_hunter/filo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/monster_hunter/filo/filo.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-filo">
                 <div class="fl-filo"></div>
                 <div class="fl-chispa"></div>
@@ -1943,8 +2563,8 @@
                 <span class="efecto-emblema">BLASÓN</span>
             </div>
             <h2 class="c-emblema">🏅 Emblema <small>Blasón del cazador</small></h2>
-            <a class="btn" href="monster_hunter/emblema/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="monster_hunter/emblema/emblema.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/monster_hunter/emblema/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/monster_hunter/emblema/emblema.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-emblema">
                 <div class="em-marco"></div>
                 <div class="em-laurel"></div>
@@ -1958,8 +2578,8 @@
                 <span class="efecto-salud">SALUD</span>
             </div>
             <h2 class="c-salud">💚 Salud <small>La barra baja</small></h2>
-            <a class="btn" href="monster_hunter/salud/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="monster_hunter/salud/salud.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/monster_hunter/salud/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/monster_hunter/salud/salud.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-salud">
                 <div class="sd-barra"></div>
                 <div class="sd-latido"></div>
@@ -1973,8 +2593,8 @@
                 <span class="efecto-rugido">RUGIDO</span>
             </div>
             <h2 class="c-rugido">🦁 Rugido <small>Rugido de bestia</small></h2>
-            <a class="btn" href="monster_hunter/rugido/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="monster_hunter/rugido/rugido.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/monster_hunter/rugido/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/monster_hunter/rugido/rugido.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-rugido">
                 <div class="ru-onda ru-onda-1"></div>
                 <div class="ru-onda ru-onda-2"></div>
@@ -1988,8 +2608,8 @@
                 <span class="efecto-garras">GARRAS</span>
             </div>
             <h2 class="c-garras">🐾 Garras <small>Zarpazo</small></h2>
-            <a class="btn" href="monster_hunter/garras/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="monster_hunter/garras/garras.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/monster_hunter/garras/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/monster_hunter/garras/garras.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-garras">
                 <div class="ga-tajos"></div>
                 <div class="ga-golpe"></div>
@@ -2003,8 +2623,8 @@
                 <span class="efecto-escamas">ESCAMAS</span>
             </div>
             <h2 class="c-escamas">🐉 Escamas <small>Coraza de escamas</small></h2>
-            <a class="btn" href="monster_hunter/escamas/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="monster_hunter/escamas/escamas.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/monster_hunter/escamas/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/monster_hunter/escamas/escamas.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-escamas">
                 <div class="sc-malla"></div>
                 <div class="sc-brillo"></div>
@@ -2018,8 +2638,8 @@
                 <span class="efecto-veneno">VENENO</span>
             </div>
             <h2 class="c-veneno">💀 Veneno <small>Estado de veneno</small></h2>
-            <a class="btn" href="monster_hunter/veneno/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="monster_hunter/veneno/veneno.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/monster_hunter/veneno/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/monster_hunter/veneno/veneno.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-veneno">
                 <div class="vn-burbujas"></div>
                 <div class="vn-nube"></div>
@@ -2033,8 +2653,8 @@
                 <span class="efecto-paralisis">PARÁLISIS</span>
             </div>
             <h2 class="c-paralisis">⚡ Parálisis <small>Parálisis eléctrica</small></h2>
-            <a class="btn" href="monster_hunter/paralisis/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="monster_hunter/paralisis/paralisis.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/monster_hunter/paralisis/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/monster_hunter/paralisis/paralisis.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-paralisis">
                 <div class="pa-chispa"></div>
                 <div class="pa-destello"></div>
@@ -2048,8 +2668,8 @@
                 <span class="efecto-fauces">FAUCES</span>
             </div>
             <h2 class="c-fauces">🦷 Fauces <small>Mordida</small></h2>
-            <a class="btn" href="monster_hunter/fauces/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="monster_hunter/fauces/fauces.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/monster_hunter/fauces/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/monster_hunter/fauces/fauces.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-fauces">
                 <div class="fc-fauces"></div>
                 <div class="fc-osamenta"></div>
@@ -2063,8 +2683,8 @@
                 <span class="efecto-barro">BARRO</span>
             </div>
             <h2 class="c-barro">💧 Barro <small>Fango</small></h2>
-            <a class="btn" href="monster_hunter/barro/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="monster_hunter/barro/barro.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/monster_hunter/barro/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/monster_hunter/barro/barro.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-barro">
                 <div class="bo-charco"></div>
                 <div class="bo-copos"></div>
@@ -2078,8 +2698,8 @@
                 <span class="efecto-wirebug">WIREBUG</span>
             </div>
             <h2 class="c-wirebug">🪲 Wirebug <small>Seda del wirebug</small></h2>
-            <a class="btn" href="monster_hunter/wirebug/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="monster_hunter/wirebug/wirebug.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/monster_hunter/wirebug/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/monster_hunter/wirebug/wirebug.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-wirebug">
                 <div class="wb-hilo"></div>
                 <div class="wb-luz"></div>
@@ -2093,8 +2713,8 @@
                 <span class="efecto-palico">PALICO</span>
             </div>
             <h2 class="c-palico">🐱 Palico <small>Ayudante felino</small></h2>
-            <a class="btn" href="monster_hunter/palico/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="monster_hunter/palico/palico.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/monster_hunter/palico/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/monster_hunter/palico/palico.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-palico">
                 <div class="pc-manos"></div>
                 <div class="pc-garras"></div>
@@ -2108,8 +2728,8 @@
                 <span class="efecto-forja">FORJA</span>
             </div>
             <h2 class="c-forja">🔨 Forja <small>El yunque</small></h2>
-            <a class="btn" href="monster_hunter/forja/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="monster_hunter/forja/forja.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/monster_hunter/forja/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/monster_hunter/forja/forja.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-forja">
                 <div class="fj-brasa"></div>
                 <div class="fj-chispas"></div>
@@ -2123,8 +2743,8 @@
                 <span class="efecto-caza">CAZA</span>
             </div>
             <h2 class="c-caza">🎯 Caza <small>Señalizar al monstruo</small></h2>
-            <a class="btn" href="monster_hunter/caza/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="monster_hunter/caza/caza.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/monster_hunter/caza/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/monster_hunter/caza/caza.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-caza">
                 <div class="cz-reticula"></div>
                 <div class="cz-barrido"></div>
@@ -2138,8 +2758,8 @@
                 <span class="efecto-sigilo">SIGILO</span>
             </div>
             <h2 class="c-sigilo">👁️ Sigilo <small>A la sombra</small></h2>
-            <a class="btn" href="monster_hunter/sigilo/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="monster_hunter/sigilo/sigilo.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/monster_hunter/sigilo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/monster_hunter/sigilo/sigilo.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-sigilo">
                 <div class="sg-sombra"></div>
                 <div class="sg-ojo"></div>
@@ -2153,8 +2773,8 @@
                 <span class="efecto-sueno">SUEÑO</span>
             </div>
             <h2 class="c-sueno">😴 Sueño <small>Estado de sueño</small></h2>
-            <a class="btn" href="monster_hunter/sueno/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="monster_hunter/sueno/sueno.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/monster_hunter/sueno/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/monster_hunter/sueno/sueno.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-sueno">
                 <div class="so-zetas"></div>
                 <div class="so-nube"></div>
@@ -2168,8 +2788,8 @@
                 <span class="efecto-embestida">EMBESTIDA</span>
             </div>
             <h2 class="c-embestida">🐅 Embestida <small>El embate</small></h2>
-            <a class="btn" href="monster_hunter/embestida/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="monster_hunter/embestida/embestida.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/monster_hunter/embestida/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/monster_hunter/embestida/embestida.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-embestida">
                 <div class="eb-estelas"></div>
                 <div class="eb-impacto"></div>
@@ -2183,8 +2803,8 @@
                 <span class="efecto-bestia">BESTIA</span>
             </div>
             <h2 class="c-bestia">🐲 Bestia <small>La bestia despierta</small></h2>
-            <a class="btn" href="monster_hunter/bestia/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="monster_hunter/bestia/bestia.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/monster_hunter/bestia/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/monster_hunter/bestia/bestia.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-bestia">
                 <div class="bs-ojo"></div>
                 <div class="bs-piel"></div>
@@ -2198,8 +2818,8 @@
                 <span class="efecto-gryffindor">GRYFFINDOR</span>
             </div>
             <h2 class="c-gryffindor">🦁 Gryffindor <small>Oro y escarlata</small></h2>
-            <a class="btn" href="harry_potter/gryffindor/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="harry_potter/gryffindor/gryffindor.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/harry_potter/gryffindor/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/harry_potter/gryffindor/gryffindor.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-gryffindor">
                 <div class="hp-gry-destello"></div>
                 <div class="hp-gry-motas"></div>
@@ -2213,8 +2833,8 @@
                 <span class="efecto-hufflepuff">HUFFLEPUFF</span>
             </div>
             <h2 class="c-hufflepuff">🦡 Hufflepuff <small>Miel y lealtad</small></h2>
-            <a class="btn" href="harry_potter/hufflepuff/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="harry_potter/hufflepuff/hufflepuff.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/harry_potter/hufflepuff/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/harry_potter/hufflepuff/hufflepuff.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-hufflepuff">
                 <div class="hp-huf-panal"></div>
                 <div class="hp-huf-polvo"></div>
@@ -2228,8 +2848,8 @@
                 <span class="efecto-ravenclaw">RAVENCLAW</span>
             </div>
             <h2 class="c-ravenclaw">🦅 Ravenclaw <small>Azul y bronce</small></h2>
-            <a class="btn" href="harry_potter/ravenclaw/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="harry_potter/ravenclaw/ravenclaw.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/harry_potter/ravenclaw/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/harry_potter/ravenclaw/ravenclaw.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-ravenclaw">
                 <div class="hp-rav-estela hp-rav-estela-1"></div>
                 <div class="hp-rav-estela hp-rav-estela-2"></div>
@@ -2243,8 +2863,8 @@
                 <span class="efecto-slytherin">SLYTHERIN</span>
             </div>
             <h2 class="c-slytherin">🐍 Slytherin <small>Esmeralda y plata</small></h2>
-            <a class="btn" href="harry_potter/slytherin/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="harry_potter/slytherin/slytherin.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/harry_potter/slytherin/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/harry_potter/slytherin/slytherin.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-slytherin">
                 <div class="hp-sly-serpiente"></div>
                 <div class="hp-sly-brillo"></div>
@@ -2258,8 +2878,8 @@
                 <span class="efecto-patronus">PATRONO</span>
             </div>
             <h2 class="c-patronus">🦌 Patronus <small>Plata de guardián</small></h2>
-            <a class="btn" href="harry_potter/patronus/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="harry_potter/patronus/patronus.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/harry_potter/patronus/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/harry_potter/patronus/patronus.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-patronus">
                 <div class="hp-pat-niebla"></div>
                 <div class="hp-pat-destello"></div>
@@ -2273,8 +2893,8 @@
                 <span class="efecto-plataforma">PLATAFORMA 9¾</span>
             </div>
             <h2 class="c-plataforma">🚂 Plataforma <small>9¾ y ladrillo</small></h2>
-            <a class="btn" href="harry_potter/plataforma/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="harry_potter/plataforma/plataforma.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/harry_potter/plataforma/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/harry_potter/plataforma/plataforma.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-plataforma">
                 <div class="hp-pla-vapor"></div>
                 <div class="hp-pla-tren"></div>
@@ -2288,8 +2908,8 @@
                 <span class="efecto-snitch">SNITCH</span>
             </div>
             <h2 class="c-snitch">🏅 Snitch <small>Oro de ala</small></h2>
-            <a class="btn" href="harry_potter/snitch/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="harry_potter/snitch/snitch.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/harry_potter/snitch/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/harry_potter/snitch/snitch.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-snitch">
                 <div class="hp-sni-estela"></div>
                 <div class="hp-sni-centella"></div>
@@ -2303,8 +2923,8 @@
                 <span class="efecto-varita">VARITA</span>
             </div>
             <h2 class="c-varita">🪄 Varita <small>Chispa de hechizo</small></h2>
-            <a class="btn" href="harry_potter/varita/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="harry_potter/varita/varita.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/harry_potter/varita/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/harry_potter/varita/varita.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-varita">
                 <div class="hp-var-chispa"></div>
                 <div class="hp-var-rastro"></div>
@@ -2318,8 +2938,8 @@
                 <span class="efecto-pocion">POCIÓN</span>
             </div>
             <h2 class="c-pocion">🧪 Poción <small>Brebaje hirviente</small></h2>
-            <a class="btn" href="harry_potter/pocion/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="harry_potter/pocion/pocion.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/harry_potter/pocion/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/harry_potter/pocion/pocion.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-pocion">
                 <div class="hp-poc-burbuja"></div>
                 <div class="hp-poc-espuma"></div>
@@ -2333,8 +2953,8 @@
                 <span class="efecto-arena">ARENA</span>
             </div>
             <h2 class="c-arena">⏳ Arena <small>Reloj de Arena</small></h2>
-            <a class="btn" href="harry_potter/arena/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="harry_potter/arena/arena.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/harry_potter/arena/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/harry_potter/arena/arena.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-arena">
                 <div class="hp-are-hilo"></div>
                 <div class="hp-are-grano"></div>
@@ -2348,8 +2968,8 @@
                 <span class="efecto-capa">CAPA</span>
             </div>
             <h2 class="c-capa">🥷 Capa <small>Capa de Invisibilidad</small></h2>
-            <a class="btn" href="harry_potter/capa/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="harry_potter/capa/capa.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/harry_potter/capa/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/harry_potter/capa/capa.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-capa">
                 <div class="hp-cap-pliegue"></div>
                 <div class="hp-cap-mota"></div>
@@ -2363,8 +2983,8 @@
                 <span class="efecto-pluma">PLUMA</span>
             </div>
             <h2 class="c-pluma">✒️ Pluma <small>Pluma de Tinta</small></h2>
-            <a class="btn" href="harry_potter/pluma/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="harry_potter/pluma/pluma.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/harry_potter/pluma/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/harry_potter/pluma/pluma.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-pluma">
                 <div class="hp-plu-trazo"></div>
                 <div class="hp-plu-gota"></div>
@@ -2378,8 +2998,8 @@
                 <span class="efecto-habas">HABAS</span>
             </div>
             <h2 class="c-habas">🍬 Habas <small>Habas de Todos los Sabores</small></h2>
-            <a class="btn" href="harry_potter/habas/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="harry_potter/habas/habas.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/harry_potter/habas/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/harry_potter/habas/habas.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-habas">
                 <div class="hp-hab-grano"></div>
                 <div class="hp-hab-azucar"></div>
@@ -2393,8 +3013,8 @@
                 <span class="efecto-sello">SELLO</span>
             </div>
             <h2 class="c-sello">📛 Sello <small>Lacre Carmesí</small></h2>
-            <a class="btn" href="harry_potter/sello/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="harry_potter/sello/sello.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/harry_potter/sello/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/harry_potter/sello/sello.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-sello">
                 <div class="hp-sel-lacre"></div>
                 <div class="hp-sel-anillo"></div>
@@ -2408,8 +3028,8 @@
                 <span class="efecto-sapo">SAPO</span>
             </div>
             <h2 class="c-sapo">🐸 Sapo <small>Sapo de Chocolate</small></h2>
-            <a class="btn" href="harry_potter/sapo/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="harry_potter/sapo/sapo.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/harry_potter/sapo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/harry_potter/sapo/sapo.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-sapo">
                 <div class="hp-sap-polvo"></div>
                 <div class="hp-sap-sombra"></div>
@@ -2423,8 +3043,8 @@
                 <span class="efecto-boggart">BOGGART</span>
             </div>
             <h2 class="c-boggart">🚪 Boggart <small>Sombra Cambiante</small></h2>
-            <a class="btn" href="harry_potter/boggart/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="harry_potter/boggart/boggart.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/harry_potter/boggart/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/harry_potter/boggart/boggart.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-boggart">
                 <div class="hp-bog-sombra"></div>
                 <div class="hp-bog-ojos"></div>
@@ -2438,8 +3058,8 @@
                 <span class="efecto-polvo">POLVO</span>
             </div>
             <h2 class="c-polvo">🌀 Polvo <small>Polvo de Floo</small></h2>
-            <a class="btn" href="harry_potter/polvo/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="harry_potter/polvo/polvo.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/harry_potter/polvo/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/harry_potter/polvo/polvo.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-polvo">
                 <div class="hp-pol-voluta"></div>
                 <div class="hp-pol-chispa"></div>
@@ -2453,8 +3073,8 @@
                 <span class="efecto-azkaban">AZKABAN</span>
             </div>
             <h2 class="c-azkaban">🔒 Azkaban <small>Entre Rejas</small></h2>
-            <a class="btn" href="harry_potter/azkaban/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="harry_potter/azkaban/azkaban.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/harry_potter/azkaban/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/harry_potter/azkaban/azkaban.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-azkaban">
                 <div class="hp-azk-reja"></div>
                 <div class="hp-azk-niebla"></div>
@@ -2468,8 +3088,8 @@
                 <span class="efecto-profecia">PROFECIA</span>
             </div>
             <h2 class="c-profecia">🔮 Profecía <small>Bola de Niebla</small></h2>
-            <a class="btn" href="harry_potter/profecia/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="harry_potter/profecia/profecia.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/harry_potter/profecia/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/harry_potter/profecia/profecia.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-profecia">
                 <div class="hp-pro-bruma"></div>
                 <div class="hp-pro-eco"></div>
@@ -2483,8 +3103,8 @@
                 <span class="efecto-pensieve">PENSIEVE</span>
             </div>
             <h2 class="c-pensieve">🌊 Pensieve <small>Memoria Plateada</small></h2>
-            <a class="btn" href="harry_potter/pensieve/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="harry_potter/pensieve/pensieve.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/harry_potter/pensieve/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/harry_potter/pensieve/pensieve.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-pensieve">
                 <div class="hp-pen-onda"></div>
                 <div class="hp-pen-hilo"></div>
@@ -2498,8 +3118,8 @@
                 <span class="efecto-solitarios">SOLITARIOS</span>
             </div>
             <h2 class="c-solitarios">🎒 Solitarios <small>Polvo y caminos</small></h2>
-            <a class="btn" href="stalker/solitarios/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="stalker/solitarios/solitarios.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/stalker/solitarios/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/stalker/solitarios/solitarios.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-solitarios">
                 <div class="stk-sol-linterna"></div>
                 <div class="stk-sol-motas"></div>
@@ -2513,8 +3133,8 @@
                 <span class="efecto-deber">DEBER</span>
             </div>
             <h2 class="c-deber">🛡 Deber <small>Orden y contención</small></h2>
-            <a class="btn" href="stalker/deber/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="stalker/deber/deber.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/stalker/deber/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/stalker/deber/deber.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-deber">
                 <div class="stk-deb-guardia"></div>
                 <div class="stk-deb-latido"></div>
@@ -2528,8 +3148,8 @@
                 <span class="efecto-libertad">LIBERTAD</span>
             </div>
             <h2 class="c-libertad">🌿 Libertad <small>Verde y sin jefe</small></h2>
-            <a class="btn" href="stalker/libertad/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="stalker/libertad/libertad.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/stalker/libertad/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/stalker/libertad/libertad.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-libertad">
                 <div class="stk-lib-humo"></div>
                 <div class="stk-lib-mota"></div>
@@ -2543,8 +3163,8 @@
                 <span class="efecto-cielodespejado">CIELO DESPEJADO</span>
             </div>
             <h2 class="c-cielodespejado">🌤 Cielo Despejado <small>Horizonte despejado</small></h2>
-            <a class="btn" href="stalker/cielodespejado/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="stalker/cielodespejado/cielodespejado.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/stalker/cielodespejado/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/stalker/cielodespejado/cielodespejado.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-cielodespejado">
                 <div class="stk-cie-nube"></div>
                 <div class="stk-cie-estela"></div>
@@ -2558,8 +3178,8 @@
                 <span class="efecto-bandidos">BANDIDOS</span>
             </div>
             <h2 class="c-bandidos">💀 Bandidos <small>Cero escrúpulos</small></h2>
-            <a class="btn" href="stalker/bandidos/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="stalker/bandidos/bandidos.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/stalker/bandidos/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/stalker/bandidos/bandidos.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-bandidos">
                 <div class="stk-ban-temblo"></div>
                 <div class="stk-ban-humo"></div>
@@ -2573,8 +3193,8 @@
                 <span class="efecto-mercenarios">MERCENARIOS</span>
             </div>
             <h2 class="c-mercenarios">🎯 Mercenarios <small>Punto en la mira</small></h2>
-            <a class="btn" href="stalker/mercenarios/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="stalker/mercenarios/mercenarios.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/stalker/mercenarios/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/stalker/mercenarios/mercenarios.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-mercenarios">
                 <div class="stk-mer-reticula"></div>
                 <div class="stk-mer-trazadora"></div>
@@ -2588,8 +3208,8 @@
                 <span class="efecto-militares">MILITARES</span>
             </div>
             <h2 class="c-militares">🪖 Militares <small>Uniforme y celo</small></h2>
-            <a class="btn" href="stalker/militares/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="stalker/militares/militares.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/stalker/militares/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/stalker/militares/militares.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-militares">
                 <div class="stk-mil-faro"></div>
                 <div class="stk-mil-camo"></div>
@@ -2603,8 +3223,8 @@
                 <span class="efecto-ecologistas">ECOLOGISTAS</span>
             </div>
             <h2 class="c-ecologistas">🧪 Ecologistas <small>Ciencia con bata</small></h2>
-            <a class="btn" href="stalker/ecologistas/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="stalker/ecologistas/ecologistas.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/stalker/ecologistas/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/stalker/ecologistas/ecologistas.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-ecologistas">
                 <div class="stk-eco-barrido"></div>
                 <div class="stk-eco-gota"></div>
@@ -2618,8 +3238,8 @@
                 <span class="efecto-monolito">MONOLITO</span>
             </div>
             <h2 class="c-monolito">🗿 Monolito <small>Psi y piedra blanca</small></h2>
-            <a class="btn" href="stalker/monolito/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="stalker/monolito/monolito.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/stalker/monolito/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/stalker/monolito/monolito.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-monolito">
                 <div class="stk-mon-halo"></div>
                 <div class="stk-mon-anillo"></div>
@@ -2633,8 +3253,8 @@
                 <span class="efecto-renegados">RENEGADOS</span>
             </div>
             <h2 class="c-renegados">🏴 Renegados <small>Cisma y herrumbre</small></h2>
-            <a class="btn" href="stalker/renegados/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="stalker/renegados/renegados.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/stalker/renegados/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/stalker/renegados/renegados.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-renegados">
                 <div class="stk-ren-goteo"></div>
                 <div class="stk-ren-pintura"></div>
@@ -2648,8 +3268,8 @@
                 <span class="efecto-pecado">PECADO</span>
             </div>
             <h2 class="c-pecado">☦ Pecado <small>Ascua y confessionario</small></h2>
-            <a class="btn" href="stalker/pecado/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="stalker/pecado/pecado.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/stalker/pecado/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/stalker/pecado/pecado.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-pecado">
                 <div class="stk-pec-velo"></div>
                 <div class="stk-pec-brasa"></div>
@@ -2663,8 +3283,8 @@
                 <span class="efecto-unisg">UNISG</span>
             </div>
             <h2 class="c-unisg">🔬 UNISG <small>Informe sin alma</small></h2>
-            <a class="btn" href="stalker/unisg/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="stalker/unisg/unisg.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/stalker/unisg/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/stalker/unisg/unisg.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-unisg">
                 <div class="stk-uni-marco"></div>
                 <div class="stk-uni-linea"></div>
@@ -2678,8 +3298,8 @@
                 <span class="efecto-ultimodia">ÚLTIMO DÍA</span>
             </div>
             <h2 class="c-ultimodia">⏳ Último Día <small>Arena que se acaba</small></h2>
-            <a class="btn" href="stalker/ultimodia/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="stalker/ultimodia/ultimodia.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/stalker/ultimodia/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/stalker/ultimodia/ultimodia.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-ultimodia">
                 <div class="stk-ult-cuenta"></div>
                 <div class="stk-ult-arena"></div>
@@ -2693,8 +3313,8 @@
                 <span class="efecto-emision">EMISIÓN</span>
             </div>
             <h2 class="c-emision">🌊 Emisión <small>El frente que sube</small></h2>
-            <a class="btn" href="stalker/emision/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="stalker/emision/emision.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/stalker/emision/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/stalker/emision/emision.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-emision">
                 <div class="stk-emi-frente"></div>
                 <div class="stk-emi-golpe"></div>
@@ -2708,8 +3328,8 @@
                 <span class="efecto-anomalia">ANOMALÍA</span>
             </div>
             <h2 class="c-anomalia">🔮 Anomalía <small>El espacio doblado</small></h2>
-            <a class="btn" href="stalker/anomalia/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="stalker/anomalia/anomalia.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/stalker/anomalia/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/stalker/anomalia/anomalia.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-anomalia">
                 <div class="stk-ano-anillo"></div>
                 <div class="stk-ano-chispa"></div>
@@ -2723,8 +3343,8 @@
                 <span class="efecto-artefacto">ARTEFACTO</span>
             </div>
             <h2 class="c-artefacto">💎 Artefacto <small>Reliquia radiactiva</small></h2>
-            <a class="btn" href="stalker/artefacto/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="stalker/artefacto/artefacto.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/stalker/artefacto/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/stalker/artefacto/artefacto.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-artefacto">
                 <div class="stk-art-resplandor"></div>
                 <div class="stk-art-destello"></div>
@@ -2738,8 +3358,8 @@
                 <span class="efecto-tormenta">TORMENTA PSI</span>
             </div>
             <h2 class="c-tormenta">🧠 Tormenta Psi <small>Zumbido en la cabeza</small></h2>
-            <a class="btn" href="stalker/tormenta/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="stalker/tormenta/tormenta.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/stalker/tormenta/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/stalker/tormenta/tormenta.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-tormenta">
                 <div class="stk-tor-raya"></div>
                 <div class="stk-tor-zumbido"></div>
@@ -2753,8 +3373,8 @@
                 <span class="efecto-detector">DETECTOR</span>
             </div>
             <h2 class="c-detector">📟 Detector <small>Pitido tras pitido</small></h2>
-            <a class="btn" href="stalker/detector/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="stalker/detector/detector.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/stalker/detector/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/stalker/detector/detector.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-detector">
                 <div class="stk-det-aguja"></div>
                 <div class="stk-det-tic"></div>
@@ -2768,8 +3388,8 @@
                 <span class="efecto-fauna">FAUNA</span>
             </div>
             <h2 class="c-fauna">🐾 Fauna <small>Algo respira en la maleza</small></h2>
-            <a class="btn" href="stalker/fauna/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="stalker/fauna/fauna.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/stalker/fauna/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/stalker/fauna/fauna.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-fauna">
                 <div class="stk-fau-esporas"></div>
                 <div class="stk-fau-colmillo"></div>
@@ -2783,8 +3403,8 @@
                 <span class="efecto-lazona">LA ZONA</span>
             </div>
             <h2 class="c-lazona">☢ La Zona <small>Radiación y aviso</small></h2>
-            <a class="btn" href="stalker/lazona/index.html">Showcase completo</a>
-            <a class="btn btn-descarga" href="stalker/lazona/lazona.zip" download>Descargar efecto (.zip)</a>
+            <a class="btn" href="efectos_css/stalker/lazona/index.html">Showcase completo</a>
+            <a class="btn btn-descarga" href="efectos_css/stalker/lazona/lazona.zip" download>Descargar efecto (.zip)</a>
             <div class="escena tema-lazona">
                 <div class="stk-laz-cinta"></div>
                 <div class="stk-laz-pulso"></div>
@@ -2793,6 +3413,116 @@
         </section>
 
         </div><!-- /.galeria -->
+
+        <!-- ============ SECCION EFECTOS SVG ============ -->
+        <section class="seccion-svg" id="efectos-svg">
+            <h2 class="titulo-svg">🧬 Efectos SVG
+                <span class="contador-svg">3 con filtros SVG</span></h2>
+            <p class="sub-svg">
+                Cada tarjeta es una muestra circular del efecto:
+                filtros SVG (feTurbulence, feDisplacementMap,
+                iluminación especular) sobre texto real con CSS, sin
+                caja ni fondo detrás.<br>
+                El botón showcase muestra ejemplos aplicados a textos
+                de diferentes tamaños (de 13px a titulares, con
+                fragmentos inline incluidos).<br>
+                El botón "Descargar Efecto" descarga: (CSS + HTML con
+                los filtros SVG + instrucciones), todo lo necesario
+                para aplicar el efecto en tus archivos.
+            </p>
+
+            <div class="galeria-svg">
+
+                <!-- ============ S1. MATRIX ============ -->
+                <article class="tarjeta-svg" data-svg="matrix" id="svg-matrix">
+                    <div class="sv-muestra">
+                        <span class="ef-matrix-fino">MATRIX</span>
+                    </div>
+                    <h3>🟩 Matrix <small>Lluvia de dígitos en el texto</small></h3>
+                    <a class="btn" href="efectos_svg/Matrix/matrix/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/Matrix/matrix/matrix.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S2. MERCURIO ============ -->
+                <article class="tarjeta-svg" data-svg="miscelanea" id="svg-mercurio">
+                    <div class="sv-muestra">
+                        <span class="ef-mercurio">MERCURIO</span>
+                    </div>
+                    <h3>💧 Mercurio <small>Cromado líquido</small></h3>
+                    <a class="btn" href="efectos_svg/miscelanea/mercurio/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/miscelanea/mercurio/mercurio.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S3. GLITCH ============ -->
+                <article class="tarjeta-svg" data-svg="miscelanea" id="svg-glitch">
+                    <div class="sv-muestra">
+                        <span class="ef-glitch">GLITCH</span>
+                    </div>
+                    <h3>📡 Glitch <small>Desgarro de canales</small></h3>
+                    <a class="btn" href="efectos_svg/miscelanea/glitch/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/miscelanea/glitch/glitch.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- ============ SECCION EFECTOS WEBGL ============ -->
+        <section class="seccion-webgl" id="efectos-webgl">
+            <h2 class="titulo-webgl">⚡ Efectos WebGL
+                <span class="contador-webgl">3 en tiempo real</span></h2>
+            <p class="sub-webgl">
+                Cada tarjeta es una muestra circular del efecto en
+                tiempo real: shaders GLSL ejecutándose en tu navegador
+                dentro de un iframe (?demo=1), sin imágenes ni
+                librerías.<br>
+                El botón showcase muestra el efecto a pantalla
+                completa con su temática, sus datos técnicos y la guía
+                de instalación.<br>
+                El botón "Descargar Efecto" descarga: (HTML con el
+                shader GLSL + instrucciones), todo lo necesario para
+                aplicar el efecto en tus archivos.
+            </p>
+
+            <div class="galeria-webgl">
+
+                <!-- ============ W1. MATRIX ============ -->
+                <article class="tarjeta-webgl" data-webgl="matrix">
+                    <div class="wg-muestra wg-matrix">
+                        <iframe loading="lazy"
+                                title="Vista previa del efecto Matrix"
+                                src="efectos_webgl/Matrix/matrix/matrix.html?demo=1"></iframe>
+                    </div>
+                    <h3>🟢 Matrix <small>Lluvia de código</small></h3>
+                    <a class="btn" href="efectos_webgl/Matrix/matrix/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_webgl/Matrix/matrix/matrix.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ W2. MATRIX 2 · CINE ============ -->
+                <article class="tarjeta-webgl" data-webgl="matrix">
+                    <div class="wg-muestra wg-matrix2">
+                        <iframe loading="lazy"
+                                title="Vista previa del efecto Matrix 2"
+                                src="efectos_webgl/Matrix/matrix2/matrix2.html?demo=1"></iframe>
+                    </div>
+                    <h3>🎬 Matrix 2 · CINE <small>Cine digital</small></h3>
+                    <a class="btn" href="efectos_webgl/Matrix/matrix2/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_webgl/Matrix/matrix2/matrix2.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ W3. MERCURIO ============ -->
+                <article class="tarjeta-webgl" data-webgl="miscelanea">
+                    <div class="wg-muestra wg-mercurio">
+                        <iframe loading="lazy"
+                                title="Vista previa del efecto Mercurio"
+                                src="efectos_webgl/miscelanea/mercurio/mercurio.html?demo=1"></iframe>
+                    </div>
+                    <h3>🌡 Mercurio <small>Metal líquido</small></h3>
+                    <a class="btn" href="efectos_webgl/miscelanea/mercurio/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_webgl/miscelanea/mercurio/mercurio.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+            </div>
+        </section>
 
         <footer>
             Actualizado el 26 de septiembre de 2026 · © 2026 davoker ·
@@ -2803,26 +3533,49 @@
 </div>
 
 
+    <script src="efectos_svg/miscelanea/mercurio/mercurio.js"></script>
+    <script src="efectos_svg/miscelanea/glitch/glitch.js"></script>
+
     <script>
         // Muestra aleatoria de la portada (aquí SÍ hay JS: es solo esta
-        // página; los efectos siguen siendo CSS puro). Con ninguna
-        // categoría abierta se muestran N tarjetas sorteadas al azar de
-        // TODAS las categorías; al abrir una se ve la suya completa y,
+        // página; los efectos siguen siendo CSS puro, SVG y WebGL).
+        // Sin ninguna sección del índice desplegada se sortean 12
+        // tarjetas al azar de ENTRE TODAS las secciones (CSS + SVG +
+        // WebGL); con una sección desplegada, 12 al azar de esa
+        // sección (si tiene menos de 12, se ven todas). Dentro de una
+        // sección, al abrir una categoría se ve la suya completa y,
         // al cerrarla, sortea otra muestra nueva.
         (function () {
             var N = 12;                       // tamaño de la muestra
-            var tarjetas = Array.prototype.slice.call(
+            var tarjetasCss = Array.prototype.slice.call(
                 document.querySelectorAll(".galeria .tarjeta"));
+            var tarjetasSvg = Array.prototype.slice.call(
+                document.querySelectorAll(".tarjeta-svg"));
+            var tarjetasWebgl = Array.prototype.slice.call(
+                document.querySelectorAll(".tarjeta-webgl"));
+            var todas = tarjetasCss.concat(tarjetasSvg, tarjetasWebgl);
 
             function sortear() {
-                var barajadas = tarjetas.slice();
+                // ¿de dónde salen los 12? de la sección desplegada o,
+                // si no hay ninguna, de todas las secciones a la vez
+                var abierta = document.querySelector(".seccion-indice[open]");
+                var conjunto = todas;
+                if (abierta && abierta.id === "s-css") {
+                    conjunto = tarjetasCss;
+                } else if (abierta && abierta.id === "s-svg") {
+                    conjunto = tarjetasSvg;
+                } else if (abierta) {
+                    conjunto = tarjetasWebgl;
+                }
+
+                var barajadas = conjunto.slice();
                 for (var i = barajadas.length - 1; i > 0; i--) {
                     var j = Math.floor(Math.random() * (i + 1));
                     var t = barajadas[i];
                     barajadas[i] = barajadas[j];
                     barajadas[j] = t;
                 }
-                tarjetas.forEach(function (el) {
+                todas.forEach(function (el) {
                     el.classList.remove("sorteada");
                 });
                 barajadas.slice(0, N).forEach(function (el) {
@@ -2839,40 +3592,264 @@
                         }
                     });
                 });
+
+            // --- SECCIONES PLEGABLES DEL ÍNDICE ---
+            // Al pulsar una sección: se pliegan las demás (por si el
+            // navegador no aplica el atributo name), se cierran las
+            // categorías que queden abiertas de otras secciones (o las
+            // suyas al plegarla) y se sortea una muestra nueva de 12
+            // efectos de esa sección (si son menos, se ven todos).
+            var secciones = document.querySelectorAll(".seccion-indice");
+            Array.prototype.forEach.call(secciones, function (s) {
+                s.addEventListener("toggle", function () {
+                    var i, grupo;
+                    if (s.open) {
+                        for (i = 0; i < secciones.length; i++) {
+                            if (secciones[i] !== s) {
+                                secciones[i].open = false;
+                            }
+                        }
+                        grupo = document.querySelectorAll(".grupo[open]");
+                        for (i = 0; i < grupo.length; i++) {
+                            if (!s.contains(grupo[i])) { grupo[i].open = false; }
+                        }
+                    } else {
+                        grupo = s.querySelectorAll(".grupo[open]");
+                        for (i = 0; i < grupo.length; i++) { grupo[i].open = false; }
+                    }
+                    sortear();                 // muestra nueva (12 al azar)
+                });
+            });
         })();
 
 
+        // ===== MUESTRAS WEBGL: el EFECTO REAL en miniatura =====
+        // Cada tarjeta embebe su propio efecto en un iframe de tamaño
+        // "de escritorio" (1280x720) y lo escala para que el EFECTO
+        // COMPLETO QUEPA dentro de la muestra circular (200x200, igual
+        // que las CSS), centrado: la miniatura es una foto viva del
+        // efecto y NO se recorta nada (la palabra entera se ve).
+        // ?demo=1 hace que el efecto se mueva solo. Si el navegador
+        // deja mirar dentro del iframe (mismo origen, http) se oculta
+        // la interfaz propia del efecto (.ui) para que solo quede la
+        // escena; con doble clic (file://) no se puede y se ve
+        // también su caja.
+        (function () {
+            var marcos = document.querySelectorAll('.wg-muestra iframe');
+            if (!marcos.length) { return; }
+            function ajustar() {
+                for (var i = 0; i < marcos.length; i++) {
+                    var f = marcos[i], caja = f.parentNode;
+                    // CONTAIN total: la diagonal del 16:9 (1.469px)
+                    // tiene que caber en el diametro del circulo
+                    // (200px) — no basta con ajustar el ancho, las
+                    // esquinas del rectangulo saldrian del circulo y
+                    // se recortarian. Resultado: 173x97 centrados,
+                    // escena entera, ni un pixel cortado.
+                    var lado = Math.min(caja.clientWidth, caja.clientHeight);
+                    var k = lado / Math.sqrt(1280 * 1280 + 720 * 720);
+                    if (k > 0) {
+                        var x = (caja.clientWidth - 1280 * k) / 2;
+                        var y = (caja.clientHeight - 720 * k) / 2;
+                        f.style.transform = 'translate(' + x + 'px,' +
+                            y + 'px) scale(' + k + ')';
+                    }
+                    try {
+                        var d = f.contentDocument;
+                        var ui = d && d.querySelector('.ui');
+                        if (ui) ui.style.display = 'none';
+                    } catch (e) { /* file://: sin acceso, se queda la interfaz */ }
+                }
+            }
+            ajustar();
+            for (var j = 0; j < marcos.length; j++) {
+                marcos[j].addEventListener('load', ajustar);
+            }
+            window.addEventListener('resize', ajustar);
+            // al desplegar/plegar una seccion o categoria del indice,
+            // las tarjetas webgl pasan de ocultas a visibles: si el
+            // iframe termino de cargar dentro de una tarjeta oculta
+            // (k = 0, sin transform), hay que escalarlo ya. El
+            // evento toggle de <details> llega hasta document.
+            document.addEventListener('toggle', ajustar, true);
+        })();
+
         // ===== FONDO ESPACIAL (canvas tras <body>, z-index -1) =====
-        // Pinta DETRÁS de todo el contenido un cielo del espacio: base
-        // en degradado, nebulosas y banda galáctica pre-renderizadas en
-        // un canvas aparte, estrellas con parpadeo y paralaje suave del
-        // ratón, y alguna estrella fugaz. El botón de tema sigue
-        // mandando: cada fotograma se lee el data-tema y, si cambia, se
-        // regenera la paleta (oscuro: azul/violeta/magenta fríos;
-        // claro: pastel lavanda-azul para no estorbar la lectura).
-        // headless no avanza frames sin capturar: el primer fotograma
-        // se pinta ya mismo y window.__fondo.repinta() fuerza otro (lo
-        // usa el botón de tema y las pruebas).
+        // Cielo de alta calidad DETRÁS de todo el contenido. Se pre-
+        // renderiza en un canvas aparte: base en degradado + nebulosa
+        // con ruido fBm con deformación de dominio (nubes texturadas,
+        // pasillos de polvo y la banda galáctica modulada por el
+        // propio ruido) + núcleos brillantes + polvo estelar + viñeta.
+        // Encima, en cada fotograma: estrellas en sprites (halo suave
+        // y destello de 4 puntas en las grandes) con parpadeo en dos
+        // frecuencias y paralaje por profundidad; estrellas fugaces
+        // con estela segmentada, cabeza con brillo y chispas; y
+        // OVNIS: diez platillos volantes clásicos (años 60/70) con
+        // lucecitas animadas que cruzan el cielo de vez en cuando,
+        // uno distinto cada vez. El botón de tema sigue mandando:
+        // cada fotograma se lee el data-tema y, si cambia, se
+        // regenera todo. En headless los fotogramas no avanzan sin
+        // capturar: el primero se pinta ya mismo, window.__fondo.
+        // repinta() fuerza otro (lo usan el botón de tema y las
+        // pruebas) y window.__fondo.ovni(i) lanza el platillo i en
+        // mitad del cielo para las capturas.
         (function () {
             var lienzo = document.getElementById("fondo-espacio");
             if (!lienzo || !lienzo.getContext) { return; }
             var fx = lienzo.getContext("2d");
-            var capa = document.createElement("canvas");   // nebulosa
+            var capa = document.createElement("canvas");   // cielo fijo
             var cb = capa.getContext("2d");
             var an = 0, al = 0;
             var dpr = Math.min(window.devicePixelRatio || 1, 2);
             var tema = "";
-            var estrellas = [], fugaces = [];
+            var estrellas = [], fugaces = [], destellos = [], ovnis = [];
+            var sprites = {};
             var px = 0, py = 0, ox = 0, oy = 0;   // paralaje real/objetivo
-            var reloj = 0, ult = 0;
+            var reloj = 0, ult = 0, ultimo_ovni = -1;
+            var fugTot = 0, ovniTot = 0;   // contadores (pruebas)
 
-            // nubes fijas: [x, y, radio] en fracción del canvas
+            // nubes fijas (posiciones de los núcleos brillantes):
+            // [x, y, radio] en fracción del canvas
             var NUB = [[.14, .2, .5], [.6, .14, .44], [.4, .66, .55],
                        [.86, .56, .46], [.18, .86, .42], [.7, .9, .4]];
+
+            // variantes de estrella fugaz: [color, grosor, largo, escala]
+            var FUG = [["#eaf4ff", 1.9, 130, 1], ["#ffe9c7", 1.5, 105, .85],
+                       ["#c8fff2", 2.2, 155, 1.15]];
+            var FUG_CLARO = [["#5f7bd8", 1.9, 130, 1], ["#b07a2a", 1.5, 105, .85],
+                             ["#2f9d8f", 2.2, 155, 1.15]];
+
+            // ----- diez platillos volantes (años 60/70) -----
+            // cuerpo/techo/aro: hex; luces: colores del borde;
+            // modo:0 cálido fijo · 1 alterna · 2 barrido · 3 respira ·
+            // 4 secuencial · 5 ventanas · 6 baliza doble
+            var DISENOS = [
+                { cuerpo: "#c9d3e3", techo: "#9fb6d8", aro: "#8e9bb0",
+                  luz: ["#ffd166", "#ffd166", "#ffd166"], modo: 0,
+                  bajo: "#8ecbff" },
+                { cuerpo: "#79c98e", techo: "#bfe8cf", aro: "#3f8f5f",
+                  luz: ["#ff5f5f", "#5fd0ff", "#ffd166"], modo: 1,
+                  bajo: "#9dffcf" },
+                { cuerpo: "#b9b2d8", techo: "#e3ddf5", aro: "#7a6fb8",
+                  luz: ["#cfd6ff", "#cfd6ff"], modo: 2,
+                  bajo: "#b9a8ff", anillo: true },
+                { cuerpo: "#e0c088", techo: "#f5e3c0", aro: "#a8813f",
+                  luz: ["#fff2b0"], modo: 3, bajo: "#ffe08a" },
+                { cuerpo: "#9aa4b5", techo: "#cfd8e6", aro: "#5e6878",
+                  luz: ["#ffb45f", "#ffb45f"], modo: 1,
+                  bajo: "#ffd9a0", tri: true },
+                { cuerpo: "#1d2740", techo: "#2c3a5e", aro: "#25e0d0",
+                  luz: ["#25e0d0", "#ff5fd0", "#25e0d0"], modo: 2,
+                  bajo: "#41e8ff", neon: true },
+                { cuerpo: "#d8d8e2", techo: "#f0f0f7", aro: "#8d8dab",
+                  luz: ["#ff4fa3", "#4fff9f", "#4f9fff", "#ffd166"],
+                  modo: 4, bajo: "#ff8fd0" },
+                { cuerpo: "#c7b9ff", techo: "#e6ddff", aro: "#8f7fd8",
+                  luz: ["#ffe9a8", "#ffe9a8", "#ffe9a8", "#ffe9a8"],
+                  modo: 5, bajo: "#cdb6ff", vent: true },
+                { cuerpo: "#9fd8f2", techo: "#d8f2ff", aro: "#4f9fc8",
+                  luz: ["#eaffff", "#bff2ff"], modo: 3, bajo: "#aef0ff" },
+                { cuerpo: "#7d8794", techo: "#aab4c2", aro: "#4a525c",
+                  luz: ["#ff4646"], modo: 6, bajo: "#ff8080" }
+            ];
 
             function claro() {
                 return document.documentElement
                         .getAttribute("data-tema") === "claro";
+            }
+
+            function aRgba(h, a) {
+                var n = parseInt(h.slice(1), 16);
+                return "rgba(" + ((n >> 16) & 255) + "," + ((n >> 8) & 255)
+                       + "," + (n & 255) + "," + a + ")";
+            }
+            function mezcla(a, b, k) {
+                var x = parseInt(a.slice(1), 16), y = parseInt(b.slice(1), 16);
+                var r = Math.round(((x >> 16) & 255) * (1 - k)
+                                   + ((y >> 16) & 255) * k);
+                var g = Math.round(((x >> 8) & 255) * (1 - k)
+                                   + ((y >> 8) & 255) * k);
+                var z = Math.round((x & 255) * (1 - k) + (y & 255) * k);
+                return "rgb(" + r + "," + g + "," + z + ")";
+            }
+            function elipse(x, y, rx, ry) {
+                fx.beginPath();
+                fx.ellipse(x, y, rx, ry, 0, 0, 6.2832);
+                fx.fill();
+            }
+
+            // ---------- ruido fBm (value noise con hash entero) ----------
+            function hash2(i, j, s) {
+                var n = (i * 374761393 + j * 668265263 + s * 1442695041) | 0;
+                n = Math.imul(n ^ (n >>> 13), 1274126177);
+                return ((n ^ (n >>> 16)) >>> 0) / 4294967296;
+            }
+            function suave(t) { return t * t * (3 - 2 * t); }
+            function ruido(x, y, s) {
+                var xi = Math.floor(x), yi = Math.floor(y);
+                var xf = x - xi, yf = y - yi;
+                var a = hash2(xi, yi, s), b = hash2(xi + 1, yi, s);
+                var c = hash2(xi, yi + 1, s), d = hash2(xi + 1, yi + 1, s);
+                var u = suave(xf), v = suave(yf);
+                return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
+            }
+            function fbm(x, y, oct, s) {
+                var suma = 0, amp = .5, fre = 1, tot = 0;
+                for (var i = 0; i < oct; i++) {
+                    suma += ruido(x * fre, y * fre, s + i * 31) * amp;
+                    tot += amp; amp *= .5; fre *= 2;
+                }
+                return suma / tot;
+            }
+
+            // banda galáctica: recta inclinada por el centro
+            function banda(x, y, w, h) {
+                var dx = x - w / 2, dy = y - h / 2;
+                var d = Math.abs(dy + dx * 0.5) / 1.118;
+                var s = h * .085;
+                return Math.exp(-(d * d) / (2 * s * s));
+            }
+
+            function paleta() {
+                var c = claro();
+                return {
+                    cielo: c ? ["#fdfeff", "#eef2f8"] : ["#04060c", "#0a0c12"],
+                    // rampa de la nebulosa: [t, r, g, b, alfa] con t de 0 a 1
+                    nube: c
+                        ? [[0, 255, 250, 252, 0], [.3, 206, 226, 255, .38],
+                           [.5, 255, 192, 216, .42], [.7, 206, 186, 255, .42],
+                           [.85, 176, 240, 232, .37], [1, 255, 255, 255, .46]]
+                        : [[0, 6, 9, 20, 0], [.25, 24, 44, 104, .46],
+                           [.45, 96, 38, 152, .55], [.62, 172, 44, 124, .5],
+                           [.78, 34, 128, 156, .4], [.9, 76, 140, 255, .44],
+                           [1, 158, 190, 255, .5]],
+                    banda: c ? .3 : .3,
+                    nuc: c ? "rgba(255,255,255," : "rgba(185,205,255,",
+                    estrellas: c
+                        ? ["#5d6f96", "#71839f", "#8a7fa8", "#6f92a8",
+                           "#94879f", "#5a8098"]
+                        : ["#ffffff", "#e8f2ff", "#cfe2ff", "#fff4d6",
+                           "#ffd9a8", "#ffb4a8", "#d8fff7"],
+                    polvo: c ? 0 : 1
+                };
+            }
+
+            function armaLut(paradas) {
+                var lut = new Uint8Array(256 * 4);
+                for (var i = 0; i < 256; i++) {
+                    var t = i / 255, j = 0;
+                    while (j < paradas.length - 2 && t > paradas[j + 1][0]) {
+                        j++;
+                    }
+                    var p0 = paradas[j], p1 = paradas[j + 1];
+                    var k = (t - p0[0]) / ((p1[0] - p0[0]) || 1);
+                    if (k < 0) { k = 0; } else if (k > 1) { k = 1; }
+                    lut[i * 4] = p0[1] + (p1[1] - p0[1]) * k;
+                    lut[i * 4 + 1] = p0[2] + (p1[2] - p0[2]) * k;
+                    lut[i * 4 + 2] = p0[3] + (p1[3] - p0[3]) * k;
+                    lut[i * 4 + 3] = (p0[4] + (p1[4] - p0[4]) * k) * 255;
+                }
+                return lut;
             }
 
             function medir() {
@@ -2892,76 +3869,201 @@
 
             function nube() {
                 var c = claro();
+                var p = paleta();
                 var w = an + 90, h = al + 90;
                 capa.width = Math.round(w * dpr);
                 capa.height = Math.round(h * dpr);
                 cb.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+                // 1) base en degradado
                 var g = cb.createLinearGradient(0, 0, 0, h);
-                g.addColorStop(0, c ? "#fdfeff" : "#04060c");
-                g.addColorStop(1, c ? "#eef2f8" : "#0a0c12");
+                g.addColorStop(0, p.cielo[0]);
+                g.addColorStop(1, p.cielo[1]);
                 cb.fillStyle = g;
                 cb.fillRect(0, 0, w, h);
-                var cols = c
-                    ? ["rgba(255,175,205,.5)", "rgba(150,185,255,.5)",
-                       "rgba(205,175,255,.42)", "rgba(150,235,245,.38)",
-                       "rgba(255,225,175,.4)", "rgba(190,255,215,.35)"]
-                    : ["rgba(120,45,190,.5)", "rgba(25,80,175,.5)",
-                       "rgba(185,35,130,.42)", "rgba(30,140,150,.38)",
-                       "rgba(90,25,150,.46)", "rgba(40,110,220,.36)"];
-                var i, n, x, y, r, gg;
-                for (i = 0; i < NUB.length; i++) {
-                    n = NUB[i];
-                    x = n[0] * w;
-                    y = n[1] * h;
-                    r = n[2] * Math.max(w, h) * .55;
-                    gg = cb.createRadialGradient(x, y, 0, x, y, r);
-                    gg.addColorStop(0, cols[i]);
-                    gg.addColorStop(1, "rgba(0,0,0,0)");
-                    cb.fillStyle = gg;
-                    cb.fillRect(x - r, y - r, r * 2, r * 2);
+
+                // 2) nebulosa + banda + pasillos de polvo con ruido fBm
+                //    (a 1/4 de resolución y subida con suavizado)
+                var sem = c ? 11 : 5;
+                var nw = Math.max(90, Math.round(w * .25));
+                var nh = Math.max(90, Math.round(h * .25));
+                if (nh > 1800) { nh = 1800; }
+                var off = document.createElement("canvas");
+                off.width = nw;
+                off.height = nh;
+                var ob = off.getContext("2d");
+                var img = ob.createImageData(nw, nh);
+                var dat = img.data;
+                var lut = armaLut(p.nube);
+                var x, y, o, i2, f, b, t, dust, k, li;
+                for (y = 0; y < nh; y++) {
+                    for (x = 0; x < nw; x++) {
+                        // deformación de dominio: nubes orgánicas
+                        i2 = fbm(x * .016, y * .016, 2, sem + 3);
+                        f = fbm(x * .011 + i2 * 1.7, y * .011 + i2 * 1.7,
+                                4, sem) * .7
+                          + fbm(x * .03 + i2, y * .03 + i2, 3, sem + 7) * .3;
+                        b = banda(x, y, nw, nh);
+                        // forma: contraste y encendido por la banda
+                        t = (f - .34) * 2.6;
+                        if (t < 0) { t = 0; } else if (t > 1) { t = 1; }
+                        t = t * (.6 + .6 * b) + b * b * .42;
+                        // pasillos de polvo: restan luz
+                        dust = fbm(x * .02, y * .02, 3, sem + 13);
+                        if (dust > .62) {
+                            k = 1 - (dust - .62) * 2.1;
+                            if (k < .3) { k = .3; }
+                            t *= k;
+                        }
+                        if (t > 1) { t = 1; }
+                        li = (t * 255) | 0;
+                        o = (y * nw + x) * 4;
+                        dat[o] = lut[li * 4];
+                        dat[o + 1] = lut[li * 4 + 1];
+                        dat[o + 2] = lut[li * 4 + 2];
+                        dat[o + 3] = lut[li * 4 + 3];
+                    }
                 }
-                // banda galáctica: elipse de luz inclinada
+                ob.putImageData(img, 0, 0);
+                cb.imageSmoothingEnabled = true;
+                cb.imageSmoothingQuality = "high";
+                cb.drawImage(off, 0, 0, w, h);
+
+                // 3) banda galáctica: elipse de luz inclinada (encendido)
+                cb.globalCompositeOperation = "lighter";
                 cb.save();
                 cb.translate(w / 2, h / 2);
                 cb.rotate(-0.5);
                 cb.scale(1, 0.2);
                 var bg = cb.createRadialGradient(0, 0, 0, 0, 0, w * .7);
-                bg.addColorStop(0, c ? "rgba(215,225,255,.8)"
-                                     : "rgba(150,175,255,.3)");
-                bg.addColorStop(.45, c ? "rgba(230,235,255,.35)"
-                                       : "rgba(110,125,225,.14)");
+                bg.addColorStop(0, c ? "rgba(255,255,255,.34)"
+                                     : "rgba(150,175,255,.25)");
+                bg.addColorStop(.45, c ? "rgba(235,240,255,.16)"
+                                       : "rgba(110,125,225,.11)");
                 bg.addColorStop(1, "rgba(0,0,0,0)");
                 cb.fillStyle = bg;
                 cb.fillRect(-w, -h, w * 2, h * 2);
                 cb.restore();
-                // polvo estelar
-                cb.fillStyle = c ? "rgba(130,150,205,.4)"
-                                 : "rgba(255,255,255,.35)";
-                for (i = 0; i < 420; i++) {
-                    cb.fillRect(Math.random() * w, Math.random() * h,
-                                1.4, 1.4);
+
+                // 4) núcleos brillantes dentro de las nubes
+                for (i2 = 0; i2 < 3; i2++) {
+                    var n = NUB[i2];
+                    var nx = n[0] * w, ny = n[1] * h;
+                    var nr = n[2] * Math.max(w, h) * .16;
+                    var ng = cb.createRadialGradient(nx, ny, 0, nx, ny, nr);
+                    ng.addColorStop(0, p.nuc + (c ? .5 : .55) + ")");
+                    ng.addColorStop(.5, p.nuc + (c ? .16 : .18) + ")");
+                    ng.addColorStop(1, p.nuc + "0)");
+                    cb.fillStyle = ng;
+                    cb.fillRect(nx - nr, ny - nr, nr * 2, nr * 2);
+                }
+                cb.globalCompositeOperation = "source-over";
+
+                // 5) polvo estelar denso dentro de la banda
+                var nP = Math.min(900, Math.round(w * h / 7000));
+                var hechos = 0, intentos = 0;
+                cb.fillStyle = p.polvo
+                    ? "rgba(255,255,255,.4)" : "rgba(110,135,190,.45)";
+                while (hechos < nP && intentos < nP * 4) {
+                    intentos++;
+                    var sx = Math.random() * w, sy = Math.random() * h;
+                    if (Math.random() > .3 + banda(sx, sy, w, h) * .85) {
+                        continue;
+                    }
+                    var tam = Math.random() < .8 ? 1.3 : 2;
+                    cb.fillRect(sx, sy, tam, tam);
+                    hechos++;
+                }
+
+                // 6) viñeta (solo en oscuro: en claro no ensucia)
+                if (!c) {
+                    var vg = cb.createRadialGradient(
+                        w / 2, h / 2, Math.min(w, h) * .38,
+                        w / 2, h / 2, Math.max(w, h) * .78);
+                    vg.addColorStop(0, "rgba(0,0,0,0)");
+                    vg.addColorStop(1, "rgba(0,0,0,.42)");
+                    cb.fillStyle = vg;
+                    cb.fillRect(0, 0, w, h);
                 }
             }
 
             function siembra() {
                 estrellas = [];
-                var cols = claro()
-                    ? ["#8fa6cc", "#a8b8de", "#c9b6d8", "#9fc0d8", "#b0a8c8"]
-                    : ["#ffffff", "#cfe0ff", "#ffe9c7", "#ffd8ec", "#c8fff2"];
-                var n = Math.min(1300, Math.round(an * al / 1200));
-                for (var i = 0; i < n; i++) {
-                    var grande = Math.random() < .15;
+                var p = paleta();
+                var n = Math.min(2200, Math.round(an * al / 850));
+                var w = an + 90, h = al + 90;
+                var hechos = 0, intentos = 0;
+                while (hechos < n && intentos < n * 3) {
+                    intentos++;
+                    var x = Math.random(), y = Math.random();
+                    // densidad mayor dentro de la banda galáctica
+                    var b = banda(x * w, y * h, w, h);
+                    if (Math.random() > .45 + b * .8) { continue; }
+                    var g = Math.random();
+                    var grande = g < .05;
+                    var mediano = !grande && g < .18;
                     estrellas.push({
-                        x: Math.random(), y: Math.random(),
-                        r: grande ? 1 + Math.random() * 1.3
-                                  : .35 + Math.random() * .8,
-                        a: .3 + Math.random() * .7,
-                        f: .4 + Math.random() * 2.6,
+                        x: x, y: y,
+                        r: grande ? 1.5 + Math.random() * 1.1
+                                  : mediano ? .9 + Math.random() * .5
+                                  : .3 + Math.random() * .55,
+                        a: grande ? .75 + Math.random() * .25
+                                  : .32 + Math.random() * .58,
+                        f: .3 + Math.random() * 2.2,
+                        f2: 1.7 + Math.random() * 3.4,
                         o: Math.random() * 6.28,
-                        c: cols[(Math.random() * cols.length) | 0],
-                        k: (Math.random() * 3) | 0,
-                        cruz: grande && Math.random() < .3
+                        o2: Math.random() * 6.28,
+                        c: p.estrellas[(Math.random() * p.estrellas.length) | 0],
+                        k: (Math.random() * 4) | 0
                     });
+                    hechos++;
+                }
+            }
+
+            // sprites de estrella: halo suave + destello en la clase L
+            function armaSprites() {
+                sprites = {};
+                var cols = paleta().estrellas;
+                var R = [7, 10, 15];
+                for (var i = 0; i < cols.length; i++) {
+                    for (var k = 0; k < 3; k++) {
+                        var c = document.createElement("canvas");
+                        var r = R[k];
+                        c.width = c.height = r * 2;
+                        var g2 = c.getContext("2d");
+                        var cg = g2.createRadialGradient(r, r, 0, r, r, r);
+                        cg.addColorStop(0, "rgba(255,255,255,1)");
+                        cg.addColorStop(.26, cols[i]);
+                        cg.addColorStop(.62, aRgba(cols[i], .25));
+                        cg.addColorStop(1, aRgba(cols[i], 0));
+                        g2.fillStyle = cg;
+                        g2.fillRect(0, 0, r * 2, r * 2);
+                        if (k === 2) {
+                            // destello de 4 puntas
+                            g2.globalCompositeOperation = "lighter";
+                            for (var eje = 0; eje < 2; eje++) {
+                                var lg = eje === 0
+                                    ? g2.createLinearGradient(0, r, r * 2, r)
+                                    : g2.createLinearGradient(r, 0, r, r * 2);
+                                lg.addColorStop(0, aRgba(cols[i], 0));
+                                lg.addColorStop(.5, "rgba(255,255,255,.8)");
+                                lg.addColorStop(1, aRgba(cols[i], 0));
+                                g2.strokeStyle = lg;
+                                g2.lineWidth = 1.4;
+                                g2.beginPath();
+                                if (eje === 0) {
+                                    g2.moveTo(0, r);
+                                    g2.lineTo(r * 2, r);
+                                } else {
+                                    g2.moveTo(r, 0);
+                                    g2.lineTo(r, r * 2);
+                                }
+                                g2.stroke();
+                            }
+                            g2.globalCompositeOperation = "source-over";
+                        }
+                        sprites[cols[i] + "-" + k] = c;
+                    }
                 }
             }
 
@@ -2970,52 +4072,291 @@
                 medir();
                 nube();
                 siembra();
+                armaSprites();
+            }
+
+            // ---------- estrellas fugaces de alta calidad ----------
+            function nuevoFugaz() {
+                fugTot++;
+                var v = claro() ? FUG_CLARO : FUG;
+                var f = v[(Math.random() * v.length) | 0];
+                fugaces.push({
+                    x: Math.random() * an * .8 - an * .1,
+                    y: (window.pageYOffset || 0)
+                       + Math.random() * window.innerHeight * .45,
+                    vx: 420 + Math.random() * 420,
+                    vy: 190 + Math.random() * 240,
+                    t: 0, vida: 700 + Math.random() * 700,
+                    col: f[0], ancho: f[1], largo: f[2], esc: f[3]
+                });
+            }
+
+            function pintaFugaz(f) {
+                var vel = Math.sqrt(f.vx * f.vx + f.vy * f.vy);
+                var nx = f.vx / vel, ny = f.vy / vel;
+                var alfa = Math.sin(Math.PI * f.t / f.vida);
+                var segs = 12, i, t1, x1, y1;
+                fx.lineCap = "round";
+                // estela segmentada: grosor y alfa decrecientes
+                for (i = segs - 1; i >= 0; i--) {
+                    t1 = (i + 1) / segs;
+                    x1 = f.x - nx * f.largo * t1;
+                    y1 = f.y - ny * f.largo * t1;
+                    fx.globalAlpha = Math.max(0, alfa * (1 - t1) * .9);
+                    fx.lineWidth = Math.max(.4, f.ancho * (1 - t1 * .8));
+                    fx.strokeStyle = i < 2 ? "#ffffff" : f.col;
+                    fx.beginPath();
+                    fx.moveTo(f.x - nx * f.largo * (i / segs),
+                              f.y - ny * f.largo * (i / segs));
+                    fx.lineTo(x1, y1);
+                    fx.stroke();
+                }
+                // cabeza con brillo
+                var hr = 7 * f.esc;
+                fx.globalAlpha = Math.max(0, alfa);
+                var hg = fx.createRadialGradient(f.x, f.y, 0, f.x, f.y, hr);
+                hg.addColorStop(0, "rgba(255,255,255,.95)");
+                hg.addColorStop(.35, f.col);
+                hg.addColorStop(1, "rgba(255,255,255,0)");
+                fx.fillStyle = hg;
+                fx.beginPath();
+                fx.arc(f.x, f.y, hr, 0, 6.2832);
+                fx.fill();
+                // chispas que se desprenden de la estela
+                if (Math.random() < .3 && destellos.length < 70) {
+                    var d = Math.random() * .7;
+                    destellos.push({
+                        x: f.x - nx * f.largo * d + (Math.random() - .5) * 4,
+                        y: f.y - ny * f.largo * d + (Math.random() - .5) * 4,
+                        vx: (Math.random() - .5) * 34,
+                        vy: (Math.random() - .5) * 34,
+                        t: 0, vida: 350 + Math.random() * 400,
+                        r: .7 + Math.random() * 1.3, col: f.col
+                    });
+                }
+            }
+
+            // ---------- OVNIS ----------
+            function luzA(modo, i, n, t) {
+                var v;
+                switch (modo) {
+                case 0:
+                    return .75 + .25 * Math.sin(t / 500 + i);
+                case 1:
+                    return (Math.floor(t / 380) + i) % 2 ? .18 : 1;
+                case 2:
+                    v = Math.sin(t / 300 - i * .9);
+                    return .35 + .65 * (v > 0 ? v : 0);
+                case 3:
+                    return .55 + .45 * Math.sin(t / 900);
+                case 4:
+                    return ((Math.floor(t / 240) + i) % n) === 0 ? 1 : .22;
+                case 5:
+                    return .8 + .2 * Math.sin(t / 700 + i * 2);
+                case 6:
+                    v = t % 1400;
+                    return (v < 180 || (v > 300 && v < 460)) ? 1 : .08;
+                }
+                return 1;
+            }
+
+            function siembraOvni(i, enVista) {
+                var d = (i == null || i < 0)
+                    ? (Math.random() * DISENOS.length) | 0
+                    : i % DISENOS.length;
+                if (i == null && d === ultimo_ovni) {
+                    d = (d + 1) % DISENOS.length;
+                }
+                ultimo_ovni = d;
+                var esc = .24 + Math.random() * .2;
+                ovniTot++;
+                var dir = Math.random() < .5 ? 1 : -1;
+                var dur = enVista ? 60000 : 12000 + Math.random() * 6000;
+                // modo captura: los diez en cuadrícula (5x2) para poder
+                // revisarlos todos en una sola captura
+                var idx = (i == null || i < 0) ? 0 : (i % DISENOS.length);
+                ovnis.push({
+                    d: d,
+                    x: enVista ? an * (.12 + (idx % 5) * .19)
+                               : (dir > 0 ? -70 : an + 70),
+                    y: (window.pageYOffset || 0)
+                       + window.innerHeight * (enVista
+                           ? .2 + Math.floor(idx / 5) * .36
+                           : .12 + Math.random() * .55),
+                    dir: dir, esc: esc, t: 0, dur: dur,
+                    vx: dir * (an + 160) * 1000 / dur,
+                    fase: Math.random() * 6.28
+                });
+            }
+
+            function pintaOvni(o) {
+                var d = DISENOS[o.d];
+                var t = o.t;
+                // fundido de entrada/salida en los bordes
+                var borde = Math.min(1, Math.min(o.x + 70,
+                                                 an + 70 - o.x) / 100);
+                if (borde <= 0) { return; }
+                fx.save();
+                fx.globalAlpha = borde;
+                fx.translate(o.x + px * 7,
+                             o.y + py * 7
+                             + Math.sin(t / 850 + o.fase) * (2 + o.esc * 5));
+                fx.scale(o.dir, 1);
+                fx.scale(o.esc, o.esc);
+                // resplandor del motor
+                var pul = .55 + .3 * Math.sin(t / 420 + o.fase);
+                var ug = fx.createRadialGradient(0, 13, 1, 0, 13, 34);
+                ug.addColorStop(0, aRgba(d.bajo, .62 * pul));
+                ug.addColorStop(.5, aRgba(d.bajo, .2 * pul));
+                ug.addColorStop(1, aRgba(d.bajo, 0));
+                fx.fillStyle = ug;
+                elipse(0, 13, 34, 14);
+                // cuerpo: disco achatado
+                var cg = fx.createLinearGradient(0, -8, 0, 11);
+                cg.addColorStop(0, mezcla(d.cuerpo, "#ffffff", .45));
+                cg.addColorStop(.45, d.cuerpo);
+                cg.addColorStop(1, mezcla(d.cuerpo, "#000000", .5));
+                fx.fillStyle = cg;
+                elipse(0, 2, 36, 9);
+                // banda/ecuador
+                fx.strokeStyle = aRgba(d.neon ? d.aro : d.aro, .95);
+                fx.lineWidth = d.neon ? 2.6 : 1.3;
+                if (d.neon) {
+                    fx.save();
+                    fx.globalAlpha = borde * .4;
+                    fx.lineWidth = 6;
+                    fx.strokeStyle = d.aro;
+                    fx.beginPath();
+                    fx.ellipse(0, 2, 36, 9, 0, 0, 6.2832);
+                    fx.stroke();
+                    fx.restore();
+                }
+                fx.beginPath();
+                fx.ellipse(0, 2, 36, 9, 0, 0, 6.2832);
+                fx.stroke();
+                // cúpula
+                var dgm = fx.createLinearGradient(0, -20, 0, 1);
+                dgm.addColorStop(0, mezcla(d.techo, "#ffffff", .5));
+                dgm.addColorStop(1, d.techo);
+                fx.fillStyle = dgm;
+                fx.beginPath();
+                fx.moveTo(-17, 1);
+                fx.quadraticCurveTo(-15, -17, 0, -18);
+                fx.quadraticCurveTo(15, -17, 17, 1);
+                fx.closePath();
+                fx.fill();
+                // brillo especular de la cúpula
+                fx.fillStyle = "rgba(255,255,255,.5)";
+                fx.beginPath();
+                fx.ellipse(-5, -9, 4.6, 2.4, -.55, 0, 6.2832);
+                fx.fill();
+                // anillo estilo Saturno
+                if (d.anillo) {
+                    fx.strokeStyle = aRgba(d.aro, .85);
+                    fx.lineWidth = 3.4;
+                    fx.beginPath();
+                    fx.ellipse(0, 4, 52, 11, 0, .18, Math.PI - .18);
+                    fx.stroke();
+                    fx.strokeStyle = aRgba(d.aro, .45);
+                    fx.lineWidth = 1.2;
+                    fx.beginPath();
+                    fx.ellipse(0, 4, 46, 9, 0, 0, 6.2832);
+                    fx.stroke();
+                }
+                // patas (estilo Adamski)
+                if (d.tri) {
+                    fx.strokeStyle = mezcla(d.aro, "#000000", .2);
+                    fx.lineWidth = 2.2;
+                    fx.beginPath();
+                    fx.moveTo(-14, 8); fx.lineTo(-18, 20);
+                    fx.moveTo(0, 9);   fx.lineTo(0, 22);
+                    fx.moveTo(14, 8);  fx.lineTo(18, 20);
+                    fx.stroke();
+                    fx.fillStyle = mezcla(d.aro, "#000000", .35);
+                    elipse(-18, 21, 4, 2);
+                    elipse(0, 23, 4, 2);
+                    elipse(18, 21, 4, 2);
+                }
+                // ventanas cálidas
+                if (d.vent) {
+                    for (var v = 0; v < 5; v++) {
+                        var vx0 = -22 + v * 11;
+                        fx.fillStyle = aRgba("#ffe9a8",
+                            .75 + .25 * Math.sin(t / 620 + v));
+                        fx.beginPath();
+                        fx.ellipse(vx0, 3, 3.4, 2.6, 0, 0, 6.2832);
+                        fx.fill();
+                    }
+                }
+                // lucecitas del borde
+                var n = d.luz.length, i, lx, a, col, lg;
+                for (i = 0; i < n; i++) {
+                    lx = -26 + (n === 1 ? 26 : i * (52 / (n - 1)));
+                    a = luzA(d.modo, i, n, t);
+                    if (a <= .03) { continue; }
+                    col = d.luz[i % d.luz.length];
+                    lg = fx.createRadialGradient(lx, 7, 0, lx, 7, 8.5);
+                    lg.addColorStop(0, aRgba("#ffffff", .95 * a));
+                    lg.addColorStop(.3, aRgba(col, a));
+                    lg.addColorStop(.55, aRgba(col, .55 * a));
+                    lg.addColorStop(1, aRgba(col, 0));
+                    fx.fillStyle = lg;
+                    fx.beginPath();
+                    fx.arc(lx, 7, 8.5, 0, 6.2832);
+                    fx.fill();
+                }
+                // baliza superior (doble parpadeo)
+                if (d.modo === 6) {
+                    var ba = luzA(6, 0, 1, t);
+                    var bg2 = fx.createRadialGradient(0, -21, 0, 0, -21, 7);
+                    bg2.addColorStop(0, aRgba("#ffffff", .9 * ba));
+                    bg2.addColorStop(.3, aRgba("#ff4646", ba));
+                    bg2.addColorStop(1, aRgba("#ff4646", 0));
+                    fx.fillStyle = bg2;
+                    fx.beginPath();
+                    fx.arc(0, -21, 7, 0, 6.2832);
+                    fx.fill();
+                }
+                fx.restore();
             }
 
             function fotograma(ts) {
-                var dt = ult ? Math.min(120, ts - ult) : 16;
+                var dt = ult ? Math.min(120, Math.max(0, ts - ult)) : 16;
                 ult = ts;
                 reloj += dt;
                 var nuevo = claro() ? "claro" : "oscuro";
-                if (nuevo !== tema) {
-                    tema = nuevo;
-                    nube();
-                    siembra();
-                }
+                if (nuevo !== tema) { cielo(); }
                 px += (ox - px) * .06;
                 py += (oy - py) * .06;
                 fx.clearRect(0, 0, an, al);
                 fx.drawImage(capa, px * 12 - 45, py * 12 - 45, w0(), h0());
                 var tt = reloj / 1000, i, s, x, y, a;
+
+                // estrellas (sprites con parpadeo en dos frecuencias)
                 for (i = 0; i < estrellas.length; i++) {
                     s = estrellas[i];
                     x = s.x * an + px * (10 + s.k * 12);
                     y = s.y * al + py * (10 + s.k * 12);
-                    if (x < -4 || x > an + 4 || y < -4 || y > al + 4) {
+                    if (x < -6 || x > an + 6 || y < -6 || y > al + 6) {
                         continue;
                     }
-                    a = s.a * (.55 + .45 * Math.sin(tt * s.f + s.o));
-                    fx.globalAlpha = a < 0 ? 0 : (a > 1 ? 1 : a);
-                    fx.fillStyle = s.c;
-                    if (s.cruz) {
-                        fx.fillRect(x - s.r * 3, y - .5, s.r * 6, 1);
-                        fx.fillRect(x - .5, y - s.r * 3, 1, s.r * 6);
+                    a = s.a * (.62 + .3 * Math.sin(tt * s.f + s.o)
+                               + .1 * Math.sin(tt * s.f2 + s.o2));
+                    if (a <= .04) { continue; }
+                    fx.globalAlpha = a > 1 ? 1 : a;
+                    var sp = sprites[s.c + "-"
+                                     + (s.r >= 1.5 ? 2 : s.r >= .95 ? 1 : 0)];
+                    if (sp) {
+                        var lado = s.r * 11;
+                        fx.drawImage(sp, x - lado / 2, y - lado / 2,
+                                     lado, lado);
                     }
-                    fx.beginPath();
-                    fx.arc(x, y, s.r, 0, 6.283);
-                    fx.fill();
                 }
                 fx.globalAlpha = 1;
+
                 // estrellas fugaces
                 if (Math.random() < dt / 7000 && fugaces.length < 3) {
-                    fugaces.push({
-                        x: Math.random() * an * .8 - an * .1,
-                        y: (window.pageYOffset || 0)
-                           + Math.random() * window.innerHeight * .45,
-                        vx: 420 + Math.random() * 420,
-                        vy: 190 + Math.random() * 240,
-                        t: 0, vida: 700 + Math.random() * 700
-                    });
+                    nuevoFugaz();
                 }
                 for (i = fugaces.length - 1; i >= 0; i--) {
                     var f = fugaces[i];
@@ -3026,17 +4367,40 @@
                     }
                     f.x += f.vx * dt / 1000;
                     f.y += f.vy * dt / 1000;
-                    var grd = fx.createLinearGradient(
-                        f.x, f.y, f.x - f.vx * .18, f.y - f.vy * .18);
-                    grd.addColorStop(0, claro() ? "#5f7bd8" : "#eaf4ff");
-                    grd.addColorStop(1, "rgba(0,0,0,0)");
-                    fx.globalAlpha = Math.sin(Math.PI * f.t / f.vida);
-                    fx.strokeStyle = grd;
-                    fx.lineWidth = 1.7;
+                    pintaFugaz(f);
+                }
+                // chispas de las fugaces
+                for (i = destellos.length - 1; i >= 0; i--) {
+                    var ch = destellos[i];
+                    ch.t += dt;
+                    if (ch.t >= ch.vida) {
+                        destellos.splice(i, 1);
+                        continue;
+                    }
+                    ch.x += ch.vx * dt / 1000;
+                    ch.y += ch.vy * dt / 1000;
+                    fx.globalAlpha = (1 - ch.t / ch.vida) * .85;
+                    fx.fillStyle = Math.random() < .5 ? "#ffffff" : ch.col;
                     fx.beginPath();
-                    fx.moveTo(f.x, f.y);
-                    fx.lineTo(f.x - f.vx * .18, f.y - f.vy * .18);
-                    fx.stroke();
+                    fx.arc(ch.x, ch.y, ch.r, 0, 6.2832);
+                    fx.fill();
+                }
+                fx.globalAlpha = 1;
+
+                // OVNIS: uno nuevo de vez en cuando (siempre que no
+                // haya ya dos cruzando) y uno distinto cada vez
+                if (Math.random() < dt / 18000 && ovnis.length < 2) {
+                    siembraOvni();
+                }
+                for (i = ovnis.length - 1; i >= 0; i--) {
+                    var o = ovnis[i];
+                    o.t += dt;
+                    o.x += o.vx * dt / 1000;
+                    if (o.t >= o.dur || o.x < -100 || o.x > an + 100) {
+                        ovnis.splice(i, 1);
+                        continue;
+                    }
+                    pintaOvni(o);
                 }
                 fx.globalAlpha = 1;
             }
@@ -3064,6 +4428,25 @@
                 repinta: function () {
                     tema = "";
                     fotograma((window.performance && performance.now()) || 0);
+                },
+                ovni: function (i) {
+                    siembraOvni(i == null ? -1 : i, true);
+                    fotograma((window.performance && performance.now()) || 0);
+                },
+                // para pruebas: contadores y salto de tiempo simulado
+                // (cada 16ms es un fotograma: asi se ve el paso natural
+                // de fugaces y OVNIS sin esperar en tiempo real)
+                estado: function () {
+                    return { estrellas: estrellas.length,
+                             fugaces: fugaces.length,
+                             destellos: destellos.length,
+                             ovnis: ovnis.length, tema: tema,
+                             fugacesTot: fugTot, ovnisTot: ovniTot };
+                },
+                simula: function (ms) {
+                    for (var t = 0; t < (ms || 0); t += 16) {
+                        fotograma(ult + 16);
+                    }
                 }
             };
             cielo();
@@ -4382,5 +5765,6 @@
             });
         })();
     </script>
+<script src="i18n.js"></script>
 </body>
 </html>

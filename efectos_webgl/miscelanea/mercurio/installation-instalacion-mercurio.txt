@@ -1,0 +1,201 @@
+================================================================
+EFECTO MERCURIO - CÓMO APLICARLO A CUALQUIER ARCHIVO HTML
+================================================================
+
+PASO 1 - COPIA EL ARCHIVO DEL EFECTO
+------------------------------------
+"mercurio.html" es autocontenido: CSS, JavaScript y shader GLSL
+van dentro; no hay imágenes ni ficheros externos.
+
+    cópialo a tu proyecto, por ejemplo:
+        tu-pagina/efectos/mercurio.html
+
+
+PASO 2 - AÑÁDELO A TU PÁGINA
+----------------------------
+a) Como página completa, enlazándolo:
+
+       <a href="efectos/mercurio.html">ver efecto</a>
+
+b) Empotrado con un iframe (recomendado dentro de tu diseño):
+
+       <iframe src="efectos/mercurio.html?demo=1"
+               title="Efecto MERCURIO"
+               style="display:block;width:100%;height:520px;
+                      border:0;background:#05060a"></iframe>
+
+c) Como fondo de una sección: contenedor con position:relative,
+   el iframe con position:absolute; inset:0 y tu texto encima
+   (z-index mayor).
+
+
+PARÁMETROS EN LA URL
+---------------------
+    ?demo=1      la luz recorre el efecto sola (se ve sin mover
+                 el ratón)
+    ?t=MERCURIO  texto inicial; "+" = espacio: ?t=TEXTO LIQUIDO
+
+
+QUÉ HACE
+--------
+Tu texto se funde en mercurio: el metal ondula sin parar, el
+ratón mueve las luces y arrastra la superficie, y al hacer clic
+se lanza una onda expansiva que recorre la palabra. Escribiendo
+en la caja inferior cambias la palabra en caliente.
+
+
+TÉCNICA
+-------
+· Canvas 2D: el texto se pinta dos veces (máscara nítida +
+  versión desenfocada) → mapa de altura.
+· Del mapa de altura se deriva la NORMAL (gradiente de las 4
+  muestras) y se le añade un ruido de alta frecuencia: el
+  "brillo líquido" que hace que la superficie vibre.
+· Ondas: una onda suave que sigue al ratón + un anillo del clic
+  (gaussiana viajera que se amortigua con la edad) desplazan la
+  UV de muestreo.
+· Metal: fondo refractado según la normal + entorno reflejado
+  (reflect) + Blinn-Phong (specular potencia 90), Fresnel y un
+  filo (rim) azulado; la luz principal gira sola y se mezcla con
+  la luz del ratón según uAmp.
+
+
+AJUSTES FÁCILES
+---------------
+· Texto por defecto: value="MERCURIO" en el <input> o ?t=...
+· Fuerza del ratón: la uniforme uAmp (0 = la luz gira sola,
+  1 = manda el ratón).
+· Onda del clic: la gaussiana "exp(-pow((cd - age * 0.85) * 7.0,
+  2.0))" → 7.0 es lo estrecha que es y 1.8 lo rápido que se
+  apaga; el empuje está en "push" (0.020 ratón / 0.050 clic).
+· Más brillo especular: la potencia 90 de "spec" (menor número
+  = brillo más ancho).
+· Tinte del metal: el vec3 (0.84, 0.89, 1.00) de "metal"
+  (azulado) o (1,1,1) para acero puro.
+· Vibración: el 0.20 con que el ruido "s1, s2" ensucia la
+  normal.
+
+
+REQUISITOS
+----------
+· Navegador con WebGL 1 (cualquier navegador actual).
+· NO necesita servidor local: el shader va dentro del HTML y no
+  se carga con fetch. Si al abrir con doble clic (file://) tu
+  navegador bloqueara algo, sirve la carpeta en local:
+
+      py -3 -m http.server 8000
+
+  y abre http://127.0.0.1:8000/mercurio.html
+· Si en tu proyecto separas el shader a un fichero .glsl, AHÍ SÍ
+  necesitarías servidor local (fetch de archivos).
+
+
+ARCHIVOS
+--------
+    mercurio.html              el efecto (autocontenido)
+    index.html                 showcase (solo presentación)
+    installation-instalacion-mercurio.txt  este documento
+    mercurio.zip               efecto + este documento
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+MERCURY EFFECT - HOW TO APPLY IT TO ANY HTML FILE
+================================================================
+
+STEP 1 - COPY THE EFFECT FILE
+------------------------------------
+"mercurio.html" is self-contained: CSS, JavaScript and GLSL shader
+go inside; there are no images or external files.
+
+    copy it to your project, for example:
+        your-page/effects/mercurio.html
+
+
+STEP 2 - ADD IT TO YOUR PAGE
+----------------------------
+a) As a full page, linking to it:
+
+       <a href="efectos/mercurio.html">ver efecto</a>
+
+b) Embedded with an iframe (recommended within your design):
+
+       <iframe src="efectos/mercurio.html?demo=1"
+               title="Effect MERCURY"
+               style="display:block;width:100%;height:520px;
+                      border:0;background:#05060a"></iframe>
+
+c) As a section background: container with position:relative,
+   the iframe with position:absolute; inset:0 and your text on top
+   (higher z-index).
+
+
+URL PARAMETERS
+---------------------
+    ?demo=1      the light crosses the effect by itself (you can
+                  watch without moving the mouse)
+    ?t=MERCURY   initial text; "+" = space: ?t=LIQUID TEXT
+
+
+WHAT IT DOES
+--------
+Your text melts into mercury: the metal ripples non-stop, the
+mouse moves the lights and drags the surface, and on click
+an expanding wave crosses the word. By typing
+in the bottom box you change the word on the fly.
+
+
+TECHNIQUE
+-------
+· Canvas 2D: the text is painted twice (sharp mask +
+  blurred version) → height map.
+· From the height map comes the NORMAL (the 4-sample
+  gradient) plus high-frequency noise: the
+  "liquid shine" that makes the surface vibrate.
+· Waves: a soft wave that follows the mouse + a click ring
+  (a traveling Gaussian that decays with age) shift the
+  sampling UV.
+· Metal: background refracted along the normal + reflected
+  environment (reflect) + Blinn-Phong (specular power 90), Fresnel and a
+  bluish rim; the main light spins on its own and mixes with
+  the mouse light according to uAmp.
+
+
+EASY TWEAKS
+---------------
+· Default text: value="MERCURY" in the <input> or ?t=...
+· Mouse strength: the uAmp uniform (0 = the light spins alone,
+  1 = the mouse takes over).
+· Click wave: the Gaussian "exp(-pow((cd - age * 0.85) * 7.0,
+  2.0))" → 7.0 is how narrow it is and 1.8 how fast it
+  fades; the push is in "push" (0.020 mouse / 0.050 click).
+· More specular shine: the power 90 in "spec" (a lower number
+  = wider highlight).
+· Metal tint: the vec3 (0.84, 0.89, 1.00) in "metal"
+  (bluish) or (1,1,1) for pure steel.
+· Vibration: the 0.20 by which the noise "s1, s2" dirties the
+  normal.
+
+
+REQUIREMENTS
+----------
+· A browser with WebGL 1 (any current browser).
+· NO local server needed: the shader is inside the HTML and not
+  loaded with fetch. If on double-click open (file://) your
+  browser blocks something, serve the folder locally:
+
+      py -3 -m http.server 8000
+
+  and open http://127.0.0.1:8000/mercurio.html
+· If your project splits the shader into a .glsl file, THEN YES
+  you'd need a local server (file fetch).
+
+
+FILES
+--------
+    mercurio.html              the effect (self-contained)
+    index.html                 showcase (presentation only)
+    installation-instalacion-mercurio.txt  this document
+    mercurio.zip               effect + this document

@@ -1,0 +1,105 @@
+================================================================
+EFECTO ECOLOGISTAS - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "ecologistas.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/ecologistas.css">
+
+Contenido del archivo:
+  · La clase .efecto-ecologistas
+  · Sus pseudo-elementos ::before y ::after
+    (barra de análisis ::before y testigo ::after)
+  ·   · stk-ecologistas-luz, stk-ecologistas-analisis,
+    stk-ecologistas-testigo
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-ecologistas">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-ecologistas">ECOLOGISTAS</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones en bucle infinito:
+  · stk-ecologistas-luz (6,6 s) → la luz del laboratorio
+    recorre el degradado blanco y ámbar de las letras.
+  · stk-ecologistas-analisis (4,4 s) → la barra inferior
+    se rellena con la muestra, la mantiene y se vacía.
+  · stk-ecologistas-testigo (1,7 s) → el testigo naranja
+    parpadea como el LED de un equipo encendido.
+
+TÉCNICA: degradado blanco/ámbar recortado en el texto con
+    background-position animado, barra ::before
+    rellenada con background-size y testigo ::after con
+    opacidad intermitente.
+
+
+AJUSTES FÁCILES
+---------------
+· Análisis más rápido: 4.4s → 2.8s en stk-ecologistas-analisis.
+· Testigo más vivo: sube el .15 inicial en su keyframe.
+· Sin barra: borra el ::before y stk-ecologistas-analisis.
+· Ámbar cálido: #ffb74d → #ffca28 en el degradado base.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+ECOLOGISTS EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "ecologistas.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/ecologistas.css">
+
+What the file contains:
+  · The .efecto-ecologistas class
+  · Its pseudo-elements ::before and ::after
+    (analysis bar ::before and indicator light ::after)
+  ·   · stk-ecologistas-luz, stk-ecologistas-analisis,
+    stk-ecologistas-testigo
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-ecologistas">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-ecologistas">ECOLOGISTAS</span></h1>
+
+
+WHAT IT DOES
+--------
+Three animations on an infinite loop:
+  · stk-ecologistas-luz (6.6 s) → the laboratory light
+    runs across the letters' white and amber gradient.
+  · stk-ecologistas-analisis (4.4 s) → the bottom bar
+    fills with the sample, holds it and empties.
+  · stk-ecologistas-testigo (1.7 s) → the orange indicator
+    blinks like the LED of a powered-on device.
+
+TECHNIQUE: white/amber gradient clipped into the text with
+    animated background-position, bar ::before
+    filled with background-size and indicator ::after with
+    intermittent opacity.
+
+
+EASY TWEAKS
+---------------
+· Faster analysis: 4.4s → 2.8s in stk-ecologistas-analisis.
+· Brighter indicator: raise the initial .15 in its keyframe.
+· No bar: delete the ::before and stk-ecologistas-analisis.
+· Warm amber: #ffb74d → #ffca28 in the base gradient.

@@ -1,0 +1,103 @@
+================================================================
+EFECTO GRYFFINDOR - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "gryffindor.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/gryffindor.css">
+
+Contenido del archivo:
+  · La clase .efecto-gryffindor
+  · Sus pseudo-elementos ::before y ::after
+    (destello de espada ::before y halo del león ::after)
+  ·   · hp-gryffindor-brillo, hp-gryffindor-halo
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-gryffindor">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-gryffindor">GRYFFINDOR</span></h1>
+
+
+QUÉ HACE
+--------
+Dos animaciones en bucle infinito:
+  · hp-gryffindor-brillo (4,4 s) → el destello de la espada
+    de Godric cruza las letras de izquierda a derecha y se
+    apaga al salir.
+  · hp-gryffindor-halo (4,4 s) → el halo escarlata y dorado
+    detrás del texto sube y baja de intensidad como brasas.
+El degradado lleva background-size 220%: el oro vive en el
+centro exacto del texto y las puntas quedan en rojo.
+
+TÉCNICA: degradado escarlata/oro con background-clip: text y
+    destello ::before en diagonal barrido, halo ::after
+    con radial-gradient difuminado.
+
+
+AJUSTES FÁCILES
+---------------
+· Oro más brillante: sube el #ffcf4d del degradado a #ffe27a.
+· Destello más frecuente: 4.4s → 3s en hp-gryffindor-brillo.
+· Sin destello: borra el ::before y hp-gryffindor-brillo.
+· Lema más rojo: cambia el #d92b1f por #ff3d2e.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+GRYFFINDOR EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "gryffindor.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/gryffindor.css">
+
+What the file contains:
+  · The .efecto-gryffindor class
+  · Its pseudo-elements ::before and ::after
+    (sword glint ::before and lion halo ::after)
+  ·   · hp-gryffindor-brillo, hp-gryffindor-halo
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-gryffindor">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-gryffindor">GRYFFINDOR</span></h1>
+
+
+WHAT IT DOES
+--------
+Two animations on an infinite loop:
+  · hp-gryffindor-brillo (4.4 s) → the glint of the sword
+    of Godric crosses the letters left to right and turns
+    off as it leaves.
+  · hp-gryffindor-halo (4.4 s) → the scarlet and gold halo
+    behind the text rises and falls in intensity like embers.
+The gradient uses background-size 220%: the gold lives in the
+exact center of the text and the tips stay red.
+
+TECHNIQUE: scarlet/gold gradient with background-clip: text and
+    destello ::before en diagonal barrido, halo ::after
+    with a blurred radial-gradient.
+
+
+EASY TWEAKS
+---------------
+· Brighter gold: raise the gradient's #ffcf4d to #ffe27a.
+· More frequent glint: 4.4s → 3s in hp-gryffindor-brillo.
+· No glint: delete the ::before and hp-gryffindor-brillo.
+· Redder motto: change #d92b1f to #ff3d2e.

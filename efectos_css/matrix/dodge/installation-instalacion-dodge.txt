@@ -1,0 +1,103 @@
+================================================================
+EFECTO DODGE - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "dodge.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/dodge.css">
+
+Contenido del archivo:
+  · La clase .efecto-dodge
+  · Sus pseudo-elementos ::before y ::after
+    (línea de estela de movimiento a los lados)
+  ·   · mx-dodge, mx-dodge-estela
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-dodge">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-dodge">ESQUIVA</span></h1>
+
+
+QUÉ HACE
+--------
+Dos animaciones en bucle infinito:\n  · mx-dodge (3,2 s) → el texto hace tres esquivas: se
+    desplaza y rota a la izquierda, salta a la derecha,
+    corrige y vuelve quieto a su sitio.
+  · mx-dodge-estela (3,2 s) → una línea de arrastre a
+    cada lado se enciende exactamente mientras el texto
+    se mueve y se apaga en cuanto se queda quieto.
+El easing rápido hace que los saltos se lean como un
+movimiento evadido, no como una deriva.
+
+TÉCNICA: transform con translate/rotate por tramos (los tres
+    saltos) + pseudo-elemento de estela cuya opacidad
+    se abre y cierra en el mismo compás.
+
+
+AJUSTES FÁCILES
+---------------
+· Esquivas más anchas: sube los 7% del translate.
+· Más saltos: añade un tramo extra a mx-dodge.
+· Ciclo más corto: 3.2s → 2.2s.
+· Estela más larga: width 46% → 70%.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+DODGE EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "dodge.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/dodge.css">
+
+What the file contains:
+  · The .efecto-dodge class
+  · Its pseudo-elements ::before and ::after
+    (motion streak line at the sides)
+  ·   · mx-dodge, mx-dodge-estela
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-dodge">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-dodge">ESQUIVA</span></h1>
+
+
+WHAT IT DOES
+--------
+Two animations on an infinite loop:\n  · mx-dodge (3.2 s) → the text makes three dodges: it
+    shifts and rotates left, jumps to the right,
+    corrects itself and settles back into place.
+  · mx-dodge-estela (3.2 s) → a drag line on
+    each side lights up exactly while the text
+    moves and switches off as soon as it stops.
+The fast easing makes the jumps read like an
+evasive move, not like a drift.
+
+TECHNIQUE: transform with translate/rotate in stages (the three
+    jumps) + streak pseudo-element whose opacity
+    opens and closes to the same beat.
+
+
+EASY TWEAKS
+---------------
+· Wider dodges: raise the 7% of the translate.
+· More jumps: add an extra stage to mx-dodge.
+· Shorter cycle: 3.2s → 2.2s.
+· Longer streak: width 46% → 70%.

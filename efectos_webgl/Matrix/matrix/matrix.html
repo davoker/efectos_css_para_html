@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Código Matrix — efecto WebGL (versión mejorada del efecto CÓDIGO)</title>
+<style>
+  html, body { margin:0; height:100%; background:#000; overflow:hidden;
+    font-family:"Segoe UI", system-ui, sans-serif; color:#7fe8a6; }
+  #gl { position:fixed; inset:0; width:100%; height:100%; display:block; }
+  .ui { position:fixed; left:0; right:0; bottom:26px; display:flex; flex-direction:column;
+        align-items:center; gap:10px; pointer-events:none; }
+  #txt { pointer-events:auto; width:min(560px,84vw); text-align:center; font-size:17px;
+        padding:12px 18px; border-radius:999px; color:#c8ffe0; letter-spacing:.18em;
+        background:rgba(0,10,4,.62); border:1px solid rgba(0,255,120,.30);
+        outline:none; backdrop-filter:blur(6px); text-transform:uppercase; }
+  #txt:focus { border-color:rgba(60,255,140,.7); box-shadow:0 0 0 3px rgba(0,255,110,.15); }
+  .hint { margin:0; font-size:12.5px; letter-spacing:.06em; opacity:.72; text-align:center;
+          padding:0 16px; color:#79d9a0; }
+  .err { position:fixed; inset:0; display:none; place-items:center; text-align:center; padding:40px; }
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div class="ui">
+  <input id="txt" value="MATRIX" spellcheck="false" maxlength="24" autocomplete="off">
+  <p class="hint">el código se acelera junto al ratón &middot; clic para una onda &middot; escribe tu palabra</p>
+</div>
+<div class="err" id="err"><p>Este navegador no soporta WebGL, así que el efecto no puede mostrarse.</p></div>
+<script>
+(function(){
+"use strict";
+
+var cv  = document.getElementById('gl');
+var err = document.getElementById('err');
+var gl  = cv.getContext('webgl', {antialias:false, alpha:false, depth:false})
+       || cv.getContext('experimental-webgl', {antialias:false, alpha:false, depth:false});
+if (!gl) { err.style.display = 'grid'; return; }
+
+/* ---------------------------------------------------------------- shaders */
+
+var VS = [
+'attribute vec2 aPos;',
+'void main(){ gl_Position = vec4(aPos, 0.0, 1.0); }'
+].join('\n');
+
+var FS = [
+'#ifdef GL_FRAGMENT_PRECISION_HIGH',
+'precision highp float;',
+'#else',
+'precision mediump float;',
+'#endif',
+'',
+'uniform vec2  uRes;',
+'uniform float uTime;',
+'uniform sampler2D uText;',
+'uniform sampler2D uBlur;',
+'uniform sampler2D uAtlas;',
+'uniform vec2  uPlane;',
+'uniform vec2  uTexel;',
+'uniform vec2  uCells;',
+'uniform vec2  uAtlasGrid;',
+'uniform vec2  uMouse;',
+'uniform vec2  uClickPos;',
+'uniform float uAmp;',
+'uniform float uClickT;',
+'',
+'float hash21(vec2 p){',
+'  p = fract(p * vec2(123.34, 456.21));',
+'  p += dot(p, p + 45.32);',
+'  return fract(p.x * p.y);',
+'}',
+'',
+'/* alpha del glifo de la celda (cellId) en su posicion local (cellUV) */',
+'float glyphAlpha(vec2 cellId, vec2 cellUV){',
+'  float g  = hash21(cellId);',
+'  float gi = floor(g * uAtlasGrid.x * uAtlasGrid.y);',
+'  vec2  gc = vec2(mod(gi, uAtlasGrid.x), floor(gi / uAtlasGrid.x));',
+'  vec2  auv = (gc + cellUV) / uAtlasGrid;',
+'  return texture2D(uAtlas, auv).a;',
+'}',
+'',
+'/* lluvia de la Matrix: devuelve la intensidad 0..1 y la cabeza blanca hg */',
+'float rainAt(vec2 ruv, float t, out float hg, out float aOut){',
+'  float cx = floor(ruv.x * uCells.x);',
+'  float y  = ruv.y * uCells.y;',
+'  float h1 = hash21(vec2(cx, 11.0));',
+'  float h2 = hash21(vec2(cx, 37.0));',
+'',
+'  /* los glifos descienden despacio (como en la pelicula) */',
+'  float yy = mod(y + t * (0.5 + 1.2 * h1), 3000.0);',
+'  float cellX = fract(ruv.x * uCells.x);',
+'  float a = glyphAlpha(vec2(cx + 0.5, floor(yy) + 0.5), vec2(cellX, fract(yy)));',
+'',
+'  /* la luz barre la columna mucho mas rapida que los glifos */',
+'  float trail = 8.0 + 12.0 * h2;',
+'  float span  = uCells.y + trail;',
+'  float hy    = span - mod(t * (10.0 + 10.0 * h1) + h2 * span, span);',
+'  float d     = y - hy;',
+'  float lit   = 0.0;',
+'  if (d >= 0.0 && d <= trail) lit = pow(1.0 - d / trail, 1.4);',
+'',
+'  /* base: codigo siempre presente y muy tenue */',
+'  float base = 0.12 + 0.16 * hash21(vec2(cx, 77.0));',
+'  aOut = a;',
+'  hg = smoothstep(1.8, 0.0, abs(d)) * a;   /* la cabeza blanca solo donde hay glifo */',
+'  return max(lit, base) * a;',
+'}',
+'',
+'vec3 codeCol(float b, float hg){',
+'  vec3 c = mix(vec3(0.03, 0.14, 0.06), vec3(0.22, 1.00, 0.45), smoothstep(0.0, 1.0, b));',
+'  c *= 0.30 + 0.70 * b;',
+'  c += vec3(0.85, 1.00, 0.92) * hg * (0.60 + 1.00 * b);',
+'  return c;',
+'}',
+'',
+'void main(){',
+'  float t = uTime;',
+'  vec2 frag = gl_FragCoord.xy;',
+'  vec2 p = (frag - 0.5 * uRes) / uRes.y;',
+'  vec2 ruv = frag / uRes;',
+'',
+'  /* -- texto: mascara nítida + mapa de altura difuminado -- */',
+'  vec2 tuv = 0.5 + p / (2.0 * uPlane);',
+'  float inPlane = step(0.0, tuv.x) * step(tuv.x, 1.0) * step(0.0, tuv.y) * step(tuv.y, 1.0);',
+'  vec2 cuv = clamp(tuv, 0.0, 1.0);',
+'  float mask = texture2D(uText, cuv).a * inPlane;',
+'  float hb   = texture2D(uBlur, cuv).a * inPlane;',
+'',
+'  float hL = texture2D(uBlur, clamp(cuv - vec2(uTexel.x, 0.0), 0.0, 1.0)).a;',
+'  float hR = texture2D(uBlur, clamp(cuv + vec2(uTexel.x, 0.0), 0.0, 1.0)).a;',
+'  float hD = texture2D(uBlur, clamp(cuv - vec2(0.0, uTexel.y), 0.0, 1.0)).a;',
+'  float hU = texture2D(uBlur, clamp(cuv + vec2(0.0, uTexel.y), 0.0, 1.0)).a;',
+'  vec3 N = normalize(vec3((hL - hR) * 2.6, (hD - hU) * 2.6, 0.35));',
+'',
+'  /* curvatura suave del "codigo" dentro de los glifos (tipo tubo de CATODO) */',
+'  float s1 = vnoiseSafe(vec2(tuv * 14.0 + vec2(t * 0.6, -t * 0.4)));',
+'  float s2 = vnoiseSafe(vec2(tuv * 14.0 + vec2(-t * 0.5, t * 0.6) + 7.3));',
+'  N.xy += (vec2(s1, s2) - 0.5) * 0.28 * hb;',
+'  N = normalize(N);',
+'',
+'  /* -- interaccion -- */',
+'  vec2 dm = p - uMouse;',
+'  float md = length(dm);',
+'  float wave = sin(md * 36.0 - t * 7.0) * exp(-md * 6.0) * uAmp;',
+'',
+'  vec2 dc = p - uClickPos;',
+'  float cd = length(dc);',
+'  float age = max(t - uClickT, 0.0);',
+'  float ring = exp(-pow((cd - age * 0.85) * 7.0, 2.0)) * exp(-age * 1.8);',
+'',
+'  float mBoost = exp(-9.0 * md * md) * uAmp;',
+'  float warp = mBoost * 2.5 + ring * 1.5 + wave * 0.5;',
+'',
+'  /* -- la lluvia, una sola vez, con lente dentro de las letras -- */',
+'  vec2 rp = ruv + N.xy * vec2(0.010, 0.020) * hb;',
+'  float hg, ga;',
+'  float b = rainAt(rp, t + warp, hg, ga);',
+'  float hg2, ga2;',
+'  float b2 = rainAt(rp + vec2(0.0, 0.55 / uCells.y), t + warp, hg2, ga2);   /* estela vertical */',
+'  b2 += (mBoost * 0.35 + ring * 0.45) * ga;',
+'',
+'  vec3 rainMain = codeCol(min(b, 1.6), hg);',
+'  vec3 smear    = codeCol(min(b2, 1.2), hg2) * 0.50;',
+'',
+'  /* -- fondo: la pelicula, muy apagado -- */',
+'  vec3 bg = (rainMain + smear) * 0.55 + vec3(0.010, 0.045, 0.020);',
+'  bg *= 0.90 + 0.10 * sin(t * 1.75);                         /* latido lento */',
+'',
+'  /* -- letras: ventana encendida con biselado -- */',
+'  vec3 L = normalize(vec3(0.35, 0.55, 0.75));',
+'  float shade = 0.80 + 0.45 * max(dot(N, L), 0.0);',
+'  float fres  = pow(1.0 - max(dot(N, vec3(0.0, 0.0, 1.0)), 0.0), 2.5);',
+'',
+'  vec3 letra = (rainMain + smear * 0.6) * 1.60 * shade;',
+'  letra += vec3(0.020, 0.090, 0.040);',
+'  letra += vec3(0.12, 0.85, 0.35) * ga * (0.35 + 0.65 * b);   /* el codigo, siempre encendido, dentro de las letras */',
+'  letra += vec3(0.10, 0.55, 0.22) * pow(hb, 2.0) * 0.30;',
+'  letra += vec3(0.30, 1.00, 0.50) * fres * 0.40;',
+'',
+'  float rim = pow(clamp(hb * (1.0 - hb) * 2.0, 0.0, 1.0), 2.0);',
+'  vec3 col = mix(bg, letra, mask);',
+'  col += vec3(0.20, 1.00, 0.45) * rim * 0.85;',
+'',
+'  /* -- aberracion cromatica en el borde de los glifos -- */',
+'  float o  = 0.004 + 0.010 * length(N.xy);',
+'  float mr = texture2D(uText, clamp(cuv + N.xy * o, 0.0, 1.0)).a;',
+'  float mb = texture2D(uText, clamp(cuv - N.xy * o, 0.0, 1.0)).a;',
+'  col += vec3(0.10, 0.95, 0.40) * (mr - mask) * 0.55;',
+'  col += vec3(0.95, 0.15, 0.75) * (mb - mask) * 0.12;',
+'',
+'  col += vec3(0.20, 1.00, 0.50) * ring * 0.35;',
+'',
+'  /* -- lineas de barrido, vineta, grano -- */',
+'  col *= 1.0 - 0.10 * (0.5 + 0.5 * sin(frag.y * 2.4));',
+'  col *= 1.0 - 0.55 * smoothstep(0.40, 1.15, length(p * vec2(0.7, 1.0)));',
+'  col += (hash21(frag + fract(t) * 13.7) - 0.5) * 0.020;',
+'  col = vec3(1.0) - exp(-max(col, 0.0) * 1.35);',
+'',
+'  gl_FragColor = vec4(col, 1.0);',
+'}'
+].join('\n');
+
+// ruido suave reutilizable (se inyecta antes de main)
+var NOISE = [
+'float vnoiseSafe(vec2 p){',
+'  vec2 i = floor(p), f = fract(p);',
+'  vec2 u = f * f * (3.0 - 2.0 * f);',
+'  float a = hash21(i);',
+'  float b = hash21(i + vec2(1.0, 0.0));',
+'  float c = hash21(i + vec2(0.0, 1.0));',
+'  float d = hash21(i + vec2(1.0, 1.0));',
+'  return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);',
+'}',
+''
+].join('\n');
+FS = FS.replace('vec3 codeCol', NOISE + 'vec3 codeCol');
+
+function compile(type, src){
+  var s = gl.createShader(type);
+  gl.shaderSource(s, src);
+  gl.compileShader(s);
+  if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+    console.error(gl.getShaderInfoLog(s));
+    return null;
+  }
+  return s;
+}
+
+var vs = compile(gl.VERTEX_SHADER, VS);
+var fs = compile(gl.FRAGMENT_SHADER, FS);
+if (!vs || !fs) { err.style.display = 'grid'; err.firstElementChild.textContent = 'Error al compilar los shaders.'; return; }
+
+var prog = gl.createProgram();
+gl.attachShader(prog, vs);
+gl.attachShader(prog, fs);
+gl.bindAttribLocation(prog, 0, 'aPos');
+gl.linkProgram(prog);
+if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+  console.error(gl.getProgramInfoLog(prog));
+  err.style.display = 'grid';
+  return;
+}
+gl.useProgram(prog);
+
+var buf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+gl.enableVertexAttribArray(0);
+gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+
+var U = {};
+['uRes','uTime','uText','uBlur','uAtlas','uPlane','uTexel','uCells','uAtlasGrid',
+ 'uMouse','uClickPos','uAmp','uClickT'].forEach(function(n){ U[n] = gl.getUniformLocation(prog, n); });
+
+function newTex(){
+  var t = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, t);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  return t;
+}
+var texText  = newTex();
+var texBlur  = newTex();
+var texAtlas = newTex();
+// el lienzo 2D crece hacia abajo y el lienzo GL hacia arriba: hay que voltearlo
+gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+
+/* --------------------------------------------------------- atlas de glifos */
+
+var ATLAS_COLS = 16, ATLAS_ROWS = 8, CELL_W = 30, CELL_H = 48;
+
+function buildAtlas(){
+  var chars = [];
+  var c;
+  // katakana de ancho medio: los de la pelicula
+  for (c = 0xFF66; c <= 0xFF9D; c++) chars.push(String.fromCharCode(c));
+  // digitos y letras
+  '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(function(s){ chars.push(s); });
+  // katakana completos
+  'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン'.split('')
+    .forEach(function(s){ chars.push(s); });
+  // kanji sueltos, como en la pelicula
+  '一二三四五六七八九十出入力無時間年月火水木金土'.split('').forEach(function(s){ chars.push(s); });
+
+  var a = document.createElement('canvas');
+  a.width  = ATLAS_COLS * CELL_W;
+  a.height = ATLAS_ROWS * CELL_H;
+  var ctx = a.getContext('2d');
+  ctx.fillStyle = '#000';
+  ctx.clearRect(0, 0, a.width, a.height);
+  ctx.fillStyle = '#fff';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.font = '26px "MS Gothic", "Yu Gothic", "Segoe UI", monospace';
+
+  for (var i = 0; i < ATLAS_COLS * ATLAS_ROWS; i++){
+    var ch = chars.length ? chars[i % chars.length] : '?';
+    var gx = (i % ATLAS_COLS) * CELL_W + CELL_W / 2;
+    var gy = Math.floor(i / ATLAS_COLS) * CELL_H + CELL_H / 2;
+    ctx.fillText(ch, gx, gy);
+  }
+
+  gl.bindTexture(gl.TEXTURE_2D, texAtlas);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, a);
+}
+buildAtlas();
+
+/* ------------------------------------------------------- textura del texto */
+
+var planeAspect = 6.0;
+var texel = [1/1024, 1/256];
+
+function fontFor(size){
+  return '900 ' + size + 'px "Arial Black", "Segoe UI Black", Impact, system-ui, sans-serif';
+}
+
+function buildText(str){
+  str = (str || '').replace(/\s+/g, ' ').trim();
+  if (!str) str = 'MATRIX';
+  str = str.toUpperCase();
+
+  var probe = document.createElement('canvas').getContext('2d');
+  var size = 320, tw = 0, pad = 0;
+  for (var k = 0; k < 4; k++){
+    probe.font = fontFor(size);
+    tw = probe.measureText(str).width;
+    pad = Math.round(size * 0.35);
+    if (tw + pad * 2 <= 2048) break;
+    size = Math.max(48, Math.floor(size * (2048 - pad * 2) / (tw + pad * 2)));
+  }
+
+  var W = Math.ceil(tw) + pad * 2;
+  var H = Math.ceil(size * 1.30) + pad * 2;
+  var baseline = pad + size * 0.98;
+
+  var sharp = document.createElement('canvas');
+  sharp.width = W; sharp.height = H;
+  var sc = sharp.getContext('2d');
+  sc.font = fontFor(size);
+  sc.textAlign = 'center';
+  sc.textBaseline = 'alphabetic';
+  sc.fillStyle = '#fff';
+  sc.fillText(str, W / 2, baseline);
+
+  var blur = document.createElement('canvas');
+  blur.width = W; blur.height = H;
+  var bc = blur.getContext('2d');
+  bc.font = fontFor(size);
+  bc.textAlign = 'center';
+  bc.textBaseline = 'alphabetic';
+  bc.fillStyle = '#fff';
+
+  var radius = Math.max(4, Math.round(size * 0.06));
+  if (typeof bc.filter === 'string') {
+    bc.filter = 'blur(' + radius + 'px)';
+    bc.fillText(str, W / 2, baseline);
+    bc.filter = 'none';
+  } else {
+    bc.globalAlpha = 0.30;
+    bc.fillText(str, W / 2, baseline);
+    for (var i = 0; i < 8; i++){
+      var ang = i / 8 * Math.PI * 2;
+      bc.fillText(str, W / 2 + Math.cos(ang) * radius, baseline + Math.sin(ang) * radius);
+    }
+    bc.globalAlpha = 1;
+  }
+
+  gl.bindTexture(gl.TEXTURE_2D, texText);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, sharp);
+  gl.bindTexture(gl.TEXTURE_2D, texBlur);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, blur);
+
+  planeAspect = W / H;
+  texel = [1 / W, 1 / H];
+  updatePlane();
+}
+
+/* ------------------------------------------------------------- geometría */
+
+var plane = [0.5, 0.125];
+var cells = [60, 30];
+
+function updatePlane(){
+  var asp = cv.width / Math.max(cv.height, 1);
+  var availX = 0.5 * asp - 0.04;
+  var h = Math.min(availX / planeAspect, 0.42);
+  plane = [h * planeAspect, h];
+}
+
+function updateCells(){
+  // celdas de la lluvia: estrechas y bajas, como en la pelicula
+  var w = window.innerWidth, hh = window.innerHeight;
+  cells = [Math.max(20, Math.round(w / 18.6)), Math.max(10, Math.round(hh / 30))];
+}
+
+function resize(){
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var w = Math.max(1, Math.floor(cv.clientWidth * dpr));
+  var h = Math.max(1, Math.floor(cv.clientHeight * dpr));
+  if (cv.width !== w || cv.height !== h){
+    cv.width = w; cv.height = h;
+    gl.viewport(0, 0, w, h);
+  }
+  updatePlane();
+  updateCells();
+}
+window.addEventListener('resize', resize);
+
+/* ----------------------------------------------------------- interacción */
+
+var mouse = [0, 0];
+var clickPos = [0, 0];
+var clickT = -10000;
+var amp = 0, ampTarget = 0;
+var lastMove = -1e9;
+
+function toScene(x, y){
+  var w = window.innerWidth, h = window.innerHeight;
+  return [(x - w / 2) / h, (h / 2 - y) / h];
+}
+
+window.addEventListener('pointermove', function(e){
+  mouse = toScene(e.clientX, e.clientY);
+  lastMove = performance.now();
+  ampTarget = 1;
+}, {passive:true});
+
+window.addEventListener('pointerdown', function(e){
+  clickPos = toScene(e.clientX, e.clientY);
+  mouse = clickPos;
+  clickT = tSec;
+  lastMove = performance.now();
+  ampTarget = 1;
+}, {passive:true});
+
+var input = document.getElementById('txt');
+var pending = null;
+input.addEventListener('input', function(){ pending = input.value; });
+input.addEventListener('keydown', function(e){
+  if (e.key === 'Enter') { e.preventDefault(); input.blur(); }
+});
+
+// modo demo (?demo=1): recorre el ratón solo, para verlo sin mover el punter
+var demo = /[?&]demo=1/.test(location.search);
+
+// texto inicial por URL (?t=MATRIX)
+var mText = /[?&]t=([^&]+)/.exec(location.search);
+if (mText) {
+  try {
+    var v0 = decodeURIComponent(mText[1].replace(/\+/g, ' '));
+    if (v0) { input.value = v0; input.setAttribute('value', v0); }
+  } catch (e) {}
+}
+
+/* ------------------------------------------------------------------ bucle */
+
+var t0 = performance.now();
+var tSec = 0;
+var pendingBuilt = false;
+
+function frame(now){
+  tSec = (now - t0) / 1000;
+  resize();
+
+  if (pending !== null && !pendingBuilt){
+    pendingBuilt = true;
+    var v = pending; pending = null;
+    buildText(v);
+    pendingBuilt = false;
+  }
+
+  if (now - lastMove > 2600) ampTarget = 0;
+  amp += (ampTarget - amp) * 0.07;
+
+  if (demo){
+    mouse = [0.30 * Math.sin(tSec * 0.8), 0.16 * Math.cos(tSec * 0.6)];
+    ampTarget = 1;
+    amp = 1;
+  }
+
+  gl.uniform2f(U.uRes, cv.width, cv.height);
+  gl.uniform1f(U.uTime, tSec);
+  gl.uniform2f(U.uPlane, plane[0], plane[1]);
+  gl.uniform2f(U.uTexel, texel[0], texel[1]);
+  gl.uniform2f(U.uCells, cells[0], cells[1]);
+  gl.uniform2f(U.uAtlasGrid, ATLAS_COLS, ATLAS_ROWS);
+  gl.uniform2f(U.uMouse, mouse[0], mouse[1]);
+  gl.uniform2f(U.uClickPos, clickPos[0], clickPos[1]);
+  gl.uniform1f(U.uAmp, amp);
+  gl.uniform1f(U.uClickT, clickT);
+
+  gl.activeTexture(gl.TEXTURE0);
+  gl.bindTexture(gl.TEXTURE_2D, texText);
+  gl.uniform1i(U.uText, 0);
+  gl.activeTexture(gl.TEXTURE1);
+  gl.bindTexture(gl.TEXTURE_2D, texBlur);
+  gl.uniform1i(U.uBlur, 1);
+  gl.activeTexture(gl.TEXTURE2);
+  gl.bindTexture(gl.TEXTURE_2D, texAtlas);
+  gl.uniform1i(U.uAtlas, 2);
+
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  requestAnimationFrame(frame);
+}
+
+gl.uniform1i(U.uText, 0);
+gl.uniform1i(U.uBlur, 1);
+gl.uniform1i(U.uAtlas, 2);
+resize();
+buildText(input.value);
+requestAnimationFrame(frame);
+
+window.__textoListo = true;
+})();
+</script>
+</body>
+</html>

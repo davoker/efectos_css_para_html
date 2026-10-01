@@ -55,7 +55,7 @@
         code { color: #d7f1ff; }
         .nota { color: #b3e5fc; font-weight: bold; }
 
-        /* --- BOTÓN "TODOS LOS EFECTOS" (centrado arriba) ---
+        /* --- BOTÓN "PORTADA" (centrado arriba) ---
            Clicable y con estado pulsado; mientras se mantiene sale el
            destello TEMÁTICO de este efecto y, al soltar, salta a
            transicion.html#espiritu: allí estalla la escena del propio
@@ -65,6 +65,7 @@
             text-align: center;
             margin: 0 0 1.4rem;
         }
+        nav.barra-volver a + a { margin-left: .7rem; }
         .btn-volver {
             position: relative;
             z-index: 2;
@@ -152,7 +153,8 @@
 <body>
 
     <nav class="barra-volver">
-        <a class="btn-volver" href="../../transicion.html#espiritu">← Todos los efectos</a>
+        <a class="btn-volver" href="../../../transicion.html#espiritu">← Portada</a>
+        <a class="btn-volver" href="espiritu.zip" download>Descarga</a>
     </nav>
 
     <h1>EFECTO ESPÍRITU</h1>
@@ -199,7 +201,7 @@
     </p>
     <p>
         También tienes las instrucciones en el archivo
-        <code>como-aplicar-espiritu.txt</code> de esta misma carpeta.
+        <code>installation-instalacion-espiritu.txt</code> de esta misma carpeta.
     </p>
 
     <script>
@@ -265,5 +267,6 @@
             }, { passive: true });
         })();
     </script>
+<script src="../../../i18n.js"></script>
 </body>
 </html>

@@ -1,0 +1,121 @@
+================================================================
+EFECTO FUEGO - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "fuego.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/fuego.css">
+
+El archivo es 100% portable: no depende de ningún otro estilo,
+de librerías ni de JavaScript. Contiene:
+  · La clase .efecto-fuego
+  · 2 @keyframes: fuego-llamas y fuego-calor
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-fuego">Tu texto</span>
+
+Ejemplo real sobre un título:
+
+    <h1><span class="efecto-fuego">Fuego</span></h1>
+
+
+VENTAJAS
+--------
+· NO necesita ningún atributo extra (a diferencia del efecto
+  glitch, aquí no hay data-text): solo la clase.
+· Recomendado: que el texto esté en negrita
+  (font-weight: bold) para que las llamas tengan volumen.
+· Funciona sobre cualquier texto (h1, h2, enlaces, botones...).
+
+
+QUÉ HACE
+--------
+Dos animaciones simultáneas en bucle infinito:
+  · fuego-llamas (0,9 s) → 4 capas de text-shadow que cambian
+    en salto seco (steps): núcleo blanco-amarillo, lengüeta
+    naranja, resplandor rojo y brillo inferior = chispas que
+    chisporrotean sin parar.
+  · fuego-calor (1,6 s) → skew + scale suaves: las letras
+    ondulan como temblor por el calor.
+
+
+AJUSTES FÁCILES
+---------------
+· Llama más grande: aumenta los valores de desplazamiento y
+  desenfoque de los text-shadow (ej: -18px → -30px).
+· Más rápido: cambia 0.9s por 0.5s (fuego-llamas) y
+  1.6s por 1s (fuego-calor).
+· Más lento: al revés (1.4s y 3s).
+· Colores fríos ("fuego fantasma"): sustituye los naranjas
+  y rojos por azules (00b0ff, 2962ff) y el amarillo por
+  blanco.
+· Menos humo/calor: borra la 4ª capa de text-shadow
+  (la que empieza por "0 10px").
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+FIRE EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "fuego.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/fuego.css">
+
+The file is 100% portable: it doesn't depend on any other style,
+on libraries or on JavaScript. It contains:
+  · The .efecto-fuego class
+  · 2 @keyframes: fuego-llamas and fuego-calor
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-fuego">Tu texto</span>
+
+Real example on a title:
+
+    <h1><span class="efecto-fuego">Fuego</span></h1>
+
+
+ADVANTAGES
+--------
+· NO extra attribute needed (unlike the glitch
+  effect, here there is no data-text): just the class.
+· Recommended: keep the text in bold
+  (font-weight: bold) so the flames have body.
+· Works on any text (h1, h2, links, buttons...).
+
+
+WHAT IT DOES
+--------
+Two simultaneous animations on an infinite loop:
+  · fuego-llamas (0.9 s) → 4 layers of text-shadow that change
+    in hard steps (steps): white-yellow core, orange tongue,
+    red glow and bottom shine = sparks that
+    crackle without stopping.
+  · fuego-calor (1.6 s) → soft skew + scale: the letters
+    waver like heat shimmer.
+
+
+EASY TWEAKS
+---------------
+· Bigger flame: increase the offset and
+  blur values of the text-shadow (e.g.: -18px → -30px).
+· Faster: change 0.9s to 0.5s (fuego-llamas) and
+  1.6s to 1s (fuego-calor).
+· Slower: the other way around (1.4s and 3s).
+· Cool colors ("ghost fire"): replace the oranges
+  and reds with blues (00b0ff, 2962ff) and the yellow with
+  white.
+· Less smoke/heat: delete the 4th text-shadow layer
+  (the one starting with "0 10px").

@@ -1,0 +1,103 @@
+================================================================
+EFECTO IMPACTO - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "impacto.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/impacto.css">
+
+Contenido del archivo:
+  · La clase .efecto-impacto
+  · Sus pseudo-elementos ::before y ::after
+    (el número de daño que brota arriba)
+  ·   · impacto-golpe, impacto-flota
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-impacto">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-impacto">CRÍTICO</span></h1>
+
+
+QUÉ HACE
+--------
+Dos animaciones sincronizadas en bucle infinito:
+  · impacto-golpe (2,8 s, steps(1)) → justo cuando nace el
+    número, el texto se sacude, crece un 6% y destella un
+    instante, seco, como un impacto real.
+  · impacto-flota (2,8 s, ease-out) → el ::after con el
+    número -12.487 aparece sobre el texto, asciende y se
+    apaga; luego espera al próximo golpe.
+El color base es un degradado blanco-dorado de daño crítico.
+
+TÉCNICA: background-clip: text + transform/filter del golpe y
+    ::after con el número flotante (content, opacity y
+    transform) con steps() y ease-out.
+
+
+AJUSTES FÁCILES
+---------------
+· Golpes más frecuentes: 2.8s → 1.6s.
+· Número más grande: .55em → .8em en ::after.
+· Otro número: cambia content: '-12.487' por el que quieras.
+· Más subida: -.9em → -1.4em en el 25% de impacto-flota.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+IMPACT EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "impacto.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/impacto.css">
+
+What the file contains:
+  · The .efecto-impacto class
+  · Its pseudo-elements ::before and ::after
+    (the damage number that pops up above)
+  ·   · impacto-golpe, impacto-flota
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-impacto">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-impacto">CRÍTICO</span></h1>
+
+
+WHAT IT DOES
+--------
+Two animations synced on an infinite loop:
+  · impacto-golpe (2.8 s, steps(1)) → right when the
+    number appears, the text shakes, grows 6% and flashes
+    for a crisp instant, like a real hit.
+  · impacto-flota (2.8 s, ease-out) → the ::after with the
+    number -12.487 appears over the text, rises and
+    fades; then waits for the next hit.
+The base color is a critical-damage white-gold gradient.
+
+TECHNIQUE: background-clip: text + the hit's transform/filter and
+    ::after with the floating number (content, opacity and
+    transform) with steps() and ease-out.
+
+
+EASY TWEAKS
+---------------
+· More frequent hits: 2.8s → 1.6s.
+· Bigger number: .55em → .8em in ::after.
+· Another number: change content: '-12.487' to whatever you want.
+· More rise: -.9em → -1.4em in the 25% of impacto-flota.

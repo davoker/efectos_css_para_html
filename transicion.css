@@ -3,9 +3,10 @@
    ------------------------------------------------------------------
    Las usan DOS páginas, para que el efecto sea idéntico en los dos
    sitios sin duplicar código:
-     · transicion.html → cada botón "Todos los efectos" llega con su
+     · transicion.html → cada botón "Portada" llega con su
        fragmento (#radiacion, #hielo…) y la regla .escena:target
-       elige la escena del propio efecto de la página de origen.
+       elige la escena del propio efecto (en los showcases WebGL y
+       SVG, la de su misma temática: #codigo, #mercurio, #cine…).
      · index.html (portada) → cada botón "Descargar efecto (.zip)"
        lleva tras de sí su propia copia del <div class="escena …">;
        al soltar el clic se muestra mientras se baja el .zip (las
@@ -7284,4 +7285,142 @@
     0%, 100% { transform: scaleY(1) skewY(0deg); }
     25%      { transform: scaleY(2.4) skewY(1.4deg); }
     60%      { transform: scaleY(1.4) skewY(-1deg); }
+}
+
+/* ============ 120. MERCURIO — metal líquido ============
+   Escena propia de los dos efectos "Mercurio" (WebGL y SVG): el
+   texto se funde en cromo y dos ondas lo rodean. Es la escena que
+   estalla al pulsar "Portada" dentro de sus showcases. */
+.tema-mercurio {
+    background: radial-gradient(120% 95% at 50% 34%,
+                #39434d 0%, #171d24 56%, #0a0e12 100%);
+}
+.tema-mercurio::after {
+    background: radial-gradient(circle at 50% 46%,
+                #ffffff 0%, #dfe9f0 22%, rgba(203,218,229,0) 66%);
+}
+.me-texto {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12vmin;
+    font-weight: 800;
+    letter-spacing: .04em;
+    color: transparent;
+    background-image: linear-gradient(180deg,
+                #ffffff 0%, #e6edf3 14%, #9aa7b4 32%, #454e58 47%,
+                #6f7b87 52%, #c3ced8 66%, #f4f8fb 80%, #5b6570 100%);
+    background-size: 100% 320%;
+    background-position: 50% 0%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    filter: drop-shadow(0 .7vmin 1.8vmin rgba(0, 0, 0, .65));
+    animation: me-texto 3.2s ease-in-out infinite,
+               me-brillo 2.6s linear infinite;
+}
+.me-onda {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 46vmin;
+    height: 46vmin;
+    margin: -23vmin 0 0 -23vmin;
+    border: .35vmin solid rgba(216, 230, 240, .75);
+    border-radius: 50%;
+    opacity: 0;
+    animation: me-onda 2.4s ease-out infinite;
+}
+.me-onda-2 { animation-delay: 1.2s; }
+@keyframes me-texto {
+    0%, 100% { transform: translate(-50%, -50%) skewX(0deg) scaleY(1); }
+    30%      { transform: translate(-50%, -53%) skewX(-3deg) scaleY(1.07); }
+    65%      { transform: translate(-50%, -47%) skewX(3deg) scaleY(.93); }
+}
+@keyframes me-brillo {
+    0%   { background-position: 50% 0%; }
+    100% { background-position: 50% 100%; }
+}
+@keyframes me-onda {
+    0%   { opacity: 0; transform: scale(.45); }
+    14%  { opacity: .85; }
+    100% { opacity: 0; transform: scale(2.3); }
+}
+
+/* ============ 121. CINE — Matrix 2 en pantalla panorámica ============
+   Escena propia del efecto "Matrix 2 · CINE" (WebGL): barras
+   panorámicas que se cierran, bloom verde y destellos de aberración
+   cromática. Es la escena que estalla al pulsar "Portada" dentro de
+   su showcase. */
+.tema-cine {
+    background: radial-gradient(130% 100% at 50% 42%,
+                #07291a 0%, #04170e 55%, #010806 100%);
+}
+.tema-cine::after {
+    background: radial-gradient(circle at 50% 48%,
+                #d9ffe9 0%, rgba(0, 255, 140, .45) 26%,
+                rgba(0, 255, 140, 0) 68%);
+}
+.ci-barras {
+    position: absolute;
+    inset: 0;
+}
+.ci-barras::before,
+.ci-barras::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 15%;
+    background: #000000;
+    box-shadow: 0 0 3vmin rgba(0, 255, 140, .35);
+    animation: ci-barra 1.1s cubic-bezier(.2, .9, .3, 1) both;
+}
+.ci-barras::before {
+    top: 0;
+    transform-origin: 50% 0;
+}
+.ci-barras::after {
+    bottom: 0;
+    transform-origin: 50% 100%;
+    animation-delay: .14s;
+}
+.ci-bloom {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 62vmin;
+    height: 62vmin;
+    margin: -31vmin 0 0 -31vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+                rgba(0, 255, 140, .55) 0%,
+                rgba(0, 255, 140, .18) 42%, transparent 70%);
+    animation: ci-bloom 2.2s ease-in-out infinite alternate;
+}
+.ci-aberracion {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+                rgba(255, 0, 70, .28) 0 33%,
+                rgba(0, 255, 140, .20) 33% 66%,
+                rgba(70, 120, 255, .28) 66% 100%);
+    mix-blend-mode: screen;
+    opacity: 0;
+    animation: ci-aberracion 2.6s steps(1, end) .5s infinite;
+}
+@keyframes ci-barra {
+    from { transform: scaleY(0); }
+    to   { transform: scaleY(1); }
+}
+@keyframes ci-bloom {
+    from { opacity: .4; transform: scale(.82); }
+    to   { opacity: .95; transform: scale(1.18); }
+}
+@keyframes ci-aberracion {
+    0%, 100% { opacity: 0; transform: translateX(0); }
+    8%       { opacity: .55; transform: translateX(-1.6%); }
+    14%      { opacity: 0; transform: translateX(0); }
+    46%      { opacity: .4; transform: translateX(1.6%); }
+    52%      { opacity: 0; transform: translateX(0); }
 }

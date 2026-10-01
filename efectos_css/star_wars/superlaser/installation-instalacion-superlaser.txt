@@ -1,0 +1,109 @@
+================================================================
+EFECTO SUPERLÁSER - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "superlaser.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/superlaser.css">
+
+Contenido del archivo:
+  · La clase .efecto-superlaser
+  · Sus pseudo-elementos ::before y ::after
+    (chispas de carga en los extremos)
+  ·   · superlaser-carga, superlaser-disparo, superlaser-chispa
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-superlaser">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-superlaser">DISPARO</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones sincronizadas en bucle infinito:
+  · superlaser-carga (4,8 s) → el texto se carga del
+    0 al 68% (tinte frío → verde vivo), destella con
+    halo de 70px entre el 74% y el 77% y vuelve a la
+    carga, seco.
+  · superlaser-disparo (4,8 s, steps(1)) → en el
+    instante del destello, el texto salta a 1,07 de
+    escala: el pulso del disparo.
+  · superlaser-chispa (4,8 s, steps(1)) → las chispas
+    ::before/::after crecen y revientan en los extremos.
+El color base es el verde de la superarma.
+
+TÉCNICA: background-clip: text + filter brightness/saturate
+    y text-shadow del halo, con steps(1) para el
+    pulso del disparo y chispas en los pseudos.
+
+
+AJUSTES FÁCILES
+---------------
+· Carga más rápida: 4.8s → 3s.
+· Destello más potente: sube brightness(2.6) a 4.
+· Disparo más seco: scale(1.07) → scale(1.2).
+· Cian en vez de verde: #00e676 → #18ffff en todo.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+SUPERLASER EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "superlaser.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/superlaser.css">
+
+What the file contains:
+  · The .efecto-superlaser class
+  · Its pseudo-elements ::before and ::after
+    (charge sparks at the ends)
+  ·   · superlaser-carga, superlaser-disparo, superlaser-chispa
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-superlaser">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-superlaser">DISPARO</span></h1>
+
+
+WHAT IT DOES
+--------
+Three synchronized animations on an infinite loop:
+  · superlaser-carga (4.8 s) → the text charges from
+    0 to 68% (cool tint → vivid green), flashes with
+    a 70px halo between 74% and 77% and returns to the
+    charge, abruptly.
+  · superlaser-disparo (4.8 s, steps(1)) → at the
+    instant of the flash, the text jumps to 1.07 in
+    escala: el pulso del disparo.
+  · superlaser-chispa (4.8 s, steps(1)) → the sparks
+    ::before/::after grow and burst at the ends.
+The base color is the superweapon green.
+
+TECHNIQUE: background-clip: text + filter brightness/saturate
+    and the halo text-shadow, with steps(1) for the
+    shot pulse and sparks in the pseudos.
+
+
+EASY TWEAKS
+---------------
+· Faster charge: 4.8s → 3s.
+· More powerful flash: raise brightness(2.6) to 4.
+· Snappier shot: scale(1.07) → scale(1.2).
+· Cyan instead of green: #00e676 → #18ffff everywhere.

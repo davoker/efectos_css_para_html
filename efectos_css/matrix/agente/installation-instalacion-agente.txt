@@ -1,0 +1,103 @@
+================================================================
+EFECTO AGENTE - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "agente.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/agente.css">
+
+Contenido del archivo:
+  · La clase .efecto-agente
+  · Sus pseudo-elementos ::before y ::after
+    (reflejo blanco de las gafas de sol del agente)
+  ·   · mx-agente-toma, mx-agente-reflejo
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-agente">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-agente">AGENTE</span></h1>
+
+
+QUÉ HACE
+--------
+Dos animaciones en bucle infinito:
+  · mx-agente-toma (5,2 s, steps(1)) → el texto está
+    verde durante la primera mitad; de pronto el filtro
+    lo vuelve gris metálico con mucho contraste (el
+    agente ha hecho copia) y al final vuelve a verde.
+  · mx-agente-reflejo (5,2 s) → una banda blanca inclinada
+    cruza las letras mientras el agente las controla.
+steps(1) en el filtro hace que el cambio sea instantáneo.
+
+TÉCNICA: filter: grayscale/contrast por pasos en los keyframes
+    + pseudo-elemento de reflejo que cruza el texto con
+    transform y opacity animados.
+
+
+AJUSTES FÁCILES
+---------------
+· Control más largo: alarga el tramo 53%-82% del filtro.
+· Más frío el gris: brightness(.75) → brightness(.6).
+· Reflejo más ancho: .28em → .45em.
+· Ciclo más corto: 5.2s → 3.4s.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+AGENT EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "agente.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/agente.css">
+
+What the file contains:
+  · The .efecto-agente class
+  · Its pseudo-elements ::before and ::after
+    (white glare off the agent's sunglasses)
+  ·   · mx-agente-toma, mx-agente-reflejo
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-agente">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-agente">AGENTE</span></h1>
+
+
+WHAT IT DOES
+--------
+Two animations on an infinite loop:
+  · mx-agente-toma (5.2 s, steps(1)) → the text is
+    green during the first half; suddenly the filter
+    turns it metallic grey with heavy contrast (the
+    agent has made a copy) and at the end it turns green again.
+  · mx-agente-reflejo (5.2 s) → a slanted white band
+    crosses the letters while the agent monitors them.
+steps(1) in the filter makes the change instantaneous.
+
+TECHNIQUE: filter: grayscale/contrast in steps across the keyframes
+    + reflection pseudo-element that crosses the text with
+    animated transform and opacity.
+
+
+EASY TWEAKS
+---------------
+· Longer control: extend the 53%-82% stretch of the filter.
+· Colder grey: brightness(.75) → brightness(.6).
+· Wider reflection: .28em → .45em.
+· Shorter cycle: 5.2s → 3.4s.

@@ -1,0 +1,117 @@
+================================================================
+EFECTO SUEÑO - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "sueno.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/sueno.css">
+
+Contenido del archivo:
+  · La clase .efecto-sueno
+  · Sus pseudo-elementos ::before y ::after
+    (fila de Z ::before y nube de somnolencia ::after)
+  ·   · mh-sueno-balanceo, mh-sueno-halo, mh-sueno-zeta,
+    mh-sueno-nube
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-sueno">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-sueno">SUEÑO</span></h1>
+
+
+QUÉ HACE
+--------
+Cuatro animaciones en bucle infinito, todas de 3,6 s para
+que caigan en el mismo latido:
+  · mh-sueno-balanceo → la palabra se balancea y se
+    inclina: cada rebote va más lejos que el anterior, como
+    una cabeza que pierde el equilibrio.
+  · mh-sueno-halo → el halo violeta del texto baja y sube;
+    se anima text-shadow, así que no hace falta capa extra.
+  · mh-sueno-zeta → tres Z suben girando desde la esquina.
+  · mh-sueno-nube → una nube de somnolencia asoma por el
+    borde inferior y se deshace.
+Los Z salen de un ::before con content de texto: los
+pseudo-elementos sí pueden escribir, no hace falta imagen
+ni JavaScript.
+
+TÉCNICA: transform por tramos (translateY + rotate) con ease-in-out
+    para el balanceo, halo animando text-shadow en una
+    segunda animación de la clase, ::before con content de
+    texto (Z) y ::after de nube con radial-gradient.
+
+
+AJUSTES FÁCILES
+---------------
+· Más pesado: sube el translateY a .16em.
+· Z más grandes: sube el font-size de .6em a .9em.
+· Sin nube: borra el ::after y mh-sueno-nube.
+· Dormir más rápido: 3.6s → 2.4s en las cuatro.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+SLEEP EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "sueno.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/sueno.css">
+
+What the file contains:
+  · The .efecto-sueno class
+  · Its pseudo-elements ::before and ::after
+    (row of Z ::before and drowsy cloud ::after)
+  ·   · mh-sueno-balanceo, mh-sueno-halo, mh-sueno-zeta,
+    mh-sueno-nube
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-sueno">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-sueno">SUEÑO</span></h1>
+
+
+WHAT IT DOES
+--------
+Four animations on an infinite loop, all 3.6 s so
+they land on the same beat:
+  · mh-sueno-balanceo → the word sways and
+    inclina: cada rebote va más lejos que el anterior, como
+    a head losing its balance.
+  · mh-sueno-halo → the text's violet halo goes down and up;
+    text-shadow is animated, so no extra layer is needed.
+  · mh-sueno-zeta → three Z rise spinning from the corner.
+  · mh-sueno-nube → a drowsy cloud peeks over the
+    bottom edge and dissolves.
+The Z come from a ::before with text content: the
+pseudo-elements can write after all, no image needed
+or JavaScript.
+
+TECHNIQUE: stepped transform (translateY + rotate) with ease-in-out
+    for the swaying, a halo animating text-shadow in a
+    second animation of the class, ::before with content of
+    text (Z) and cloud ::after with radial-gradient.
+
+
+EASY TWEAKS
+---------------
+· Heavier: raise the translateY to .16em.
+· Bigger Zs: raise the font-size from .6em to .9em.
+· No cloud: delete the ::after and mh-sueno-nube.
+· Fall asleep faster: 3.6s → 2.4s in all four.

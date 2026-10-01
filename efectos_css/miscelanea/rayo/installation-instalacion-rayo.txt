@@ -1,0 +1,115 @@
+================================================================
+EFECTO RAYO - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "rayo.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/rayo.css">
+
+El archivo es 100% portable: no depende de ningún otro estilo,
+de librerías ni de JavaScript. Contiene:
+  · La clase .efecto-rayo
+  · Sus pseudo-elementos ::before y ::after
+  · 3 @keyframes: rayo-descarga, rayo-rayo y rayo-destello
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-rayo">Tu texto</span>
+
+Ejemplo real sobre un título:
+
+    <h1><span class="efecto-rayo">Rayo</span></h1>
+
+
+VENTAJAS
+--------
+· NO necesita ningún atributo extra: solo la clase.
+· Funciona sobre cualquier texto (h1, h2, enlaces, botones...).
+· Recomendado: fondo oscuro; el metal apagado solo se enciende
+  durante las descargas.
+
+
+QUÉ HACE
+--------
+Tres animaciones simultáneas en bucle infinito (2,8 s), todas
+en salto seco (steps(1, end)):
+  · rayo-descarga → tres golpes (0%, 38% doble y 74%): el
+    texto pasa de azul acero a blanco con sacudida de 2-3 px.
+  · rayo-rayo     → un rayo clip-path zigzag cruza las letras
+    en cada golpe (en un sitio distinto).
+  · rayo-destello → un destello redondo acompaña cada golpe.
+
+
+AJUSTES FÁCILES
+---------------
+· Más golpes: copia un tramo más (p. ej. 60% / 63%) en los
+  3 keyframes, respetando el orden de los stops.
+· Forma del rayo: cambia los porcentajes del clip-path de
+  ::before (son 8 vértices en zigzag).
+· Más violento: sube los translate(2px/3px → 6px).
+· Ciclo más largo: cambia 2.8s por 4s en las 3 líneas
+  animation (los stops en % se reajustan solos).
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+LIGHTNING EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "rayo.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/rayo.css">
+
+The file is 100% portable: it doesn't depend on any other style,
+on libraries or on JavaScript. It contains:
+  · The .efecto-rayo class
+  · Its pseudo-elements ::before and ::after
+  · 3 @keyframes: rayo-descarga, rayo-rayo and rayo-destello
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-rayo">Tu texto</span>
+
+Real example on a title:
+
+    <h1><span class="efecto-rayo">Rayo</span></h1>
+
+
+ADVANTAGES
+--------
+· NO extra attribute needed: just the class.
+· Works on any text (h1, h2, links, buttons...).
+· Recommended: dark background; the dull metal only lights up
+  during the discharges.
+
+
+WHAT IT DOES
+--------
+Three simultaneous animations on an infinite loop (2.8 s), all
+with hard steps (steps(1, end)):
+  · rayo-descarga → three hits (0%, double at 38% and 74%): the
+    text goes from steel blue to white with a 2-3 px shake.
+  · rayo-rayo     → a zigzag clip-path bolt crosses the letters
+    on every hit (in a different spot).
+  · rayo-destello → a round flash accompanies each hit.
+
+
+EASY TWEAKS
+---------------
+· More hits: copy one more stop (e.g. 60% / 63%) into the
+  3 keyframes, keeping the order of the stops.
+· Bolt shape: change the clip-path percentages of the
+  ::before (they are 8 vertices in a zigzag).
+· More violent: raise translate(2px/3px → 6px).
+· Longer cycle: change 2.8s to 4s in the 3
+  animation lines (the % stops adjust themselves).

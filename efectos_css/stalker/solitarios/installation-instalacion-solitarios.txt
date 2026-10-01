@@ -1,0 +1,109 @@
+================================================================
+EFECTO SOLITARIOS - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "solitarios.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/solitarios.css">
+
+Contenido del archivo:
+  · La clase .efecto-solitarios
+  · Sus pseudo-elementos ::before y ::after
+    (camino punteado ::before y trebol radiactivo ::after)
+  ·   · stk-solitarios-viaje, stk-solitarios-camino,
+    stk-solitarios-trebol
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-solitarios">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-solitarios">SOLITARIOS</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones en bucle infinito:
+  · stk-solitarios-viaje (7 s) → la luz recorre el
+    degradado pardo de derecha a izquierda y vuelve.
+  · stk-solitarios-camino (3,4 s) → las trazas del camino
+    punteado avanzan bajo la palabra sin descanso.
+  · stk-solitarios-trebol (9 s) → el resplandor radiactivo
+    amarillo gira detrás del texto como un viejo parche.
+El ::before mide lo mismo que el periodo del repeating:
+el salto del bucle es invisible.
+
+TÉCNICA: degradado pardo recortado en el texto con
+    background-position animado, camino punteado ::before
+    con repeating-linear-gradient y trebol radiactivo
+    ::after con conic-gradient girando 360°.
+
+
+AJUSTES FÁCILES
+---------------
+· Parche más marcado: sube el .3 del opacity en ::after a .5.
+· Luz más rápida: 7s → 4s en stk-solitarios-viaje.
+· Sin camino: borra el ::before y stk-solitarios-camino.
+· Tierra más clara: #6b5a34 → #8a7544 en el degradado.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+LONERS EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "solitarios.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/solitarios.css">
+
+What the file contains:
+  · The .efecto-solitarios class
+  · Its pseudo-elements ::before and ::after
+    (dotted path ::before and radioactive clover ::after)
+  ·   · stk-solitarios-viaje, stk-solitarios-camino,
+    stk-solitarios-trebol
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-solitarios">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-solitarios">SOLITARIOS</span></h1>
+
+
+WHAT IT DOES
+--------
+Three animations on an infinite loop:
+  · stk-solitarios-viaje (7 s) → the light runs across the
+    brown gradient from right to left and back.
+  · stk-solitarios-camino (3.4 s) → the traces of the
+    dotted path advance under the word without stopping.
+  · stk-solitarios-trebol (9 s) → the radioactive glow
+    yellow spins behind the text like an old patch.
+The ::before measures the same as the period of the repeating:
+the loop's jump is invisible.
+
+TECHNIQUE: brown gradient clipped into the text with
+    animated background-position, dotted path ::before
+    with repeating-linear-gradient and radioactive clover
+    ::after with conic-gradient spinning 360°.
+
+
+EASY TWEAKS
+---------------
+· Stronger patch: raise the .3 of the opacity in ::after to .5.
+· Faster light: 7s → 4s in stk-solitarios-viaje.
+· No path: delete the ::before and stk-solitarios-camino.
+· Lighter earth: #6b5a34 → #8a7544 in the gradient.

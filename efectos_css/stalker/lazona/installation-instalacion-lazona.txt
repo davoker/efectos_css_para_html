@@ -1,0 +1,105 @@
+================================================================
+EFECTO LA ZONA - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "lazona.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/lazona.css">
+
+Contenido del archivo:
+  · La clase .efecto-lazona
+  · Sus pseudo-elementos ::before y ::after
+    (interferencia ::before y banda de alerta ::after)
+  ·   · stk-lazona-parpadeo, stk-lazona-interferencia,
+    stk-lazona-alerta
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-lazona">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-lazona">LA ZONA</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones en bucle infinito:
+  · stk-lazona-parpadeo (2,4 s) → la cinta de aviso se
+    apaga y vuelve a encenderse de golpe.
+  · stk-lazona-interferencia (3,6 s) → las barras de la
+    señal recorren la palabra sin parar.
+  · stk-lazona-alerta (1,8 s) → la banda de alerta se
+    enciende a saltos fijos, como un piloto roto.
+
+TÉCNICA: repeating-linear-gradient de cinta radiactiva recortado
+    en el texto, interferencia ::before con barras finas
+    movidas por background-position y alerta ::after con
+    animation steps(1, end) para que corte sin avisar.
+
+
+AJUSTES FÁCILES
+---------------
+· Alerta más frecuente: 1.8s → 1.1s en stk-lazona-alerta.
+· Cinta más ancha: 1.8em → 2.6em en el repeating base.
+· Sin interferencia: borra el ::before y stk-lazona-interferencia.
+· Amarillo más puro: #ffd54f → #ffeb3b en el degradado base.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+THE ZONE EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "lazona.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/lazona.css">
+
+What the file contains:
+  · The .efecto-lazona class
+  · Its pseudo-elements ::before and ::after
+    (interference ::before and warning band ::after)
+  ·   · stk-lazona-parpadeo, stk-lazona-interferencia,
+    stk-lazona-alerta
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-lazona">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-lazona">LA ZONA</span></h1>
+
+
+WHAT IT DOES
+--------
+Three animations on an infinite loop:
+  · stk-lazona-parpadeo (2.4 s) → the warning tape
+    switches off and snaps back on.
+  · stk-lazona-interferencia (3.6 s) → the bars of the
+    signal travel across the word without stopping.
+  · stk-lazona-alerta (1.8 s) → the warning band
+    lights up in fixed jumps, like a broken indicator.
+
+TECHNIQUE: radioactive tape repeating-linear-gradient clipped
+    into the text, interference ::before with thin bars
+    moved by background-position and alert ::after with
+    animation steps(1, end) so it cuts without warning.
+
+
+EASY TWEAKS
+---------------
+· More frequent alert: 1.8s → 1.1s in stk-lazona-alerta.
+· Wider tape: 1.8em → 2.6em in the base repeating.
+· No interference: delete the ::before and stk-lazona-interferencia.
+· Purer yellow: #ffd54f → #ffeb3b in the base gradient.

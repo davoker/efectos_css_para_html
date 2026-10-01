@@ -1,0 +1,107 @@
+================================================================
+EFECTO ABATIDO - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "abatido.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/abatido.css">
+
+Contenido del archivo:
+  · La clase .efecto-abatido
+  · Sus pseudo-elementos ::before y ::after
+    (línea de base y pico del ECG)
+  ·   · abatido-estado, abatido-linea, abatido-trazo
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-abatido">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-abatido">ABATIDO</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones sincronizadas en bucle infinito:
+  · abatido-estado (3,2 s) → mientras late, el texto es
+    rojo vivo; al llegar la línea plana se desatura a
+    gris y se apaga hasta el próximo latido.
+  · abatido-linea (3,2 s) → la línea de base ::before
+    aparece SOLO en la fase de paro (trazo plano).
+  · abatido-trazo (3,2 s) → el pico ::after (recortado
+    con clip-path en forma de QRS) cruza el texto de
+    izquierda a derecha una vez por ciclo.
+El color base es un degradado rojo de monitor médico.
+
+TÉCNICA: background-clip: text + ::before (línea de base) y
+    ::after recortado con clip-path (el pico) viajando
+    con left animado; filter grayscale en el paro.
+
+
+AJUSTES FÁCILES
+---------------
+· Ciclo más rápido: 3.2s → 2s.
+· Pico más ancho: width .5em → .8em en ::after.
+· Paro antes: 46% → 35% en abatido-linea.
+· Paro más gris: grayscale(.85) → grayscale(1) en abatido-estado.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+DOWNED EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "abatido.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/abatido.css">
+
+What the file contains:
+  · The .efecto-abatido class
+  · Its pseudo-elements ::before and ::after
+    (ECG baseline and peak)
+  ·   · abatido-estado, abatido-linea, abatido-trazo
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-abatido">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-abatido">ABATIDO</span></h1>
+
+
+WHAT IT DOES
+--------
+Three synchronized animations on an infinite loop:
+  · abatido-estado (3.2 s) → while it beats, the text is
+    bright red; when the flat line arrives it desaturates to
+    gray and dims until the next beat.
+  · abatido-linea (3.2 s) → the ::before baseline
+    appears ONLY in the arrest phase (flat trace).
+  · abatido-trazo (3.2 s) → the ::after peak (clipped
+    with a clip-path shaped like a QRS) crosses the text
+    from left to right once per cycle.
+The base color is a medical monitor red gradient.
+
+TECHNIQUE: background-clip: text + ::before (baseline) and
+    ::after clipped with clip-path (the peak) traveling
+    with animated left; grayscale filter during the arrest.
+
+
+EASY TWEAKS
+---------------
+· Faster cycle: 3.2s → 2s.
+· Wider peak: width .5em → .8em in ::after.
+· Earlier arrest: 46% → 35% in abatido-linea.
+· Grayer arrest: grayscale(.85) → grayscale(1) in abatido-estado.

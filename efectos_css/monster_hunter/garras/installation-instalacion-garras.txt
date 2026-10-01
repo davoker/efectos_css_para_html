@@ -1,0 +1,105 @@
+================================================================
+EFECTO GARRAS - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "garras.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/garras.css">
+
+Contenido del archivo:
+  · La clase .efecto-garras
+  · Sus pseudo-elementos ::before y ::after
+    (tres tajos diagonales ::before y resplandor ::after)
+  ·   · mh-garras-golpe, mh-garras-tajo, mh-garras-destello
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-garras">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-garras">GARRAS</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones en bucle infinito:
+  · mh-garras-golpe (3,4 s) → las letras se desplazan e
+    inclinan en el instante del zarpazo.
+  · mh-garras-tajo (3,4 s) → los tres cortes diagonales
+    recorren el texto de izquierda a derecha.
+  · mh-garras-destello (3,4 s) → el fondo rojo del
+    impacto aparece y se apaga.
+El patrón de los cortes es un repeating-linear-gradient
+a 112 grados: por eso son paralelos y equidistantes.
+
+TÉCNICA: ::before con repeating-linear-gradient en diagonal
+    (los tres cortes), ::after de resplandor radial y
+    transform por tramos en la propia clase.
+
+
+AJUSTES FÁCILES
+---------------
+· Tajos más finos: .16em/.22em → .1em/.14em.
+· Golpe más fuerte: sube el skewX a -10deg.
+· Cuatro tajos: añade otro par de paradas al degradado.
+· Sin resplandor: borra el ::after.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+CLAWS EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "garras.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/garras.css">
+
+What the file contains:
+  · The .efecto-garras class
+  · Its pseudo-elements ::before and ::after
+    (three diagonal gashes ::before and glow ::after)
+  ·   · mh-garras-golpe, mh-garras-tajo, mh-garras-destello
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-garras">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-garras">GARRAS</span></h1>
+
+
+WHAT IT DOES
+--------
+Three animations on an infinite loop:
+  · mh-garras-golpe (3.4 s) → the letters shift and
+    tilt at the instant of the claw swipe.
+  · mh-garras-tajo (3.4 s) → the three diagonal cuts
+    travel across the text from left to right.
+  · mh-garras-destello (3.4 s) → the red background of the
+    impact appears and fades out.
+The pattern of the cuts is a repeating-linear-gradient
+at 112 degrees: that is why they are parallel and evenly spaced.
+
+TECHNIQUE: ::before with diagonal repeating-linear-gradient
+    (the three cuts), radial glow ::after and
+    stepped transform in the class itself.
+
+
+EASY TWEAKS
+---------------
+· Thinner gashes: .16em/.22em → .1em/.14em.
+· Stronger hit: raise the skewX to -10deg.
+· Four gashes: add another pair of stops to the gradient.
+· No glow: delete the ::after.

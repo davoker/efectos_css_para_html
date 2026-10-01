@@ -1,0 +1,107 @@
+================================================================
+EFECTO APUNTAR - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "apuntar.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/apuntar.css">
+
+Contenido del archivo:
+  · La clase .efecto-apuntar
+  · Sus pseudo-elementos ::before y ::after
+    (corchetes [ ] de puntería a los lados)
+  ·   · apuntar-bloqueo, apuntar-cierre-i, apuntar-cierre-d
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-apuntar">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-apuntar">BLK</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones sincronizadas en bucle infinito,
+con saltos secos:
+  · apuntar-cierre-i (3,4 s) → el corchete izquierdo
+    entra desde fuera, rebota hasta su sitio y sale.
+  · apuntar-cierre-d (3,4 s) → lo mismo con el
+    corchete derecho (keyframes espejo).
+  · apuntar-bloqueo (3,4 s, steps(1)) → en el instante
+    en que encajan, las letras destellan 2,1x y se
+    sacuden; al soltar el bloqueo bajan a 0,85.
+El color base es un degradado verde de visor térmico.
+
+TÉCNICA: background-clip: text (verde visor) +
+    ::before/::after con translate propio (dos
+    keyframes espejo) y destello con steps(1).
+
+
+AJUSTES FÁCILES
+---------------
+· Corchetes más lejos: -1.1em → -1.8em en los keyframes.
+· Rebote más corto: quita las fases 17%/21% (va directo).
+· Destello más fuerte: brightness(2.1) → brightness(3).
+· Cian de Visión Nocturna: #76ff03 → #18ffff en todo.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+AIM EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "apuntar.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/apuntar.css">
+
+What the file contains:
+  · The .efecto-apuntar class
+  · Its pseudo-elements ::before and ::after
+    (aiming brackets [ ] on each side)
+  ·   · apuntar-bloqueo, apuntar-cierre-i, apuntar-cierre-d
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-apuntar">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-apuntar">BLK</span></h1>
+
+
+WHAT IT DOES
+--------
+Three synchronized animations on an infinite loop,
+with abrupt steps:
+  · apuntar-cierre-i (3.4 s) → the left bracket
+    comes in from outside, bounces into place and leaves.
+  · apuntar-cierre-d (3.4 s) → the same with the
+    right bracket (mirrored keyframes).
+  · apuntar-bloqueo (3.4 s, steps(1)) → at the instant
+    they snap together, the letters flash 2.1x and
+    shake; when the lock releases they drop to 0.85.
+The base color is a thermal visor green gradient.
+
+TECHNIQUE: background-clip: text (visor green) +
+    ::before/::after with their own translate (two
+    mirrored keyframes) and flash with steps(1).
+
+
+EASY TWEAKS
+---------------
+· Brackets farther out: -1.1em → -1.8em in the keyframes.
+· Shorter bounce: remove the 17%/21% phases (it goes straight).
+· Stronger flash: brightness(2.1) → brightness(3).
+· Night Vision cyan: #76ff03 → #18ffff everywhere.

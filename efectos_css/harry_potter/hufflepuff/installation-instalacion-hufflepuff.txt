@@ -1,0 +1,111 @@
+================================================================
+EFECTO HUFFLEPUFF - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "hufflepuff.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/hufflepuff.css">
+
+Contenido del archivo:
+  · La clase .efecto-hufflepuff
+  · Sus pseudo-elementos ::before y ::after
+    (grano de polen ::before y hebra de miel ::after)
+  ·   · hp-hufflepuff-cintas, hp-hufflepuff-polen,
+    hp-hufflepuff-miel
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-hufflepuff">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-hufflepuff">HUFFLEPUFF</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones en bucle infinito:
+  · hp-hufflepuff-cintas (5 s) → las rayas negras bajan una
+    a una dentro de las letras; el salto final es exactamente
+    la altura de la raya, así que el bucle cierra sin costura.
+  · hp-hufflepuff-polen (5 s) → un grano de polen dorado
+    flota en diagonal y aparece y desaparece.
+  · hp-hufflepuff-miel (5 s) → la hebra de miel se estira
+    desde el borde superior y vuelve a encogerse.
+La base amarilla usa background-size 100%: solo se mueven las
+rayas, el oro del fondo se mantiene quieto.
+
+TÉCNICA: repeating-linear-gradient de rayas negras recortadas en
+    el texto con background-position animado, polen
+    ::before con radial-gradient y hebra de miel ::after
+    estirada con transform: scaleY.
+
+
+AJUSTES FÁCILES
+---------------
+· Rayas más gruesas: sube el .34em del repeating-gradient.
+· Miel más ámbar: #f9a825 → #ef8c00 en el degradado base.
+· Sin polen: borra el ::before y hp-hufflepuff-polen.
+· Marcha más lenta: 5s → 7s en hp-hufflepuff-cintas.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+HUFFLEPUFF EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "hufflepuff.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/hufflepuff.css">
+
+What the file contains:
+  · The .efecto-hufflepuff class
+  · Its pseudo-elements ::before and ::after
+    (pollen grain ::before and honey strand ::after)
+  ·   · hp-hufflepuff-cintas, hp-hufflepuff-polen,
+    hp-hufflepuff-miel
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-hufflepuff">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-hufflepuff">HUFFLEPUFF</span></h1>
+
+
+WHAT IT DOES
+--------
+Three animations on an infinite loop:
+  · hp-hufflepuff-cintas (5 s) → the black stripes drop one
+    at a time inside the letters; the final jump is exactly
+    the height of the stripe, so the loop closes without a seam.
+  · hp-hufflepuff-polen (5 s) → a golden pollen grain
+    floats on a diagonal and fades in and out.
+  · hp-hufflepuff-miel (5 s) → the honey strand stretches
+    from the top edge and shrinks back.
+The yellow base uses background-size 100%: only the
+stripes move, the background gold stays still.
+
+TECHNIQUE: repeating-linear-gradient of black stripes clipped into
+    the text with animated background-position, pollen
+    ::before with a radial-gradient and honey strand ::after
+    stretched with transform: scaleY.
+
+
+EASY TWEAKS
+---------------
+· Thicker stripes: raise the .34em of the repeating-gradient.
+· More amber honey: #f9a825 → #ef8c00 in the base gradient.
+· No pollen: delete the ::before and hp-hufflepuff-polen.
+· Slower pace: 5s → 7s in hp-hufflepuff-cintas.

@@ -1,0 +1,111 @@
+================================================================
+EFECTO VARITA - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "varita.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/varita.css">
+
+Contenido del archivo:
+  · La clase .efecto-varita
+  · Sus pseudo-elementos ::before y ::after
+    (chispa ::before y rastro ::after)
+  ·   · hp-varita-enciende, hp-varita-chispa, hp-varita-carga
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-varita">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-varita">VARITA</span></h1>
+
+
+QUÉ HACE
+--------
+Tres animaciones en bucle infinito:
+  · hp-varita-enciende (5 s) → un rastro de luz crece desde
+    la izquierda hasta el final y se apaga; el corte es
+    seco, como la varita golpeando el aire.
+  · hp-varita-chispa (5 s) → la chispa viaja con el rastro
+    usando left en porcentaje, así sirve para palabras de
+    cualquier ancho, y revienta con un pop final.
+  · hp-varita-carga (5 s) → el texto tenue respira mientras
+    espera el siguiente hechizo.
+La chispa y el rastro empiezan y acaban a la vez: no hace
+falta sincronizar nada más.
+
+TÉCNICA: degradado tenue con background-clip: text, chispa
+    ::before con radial-gradient movida por left en
+    porcentaje y rastro ::after con degradado que crece y
+    se apaga.
+
+
+AJUSTES FÁCILES
+---------------
+· Chispa más ancha: sube el width .3em del ::before.
+· Hechizo más corto: 5s → 3.4s en los tres keyframes.
+· Sin rastro: borra el ::after y hp-varita-enciende.
+· Base más violeta: #3b2a6e → #4b37a0 en el degradado.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+WAND EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "varita.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/varita.css">
+
+What the file contains:
+  · The .efecto-varita class
+  · Its pseudo-elements ::before and ::after
+    (spark ::before and trail ::after)
+  ·   · hp-varita-enciende, hp-varita-chispa, hp-varita-carga
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-varita">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-varita">VARITA</span></h1>
+
+
+WHAT IT DOES
+--------
+Three animations on an infinite loop:
+  · hp-varita-enciende (5 s) → a trail of light grows from
+    the left to the end and switches off; the cut is
+    abrupt, like the wand striking the air.
+  · hp-varita-chispa (5 s) → the spark travels with the trail
+    using left in percentages, so it works for words of
+    any width, and bursts with a final pop.
+  · hp-varita-carga (5 s) → the dim text breathes while it
+    waits for the next spell.
+The spark and the trail start and end at the same time: there's no
+need to sync anything else.
+
+TECHNIQUE: dim gradient with background-clip: text, spark
+    ::before with radial-gradient moved by left in
+    percentages and trail ::after with a gradient that grows and
+    switches off.
+
+
+EASY TWEAKS
+---------------
+· Wider spark: raise the .3em width of the ::before.
+· Shorter spell: 5s → 3.4s in the three keyframes.
+· No trail: delete the ::after and hp-varita-enciende.
+· More violet base: #3b2a6e → #4b37a0 in the gradient.

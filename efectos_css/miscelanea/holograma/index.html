@@ -55,7 +55,7 @@
         code { color: #a9f5ff; }
         .nota { color: #00e5ff; font-weight: bold; }
     
-        /* --- BOTÓN "TODOS LOS EFECTOS" (centrado arriba) ---
+        /* --- BOTÓN "PORTADA" (centrado arriba) ---
            Clicable y con estado pulsado; mientras se mantiene sale el
            destello TEMÁTICO de este efecto y, al soltar, salta a
            transicion.html#holograma: allí estalla la escena del propio
@@ -65,6 +65,7 @@
             text-align: center;
             margin: 0 0 1.4rem;
         }
+        nav.barra-volver a + a { margin-left: .7rem; }
         .btn-volver {
             position: relative;
             z-index: 2;
@@ -151,7 +152,8 @@
 <body>
 
     <nav class="barra-volver">
-        <a class="btn-volver" href="../../transicion.html#holograma">← Todos los efectos</a>
+        <a class="btn-volver" href="../../../transicion.html#holograma">← Portada</a>
+        <a class="btn-volver" href="holograma.zip" download>Descarga</a>
     </nav>
 
     <h1>EFECTO HOLOGRAMA</h1>
@@ -197,7 +199,7 @@
     </p>
     <p>
         También tienes las instrucciones en el archivo
-        <code>como-aplicar-holograma.txt</code> de esta misma carpeta.
+        <code>installation-instalacion-holograma.txt</code> de esta misma carpeta.
     </p>
 
     <script>
@@ -263,5 +265,6 @@
             }, { passive: true });
         })();
     </script>
+<script src="../../../i18n.js"></script>
 </body>
 </html>

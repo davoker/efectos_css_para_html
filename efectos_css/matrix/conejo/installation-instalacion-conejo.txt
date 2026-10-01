@@ -1,0 +1,101 @@
+================================================================
+EFECTO CONEJO BLANCO - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "conejo.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/conejo.css">
+
+Contenido del archivo:
+  · La clase .efecto-conejo
+  · Sus pseudo-elementos ::before y ::after
+    (punto de luz que salta sobre las letras)
+  ·   · mx-conejo, mx-conejo-marca
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-conejo">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-conejo">CONEJO</span></h1>
+
+
+QUÉ HACE
+--------
+Dos animaciones en bucle infinito:\n  · mx-conejo (4,4 s) → el punto blanco aparece a la
+    izquierda, salta a tres posiciones de las letras
+    rebotando arriba y abajo, y se va por la derecha.
+  · mx-conejo-marca (4,4 s) → el brillo del texto
+    sube justo cuando el punto está encima.
+Cada rebote tiene su propio desplazamiento en left y en
+translateY, así que la trayectoria se lee como un salto.
+
+TÉCNICA: pseudo-elemento con degradado radial (el punto de
+    luz) cuyo left/translateY salta por tramos +
+    text-shadow sincronizado en la clase.
+
+
+AJUSTES FÁCILES
+---------------
+· Salto más alto: sube los translateY (-30%/24%).
+· Punto más grande: width/height .55em → .9em.
+· Más rápido: 4.4s → 2.8s.
+· Sin rebote: pon todos los translateY a 0.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+WHITE RABBIT EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "conejo.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/conejo.css">
+
+What the file contains:
+  · The .efecto-conejo class
+  · Its pseudo-elements ::before and ::after
+    (dot of light hopping over the letters)
+  ·   · mx-conejo, mx-conejo-marca
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-conejo">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-conejo">CONEJO</span></h1>
+
+
+WHAT IT DOES
+--------
+Two animations on an infinite loop:\n  · mx-conejo (4.4 s) → the white dot appears on the
+    left, jumps to three positions on the letters
+    bouncing up and down, and leaves on the right.
+  · mx-conejo-marca (4.4 s) → the text's brightness
+    rises just when the dot is right above.
+Each bounce has its own shift in left and in
+translateY, so the path reads as a jump.
+
+TECHNIQUE: pseudo-element with a radial gradient (the dot of
+    light) whose left/translateY jumps in stages +
+    text-shadow synced in the class.
+
+
+EASY TWEAKS
+---------------
+· Higher jump: raise the translateY (-30%/24%).
+· Bigger dot: width/height .55em → .9em.
+· Faster: 4.4s → 2.8s.
+· No bounce: set all the translateY to 0.

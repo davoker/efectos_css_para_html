@@ -1,0 +1,193 @@
+================================================================
+EFECTO MATRIX - CÓMO APLICARLO A CUALQUIER ARCHIVO HTML
+================================================================
+
+PASO 1 - COPIA EL ARCHIVO DEL EFECTO
+------------------------------------
+"matrix.html" es autocontenido: dentro van el CSS, el JavaScript,
+los shaders GLSL y el atlas de glifos (los 128 glifos se dibujan
+en un canvas, no hay imágenes ni ficheros externos).
+
+    cópialo a tu proyecto, por ejemplo:
+        tu-pagina/efectos/matrix.html
+
+
+PASO 2 - AÑÁDELO A TU PÁGINA
+----------------------------
+a) Como página completa, enlazándolo:
+
+       <a href="efectos/matrix.html">ver efecto</a>
+
+b) Empotrado con un iframe (recomendado dentro de tu diseño):
+
+       <iframe src="efectos/matrix.html?demo=1"
+               title="Efecto MATRIX"
+               style="display:block;width:100%;height:520px;
+                      border:0;background:#000"></iframe>
+
+c) Como fondo de una sección: contenedor con position:relative,
+   el iframe con position:absolute; inset:0 y tu texto encima
+   (z-index mayor).
+
+
+PARÁMETROS EN LA URL
+---------------------
+    ?demo=1      recorre el ratón solo (se ve sin mover nada)
+    ?t=HOLA      texto inicial; "+" = espacio: ?t=EFECTOS WEBGL
+
+Dentro del efecto también hay una caja inferior para escribir
+otra palabra en caliente.
+
+
+QUÉ HACE
+--------
+El texto es una ventana: DENTRO de los glifos cae la lluvia de
+código (katakana, dígitos y letras). El código se acelera junto
+al ratón, al hacer clic se lanza una onda expansiva y la lluvia
+tiene profundidad (parallax: cada capa se desplaza distinto).
+
+
+TÉCNICA
+-------
+· Canvas 2D: el texto se pinta dos veces (máscara nítida + versión
+  desenfocada) y otro canvas genera el atlas de glifos 16x8.
+· El shader muestrea el atlas con un hash estable por columna y
+  fila: eso decide qué glifo cae, su brillo y su estela.
+· La máscara de texto recorta la lluvia a los interior de las
+  letras: fuera no se ve nada.
+· Onda del clic: un anillo viajero que ensancha el desplazamiento
+  (dispersión RGB) mientras recorre la palabra.
+
+
+AJUSTES FÁCILES
+---------------
+· Texto por defecto: cambia value="MATRIX" en el <input>, o usa
+  ?t=TU+PALABRA en la URL.
+· Densidad de columnas: la rejilla uCells (por defecto se calcula
+  como ancho/18.6 y alto/30; busca "uCells" o "cells = [").
+· Velocidad: multiplica el tiempo del shader (busca "t * " o la
+  variable "warp").
+· Estela más larga/corta: la variable "trail" dentro de rainAt().
+· Colores: los vec3 verdes del shader (glifos, cabezas de
+  columna, estela) y el color de fondo.
+
+
+REQUISITOS
+----------
+· Navegador con WebGL 1 (cualquier navegador actual).
+· NO necesita servidor local: los shaders van dentro del HTML y
+  no se cargan con fetch. Si al abrir con doble clic (file://)
+  tu navegador bloqueara algo, sirve la carpeta en local:
+
+      py -3 -m http.server 8000
+
+  y abre http://127.0.0.1:8000/matrix.html
+· Si en tu proyecto separas los shaders a ficheros .glsl, AHÍ SÍ
+  necesitarías servidor local (fetch de archivos).
+
+
+ARCHIVOS
+--------
+    matrix.html                el efecto (autocontenido)
+    index.html                 showcase (solo presentación)
+    installation-instalacion-matrix.txt    este documento
+    matrix.zip                 efecto + este documento
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+MATRIX EFFECT - HOW TO APPLY IT TO ANY HTML FILE
+================================================================
+
+STEP 1 - COPY THE EFFECT FILE
+------------------------------------
+"matrix.html" is self-contained: inside go the CSS, the JavaScript,
+the GLSL shaders and the glyph atlas (the 128 glyphs are drawn
+on a canvas, there are no images or external files).
+
+    copy it to your project, for example:
+        your-page/effects/matrix.html
+
+
+STEP 2 - ADD IT TO YOUR PAGE
+----------------------------
+a) As a full page, linking to it:
+
+       <a href="efectos/matrix.html">ver efecto</a>
+
+b) Embedded with an iframe (recommended within your design):
+
+       <iframe src="efectos/matrix.html?demo=1"
+               title="Effect MATRIX"
+               style="display:block;width:100%;height:520px;
+                      border:0;background:#000"></iframe>
+
+c) As a section background: container with position:relative,
+   the iframe with position:absolute; inset:0 and your text on top
+   (higher z-index).
+
+
+URL PARAMETERS
+---------------------
+    ?demo=1      the mouse roams on its own (watch without moving)
+    ?t=HELLO     initial text; "+" = space: ?t=WEBGL EFFECTS
+
+Inside the effect there's also a bottom box to type
+another word on the fly.
+
+
+WHAT IT DOES
+--------
+The text is a window: INSIDE the glyphs falls the rain of
+code (katakana, digits and letters). The code speeds up with
+the mouse, on click an expanding wave is launched and the rain
+has depth (parallax: each layer shifts differently).
+
+
+TECHNIQUE
+-------
+· Canvas 2D: the text is painted twice (sharp mask + blurred
+  version) and another canvas builds the 16x8 glyph atlas.
+· The shader samples the atlas with a stable hash per column and
+  row: that decides which glyph falls, its brightness and its trail.
+· The text mask clips the rain to the inside of the
+  letters: nothing shows outside.
+· Click wave: a traveling ring that widens the displacement
+  (RGB dispersion) as it crosses the word.
+
+
+EASY TWEAKS
+---------------
+· Default text: change value="MATRIX" in the <input>, or use
+  ?t=YOUR+WORD in the URL.
+· Column density: the uCells grid (by default it's computed
+  as width/18.6 and height/30; look for "uCells" or "cells = [").
+· Speed: multiply the shader time (look for "t * " or the
+  "warp" variable).
+· Longer/shorter trail: the "trail" variable inside rainAt().
+· Colors: the shader's green vec3s (glyphs, column
+  heads, trail) and the background color.
+
+
+REQUIREMENTS
+----------
+· A browser with WebGL 1 (any current browser).
+· NO local server needed: the shaders live inside the HTML and
+  aren't loaded with fetch. If on double-click open (file://)
+  your browser blocks something, serve the folder locally:
+
+      py -3 -m http.server 8000
+
+  and open http://127.0.0.1:8000/matrix.html
+· If your project splits the shaders into .glsl files, THEN YES
+  you'd need a local server (file fetch).
+
+
+FILES
+--------
+    matrix.html                the effect (self-contained)
+    index.html                 showcase (presentation only)
+    installation-instalacion-matrix.txt    this document
+    matrix.zip                 effect + this document

@@ -1,0 +1,103 @@
+================================================================
+EFECTO ORACLE - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "oracle.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/oracle.css">
+
+Contenido del archivo:
+  · La clase .efecto-oracle
+  · Sus pseudo-elementos ::before y ::after
+    (migajas que caen bajo las letras)
+  ·   · mx-oracle-calor, mx-oracle-migajas
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-oracle">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-oracle">GALLETA</span></h1>
+
+
+QUÉ HACE
+--------
+Dos animaciones en bucle infinito:\n  · mx-oracle-calor (3,8 s) → el halo ámbar de las
+    letras sube y baja de intensidad, como la luz cálida
+    de la cocina del Oráculo.
+  · mx-oracle-migajas (3,8 s) → las migajas del
+    pseudo-elemento aparecen bajo el texto y van cayendo
+    hasta desaparecer en cada ciclo.
+El degradado tiene la parte baja más tostada: es el
+corte de la galleta.
+
+TÉCNICA: background-clip: text con degradado de galleta +
+    filter: drop-shadow animado en la clase +
+    pseudo-elemento de migajas con content y \A.
+
+
+AJUSTES FÁCILES
+---------------
+· Migajas más gruesas: font-size .5em → .8em.
+· Halo más suave: drop-shadow 18px → 10px.
+· Caída más larga: 3.8s → 6s (las dos juntas).
+· Tostado más oscuro: #e08b3e → #b35b1e.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+ORACLE EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "oracle.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/oracle.css">
+
+What the file contains:
+  · The .efecto-oracle class
+  · Its pseudo-elements ::before and ::after
+    (crumbs falling under the letters)
+  ·   · mx-oracle-calor, mx-oracle-migajas
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-oracle">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-oracle">GALLETA</span></h1>
+
+
+WHAT IT DOES
+--------
+Two animations on an infinite loop:\n  · mx-oracle-calor (3.8 s) → the amber halo of the
+    letters rises and falls in intensity, like the warm light
+    of the Oracle's kitchen.
+  · mx-oracle-migajas (3.8 s) → the crumbs from the
+    pseudo-element appear under the text and keep falling
+    until they vanish each cycle.
+The gradient has a more toasted bottom: it's the
+break line of the cookie.
+
+TECHNIQUE: background-clip: text with a cookie gradient +
+    filter: drop-shadow animado en la clase +
+    crumb pseudo-element with content and \A.
+
+
+EASY TWEAKS
+---------------
+· Bigger crumbs: font-size .5em → .8em.
+· Softer halo: drop-shadow 18px → 10px.
+· Longer fall: 3.8s → 6s (both together).
+· Darker toast tone: #e08b3e → #b35b1e.

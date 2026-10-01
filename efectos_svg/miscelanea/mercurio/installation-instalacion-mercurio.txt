@@ -1,0 +1,327 @@
+================================================================
+EFECTO MERCURIO - CÓMO APLICARLO A CUALQUIER ARCHIVO .HTML/.CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "mercurio.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/mercurio.css">
+
+Contenido del archivo:
+  · Las clases .ef-mercurio y .ef-mercurio-mini
+  · Sus rellenos cromados recortados a los glifos
+  · Sus transiciones de brillo al interactuar
+  · Fallbacks: prefers-reduced-motion y @media print
+
+
+PASO 2 - PEGA EL BLOQUE SVG DE FILTROS (UNA VEZ)
+-------------------------------------------------
+Este efecto usa filtros SVG (turbulencia + iluminación
+especular): pega el siguiente bloque UNA sola vez en la
+página que quiera usarlo —es el equivalente a quien pega el
+<style> de los efectos CSS. Lo tienes listo para copiar en
+el index.html de este efecto y en este mismo archivo:
+
+    <!-- ============================================================
+         BLOQUE SVG DE FILTROS — se pega UNA VEZ en la página
+         ============================================================ -->
+    <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+        <defs>
+            <!-- 1 · mercurio (versión suave, siempre activa) -->
+            <filter id="ef-mercurio" x="-20%" y="-60%" width="140%" height="220%"
+                    color-interpolation-filters="sRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.015 0.04"
+                              numOctaves="2" seed="7" result="ruido">
+                    <animate attributeName="baseFrequency" dur="12s" repeatCount="indefinite"
+                             values="0.015 0.04; 0.025 0.055; 0.015 0.04"/>
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="ruido" scale="11"
+                                   xChannelSelector="R" yChannelSelector="G" result="forma"/>
+                <feSpecularLighting in="ruido" surfaceScale="3.2" specularConstant="1.15"
+                                    specularExponent="24" lighting-color="#ffffff" result="brillo">
+                    <feDistantLight azimuth="225" elevation="56">
+                        <animate attributeName="azimuth" dur="9s" repeatCount="indefinite"
+                                 values="210;280;210"/>
+                    </feDistantLight>
+                </feSpecularLighting>
+                <feComposite in="brillo" in2="forma" operator="arithmetic"
+                             k1="0" k2="1" k3="0.75" k4="0" result="suma"/>
+                <feComposite in="suma" in2="forma" operator="in"/>
+            </filter>
+
+            <!-- 1b · mercurio MINI — para párrafos, inline y texto
+                 pequeño: desplazamiento solo ±1,5px, onda fina y
+                 brillo contenido, para que a 13px el texto siga
+                 siendo texto legible -->
+            <filter id="ef-mercurio-mini" x="-10%" y="-45%" width="120%" height="190%"
+                    color-interpolation-filters="sRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.035 0.075"
+                              numOctaves="2" seed="7" result="ruido">
+                    <animate attributeName="baseFrequency" dur="14s" repeatCount="indefinite"
+                             values="0.035 0.075; 0.05 0.1; 0.035 0.075"/>
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="ruido" scale="3"
+                                   xChannelSelector="R" yChannelSelector="G" result="forma"/>
+                <feSpecularLighting in="ruido" surfaceScale="1.2" specularConstant="0.7"
+                                    specularExponent="30" lighting-color="#ffffff" result="brillo">
+                    <feDistantLight azimuth="225" elevation="62">
+                        <animate attributeName="azimuth" dur="11s" repeatCount="indefinite"
+                                 values="215;275;215"/>
+                    </feDistantLight>
+                </feSpecularLighting>
+                <feComposite in="brillo" in2="forma" operator="arithmetic"
+                             k1="0" k2="1" k3="0.7" k4="0" result="suma"/>
+                <feComposite in="suma" in2="forma" operator="in"/>
+            </filter>
+        </defs>
+    </svg>
+
+Si la página usa varios de estos efectos (mercurio y glitch),
+con UN solo bloque <svg> en la página vale para todos: cada
+efecto trae sus filtros dentro de <defs>.
+
+
+PASO 3 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <h1 class="ef-mercurio">Mi título</h1>                     <!-- efecto completo, ≥24px -->
+    <p class="ef-mercurio-mini">Párrafo o texto pequeño.</p>   <!-- mini: legible hasta 13px -->
+    <p>Normal con <span class="ef-mercurio-mini">fragmento</span>.</p>
+
+
+PASO 4 (OPCIONAL) - EL JAVASCRIPT
+----------------------------------
+    <script src="ruta/mercurio.js"></script>
+
+Sin él el efecto funciona igual (ondulación SMIL + brillo al
+pasar el ratón). Con él, al interactuar la onda CRECE SUAVE
+(tween del scale del filtro, 11 → 18 en 600 ms, sin salto
+instantáneo) y con prefers-reduced-motion se pausan las ondas
+SMIL. Si no lo usas y tu página tiene movimiento reducido,
+puedes pausarlas tú con svg.pauseAnimations().
+
+
+QUÉ HACE
+--------
+Un gradiente cromado recortado a los glifos + turbulencia
+SVG que ondula las letras + un brillo especular que recorre
+el texto sin parar. Efecto SOLO del texto: sin caja ni
+fondo detrás (el cromo solo existe dentro de las letras).
+
+TÉCNICA: background-clip: text para el cromo y
+    filter: url(#ef-mercurio) (feTurbulence +
+    feDisplacementMap + feSpecularLighting) para la onda y
+    el brillo metálico. Dos variantes para que el
+    desplazamiento en PÍXELES ABSOLUTOS no arruine el
+    texto pequeño.
+
+
+VARIANTES Y TAMAÑO DEL TEXTO (importante)
+-----------------------------------------
+· .ef-mercurio → títulos grandes (≥24px): onda fuerte
+  (scale 11, desplazamiento de ±5,5px).
+· .ef-mercurio-mini → párrafos, fragmentos inline y texto
+  pequeño: onda fina (scale 3, ±1,5px) y brillo contenido.
+  Verificado legible a 13px.
+Si dudas, aplica por tamaño: completo en títulos, mini en
+el resto. Con movimiento reducido ambos quedan quietos
+(el cromo sigue ahí).
+
+
+REGLA DEL FONDO
+---------------
+El elemento con la clase no debe llevar fondo propio: el
+filtro se calcula sobre TODO lo que pinta el elemento y
+ondularía la caja también. Si tu bloque necesita fondo,
+ponlo en el PADRE y la clase en un <span> interior:
+
+    <div class="mi-caja">
+        <span class="ef-mercurio">efecto dentro, caja fuera</span>
+    </div>
+
+
+SELECCIÓN, IMPRESIÓN Y MOVIMIENTO
+---------------------------------
+· El texto es texto real del DOM: legible, seleccionable y
+  con los saltos de línea normales de tu página.
+· Al imprimir, @media print deja todo en negro liso sin
+  efectos (sigue siendo texto).
+· Con prefers-reduced-motion no hay tween y las ondas SMIL
+  quedan pausadas: el metal sigue ahí, quieto.
+
+
+AJUSTES FÁCILES
+---------------
+· Oda más suave/fuerte: scale="11" → 8 / 14 en el filtro
+  (y el tween de 11→18 sube o baja igual).
+· Brillo menos intenso: specularConstant 1.15 → 0.9.
+· Croma más oscuro: cambia los blancos del gradiente por
+  #9fb4cc → #5f7286.
+· Ondulación más lenta: dur="12s" → 20s (SMIL).
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+MERCURY EFFECT - HOW TO APPLY IT TO ANY .HTML/.CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "mercurio.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/mercurio.css">
+
+What the file contains:
+  · The .ef-mercurio and .ef-mercurio-mini classes
+  · Its chrome fills clipped to the glyphs
+  · Its shine transitions on interaction
+  · Fallbacks: prefers-reduced-motion and @media print
+
+
+STEP 2 - PASTE THE SVG FILTER BLOCK (ONCE)
+-------------------------------------------------
+This effect uses SVG filters (turbulence + specular
+lighting): paste the block below just ONCE on the
+page that will use it —it's the equivalent of pasting the
+<style> of the CSS effects. You have it ready to copy into
+this effect's index.html and into this same file:
+
+    <!-- ============================================================
+         SVG FILTER BLOCK — paste ONCE on the page
+         ============================================================ -->
+    <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+        <defs>
+            <!-- 1 · mercurio (versión suave, siempre activa) -->
+            <filter id="ef-mercurio" x="-20%" y="-60%" width="140%" height="220%"
+                    color-interpolation-filters="sRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.015 0.04"
+                              numOctaves="2" seed="7" result="ruido">
+                    <animate attributeName="baseFrequency" dur="12s" repeatCount="indefinite"
+                             values="0.015 0.04; 0.025 0.055; 0.015 0.04"/>
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="ruido" scale="11"
+                                   xChannelSelector="R" yChannelSelector="G" result="forma"/>
+                <feSpecularLighting in="ruido" surfaceScale="3.2" specularConstant="1.15"
+                                    specularExponent="24" lighting-color="#ffffff" result="brillo">
+                    <feDistantLight azimuth="225" elevation="56">
+                        <animate attributeName="azimuth" dur="9s" repeatCount="indefinite"
+                                 values="210;280;210"/>
+                    </feDistantLight>
+                </feSpecularLighting>
+                <feComposite in="brillo" in2="forma" operator="arithmetic"
+                             k1="0" k2="1" k3="0.75" k4="0" result="suma"/>
+                <feComposite in="suma" in2="forma" operator="in"/>
+            </filter>
+
+            <!-- 1b · mercurio MINI — para párrafos, inline y texto
+                 pequeño: desplazamiento solo ±1,5px, onda fina y
+                 subdued shine, so at 13px the text
+                 still reads as readable text -->
+            <filter id="ef-mercurio-mini" x="-10%" y="-45%" width="120%" height="190%"
+                    color-interpolation-filters="sRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.035 0.075"
+                              numOctaves="2" seed="7" result="ruido">
+                    <animate attributeName="baseFrequency" dur="14s" repeatCount="indefinite"
+                             values="0.035 0.075; 0.05 0.1; 0.035 0.075"/>
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="ruido" scale="3"
+                                   xChannelSelector="R" yChannelSelector="G" result="forma"/>
+                <feSpecularLighting in="ruido" surfaceScale="1.2" specularConstant="0.7"
+                                    specularExponent="30" lighting-color="#ffffff" result="brillo">
+                    <feDistantLight azimuth="225" elevation="62">
+                        <animate attributeName="azimuth" dur="11s" repeatCount="indefinite"
+                                 values="215;275;215"/>
+                    </feDistantLight>
+                </feSpecularLighting>
+                <feComposite in="brillo" in2="forma" operator="arithmetic"
+                             k1="0" k2="1" k3="0.7" k4="0" result="suma"/>
+                <feComposite in="suma" in2="forma" operator="in"/>
+            </filter>
+        </defs>
+    </svg>
+
+If the page uses several of these effects (mercury and glitch),
+with ONE single <svg> block on the page works for all: each
+effect carries its filters inside <defs>.
+
+
+STEP 3 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <h1 class="ef-mercurio">Mi título</h1>                     <!-- efecto completo, ≥24px -->
+    <p class="ef-mercurio-mini">Párrafo o texto pequeño.</p>   <!-- mini: legible hasta 13px -->
+    <p>Normal con <span class="ef-mercurio-mini">fragmento</span>.</p>
+
+
+STEP 4 (OPTIONAL) - THE JAVASCRIPT
+----------------------------------
+    <script src="ruta/mercurio.js"></script>
+
+Without it the effect works the same (SMIL wavering + shine on
+mouse-over). With it, on interaction the wave GROWS SMOOTHLY
+(tween of the filter's scale, 11 → 18 over 600 ms, no jump
+instantly) and with prefers-reduced-motion the SMIL waves
+pause. If you don't use it and your page has reduced motion,
+you can pause them yourself with svg.pauseAnimations().
+
+
+WHAT IT DOES
+--------
+A chrome gradient clipped to the glyphs + turbulence
+SVG that ripples the letters + a specular shine that sweeps
+the text non-stop. Effect ONLY on the text: no box or
+background behind (the chrome only exists inside the letters).
+
+TECHNIQUE: background-clip: text for the chrome and
+    filter: url(#ef-mercurio) (feTurbulence +
+    feDisplacementMap + feSpecularLighting) for the wave and
+    the metallic shine. Two variants so that the
+    displacement in ABSOLUTE PIXELS doesn't ruin
+    small text.
+
+
+VARIANTS AND TEXT SIZE (important)
+-----------------------------------------
+· .ef-mercurio → large titles (≥24px): strong wave
+  (scale 11, ±5.5px shift).
+· .ef-mercurio-mini → paragraphs, inline fragments and small
+  text: fine wave (scale 3, ±1.5px) and subdued shine.
+  Verified readable at 13px.
+If in doubt, apply by size: full on titles, mini on
+the rest. With reduced motion both stay still
+(the chrome is still there).
+
+
+BACKGROUND RULE
+---------------
+The element with the class must not have its own background: the
+filter is computed over EVERYTHING the element paints and
+it would warp the box too. If your block needs a background,
+put it on the PARENT and the class on an inner <span>:
+
+    <div class="mi-caja">
+        <span class="ef-mercurio">efecto dentro, caja fuera</span>
+    </div>
+
+
+SELECTION, PRINTING AND MOTION
+---------------------------------
+· The text is real DOM text: readable, selectable and
+  with your page's normal line breaks.
+· When printing, @media print leaves everything flat black with no
+  effects (it's still text).
+· With prefers-reduced-motion there's no tween and the SMIL waves
+  stay paused: the metal is still there, still.
+
+
+EASY TWEAKS
+---------------
+· Softer/stronger wave: scale="11" → 8 / 14 in the filter
+  (and the 11→18 tween goes up or down the same).
+· Less intense shine: specularConstant 1.15 → 0.9.
+· Darker chrome: swap the gradient's whites for
+  #9fb4cc → #5f7286.
+· Slower rippling: dur="12s" → 20s (SMIL).

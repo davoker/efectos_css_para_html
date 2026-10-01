@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Código Matrix · CINE — efecto WebGL (profundidad, cristal, bloom)</title>
+<style>
+  html, body { margin:0; height:100%; background:#000; overflow:hidden;
+    font-family:"Segoe UI", system-ui, sans-serif; color:#7fe8a6; }
+  #gl { position:fixed; inset:0; width:100%; height:100%; display:block; }
+  .ui { position:fixed; left:0; right:0; bottom:26px; display:flex; flex-direction:column;
+        align-items:center; gap:10px; pointer-events:none; }
+  #txt { pointer-events:auto; width:min(560px,84vw); text-align:center; font-size:17px;
+        padding:12px 18px; border-radius:999px; color:#c8ffe0; letter-spacing:.18em;
+        background:rgba(0,10,4,.62); border:1px solid rgba(0,255,120,.30);
+        outline:none; backdrop-filter:blur(6px); }
+  #txt:focus { border-color:rgba(60,255,140,.7); box-shadow:0 0 0 3px rgba(0,255,110,.15); }
+  .hint { margin:0; font-size:12.5px; letter-spacing:.06em; opacity:.72; text-align:center;
+          padding:0 16px; color:#79d9a0; }
+  .err { position:fixed; inset:0; display:none; place-items:center; text-align:center; padding:40px; }
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div class="ui">
+  <input id="txt" value="MATRIX" spellcheck="false" maxlength="24" autocomplete="off">
+  <p class="hint">Escribe cualquier texto, con mayúsculas y minúsculas &middot; el código cae dentro de las letras &middot; clic = onda expansiva</p>
+</div>
+<div class="err" id="err"><p>Este navegador no soporta WebGL, así que el efecto no puede mostrarse.</p></div>
+<script>
+(function(){
+"use strict";
+
+var cv  = document.getElementById('gl');
+var err = document.getElementById('err');
+var gl  = cv.getContext('webgl', {antialias:false, alpha:false, depth:false})
+       || cv.getContext('experimental-webgl', {antialias:false, alpha:false, depth:false});
+if (!gl) { err.style.display = 'grid'; return; }
+
+/* ================================================================ shaders */
+
+var VS = [
+'attribute vec2 aPos;',
+'varying vec2 vUv;',
+'void main(){ vUv = aPos * 0.5 + 0.5; gl_Position = vec4(aPos, 0.0, 1.0); }'
+].join('\n');
+
+/* ------------------------------------------------------------------ escena */
+
+var FS_SCENE = [
+'#ifdef GL_FRAGMENT_PRECISION_HIGH',
+'precision highp float;',
+'#else',
+'precision mediump float;',
+'#endif',
+'varying vec2 vUv;',
+'uniform vec2  uRes;',
+'uniform float uTime;',
+'uniform sampler2D uText;',
+'uniform sampler2D uBlur;',
+'uniform sampler2D uAtlas;',
+'uniform vec2  uPlane;',
+'uniform vec2  uTexel;',
+'uniform vec2  uCells;',
+'uniform vec2  uAtlasGrid;',
+'uniform vec2  uMouse;',
+'uniform vec2  uClickPos;',
+'uniform float uAmp;',
+'uniform float uClickT;',
+'',
+'float hash21(vec2 p){',
+'  p = fract(p * vec2(123.34, 456.21));',
+'  p += dot(p, p + 45.32);',
+'  return fract(p.x * p.y);',
+'}',
+'',
+'float vnoiseSafe(vec2 p){',
+'  vec2 i = floor(p), f = fract(p);',
+'  vec2 u = f * f * (3.0 - 2.0 * f);',
+'  float a = hash21(i);',
+'  float b = hash21(i + vec2(1.0, 0.0));',
+'  float c = hash21(i + vec2(0.0, 1.0));',
+'  float d = hash21(i + vec2(1.0, 1.0));',
+'  return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);',
+'}',
+'',
+'float glyphAlpha(vec2 cellId, vec2 cellUV){',
+'  float g  = hash21(cellId);',
+'  float gi = floor(g * uAtlasGrid.x * uAtlasGrid.y);',
+'  vec2  gc = vec2(mod(gi, uAtlasGrid.x), floor(gi / uAtlasGrid.x));',
+'  vec2  auv = (gc + cellUV) / uAtlasGrid;',
+'  return texture2D(uAtlas, auv).a;',
+'}',
+'',
+'/* lluvia de la Matrix en una capa (cells = rejilla de esa capa) */',
+'float rainAt(vec2 ruv, vec2 cells, float t, out float hg, out float aOut){',
+'  float cx = floor(ruv.x * cells.x);',
+'  float y  = ruv.y * cells.y;',
+'  float h1 = hash21(vec2(cx, 11.0));',
+'  float h2 = hash21(vec2(cx, 37.0));',
+'  float yy = mod(y + t * (0.5 + 1.2 * h1), 3000.0);',
+'  float a = glyphAlpha(vec2(cx + 0.5, floor(yy) + 0.5), vec2(fract(ruv.x * cells.x), fract(yy)));',
+'  float trail = 8.0 + 12.0 * h2;',
+'  float span  = cells.y + trail;',
+'  float hy    = span - mod(t * (10.0 + 10.0 * h1) + h2 * span, span);',
+'  float d     = y - hy;',
+'  float lit   = 0.0;',
+'  if (d >= 0.0 && d <= trail) lit = pow(1.0 - d / trail, 1.4);',
+'  float base = 0.12 + 0.16 * hash21(vec2(cx, 77.0));',
+'  aOut = a;',
+'  hg = smoothstep(1.8, 0.0, abs(d)) * a;',
+'  return max(lit, base) * a;',
+'}',
+'',
+'vec3 codeCol(float b, float hg){',
+'  vec3 c = mix(vec3(0.03, 0.14, 0.06), vec3(0.22, 1.00, 0.45), smoothstep(0.0, 1.0, b));',
+'  c *= 0.30 + 0.70 * b;',
+'  c += vec3(0.85, 1.00, 0.92) * hg * (0.60 + 1.00 * b);',
+'  return c;',
+'}',
+'',
+'void main(){',
+'  float t = uTime;',
+'  vec2 frag = gl_FragCoord.xy;',
+'  vec2 p = (frag - 0.5 * uRes) / uRes.y;',
+'  vec2 ruv = frag / uRes;',
+'',
+'  /* ---- interaccion ---- */',
+'  vec2 dm = p - uMouse;',
+'  float md = length(dm);',
+'  float wave = sin(md * 36.0 - t * 7.0) * exp(-md * 6.0) * uAmp;',
+'  vec2 dc = p - uClickPos;',
+'  float cd = length(dc);',
+'  float age = max(t - uClickT, 0.0);',
+'  float ring = exp(-pow((cd - age * 0.85) * 7.0, 2.0)) * exp(-age * 1.8);',
+'  float mBoost = exp(-9.0 * md * md) * uAmp;',
+'  float warp = mBoost * 2.5 + ring * 1.5 + wave * 0.5;',
+'',
+'  /* ---- texto: mascara + altura ---- */',
+'  vec2 tuv = 0.5 + p / (2.0 * uPlane);',
+'  float inPlane = step(0.0, tuv.x) * step(tuv.x, 1.0) * step(0.0, tuv.y) * step(tuv.y, 1.0);',
+'  vec2 cuv = clamp(tuv, 0.0, 1.0);',
+'  float mask = texture2D(uText, cuv).a * inPlane;',
+'  float hb   = texture2D(uBlur, cuv).a * inPlane;',
+'',
+'  float hL = texture2D(uBlur, clamp(cuv - vec2(uTexel.x, 0.0), 0.0, 1.0)).a;',
+'  float hR = texture2D(uBlur, clamp(cuv + vec2(uTexel.x, 0.0), 0.0, 1.0)).a;',
+'  float hD = texture2D(uBlur, clamp(cuv - vec2(0.0, uTexel.y), 0.0, 1.0)).a;',
+'  float hU = texture2D(uBlur, clamp(cuv + vec2(0.0, uTexel.y), 0.0, 1.0)).a;',
+'  vec3 N = normalize(vec3((hL - hR) * 2.6, (hD - hU) * 2.6, 0.32));',
+'  float s1 = vnoiseSafe(tuv * 14.0 + vec2(t * 0.6, -t * 0.4));',
+'  float s2 = vnoiseSafe(tuv * 14.0 + vec2(-t * 0.5, t * 0.6) + 7.3);',
+'  N.xy += (vec2(s1, s2) - 0.5) * 0.26 * hb;',
+'  N = normalize(N);',
+'',
+'  /* ---- parallax por profundidad ---- */',
+'  vec2 par = uMouse * 0.030 * uAmp;',
+'',
+'  /* capa lejana: solo dentro de las letras (el fondo es plano) */',
+'  float hgF = 0.0, aF = 0.0, bF = 0.0;',
+'  if (mask > 0.001) bF = rainAt(ruv + par * 0.15, uCells * 1.85, t * 0.70, hgF, aF);',
+'  vec3 colF = codeCol(min(bF, 1.3), hgF) * 0.26;',
+'',
+'  /* capa media: el codigo que cae dentro de las letras (dispersion RGB) */',
+'  vec3 mid = vec3(0.0);',
+'  if (mask > 0.001){',
+'    float hgM, aM, hgR, aR, hgB, aB;',
+'    float bM, bR, bB;',
+'    vec2 offM = N.xy * vec2(0.005, 0.009) * hb;',
+'    bR = rainAt(ruv + par * 0.35 + offM * 0.70, uCells, t + warp, hgR, aR);',
+'    bM = rainAt(ruv + par * 0.35 + offM * 1.00, uCells, t + warp, hgM, aM);',
+'    bB = rainAt(ruv + par * 0.35 + offM * 1.30, uCells, t + warp, hgB, aB);',
+'    mid = vec3(codeCol(min(bR, 1.6), hgR).r,',
+'               codeCol(min(bM, 1.6), hgM).g,',
+'               codeCol(min(bB, 1.6), hgB).b);',
+'  }',
+'',
+'  /* fondo plano de un solo color (cambia aqui el tono si quieres otro) */',
+'  vec3 bg = vec3(0.030, 0.055, 0.040);',
+'',
+'  /* ---- letras: ventana oscura con la misma lluvia e intensidad que la pantalla ---- */',
+'  vec3 letra = (colF + mid * 0.40 + vec3(0.006, 0.026, 0.012)) * (0.90 + 0.10 * sin(t * 1.75));',
+'',
+'  vec3 col = mix(bg, letra, mask);',
+'',
+'  /* borde nitido del glifo: gradiente de la mascara afinada (2-3 px) */',
+'  float eL = texture2D(uText, clamp(cuv - vec2(1.6 * uTexel.x, 0.0), 0.0, 1.0)).a * inPlane;',
+'  float eR = texture2D(uText, clamp(cuv + vec2(1.6 * uTexel.x, 0.0), 0.0, 1.0)).a * inPlane;',
+'  float eD = texture2D(uText, clamp(cuv - vec2(0.0, 1.6 * uTexel.y), 0.0, 1.0)).a * inPlane;',
+'  float eU = texture2D(uText, clamp(cuv + vec2(0.0, 1.6 * uTexel.y), 0.0, 1.0)).a * inPlane;',
+'  float eMax = max(max(eL, eR), max(eD, eU));',
+'  float eMin = min(min(eL, eR), min(eD, eU));',
+'  float edge = clamp((eMax - eMin) * 1.4, 0.0, 1.0);',
+'  col += vec3(0.30, 1.00, 0.55) * edge * 0.75;',
+'  col += vec3(0.20, 1.00, 0.50) * ring * 0.40;',
+'',
+'  gl_FragColor = vec4(col, 1.0);',
+'}'
+].join('\n');
+
+/* ------------------------------------------------------- bright / blur / final */
+
+var FS_BRIGHT = [
+'precision mediump float;',
+'varying vec2 vUv;',
+'uniform sampler2D uTex;',
+'void main(){',
+'  vec3 c = texture2D(uTex, vUv).rgb;',
+'  float l = max(max(c.r, c.g), c.b);',
+'  gl_FragColor = vec4(c * smoothstep(0.80, 1.10, l), 1.0);',
+'}'
+].join('\n');
+
+var FS_BLUR = [
+'precision mediump float;',
+'varying vec2 vUv;',
+'uniform sampler2D uTex;',
+'uniform vec2 uDir;',
+'void main(){',
+'  vec3 c = texture2D(uTex, vUv).rgb * 0.2270270270;',
+'  vec2 o1 = uDir * 1.3846153846;',
+'  vec2 o2 = uDir * 3.2307692308;',
+'  c += (texture2D(uTex, vUv + o1).rgb + texture2D(uTex, vUv - o1).rgb) * 0.3162162162;',
+'  c += (texture2D(uTex, vUv + o2).rgb + texture2D(uTex, vUv - o2).rgb) * 0.0702702703;',
+'  gl_FragColor = vec4(c, 1.0);',
+'}'
+].join('\n');
+
+var FS_FINAL = [
+'precision highp float;',
+'varying vec2 vUv;',
+'uniform sampler2D uScene;',
+'uniform sampler2D uBloom1;',
+'uniform sampler2D uBloom2;',
+'uniform vec2  uRes;',
+'uniform float uTime;',
+'',
+'float hash21(vec2 p){',
+'  p = fract(p * vec2(123.34, 456.21));',
+'  p += dot(p, p + 45.32);',
+'  return fract(p.x * p.y);',
+'}',
+'',
+'void main(){',
+'  vec2 d = vUv - 0.5;',
+'  float r2 = dot(d, d);',
+'',
+'  /* barril suave de tubo */',
+'  vec2 uv = 0.5 + d * (1.0 + 0.055 * r2);',
+'  uv = clamp(uv, 0.0005, 0.9995);',
+'',
+'  /* aberracion radial */',
+'  float ca = 0.0040;',
+'  vec3 sc;',
+'  sc.r = texture2D(uScene, clamp(uv + d * ca, 0.0005, 0.9995)).r;',
+'  sc.g = texture2D(uScene, uv).g;',
+'  sc.b = texture2D(uScene, clamp(uv - d * ca, 0.0005, 0.9995)).b;',
+'',
+'  vec3 bl = texture2D(uBloom1, uv).rgb * 0.60 + texture2D(uBloom2, uv).rgb * 0.80;',
+'  vec3 c = sc + bl;',
+'',
+'  /* tonemap ACES */',
+'  c = clamp((c * (2.51 * c + 0.03)) / (c * (2.43 * c + 0.59) + 0.14), 0.0, 1.0);',
+'',
+'  gl_FragColor = vec4(max(c, 0.0), 1.0);',
+'}'
+].join('\n');
+
+function compile(type, src, name){
+  var s = gl.createShader(type);
+  gl.shaderSource(s, src);
+  gl.compileShader(s);
+  if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+    console.error(name + ': ' + gl.getShaderInfoLog(s));
+    return null;
+  }
+  return s;
+}
+
+function makeProg(fsSrc, name){
+  var vs = compile(gl.VERTEX_SHADER, VS, name + '.vs');
+  var fs = compile(gl.FRAGMENT_SHADER, fsSrc, name + '.fs');
+  if (!vs || !fs) return null;
+  var p = gl.createProgram();
+  gl.attachShader(p, vs);
+  gl.attachShader(p, fs);
+  gl.bindAttribLocation(p, 0, 'aPos');
+  gl.linkProgram(p);
+  if (!gl.getProgramParameter(p, gl.LINK_STATUS)) {
+    console.error(name + ': ' + gl.getProgramInfoLog(p));
+    return null;
+  }
+  return p;
+}
+
+var pScene  = makeProg(FS_SCENE,  'scene');
+var pBright = makeProg(FS_BRIGHT, 'bright');
+var pBlur   = makeProg(FS_BLUR,   'blur');
+var pFinal  = makeProg(FS_FINAL,  'final');
+if (!pScene || !pBright || !pBlur || !pFinal) {
+  err.style.display = 'grid';
+  err.firstElementChild.textContent = 'Error al compilar los shaders.';
+  return;
+}
+
+function U(p, names){
+  var o = {};
+  names.forEach(function(n){ o[n] = gl.getUniformLocation(p, n); });
+  return o;
+}
+var uScene  = U(pScene,  ['uRes','uTime','uText','uBlur','uAtlas','uPlane','uTexel','uCells',
+                          'uAtlasGrid','uMouse','uClickPos','uAmp','uClickT']);
+var uBright = U(pBright, ['uTex']);
+var uBlur   = U(pBlur,   ['uTex','uDir']);
+var uFinal  = U(pFinal,  ['uScene','uBloom1','uBloom2','uRes','uTime']);
+
+var quad = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, quad);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+gl.enableVertexAttribArray(0);
+gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+function drawQuad(){ gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); }
+
+/* ------------------------------------------------------- render targets */
+
+function makeRT(w, h){
+  w = Math.max(1, Math.floor(w)); h = Math.max(1, Math.floor(h));
+  var tex = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, tex);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  var fb = gl.createFramebuffer();
+  gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+  gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  return {tex:tex, fb:fb, w:w, h:h};
+}
+function freeRT(rt){ if (rt){ gl.deleteTexture(rt.tex); gl.deleteFramebuffer(rt.fb); } }
+
+var rtScene = null, rtHalfA = null, rtHalfB = null, rtQA = null, rtQB = null;
+
+function buildRTs(){
+  freeRT(rtScene); freeRT(rtHalfA); freeRT(rtHalfB); freeRT(rtQA); freeRT(rtQB);
+  var w = cv.width, h = cv.height;
+  rtScene = makeRT(w, h);
+  rtHalfA = makeRT(w / 2, h / 2);
+  rtHalfB = makeRT(w / 2, h / 2);
+  rtQA    = makeRT(w / 4, h / 4);
+  rtQB    = makeRT(w / 4, h / 4);
+}
+
+/* ------------------------------------------------------------ texturas UI */
+
+function newTex(){
+  var t = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, t);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  return t;
+}
+var texText  = newTex();
+var texBlur  = newTex();
+var texAtlas = newTex();
+gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+
+/* --------------------------------------------------------- atlas de glifos */
+
+var ATLAS_COLS = 16, ATLAS_ROWS = 8, CELL_W = 30, CELL_H = 48;
+
+function buildAtlas(){
+  var chars = [], c;
+  for (c = 0xFF66; c <= 0xFF9D; c++) chars.push(String.fromCharCode(c));
+  '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(function(s){ chars.push(s); });
+  'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン'.split('')
+    .forEach(function(s){ chars.push(s); });
+  '一二三四五六七八九十出入力無時間年月火水木金土'.split('').forEach(function(s){ chars.push(s); });
+
+  var a = document.createElement('canvas');
+  a.width  = ATLAS_COLS * CELL_W;
+  a.height = ATLAS_ROWS * CELL_H;
+  var ctx = a.getContext('2d');
+  ctx.clearRect(0, 0, a.width, a.height);
+  ctx.fillStyle = '#fff';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.font = '26px "MS Gothic", "Yu Gothic", "Segoe UI", monospace';
+  for (var i = 0; i < ATLAS_COLS * ATLAS_ROWS; i++){
+    var ch = chars.length ? chars[i % chars.length] : '?';
+    ctx.fillText(ch, (i % ATLAS_COLS) * CELL_W + CELL_W / 2,
+                    Math.floor(i / ATLAS_COLS) * CELL_H + CELL_H / 2);
+  }
+  gl.bindTexture(gl.TEXTURE_2D, texAtlas);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, a);
+}
+buildAtlas();
+
+/* ------------------------------------------------------- textura del texto */
+
+var planeAspect = 6.0;
+var texel = [1/1024, 1/256];
+
+function fontFor(size){
+  return '900 ' + size + 'px "Arial Black", "Segoe UI Black", Impact, system-ui, sans-serif';
+}
+
+function buildText(str){
+  str = (str || '').replace(/\s+/g, ' ').trim();
+  if (!str) str = 'MATRIX';
+
+  var probe = document.createElement('canvas').getContext('2d');
+  var size = 320, tw = 0, pad = 0;
+  for (var k = 0; k < 4; k++){
+    probe.font = fontFor(size);
+    tw = probe.measureText(str).width;
+    pad = Math.round(size * 0.35);
+    if (tw + pad * 2 <= 2048) break;
+    size = Math.max(48, Math.floor(size * (2048 - pad * 2) / (tw + pad * 2)));
+  }
+  /* caja medida sobre la tinta real: vale con mayusculas, minusculas y acentos */
+  probe.font = fontFor(size);
+  var mm = probe.measureText(str);
+  var asc = (mm.actualBoundingBoxAscent || size * 0.78) + size * 0.08;
+  var dsc = (mm.actualBoundingBoxDescent || size * 0.24) + size * 0.08;
+  var W = Math.ceil(tw) + pad * 2;
+  var H = Math.ceil(asc + dsc) + pad * 2;
+  var baseline = pad + asc;
+
+  var sharp = document.createElement('canvas');
+  sharp.width = W; sharp.height = H;
+  var sc = sharp.getContext('2d');
+  sc.font = fontFor(size);
+  sc.textAlign = 'center';
+  sc.textBaseline = 'alphabetic';
+  sc.fillStyle = '#fff';
+  sc.fillText(str, W / 2, baseline);
+
+  var blur = document.createElement('canvas');
+  blur.width = W; blur.height = H;
+  var bc = blur.getContext('2d');
+  bc.font = fontFor(size);
+  bc.textAlign = 'center';
+  bc.textBaseline = 'alphabetic';
+  bc.fillStyle = '#fff';
+  var radius = Math.max(4, Math.round(size * 0.06));
+  if (typeof bc.filter === 'string') {
+    bc.filter = 'blur(' + radius + 'px)';
+    bc.fillText(str, W / 2, baseline);
+    bc.filter = 'none';
+  } else {
+    bc.globalAlpha = 0.30;
+    bc.fillText(str, W / 2, baseline);
+    for (var i = 0; i < 8; i++){
+      var ang = i / 8 * Math.PI * 2;
+      bc.fillText(str, W / 2 + Math.cos(ang) * radius, baseline + Math.sin(ang) * radius);
+    }
+    bc.globalAlpha = 1;
+  }
+
+  gl.bindTexture(gl.TEXTURE_2D, texText);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, sharp);
+  gl.bindTexture(gl.TEXTURE_2D, texBlur);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, blur);
+
+  planeAspect = W / H;
+  texel = [1 / W, 1 / H];
+  updatePlane();
+}
+
+/* ------------------------------------------------------------- geometria */
+
+var plane = [0.5, 0.125];
+var cells = [60, 30];
+
+function updatePlane(){
+  var asp = cv.width / Math.max(cv.height, 1);
+  var h = Math.min((0.5 * asp - 0.04) / planeAspect, 0.42);
+  plane = [h * planeAspect, h];
+}
+function updateCells(){
+  var w = window.innerWidth, hh = window.innerHeight;
+  cells = [Math.max(20, Math.round(w / 18.6)), Math.max(10, Math.round(hh / 30))];
+}
+function resize(){
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var w = Math.max(1, Math.floor(cv.clientWidth * dpr));
+  var h = Math.max(1, Math.floor(cv.clientHeight * dpr));
+  if (cv.width !== w || cv.height !== h){
+    cv.width = w; cv.height = h;
+    buildRTs();
+  }
+  updatePlane();
+  updateCells();
+}
+window.addEventListener('resize', resize);
+
+/* ----------------------------------------------------------- interaccion */
+
+var mouse = [0, 0], clickPos = [0, 0], clickT = -10000;
+var amp = 0, ampTarget = 0, lastMove = -1e9;
+
+function toScene(x, y){
+  var w = window.innerWidth, h = window.innerHeight;
+  return [(x - w / 2) / h, (h / 2 - y) / h];
+}
+window.addEventListener('pointermove', function(e){
+  mouse = toScene(e.clientX, e.clientY);
+  lastMove = performance.now();
+  ampTarget = 1;
+}, {passive:true});
+window.addEventListener('pointerdown', function(e){
+  clickPos = toScene(e.clientX, e.clientY);
+  mouse = clickPos;
+  clickT = tSec;
+  lastMove = performance.now();
+  ampTarget = 1;
+}, {passive:true});
+
+var input = document.getElementById('txt');
+var pending = null;
+input.addEventListener('input', function(){ pending = input.value; });
+input.addEventListener('keydown', function(e){
+  if (e.key === 'Enter') { e.preventDefault(); input.blur(); }
+});
+
+var demo = /[?&]demo=1/.test(location.search);
+var mText = /[?&]t=([^&]+)/.exec(location.search);
+if (mText) {
+  try {
+    var v0 = decodeURIComponent(mText[1].replace(/\+/g, ' '));
+    if (v0) { input.value = v0; input.setAttribute('value', v0); }
+  } catch (e) {}
+}
+
+/* ------------------------------------------------------------------ bucle */
+
+var t0 = performance.now();
+var tSec = 0;
+
+function render(){
+  /* 1) escena completa */
+  gl.bindFramebuffer(gl.FRAMEBUFFER, rtScene.fb);
+  gl.viewport(0, 0, rtScene.w, rtScene.h);
+  gl.useProgram(pScene);
+  gl.uniform2f(uScene.uRes, rtScene.w, rtScene.h);
+  gl.uniform1f(uScene.uTime, tSec);
+  gl.uniform2f(uScene.uPlane, plane[0], plane[1]);
+  gl.uniform2f(uScene.uTexel, texel[0], texel[1]);
+  gl.uniform2f(uScene.uCells, cells[0], cells[1]);
+  gl.uniform2f(uScene.uAtlasGrid, ATLAS_COLS, ATLAS_ROWS);
+  gl.uniform2f(uScene.uMouse, mouse[0], mouse[1]);
+  gl.uniform2f(uScene.uClickPos, clickPos[0], clickPos[1]);
+  gl.uniform1f(uScene.uAmp, amp);
+  gl.uniform1f(uScene.uClickT, clickT);
+  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texText);  gl.uniform1i(uScene.uText, 0);
+  gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, texBlur);  gl.uniform1i(uScene.uBlur, 1);
+  gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, texAtlas); gl.uniform1i(uScene.uAtlas, 2);
+  drawQuad();
+
+  /* 2) bright pass a media escala */
+  gl.bindFramebuffer(gl.FRAMEBUFFER, rtHalfA.fb);
+  gl.viewport(0, 0, rtHalfA.w, rtHalfA.h);
+  gl.useProgram(pBright);
+  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, rtScene.tex);
+  gl.uniform1i(uBright.uTex, 0);
+  drawQuad();
+
+  /* 3) blur H (media) */
+  gl.bindFramebuffer(gl.FRAMEBUFFER, rtHalfB.fb);
+  gl.viewport(0, 0, rtHalfB.w, rtHalfB.h);
+  gl.useProgram(pBlur);
+  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, rtHalfA.tex);
+  gl.uniform1i(uBlur.uTex, 0);
+  gl.uniform2f(uBlur.uDir, 1 / rtHalfA.w, 0);
+  drawQuad();
+
+  /* 4) blur V (media) */
+  gl.bindFramebuffer(gl.FRAMEBUFFER, rtHalfA.fb);
+  gl.viewport(0, 0, rtHalfA.w, rtHalfA.h);
+  gl.bindTexture(gl.TEXTURE_2D, rtHalfB.tex);
+  gl.uniform2f(uBlur.uDir, 0, 1 / rtHalfB.h);
+  drawQuad();
+
+  /* 5) blur H (cuarto, radio doble) */
+  gl.bindFramebuffer(gl.FRAMEBUFFER, rtQA.fb);
+  gl.viewport(0, 0, rtQA.w, rtQA.h);
+  gl.bindTexture(gl.TEXTURE_2D, rtHalfA.tex);
+  gl.uniform2f(uBlur.uDir, 2 / rtHalfA.w, 0);
+  drawQuad();
+
+  /* 6) blur V (cuarto) */
+  gl.bindFramebuffer(gl.FRAMEBUFFER, rtQB.fb);
+  gl.viewport(0, 0, rtQB.w, rtQB.h);
+  gl.bindTexture(gl.TEXTURE_2D, rtQA.tex);
+  gl.uniform2f(uBlur.uDir, 0, 2 / rtQA.h);
+  drawQuad();
+
+  /* 7) composite final a pantalla */
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  gl.viewport(0, 0, cv.width, cv.height);
+  gl.useProgram(pFinal);
+  gl.uniform2f(uFinal.uRes, cv.width, cv.height);
+  gl.uniform1f(uFinal.uTime, tSec);
+  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, rtScene.tex); gl.uniform1i(uFinal.uScene, 0);
+  gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, rtHalfA.tex); gl.uniform1i(uFinal.uBloom1, 1);
+  gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, rtQB.tex);    gl.uniform1i(uFinal.uBloom2, 2);
+  drawQuad();
+}
+
+function frame(now){
+  tSec = (now - t0) / 1000;
+  resize();
+
+  if (pending !== null){
+    var v = pending; pending = null;
+    buildText(v);
+  }
+
+  if (now - lastMove > 2600) ampTarget = 0;
+  amp += (ampTarget - amp) * 0.07;
+  if (demo){
+    mouse = [0.30 * Math.sin(tSec * 0.8), 0.16 * Math.cos(tSec * 0.6)];
+    ampTarget = 1; amp = 1;
+  }
+
+  render();
+  requestAnimationFrame(frame);
+}
+
+resize();
+buildRTs();
+buildText(input.value);
+requestAnimationFrame(frame);
+window.__textoListo = true;
+})();
+</script>
+</body>
+</html>

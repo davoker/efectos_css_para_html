@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     SHOWCASE WEBGL · MATRIX 2 · CINE
+     Dirección de diseño: "HUD de laboratorio" (común a los
+     showcases WebGL: efecto a pantalla completa + chrome
+     flotante de vidrio esmerilado con tipografía monoespaciada).
+     ------------------------------------------------------------
+     ESTE ARCHIVO no es el efecto: el efecto es matrix2.html
+     ============================================================ -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATRIX 2 · CINE — Showcase WebGL</title>
+    <link rel="stylesheet" href="../../showcase.css">
+</head>
+<body class="showcase" data-tema="matrix" data-efecto="matrix2"
+      style="--acento-rgb: 70, 255, 170">
+
+    <!-- EL EFECTO, A PANTALLA COMPLETA -->
+    <iframe class="escenario" src="matrix2.html?demo=1"
+            title="Efecto MATRIX 2 · CINE en marcha"></iframe>
+
+    <canvas class="ambiental" aria-hidden="true"></canvas>
+
+    <!-- ============ HUD SUPERIOR ============ -->
+    <header class="hud hud-cima">
+        <div class="placa">
+            <span class="chip"><span class="punto"></span>WebGL 1</span>
+            <div>
+                <p class="miga">efectos_webgl / matrix2 · temática <b>matrix</b></p>
+                <h1 class="titulo">MATRIX 2 · CINE</h1>
+                <p class="descr">Bloom multipasada, aberración cromática y ACES sobre fondo de un color.</p>
+            </div>
+        </div>
+        <nav class="acciones" aria-label="Navegación del showcase">
+            <a class="btn btn-primario" href="../../../transicion.html#cine">⟵ Portada</a>
+            <a class="btn" href="matrix2.zip" download>Descarga</a>
+        </nav>
+    </header>
+
+    <!-- ============ HUD INFERIOR ============ -->
+    <footer class="hud hud-pie">
+        <p class="datos">
+            <span>GLSL ES 1.00</span><span>4 pasadas</span>
+            <span>bloom + ACES</span><span>aberración radial</span>
+            <span>fondo plano</span>
+        </p>
+        <div class="acciones">
+            <button class="btn" id="btn-instalar" type="button"
+                    aria-expanded="false" aria-controls="cajon">Instalar</button>
+        </div>
+    </footer>
+
+    <p class="atajos" aria-hidden="true">I instalar · ESC cerrar</p>
+
+    <!-- ============ CAJÓN INSTALAR ============ -->
+    <div class="velo" id="velo" hidden></div>
+    <aside class="cajon" id="cajon" aria-label="Cómo instalar el efecto">
+        <button class="btn cierra" id="cerrar-instalar" type="button">✕ esc</button>
+        <p class="miga">instalación</p>
+        <h2 class="cajon-titulo">CÓMO APLICARLO</h2>
+        <ol class="pasos">
+            <li><b>Paso 1 — copia el archivo.</b> <code>matrix2.html</code> es
+                autocontenido: CSS, JavaScript, los cuatro shaders GLSL, el
+                atlas de glifos y la lógica de bloom viven dentro; no hay
+                imágenes ni ficheros externos.</li>
+            <li><b>Paso 2 — añádelo a tu página.</b> Ábrelo a pantalla
+                completa o emprétalo en un iframe:</li>
+        </ol>
+        <pre><code>&lt;iframe src="ruta/matrix2.html?demo=1"
+        title="Efecto MATRIX 2"
+        style="display:block;width:100%;height:520px;
+               border:0;background:#000"&gt;&lt;/iframe&gt;</code></pre>
+        <p><b>Paso 3 — personaliza.</b> <code>?t=TU+TEXTO</code> fija el
+            texto inicial y <b>respeta mayúsculas y minúsculas</b>
+            (<code>+</code> = espacio); <code>?demo=1</code> deja el
+            parallax corriendo solo. El fondo es un color plano: el
+            protagonista es el texto con el código cayendo dentro.</p>
+        <p class="nota"><b>Requisitos:</b> navegador con WebGL 1.
+            <b>No necesita servidor local</b> (todo va en el HTML). Si tu
+            navegador bloqueara algo al abrir con doble clic, sirve la
+            carpeta con <code>py -3 -m http.server</code>.</p>
+        <div class="enlaces-cajon">
+            <a class="btn" href="installation-instalacion-matrix2.txt">installation-instalacion-matrix2.txt</a>
+            <a class="btn" href="matrix2.zip" download>⬇ descargar zip</a>
+        </div>
+    </aside>
+
+    <script src="../../showcase.js"></script>
+<script src="../../../i18n.js"></script>
+</body>
+</html>

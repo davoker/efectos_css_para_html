@@ -1,0 +1,105 @@
+================================================================
+EFECTO RUGIDO - CÓMO APLICARLO A CUALQUIER ARCHIVO .CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "rugido.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/rugido.css">
+
+Contenido del archivo:
+  · La clase .efecto-rugido
+  · Sus pseudo-elementos ::before y ::after
+    (dos ondas concéntricas que salen de las letras)
+  ·   · mh-rugido-temblor, mh-rugido-onda
+
+
+PASO 2 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+    <span class="efecto-rugido">Tu texto</span>
+
+Ejemplo real:
+
+    <h1><span class="efecto-rugido">RUGIDO</span></h1>
+
+
+QUÉ HACE
+--------
+Dos animaciones en bucle infinito:
+  · mh-rugido-temblor (3,2 s) → el texto da un latido de
+    escala y se desplaza unos píxeles en cruz: la sacudida.
+  · mh-rugido-onda (3,2 s) → desde el centro salen dos
+    aros que se expanden y se desvanecen; el segundo va
+    con medio segundo de retraso (animation-delay: -.5s).
+El temblor son 6 tramos cerrados: por eso se ve a golpes
+y no como un movimiento continuo.
+
+TÉCNICA: transform por tramos (translate + scale) para el
+    temblor, dos ::before/::after con border redondeado
+    y escala animada para las ondas, y text-shadow con
+    latido.
+
+
+AJUSTES FÁCILES
+---------------
+· Rugido más fuerte: sube el scale(1.06) del temblor.
+· Ondas más lentas: 3.2s → 4.4s en mh-rugido-onda.
+· Sin ondas: borra el ::before y el ::after.
+· Color distinto: cambia el #ffcc80 del texto.
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+ROAR EFFECT - HOW TO APPLY IT TO ANY .CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "rugido.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/rugido.css">
+
+What the file contains:
+  · The .efecto-rugido class
+  · Its pseudo-elements ::before and ::after
+    (two concentric waves coming out of the letters)
+  ·   · mh-rugido-temblor, mh-rugido-onda
+
+
+STEP 2 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+    <span class="efecto-rugido">Tu texto</span>
+
+Real example:
+
+    <h1><span class="efecto-rugido">RUGIDO</span></h1>
+
+
+WHAT IT DOES
+--------
+Two animations on an infinite loop:
+  · mh-rugido-temblor (3.2 s) → the text pulses in scale
+    and shifts a few pixels in a cross: the shake.
+  · mh-rugido-onda (3.2 s) → from the center come two
+    rings that expand and fade; the second goes
+    half a second behind (animation-delay: -.5s).
+The shake is 6 closed segments: that is why it looks choppy
+and not like a continuous movement.
+
+TECHNIQUE: stepped transform (translate + scale) for the
+    shake, two ::before/::after with rounded border
+    and animated scale for the waves, and text-shadow with
+    a beat.
+
+
+EASY TWEAKS
+---------------
+· Stronger roar: raise the shake's scale(1.06).
+· Slower waves: 3.2s → 4.4s in mh-rugido-onda.
+· No waves: delete the ::before and the ::after.
+· Different color: change the text's #ffcc80.
