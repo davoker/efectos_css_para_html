@@ -152,13 +152,14 @@
 
     function inyectarEstilos() {
         var css = [
-            '.btn-idioma{position:fixed;top:10px;',
-            'right:calc(10px + 2.5rem + 10px);z-index:150;height:2.5rem;',
+            '.btn-idioma{position:fixed;top:16px;',
+            'right:calc(10px + 2.5rem + 10px);z-index:150;height:1.75rem;',
             'display:flex;align-items:stretch;overflow:hidden;',
             'border:1px solid #2a3341;border-radius:999px;',
             'background-color:#151a21;}',
             '.btn-idioma button{border:0;background-color:transparent;',
-            'color:#8b94a1;padding:0 .72rem;font:600 .78rem/1 inherit;',
+            'color:#8b94a1;padding:0 .5rem;font-size:.75rem;',
+            'font-weight:600;line-height:1;',
             'letter-spacing:.06em;cursor:pointer;transition:color .15s,',
             'background-color .15s;}',
             '.btn-idioma button:hover:not(.activo){color:#ffffff;}',

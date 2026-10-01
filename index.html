@@ -1115,7 +1115,7 @@
             position: relative;
             z-index: 30; /* sobre el contenido, bajo #efectos (40) */
             overflow: hidden;
-            padding: .7rem 11rem .7rem 1.2rem;
+            padding: 1rem 11rem 1rem 1.2rem;
             text-align: center;
             background:
                 radial-gradient(140% 320% at 12% -70%, rgba(120,45,190,.55), transparent 62%),
@@ -1240,7 +1240,7 @@
                         rgba(180,150,255,.3) 55%, transparent 78%);
         }
         @media (max-width: 720px) {
-            .cabecera-espacial { padding: .55rem 9.6rem .55rem .8rem; }
+            .cabecera-espacial { padding: .85rem 9.6rem .85rem .8rem; }
             .cabecera-espacial p { font-size: .78rem; letter-spacing: .2px; }
         }
 
@@ -3684,15 +3684,24 @@
         // y destello de 4 puntas en las grandes) con parpadeo en dos
         // frecuencias y paralaje por profundidad; estrellas fugaces
         // con estela segmentada, cabeza con brillo y chispas; y
-        // OVNIS: diez platillos volantes clásicos (años 60/70) con
+        // OVNIS: treinta platillos variados (clásicos de los 60/70,
+        // puros, triángulos, orbes, diamantes, cruces, hongos,
+        // bumeranes, cubos, ruedas, medusas y sombreros) con
         // lucecitas animadas que cruzan el cielo de vez en cuando,
-        // uno distinto cada vez. El botón de tema sigue mandando:
-        // cada fotograma se lee el data-tema y, si cambia, se
-        // regenera todo. En headless los fotogramas no avanzan sin
-        // capturar: el primero se pinta ya mismo, window.__fondo.
-        // repinta() fuerza otro (lo usan el botón de tema y las
-        // pruebas) y window.__fondo.ovni(i) lanza el platillo i en
-        // mitad del cielo para las capturas.
+        // uno distinto cada vez, un poco más seguido y hasta tres a
+        // la vez. Además son DESTRUIBLES con el clic: el platillo
+        // revienta (explosión con onda y chispas), todo vuelve al
+        // punto (implosión con chasquido), queda humo que se
+        // disipa y sale una puntuación que empieza pequeña, crece
+        // y reventona en chispas doradas. El botón de tema sigue
+        // mandando: cada fotograma se lee el data-tema y, si
+        // cambia, se regenera todo. En headless los fotogramas no
+        // avanzan sin capturar: el primero se pinta ya mismo,
+        // window.__fondo. repinta() fuerza otro (lo usan el botón
+        // de tema y las pruebas), window.__fondo.ovni(i) lanza el
+        // platillo i en su hueco de la cuadrícula de capturas y
+        // window.__fondo.clicEnOvni() avisa al mazo de efectos de
+        // que un clic se comió un OVNI (para no duplicar estallidos).
         (function () {
             var lienzo = document.getElementById("fondo-espacio");
             if (!lienzo || !lienzo.getContext) { return; }
@@ -3703,6 +3712,9 @@
             var dpr = Math.min(window.devicePixelRatio || 1, 2);
             var tema = "";
             var estrellas = [], fugaces = [], destellos = [], ovnis = [];
+            var explosiones = [], puntuaciones = [];   // al morir un OVNI
+            var muertosTot = 0, puntosTot = 0;         // contadores
+            var clic_comido = false;   // el último clic acertó a un OVNI
             var sprites = {};
             var px = 0, py = 0, ox = 0, oy = 0;   // paralaje real/objetivo
             var reloj = 0, ult = 0, ultimo_ovni = -1;
@@ -3719,7 +3731,10 @@
             var FUG_CLARO = [["#5f7bd8", 1.9, 130, 1], ["#b07a2a", 1.5, 105, .85],
                              ["#2f9d8f", 2.2, 155, 1.15]];
 
-            // ----- diez platillos volantes (años 60/70) -----
+            // ----- treinta platillos volantes (x30 variantes) -----
+            // forma: 0 clásico · 1 puro · 2 triángulo · 3 orbe ·
+            // 4 diamante · 5 cruz · 6 hongo · 7 bumerán · 8 cubo ·
+            // 9 rueda · 10 medusa · 11 sombrero (sin campo = 0)
             // cuerpo/techo/aro: hex; luces: colores del borde;
             // modo:0 cálido fijo · 1 alterna · 2 barrido · 3 respira ·
             // 4 secuencial · 5 ventanas · 6 baliza doble
@@ -3750,7 +3765,84 @@
                 { cuerpo: "#9fd8f2", techo: "#d8f2ff", aro: "#4f9fc8",
                   luz: ["#eaffff", "#bff2ff"], modo: 3, bajo: "#aef0ff" },
                 { cuerpo: "#7d8794", techo: "#aab4c2", aro: "#4a525c",
-                  luz: ["#ff4646"], modo: 6, bajo: "#ff8080" }
+                  luz: ["#ff4646"], modo: 6, bajo: "#ff8080" },
+                // --- 10-11: puros (cigarras de los 50)
+                { forma: 1, cuerpo: "#b08d57", techo: "#dcb87d",
+                  aro: "#7a5c33", luz: ["#ffe9a8", "#ffe9a8"],
+                  modo: 3, bajo: "#ffdf9e" },
+                { forma: 1, cuerpo: "#3a4356", techo: "#556079",
+                  aro: "#4fff9f", luz: ["#4fff9f", "#4fff9f"],
+                  modo: 2, bajo: "#7dffbe", neon: true },
+                // --- 12-13: triángulos (TR-3B)
+                { forma: 2, cuerpo: "#171b26", techo: "#232a3c",
+                  aro: "#5fa8ff",
+                  luz: ["#5fa8ff", "#9fd0ff", "#5fa8ff"],
+                  modo: 4, bajo: "#4f9fff" },
+                { forma: 2, cuerpo: "#4a3b22", techo: "#6b5530",
+                  aro: "#ffd166", luz: ["#ffd166", "#ffd166"],
+                  modo: 1, bajo: "#ffdf8a" },
+                // --- 14-15: orbes
+                { forma: 3, cuerpo: "#e8eef7", techo: "#ffffff",
+                  aro: "#9fb6d8", luz: ["#aef0ff", "#aef0ff"],
+                  modo: 3, bajo: "#d8f2ff" },
+                { forma: 3, cuerpo: "#2b2140", techo: "#463463",
+                  aro: "#ff5f5f", luz: ["#ff5f5f", "#ffd166"],
+                  modo: 2, bajo: "#ff8f8f" },
+                // --- 16-17: diamantes
+                { forma: 4, cuerpo: "#123326", techo: "#1e5540",
+                  aro: "#4fff9f", luz: ["#4fff9f", "#eafff4"],
+                  modo: 5, bajo: "#7dffbe", neon: true },
+                { forma: 4, cuerpo: "#8a6a1f", techo: "#c9a13f",
+                  aro: "#ffe9a8", luz: ["#ffe9a8"],
+                  modo: 0, bajo: "#ffdf8a" },
+                // --- 18-19: cruces
+                { forma: 5, cuerpo: "#e6e9f2", techo: "#ffffff",
+                  aro: "#aab4c2",
+                  luz: ["#ff4fa3", "#4f9fff", "#ffd166", "#4fff9f"],
+                  modo: 4, bajo: "#cfd8e6" },
+                { forma: 5, cuerpo: "#3c2f66", techo: "#58479a",
+                  aro: "#c8a2ff", luz: ["#c8a2ff", "#ff5fd0"],
+                  modo: 1, bajo: "#b48aff", neon: true },
+                // --- 20-21: hongos (contactee clásico)
+                { forma: 6, cuerpo: "#c7ccd8", techo: "#eef1f7",
+                  aro: "#8d96ab", luz: ["#ffd166", "#5fd0ff"],
+                  modo: 0, bajo: "#9fd8f2" },
+                { forma: 6, cuerpo: "#79c98e", techo: "#bfe8cf",
+                  aro: "#3f8f5f", luz: ["#fff2b0", "#fff2b0"],
+                  modo: 5, bajo: "#9dffcf" },
+                // --- 22-23: bumeranes
+                { forma: 7, cuerpo: "#5d4426", techo: "#7d5d36",
+                  aro: "#d8b87e", luz: ["#ffe9a8", "#ffe9a8"],
+                  modo: 3, bajo: "#ffdf9e" },
+                { forma: 7, cuerpo: "#2a3346", techo: "#41506e",
+                  aro: "#41e8ff",
+                  luz: ["#41e8ff", "#ff5fd0", "#41e8ff"],
+                  modo: 2, bajo: "#6ff0ff", neon: true },
+                // --- 24-25: cubos
+                { forma: 8, cuerpo: "#9aa4b5", techo: "#cfd8e6",
+                  aro: "#5e6878",
+                  luz: ["#ffd166", "#ffd166", "#ffd166"],
+                  modo: 1, bajo: "#ffd9a0" },
+                { forma: 8, cuerpo: "#191225", techo: "#2b1f42",
+                  aro: "#ff5fd0", luz: ["#ff5fd0", "#ff5fd0"],
+                  modo: 4, bajo: "#ff8fd0", neon: true },
+                // --- 26-27: ruedas
+                { forma: 9, cuerpo: "#b9c2cf", techo: "#e3e9f2",
+                  aro: "#6f7b8c",
+                  luz: ["#eaffff", "#bff2ff", "#ffffff"],
+                  modo: 2, bajo: "#aef0ff" },
+                { forma: 9, cuerpo: "#23272e", techo: "#3a4048",
+                  aro: "#ff4646", luz: ["#ff4646", "#ffb45f"],
+                  modo: 6, bajo: "#ff8080" },
+                // --- 28: medusa
+                { forma: 10, cuerpo: "#2d6fa8", techo: "#6fc0e8",
+                  aro: "#a8e6ff", luz: ["#eaffff", "#bff2ff"],
+                  modo: 3, bajo: "#7fd4ff" },
+                // --- 29: sombrero biónico
+                { forma: 11, cuerpo: "#2b2b34", techo: "#47475a",
+                  aro: "#ffd166",
+                  luz: ["#ffd166", "#4fff9f", "#ff5f5f"],
+                  modo: 1, bajo: "#ffe08a" }
             ];
 
             function claro() {
@@ -4168,26 +4260,476 @@
                     d = (d + 1) % DISENOS.length;
                 }
                 ultimo_ovni = d;
-                var esc = .24 + Math.random() * .2;
+                // tamano x1.20: los platillos se ven un 20% mas
+                var esc = (enVista ? .52 : .24 + Math.random() * .2) * 1.2;
                 ovniTot++;
                 var dir = Math.random() < .5 ? 1 : -1;
                 var dur = enVista ? 60000 : 12000 + Math.random() * 6000;
-                // modo captura: los diez en cuadrícula (5x2) para poder
-                // revisarlos todos en una sola captura
+                // modo captura: los treinta en cuadrícula (6x5) para
+                // poder revisarlos todos en una sola captura
                 var idx = (i == null || i < 0) ? 0 : (i % DISENOS.length);
                 ovnis.push({
                     d: d,
-                    x: enVista ? an * (.12 + (idx % 5) * .19)
+                    x: enVista ? an * (.07 + (idx % 6) * .157)
                                : (dir > 0 ? -70 : an + 70),
                     y: (window.pageYOffset || 0)
                        + window.innerHeight * (enVista
-                           ? .2 + Math.floor(idx / 5) * .36
+                           ? .14 + Math.floor(idx / 6) * .19
                            : .12 + Math.random() * .55),
                     dir: dir, esc: esc, t: 0, dur: dur,
-                    vx: dir * (an + 160) * 1000 / dur,
+                    // en cuadrícula (modo revisión) quieta: la captura
+                    // no debe derivarlos fuera de su celda
+                    vx: enVista ? 0 : dir * (an + 160) * 1000 / dur,
                     fase: Math.random() * 6.28
                 });
             }
+
+            // ----- cascos: cada forma dibuja su nave y devuelve las
+            // anclas (x, y) donde se sueldan las lucecitas -----
+            function anclasFila(y, xmin, xmax, n) {
+                var a = [], i;
+                for (i = 0; i < n; i++) {
+                    a.push([n === 1 ? (xmin + xmax) / 2
+                                    : xmin + i * (xmax - xmin) / (n - 1),
+                            y]);
+                }
+                return a;
+            }
+            function filaLuces(d) {
+                return anclasFila(7, -26, 26, d.luz.length);
+            }
+
+            var FORMAS = [
+                // 0) clásico: disco achatado + cúpula (con anillo
+                //    Saturno, patas Adamski o ventanas según receta)
+                function (d, t, borde) {
+                    var cg = fx.createLinearGradient(0, -8, 0, 11);
+                    cg.addColorStop(0, mezcla(d.cuerpo, "#ffffff", .45));
+                    cg.addColorStop(.45, d.cuerpo);
+                    cg.addColorStop(1, mezcla(d.cuerpo, "#000000", .5));
+                    fx.fillStyle = cg;
+                    elipse(0, 2, 36, 9);
+                    // banda/ecuador
+                    fx.strokeStyle = aRgba(d.aro, .95);
+                    fx.lineWidth = d.neon ? 2.6 : 1.3;
+                    if (d.neon) {
+                        fx.save();
+                        fx.globalAlpha = borde * .4;
+                        fx.lineWidth = 6;
+                        fx.strokeStyle = d.aro;
+                        fx.beginPath();
+                        fx.ellipse(0, 2, 36, 9, 0, 0, 6.2832);
+                        fx.stroke();
+                        fx.restore();
+                    }
+                    fx.beginPath();
+                    fx.ellipse(0, 2, 36, 9, 0, 0, 6.2832);
+                    fx.stroke();
+                    // cúpula
+                    var dgm = fx.createLinearGradient(0, -20, 0, 1);
+                    dgm.addColorStop(0, mezcla(d.techo, "#ffffff", .5));
+                    dgm.addColorStop(1, d.techo);
+                    fx.fillStyle = dgm;
+                    fx.beginPath();
+                    fx.moveTo(-17, 1);
+                    fx.quadraticCurveTo(-15, -17, 0, -18);
+                    fx.quadraticCurveTo(15, -17, 17, 1);
+                    fx.closePath();
+                    fx.fill();
+                    // brillo especular de la cúpula
+                    fx.fillStyle = "rgba(255,255,255,.5)";
+                    fx.beginPath();
+                    fx.ellipse(-5, -9, 4.6, 2.4, -.55, 0, 6.2832);
+                    fx.fill();
+                    // anillo estilo Saturno
+                    if (d.anillo) {
+                        fx.strokeStyle = aRgba(d.aro, .85);
+                        fx.lineWidth = 3.4;
+                        fx.beginPath();
+                        fx.ellipse(0, 4, 52, 11, 0, .18, Math.PI - .18);
+                        fx.stroke();
+                        fx.strokeStyle = aRgba(d.aro, .45);
+                        fx.lineWidth = 1.2;
+                        fx.beginPath();
+                        fx.ellipse(0, 4, 46, 9, 0, 0, 6.2832);
+                        fx.stroke();
+                    }
+                    // patas (estilo Adamski)
+                    if (d.tri) {
+                        fx.strokeStyle = mezcla(d.aro, "#000000", .2);
+                        fx.lineWidth = 2.2;
+                        fx.beginPath();
+                        fx.moveTo(-14, 8); fx.lineTo(-18, 20);
+                        fx.moveTo(0, 9);   fx.lineTo(0, 22);
+                        fx.moveTo(14, 8);  fx.lineTo(18, 20);
+                        fx.stroke();
+                        fx.fillStyle = mezcla(d.aro, "#000000", .35);
+                        elipse(-18, 21, 4, 2);
+                        elipse(0, 23, 4, 2);
+                        elipse(18, 21, 4, 2);
+                    }
+                    // ventanas cálidas
+                    if (d.vent) {
+                        for (var v = 0; v < 5; v++) {
+                            fx.fillStyle = aRgba("#ffe9a8",
+                                .75 + .25 * Math.sin(t / 620 + v));
+                            fx.beginPath();
+                            fx.ellipse(-22 + v * 11, 3, 3.4, 2.6,
+                                      0, 0, 6.2832);
+                            fx.fill();
+                        }
+                    }
+                    return filaLuces(d);
+                },
+                // 1) puro: casco alargado con balcones y aleta de cola
+                function (d, t) {
+                    var g = fx.createLinearGradient(0, -9, 0, 9);
+                    g.addColorStop(0, mezcla(d.cuerpo, "#ffffff", .5));
+                    g.addColorStop(.5, d.cuerpo);
+                    g.addColorStop(1, mezcla(d.cuerpo, "#000000", .5));
+                    fx.fillStyle = g;
+                    fx.beginPath();
+                    fx.ellipse(0, 0, 44, 8.5, 0, 0, 6.2832);
+                    fx.fill();
+                    // franja del ecuador
+                    fx.strokeStyle = aRgba(d.aro, d.neon ? .95 : .85);
+                    fx.lineWidth = d.neon ? 2.6 : 1.3;
+                    fx.beginPath();
+                    fx.moveTo(-42, 1); fx.lineTo(42, 1);
+                    fx.stroke();
+                    // aleta de cola
+                    fx.fillStyle = mezcla(d.cuerpo, "#000000", .4);
+                    fx.beginPath();
+                    fx.moveTo(-40, -1);
+                    fx.lineTo(-51, -10);
+                    fx.lineTo(-48, 7);
+                    fx.closePath();
+                    fx.fill();
+                    // baliza de proa
+                    var pul = .5 + .5 * Math.sin(t / 380);
+                    fx.fillStyle = aRgba(d.bajo, .45 + .55 * pul);
+                    fx.beginPath();
+                    fx.ellipse(43, 0, 3.5, 4, 0, 0, 6.2832);
+                    fx.fill();
+                    // balcones cálidos
+                    for (var v = 0; v < 6; v++) {
+                        fx.fillStyle = aRgba("#ffe9a8",
+                            .7 + .3 * Math.sin(t / 620 + v));
+                        fx.beginPath();
+                        fx.ellipse(-25 + v * 10, 2.5, 2.8, 2.2,
+                                  0, 0, 6.2832);
+                        fx.fill();
+                    }
+                    return anclasFila(7, -34, 34, d.luz.length);
+                },
+                // 2) triángulo (estilo TR-3B) con motor central
+                function (d, t) {
+                    var g = fx.createLinearGradient(0, -18, 0, 17);
+                    g.addColorStop(0, mezcla(d.cuerpo, "#ffffff", .35));
+                    g.addColorStop(.5, d.cuerpo);
+                    g.addColorStop(1, mezcla(d.cuerpo, "#000000", .55));
+                    fx.fillStyle = g;
+                    fx.beginPath();
+                    fx.moveTo(0, -17);
+                    fx.lineTo(34, 13);
+                    fx.quadraticCurveTo(0, 21, -34, 13);
+                    fx.closePath();
+                    fx.fill();
+                    // canto (neón si lo lleva)
+                    fx.strokeStyle = aRgba(d.aro, d.neon ? .95 : .7);
+                    fx.lineWidth = d.neon ? 2.4 : 1.2;
+                    fx.stroke();
+                    // motor central (halo que late)
+                    var pul = .55 + .3 * Math.sin(t / 420);
+                    var cg2 = fx.createRadialGradient(0, 8, 1, 0, 8, 15);
+                    cg2.addColorStop(0, aRgba("#ffffff", .85 * pul));
+                    cg2.addColorStop(.4, aRgba(d.bajo, .6 * pul));
+                    cg2.addColorStop(1, aRgba(d.bajo, 0));
+                    fx.fillStyle = cg2;
+                    elipse(0, 8, 15, 9);
+                    return [[-25, 10], [25, 10], [0, -8]];
+                },
+                // 3) orbe: esfera con bandas ecuatoriales
+                function (d, t) {
+                    var g = fx.createRadialGradient(-7, -9, 2, 0, 0, 25);
+                    g.addColorStop(0, mezcla(d.cuerpo, "#ffffff", .6));
+                    g.addColorStop(.55, d.cuerpo);
+                    g.addColorStop(1, mezcla(d.cuerpo, "#000000", .55));
+                    fx.fillStyle = g;
+                    elipse(0, 0, 23, 23);
+                    // bandas
+                    fx.strokeStyle = aRgba(d.aro, .8);
+                    fx.lineWidth = 1.6;
+                    var b, yy, rr;
+                    for (b = -1; b <= 1; b++) {
+                        yy = b * 8 + Math.sin(t / 900) * b * 1.5;
+                        rr = Math.sqrt(Math.max(1, 529 - yy * yy));
+                        fx.beginPath();
+                        fx.ellipse(0, yy, rr, 3.4, 0, 0, 6.2832);
+                        fx.stroke();
+                    }
+                    // destello especular
+                    fx.fillStyle = "rgba(255,255,255,.5)";
+                    fx.beginPath();
+                    fx.ellipse(-8, -10, 5, 3, -.6, 0, 6.2832);
+                    fx.fill();
+                    // lucecitas sobre el ecuador (arco inferior)
+                    var n = d.luz.length, a = [], i, an2;
+                    for (i = 0; i < n; i++) {
+                        an2 = Math.PI * (.12 + .76
+                                        * (n === 1 ? .5 : i / (n - 1)));
+                        a.push([Math.cos(an2) * 23, Math.sin(an2) * 23]);
+                    }
+                    return a;
+                },
+                // 4) diamante: octaedro con ecuador luminoso
+                function (d, t) {
+                    var g = fx.createLinearGradient(0, -24, 0, 24);
+                    g.addColorStop(0, mezcla(d.techo, "#ffffff", .5));
+                    g.addColorStop(.5, d.cuerpo);
+                    g.addColorStop(1, mezcla(d.cuerpo, "#000000", .5));
+                    fx.fillStyle = g;
+                    fx.beginPath();
+                    fx.moveTo(0, -24);
+                    fx.lineTo(22, 2);
+                    fx.lineTo(0, 24);
+                    fx.lineTo(-22, 2);
+                    fx.closePath();
+                    fx.fill();
+                    // aristas
+                    fx.strokeStyle = aRgba(d.aro, d.neon ? .95 : .65);
+                    fx.lineWidth = d.neon ? 2.2 : 1.1;
+                    fx.stroke();
+                    // ecuador que respira
+                    var pul = .6 + .4 * Math.sin(t / 480);
+                    fx.strokeStyle = aRgba(d.bajo, .45 + .55 * pul);
+                    fx.lineWidth = 2;
+                    fx.beginPath();
+                    fx.moveTo(-21, 2); fx.lineTo(21, 2);
+                    fx.stroke();
+                    return [[-13, 11], [13, 11], [0, 19]];
+                },
+                // 5) cruz: casco en aspa con luces en los brazos
+                function (d, t) {
+                    var g = fx.createLinearGradient(0, -22, 0, 21);
+                    g.addColorStop(0, mezcla(d.cuerpo, "#ffffff", .5));
+                    g.addColorStop(.5, d.cuerpo);
+                    g.addColorStop(1, mezcla(d.cuerpo, "#000000", .45));
+                    fx.fillStyle = g;
+                    // brazo horizontal
+                    fx.beginPath();
+                    if (fx.roundRect) { fx.roundRect(-32, -7, 64, 16, 8); }
+                    else { fx.ellipse(0, 1, 32, 8, 0, 0, 6.2832); }
+                    fx.fill();
+                    // mástil vertical
+                    fx.beginPath();
+                    if (fx.roundRect) { fx.roundRect(-8, -22, 16, 43, 8); }
+                    else { fx.ellipse(0, -1, 8, 22, 0, 0, 6.2832); }
+                    fx.fill();
+                    // nervio del ecuador
+                    fx.strokeStyle = aRgba(d.aro, .8);
+                    fx.lineWidth = 1.2;
+                    fx.beginPath();
+                    fx.moveTo(-30, 1); fx.lineTo(30, 1);
+                    fx.stroke();
+                    return [[-26, 6], [26, 6], [-13, 6], [13, 6],
+                            [0, 15]];
+                },
+                // 6) hongo: cúpula grande con falda (contactee clásico)
+                function (d, t) {
+                    // gondola inferior
+                    fx.fillStyle = mezcla(d.cuerpo, "#000000", .45);
+                    elipse(0, 16, 11, 5);
+                    // falda / ala ancha
+                    var g = fx.createLinearGradient(0, -4, 0, 14);
+                    g.addColorStop(0, mezcla(d.cuerpo, "#ffffff", .45));
+                    g.addColorStop(1, mezcla(d.cuerpo, "#000000", .4));
+                    fx.fillStyle = g;
+                    fx.beginPath();
+                    fx.ellipse(0, 6, 38, 8, 0, 0, 6.2832);
+                    fx.fill();
+                    // cúpula
+                    var dg = fx.createLinearGradient(0, -30, 0, 6);
+                    dg.addColorStop(0, mezcla(d.techo, "#ffffff", .55));
+                    dg.addColorStop(1, d.techo);
+                    fx.fillStyle = dg;
+                    fx.beginPath();
+                    fx.moveTo(-26, 5);
+                    fx.quadraticCurveTo(-24, -30, 0, -31);
+                    fx.quadraticCurveTo(24, -30, 26, 5);
+                    fx.closePath();
+                    fx.fill();
+                    // brillo
+                    fx.fillStyle = "rgba(255,255,255,.45)";
+                    fx.beginPath();
+                    fx.ellipse(-8, -16, 5, 3, -.5, 0, 6.2832);
+                    fx.fill();
+                    return anclasFila(8, -30, 30, d.luz.length);
+                },
+                // 7) bumerán: chevron volador
+                function (d, t) {
+                    var g = fx.createLinearGradient(0, -14, 0, 22);
+                    g.addColorStop(0, mezcla(d.cuerpo, "#ffffff", .5));
+                    g.addColorStop(.5, d.cuerpo);
+                    g.addColorStop(1, mezcla(d.cuerpo, "#000000", .5));
+                    fx.fillStyle = g;
+                    fx.beginPath();
+                    fx.moveTo(-46, -6);
+                    fx.quadraticCurveTo(-18, 4, 0, 16);
+                    fx.quadraticCurveTo(18, 4, 46, -6);
+                    fx.lineTo(42, 3);
+                    fx.quadraticCurveTo(16, 12, 0, 22);
+                    fx.quadraticCurveTo(-16, 12, -42, 3);
+                    fx.closePath();
+                    fx.fill();
+                    fx.strokeStyle = aRgba(d.aro, d.neon ? .95 : .6);
+                    fx.lineWidth = d.neon ? 2.2 : 1.1;
+                    fx.stroke();
+                    // luz de proa
+                    var pul = .5 + .5 * Math.sin(t / 350);
+                    fx.fillStyle = aRgba(d.bajo, .4 + .6 * pul);
+                    fx.beginPath();
+                    fx.ellipse(0, 18, 4.5, 3, 0, 0, 6.2832);
+                    fx.fill();
+                    return anclasFila(14, -32, 32, d.luz.length);
+                },
+                // 8) cubo: bloque con esquinas redondeadas
+                function (d, t) {
+                    var g = fx.createLinearGradient(0, -18, 0, 18);
+                    g.addColorStop(0, mezcla(d.techo, "#ffffff", .5));
+                    g.addColorStop(.4, d.cuerpo);
+                    g.addColorStop(1, mezcla(d.cuerpo, "#000000", .5));
+                    fx.fillStyle = g;
+                    fx.beginPath();
+                    if (fx.roundRect) { fx.roundRect(-24, -18, 48, 36, 7); }
+                    else { fx.rect(-24, -18, 48, 36); }
+                    fx.fill();
+                    // cara superior (perspectiva)
+                    fx.fillStyle = "rgba(255,255,255,.22)";
+                    fx.beginPath();
+                    if (fx.roundRect) { fx.roundRect(-24, -18, 48, 13, 7); }
+                    else { fx.rect(-24, -18, 48, 13); }
+                    fx.fill();
+                    // canto
+                    fx.strokeStyle = aRgba(d.aro, d.neon ? .95 : .7);
+                    fx.lineWidth = d.neon ? 2.4 : 1.2;
+                    fx.beginPath();
+                    if (fx.roundRect) { fx.roundRect(-24, -18, 48, 36, 7); }
+                    else { fx.rect(-24, -18, 48, 36); }
+                    fx.stroke();
+                    return anclasFila(19, -18, 18, d.luz.length);
+                },
+                // 9) rueda: anillo metálico con radios y "ojo"
+                function (d, t) {
+                    // radios girando
+                    fx.strokeStyle = aRgba(d.aro, .75);
+                    fx.lineWidth = 2.4;
+                    var r, ang;
+                    for (r = 0; r < 6; r++) {
+                        ang = t / 2400 * 6.2832 + r * 1.0472;
+                        fx.beginPath();
+                        fx.moveTo(Math.cos(ang) * 7, Math.sin(ang) * 7);
+                        fx.lineTo(Math.cos(ang) * 21, Math.sin(ang) * 21);
+                        fx.stroke();
+                    }
+                    // aro exterior
+                    fx.strokeStyle = mezcla(d.cuerpo, "#000000", .35);
+                    fx.lineWidth = 7;
+                    fx.beginPath();
+                    fx.arc(0, 0, 24, 0, 6.2832);
+                    fx.stroke();
+                    fx.strokeStyle = aRgba(d.aro, .9);
+                    fx.lineWidth = 2;
+                    fx.beginPath();
+                    fx.arc(0, 0, 24, 0, 6.2832);
+                    fx.stroke();
+                    // iris central
+                    var g = fx.createRadialGradient(0, 0, 1, 0, 0, 9);
+                    g.addColorStop(0, "#ffffff");
+                    g.addColorStop(.5, d.bajo);
+                    g.addColorStop(1, aRgba(d.bajo, 0));
+                    fx.fillStyle = g;
+                    elipse(0, 0, 9, 9);
+                    // lucecitas alrededor del aro
+                    var n = d.luz.length, a = [], i, an2;
+                    for (i = 0; i < n; i++) {
+                        an2 = -1.5708 + i * 6.2832 / n;
+                        a.push([Math.cos(an2) * 24, Math.sin(an2) * 24]);
+                    }
+                    return a;
+                },
+                // 10) medusa: domo gelatinoso con tentáculos
+                function (d, t) {
+                    var g = fx.createRadialGradient(-6, -8, 2, 0, -2, 26);
+                    g.addColorStop(0, mezcla(d.techo, "#ffffff", .6));
+                    g.addColorStop(.6, d.techo);
+                    g.addColorStop(1, aRgba(d.cuerpo, .92));
+                    fx.fillStyle = g;
+                    fx.beginPath();
+                    fx.moveTo(-24, 6);
+                    fx.quadraticCurveTo(-24, -24, 0, -25);
+                    fx.quadraticCurveTo(24, -24, 24, 6);
+                    fx.quadraticCurveTo(0, 13, -24, 6);
+                    fx.closePath();
+                    fx.fill();
+                    // borde luminoso del domo
+                    fx.strokeStyle = aRgba(d.bajo, .75);
+                    fx.lineWidth = 1.6;
+                    fx.stroke();
+                    // tentáculos que ondean
+                    fx.strokeStyle = aRgba(d.cuerpo, .8);
+                    fx.lineWidth = 2;
+                    var k, x0, sway;
+                    for (k = 0; k < 5; k++) {
+                        x0 = -18 + k * 9;
+                        sway = Math.sin(t / 520 + k * 1.1) * 6;
+                        fx.beginPath();
+                        fx.moveTo(x0, 8);
+                        fx.quadraticCurveTo(x0 + sway, 18,
+                                            x0 - sway * .6, 27);
+                        fx.stroke();
+                    }
+                    return anclasFila(9, -20, 20, d.luz.length);
+                },
+                // 11) sombrero biónico: ala ancha + copa alta
+                function (d, t) {
+                    // copa
+                    var g = fx.createLinearGradient(0, -30, 0, 6);
+                    g.addColorStop(0, mezcla(d.techo, "#ffffff", .45));
+                    g.addColorStop(1, d.cuerpo);
+                    fx.fillStyle = g;
+                    fx.beginPath();
+                    if (fx.roundRect) { fx.roundRect(-15, -30, 30, 36, 4); }
+                    else { fx.rect(-15, -30, 30, 36); }
+                    fx.fill();
+                    // cinta
+                    fx.fillStyle = aRgba(d.aro, .95);
+                    fx.beginPath();
+                    if (fx.roundRect) { fx.roundRect(-15, -9, 30, 7, 3); }
+                    else { fx.rect(-15, -9, 30, 7); }
+                    fx.fill();
+                    // ala
+                    var ag = fx.createLinearGradient(0, 2, 0, 15);
+                    ag.addColorStop(0, mezcla(d.cuerpo, "#ffffff", .35));
+                    ag.addColorStop(1, mezcla(d.cuerpo, "#000000", .5));
+                    fx.fillStyle = ag;
+                    fx.beginPath();
+                    fx.ellipse(0, 8, 38, 7, 0, 0, 6.2832);
+                    fx.fill();
+                    fx.strokeStyle = aRgba(d.aro, .8);
+                    fx.lineWidth = 1.2;
+                    fx.beginPath();
+                    fx.ellipse(0, 8, 38, 7, 0, 0, 6.2832);
+                    fx.stroke();
+                    // remache superior que parpadea
+                    var pul = .5 + .5 * Math.sin(t / 400);
+                    fx.fillStyle = aRgba(d.bajo, .4 + .6 * pul);
+                    fx.beginPath();
+                    fx.ellipse(0, -31, 3.5, 2.5, 0, 0, 6.2832);
+                    fx.fill();
+                    return anclasFila(11, -30, 30, d.luz.length);
+                }
+            ];
 
             function pintaOvni(o) {
                 var d = DISENOS[o.d];
@@ -4211,98 +4753,26 @@
                 ug.addColorStop(1, aRgba(d.bajo, 0));
                 fx.fillStyle = ug;
                 elipse(0, 13, 34, 14);
-                // cuerpo: disco achatado
-                var cg = fx.createLinearGradient(0, -8, 0, 11);
-                cg.addColorStop(0, mezcla(d.cuerpo, "#ffffff", .45));
-                cg.addColorStop(.45, d.cuerpo);
-                cg.addColorStop(1, mezcla(d.cuerpo, "#000000", .5));
-                fx.fillStyle = cg;
-                elipse(0, 2, 36, 9);
-                // banda/ecuador
-                fx.strokeStyle = aRgba(d.neon ? d.aro : d.aro, .95);
-                fx.lineWidth = d.neon ? 2.6 : 1.3;
-                if (d.neon) {
-                    fx.save();
-                    fx.globalAlpha = borde * .4;
-                    fx.lineWidth = 6;
-                    fx.strokeStyle = d.aro;
-                    fx.beginPath();
-                    fx.ellipse(0, 2, 36, 9, 0, 0, 6.2832);
-                    fx.stroke();
-                    fx.restore();
-                }
-                fx.beginPath();
-                fx.ellipse(0, 2, 36, 9, 0, 0, 6.2832);
-                fx.stroke();
-                // cúpula
-                var dgm = fx.createLinearGradient(0, -20, 0, 1);
-                dgm.addColorStop(0, mezcla(d.techo, "#ffffff", .5));
-                dgm.addColorStop(1, d.techo);
-                fx.fillStyle = dgm;
-                fx.beginPath();
-                fx.moveTo(-17, 1);
-                fx.quadraticCurveTo(-15, -17, 0, -18);
-                fx.quadraticCurveTo(15, -17, 17, 1);
-                fx.closePath();
-                fx.fill();
-                // brillo especular de la cúpula
-                fx.fillStyle = "rgba(255,255,255,.5)";
-                fx.beginPath();
-                fx.ellipse(-5, -9, 4.6, 2.4, -.55, 0, 6.2832);
-                fx.fill();
-                // anillo estilo Saturno
-                if (d.anillo) {
-                    fx.strokeStyle = aRgba(d.aro, .85);
-                    fx.lineWidth = 3.4;
-                    fx.beginPath();
-                    fx.ellipse(0, 4, 52, 11, 0, .18, Math.PI - .18);
-                    fx.stroke();
-                    fx.strokeStyle = aRgba(d.aro, .45);
-                    fx.lineWidth = 1.2;
-                    fx.beginPath();
-                    fx.ellipse(0, 4, 46, 9, 0, 0, 6.2832);
-                    fx.stroke();
-                }
-                // patas (estilo Adamski)
-                if (d.tri) {
-                    fx.strokeStyle = mezcla(d.aro, "#000000", .2);
-                    fx.lineWidth = 2.2;
-                    fx.beginPath();
-                    fx.moveTo(-14, 8); fx.lineTo(-18, 20);
-                    fx.moveTo(0, 9);   fx.lineTo(0, 22);
-                    fx.moveTo(14, 8);  fx.lineTo(18, 20);
-                    fx.stroke();
-                    fx.fillStyle = mezcla(d.aro, "#000000", .35);
-                    elipse(-18, 21, 4, 2);
-                    elipse(0, 23, 4, 2);
-                    elipse(18, 21, 4, 2);
-                }
-                // ventanas cálidas
-                if (d.vent) {
-                    for (var v = 0; v < 5; v++) {
-                        var vx0 = -22 + v * 11;
-                        fx.fillStyle = aRgba("#ffe9a8",
-                            .75 + .25 * Math.sin(t / 620 + v));
-                        fx.beginPath();
-                        fx.ellipse(vx0, 3, 3.4, 2.6, 0, 0, 6.2832);
-                        fx.fill();
-                    }
-                }
-                // lucecitas del borde
-                var n = d.luz.length, i, lx, a, col, lg;
+                // casco de la variante: cada forma se dibuja sola y
+                // devuelve las anclas (x, y) de las lucecitas
+                var anc = FORMAS[(d.forma || 0) % FORMAS.length](d,
+                                                                 t, borde);
+                // lucecitas del borde (en las anclas de la forma)
+                var n = anc.length, i, a, col, lg, P0;
                 for (i = 0; i < n; i++) {
-                    lx = -26 + (n === 1 ? 26 : i * (52 / (n - 1)));
+                    P0 = anc[i];
                     a = luzA(d.modo, i, n, t);
                     if (a <= .03) { continue; }
                     col = d.luz[i % d.luz.length];
-                    lg = fx.createRadialGradient(lx, 7, 0, lx, 7, 8.5);
+                    lg = fx.createRadialGradient(P0[0], P0[1], 0,
+                                                 P0[0], P0[1], 8.5);
                     lg.addColorStop(0, aRgba("#ffffff", .95 * a));
                     lg.addColorStop(.3, aRgba(col, a));
                     lg.addColorStop(.55, aRgba(col, .55 * a));
                     lg.addColorStop(1, aRgba(col, 0));
                     fx.fillStyle = lg;
                     fx.beginPath();
-                    fx.arc(lx, 7, 8.5, 0, 6.2832);
+                    fx.arc(P0[0], P0[1], 8.5, 0, 6.2832);
                     fx.fill();
                 }
                 // baliza superior (doble parpadeo)
@@ -4318,6 +4788,294 @@
                     fx.fill();
                 }
                 fx.restore();
+            }
+
+            // ---------- destrucción de OVNIS con el clic ----------
+            // Secuencia: (1) explosión con onda de choque y chispas
+            // disparadas, (2) implosión: todo vuelve al punto, el
+            // núcleo se contrae y cierra con un chasquido, (3) humo
+            // que queda flotando, (4) el humo se disipa. Además la
+            // puntuación: empieza pequeña, crece y reventona.
+            function valorOvni(d) {
+                var v = 150 + (d.forma || 0) * 30;
+                if (d.neon) { v += 200; }
+                if (d.anillo) { v += 150; }
+                if (d.modo === 6) { v += 250; }
+                v += (Math.random() * 100) | 0;
+                return Math.round(v / 10) * 10;
+            }
+
+            function destruyeOvni(o) {
+                var d = DISENOS[o.d], i, n;
+                var ch = [], hum = [], est = [];
+                n = 14 + ((Math.random() * 7) | 0);
+                for (i = 0; i < n; i++) {
+                    ch.push({
+                        a: (i / n) * 6.2832 + Math.random() * .45,
+                        dist: (40 + Math.random() * 70) * (.6 + o.esc),
+                        r: 1.6 + Math.random() * 2.4,
+                        col: i % 3 === 0 ? d.bajo
+                             : d.luz[i % d.luz.length]
+                    });
+                }
+                n = 7 + ((Math.random() * 4) | 0);
+                for (i = 0; i < n; i++) {
+                    hum.push({
+                        a: Math.random() * 6.2832,
+                        r0: (10 + Math.random() * 14) * (.7 + o.esc),
+                        esp: (Math.random() * 340) | 0,  // nace escalonado
+                        der: (Math.random() - .5) * 30,
+                        sub: 12 + Math.random() * 22
+                    });
+                }
+                for (i = 0; i < 16; i++) {
+                    est.push({
+                        a: (i / 16) * 6.2832 + Math.random() * .4,
+                        dist: 34 + Math.random() * 62,
+                        r: 1.4 + Math.random() * 2
+                    });
+                }
+                var val = valorOvni(d);
+                explosiones.push({
+                    x: o.x, y: o.y, esc: o.esc, d: o.d,
+                    t: 0, ch: ch, hum: hum
+                });
+                puntuaciones.push({
+                    x: o.x, y: o.y - 34 * o.esc - 16,
+                    t: 0, val: val, est: est
+                });
+                muertosTot++;
+                puntosTot += val;
+            }
+
+            function pintaExplosion(E) {
+                var d = DISENOS[E.d], T = E.t, i, c;
+                var cx = E.x + px * 7, cy = E.y + py * 7;
+                var esc = E.esc;
+                // (1) explosión: destello + onda de choque
+                if (T < 470) {
+                    var k = T / 470;
+                    var ek = 1 - Math.pow(1 - k, 3);
+                    var rr = (24 + 96 * esc) * ek + 8;
+                    fx.globalAlpha = (1 - k) * .95;
+                    fx.lineWidth = 4 * (1 - k) + .6;
+                    fx.strokeStyle = k < .35 ? "#ffffff" : d.bajo;
+                    fx.beginPath();
+                    fx.arc(cx, cy, rr, 0, 6.2832);
+                    fx.stroke();
+                    var fr = (46 * esc + 36) * (1 - k * .45);
+                    var fg = fx.createRadialGradient(cx, cy, 0, cx, cy, fr);
+                    fg.addColorStop(0, "rgba(255,255,255,"
+                                    + (.95 * (1 - k)) + ")");
+                    fg.addColorStop(.4, aRgba(d.bajo, .7 * (1 - k)));
+                    fg.addColorStop(1, aRgba(d.bajo, 0));
+                    fx.globalAlpha = 1;
+                    fx.fillStyle = fg;
+                    fx.beginPath();
+                    fx.arc(cx, cy, fr, 0, 6.2832);
+                    fx.fill();
+                }
+                // (2) implosión: el anillo se cierra, el núcleo se
+                //     contrae y todo acaba en un chasquido
+                if (T >= 450 && T < 1180) {
+                    var k2 = Math.min(1, (T - 450) / 530);
+                    var r2 = (24 + 96 * esc) * (1 - k2) + 3;
+                    fx.globalAlpha = .5 + .5 * k2;
+                    fx.lineWidth = 2.6 * k2 + .5;
+                    fx.strokeStyle = d.aro;
+                    fx.beginPath();
+                    fx.arc(cx, cy, r2, 0, 6.2832);
+                    fx.stroke();
+                    var nr = (18 * esc + 13) * (1 - k2);
+                    if (nr > .6) {
+                        var ng = fx.createRadialGradient(cx, cy, 0,
+                                                         cx, cy, nr * 2.2);
+                        ng.addColorStop(0, "rgba(4,6,14,.92)");
+                        ng.addColorStop(.5, aRgba(d.bajo, .45 * k2));
+                        ng.addColorStop(1, aRgba(d.bajo, 0));
+                        fx.globalAlpha = 1;
+                        fx.fillStyle = ng;
+                        fx.beginPath();
+                        fx.arc(cx, cy, nr * 2.2, 0, 6.2832);
+                        fx.fill();
+                    }
+                    if (T > 900 && T < 1180) {          // chasquido
+                        var ck = (T - 900) / 280;
+                        fx.globalAlpha = (1 - ck) * .9;
+                        fx.lineWidth = 3 * (1 - ck) + .5;
+                        fx.strokeStyle = "#ffffff";
+                        fx.beginPath();
+                        fx.arc(cx, cy, 5 + 46 * ck, 0, 6.2832);
+                        fx.stroke();
+                    }
+                }
+                // chispas: salen disparadas en la explosión y, en la
+                // implosión, vuelven al punto de impacto
+                for (i = 0; i < E.ch.length; i++) {
+                    c = E.ch[i];
+                    var rr2 = 0, al2 = 0, ki;
+                    if (T < 450) {
+                        rr2 = c.dist * (1 - Math.pow(1 - T / 450, 3));
+                        al2 = Math.min(1, T / 50) * (1 - T / 1000);
+                    } else if (T < 1000) {
+                        ki = (T - 450) / 550;
+                        rr2 = c.dist * (1 - ki * ki * (3 - 2 * ki));
+                        al2 = .7 * (1 - ki);
+                    }
+                    if (al2 <= .02) { continue; }
+                    fx.globalAlpha = al2;
+                    fx.strokeStyle = c.col;
+                    fx.lineWidth = c.r * 1.6;
+                    fx.beginPath();
+                    fx.moveTo(cx + Math.cos(c.a) * rr2 * .55,
+                              cy + Math.sin(c.a) * rr2 * .8 * .55);
+                    fx.lineTo(cx + Math.cos(c.a) * rr2,
+                              cy + Math.sin(c.a) * rr2 * .8);
+                    fx.stroke();
+                    fx.fillStyle = "#ffffff";
+                    fx.beginPath();
+                    fx.arc(cx + Math.cos(c.a) * rr2,
+                           cy + Math.sin(c.a) * rr2 * .8,
+                           c.r * .7, 0, 6.2832);
+                    fx.fill();
+                }
+                // (3-4) humo: nace tras la implosión, flota y se
+                // disipa en la recta final
+                for (i = 0; i < E.hum.length; i++) {
+                    var h = E.hum[i];
+                    var age = T - 950 - h.esp;
+                    if (age <= 0) { continue; }
+                    var fade = T < 2300 ? 1
+                               : Math.max(0, 1 - (T - 2300) / 900);
+                    var al3 = Math.min(1, age / 300) * fade * .5;
+                    if (al3 <= .01) { continue; }
+                    var rr3 = h.r0 * (1 + age * .00075);
+                    var hx = cx + Math.cos(h.a) * (9 + age * .007)
+                             + h.der * Math.min(1, age / 1200);
+                    var hy = cy + Math.sin(h.a) * (9 + age * .007)
+                             - h.sub * Math.min(1, age / 1600);
+                    var hg = fx.createRadialGradient(hx, hy, 0, hx, hy, rr3);
+                    hg.addColorStop(0, "rgba(154,163,177," + al3 + ")");
+                    hg.addColorStop(.55, "rgba(122,130,145," + al3 * .6 + ")");
+                    hg.addColorStop(1, "rgba(110,118,132,0)");
+                    fx.globalAlpha = 1;
+                    fx.fillStyle = hg;
+                    fx.beginPath();
+                    fx.arc(hx, hy, rr3, 0, 6.2832);
+                    fx.fill();
+                }
+                fx.globalAlpha = 1;
+            }
+
+            function pintaPuntos(P) {
+                var T = P.t, i;
+                var cx = P.x + px * 7;
+                var cy = P.y + py * 7 - T * .022;   // flota hacia arriba
+                // el número: pequeño -> grande -> revienta a los 1000
+                var alfa = 1, sz = 45, k, k2;
+                if (T < 1000) {
+                    k = 1 - Math.pow(1 - Math.min(1, T / 750), 3);
+                    sz = 11 + 34 * k;
+                } else if (T < 1150) {
+                    k2 = (T - 1000) / 150;
+                    sz = 45 + 42 * k2;
+                    alfa = 1 - Math.pow(k2, 3);
+                } else {
+                    alfa = 0;
+                }
+                if (alfa > 0) {
+                    fx.save();
+                    fx.globalAlpha = alfa;
+                    fx.font = '800 ' + sz + 'px "Segoe UI", '
+                              + 'system-ui, sans-serif';
+                    fx.textAlign = "center";
+                    fx.textBaseline = "middle";
+                    fx.lineJoin = "round";
+                    fx.shadowColor = "rgba(255,220,70,.95)";
+                    fx.shadowBlur = 12 + 8 * Math.sin(T / 90);
+                    fx.lineWidth = Math.max(2.2, sz * .14);
+                    fx.strokeStyle = "rgba(5,9,18,.92)";  // borde oscuro:
+                    fx.strokeText("+" + P.val, cx, cy);   // legible en
+                    fx.fillStyle = "#ffe66d";             // ambos temas
+                    fx.fillText("+" + P.val, cx, cy);
+                    fx.shadowBlur = 0;
+                    fx.restore();
+                }
+                // POP: fogonazo, anillo de oro y chispas reventando
+                if (T >= 1000 && T < 1750) {
+                    var k3 = (T - 1000) / 750;
+                    var ek3 = 1 - Math.pow(1 - k3, 3);
+                    var fr = 46 * (1 - k3);
+                    if (fr > 1) {
+                        var fg = fx.createRadialGradient(cx, cy, 0,
+                                                         cx, cy, fr);
+                        fg.addColorStop(0, "rgba(255,244,190,"
+                                        + (.85 * (1 - k3)) + ")");
+                        fg.addColorStop(1, "rgba(255,230,109,0)");
+                        fx.globalAlpha = 1;
+                        fx.fillStyle = fg;
+                        fx.beginPath();
+                        fx.arc(cx, cy, fr, 0, 6.2832);
+                        fx.fill();
+                    }
+                    fx.globalAlpha = (1 - k3) * .95;
+                    fx.lineWidth = 3.5 * (1 - k3) + .5;
+                    fx.strokeStyle = "#ffe66d";
+                    fx.beginPath();
+                    fx.arc(cx, cy, 8 + 84 * ek3, 0, 6.2832);
+                    fx.stroke();
+                    for (i = 0; i < P.est.length; i++) {
+                        var e = P.est[i];
+                        var rr = e.dist * ek3;
+                        fx.strokeStyle = i % 3 === 0 ? "#ffffff"
+                                                     : "#ffe66d";
+                        fx.lineWidth = e.r * 1.4;
+                        fx.beginPath();
+                        fx.moveTo(cx + Math.cos(e.a) * rr * .6,
+                                  cy + Math.sin(e.a) * rr * .6);
+                        fx.lineTo(cx + Math.cos(e.a) * rr,
+                                  cy + Math.sin(e.a) * rr);
+                        fx.stroke();
+                        fx.fillStyle = "#fffbe6";
+                        fx.beginPath();
+                        fx.arc(cx + Math.cos(e.a) * rr,
+                               cy + Math.sin(e.a) * rr,
+                               e.r * .8, 0, 6.2832);
+                        fx.fill();
+                    }
+                    fx.globalAlpha = 1;
+                }
+            }
+
+            // ¿hay un OVNI bajo el punto (x, y) en coordenadas de
+            // documento? Devuelve su índice o -1 (el más cercano si
+            // hay varios)
+            function ovniBajo(sx, sy) {
+                var k, mejor = -1, mejorD = 1e12;
+                for (k = 0; k < ovnis.length; k++) {
+                    var o2 = ovnis[k];
+                    var bob = Math.sin(o2.t / 850 + o2.fase)
+                              * (2 + o2.esc * 5);
+                    var dx = sx - (o2.x + px * 7);
+                    var dy = sy - (o2.y + py * 7 + bob);
+                    var rr = 50 * o2.esc + 10;
+                    var d2 = dx * dx + dy * dy;
+                    if (d2 <= rr * rr && d2 < mejorD) {
+                        mejorD = d2;
+                        mejor = k;
+                    }
+                }
+                return mejor;
+            }
+
+            // el clic cae sobre contenido con vida propia (enlaces,
+            // tarjetas, muestras, código, botones…)? esos clics son
+            // del mazo de efectos, no de los OVNIS
+            function contenido(alvo) {
+                return !!(alvo && alvo.closest && alvo.closest(
+                    "a,button,select,input,textarea,label,summary," +
+                    "pre,code,.tarjeta,.muestra,.cabecera-espacial," +
+                    "#btn-tema,#btn-idioma"));
             }
 
             function fotograma(ts) {
@@ -4387,9 +5145,10 @@
                 }
                 fx.globalAlpha = 1;
 
-                // OVNIS: uno nuevo de vez en cuando (siempre que no
-                // haya ya dos cruzando) y uno distinto cada vez
-                if (Math.random() < dt / 18000 && ovnis.length < 2) {
+                // OVNIS: uno nuevo un poco más seguido (de media
+                // cada ~15 s en vez de 18) y hasta tres cruzando,
+                // siempre uno distinto del anterior
+                if (Math.random() < dt / 14500 && ovnis.length < 3) {
                     siembraOvni();
                 }
                 for (i = ovnis.length - 1; i >= 0; i--) {
@@ -4402,6 +5161,26 @@
                     }
                     pintaOvni(o);
                 }
+                // destrucciones: explosión -> implosión -> humo
+                for (i = explosiones.length - 1; i >= 0; i--) {
+                    var E = explosiones[i];
+                    E.t += dt;
+                    if (E.t > 3300) {
+                        explosiones.splice(i, 1);
+                        continue;
+                    }
+                    pintaExplosion(E);
+                }
+                // puntuaciones: crecen y reventonan
+                for (i = puntuaciones.length - 1; i >= 0; i--) {
+                    var Pc = puntuaciones[i];
+                    Pc.t += dt;
+                    if (Pc.t > 1750) {
+                        puntuaciones.splice(i, 1);
+                        continue;
+                    }
+                    pintaPuntos(Pc);
+                }
                 fx.globalAlpha = 1;
             }
 
@@ -4411,6 +5190,16 @@
             window.addEventListener("mousemove", function (e) {
                 ox = (e.clientX / (an || 1)) * 2 - 1;
                 oy = (e.clientY / (al || 1)) * 2 - 1;
+                // punto de mira cuando el puntero se cruza con un
+                // OVNI destructible (si no, se libera)
+                var cruz = !contenido(e.target) && ovniBajo(
+                    e.clientX + (window.pageXOffset || 0),
+                    e.clientY + (window.pageYOffset || 0)) >= 0;
+                if (cruz) {
+                    document.body.style.cursor = "crosshair";
+                } else if (document.body.style.cursor) {
+                    document.body.style.cursor = "";
+                }
             });
             window.addEventListener("resize", function () {
                 cielo();
@@ -4424,6 +5213,25 @@
                     fotograma((window.performance && performance.now()) || 0);
                 }).observe(document.body);
             }
+            // destruir OVNIS con el clic: el clic tiene que caer a
+            // pelo sobre el platillo y sin apuntar a contenido con
+            // vida propia (enlaces, tarjetas…). Si acierta, el mazo
+            // de efectos #efectos se lo salta (clicEnOvni()) porque
+            // la explosión ya es SU efecto para ese clic.
+            document.addEventListener("click", function (e) {
+                clic_comido = false;
+                if (contenido(e.target)) { return; }
+                var sx = e.clientX + (window.pageXOffset || 0);
+                var sy = e.clientY + (window.pageYOffset || 0);
+                var k = ovniBajo(sx, sy);
+                if (k >= 0) {
+                    destruyeOvni(ovnis[k]);
+                    ovnis.splice(k, 1);
+                    clic_comido = true;
+                    fotograma((window.performance && performance.now()) || 0);
+                }
+            });
+
             window.__fondo = {
                 repinta: function () {
                     tema = "";
@@ -4434,14 +5242,36 @@
                     fotograma((window.performance && performance.now()) || 0);
                 },
                 // para pruebas: contadores y salto de tiempo simulado
-                // (cada 16ms es un fotograma: asi se ve el paso natural
-                // de fugaces y OVNIS sin esperar en tiempo real)
+                // (cada 16ms es un fotograma: asi se ve el paso
+                // natural de fugaces, OVNIS y destrucciones sin
+                // esperar en tiempo real)
                 estado: function () {
                     return { estrellas: estrellas.length,
                              fugaces: fugaces.length,
                              destellos: destellos.length,
                              ovnis: ovnis.length, tema: tema,
-                             fugacesTot: fugTot, ovnisTot: ovniTot };
+                             fugacesTot: fugTot, ovnisTot: ovniTot,
+                             explosiones: explosiones.length,
+                             puntuaciones: puntuaciones.length,
+                             destruidosTot: muertosTot,
+                             puntos: puntosTot,
+                             // detalle para pruebas: qué platillo está
+                             // en cada sitio y desde cuándo
+                             ovnisLista: ovnis.map(function (o) {
+                                 return { d: o.d, x: Math.round(o.x),
+                                          y: Math.round(o.y),
+                                          t: Math.round(o.t),
+                                          esc: Math.round(o.esc * 100) / 100 };
+                             }),
+                             dims: { w: window.innerWidth,
+                                     h: window.innerHeight } };
+                },
+                // ¿el último clic destruyó un OVNI? (lo consulta el
+                // mazo de efectos: un clic, un solo estallido)
+                clicEnOvni: function () {
+                    var r = clic_comido;
+                    clic_comido = false;
+                    return r;
                 },
                 simula: function (ms) {
                     for (var t = 0; t < (ms || 0); t += 16) {
@@ -5696,6 +6526,11 @@
             }
 
             document.addEventListener("click", function (e) {
+                // si el clic acertó a un OVNI, su explosión ya es el
+                // efecto de este clic: no se duplica con el mazo
+                if (window.__fondo && window.__fondo.clicEnOvni()) {
+                    return;
+                }
                 var x = e.clientX, y = e.clientY;
                 if (!x && !y) {      // clics sin coordenadas: centro
                     x = an / 2;
