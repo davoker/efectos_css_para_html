@@ -1,0 +1,98 @@
+/* =============================================================
+   DENTISTA (SVG) · Taladro que vibra en el texto
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-dentista.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-dentista,
+    .ef-dentista-mini — vibración de taladro + destello
+   ============================================================= */
+.ef-dentista {
+    color: #eafcff;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(178deg,
+            rgba(4, 44, 60, .7) 0 4px, rgba(4,44,60,0) 4px 12px),
+        linear-gradient(172deg,
+            #ffffff 0%, #b6ecf7 32%, #38a2c4 66%, #06323f 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .6px rgba(6, 50, 63, .85);
+    paint-order: stroke fill;
+    filter: url(#ef-dentista) brightness(1) contrast(1);
+    animation: dt-dentista-estira 3.6s ease-in-out infinite,
+               dt-dentista-destello 2.6s ease-in-out infinite;
+}
+.ef-dentista:hover,
+.ef-dentista:focus-visible {
+    animation-duration: 1.6s, 1.2s;
+}
+.ef-dentista-mini {
+    color: #eafcff;
+    background:
+        repeating-linear-gradient(178deg,
+            rgba(4, 44, 60, .65) 0 3px, rgba(4,44,60,0) 3px 9px),
+        linear-gradient(172deg,
+            #ffffff 0%, #b6ecf7 32%, #38a2c4 66%, #06323f 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-dentista-mini) brightness(1) contrast(1);
+    animation: dt-dentista-estira 3.6s ease-in-out infinite,
+               dt-dentista-destello 2.6s ease-in-out infinite;
+}
+.ef-dentista-mini:hover,
+.ef-dentista-mini:focus-visible {
+    animation-duration: 1.6s, 1.2s;
+}
+
+/* el trazo se estira buscando la muela y la lámpara azota */
+@keyframes dt-dentista-estira {
+    0%, 100% { letter-spacing: 0em; }
+    46%      { letter-spacing: .26em; }
+}
+@keyframes dt-dentista-destello {
+    0%, 100% { filter: url(#ef-dentista) brightness(1) contrast(1); }
+    44%      { filter: url(#ef-dentista) brightness(1.65) contrast(1.4); }
+    56%      { filter: url(#ef-dentista) brightness(.92) contrast(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-dentista,
+    .ef-dentista-mini {
+        animation: none;
+        letter-spacing: 0em;
+        filter: url(#ef-dentista) brightness(1.12) contrast(1.1);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-dentista,
+    .ef-dentista-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

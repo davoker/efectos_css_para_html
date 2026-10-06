@@ -1,0 +1,101 @@
+/* =============================================================
+   PARADOJA (SVG) · Tiempo que se descolora
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-paradoja.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-paradoja,
+    .ef-paradoja-mini — giro de tiempo + color que se escapa
+   ============================================================= */
+.ef-paradoja {
+    display: inline-block;
+    color: #cbb4ff;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(126deg,
+            rgba(20, 8, 48, .7) 0 6px, rgba(20,8,48,0) 6px 17px),
+        linear-gradient(170deg,
+            #f6f1ff 0%, #cbb4ff 34%, #6a49d8 68%, #150a3a 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .6px rgba(21, 10, 58, .85);
+    paint-order: stroke fill;
+    filter: url(#ef-paradoja) grayscale(0);
+    animation: dt-paradoja-gira 6.4s ease-in-out infinite,
+               dt-paradoja-color 6.4s ease-in-out infinite;
+}
+.ef-paradoja:hover,
+.ef-paradoja:focus-visible {
+    animation-duration: 2.8s, 2.8s;
+}
+.ef-paradoja-mini {
+    display: inline-block;
+    color: #cbb4ff;
+    background:
+        repeating-linear-gradient(126deg,
+            rgba(20, 8, 48, .65) 0 4px, rgba(20,8,48,0) 4px 12px),
+        linear-gradient(170deg,
+            #f6f1ff 0%, #cbb4ff 34%, #6a49d8 68%, #150a3a 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-paradoja-mini) grayscale(0);
+    animation: dt-paradoja-gira 6.4s ease-in-out infinite,
+               dt-paradoja-color 6.4s ease-in-out infinite;
+}
+.ef-paradoja-mini:hover,
+.ef-paradoja-mini:focus-visible {
+    animation-duration: 2.8s, 2.8s;
+}
+
+/* el bloque gira sobre sí mismo y el color se le escapa */
+@keyframes dt-paradoja-gira {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    42%      { transform: rotate(-4deg) scale(1.05); }
+    74%      { transform: rotate(3deg) scale(.97); }
+}
+@keyframes dt-paradoja-color {
+    0%, 100% { filter: url(#ef-paradoja) grayscale(0) saturate(1); }
+    46%      { filter: url(#ef-paradoja) grayscale(.92) saturate(.4); }
+    64%      { filter: url(#ef-paradoja) grayscale(.25) saturate(1.2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-paradoja,
+    .ef-paradoja-mini {
+        animation: none;
+        transform: none;
+        filter: url(#ef-paradoja) grayscale(0) saturate(1);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-paradoja,
+    .ef-paradoja-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

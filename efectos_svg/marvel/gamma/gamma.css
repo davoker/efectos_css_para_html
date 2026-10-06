@@ -22,6 +22,7 @@
     .ef-gamma-mini — turbulencia + morfología
    ============================================================= */
 .ef-gamma {
+    display: inline-block;
     color: #b6ff4d;                     /* respaldo si no hay clip */
     background: linear-gradient(0deg,
         #0b2a06 0%, #1d5a0a 26%, #57d11a 52%, #b6ff4d 74%, #e9ffd0 100%);
@@ -40,6 +41,7 @@
 }
 
 .ef-gamma-mini {
+    display: inline-block;
     color: #b6ff4d;
     background: linear-gradient(0deg,
         #0b2a06 0%, #1d5a0a 26%, #57d11a 52%, #b6ff4d 74%, #e9ffd0 100%);

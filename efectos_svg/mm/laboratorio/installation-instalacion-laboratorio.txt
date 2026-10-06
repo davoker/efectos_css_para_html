@@ -1,0 +1,239 @@
+================================================================
+EFECTO LABORATORIO - CÓMO APLICARLO A CUALQUIER ARCHIVO .HTML/.CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "laboratorio.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/laboratorio.css">
+
+Contenido del archivo:
+  · la clase ef-laboratorio (efecto completo, ≥24px)
+  · la clase ef-laboratorio-mini (párrafos, inline y texto pequeño)
+  · Sus transiciones y estados al interactuar
+  · Fallbacks: prefers-reduced-motion y @media print
+
+
+PASO 2 - PEGA EL BLOQUE SVG DE FILTROS (UNA VEZ)
+-------------------------------------------------
+Este efecto usa filtros SVG (banda de medida + descarga eléctrica): pega el
+siguiente bloque UNA sola vez en la página que quiera usarlo
+-es el equivalente a quien pega el <style> de los efectos
+CSS. Lo tienes listo para copiar en el index.html de este
+efecto y en este mismo archivo:
+
+    <filter id="ef-laboratorio" x="-24%" y="-75%" width="148%"
+            height="260%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .42"
+                      numOctaves="2" seed="7" result="chispa"/>
+        <feDisplacementMap in="SourceGraphic" in2="chispa" scale="5.5"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="descarga"/>
+        <feSpecularLighting in="descarga" surfaceScale="2.4"
+                            specularConstant="1.4" specularExponent="26"
+                            lighting-color="#dffcff" result="brillo">
+            <feDistantLight azimuth="70" elevation="46"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="descarga" operator="in" result="b-txt"/>
+        <feMerge>
+            <feMergeNode in="descarga"/>
+            <feMergeNode in="b-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-laboratorio-mini" x="-16%" y="-60%" width="132%"
+            height="235%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".16 1.2"
+                      numOctaves="2" seed="7" result="chispa"/>
+        <feDisplacementMap in="SourceGraphic" in2="chispa" scale="2"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="descarga"/>
+        <feColorMatrix in="descarga" type="matrix" result="claro"
+            values="1.2 0 .2 0 -.05
+                    0 1.25 .25 0 -.04
+                    0 .25 1.3 0 -.03
+                    0 0 0 1 0"/>
+        <feComposite in="claro" in2="descarga" operator="in"/>
+    </filter>
+
+Si la página usa varios de estos efectos, con UN solo bloque
+<svg> en la página vale para todos: cada efecto trae sus
+filtros dentro de <defs>.
+
+
+PASO 3 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+&lt;h1 class="ef-laboratorio"&gt;Mi título&lt;/h1&gt;                     &lt;!-- efecto completo, ≥24px --&gt;
+&lt;p class="ef-laboratorio-mini"&gt;Párrafo o texto pequeño.&lt;/p&gt;   &lt;!-- mini: legible hasta 13px --&gt;
+&lt;p&gt;Normal con &lt;span class="ef-laboratorio-mini"&gt;fragmento&lt;/span&gt;.&lt;/p&gt;
+
+
+QUÉ HACE
+--------
+mask-size desplaza una banda de medición que nunca baja del 65 % de opacidad y filter: url() brightness() salta con la descarga; feTurbulence de frecuencia alta y feDisplacementMap hacen la electricidad. Fuera del texto no hay laboratorio.
+
+TÉCNICA: máscara de banda con mask-size + filter: url(#ef-laboratorio) brightness() animado (feTurbulence + feDisplacementMap + feSpecularLighting).
+
+
+VARIANTES Y TAMAÑO DEL TEXTO (importante)
+-----------------------------------------
+· .ef-laboratorio — títulos grandes (≥24px): intensidad completa.
+· .ef-laboratorio-mini — párrafos, fragmentos inline y texto pequeño:
+  versión suave, verificada legible a 13px.
+Si dudas, aplica por tamaño: completo en títulos, mini en
+el resto. Con movimiento reducido el efecto se queda en su
+estado inicial (sin desaparecer nunca el texto).
+
+
+REGLA DEL FONDO
+---------------
+El elemento con la clase no debe llevar fondo propio: el
+efecto se calcula sobre TODO lo que pinta el elemento y
+también pintaría la caja. Si tu bloque necesita fondo,
+ponlo en el PADRE y la clase en un <span> interior:
+
+    <div class="mi-caja">
+        <span class="ef-laboratorio">efecto dentro, caja fuera</span>
+    </div>
+
+
+SELECCIÓN, IMPRESIÓN Y MOVIMIENTO
+---------------------------------
+· El texto es texto real del DOM: legible, seleccionable y
+  con los saltos de línea normales de tu página.
+· Al imprimir, @media print deja todo en negro liso sin
+  efectos (sigue siendo texto).
+· Con prefers-reduced-motion las animaciones CSS se detienen:
+  el efecto se ve en su estado inicial (sin SMIL ni JavaScript,
+  basta con esa regla).
+
+
+AJUSTES FÁCILES
+----------------
+· Intensidad: en el bloque <svg> busca el valor clave del filtro (scale, baseFrequency, stdDeviation o surfaceScale) y súbelo o bájalo a tu gusto.
+· Color: cambia los colores del gradiente y los del filtro (lighting-color, flood-color) por los de tu marca.
+· Velocidad: sube o baja la duración de los @keyframes del CSS (todas las animaciones son CSS: no hay SMIL ni JavaScript).
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+LABORATORIO EFFECT - HOW TO APPLY IT TO ANY .HTML/.CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "laboratorio.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/laboratorio.css">
+
+What the file contains:
+  · the ef-laboratorio class (full effect, ≥24px)
+  · the ef-laboratorio-mini class (paragraphs, inline and small text)
+  · Its transitions and states on interaction
+  · Fallbacks: prefers-reduced-motion and @media print
+
+
+STEP 2 - PASTE THE SVG FILTER BLOCK (ONCE)
+-------------------------------------------------
+This effect uses SVG filters (gauge band + electric discharge): paste the
+block below just ONCE on the page that will use it -it's the
+equivalent of pasting the <style> of the CSS effects. You
+have it ready to copy into this effect's index.html and into
+this same file:
+
+    <filter id="ef-laboratorio" x="-24%" y="-75%" width="148%"
+            height="260%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .42"
+                      numOctaves="2" seed="7" result="chispa"/>
+        <feDisplacementMap in="SourceGraphic" in2="chispa" scale="5.5"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="descarga"/>
+        <feSpecularLighting in="descarga" surfaceScale="2.4"
+                            specularConstant="1.4" specularExponent="26"
+                            lighting-color="#dffcff" result="brillo">
+            <feDistantLight azimuth="70" elevation="46"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="descarga" operator="in" result="b-txt"/>
+        <feMerge>
+            <feMergeNode in="descarga"/>
+            <feMergeNode in="b-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-laboratorio-mini" x="-16%" y="-60%" width="132%"
+            height="235%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".16 1.2"
+                      numOctaves="2" seed="7" result="chispa"/>
+        <feDisplacementMap in="SourceGraphic" in2="chispa" scale="2"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="descarga"/>
+        <feColorMatrix in="descarga" type="matrix" result="claro"
+            values="1.2 0 .2 0 -.05
+                    0 1.25 .25 0 -.04
+                    0 .25 1.3 0 -.03
+                    0 0 0 1 0"/>
+        <feComposite in="claro" in2="descarga" operator="in"/>
+    </filter>
+
+If the page uses several of these effects, with ONE single
+<svg> block on the page works for all: each effect carries
+its filters inside <defs>.
+
+
+STEP 3 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+&lt;h1 class="ef-laboratorio"&gt;Mi título&lt;/h1&gt;                     &lt;!-- efecto completo, ≥24px --&gt;
+&lt;p class="ef-laboratorio-mini"&gt;Párrafo o texto pequeño.&lt;/p&gt;   &lt;!-- mini: legible hasta 13px --&gt;
+&lt;p&gt;Normal con &lt;span class="ef-laboratorio-mini"&gt;fragmento&lt;/span&gt;.&lt;/p&gt;
+
+
+WHAT IT DOES
+--------
+mask-size shifts a gauge band that never drops below 65 % opacity and filter: url() brightness() jumps with the discharge; high-frequency feTurbulence and feDisplacementMap make the electricity. No lab outside the text.
+
+TECHNIQUE: band mask with mask-size + animated filter: url(#ef-laboratorio) brightness() (feTurbulence + feDisplacementMap + feSpecularLighting).
+
+
+VARIANTS AND TEXT SIZE (important)
+-----------------------------------------
+· .ef-laboratorio — large headings (≥24px): full strength.
+· .ef-laboratorio-mini — paragraphs, inline fragments and small text:
+  softened version, verified readable at 13px.
+If in doubt, apply by size: full on headings, mini on
+the rest. With reduced motion the effect keeps its
+initial state (the text never disappears).
+
+
+BACKGROUND RULE
+---------------
+The element with the class must not have its own background: the
+effect is computed over EVERYTHING the element paints and
+it would paint the box too. If your block needs a background,
+put it on the PARENT and the class on an inner <span>:
+
+    <div class="mi-caja">
+        <span class="ef-laboratorio">effect inside, box outside</span>
+    </div>
+
+
+SELECTION, PRINTING AND MOTION
+---------------------------------
+· The text is real DOM text: readable, selectable and
+  with your page's normal line breaks.
+· When printing, @media print leaves everything flat black with no
+  effects (it's still text).
+· With prefers-reduced-motion the CSS animations stop: the
+  effect shows its initial state (no SMIL and no JavaScript,
+  that rule is enough).
+
+
+EASY TWEAKS
+---------------
+· Intensity: in the <svg> block look for the filter's key value (scale, baseFrequency, stdDeviation or surfaceScale) and raise or lower it as you like.
+· Color: swap the gradient colors and the filter's colors (lighting-color, flood-color) for your brand's.
+· Speed: raise or lower the duration of the CSS @keyframes (every animation is CSS: no SMIL and no JavaScript).
+
+================================================================

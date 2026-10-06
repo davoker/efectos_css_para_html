@@ -8651,7 +8651,7 @@
     border-top-color: transparent;
     animation-delay: .2s;
 }
-.uc-aven-cuña {
+.uc-aven-cuna {
     position: absolute;
     left: 50%; top: 50%;
     width: 0; height: 0;
@@ -8660,9 +8660,9 @@
     border-bottom: 12vmin solid rgba(255,255,255,.85);
     transform: translate(-50%, -50%);
     opacity: 0;
-    animation: uc-aven-cuña 1.7s ease-out .35s both;
+    animation: uc-aven-cuna 1.7s ease-out .35s both;
 }
-.uc-aven-cuña-2 {
+.uc-aven-cuna-2 {
     border-bottom-color: rgba(200,16,46,.9);
     transform: translate(-50%, -50%) rotate(180deg);
     animation-delay: .5s;
@@ -8672,7 +8672,7 @@
     26%  { opacity: 1;   transform: scale(1) rotate(0deg); }
     100% { opacity: 0;   transform: scale(1.8) rotate(160deg); }
 }
-@keyframes uc-aven-cuña {
+@keyframes uc-aven-cuna {
     0%   { opacity: 0;   margin-left: -34vmin; }
     28%  { opacity: 1;   margin-left: -7vmin; }
     100% { opacity: 0;   margin-left: 22vmin; }
@@ -10900,4 +10900,2596 @@
     0%, 100% { opacity: 0;  transform: scale(.4) rotate(0deg); }
     34%      { opacity: 1;  transform: scale(1) rotate(14deg); }
     74%      { opacity: .7; transform: scale(1.3) rotate(30deg); }
+}
+
+/* ============ 182. TENTÁCULO — Ventosas que se arrastran ============
+   Escena propia del efecto "Tentáculo" (sección Day of Tentacle). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-tentaculo {
+    background: radial-gradient(130% 100% at 50% 74%,
+                #2a1046 0%, #170a28 58%, #080310 100%);
+}
+.tema-tentaculo::after {
+    background: radial-gradient(circle at 50% 72%,
+                #f3e6ff 0%, #b98bff 22%, rgba(106,43,181,0) 68%);
+}
+.dts-tent-brazo {
+    position: absolute;
+    left: 50%; bottom: -14%;
+    width: 36vmin; height: 104%;
+    margin-left: -18vmin;
+    background: linear-gradient(180deg,
+                #f3e6ff 0%, #b98bff 34%, #7a39c6 68%, #2b0b47 100%);
+    -webkit-clip-path: polygon(50% 0, 76% 12%, 92% 38%, 97% 72%,
+                               100% 100%, 0 100%, 3% 72%, 8% 38%,
+                               24% 12%);
+    clip-path: polygon(50% 0, 76% 12%, 92% 38%, 97% 72%,
+                       100% 100%, 0 100%, 3% 72%, 8% 38%, 24% 12%);
+    opacity: 0;
+    animation: dts-tent-brazo 1.7s ease-out both;
+}
+.dts-tent-ventosa {
+    position: absolute;
+    left: 50%; top: 22%;
+    width: 30vmin; height: 44vmin;
+    margin-left: -15vmin;
+    background-image: radial-gradient(circle,
+                rgba(43, 11, 71, .85) 0 22%, rgba(43,11,71,0) 26%);
+    background-size: 10vmin 10vmin;
+    -webkit-clip-path: polygon(24% 0, 76% 0, 88% 60%, 100% 100%, 0 100%,
+                               12% 60%);
+    clip-path: polygon(24% 0, 76% 0, 88% 60%, 100% 100%, 0 100%, 12% 60%);
+    opacity: 0;
+    animation: dts-tent-ventosa 1.7s linear both;
+}
+.dts-tent-garra {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 64vmin; height: 64vmin;
+    margin: -32vmin 0 0 -32vmin;
+    border: .55vmin solid rgba(243, 230, 255, .8);
+    border-radius: 46% 54% 52% 48%;
+    opacity: 0;
+    animation: dts-tent-garra 1.7s ease-in-out both;
+}
+@keyframes dts-tent-brazo {
+    0%   { opacity: 0;  transform: translateY(52%) rotate(-9deg); }
+    34%  { opacity: 1;  transform: translateY(0) rotate(3deg); }
+    74%  { opacity: 1;  transform: translateY(-3%) rotate(-3deg); }
+    100% { opacity: 0;  transform: translateY(-16%) rotate(7deg); }
+}
+@keyframes dts-tent-ventosa {
+    0%   { opacity: 0;  background-position: 0 0; }
+    30%  { opacity: 1;  background-position: 0 -4vmin; }
+    100% { opacity: 0;  background-position: 0 -22vmin; }
+}
+@keyframes dts-tent-garra {
+    0%   { opacity: 0;  transform: scale(.4) rotate(-40deg); }
+    32%  { opacity: 1;  transform: scale(1) rotate(0deg); }
+    100% { opacity: 0;  transform: scale(1.7) rotate(70deg); }
+}
+
+/* ============ 183. TENTÁCULO VERDE — Moco que cruza el texto ============
+   Escena propia del efecto "Tentáculo verde" (sección Day of Tentacle). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-verde {
+    background: radial-gradient(130% 100% at 50% 56%,
+                #0d2c17 0%, #071a0e 58%, #020704 100%);
+}
+.tema-verde::after {
+    background: radial-gradient(circle at 50% 56%,
+                #eaffec 0%, #8dff9e 24%, rgba(47,174,85,0) 68%);
+}
+.dts-verd-gota {
+    position: absolute;
+    left: 50%; top: -8%;
+    width: 14vmin; height: 46vmin;
+    margin-left: -7vmin;
+    background: linear-gradient(180deg, #8dff9e, #2fae55 70%, #0d3d1d);
+    -webkit-clip-path: polygon(50% 0, 100% 18%, 82% 100%, 18% 100%, 0 18%);
+    clip-path: polygon(50% 0, 100% 18%, 82% 100%, 18% 100%, 0 18%);
+    opacity: 0;
+    animation: dts-verd-gota 1.7s ease-in both;
+}
+.dts-verd-charco {
+    position: absolute;
+    left: 50%; bottom: -12%;
+    width: 96vmin; height: 34vmin;
+    margin-left: -48vmin;
+    background: radial-gradient(ellipse at 50% 40%,
+                rgba(141, 255, 158, .85) 0%, rgba(47, 174, 85, .7) 46%,
+                rgba(13, 61, 29, 0) 78%);
+    filter: blur(1.4vmin);
+    opacity: 0;
+    animation: dts-verd-charco 1.7s ease-out both;
+}
+.dts-verd-burbuja {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 26% 64%,
+                rgba(234, 255, 236, .9) 0 2.4vmin, transparent 2.6vmin),
+                radial-gradient(circle at 68% 72%,
+                rgba(234, 255, 236, .85) 0 1.8vmin, transparent 2vmin),
+                radial-gradient(circle at 48% 86%,
+                rgba(141, 255, 158, .9) 0 3vmin, transparent 3.2vmin);
+    opacity: 0;
+    animation: dts-verd-burbuja 1.7s linear .25s both;
+}
+@keyframes dts-verd-gota {
+    0%   { opacity: 0;  transform: translateY(-60%) scaleY(.5); }
+    34%  { opacity: 1;  transform: translateY(0) scaleY(1); }
+    76%  { opacity: 1;  transform: translateY(18%) scaleY(1.25); }
+    100% { opacity: 0;  transform: translateY(60%) scaleY(.7); }
+}
+@keyframes dts-verd-charco {
+    0%   { opacity: 0;  transform: scaleX(.2); }
+    32%  { opacity: 1;  transform: scaleX(1); }
+    100% { opacity: 0;  transform: scaleX(1.4); }
+}
+@keyframes dts-verd-burbuja {
+    0%   { opacity: 0;  transform: translateY(10%); }
+    36%  { opacity: 1;  transform: translateY(0); }
+    100% { opacity: 0;  transform: translateY(-24%); }
+}
+
+/* ============ 184. BERNARD — Corbata de moño de cómic ============
+   Escena propia del efecto "Bernard" (sección Day of Tentacle). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-bernard {
+    background: radial-gradient(130% 100% at 50% 46%,
+                #2e1c06 0%, #1a1004 58%, #070401 100%);
+}
+.tema-bernard::after {
+    background: radial-gradient(circle at 50% 46%,
+                #fffaf0 0%, #ffe08a 24%, rgba(255,156,63,0) 68%);
+}
+.dts-bern-globo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 74vmin; height: 46vmin;
+    margin: -23vmin 0 0 -37vmin;
+    border: .7vmin solid rgba(48, 22, 0, .95);
+    background: rgba(255, 250, 240, .92);
+    -webkit-clip-path: polygon(4% 0, 96% 0, 100% 78%, 62% 100%, 58% 78%,
+                               12% 82%);
+    clip-path: polygon(4% 0, 96% 0, 100% 78%, 62% 100%, 58% 78%, 12% 82%);
+    opacity: 0;
+    animation: dts-bern-globo 1.7s ease-out both;
+}
+.dts-bern-mono {
+    position: absolute;
+    left: 50%; top: 74%;
+    width: 26vmin; height: 16vmin;
+    margin-left: -13vmin;
+    background: linear-gradient(90deg, #ff5b5b, #c81f2a 50%, #ff5b5b);
+    -webkit-clip-path: polygon(0 6%, 44% 36%, 44% 64%, 0 94%, 16% 50%,
+                               100% 6%, 56% 36%, 56% 64%, 100% 94%,
+                               84% 50%);
+    clip-path: polygon(0 6%, 44% 36%, 44% 64%, 0 94%, 16% 50%,
+                       100% 6%, 56% 36%, 56% 64%, 100% 94%, 84% 50%);
+    opacity: 0;
+    animation: dts-bern-mono 1.7s ease-in-out .2s both;
+}
+.dts-bern-trazo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 82vmin; height: 52vmin;
+    margin: -26vmin 0 0 -41vmin;
+    border: .5vmin dashed rgba(255, 224, 138, .9);
+    opacity: 0;
+    animation: dts-bern-trazo 1.7s linear both;
+}
+@keyframes dts-bern-globo {
+    0%   { opacity: 0;  transform: scale(.3) rotate(-8deg); }
+    34%  { opacity: 1;  transform: scale(1) rotate(0deg); }
+    76%  { opacity: 1;  transform: scale(1.04) rotate(2deg); }
+    100% { opacity: 0;  transform: scale(1.3) rotate(6deg); }
+}
+@keyframes dts-bern-mono {
+    0%, 100% { opacity: 0;  transform: scale(.5); }
+    40%      { opacity: 1;  transform: scale(1); }
+    62%      { opacity: 1;  transform: scale(1.12); }
+}
+@keyframes dts-bern-trazo {
+    0%, 100% { opacity: 0;  transform: rotate(0deg) scale(.9); }
+    46%      { opacity: 1;  transform: rotate(6deg) scale(1); }
+}
+
+/* ============ 185. LAVERNE — Melena morada que barre ============
+   Escena propia del efecto "Laverne" (sección Day of Tentacle). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-laverne {
+    background: radial-gradient(130% 100% at 50% 44%,
+                #2b0642 0%, #180326 58%, #06010a 100%);
+}
+.tema-laverne::after {
+    background: radial-gradient(circle at 50% 44%,
+                #fbf1ff 0%, #e0a8ff 24%, rgba(166,63,216,0) 68%);
+}
+.dts-lav-melena {
+    position: absolute;
+    left: -10%; top: 40%;
+    width: 120%; height: 46%;
+    background:
+        radial-gradient(38vmin 20vmin at 18% 60%, rgba(224,168,255,.95),
+                        transparent 70%),
+        radial-gradient(34vmin 18vmin at 54% 44%, rgba(166,63,216,.95),
+                        transparent 70%),
+        radial-gradient(30vmin 16vmin at 86% 66%, rgba(255,90,230,.85),
+                        transparent 70%);
+    filter: blur(1.6vmin);
+    opacity: 0;
+    animation: dts-lav-melena 1.7s ease-in-out both;
+}
+.dts-lav-chispa {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 30% 34%,
+                rgba(251, 241, 255, .95) 0 1.4vmin, transparent 1.6vmin),
+                radial-gradient(circle at 66% 28%,
+                rgba(251, 241, 255, .9) 0 1vmin, transparent 1.2vmin),
+                radial-gradient(circle at 48% 74%,
+                rgba(224, 168, 255, .9) 0 1.8vmin, transparent 2vmin);
+    opacity: 0;
+    animation: dts-lav-chispa 1.7s linear both;
+}
+.dts-lav-arco {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 70vmin; height: 70vmin;
+    margin: -35vmin 0 0 -35vmin;
+    border: .5vmin solid rgba(224, 168, 255, .85);
+    border-radius: 50% 50% 46% 54%;
+    opacity: 0;
+    animation: dts-lav-arco 1.7s ease-out both;
+}
+@keyframes dts-lav-melena {
+    0%   { opacity: 0;  transform: translateX(-14%) rotate(-6deg); }
+    34%  { opacity: 1;  transform: translateX(0) rotate(2deg); }
+    76%  { opacity: 1;  transform: translateX(6%) rotate(-3deg); }
+    100% { opacity: 0;  transform: translateX(18%) rotate(8deg); }
+}
+@keyframes dts-lav-chispa {
+    0%   { opacity: 0;  transform: translateY(16%); }
+    36%  { opacity: 1;  transform: translateY(0); }
+    100% { opacity: 0;  transform: translateY(-30%); }
+}
+@keyframes dts-lav-arco {
+    0%   { opacity: 0;  transform: scale(.5) rotate(0deg); }
+    32%  { opacity: 1;  transform: scale(1) rotate(24deg); }
+    100% { opacity: 0;  transform: scale(1.7) rotate(72deg); }
+}
+
+/* ============ 186. HOAGIE — Camisa de cuadros que corre ============
+   Escena propia del efecto "Hoagie" (sección Day of Tentacle). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-hoagie {
+    background: radial-gradient(130% 100% at 50% 54%,
+                #3a140a 0%, #200903 58%, #090201 100%);
+}
+.tema-hoagie::after {
+    background: radial-gradient(circle at 50% 54%,
+                #fff3e6 0%, #ff9a4d 24%, rgba(182,64,26,0) 68%);
+}
+.dts-hoa-camisa {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 76vmin; height: 58vmin;
+    margin: -29vmin 0 0 -38vmin;
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, .5) 0 3vmin, transparent 3vmin 9vmin),
+        repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, .5) 0 3vmin, transparent 3vmin 9vmin),
+        linear-gradient(172deg, #ff9a4d, #b6401a);
+    opacity: 0;
+    animation: dts-hoa-camisa 1.7s ease-out both;
+}
+.dts-hoa-boton {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 6vmin; height: 6vmin;
+    margin: -3vmin 0 0 -3vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff3e6, #ff9a4d 70%,
+                rgba(182,64,26,0));
+    opacity: 0;
+    animation: dts-hoa-boton 1.7s linear both;
+}
+.dts-hoa-boton-2 { transform: translateY(14vmin); animation-delay: .18s; }
+.dts-hoa-boton-3 { transform: translateY(-14vmin); animation-delay: .36s; }
+.dts-hoa-paso {
+    position: absolute;
+    left: 6%; bottom: 8%;
+    width: 88%; height: .5vmin;
+    background: linear-gradient(90deg, rgba(255,243,230,0),
+                #fff3e6, rgba(255,243,230,0));
+    opacity: 0;
+    animation: dts-hoa-paso 1.7s linear .3s both;
+}
+@keyframes dts-hoa-camisa {
+    0%   { opacity: 0;  transform: translateY(30%) rotate(-3deg); }
+    34%  { opacity: 1;  transform: translateY(0) rotate(0deg); }
+    76%  { opacity: 1;  transform: translateY(-2%) rotate(2deg); }
+    100% { opacity: 0;  transform: translateY(-14%) rotate(5deg); }
+}
+@keyframes dts-hoa-boton {
+    0%, 100% { opacity: 0;  transform: scale(.3); }
+    40%      { opacity: 1;  transform: scale(1); }
+    70%      { opacity: .8; transform: scale(1.3); }
+}
+@keyframes dts-hoa-paso {
+    0%   { opacity: 0;  transform: scaleX(.2); }
+    32%  { opacity: 1;  transform: scaleX(1); }
+    100% { opacity: 0;  transform: scaleX(1.2); }
+}
+
+/* ============ 187. DR. FRED — Chispa de laboratorio ============
+   Escena propia del efecto "Dr. Fred" (sección Day of Tentacle). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-fred {
+    background: radial-gradient(130% 100% at 50% 50%,
+                #0a2436 0%, #05141f 58%, #01060a 100%);
+}
+.tema-fred::after {
+    background: radial-gradient(circle at 50% 50%,
+                #ffffff 0%, #7df3ff 24%, rgba(31,127,214,0) 68%);
+}
+.dts-fred-bobina {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 58vmin; height: 58vmin;
+    margin: -29vmin 0 0 -29vmin;
+    border: .6vmin solid rgba(125, 243, 255, .9);
+    border-radius: 50%;
+    background:
+        repeating-conic-gradient(from 0deg at 50% 50%,
+            rgba(125, 243, 255, .5) 0 8deg, transparent 8deg 26deg);
+    opacity: 0;
+    animation: dts-fred-bobina 1.7s linear both;
+}
+.dts-fred-rayo {
+    position: absolute;
+    left: 50%; top: 0;
+    width: 16vmin; height: 100%;
+    margin-left: -8vmin;
+    background: linear-gradient(180deg,
+                rgba(255,255,255,0), #ffffff 30%, #7df3ff 60%,
+                rgba(255,255,255,0));
+    -webkit-clip-path: polygon(60% 0, 100% 0, 42% 44%, 74% 44%,
+                               16% 100%, 34% 52%, 6% 52%);
+    clip-path: polygon(60% 0, 100% 0, 42% 44%, 74% 44%,
+                       16% 100%, 34% 52%, 6% 52%);
+    opacity: 0;
+    animation: dts-fred-rayo 1.7s steps(3, end) both;
+}
+.dts-fred-onda {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 40vmin; height: 40vmin;
+    margin: -20vmin 0 0 -20vmin;
+    border: .5vmin solid rgba(255, 255, 255, .85);
+    border-radius: 50%;
+    opacity: 0;
+    animation: dts-fred-onda 1.7s ease-out .25s both;
+}
+@keyframes dts-fred-bobina {
+    0%   { opacity: 0;  transform: scale(.5) rotate(0deg); }
+    32%  { opacity: 1;  transform: scale(1) rotate(120deg); }
+    100% { opacity: 0;  transform: scale(1.5) rotate(300deg); }
+}
+@keyframes dts-fred-rayo {
+    0%, 100% { opacity: 0;  transform: translateX(-24vmin) scaleY(.6); }
+    30%      { opacity: 1;  transform: translateX(-6vmin) scaleY(1); }
+    66%      { opacity: .9; transform: translateX(8vmin) scaleY(1.1); }
+}
+@keyframes dts-fred-onda {
+    0%   { opacity: 0;  transform: scale(.2); }
+    34%  { opacity: 1;  transform: scale(1); }
+    100% { opacity: 0;  transform: scale(2.4); }
+}
+
+/* ============ 188. METECO — Roca que se resquebraja ============
+   Escena propia del efecto "Meteco" (sección Day of Tentacle). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-meteoro {
+    background: radial-gradient(130% 100% at 50% 46%,
+                #3a1408 0%, #1e0903 58%, #070201 100%);
+}
+.tema-meteoro::after {
+    background: radial-gradient(circle at 50% 46%,
+                #fff1d6 0%, #ffb26b 24%, rgba(214,84,28,0) 68%);
+}
+.dts-met-roca {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 62vmin; height: 62vmin;
+    margin: -31vmin 0 0 -31vmin;
+    background:
+        radial-gradient(circle at 36% 32%, rgba(255, 241, 214, .85),
+                        transparent 40%),
+        linear-gradient(150deg, #d6541c, #4a1204 78%);
+    -webkit-clip-path: polygon(50% 0, 78% 12%, 96% 40%, 92% 74%,
+                               66% 96%, 32% 92%, 8% 68%, 4% 34%,
+                               26% 10%);
+    clip-path: polygon(50% 0, 78% 12%, 96% 40%, 92% 74%, 66% 96%,
+                       32% 92%, 8% 68%, 4% 34%, 26% 10%);
+    opacity: 0;
+    animation: dts-met-roca 1.7s ease-out both;
+}
+.dts-met-grieta {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 70vmin; height: 70vmin;
+    margin: -35vmin 0 0 -35vmin;
+    background: linear-gradient(52deg,
+                transparent 46%, rgba(255, 241, 214, .95) 47% 53%,
+                transparent 54%),
+                linear-gradient(-64deg,
+                transparent 46%, rgba(255, 178, 107, .9) 47% 53%,
+                transparent 54%);
+    opacity: 0;
+    animation: dts-met-grieta 1.7s steps(3, end) both;
+}
+.dts-met-estela {
+    position: absolute;
+    left: -30%; top: 18%;
+    width: 66%; height: 8vmin;
+    background: linear-gradient(90deg, rgba(255, 178, 107, 0),
+                #fff1d6, rgba(255, 178, 107, 0));
+    filter: blur(1vmin);
+    opacity: 0;
+    animation: dts-met-estela 1.7s linear both;
+}
+.dts-met-anillo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 54vmin; height: 54vmin;
+    margin: -27vmin 0 0 -27vmin;
+    border: .55vmin solid rgba(255, 178, 107, .9);
+    border-radius: 50%;
+    opacity: 0;
+    animation: dts-met-anillo 1.7s ease-out .3s both;
+}
+@keyframes dts-met-roca {
+    0%   { opacity: 0;  transform: scale(.4) rotate(-30deg); }
+    34%  { opacity: 1;  transform: scale(1) rotate(0deg); }
+    78%  { opacity: 1;  transform: scale(1.06) rotate(8deg); }
+    100% { opacity: 0;  transform: scale(1.4) rotate(22deg); }
+}
+@keyframes dts-met-grieta {
+    0%, 100% { opacity: 0;  transform: scale(.5) rotate(0deg); }
+    38%      { opacity: 1;  transform: scale(1) rotate(12deg); }
+    74%      { opacity: .8; transform: scale(1.25) rotate(28deg); }
+}
+@keyframes dts-met-estela {
+    0%   { opacity: 0;  transform: translate(-20%, -30%); }
+    30%  { opacity: 1;  transform: translate(30%, 10%); }
+    100% { opacity: 0;  transform: translate(150%, 60%); }
+}
+@keyframes dts-met-anillo {
+    0%   { opacity: 0;  transform: scale(.3); }
+    34%  { opacity: 1;  transform: scale(1); }
+    100% { opacity: 0;  transform: scale(2.2); }
+}
+
+/* ============ 189. CHRON-O-JOHN — Salto temporal por la letra ============
+   Escena propia del efecto "Chron-o-John" (sección Day of Tentacle). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-chronojohn {
+    background: radial-gradient(130% 100% at 50% 50%,
+                #10263a 0%, #08151f 58%, #020709 100%);
+}
+.tema-chronojohn::after {
+    background: radial-gradient(circle at 50% 50%,
+                #ffffff 0%, #bfe9ff 24%, rgba(70,150,220,0) 68%);
+}
+.dts-chr-tubo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 40vmin; height: 56vmin;
+    margin: -28vmin 0 0 -20vmin;
+    background: linear-gradient(180deg, #f2fbff, #8fc6ea 44%, #12263a);
+    -webkit-clip-path: polygon(18% 0, 82% 0, 100% 22%, 92% 100%, 8% 100%,
+                               0 22%);
+    clip-path: polygon(18% 0, 82% 0, 100% 22%, 92% 100%, 8% 100%, 0 22%);
+    opacity: 0;
+    animation: dts-chr-tubo 1.7s ease-out both;
+}
+.dts-chr-anillo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 56vmin; height: 56vmin;
+    margin: -28vmin 0 0 -28vmin;
+    border: .6vmin solid rgba(191, 233, 255, .9);
+    border-radius: 50%;
+    opacity: 0;
+    animation: dts-chr-anillo 1.7s linear both;
+}
+.dts-chr-puerta {
+    position: absolute;
+    left: 50%; top: 6%;
+    width: 26vmin; height: 40vmin;
+    margin-left: -13vmin;
+    background: linear-gradient(90deg, rgba(191, 233, 255, .1),
+                rgba(255, 255, 255, .85));
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%,
+                               0 50%, 12% 50%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 50%, 12% 50%);
+    opacity: 0;
+    animation: dts-chr-puerta 1.7s ease-in-out .25s both;
+}
+@keyframes dts-chr-tubo {
+    0%   { opacity: 0;  transform: scale(.4) rotate(-14deg); }
+    34%  { opacity: 1;  transform: scale(1) rotate(0deg); }
+    76%  { opacity: 1;  transform: scale(1.05) rotate(6deg); }
+    100% { opacity: 0;  transform: scale(1.35) rotate(16deg); }
+}
+@keyframes dts-chr-anillo {
+    0%   { opacity: 0;  transform: rotate(0deg) scale(.4); }
+    32%  { opacity: 1;  transform: rotate(180deg) scale(1); }
+    100% { opacity: 0;  transform: rotate(540deg) scale(1.8); }
+}
+@keyframes dts-chr-puerta {
+    0%   { opacity: 0;  transform: scaleX(.05); transform-origin: 0 50%; }
+    34%  { opacity: 1;  transform: scaleX(1); transform-origin: 0 50%; }
+    74%  { opacity: 1;  transform: scaleX(1); transform-origin: 0 50%; }
+    100% { opacity: 0;  transform: scaleX(1); transform-origin: 100% 50%; }
+}
+
+/* ============ 190. RESIDUOS — Fuga que sube por la letra ============
+   Escena propia del efecto "Residuos" (sección Day of Tentacle). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-residuos {
+    background: radial-gradient(130% 100% at 50% 78%,
+                #12300b 0%, #0a1a06 58%, #020501 100%);
+}
+.tema-residuos::after {
+    background: radial-gradient(circle at 50% 76%,
+                #d9ff7a 0%, #7ad92e 24%, rgba(47,122,28,0) 68%);
+}
+.dts-res-tanque {
+    position: absolute;
+    left: 50%; bottom: -6%;
+    width: 74vmin; height: 52vmin;
+    margin-left: -37vmin;
+    background: linear-gradient(180deg, rgba(201, 255, 94, .35),
+                rgba(47, 122, 28, .8));
+    border: .5vmin solid rgba(201, 255, 94, .8);
+    border-radius: 4vmin 4vmin 0 0;
+    opacity: 0;
+    animation: dts-res-tanque 1.7s ease-out both;
+}
+.dts-res-burbuja {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 34% 78%,
+                rgba(217, 255, 122, .95) 0 3.4vmin, transparent 3.6vmin),
+                radial-gradient(circle at 62% 88%,
+                rgba(122, 217, 46, .9) 0 2.6vmin, transparent 2.8vmin),
+                radial-gradient(circle at 48% 64%,
+                rgba(217, 255, 122, .85) 0 1.8vmin, transparent 2vmin);
+    opacity: 0;
+    animation: dts-res-burbuja 1.7s linear both;
+}
+.dts-res-peligro {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 58vmin; height: 58vmin;
+    margin: -29vmin 0 0 -29vmin;
+    background:
+        repeating-conic-gradient(from 45deg at 50% 50%,
+            rgba(217, 255, 122, .8) 0 14deg, rgba(217,255,122,0) 14deg 34deg);
+    -webkit-clip-path: circle(46%);
+    clip-path: circle(46%);
+    opacity: 0;
+    animation: dts-res-peligro 1.7s linear .2s both;
+}
+@keyframes dts-res-tanque {
+    0%   { opacity: 0;  transform: translateY(40%); }
+    34%  { opacity: 1;  transform: translateY(0); }
+    100% { opacity: 0;  transform: translateY(-16%); }
+}
+@keyframes dts-res-burbuja {
+    0%   { opacity: 0;  transform: translateY(24%) scale(.6); }
+    38%  { opacity: 1;  transform: translateY(0) scale(1); }
+    100% { opacity: 0;  transform: translateY(-46%) scale(1.4); }
+}
+@keyframes dts-res-peligro {
+    0%   { opacity: 0;  transform: rotate(0deg) scale(.3); }
+    34%  { opacity: .9; transform: rotate(60deg) scale(1); }
+    100% { opacity: 0;  transform: rotate(200deg) scale(1.6); }
+}
+
+/* ============ 191. HAMSTER — Rueda que no para ============
+   Escena propia del efecto "Hamster" (sección Day of Tentacle). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-hamster {
+    background: radial-gradient(130% 100% at 50% 50%,
+                #3a1c06 0%, #1d0e02 58%, #070301 100%);
+}
+.tema-hamster::after {
+    background: radial-gradient(circle at 50% 50%,
+                #fffaf0 0%, #ffe6c2 24%, rgba(232,164,74,0) 68%);
+}
+.dts-ham-rueda {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 66vmin; height: 66vmin;
+    margin: -33vmin 0 0 -33vmin;
+    border: 1vmin solid rgba(255, 230, 194, .95);
+    border-radius: 50%;
+    background:
+        repeating-conic-gradient(from 0deg at 50% 50%,
+            rgba(255, 230, 194, .9) 0 1.6deg, rgba(255,230,194,0) 1.6deg 40deg);
+    opacity: 0;
+    animation: dts-ham-rueda 1.7s linear both;
+}
+.dts-ham-bola {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 24vmin; height: 20vmin;
+    margin: -10vmin 0 0 -12vmin;
+    border-radius: 50% 50% 46% 54%;
+    background: radial-gradient(circle at 34% 34%, #fffaf0,
+                #e8a44a 70%, #5a2c06);
+    opacity: 0;
+    animation: dts-ham-bola 1.7s ease-in-out both;
+}
+.dts-ham-rastro {
+    position: absolute;
+    left: 8%; top: 50%;
+    width: 84%; height: .5vmin;
+    background: linear-gradient(90deg, rgba(255,230,194,0),
+                #ffe6c2, rgba(255,230,194,0));
+    opacity: 0;
+    animation: dts-ham-rastro 1.7s linear .2s both;
+}
+@keyframes dts-ham-rueda {
+    0%   { opacity: 0;  transform: rotate(0deg) scale(.5); }
+    32%  { opacity: 1;  transform: rotate(240deg) scale(1); }
+    100% { opacity: 0;  transform: rotate(900deg) scale(1.5); }
+}
+@keyframes dts-ham-bola {
+    0%   { opacity: 0;  transform: translate(-40%, 30%) scale(.5); }
+    34%  { opacity: 1;  transform: translate(0, 0) scale(1); }
+    74%  { opacity: 1;  transform: translate(30%, -10%) scale(1.1); }
+    100% { opacity: 0;  transform: translate(70%, 20%) scale(.6); }
+}
+@keyframes dts-ham-rastro {
+    0%   { opacity: 0;  transform: scaleX(.2); }
+    34%  { opacity: 1;  transform: scaleX(1); }
+    100% { opacity: 0;  transform: scaleX(1.3); }
+}
+
+/* ============ 192. VERBO SCUMM — La barra que salta de verbo en verbo ============
+   Escena propia del efecto "Verbo SCUMM" (sección Day of Tentacle). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-scumm {
+    background: radial-gradient(130% 100% at 50% 62%,
+                #06301c 0%, #041a10 58%, #010603 100%);
+}
+.tema-scumm::after {
+    background: radial-gradient(circle at 50% 62%,
+                #f2fff6 0%, #9ff7b0 24%, rgba(47,174,94,0) 68%);
+}
+.dts-scum-barra {
+    position: absolute;
+    left: 4%; bottom: 6%;
+    width: 92%; height: 26vmin;
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, .6) 0 .5vmin, transparent .5vmin 15%),
+        linear-gradient(180deg, rgba(6, 48, 28, .95), rgba(1, 6, 3, .98));
+    border: .5vmin solid rgba(159, 247, 176, .85);
+    opacity: 0;
+    animation: dts-scum-barra 1.7s ease-out both;
+}
+.dts-scum-foco {
+    position: absolute;
+    left: 4%; bottom: 6%;
+    width: 14%; height: 26vmin;
+    background: linear-gradient(180deg, rgba(242, 255, 246, .8),
+                rgba(159, 247, 176, .35));
+    opacity: 0;
+    animation: dts-scum-foco 1.7s steps(5, end) both;
+}
+.dts-scum-puntero {
+    position: absolute;
+    left: 50%; top: 46%;
+    width: 14vmin; height: 14vmin;
+    margin: -7vmin 0 0 -7vmin;
+    background: linear-gradient(150deg, #f2fff6, #9ff7b0 60%, #2fae5e);
+    -webkit-clip-path: polygon(0 0, 74% 30%, 46% 44%, 66% 78%, 44% 92%,
+                               26% 56%, 0 74%);
+    clip-path: polygon(0 0, 74% 30%, 46% 44%, 66% 78%, 44% 92%,
+                       26% 56%, 0 74%);
+    opacity: 0;
+    animation: dts-scum-puntero 1.7s ease-in .3s both;
+}
+@keyframes dts-scum-barra {
+    0%   { opacity: 0;  transform: translateY(40%); }
+    32%  { opacity: 1;  transform: translateY(0); }
+    100% { opacity: 0;  transform: translateY(-12%); }
+}
+@keyframes dts-scum-foco {
+    0%   { opacity: 0;  transform: translateX(0); }
+    20%  { opacity: .9; transform: translateX(60%); }
+    60%  { opacity: .9; transform: translateX(300%); }
+    100% { opacity: 0;  transform: translateX(560%); }
+}
+@keyframes dts-scum-puntero {
+    0%   { opacity: 0;  transform: scale(.4) rotate(-24deg); }
+    36%  { opacity: 1;  transform: scale(1) rotate(0deg); }
+    74%  { opacity: 1;  transform: scale(1.18) rotate(8deg); }
+    100% { opacity: 0;  transform: scale(.7) rotate(-10deg); }
+}
+
+/* ============ 193. VGA — Paleta de 256 colores ============
+   Escena propia del efecto "VGA" (sección Day of Tentacle). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-vga {
+    background: radial-gradient(130% 100% at 50% 50%,
+                #2a0433 0%, #15021a 58%, #050107 100%);
+}
+.tema-vga::after {
+    background: radial-gradient(circle at 50% 50%,
+                #fff0fb 0%, #ff9ad5 24%, rgba(180,46,198,0) 68%);
+}
+.dts-vga-carga {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 64vmin; height: 42vmin;
+    margin: -21vmin 0 0 -32vmin;
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(255, 154, 213, .85) 0 2vmin, transparent 2vmin 6vmin),
+        rgba(10, 0, 14, .9);
+    border: .5vmin solid rgba(255, 154, 213, .9);
+    opacity: 0;
+    animation: dts-vga-carga 1.7s steps(6, end) both;
+}
+.dts-vga-pixel {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 22% 34%,
+                rgba(255, 240, 251, .95) 0 2.4vmin, transparent 2.6vmin),
+                radial-gradient(circle at 74% 68%,
+                rgba(255, 154, 213, .95) 0 3.4vmin, transparent 3.6vmin),
+                radial-gradient(circle at 52% 18%,
+                rgba(180, 46, 198, .9) 0 2vmin, transparent 2.2vmin);
+    background-size: 8vmin 8vmin, 14vmin 14vmin, 6vmin 6vmin;
+    opacity: 0;
+    animation: dts-vga-pixel 1.7s steps(4, end) both;
+}
+.dts-vga-barrido {
+    position: absolute;
+    left: 0; top: 50%;
+    width: 100%; height: 3vmin;
+    margin-top: -1.5vmin;
+    background: linear-gradient(90deg, rgba(255,240,251,0),
+                rgba(255, 240, 251, .9), rgba(255,240,251,0));
+    opacity: 0;
+    animation: dts-vga-barrido 1.7s linear both;
+}
+@keyframes dts-vga-carga {
+    0%   { opacity: 0;  clip-path: inset(0 100% 0 0); }
+    32%  { opacity: 1;  clip-path: inset(0 0 0 0); }
+    74%  { opacity: 1;  clip-path: inset(0 0 0 0); }
+    100% { opacity: 0;  clip-path: inset(0 0 0 0); }
+}
+@keyframes dts-vga-pixel {
+    0%   { opacity: 0;  background-position: 0 0, 0 0, 0 0; }
+    34%  { opacity: 1;  background-position: -8vmin 0, 14vmin 0, 0 6vmin; }
+    74%  { opacity: .9; background-position: -16vmin 0, 28vmin 0, 0 12vmin; }
+    100% { opacity: 0;  background-position: -24vmin 0, 42vmin 0, 0 18vmin; }
+}
+@keyframes dts-vga-barrido {
+    0%   { opacity: 0;  transform: translateY(-24vmin); }
+    30%  { opacity: 1;  transform: translateY(0); }
+    100% { opacity: 0;  transform: translateY(24vmin); }
+}
+
+/* ============ 194. FUTURO — Silueta de tentáculo invadiendo ============
+   Escena propia del efecto "Futuro" (sección Day of Tentacle). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-futuro {
+    background: radial-gradient(130% 100% at 50% 40%,
+                #150131 0%, #0b011d 58%, #030107 100%);
+}
+.tema-futuro::after {
+    background: radial-gradient(circle at 50% 40%,
+                #ffeaf9 0%, #ff8ae6 22%, rgba(125,31,184,0) 68%);
+}
+.dts-fut-torre {
+    position: absolute;
+    bottom: 0;
+    width: 12vmin;
+    background: linear-gradient(180deg, rgba(125, 31, 184, .8),
+                rgba(3, 1, 7, .95));
+    border-top: .4vmin solid rgba(0, 226, 255, .9);
+    opacity: 0;
+    animation: dts-fut-torre 1.7s ease-out both;
+}
+.dts-fut-torre-a { left: 8%;  height: 58%; }
+.dts-fut-torre-b { left: 34%; height: 76%; animation-delay: .2s; }
+.dts-fut-torre-c { left: 74%; height: 48%; animation-delay: .4s; }
+.dts-fut-brazo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 96vmin; height: 60vmin;
+    margin: -30vmin 0 0 -48vmin;
+    background: linear-gradient(140deg,
+                rgba(255, 138, 230, .85), rgba(10, 0, 30, .95));
+    -webkit-clip-path: polygon(0 62%, 22% 40%, 38% 54%, 56% 26%,
+                               72% 44%, 92% 12%, 100% 34%, 78% 74%,
+                               54% 62%, 34% 86%, 14% 74%);
+    clip-path: polygon(0 62%, 22% 40%, 38% 54%, 56% 26%, 72% 44%,
+                       92% 12%, 100% 34%, 78% 74%, 54% 62%, 34% 86%,
+                       14% 74%);
+    opacity: 0;
+    animation: dts-fut-brazo 1.7s ease-in-out .15s both;
+}
+.dts-fut-alerta {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 226, 255, .18);
+    opacity: 0;
+    animation: dts-fut-alerta 1.7s steps(1, end) both;
+}
+@keyframes dts-fut-torre {
+    0%   { opacity: 0;  transform: translateY(60%); }
+    34%  { opacity: 1;  transform: translateY(0); }
+    100% { opacity: 0;  transform: translateY(-8%); }
+}
+@keyframes dts-fut-brazo {
+    0%   { opacity: 0;  transform: translateX(-40%) rotate(-8deg); }
+    36%  { opacity: 1;  transform: translateX(0) rotate(2deg); }
+    76%  { opacity: 1;  transform: translateX(8%) rotate(-4deg); }
+    100% { opacity: 0;  transform: translateX(34%) rotate(6deg); }
+}
+@keyframes dts-fut-alerta {
+    0%, 100% { opacity: 0; }
+    24%      { opacity: 1; }
+    34%      { opacity: 0; }
+    64%      { opacity: .8; }
+    74%      { opacity: 0; }
+}
+
+/* ============ 195. PASADO — Pluma sobre pergamino ============
+   Escena propia del efecto "Pasado" (sección Day of Tentacle). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-pasado {
+    background: radial-gradient(130% 100% at 50% 48%,
+                #3d2a10 0%, #20160a 58%, #070502 100%);
+}
+.tema-pasado::after {
+    background: radial-gradient(circle at 50% 48%,
+                #fffaf0 0%, #f0dcae 24%, rgba(201,163,92,0) 68%);
+}
+.dts-pas-pergamino {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 78vmin; height: 50vmin;
+    margin: -25vmin 0 0 -39vmin;
+    background:
+        repeating-linear-gradient(94deg,
+            rgba(92, 62, 18, .3) 0 .8vmin, transparent .8vmin 3vmin),
+        linear-gradient(176deg, #fffaf0, #c9a35c 84%);
+    -webkit-clip-path: polygon(2% 4%, 98% 0, 100% 92%, 60% 100%,
+                               4% 96%);
+    clip-path: polygon(2% 4%, 98% 0, 100% 92%, 60% 100%, 4% 96%);
+    opacity: 0;
+    animation: dts-pas-pergamino 1.7s ease-out both;
+}
+.dts-pas-pluma {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 46vmin; height: 46vmin;
+    margin: -23vmin 0 0 -23vmin;
+    background: linear-gradient(150deg, rgba(255, 250, 240, .95),
+                rgba(201, 163, 92, .6));
+    -webkit-clip-path: polygon(50% 0, 74% 40%, 62% 100%, 38% 100%,
+                               26% 40%);
+    clip-path: polygon(50% 0, 74% 40%, 62% 100%, 38% 100%, 26% 40%);
+    opacity: 0;
+    animation: dts-pas-pluma 1.7s ease-in-out both;
+}
+.dts-pas-campana {
+    position: absolute;
+    left: 72%; top: 22%;
+    width: 22vmin; height: 26vmin;
+    background: linear-gradient(180deg, #fff6e0, #c9a35c 70%,
+                #5a3c12);
+    -webkit-clip-path: polygon(50% 0, 84% 76%, 96% 100%, 4% 100%,
+                               16% 76%);
+    clip-path: polygon(50% 0, 84% 76%, 96% 100%, 4% 100%, 16% 76%);
+    opacity: 0;
+    animation: dts-pas-campana 1.7s ease-in-out .25s both;
+}
+@keyframes dts-pas-pergamino {
+    0%   { opacity: 0;  transform: scale(.7) rotate(-3deg); }
+    34%  { opacity: 1;  transform: scale(1) rotate(0deg); }
+    100% { opacity: 0;  transform: scale(1.2) rotate(3deg); }
+}
+@keyframes dts-pas-pluma {
+    0%   { opacity: 0;  transform: translate(-80%, -60%) rotate(-40deg); }
+    36%  { opacity: 1;  transform: translate(0, 0) rotate(0deg); }
+    76%  { opacity: 1;  transform: translate(40%, 30%) rotate(24deg); }
+    100% { opacity: 0;  transform: translate(90%, 70%) rotate(50deg); }
+}
+@keyframes dts-pas-campana {
+    0%, 100% { opacity: 0;  transform: rotate(0deg); }
+    34%      { opacity: 1;  transform: rotate(0deg); }
+    50%      { opacity: 1;  transform: rotate(-16deg); }
+    66%      { opacity: 1;  transform: rotate(12deg); }
+    82%      { opacity: 1;  transform: rotate(-7deg); }
+}
+
+/* ============ 196. DENTISTA — Taladro que vibra en el texto ============
+   Escena propia del efecto "Dentista" (sección Day of Tentacle). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-dentista {
+    background: radial-gradient(130% 100% at 50% 44%,
+                #06323f 0%, #03202a 58%, #010608 100%);
+}
+.tema-dentista::after {
+    background: radial-gradient(circle at 50% 44%,
+                #ffffff 0%, #b6ecf7 24%, rgba(56,162,196,0) 68%);
+}
+.dts-den-lampara {
+    position: absolute;
+    left: 50%; top: -6%;
+    width: 54vmin; height: 44vmin;
+    margin-left: -27vmin;
+    background: conic-gradient(from 200deg at 50% 0%,
+                rgba(255, 255, 255, 0), rgba(255, 255, 255, .85) 40%,
+                rgba(182, 236, 247, .5) 62%, rgba(255, 255, 255, 0));
+    opacity: 0;
+    animation: dts-den-lampara 1.7s ease-out both;
+}
+.dts-den-taladro {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 8vmin; height: 54vmin;
+    margin: -27vmin 0 0 -4vmin;
+    background: linear-gradient(180deg, #eafcff, #38a2c4 66%,
+                #06323f);
+    -webkit-clip-path: polygon(30% 0, 70% 0, 100% 78%, 50% 100%,
+                               0 78%);
+    clip-path: polygon(30% 0, 70% 0, 100% 78%, 50% 100%, 0 78%);
+    opacity: 0;
+    animation: dts-den-taladro 1.7s linear both;
+}
+.dts-den-vibra {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(90deg,
+                rgba(234, 252, 255, .5) 0 1vmin, transparent 1vmin 5vmin);
+    opacity: 0;
+    animation: dts-den-vibra 1.7s steps(6, end) both;
+}
+@keyframes dts-den-lampara {
+    0%   { opacity: 0;  transform: scaleX(.4); transform-origin: 50% 0; }
+    34%  { opacity: 1;  transform: scaleX(1); transform-origin: 50% 0; }
+    100% { opacity: 0;  transform: scaleX(1.5); transform-origin: 50% 0; }
+}
+@keyframes dts-den-taladro {
+    0%   { opacity: 0;  transform: translateY(-50%) rotate(-14deg); }
+    34%  { opacity: 1;  transform: translateY(0) rotate(0deg); }
+    60%  { opacity: 1;  transform: translateY(4%) rotate(4deg); }
+    100% { opacity: 0;  transform: translateY(24%) rotate(10deg); }
+}
+@keyframes dts-den-vibra {
+    0%, 100% { opacity: 0;  transform: translateX(0); }
+    30%      { opacity: .9; transform: translateX(-1vmin); }
+    50%      { opacity: .5; transform: translateX(1vmin); }
+    70%      { opacity: .9; transform: translateX(-.6vmin); }
+}
+
+/* ============ 197. DIÁLOGO — Tinta que cambia de personaje ============
+   Escena propia del efecto "Diálogo" (sección Day of Tentacle). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-dialogo {
+    background: radial-gradient(130% 100% at 50% 66%,
+                #1d1030 0%, #100820 58%, #04010a 100%);
+}
+.tema-dialogo::after {
+    background: radial-gradient(circle at 50% 64%,
+                #fff4a8 0%, #b98bff 24%, rgba(122,57,198,0) 68%);
+}
+.dts-dia-globo {
+    position: absolute;
+    left: 8%; top: 24%;
+    width: 58vmin; height: 34vmin;
+    background: rgba(255, 255, 255, .93);
+    -webkit-clip-path: polygon(4% 0, 96% 0, 100% 76%, 46% 100%,
+                               38% 78%, 0 84%);
+    clip-path: polygon(4% 0, 96% 0, 100% 76%, 46% 100%, 38% 78%,
+                       0 84%);
+    opacity: 0;
+    animation: dts-dia-globo 1.7s ease-out both;
+}
+.dts-dia-renglon {
+    position: absolute;
+    left: 14%; top: 36%;
+    width: 44vmin; height: 3vmin;
+    background: repeating-linear-gradient(90deg,
+                rgba(29, 16, 48, .9) 0 6vmin, transparent 6vmin 8vmin);
+    opacity: 0;
+    animation: dts-dia-renglon 1.7s steps(5, end) .3s both;
+}
+.dts-dia-renglon-2 { top: 46%; width: 34vmin; animation-delay: .5s; }
+.dts-dia-boca {
+    position: absolute;
+    right: 10%; bottom: 16%;
+    width: 30vmin; height: 30vmin;
+    background: radial-gradient(circle at 40% 36%, #b98bff,
+                #4a1d80 72%, rgba(20, 4, 40, 0));
+    -webkit-clip-path: polygon(48% 0, 78% 14%, 96% 44%, 84% 80%,
+                               52% 100%, 18% 84%, 4% 50%, 18% 16%);
+    clip-path: polygon(48% 0, 78% 14%, 96% 44%, 84% 80%, 52% 100%,
+                       18% 84%, 4% 50%, 18% 16%);
+    opacity: 0;
+    animation: dts-dia-boca 1.7s ease-in-out .2s both;
+}
+@keyframes dts-dia-globo {
+    0%   { opacity: 0;  transform: scale(.4) rotate(-6deg); }
+    34%  { opacity: 1;  transform: scale(1) rotate(0deg); }
+    78%  { opacity: 1;  transform: scale(1.05) rotate(2deg); }
+    100% { opacity: 0;  transform: scale(1.3) rotate(6deg); }
+}
+@keyframes dts-dia-renglon {
+    0%   { opacity: 0;  transform: scaleX(.1); transform-origin: 0 50%; }
+    34%  { opacity: 1;  transform: scaleX(1); transform-origin: 0 50%; }
+    76%  { opacity: 1;  transform: scaleX(1); transform-origin: 0 50%; }
+    100% { opacity: 0;  transform: scaleX(1); transform-origin: 0 50%; }
+}
+@keyframes dts-dia-boca {
+    0%   { opacity: 0;  transform: scale(.5); }
+    36%  { opacity: 1;  transform: scale(1); }
+    64%  { opacity: 1;  transform: scale(1.14); }
+    100% { opacity: 0;  transform: scale(1.5); }
+}
+
+/* ============ 198. DOMINAR — Retícula del planeta que se recorre ============
+   Escena propia del efecto "Dominar" (sección Day of Tentacle). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-dominar {
+    background: radial-gradient(130% 100% at 50% 50%,
+                #34001a 0%, #1c000e 58%, #070003 100%);
+}
+.tema-dominar::after {
+    background: radial-gradient(circle at 50% 50%,
+                #fff0f7 0%, #ff7ab8 24%, rgba(192,24,106,0) 68%);
+}
+.dts-dom-globo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 68vmin; height: 68vmin;
+    margin: -34vmin 0 0 -34vmin;
+    border: .55vmin solid rgba(255, 122, 184, .9);
+    border-radius: 50%;
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(255, 122, 184, .5) 0 .4vmin, transparent .4vmin 12vmin),
+        repeating-linear-gradient(90deg,
+            rgba(255, 122, 184, .5) 0 .4vmin, transparent .4vmin 12vmin),
+        radial-gradient(circle at 34% 30%, rgba(255, 240, 247, .3),
+                        transparent 60%);
+    opacity: 0;
+    animation: dts-dom-globo 1.7s ease-out both;
+}
+.dts-dom-onda {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 40vmin; height: 40vmin;
+    margin: -20vmin 0 0 -20vmin;
+    border: .5vmin solid rgba(255, 240, 247, .9);
+    border-radius: 50%;
+    opacity: 0;
+    animation: dts-dom-onda 1.7s ease-out .25s both;
+}
+.dts-dom-banda {
+    position: absolute;
+    left: 0; top: 44%;
+    width: 100%; height: 12vmin;
+    background: linear-gradient(90deg, rgba(192, 24, 106, 0),
+                rgba(255, 122, 184, .75), rgba(192, 24, 106, 0));
+    opacity: 0;
+    animation: dts-dom-banda 1.7s linear .3s both;
+}
+@keyframes dts-dom-globo {
+    0%   { opacity: 0;  transform: scale(.3) rotate(0deg); }
+    34%  { opacity: 1;  transform: scale(1) rotate(30deg); }
+    76%  { opacity: 1;  transform: scale(1.1) rotate(70deg); }
+    100% { opacity: 0;  transform: scale(1.6) rotate(120deg); }
+}
+@keyframes dts-dom-onda {
+    0%   { opacity: 0;  transform: scale(.2); }
+    36%  { opacity: 1;  transform: scale(1); }
+    100% { opacity: 0;  transform: scale(2.6); }
+}
+@keyframes dts-dom-banda {
+    0%   { opacity: 0;  transform: translateX(-60%) scaleX(.4); }
+    34%  { opacity: 1;  transform: translateX(0) scaleX(1); }
+    100% { opacity: 0;  transform: translateX(60%) scaleX(1.3); }
+}
+
+/* ============ 199. PUNTERO — Clic que hace reaccionar al texto ============
+   Escena propia del efecto "Puntero" (sección Day of Tentacle). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-cursor {
+    background: radial-gradient(130% 100% at 50% 52%,
+                #3a1c04 0%, #1f0e01 58%, #070300 100%);
+}
+.tema-cursor::after {
+    background: radial-gradient(circle at 50% 52%,
+                #fffbe8 0%, #ffe066 24%, rgba(255,158,44,0) 68%);
+}
+.dts-cur-mano {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 40vmin; height: 46vmin;
+    margin: -23vmin 0 0 -20vmin;
+    background: linear-gradient(150deg, #fffbe8, #ff9e2c 70%,
+                #5c2a00);
+    -webkit-clip-path: polygon(34% 100%, 6% 66%, 22% 54%, 44% 76%,
+                               44% 0, 66% 6%, 66% 62%, 76% 50%,
+                               94% 62%, 84% 84%, 66% 100%);
+    clip-path: polygon(34% 100%, 6% 66%, 22% 54%, 44% 76%, 44% 0,
+                       66% 6%, 66% 62%, 76% 50%, 94% 62%, 84% 84%,
+                       66% 100%);
+    opacity: 0;
+    animation: dts-cur-mano 1.7s ease-in-out both;
+}
+.dts-cur-anillo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 44vmin; height: 44vmin;
+    margin: -22vmin 0 0 -22vmin;
+    border: .55vmin solid rgba(255, 224, 102, .95);
+    border-radius: 50%;
+    opacity: 0;
+    animation: dts-cur-anillo 1.7s ease-out .35s both;
+}
+.dts-cur-caja {
+    position: absolute;
+    left: 14%; top: 34%;
+    width: 72%; height: 34%;
+    border: .5vmin dashed rgba(255, 251, 232, .9);
+    opacity: 0;
+    animation: dts-cur-caja 1.7s steps(4, end) both;
+}
+@keyframes dts-cur-mano {
+    0%   { opacity: 0;  transform: translate(-70%, 60%) scale(.5)
+                         rotate(-18deg); }
+    36%  { opacity: 1;  transform: translate(0, 0) scale(1) rotate(0deg); }
+    74%  { opacity: 1;  transform: translate(6%, -6%) scale(1.06)
+                         rotate(6deg); }
+    100% { opacity: 0;  transform: translate(-20%, -40%) scale(.7)
+                         rotate(-8deg); }
+}
+@keyframes dts-cur-anillo {
+    0%   { opacity: 0;  transform: scale(.2); }
+    40%  { opacity: 1;  transform: scale(1); }
+    100% { opacity: 0;  transform: scale(2.4); }
+}
+@keyframes dts-cur-caja {
+    0%, 100% { opacity: 0;  transform: scale(1.1); }
+    40%      { opacity: 1;  transform: scale(1); }
+    74%      { opacity: 1;  transform: scale(1.04); }
+}
+
+/* ============ 200. IMUSE — Partitura que respira con el tempo ============
+   Escena propia del efecto "iMUSE" (sección Day of Tentacle). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-imuse {
+    background: radial-gradient(130% 100% at 50% 56%,
+                #062141 0%, #041426 58%, #01060c 100%);
+}
+.tema-imuse::after {
+    background: radial-gradient(circle at 50% 56%,
+                #f0f8ff 0%, #a8d8ff 24%, rgba(61,122,214,0) 68%);
+}
+.dts-imu-pentagrama {
+    position: absolute;
+    left: 6%; top: 50%;
+    width: 88%; height: 24vmin;
+    margin-top: -12vmin;
+    background: repeating-linear-gradient(180deg,
+                rgba(240, 248, 255, .8) 0 .35vmin,
+                transparent .35vmin 5vmin);
+    opacity: 0;
+    animation: dts-imu-pentagrama 1.7s ease-out both;
+}
+.dts-imu-nota {
+    position: absolute;
+    width: 10vmin; height: 7.4vmin;
+    border-radius: 50%;
+    background: linear-gradient(150deg, #f0f8ff, #3d7ad6 80%);
+    opacity: 0;
+    animation: dts-imu-nota 1.7s ease-in-out both;
+}
+.dts-imu-nota-a { left: 20%; top: 44%; }
+.dts-imu-nota-b { left: 46%; top: 54%; animation-delay: .2s; }
+.dts-imu-nota-c { left: 70%; top: 38%; animation-delay: .4s; }
+.dts-imu-onda {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 62vmin; height: 62vmin;
+    margin: -31vmin 0 0 -31vmin;
+    border: .5vmin solid rgba(168, 216, 255, .9);
+    border-radius: 50%;
+    opacity: 0;
+    animation: dts-imu-onda 1.7s ease-out .3s both;
+}
+@keyframes dts-imu-pentagrama {
+    0%   { opacity: 0;  transform: scaleX(.3); transform-origin: 0 50%; }
+    34%  { opacity: 1;  transform: scaleX(1); transform-origin: 0 50%; }
+    78%  { opacity: 1;  transform: scaleX(1); transform-origin: 0 50%; }
+    100% { opacity: 0;  transform: scaleX(1); transform-origin: 0 50%; }
+}
+@keyframes dts-imu-nota {
+    0%   { opacity: 0;  transform: translateY(26vmin) rotate(-30deg); }
+    36%  { opacity: 1;  transform: translateY(0) rotate(0deg); }
+    76%  { opacity: 1;  transform: translateY(-6vmin) rotate(14deg); }
+    100% { opacity: 0;  transform: translateY(-26vmin) rotate(40deg); }
+}
+@keyframes dts-imu-onda {
+    0%   { opacity: 0;  transform: scale(.3); }
+    38%  { opacity: 1;  transform: scale(1); }
+    100% { opacity: 0;  transform: scale(2.2); }
+}
+
+/* ============ 201. PARADOJA — Tiempo que se descolora ============
+   Escena propia del efecto "Paradoja" (sección Day of Tentacle). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-paradoja {
+    background: radial-gradient(130% 100% at 50% 50%,
+                #150a3a 0%, #0b0520 58%, #030109 100%);
+}
+.tema-paradoja::after {
+    background: radial-gradient(circle at 50% 50%,
+                #f6f1ff 0%, #cbb4ff 24%, rgba(106,73,216,0) 68%);
+}
+.dts-par-esfera {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 64vmin; height: 64vmin;
+    margin: -32vmin 0 0 -32vmin;
+    border: .55vmin solid rgba(203, 180, 255, .9);
+    background:
+        repeating-conic-gradient(from 0deg at 50% 50%,
+            rgba(203, 180, 255, .45) 0 3deg, rgba(203,180,255,0) 3deg 30deg);
+    -webkit-clip-path: circle(50%);
+    clip-path: circle(50%);
+    opacity: 0;
+    animation: dts-par-esfera 1.7s linear both;
+}
+.dts-par-aguja {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: .8vmin; height: 30vmin;
+    margin-left: -.4vmin;
+    background: linear-gradient(180deg, #f6f1ff, rgba(106, 73, 216, 0));
+    transform-origin: 50% 0;
+    opacity: 0;
+    animation: dts-par-aguja 1.7s linear .2s both;
+}
+.dts-par-bucle {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 84vmin; height: 84vmin;
+    margin: -42vmin 0 0 -42vmin;
+    border: .5vmin dashed rgba(246, 241, 255, .85);
+    border-radius: 50%;
+    opacity: 0;
+    animation: dts-par-bucle 1.7s ease-in-out .3s both;
+}
+@keyframes dts-par-esfera {
+    0%   { opacity: 0;  transform: rotate(0deg) scale(.4); }
+    34%  { opacity: 1;  transform: rotate(320deg) scale(1); }
+    100% { opacity: 0;  transform: rotate(1080deg) scale(1.5); }
+}
+@keyframes dts-par-aguja {
+    0%   { opacity: 0;  transform: rotate(0deg); }
+    34%  { opacity: 1;  transform: rotate(420deg); }
+    76%  { opacity: 1;  transform: rotate(-240deg); }
+    100% { opacity: 0;  transform: rotate(760deg); }
+}
+@keyframes dts-par-bucle {
+    0%, 100% { opacity: 0;  transform: scale(.6) rotate(0deg); }
+    42%      { opacity: 1;  transform: scale(1) rotate(90deg); }
+    74%      { opacity: .7; transform: scale(1.16) rotate(-70deg); }
+}
+
+/* ============ 202. DAVE MILLER — El héroe cruza la puerta ============
+   Escena propia del efecto "Dave Miller" (sección Maniac Mansion). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-dave {
+    background: radial-gradient(130% 100% at 50% 46%,
+                #06301a 0%, #04170c 58%, #010603 100%);
+}
+.tema-dave::after {
+    background: radial-gradient(circle at 50% 46%,
+                #fbfff0 0%, #d8ff9a 24%, rgba(87,194,106,0) 68%);
+}
+.mms-dav-haz {
+    position: absolute;
+    left: -10%; top: -10%;
+    width: 120%; height: 120%;
+    background: conic-gradient(from 250deg at 26% 18%,
+                rgba(255, 246, 200, .85) 0 14deg,
+                rgba(255, 246, 200, .18) 34deg,
+                rgba(255, 246, 200, 0) 64deg);
+    opacity: 0;
+    animation: mms-dav-haz 1.7s ease-out both;
+}
+.mms-dav-puerta {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 46vmin; height: 62vmin;
+    margin: -31vmin 0 0 -23vmin;
+    background: linear-gradient(180deg, #0c3a20, #04170c);
+    border: .55vmin solid rgba(216, 255, 154, .9);
+    -webkit-clip-path: polygon(0 22%, 50% 0, 100% 22%, 100% 100%, 0 100%);
+    clip-path: polygon(0 22%, 50% 0, 100% 22%, 100% 100%, 0 100%);
+    opacity: 0;
+    animation: mms-dav-puerta 1.7s ease-in-out both;
+}
+.mms-dav-paso {
+    position: absolute;
+    left: 50%; bottom: 12%;
+    width: 14vmin; height: 34vmin;
+    margin-left: -7vmin;
+    background: linear-gradient(180deg, #d8ff9a, #57c26a 60%, #06301a);
+    -webkit-clip-path: polygon(38% 0, 62% 0, 74% 34%, 68% 62%, 84% 100%,
+                               56% 100%, 50% 64%, 44% 100%, 16% 100%,
+                               32% 62%, 26% 34%);
+    clip-path: polygon(38% 0, 62% 0, 74% 34%, 68% 62%, 84% 100%, 56% 100%,
+                       50% 64%, 44% 100%, 16% 100%, 32% 62%, 26% 34%);
+    opacity: 0;
+    animation: mms-dav-paso 1.7s ease-in .25s both;
+}
+@keyframes mms-dav-haz {
+    0%   { opacity: 0;  transform: rotate(-14deg); }
+    34%  { opacity: 1;  transform: rotate(4deg); }
+    76%  { opacity: .8; transform: rotate(-6deg); }
+    100% { opacity: 0;  transform: rotate(10deg); }
+}
+@keyframes mms-dav-puerta {
+    0%   { opacity: 0;  transform: scale(.72); }
+    36%  { opacity: 1;  transform: scale(1); }
+    78%  { opacity: 1;  transform: scale(1.06); }
+    100% { opacity: 0;  transform: scale(1.4); }
+}
+@keyframes mms-dav-paso {
+    0%   { opacity: 0;  transform: translateY(38%) scale(.7); }
+    38%  { opacity: 1;  transform: translateY(0) scale(1); }
+    74%  { opacity: 1;  transform: translateY(-8%) scale(1.05); }
+    100% { opacity: 0;  transform: translateY(-34%) scale(.8); }
+}
+
+/* ============ 203. SANDY PANTZ — La novia a la luz de una vela ============
+   Escena propia del efecto "Sandy Pantz" (sección Maniac Mansion). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-sandy {
+    background: radial-gradient(130% 100% at 50% 58%,
+                #2b1604 0%, #160c02 58%, #060301 100%);
+}
+.tema-sandy::after {
+    background: radial-gradient(circle at 50% 58%,
+                #fff3d0 0%, #ffcf7a 24%, rgba(196,110,30,0) 68%);
+}
+.mms-san-vela {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 9vmin; height: 30vmin;
+    margin: -4vmin 0 0 -4.5vmin;
+    background: linear-gradient(180deg, #fff6dc 0%, #ffe7a8 40%, #b97b3a 100%);
+    -webkit-clip-path: polygon(30% 0, 70% 0, 100% 100%, 0 100%);
+    clip-path: polygon(30% 0, 70% 0, 100% 100%, 0 100%);
+    opacity: 0;
+    animation: mms-san-vela 1.7s ease-out both;
+}
+.mms-san-llama {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 12vmin; height: 16vmin;
+    margin: -26vmin 0 0 -6vmin;
+    background: radial-gradient(circle at 50% 70%,
+                #fffbe8 0%, #ffcf5a 44%, rgba(255, 140, 40, .2) 76%,
+                rgba(255, 140, 40, 0) 100%);
+    -webkit-clip-path: polygon(50% 0, 84% 56%, 72% 100%, 28% 100%, 16% 56%);
+    clip-path: polygon(50% 0, 84% 56%, 72% 100%, 28% 100%, 16% 56%);
+    opacity: 0;
+    animation: mms-san-llama 1.7s ease-in-out .2s both;
+}
+.mms-san-halo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 66vmin; height: 66vmin;
+    margin: -33vmin 0 0 -33vmin;
+    background: radial-gradient(circle, rgba(255, 207, 122, .55) 0 40%,
+                rgba(255, 140, 40, 0) 72%);
+    border-radius: 50%;
+    opacity: 0;
+    animation: mms-san-halo 1.7s ease-in-out .35s both;
+}
+@keyframes mms-san-vela {
+    0%   { opacity: 0;  transform: translateY(24%); }
+    34%  { opacity: 1;  transform: translateY(0); }
+    100% { opacity: 0;  transform: translateY(-14%); }
+}
+@keyframes mms-san-llama {
+    0%   { opacity: 0;  transform: scale(.3) rotate(-8deg); }
+    36%  { opacity: 1;  transform: scale(1) rotate(4deg); }
+    58%  { opacity: .7; transform: scale(.9) rotate(-5deg); }
+    76%  { opacity: 1;  transform: scale(1.1) rotate(6deg); }
+    100% { opacity: 0;  transform: scale(1.5) rotate(0deg); }
+}
+@keyframes mms-san-halo {
+    0%   { opacity: 0;  transform: scale(.4); }
+    40%  { opacity: 1;  transform: scale(1); }
+    68%  { opacity: .6; transform: scale(1.25); }
+    100% { opacity: 0;  transform: scale(1.9); }
+}
+
+/* ============ 204. RAZOR — Grito de cantante punk ============
+   Escena propia del efecto "Razor" (sección Maniac Mansion). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-razor {
+    background: radial-gradient(130% 100% at 50% 34%,
+                #2b0410 0%, #18020a 58%, #060103 100%);
+}
+.tema-razor::after {
+    background: radial-gradient(circle at 50% 34%,
+                #fff0f3 0%, #ff5c7a 24%, rgba(163,18,63,0) 68%);
+}
+.mms-raz-cono {
+    position: absolute;
+    top: -8%;
+    width: 34vmin; height: 78vmin;
+    background: linear-gradient(180deg, rgba(255, 92, 122, .75),
+                rgba(255, 92, 122, 0));
+    -webkit-clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%);
+    clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%);
+    opacity: 0;
+    animation: mms-raz-cono 1.7s ease-out both;
+}
+.mms-raz-cono-a { left: 8%; transform: rotate(-12deg); }
+.mms-raz-cono-b { right: 8%; background: linear-gradient(180deg,
+                  rgba(120, 190, 255, .7), rgba(120, 190, 255, 0));
+                  animation-delay: .25s; }
+.mms-raz-altavoz {
+    position: absolute;
+    left: 50%; bottom: 6%;
+    width: 30vmin; height: 42vmin;
+    margin-left: -15vmin;
+    background: linear-gradient(180deg, #23101a, #0a0407);
+    border: .5vmin solid rgba(255, 92, 122, .9);
+    -webkit-clip-path: polygon(6% 0, 94% 0, 100% 100%, 0 100%);
+    clip-path: polygon(6% 0, 94% 0, 100% 100%, 0 100%);
+    opacity: 0;
+    animation: mms-raz-altavoz 1.7s ease-in-out .2s both;
+}
+.mms-raz-onda {
+    position: absolute;
+    left: 50%; bottom: 24%;
+    width: 58vmin; height: 34vmin;
+    margin-left: -29vmin;
+    background: radial-gradient(ellipse at 50% 50%,
+                rgba(255, 240, 243, .85) 0 18%, rgba(255,92,122,0) 62%);
+    opacity: 0;
+    animation: mms-raz-onda 1.7s ease-in-out .35s both;
+}
+@keyframes mms-raz-cono {
+    0%   { opacity: 0;  transform: scaleX(.3); }
+    34%  { opacity: 1;  transform: scaleX(1); }
+    76%  { opacity: .7; transform: scaleX(1.2); }
+    100% { opacity: 0;  transform: scaleX(1.5); }
+}
+@keyframes mms-raz-altavoz {
+    0%   { opacity: 0;  transform: translateY(30%) scale(.8); }
+    36%  { opacity: 1;  transform: translateY(0) scale(1); }
+    62%  { opacity: 1;  transform: translateY(-3%) scale(1.06); }
+    100% { opacity: 0;  transform: translateY(14%) scale(1.14); }
+}
+@keyframes mms-raz-onda {
+    0%   { opacity: 0;  transform: scale(.3); }
+    40%  { opacity: 1;  transform: scale(1); }
+    100% { opacity: 0;  transform: scale(2.3); }
+}
+
+/* ============ 205. SYD — Ecualizador de la banda ============
+   Escena propia del efecto "Syd" (sección Maniac Mansion). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-syd {
+    background: radial-gradient(130% 100% at 50% 50%,
+                #03203a 0%, #041427 58%, #01060d 100%);
+}
+.tema-syd::after {
+    background: radial-gradient(circle at 50% 50%,
+                #eefaff 0%, #9fe4ff 24%, rgba(43,127,214,0) 68%);
+}
+.mms-syd-barra {
+    position: absolute;
+    bottom: 10%;
+    width: 7vmin;
+    background: linear-gradient(180deg, #ff5c7a 0 22%, #ffd35a 22% 56%,
+                #9fe4ff 56% 100%);
+    opacity: 0;
+    animation: mms-syd-barra 1.7s ease-in-out both;
+}
+.mms-syd-b1 { left: 18%; height: 44%; }
+.mms-syd-b2 { left: 33%; height: 66%; animation-delay: .12s; }
+.mms-syd-b3 { left: 48%; height: 34%; animation-delay: .24s; }
+.mms-syd-b4 { left: 63%; height: 58%; animation-delay: .36s; }
+.mms-syd-b5 { left: 78%; height: 46%; animation-delay: .48s; }
+.mms-syd-nota {
+    position: absolute;
+    left: 50%; top: 26%;
+    width: 16vmin; height: 12vmin;
+    margin-left: -8vmin;
+    background: radial-gradient(circle at 34% 74%, #eefaff 0 32%,
+                rgba(238, 250, 255, 0) 36%),
+                radial-gradient(circle at 76% 62%, #eefaff 0 32%,
+                rgba(238, 250, 255, 0) 36%);
+    opacity: 0;
+    animation: mms-syd-nota 1.7s ease-in-out .3s both;
+}
+@keyframes mms-syd-barra {
+    0%   { opacity: 0;  transform: scaleY(.1); transform-origin: 50% 100%; }
+    34%  { opacity: 1;  transform: scaleY(1); transform-origin: 50% 100%; }
+    56%  { opacity: 1;  transform: scaleY(.7); transform-origin: 50% 100%; }
+    78%  { opacity: 1;  transform: scaleY(1.15); transform-origin: 50% 100%; }
+    100% { opacity: 0;  transform: scaleY(.3); transform-origin: 50% 100%; }
+}
+@keyframes mms-syd-nota {
+    0%   { opacity: 0;  transform: translateY(30vmin) rotate(-16deg); }
+    38%  { opacity: 1;  transform: translateY(0) rotate(4deg); }
+    76%  { opacity: 1;  transform: translateY(-14vmin) rotate(18deg); }
+    100% { opacity: 0;  transform: translateY(-34vmin) rotate(34deg); }
+}
+
+/* ============ 206. WEIRD ED — Gallinas del gallinero ============
+   Escena propia del efecto "Weird Ed" (sección Maniac Mansion). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-pollo {
+    background: radial-gradient(130% 100% at 50% 54%,
+                #4a2400 0%, #2a1400 58%, #0a0500 100%);
+}
+.tema-pollo::after {
+    background: radial-gradient(circle at 50% 54%,
+                #fffceb 0%, #ffe066 24%, rgba(224,154,30,0) 68%);
+}
+.mms-pol-gallina {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 44vmin; height: 40vmin;
+    margin: -20vmin 0 0 -22vmin;
+    background: linear-gradient(150deg, #fffceb, #ffe066 56%, #e09a1e);
+    -webkit-clip-path: polygon(64% 0, 84% 16%, 76% 40%, 96% 52%,
+                               78% 96%, 26% 100%, 4% 66%, 20% 24%);
+    clip-path: polygon(64% 0, 84% 16%, 76% 40%, 96% 52%, 78% 96%, 26% 100%,
+                       4% 66%, 20% 24%);
+    opacity: 0;
+    animation: mms-pol-gallina 1.7s ease-in-out both;
+}
+.mms-pol-pico {
+    position: absolute;
+    left: 66%; top: 34%;
+    width: 14vmin; height: 10vmin;
+    background: linear-gradient(120deg, #ff8a3c, #c14a00);
+    -webkit-clip-path: polygon(0 30%, 100% 0, 100% 100%, 0 72%);
+    clip-path: polygon(0 30%, 100% 0, 100% 100%, 0 72%);
+    opacity: 0;
+    animation: mms-pol-pico 1.7s ease-in-out .3s both;
+}
+.mms-pol-huevo {
+    position: absolute;
+    width: 12vmin; height: 15vmin;
+    background: radial-gradient(circle at 34% 30%, #fffceb, #e09a1e 84%);
+    border-radius: 50% 50% 46% 46%;
+    opacity: 0;
+    animation: mms-pol-huevo 1.7s ease-out .2s both;
+}
+.mms-pol-huevo-a { left: 16%; bottom: 14%; }
+.mms-pol-huevo-b { right: 18%; bottom: 10%; animation-delay: .4s; }
+@keyframes mms-pol-gallina {
+    0%   { opacity: 0;  transform: translateY(34%) scale(.6); }
+    36%  { opacity: 1;  transform: translateY(0) scale(1); }
+    58%  { opacity: 1;  transform: translateY(-6%) scale(1.08); }
+    78%  { opacity: 1;  transform: translateY(2%) scale(.97); }
+    100% { opacity: 0;  transform: translateY(26%) scale(1.3); }
+}
+@keyframes mms-pol-pico {
+    0%, 100% { opacity: 0;  transform: scaleX(.2); transform-origin: 0 50%; }
+    38%      { opacity: 1;  transform: scaleX(1); transform-origin: 0 50%; }
+    62%      { opacity: 1;  transform: scaleX(1.3); transform-origin: 0 50%; }
+}
+@keyframes mms-pol-huevo {
+    0%   { opacity: 0;  transform: translateY(-30vmin) rotate(-40deg); }
+    40%  { opacity: 1;  transform: translateY(0) rotate(0deg); }
+    76%  { opacity: 1;  transform: translateY(-4vmin) rotate(12deg); }
+    100% { opacity: 0;  transform: translateY(12vmin) rotate(34deg); }
+}
+
+/* ============ 207. LABORATORIO — Chispas del artilugio de Fred ============
+   Escena propia del efecto "Laboratorio" (sección Maniac Mansion). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-laboratorio {
+    background: radial-gradient(130% 100% at 50% 46%,
+                #022b26 0%, #04140f 58%, #010504 100%);
+}
+.tema-laboratorio::after {
+    background: radial-gradient(circle at 50% 46%,
+                #eafffb 0%, #7dffd4 24%, rgba(23,165,140,0) 68%);
+}
+.mms-lab-matraz {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 40vmin; height: 56vmin;
+    margin: -14vmin 0 0 -20vmin;
+    background: linear-gradient(180deg, rgba(125, 255, 212, .55),
+                rgba(2, 43, 38, .92));
+    -webkit-clip-path: polygon(38% 0, 62% 0, 62% 34%, 96% 92%,
+                               84% 100%, 16% 100%, 4% 92%, 38% 34%);
+    clip-path: polygon(38% 0, 62% 0, 62% 34%, 96% 92%, 84% 100%, 16% 100%,
+                       4% 92%, 38% 34%);
+    opacity: 0;
+    animation: mms-lab-matraz 1.7s ease-out both;
+}
+.mms-lab-burbujas {
+    position: absolute;
+    left: 50%; bottom: 14%;
+    width: 26vmin; height: 22vmin;
+    margin-left: -13vmin;
+    background: radial-gradient(circle at 30% 70%, rgba(234, 255, 251, .9)
+                0 12%, rgba(234,255,251,0) 14%),
+                radial-gradient(circle at 68% 40%, rgba(125, 255, 212, .85)
+                0 10%, rgba(125,255,212,0) 12%),
+                radial-gradient(circle at 48% 84%, rgba(234, 255, 251, .8)
+                0 8%, rgba(234,255,251,0) 10%);
+    opacity: 0;
+    animation: mms-lab-burbujas 1.7s ease-in .3s both;
+}
+.mms-lab-arco {
+    position: absolute;
+    left: 14%; top: 16%;
+    width: 72%; height: 44%;
+    background: repeating-linear-gradient(74deg,
+                rgba(234, 255, 251, .9) 0 .6vmin, transparent .6vmin 7vmin);
+    -webkit-clip-path: polygon(0 70%, 24% 20%, 46% 62%, 70% 8%, 100% 54%,
+                               100% 74%, 68% 34%, 46% 88%, 22% 46%, 0 92%);
+    clip-path: polygon(0 70%, 24% 20%, 46% 62%, 70% 8%, 100% 54%, 100% 74%,
+                       68% 34%, 46% 88%, 22% 46%, 0 92%);
+    opacity: 0;
+    animation: mms-lab-arco 1.7s steps(4, end) both;
+}
+@keyframes mms-lab-matraz {
+    0%   { opacity: 0;  transform: scale(.5) rotate(-8deg); }
+    36%  { opacity: 1;  transform: scale(1) rotate(0deg); }
+    76%  { opacity: 1;  transform: scale(1.07) rotate(4deg); }
+    100% { opacity: 0;  transform: scale(1.45) rotate(10deg); }
+}
+@keyframes mms-lab-burbujas {
+    0%   { opacity: 0;  transform: translateY(14vmin); }
+    38%  { opacity: 1;  transform: translateY(0); }
+    74%  { opacity: .8; transform: translateY(-6vmin); }
+    100% { opacity: 0;  transform: translateY(-18vmin); }
+}
+@keyframes mms-lab-arco {
+    0%, 100% { opacity: 0;  transform: translateX(-4%); }
+    34%      { opacity: 1;  transform: translateX(3%); }
+    58%      { opacity: .4; transform: translateX(-3%); }
+    80%      { opacity: 1;  transform: translateX(5%); }
+}
+
+/* ============ 208. CONTROL MENTAL — El artilugio gira en los glifos ============
+   Escena propia del efecto "Control mental" (sección Maniac Mansion). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-cerebro {
+    background: radial-gradient(130% 100% at 50% 50%,
+                #04170c 0%, #05100a 58%, #010503 100%);
+}
+.tema-cerebro::after {
+    background: radial-gradient(circle at 50% 50%,
+                #eaffee 0%, #8dff9b 24%, rgba(60,190,110,0) 68%);
+}
+.mms-cer-dientes {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 74vmin; height: 74vmin;
+    margin: -37vmin 0 0 -37vmin;
+    background: repeating-conic-gradient(from 0deg at 50% 50%,
+                rgba(141, 255, 155, .8) 0 8deg, rgba(4, 23, 12, 0) 8deg 30deg);
+    -webkit-clip-path: circle(50%);
+    clip-path: circle(50%);
+    opacity: 0;
+    animation: mms-cer-dientes 1.7s linear both;
+}
+.mms-cer-nucleo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 34vmin; height: 34vmin;
+    margin: -17vmin 0 0 -17vmin;
+    background: radial-gradient(circle at 38% 34%, #ffd9b0, #8dff9b 62%,
+                #06361a);
+    border-radius: 50%;
+    opacity: 0;
+    animation: mms-cer-nucleo 1.7s ease-in-out both;
+}
+.mms-cer-onda {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 46vmin; height: 46vmin;
+    margin: -23vmin 0 0 -23vmin;
+    border: .5vmin solid rgba(234, 255, 238, .9);
+    border-radius: 50%;
+    opacity: 0;
+    animation: mms-cer-onda 1.7s ease-out .3s both;
+}
+@keyframes mms-cer-dientes {
+    0%   { opacity: 0;  transform: rotate(0deg) scale(.5); }
+    34%  { opacity: 1;  transform: rotate(120deg) scale(1); }
+    78%  { opacity: .9; transform: rotate(300deg) scale(1.1); }
+    100% { opacity: 0;  transform: rotate(520deg) scale(1.5); }
+}
+@keyframes mms-cer-nucleo {
+    0%   { opacity: 0;  transform: scale(.3); }
+    36%  { opacity: 1;  transform: scale(1); }
+    64%  { opacity: 1;  transform: scale(1.16); }
+    100% { opacity: 0;  transform: scale(1.7); }
+}
+@keyframes mms-cer-onda {
+    0%   { opacity: 0;  transform: scale(.4); }
+    40%  { opacity: 1;  transform: scale(1); }
+    100% { opacity: 0;  transform: scale(2.6); }
+}
+
+/* ============ 209. ZOMBIS — La cuadrilla del patio ============
+   Escena propia del efecto "Zombis" (sección Maniac Mansion). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-zombi {
+    background: radial-gradient(130% 100% at 50% 56%,
+                #10240f 0%, #091607 58%, #030602 100%);
+}
+.tema-zombi::after {
+    background: radial-gradient(circle at 50% 56%,
+                #dff4dd 0%, #a6e8a0 24%, rgba(80,170,90,0) 68%);
+}
+.mms-zom-niebla {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 78%,
+                rgba(214, 244, 210, .75) 0 34%, rgba(120, 190, 130, 0) 74%);
+    opacity: 0;
+    animation: mms-zom-niebla 1.7s ease-out both;
+}
+.mms-zom-lapida {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 40vmin; height: 52vmin;
+    margin: -26vmin 0 0 -20vmin;
+    background: linear-gradient(180deg, #2c4a2a, #0b160a);
+    border: .5vmin solid rgba(166, 232, 160, .85);
+    -webkit-clip-path: polygon(0 26%, 50% 0, 100% 26%, 100% 100%, 0 100%);
+    clip-path: polygon(0 26%, 50% 0, 100% 26%, 100% 100%, 0 100%);
+    opacity: 0;
+    animation: mms-zom-lapida 1.7s ease-in-out both;
+}
+.mms-zom-mano {
+    position: absolute;
+    left: 50%; bottom: 8%;
+    width: 26vmin; height: 30vmin;
+    margin-left: -13vmin;
+    background: linear-gradient(180deg, #a6e8a0, #2c4a2a 74%);
+    -webkit-clip-path: polygon(34% 100%, 22% 46%, 30% 8%, 44% 8%, 46% 46%,
+                               56% 0, 68% 4%, 66% 48%, 78% 14%, 90% 20%,
+                               78% 56%, 74% 100%);
+    clip-path: polygon(34% 100%, 22% 46%, 30% 8%, 44% 8%, 46% 46%, 56% 0,
+                       68% 4%, 66% 48%, 78% 14%, 90% 20%, 78% 56%, 74% 100%);
+    opacity: 0;
+    animation: mms-zom-mano 1.7s ease-in .3s both;
+}
+@keyframes mms-zom-niebla {
+    0%   { opacity: 0;  transform: translateY(16%); }
+    36%  { opacity: 1;  transform: translateY(0); }
+    76%  { opacity: .8; transform: translateY(-6%); }
+    100% { opacity: 0;  transform: translateY(-16%); }
+}
+@keyframes mms-zom-lapida {
+    0%   { opacity: 0;  transform: translateY(34%) rotate(-5deg); }
+    36%  { opacity: 1;  transform: translateY(0) rotate(0deg); }
+    74%  { opacity: 1;  transform: translateY(-4%) rotate(3deg); }
+    100% { opacity: 0;  transform: translateY(-18%) rotate(7deg); }
+}
+@keyframes mms-zom-mano {
+    0%   { opacity: 0;  transform: translateY(60%) scale(.6); }
+    40%  { opacity: 1;  transform: translateY(0) scale(1); }
+    66%  { opacity: 1;  transform: translateY(-14%) scale(1.08); }
+    100% { opacity: 0;  transform: translateY(-46%) scale(.9); }
+}
+
+/* ============ 210. MOTOSIERRA — Zumbido de la sierra ============
+   Escena propia del efecto "Motosierra" (sección Maniac Mansion). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-motosierra {
+    background: radial-gradient(130% 100% at 50% 52%,
+                #071733 0%, #050e1e 58%, #01040a 100%);
+}
+.tema-motosierra::after {
+    background: radial-gradient(circle at 50% 52%,
+                #ffffff 0%, #d7e6ff 24%, rgba(74,127,214,0) 68%);
+}
+.mms-mot-cuerpo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 62vmin; height: 34vmin;
+    margin: -17vmin 0 0 -31vmin;
+    background: linear-gradient(160deg, #d7e6ff 0%, #4a7fd6 54%, #071733);
+    -webkit-clip-path: polygon(0 34%, 62% 24%, 76% 0, 100% 0, 92% 46%,
+                               100% 100%, 54% 100%, 40% 74%, 0 78%);
+    clip-path: polygon(0 34%, 62% 24%, 76% 0, 100% 0, 92% 46%, 100% 100%,
+                       54% 100%, 40% 74%, 0 78%);
+    opacity: 0;
+    animation: mms-mot-cuerpo 1.7s ease-in-out both;
+}
+.mms-mot-dientes {
+    position: absolute;
+    left: 6%; top: 44%;
+    width: 84%; height: 8vmin;
+    background: repeating-linear-gradient(90deg,
+                rgba(255, 255, 255, .95) 0 3vmin, rgba(7, 23, 51, 0) 3vmin 6vmin);
+    -webkit-clip-path: polygon(0 0, 100% 0, 96% 100%, 92% 30%, 88% 100%,
+                               84% 30%, 80% 100%, 76% 30%, 72% 100%,
+                               68% 30%, 64% 100%, 60% 30%, 56% 100%,
+                               52% 30%, 48% 100%, 44% 30%, 40% 100%,
+                               36% 30%, 32% 100%, 28% 30%, 24% 100%,
+                               20% 30%, 16% 100%, 12% 30%, 8% 100%,
+                               4% 30%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 96% 100%, 92% 30%, 88% 100%, 84% 30%,
+                       80% 100%, 76% 30%, 72% 100%, 68% 30%, 64% 100%,
+                       60% 30%, 56% 100%, 52% 30%, 48% 100%, 44% 30%,
+                       40% 100%, 36% 30%, 32% 100%, 28% 30%, 24% 100%,
+                       20% 30%, 16% 100%, 12% 30%, 8% 100%, 4% 30%, 0 100%);
+    opacity: 0;
+    animation: mms-mot-dientes 1.7s linear .2s both;
+}
+.mms-mot-vibra {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg,
+                rgba(215, 230, 255, .5) 0 1vmin, transparent 1vmin 5vmin);
+    opacity: 0;
+    animation: mms-mot-vibra 1.7s steps(6, end) both;
+}
+@keyframes mms-mot-cuerpo {
+    0%   { opacity: 0;  transform: translateX(-40%) rotate(-8deg); }
+    36%  { opacity: 1;  transform: translateX(0) rotate(0deg); }
+    74%  { opacity: 1;  transform: translateX(6%) rotate(4deg); }
+    100% { opacity: 0;  transform: translateX(34%) rotate(10deg); }
+}
+@keyframes mms-mot-dientes {
+    0%   { opacity: 0;  background-position: 0 0; }
+    34%  { opacity: 1;  background-position: -6vmin 0; }
+    76%  { opacity: 1;  background-position: -18vmin 0; }
+    100% { opacity: 0;  background-position: -30vmin 0; }
+}
+@keyframes mms-mot-vibra {
+    0%, 100% { opacity: 0;  transform: translateY(0); }
+    34%      { opacity: .9; transform: translateY(-.8vmin); }
+    56%      { opacity: .4; transform: translateY(.8vmin); }
+    78%      { opacity: .9; transform: translateY(-.5vmin); }
+}
+
+/* ============ 211. GALLINA DE GOMA — Con polea y todo ============
+   Escena propia del efecto "Gallina de goma" (sección Maniac Mansion). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-gallina {
+    background: radial-gradient(130% 100% at 50% 48%,
+                #4a3200 0%, #241800 58%, #080500 100%);
+}
+.tema-gallina::after {
+    background: radial-gradient(circle at 50% 48%,
+                #fffdf2 0%, #ffe34f 24%, rgba(224,154,30,0) 68%);
+}
+.mms-gal-polea {
+    position: absolute;
+    left: 50%; top: 14%;
+    width: 34vmin; height: 34vmin;
+    margin-left: -17vmin;
+    background: radial-gradient(circle at 40% 36%, #fffdf2, #e09a1e 66%,
+                #4a2400);
+    border: 1.4vmin solid rgba(74, 36, 0, .95);
+    border-radius: 50%;
+    opacity: 0;
+    animation: mms-gal-polea 1.7s ease-in-out both;
+}
+.mms-gal-cuerda {
+    position: absolute;
+    left: 50%; top: 30%;
+    width: 2vmin; height: 56%;
+    margin-left: -1vmin;
+    background: linear-gradient(180deg, rgba(255, 253, 242, .95),
+                rgba(224, 154, 30, .5));
+    opacity: 0;
+    animation: mms-gal-cuerda 1.7s linear .2s both;
+}
+.mms-gal-pollo {
+    position: absolute;
+    left: 50%; bottom: 6%;
+    width: 38vmin; height: 40vmin;
+    margin-left: -19vmin;
+    background: linear-gradient(150deg, #ffe34f, #ff7a3c 62%, #7a2400);
+    -webkit-clip-path: polygon(56% 0, 82% 12%, 74% 34%, 96% 46%,
+                               74% 92%, 30% 100%, 6% 70%, 22% 26%);
+    clip-path: polygon(56% 0, 82% 12%, 74% 34%, 96% 46%, 74% 92%, 30% 100%,
+                       6% 70%, 22% 26%);
+    opacity: 0;
+    animation: mms-gal-pollo 1.7s ease-in-out .3s both;
+}
+@keyframes mms-gal-polea {
+    0%   { opacity: 0;  transform: rotate(0deg) scale(.5); }
+    36%  { opacity: 1;  transform: rotate(0deg) scale(1); }
+    66%  { opacity: 1;  transform: rotate(180deg) scale(1.06); }
+    100% { opacity: 0;  transform: rotate(360deg) scale(1.4); }
+}
+@keyframes mms-gal-cuerda {
+    0%   { opacity: 0;  transform: scaleY(.2); transform-origin: 50% 0; }
+    38%  { opacity: 1;  transform: scaleY(1); transform-origin: 50% 0; }
+    74%  { opacity: 1;  transform: scaleY(1.12); transform-origin: 50% 0; }
+    100% { opacity: 0;  transform: scaleY(.4); transform-origin: 50% 0; }
+}
+@keyframes mms-gal-pollo {
+    0%   { opacity: 0;  transform: translateY(-40%) rotate(-24deg) scale(.6); }
+    40%  { opacity: 1;  transform: translateY(0) rotate(0deg) scale(1); }
+    70%  { opacity: 1;  transform: translateY(6%) rotate(8deg) scale(1.06); }
+    100% { opacity: 0;  transform: translateY(30%) rotate(22deg) scale(1.3); }
+}
+
+/* ============ 212. REACTOR — Alarma de critidad ============
+   Escena propia del efecto "Reactor" (sección Maniac Mansion). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-nuclear {
+    background: radial-gradient(130% 100% at 50% 50%,
+                #3d0505 0%, #1e0202 58%, #070101 100%);
+}
+.tema-nuclear::after {
+    background: radial-gradient(circle at 50% 50%,
+                #ffe9a8 0%, #ff5a3c 24%, rgba(180,20,10,0) 68%);
+}
+.mms-nuc-nucleo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 56vmin; height: 56vmin;
+    margin: -28vmin 0 0 -28vmin;
+    background: radial-gradient(circle at 38% 34%, #fff0a0 0 16%,
+                #ff8a3c 42%, #7a0f05 76%, rgba(61, 5, 5, 0) 100%);
+    border-radius: 50%;
+    opacity: 0;
+    animation: mms-nuc-nucleo 1.7s ease-in-out both;
+}
+.mms-nuc-aviso {
+    position: absolute;
+    left: -4%; top: 42%;
+    width: 108%; height: 14vmin;
+    background: repeating-linear-gradient(45deg,
+                rgba(255, 212, 71, .9) 0 4vmin, rgba(30, 2, 2, .9) 4vmin 8vmin);
+    opacity: 0;
+    animation: mms-nuc-aviso 1.7s steps(4, end) both;
+}
+.mms-nuc-contador {
+    position: absolute;
+    left: 14%; bottom: 12%;
+    width: 72%; height: 5vmin;
+    background: linear-gradient(90deg, #ff3b30, #ffd447);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    opacity: 0;
+    animation: mms-nuc-contador 1.7s linear .2s both;
+}
+@keyframes mms-nuc-nucleo {
+    0%   { opacity: 0;  transform: scale(.3); }
+    36%  { opacity: 1;  transform: scale(1); }
+    58%  { opacity: .7; transform: scale(1.14); }
+    78%  { opacity: 1;  transform: scale(.96); }
+    100% { opacity: 0;  transform: scale(1.7); }
+}
+@keyframes mms-nuc-aviso {
+    0%, 100% { opacity: 0;  transform: translateX(0); }
+    34%      { opacity: 1;  transform: translateX(4%); }
+    66%      { opacity: 1;  transform: translateX(-4%); }
+}
+@keyframes mms-nuc-contador {
+    0%   { opacity: 0;  transform: scaleX(1); transform-origin: 0 50%; }
+    36%  { opacity: 1;  transform: scaleX(1); transform-origin: 0 50%; }
+    82%  { opacity: 1;  transform: scaleX(.1); transform-origin: 0 50%; }
+    100% { opacity: 0;  transform: scaleX(.1); transform-origin: 0 50%; }
+}
+
+/* ============ 213. FUENTE — Salpicaduras del patio ============
+   Escena propia del efecto "Fuente" (sección Maniac Mansion). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-fuente {
+    background: radial-gradient(130% 100% at 50% 62%,
+                #04263a 0%, #061724 58%, #010609 100%);
+}
+.tema-fuente::after {
+    background: radial-gradient(circle at 50% 62%,
+                #f4fdff 0%, #9fe6ff 24%, rgba(42,143,196,0) 68%);
+}
+.mms-fue-taza {
+    position: absolute;
+    left: 50%; bottom: 8%;
+    width: 74vmin; height: 30vmin;
+    margin-left: -37vmin;
+    background: linear-gradient(180deg, rgba(159, 230, 255, .55),
+                rgba(4, 38, 58, .95));
+    -webkit-clip-path: polygon(0 0, 100% 0, 88% 100%, 12% 100%);
+    clip-path: polygon(0 0, 100% 0, 88% 100%, 12% 100%);
+    opacity: 0;
+    animation: mms-fue-taza 1.7s ease-out both;
+}
+.mms-fue-chorro {
+    position: absolute;
+    left: 50%; top: 14%;
+    width: 8vmin; height: 66%;
+    margin-left: -4vmin;
+    background: linear-gradient(180deg, rgba(244, 253, 255, .95),
+                rgba(42, 143, 196, .25));
+    -webkit-clip-path: polygon(38% 0, 62% 0, 100% 100%, 0 100%);
+    clip-path: polygon(38% 0, 62% 0, 100% 100%, 0 100%);
+    opacity: 0;
+    animation: mms-fue-chorro 1.7s ease-in-out .2s both;
+}
+.mms-fue-gota {
+    position: absolute;
+    width: 7vmin; height: 9vmin;
+    background: radial-gradient(circle at 34% 30%, #f4fdff, #2a8fc4 84%);
+    border-radius: 50% 50% 46% 46%;
+    opacity: 0;
+    animation: mms-fue-gota 1.7s ease-out .35s both;
+}
+.mms-fue-gota-a { left: 26%; top: 34%; }
+.mms-fue-gota-b { right: 26%; top: 28%; animation-delay: .5s; }
+@keyframes mms-fue-taza {
+    0%   { opacity: 0;  transform: translateY(30%); }
+    34%  { opacity: 1;  transform: translateY(0); }
+    100% { opacity: 0;  transform: translateY(-10%); }
+}
+@keyframes mms-fue-chorro {
+    0%   { opacity: 0;  transform: scaleY(.2); transform-origin: 50% 100%; }
+    36%  { opacity: 1;  transform: scaleY(1); transform-origin: 50% 100%; }
+    66%  { opacity: 1;  transform: scaleY(1.14); transform-origin: 50% 100%; }
+    100% { opacity: 0;  transform: scaleY(.4); transform-origin: 50% 100%; }
+}
+@keyframes mms-fue-gota {
+    0%   { opacity: 0;  transform: translateY(24vmin) scale(.5); }
+    40%  { opacity: 1;  transform: translateY(0) scale(1); }
+    76%  { opacity: .9; transform: translateY(-6vmin) scale(1.1); }
+    100% { opacity: 0;  transform: translateY(18vmin) scale(.7); }
+}
+
+/* ============ 214. PUERTA — El porche de la mansión ============
+   Escena propia del efecto "Puerta" (sección Maniac Mansion). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-puerta {
+    background: radial-gradient(130% 100% at 50% 46%,
+                #3a2208 0%, #1d1104 58%, #070401 100%);
+}
+.tema-puerta::after {
+    background: radial-gradient(circle at 50% 46%,
+                #fffaf0 0%, #f6e2b8 24%, rgba(185,138,60,0) 68%);
+}
+.mms-pue-marco {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 54vmin; height: 74vmin;
+    margin: -37vmin 0 0 -27vmin;
+    background: linear-gradient(172deg, #f6e2b8 0%, #b98a3c 56%, #3a2208);
+    -webkit-clip-path: polygon(0 24%, 50% 0, 100% 24%, 100% 100%, 0 100%);
+    clip-path: polygon(0 24%, 50% 0, 100% 24%, 100% 100%, 0 100%);
+    opacity: 0;
+    animation: mms-pue-marco 1.7s ease-out both;
+}
+.mms-pue-hoja {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 24vmin; height: 56vmin;
+    margin: -28vmin 0 0 -12vmin;
+    background: linear-gradient(100deg, #4a2c0c 0%, #2a1704 60%,
+                rgba(42, 23, 4, .35));
+    -webkit-clip-path: polygon(0 0, 100% 8%, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 8%, 100% 100%, 0 100%);
+    transform-origin: 0 50%;
+    opacity: 0;
+    animation: mms-pue-hoja 1.7s ease-in-out .2s both;
+}
+.mms-pue-luz {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 18%,
+                rgba(255, 242, 192, .7) 0 26%, rgba(185,138,60,0) 70%);
+    opacity: 0;
+    animation: mms-pue-luz 1.7s ease-in-out .35s both;
+}
+@keyframes mms-pue-marco {
+    0%   { opacity: 0;  transform: scale(.7); }
+    34%  { opacity: 1;  transform: scale(1); }
+    100% { opacity: 0;  transform: scale(1.35); }
+}
+@keyframes mms-pue-hoja {
+    0%   { opacity: 0;  transform: perspective(60vmin) rotateY(0deg); }
+    36%  { opacity: 1;  transform: perspective(60vmin) rotateY(-46deg); }
+    76%  { opacity: 1;  transform: perspective(60vmin) rotateY(-24deg); }
+    100% { opacity: 0;  transform: perspective(60vmin) rotateY(-72deg); }
+}
+@keyframes mms-pue-luz {
+    0%   { opacity: 0;  transform: scale(.5); }
+    40%  { opacity: 1;  transform: scale(1); }
+    68%  { opacity: .5; transform: scale(1.2); }
+    100% { opacity: 0;  transform: scale(1.7); }
+}
+
+/* ============ 215. BIBLIOTECA — El pasadizo secreto ============
+   Escena propia del efecto "Biblioteca" (sección Maniac Mansion). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-biblioteca {
+    background: radial-gradient(130% 100% at 50% 50%,
+                #2a1a06 0%, #171006 58%, #060401 100%);
+}
+.tema-biblioteca::after {
+    background: radial-gradient(circle at 50% 50%,
+                #fff6e2 0%, #e8c48a 24%, rgba(150,110,50,0) 68%);
+}
+.mms-bib-balda {
+    position: absolute;
+    left: 6%; right: 6%;
+    height: 6vmin;
+    background: linear-gradient(180deg, #d8a05a, #4a2c0c);
+    opacity: 0;
+    animation: mms-bib-balda 1.7s ease-out both;
+}
+.mms-bib-balda-a { top: 24%; }
+.mms-bib-balda-b { top: 52%; animation-delay: .15s; }
+.mms-bib-balda-c { top: 78%; animation-delay: .3s; }
+.mms-bib-libro {
+    position: absolute;
+    left: 46%; top: 26%;
+    width: 9vmin; height: 26vmin;
+    background: linear-gradient(160deg, #ff5c5c, #6a1010);
+    -webkit-clip-path: polygon(0 0, 100% 6%, 100% 100%, 0 94%);
+    clip-path: polygon(0 0, 100% 6%, 100% 100%, 0 94%);
+    opacity: 0;
+    animation: mms-bib-libro 1.7s ease-in-out .4s both;
+}
+.mms-bib-piedra {
+    position: absolute;
+    left: 56%; top: 20%;
+    width: 34%; height: 66%;
+    background: repeating-linear-gradient(0deg,
+                rgba(185, 194, 200, .85) 0 6vmin, rgba(40, 44, 48, .9) 6vmin 7vmin),
+                repeating-linear-gradient(90deg,
+                rgba(185, 194, 200, .5) 0 8vmin, rgba(40, 44, 48, .9) 8vmin 9vmin);
+    -webkit-clip-path: polygon(0 0, 100% 4%, 100% 100%, 0 96%);
+    clip-path: polygon(0 0, 100% 4%, 100% 100%, 0 96%);
+    opacity: 0;
+    animation: mms-bib-piedra 1.7s ease-in-out .55s both;
+}
+@keyframes mms-bib-balda {
+    0%   { opacity: 0;  transform: translateX(-8%); }
+    34%  { opacity: 1;  transform: translateX(0); }
+    100% { opacity: 0;  transform: translateX(6%); }
+}
+@keyframes mms-bib-libro {
+    0%   { opacity: 0;  transform: rotate(0deg) translateX(0); }
+    38%  { opacity: 1;  transform: rotate(0deg) translateX(0); }
+    74%  { opacity: 1;  transform: rotate(-64deg) translateX(-40%); }
+    100% { opacity: 0;  transform: rotate(-78deg) translateX(-64%); }
+}
+@keyframes mms-bib-piedra {
+    0%   { opacity: 0;  transform: scaleX(.2); transform-origin: 100% 50%; }
+    40%  { opacity: 1;  transform: scaleX(1); transform-origin: 100% 50%; }
+    76%  { opacity: 1;  transform: scaleX(1); transform-origin: 100% 50%; }
+    100% { opacity: 0;  transform: scaleX(.4); transform-origin: 100% 50%; }
+}
+
+/* ============ 216. EXPLOSIÓN — El laboratorio se va por los aires ============
+   Escena propia del efecto "Explosión" (sección Maniac Mansion). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-explosion {
+    background: radial-gradient(130% 100% at 50% 52%,
+                #4a1000 0%, #230700 58%, #080200 100%);
+}
+.tema-explosion::after {
+    background: radial-gradient(circle at 50% 52%,
+                #fffdf2 0%, #ffd88a 24%, rgba(255,106,31,0) 68%);
+}
+.mms-exp-onda {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 70vmin; height: 70vmin;
+    margin: -35vmin 0 0 -35vmin;
+    border: .7vmin solid rgba(255, 216, 138, .95);
+    border-radius: 50%;
+    opacity: 0;
+    animation: mms-exp-onda 1.7s ease-out both;
+}
+.mms-exp-destello {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 52%,
+                rgba(255, 253, 242, .95) 0 14%,
+                rgba(255, 216, 138, .5) 32%, rgba(255,106,31,0) 62%);
+    opacity: 0;
+    animation: mms-exp-destello 1.7s steps(1, end) both;
+}
+.mms-exp-esquirla {
+    position: absolute;
+    left: 50%; top: 52%;
+    width: 76vmin; height: 44vmin;
+    margin: -22vmin 0 0 -38vmin;
+    background: linear-gradient(150deg, #ff6a1f, #4a1000);
+    -webkit-clip-path: polygon(0 46%, 22% 30%, 30% 52%, 52% 24%, 62% 50%,
+                               84% 28%, 100% 44%, 84% 68%, 60% 54%,
+                               44% 74%, 20% 58%);
+    clip-path: polygon(0 46%, 22% 30%, 30% 52%, 52% 24%, 62% 50%, 84% 28%,
+                       100% 44%, 84% 68%, 60% 54%, 44% 74%, 20% 58%);
+    opacity: 0;
+    animation: mms-exp-esquirla 1.7s ease-out .18s both;
+}
+@keyframes mms-exp-onda {
+    0%   { opacity: 0;  transform: scale(.1); }
+    34%  { opacity: 1;  transform: scale(1); }
+    100% { opacity: 0;  transform: scale(2.6); }
+}
+@keyframes mms-exp-destello {
+    0%, 100% { opacity: 0; }
+    34%      { opacity: 1; }
+    46%      { opacity: 0; }
+    58%      { opacity: .8; }
+    68%      { opacity: 0; }
+}
+@keyframes mms-exp-esquirla {
+    0%   { opacity: 0;  transform: scale(.3); }
+    36%  { opacity: 1;  transform: scale(1); }
+    74%  { opacity: .7; transform: scale(1.2); }
+    100% { opacity: 0;  transform: scale(1.7); }
+}
+
+/* ============ 217. BESO FINAL — Final feliz de Dave y Sandy ============
+   Escena propia del efecto "Beso final" (sección Maniac Mansion). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-beso {
+    background: radial-gradient(130% 100% at 50% 56%,
+                #4a0024 0%, #22000f 58%, #070103 100%);
+}
+.tema-beso::after {
+    background: radial-gradient(circle at 50% 56%,
+                #ffd9e6 0%, #ff7fae 24%, rgba(224,26,79,0) 68%);
+}
+.mms-bes-telon {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 34%;
+    background: linear-gradient(90deg, #7a0030, #2b0011);
+    opacity: 0;
+    animation: mms-bes-telon 1.7s ease-in-out both;
+}
+.mms-bes-telon-a { left: 0; }
+.mms-bes-telon-b { right: 0; transform-origin: 100% 50%; }
+.mms-bes-corazon {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 40vmin; height: 36vmin;
+    margin: -18vmin 0 0 -20vmin;
+    background: linear-gradient(160deg, #ffd9e6, #ff7fae 52%, #e01a4f);
+    -webkit-clip-path: polygon(50% 100%, 8% 52%, 4% 30%, 18% 10%, 40% 6%,
+                               50% 24%, 60% 6%, 82% 10%, 96% 30%, 92% 52%);
+    clip-path: polygon(50% 100%, 8% 52%, 4% 30%, 18% 10%, 40% 6%, 50% 24%,
+                       60% 6%, 82% 10%, 96% 30%, 92% 52%);
+    opacity: 0;
+    animation: mms-bes-corazon 1.7s ease-in-out .3s both;
+}
+.mms-bes-brillo {
+    position: absolute;
+    left: 50%; top: 42%;
+    width: 62vmin; height: 46vmin;
+    margin: -23vmin 0 0 -31vmin;
+    background: radial-gradient(circle, rgba(255, 217, 230, .85) 0 26%,
+                rgba(255, 127, 174, 0) 66%);
+    opacity: 0;
+    animation: mms-bes-brillo 1.7s ease-out .45s both;
+}
+@keyframes mms-bes-telon {
+    0%   { opacity: 0;  transform: translateX(-40%); }
+    34%  { opacity: 1;  transform: translateX(0); }
+    76%  { opacity: 1;  transform: translateX(8%); }
+    100% { opacity: 0;  transform: translateX(26%); }
+}
+@keyframes mms-bes-corazon {
+    0%   { opacity: 0;  transform: scale(.3) rotate(-14deg); }
+    38%  { opacity: 1;  transform: scale(1) rotate(0deg); }
+    64%  { opacity: 1;  transform: scale(1.18) rotate(6deg); }
+    100% { opacity: 0;  transform: scale(1.6) rotate(14deg); }
+}
+@keyframes mms-bes-brillo {
+    0%   { opacity: 0;  transform: scale(.4); }
+    40%  { opacity: 1;  transform: scale(1); }
+    100% { opacity: 0;  transform: scale(2.1); }
+}
+
+/* ============ 218. MANSIÓN — De noche, con las luces puestas ============
+   Escena propia del efecto "Mansión" (sección Maniac Mansion). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-mansion {
+    background: radial-gradient(130% 100% at 50% 58%,
+                #060a1e 0%, #04071a 58%, #010206 100%);
+}
+.tema-mansion::after {
+    background: radial-gradient(circle at 50% 58%,
+                #f5f9ff 0%, #a8c8ff 24%, rgba(56,86,156,0) 68%);
+}
+.mms-man-luna {
+    position: absolute;
+    left: 12%; top: 12%;
+    width: 26vmin; height: 26vmin;
+    background: radial-gradient(circle at 38% 34%, #f5f9ff 0 56%,
+                rgba(168, 200, 255, .35) 74%, rgba(168,200,255,0) 100%);
+    border-radius: 50%;
+    opacity: 0;
+    animation: mms-man-luna 1.7s ease-out both;
+}
+.mms-man-casa {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 66vmin; height: 62vmin;
+    margin: -24vmin 0 0 -33vmin;
+    background: linear-gradient(180deg, #101a3a, #04060f);
+    -webkit-clip-path: polygon(0 34%, 50% 0, 100% 34%, 100% 100%, 0 100%);
+    clip-path: polygon(0 34%, 50% 0, 100% 34%, 100% 100%, 0 100%);
+    border: .5vmin solid rgba(207, 227, 255, .9);
+    opacity: 0;
+    animation: mms-man-casa 1.7s ease-in-out both;
+}
+.mms-man-ventana {
+    position: absolute;
+    width: 9vmin; height: 11vmin;
+    background: linear-gradient(170deg, #ffe9a8, #ffb347);
+    opacity: 0;
+    animation: mms-man-ventana 1.7s steps(1, end) both;
+}
+.mms-man-v1 { left: 34%; top: 52%; }
+.mms-man-v2 { left: 56%; top: 52%; animation-delay: .25s; }
+.mms-man-v3 { left: 45%; top: 68%; animation-delay: .5s; }
+@keyframes mms-man-luna {
+    0%   { opacity: 0;  transform: translateY(-16%) scale(.6); }
+    38%  { opacity: 1;  transform: translateY(0) scale(1); }
+    100% { opacity: 0;  transform: translateY(10%) scale(1.25); }
+}
+@keyframes mms-man-casa {
+    0%   { opacity: 0;  transform: scale(.62); }
+    36%  { opacity: 1;  transform: scale(1); }
+    76%  { opacity: 1;  transform: scale(1.06); }
+    100% { opacity: 0;  transform: scale(1.5); }
+}
+@keyframes mms-man-ventana {
+    0%, 100% { opacity: 0; }
+    38%      { opacity: 1; }
+    64%      { opacity: .3; }
+    82%      { opacity: 1; }
+}
+
+/* ============ 219. SUSTO — ¡De repente! ============
+   Escena propia del efecto "Susto" (sección Maniac Mansion). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-susto {
+    background: radial-gradient(130% 100% at 50% 46%,
+                #041a26 0%, #050f18 58%, #010406 100%);
+}
+.tema-susto::after {
+    background: radial-gradient(circle at 50% 46%,
+                #ffffff 0%, #b8f4ff 24%, rgba(43,166,196,0) 68%);
+}
+.mms-sus-destello {
+    position: absolute;
+    inset: 0;
+    background: repeating-conic-gradient(from 0deg at 50% 46%,
+                rgba(255, 255, 255, .9) 0 5deg, rgba(4, 26, 38, 0) 5deg 18deg);
+    opacity: 0;
+    animation: mms-sus-destello 1.7s steps(3, end) both;
+}
+.mms-sus-dientes {
+    position: absolute;
+    left: -2%; right: -2%; top: 18%;
+    height: 30%;
+    background: linear-gradient(180deg, #e9fbff, #2ba6c4);
+    -webkit-clip-path: polygon(0 0, 100% 0, 96% 100%, 90% 34%, 84% 100%,
+                               78% 34%, 72% 100%, 66% 34%, 60% 100%,
+                               54% 34%, 48% 100%, 42% 34%, 36% 100%,
+                               30% 34%, 24% 100%, 18% 34%, 12% 100%,
+                               6% 34%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 96% 100%, 90% 34%, 84% 100%, 78% 34%,
+                       72% 100%, 66% 34%, 60% 100%, 54% 34%, 48% 100%,
+                       42% 34%, 36% 100%, 30% 34%, 24% 100%, 18% 34%,
+                       12% 100%, 6% 34%, 0 100%);
+    opacity: 0;
+    animation: mms-sus-dientes 1.7s ease-in-out both;
+}
+.mms-sus-mano {
+    position: absolute;
+    left: 50%; bottom: -6%;
+    width: 44vmin; height: 52vmin;
+    margin-left: -22vmin;
+    background: linear-gradient(180deg, #e9fbff, #0f4a5c 76%);
+    -webkit-clip-path: polygon(24% 100%, 8% 54%, 16% 14%, 32% 16%,
+                               34% 56%, 40% 4%, 56% 6%, 56% 58%,
+                               64% 10%, 78% 16%, 74% 60%, 86% 30%,
+                               98% 40%, 84% 78%, 76% 100%);
+    clip-path: polygon(24% 100%, 8% 54%, 16% 14%, 32% 16%, 34% 56%, 40% 4%,
+                       56% 6%, 56% 58%, 64% 10%, 78% 16%, 74% 60%,
+                       86% 30%, 98% 40%, 84% 78%, 76% 100%);
+    opacity: 0;
+    animation: mms-sus-mano 1.7s ease-out .3s both;
+}
+@keyframes mms-sus-destello {
+    0%, 100% { opacity: 0;  transform: scale(.5); }
+    34%      { opacity: 1;  transform: scale(1); }
+    52%      { opacity: .3; transform: scale(1.15); }
+    74%      { opacity: .9; transform: scale(1.3); }
+}
+@keyframes mms-sus-dientes {
+    0%   { opacity: 0;  transform: translateY(-40%); }
+    36%  { opacity: 1;  transform: translateY(0); }
+    76%  { opacity: 1;  transform: translateY(6%); }
+    100% { opacity: 0;  transform: translateY(34%); }
+}
+@keyframes mms-sus-mano {
+    0%   { opacity: 0;  transform: translateY(70%) scale(.7); }
+    40%  { opacity: 1;  transform: translateY(0) scale(1); }
+    70%  { opacity: 1;  transform: translateY(-12%) scale(1.07); }
+    100% { opacity: 0;  transform: translateY(-46%) scale(.85); }
+}
+
+/* ============ 220. RADIO — Sintonizando la banda ============
+   Escena propia del efecto "Radio" (sección Maniac Mansion). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-radio {
+    background: radial-gradient(130% 100% at 50% 50%,
+                #022b2e 0%, #041416 58%, #010505 100%);
+}
+.tema-radio::after {
+    background: radial-gradient(circle at 50% 50%,
+                #f2fffb 0%, #7dffd4 24%, rgba(23,143,140,0) 68%);
+}
+.mms-rad-cuerpo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 72vmin; height: 46vmin;
+    margin: -23vmin 0 0 -36vmin;
+    background: linear-gradient(166deg, #0d3a3d, #02181a);
+    border: .5vmin solid rgba(125, 255, 212, .9);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 82%, 94% 100%, 6% 100%, 0 82%);
+    clip-path: polygon(0 0, 100% 0, 100% 82%, 94% 100%, 6% 100%, 0 82%);
+    opacity: 0;
+    animation: mms-rad-cuerpo 1.7s ease-out both;
+}
+.mms-rad-escala {
+    position: absolute;
+    left: 12%; top: 40%;
+    width: 76%; height: 8vmin;
+    background: repeating-linear-gradient(90deg,
+                rgba(242, 255, 251, .95) 0 .4vmin, rgba(0,0,0,0) .4vmin 3vmin);
+    opacity: 0;
+    animation: mms-rad-escala 1.7s linear .2s both;
+}
+.mms-rad-aguja {
+    position: absolute;
+    left: 30%; top: 34%;
+    width: .9vmin; height: 22vmin;
+    background: linear-gradient(180deg, #ff5c5c, #7a0f0f);
+    opacity: 0;
+    animation: mms-rad-aguja 1.7s ease-in-out .4s both;
+}
+.mms-rad-onda {
+    position: absolute;
+    left: 50%; top: 14%;
+    width: 52vmin; height: 34vmin;
+    margin-left: -26vmin;
+    background: radial-gradient(ellipse at 50% 100%,
+                rgba(166, 255, 216, .8) 0 16%, rgba(125,255,212,0) 62%);
+    opacity: 0;
+    animation: mms-rad-onda 1.7s ease-out .5s both;
+}
+@keyframes mms-rad-cuerpo {
+    0%   { opacity: 0;  transform: scale(.6); }
+    34%  { opacity: 1;  transform: scale(1); }
+    100% { opacity: 0;  transform: scale(1.42); }
+}
+@keyframes mms-rad-escala {
+    0%   { opacity: 0;  background-position: 0 0; }
+    34%  { opacity: 1;  background-position: -9vmin 0; }
+    76%  { opacity: 1;  background-position: -24vmin 0; }
+    100% { opacity: 0;  background-position: -40vmin 0; }
+}
+@keyframes mms-rad-aguja {
+    0%   { opacity: 0;  transform: translateX(-60%); }
+    36%  { opacity: 1;  transform: translateX(0); }
+    74%  { opacity: 1;  transform: translateX(210%); }
+    100% { opacity: 0;  transform: translateX(360%); }
+}
+@keyframes mms-rad-onda {
+    0%   { opacity: 0;  transform: scale(.3); }
+    42%  { opacity: 1;  transform: scale(1); }
+    100% { opacity: 0;  transform: scale(2.2); }
+}
+
+/* ============ 221. SETO — El laberinto del jardín ============
+   Escena propia del efecto "Seto" (sección Maniac Mansion). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-seto {
+    background: radial-gradient(130% 100% at 50% 54%,
+                #08320a 0%, #0a1c06 58%, #020501 100%);
+}
+.tema-seto::after {
+    background: radial-gradient(circle at 50% 54%,
+                #f4ffe6 0%, #b6ff7a 24%, rgba(63,160,58,0) 68%);
+}
+.mms-set-bloque {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 36%;
+    background: linear-gradient(100deg, #3fa03a, #0a3a0d 72%);
+    -webkit-clip-path: polygon(0 0, 78% 0, 100% 12%, 84% 30%, 100% 48%,
+                               82% 66%, 100% 84%, 76% 100%, 0 100%);
+    clip-path: polygon(0 0, 78% 0, 100% 12%, 84% 30%, 100% 48%, 82% 66%,
+                       100% 84%, 76% 100%, 0 100%);
+    opacity: 0;
+    animation: mms-set-bloque 1.7s ease-out both;
+}
+.mms-set-bloque-a { left: 0; }
+.mms-set-bloque-b { right: 0; transform: scaleX(-1); }
+.mms-set-camino {
+    position: absolute;
+    left: 50%; bottom: 0;
+    width: 30%; height: 76%;
+    margin-left: -15%;
+    background: linear-gradient(180deg, rgba(244, 255, 230, .55),
+                rgba(182, 255, 122, .12));
+    -webkit-clip-path: polygon(34% 0, 66% 0, 100% 100%, 0 100%);
+    clip-path: polygon(34% 0, 66% 0, 100% 100%, 0 100%);
+    opacity: 0;
+    animation: mms-set-camino 1.7s ease-in-out .2s both;
+}
+.mms-set-hoja {
+    position: absolute;
+    left: 50%; top: 30%;
+    width: 22vmin; height: 22vmin;
+    margin-left: -11vmin;
+    background: radial-gradient(circle at 34% 30%, #f4ffe6, #3fa03a 76%);
+    -webkit-clip-path: polygon(0 50%, 46% 0, 100% 46%, 54% 100%);
+    clip-path: polygon(0 50%, 46% 0, 100% 46%, 54% 100%);
+    opacity: 0;
+    animation: mms-set-hoja 1.7s ease-in-out .4s both;
+}
+@keyframes mms-set-bloque {
+    0%   { opacity: 0;  transform: translateX(-34%); }
+    36%  { opacity: 1;  transform: translateX(0); }
+    76%  { opacity: 1;  transform: translateX(4%); }
+    100% { opacity: 0;  transform: translateX(16%); }
+}
+@keyframes mms-set-camino {
+    0%   { opacity: 0;  transform: scaleY(.2); transform-origin: 50% 100%; }
+    38%  { opacity: 1;  transform: scaleY(1); transform-origin: 50% 100%; }
+    74%  { opacity: .8; transform: scaleY(1.1); transform-origin: 50% 100%; }
+    100% { opacity: 0;  transform: scaleY(.5); transform-origin: 50% 100%; }
+}
+@keyframes mms-set-hoja {
+    0%   { opacity: 0;  transform: scale(.2) rotate(-40deg); }
+    40%  { opacity: 1;  transform: scale(1) rotate(0deg); }
+    74%  { opacity: 1;  transform: scale(1.2) rotate(36deg); }
+    100% { opacity: 0;  transform: scale(1.6) rotate(84deg); }
 }

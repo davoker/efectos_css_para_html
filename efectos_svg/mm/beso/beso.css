@@ -1,0 +1,85 @@
+/* =============================================================
+   BESO FINAL (SVG) · Final feliz de Dave y Sandy
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-beso.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-beso,
+    .ef-beso-mini — fundido de créditos en color
+   ============================================================= */
+.ef-beso {
+    color: #ff7fae;                     /* rosa del beso */
+    -webkit-text-stroke: .7px rgba(70, 0, 34, .9);
+    paint-order: stroke fill;
+    filter: url(#ef-beso);
+    animation: mn-beso-color 6s ease-in-out infinite,
+               mn-beso-fundido 6s ease-in-out infinite;
+}
+.ef-beso:hover,
+.ef-beso:focus-visible {
+    animation-duration: 2.6s, 2.6s;
+}
+.ef-beso-mini {
+    color: #ff7fae;
+    -webkit-text-stroke: .35px rgba(70, 0, 34, .85);
+    paint-order: stroke fill;
+    filter: url(#ef-beso-mini);
+    animation: mn-beso-color 6s ease-in-out infinite,
+               mn-beso-fundido 6s ease-in-out infinite;
+}
+.ef-beso-mini:hover,
+.ef-beso-mini:focus-visible {
+    animation-duration: 2.6s, 2.6s;
+}
+
+/* el color madura y el fundido apaga el texto */
+@keyframes mn-beso-color {
+    0%, 100% { color: #ff7fae; }
+    50%      { color: #e01a4f; }
+    76%      { color: #ff9fc4; }
+}
+@keyframes mn-beso-fundido {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: .55; }
+    78%      { opacity: .92; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-beso,
+    .ef-beso-mini {
+        animation: none;
+        opacity: 1;
+        color: #ff7fae;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-beso,
+    .ef-beso-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

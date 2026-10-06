@@ -1,0 +1,101 @@
+/* =============================================================
+   METECO (SVG) · Roca que se resquebraja
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-meteoro.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-meteoro,
+    .ef-meteoro-mini — grieta que barre + calor interior
+   ============================================================= */
+.ef-meteoro {
+    display: inline-block;
+    color: #ffb26b;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(138deg,
+            rgba(30, 8, 0, .8) 0 5px, rgba(30,8,0,0) 5px 15px),
+        linear-gradient(166deg,
+            #fff1d6 0%, #ffb26b 34%, #d6541c 68%, #4a1204 100%);
+    background-size: 100% 100%;
+    background-position: 0 0, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-meteoro);
+    animation: dt-meteoro-grieta 4.2s ease-in-out infinite,
+               dt-meteoro-calor 2.8s ease-in-out infinite;
+}
+.ef-meteoro:hover,
+.ef-meteoro:focus-visible {
+    animation-duration: 1.8s, 1.2s;
+}
+.ef-meteoro-mini {
+    display: inline-block;
+    color: #ffb26b;
+    background:
+        repeating-linear-gradient(138deg,
+            rgba(30, 8, 0, .75) 0 3px, rgba(30,8,0,0) 3px 11px),
+        linear-gradient(166deg,
+            #fff1d6 0%, #ffb26b 34%, #d6541c 68%, #4a1204 100%);
+    background-size: 100% 100%;
+    background-position: 0 0, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-meteoro-mini);
+    animation: dt-meteoro-grieta 4.2s ease-in-out infinite,
+               dt-meteoro-calor 2.8s ease-in-out infinite;
+}
+.ef-meteoro-mini:hover,
+.ef-meteoro-mini:focus-visible {
+    animation-duration: 1.8s, 1.2s;
+}
+
+/* la cuña de la grieta se abre y el calor late dentro */
+@keyframes dt-meteoro-grieta {
+    0%, 100% { transform: scaleX(1); }
+    50%      { transform: scaleX(.9); }
+}
+@keyframes dt-meteoro-calor {
+    0%, 100% { text-shadow: 0 0 .5em rgba(255, 130, 40, .75); }
+    50%      { text-shadow: 0 0 1.5em rgba(255, 210, 120, 1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-meteoro,
+    .ef-meteoro-mini {
+        animation: none;
+        transform: none;
+        text-shadow: 0 0 .8em rgba(255, 150, 60, .85);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-meteoro,
+    .ef-meteoro-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

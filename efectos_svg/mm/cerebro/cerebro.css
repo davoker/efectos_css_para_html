@@ -1,0 +1,86 @@
+/* =============================================================
+   CONTROL MENTAL (SVG) · El artilugio gira en los glifos
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-cerebro.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-cerebro,
+    .ef-cerebro-mini — giro lento + piel que se vuelve máquina
+   ============================================================= */
+.ef-cerebro {
+    display: inline-block;
+    color: #ffd9b0;                     /* tono de piel */
+    -webkit-text-stroke: .8px rgba(8, 40, 18, .9);
+    paint-order: stroke fill;
+    filter: url(#ef-cerebro);
+    animation: mn-cerebro-gira 6.8s ease-in-out infinite,
+               mn-cerebro-maquina 6.8s ease-in-out infinite;
+}
+.ef-cerebro:hover,
+.ef-cerebro:focus-visible {
+    animation-duration: 3s, 3s;
+}
+.ef-cerebro-mini {
+    display: inline-block;
+    color: #ffd9b0;
+    -webkit-text-stroke: .4px rgba(8, 40, 18, .85);
+    paint-order: stroke fill;
+    filter: url(#ef-cerebro-mini);
+    animation: mn-cerebro-gira 6.8s ease-in-out infinite,
+               mn-cerebro-maquina 6.8s ease-in-out infinite;
+}
+.ef-cerebro-mini:hover,
+.ef-cerebro-mini:focus-visible {
+    animation-duration: 3s, 3s;
+}
+
+/* el bloque gira y la piel se vuelve verde */
+@keyframes mn-cerebro-gira {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    40%      { transform: rotate(-4.5deg) scale(1.06); }
+    74%      { transform: rotate(3.5deg) scale(.97); }
+}
+@keyframes mn-cerebro-maquina {
+    0%, 100% { color: #ffd9b0; }
+    50%      { color: #8dff9b; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-cerebro,
+    .ef-cerebro-mini {
+        animation: none;
+        transform: none;
+        color: #ffd9b0;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-cerebro,
+    .ef-cerebro-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

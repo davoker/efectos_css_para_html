@@ -1,0 +1,84 @@
+/* =============================================================
+   REACTOR (SVG) · Alarma de critidad
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-nuclear.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-nuclear,
+    .ef-nuclear-mini — tono de sirena que salta
+   ============================================================= */
+.ef-nuclear {
+    color: #ffd447;                     /* ámbar de la sirena */
+    -webkit-text-stroke: .7px rgba(60, 8, 0, .92);
+    paint-order: stroke fill;
+    filter: url(#ef-nuclear);
+    animation: mn-nuclear-tono 1.6s steps(1, end) infinite,
+               mn-nuclear-halo 1.6s ease-in-out infinite;
+}
+.ef-nuclear:hover,
+.ef-nuclear:focus-visible {
+    animation-duration: .6s, .6s;
+}
+.ef-nuclear-mini {
+    color: #ffd447;
+    -webkit-text-stroke: .35px rgba(60, 8, 0, .88);
+    paint-order: stroke fill;
+    filter: url(#ef-nuclear-mini);
+    animation: mn-nuclear-tono 1.6s steps(1, end) infinite,
+               mn-nuclear-halo 1.6s ease-in-out infinite;
+}
+.ef-nuclear-mini:hover,
+.ef-nuclear-mini:focus-visible {
+    animation-duration: .6s, .6s;
+}
+
+/* el tono salta y el halo late con la sirena */
+@keyframes mn-nuclear-tono {
+    0%, 100% { color: #ffd447; }
+    33%      { color: #ff3b30; }
+    66%      { color: #fff0a0; }
+}
+@keyframes mn-nuclear-halo {
+    0%, 100% { text-shadow: 0 0 .4em rgba(255, 60, 40, .8); }
+    50%      { text-shadow: 0 0 1.5em rgba(255, 60, 40, 1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-nuclear,
+    .ef-nuclear-mini {
+        animation: none;
+        color: #ffd447;
+        text-shadow: 0 0 .9em rgba(255, 80, 50, .9);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-nuclear,
+    .ef-nuclear-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

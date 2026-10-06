@@ -1,0 +1,114 @@
+/* =============================================================
+   TENTÁCULO VERDE (SVG) · Moco que cruza el texto
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-verde.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-verde,
+    .ef-verde-mini — banda de moco + halo húmedo
+   ============================================================= */
+.ef-verde {
+    color: #8dff9e;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(168deg,
+            rgba(10, 48, 22, .8) 0 4px, rgba(10,48,22,0) 4px 13px),
+        linear-gradient(174deg,
+            #eaffec 0%, #8dff9e 36%, #2fae55 70%, #0d3d1d 100%);
+    -webkit-mask-image: linear-gradient(104deg,
+            rgba(0, 0, 0, .74) 0 44%, #000 56% 76%,
+            rgba(0, 0, 0, .74) 88% 100%);
+    mask-image: linear-gradient(104deg,
+            rgba(0, 0, 0, .74) 0 44%, #000 56% 76%,
+            rgba(0, 0, 0, .74) 88% 100%);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-verde);
+    animation: dt-verde-banda 4.6s ease-in-out infinite,
+               dt-verde-halo 2.6s ease-in-out infinite;
+}
+.ef-verde:hover,
+.ef-verde:focus-visible {
+    animation-duration: 2s, 1.2s;
+}
+.ef-verde-mini {
+    color: #8dff9e;
+    background:
+        repeating-linear-gradient(168deg,
+            rgba(10, 48, 22, .75) 0 3px, rgba(10,48,22,0) 3px 9px),
+        linear-gradient(174deg,
+            #eaffec 0%, #8dff9e 36%, #2fae55 70%, #0d3d1d 100%);
+    -webkit-mask-image: linear-gradient(104deg,
+            rgba(0, 0, 0, .84) 0 44%, #000 56% 76%,
+            rgba(0, 0, 0, .84) 88% 100%);
+    mask-image: linear-gradient(104deg,
+            rgba(0, 0, 0, .84) 0 44%, #000 56% 76%,
+            rgba(0, 0, 0, .84) 88% 100%);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-verde-mini);
+    animation: dt-verde-banda 4.6s ease-in-out infinite,
+               dt-verde-halo 2.6s ease-in-out infinite;
+}
+.ef-verde-mini:hover,
+.ef-verde-mini:focus-visible {
+    animation-duration: 2s, 1.2s;
+}
+
+/* la banda de moco crece y el halo respira */
+@keyframes dt-verde-banda {
+    0%, 100% { -webkit-mask-size: 130% 100%; mask-size: 130% 100%; }
+    50%      { -webkit-mask-size: 330% 100%; mask-size: 330% 100%; }
+}
+@keyframes dt-verde-halo {
+    0%, 100% { text-shadow: 0 0 .4em rgba(80, 240, 120, .55); }
+    50%      { text-shadow: 0 0 1.3em rgba(150, 255, 170, 1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-verde,
+    .ef-verde-mini {
+        animation: none;
+        -webkit-mask-size: 100% 100%;
+        mask-size: 100% 100%;
+        text-shadow: 0 0 .7em rgba(90, 240, 130, .8);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-verde,
+    .ef-verde-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

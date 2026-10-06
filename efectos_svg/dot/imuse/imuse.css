@@ -1,0 +1,97 @@
+/* =============================================================
+   IMUSE (SVG) · Partitura que respira con el tempo
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-imuse.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-imuse,
+    .ef-imuse-mini — compás que abre + pulso de tema
+   ============================================================= */
+.ef-imuse {
+    color: #a8d8ff;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(0, 20, 44, .7) 0 3px, rgba(0,20,44,0) 3px 12px),
+        linear-gradient(172deg,
+            #f0f8ff 0%, #a8d8ff 32%, #3d7ad6 66%, #062141 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .5px rgba(6, 33, 65, .85);
+    paint-order: stroke fill;
+    filter: url(#ef-imuse);
+    animation: dt-imuse-compas 4.8s ease-in-out infinite,
+               dt-imuse-pulso 1.2s steps(1, end) infinite;
+}
+.ef-imuse:hover,
+.ef-imuse:focus-visible {
+    animation-duration: 2.2s, .5s;
+}
+.ef-imuse-mini {
+    color: #a8d8ff;
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(0, 20, 44, .65) 0 2px, rgba(0,20,44,0) 2px 8px),
+        linear-gradient(172deg,
+            #f0f8ff 0%, #a8d8ff 32%, #3d7ad6 66%, #062141 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-imuse-mini);
+    animation: dt-imuse-compas 4.8s ease-in-out infinite,
+               dt-imuse-pulso 1.2s steps(1, end) infinite;
+}
+.ef-imuse-mini:hover,
+.ef-imuse-mini:focus-visible {
+    animation-duration: 2.2s, .5s;
+}
+
+/* el compás abre las notas y el pulso marca el tiempo */
+@keyframes dt-imuse-compas {
+    0%, 100% { letter-spacing: .02em; }
+    50%      { letter-spacing: .34em; }
+}
+@keyframes dt-imuse-pulso {
+    0%, 100% { text-shadow: 0 0 .3em rgba(61, 122, 214, .7); }
+    50%      { text-shadow: 0 0 1.2em rgba(210, 238, 255, 1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-imuse,
+    .ef-imuse-mini {
+        animation: none;
+        letter-spacing: .02em;
+        text-shadow: 0 0 .7em rgba(120, 190, 255, .8);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-imuse,
+    .ef-imuse-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

@@ -1,0 +1,98 @@
+/* =============================================================
+   HAMSTER (SVG) · Rueda que no para
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-hamster.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-hamster,
+    .ef-hamster-mini — radios estroboscópicos + pelaje
+   ============================================================= */
+.ef-hamster {
+    color: #ffe6c2;                     /* respaldo si no hay clip */
+    background:
+        repeating-conic-gradient(from 0deg at 50% 50%,
+            rgba(58, 26, 4, .92) 0 5deg, rgba(58,26,4,0) 5deg 30deg),
+        linear-gradient(174deg,
+            #fffaf0 0%, #ffe6c2 34%, #e8a44a 68%, #5a2c06 100%);
+    background-size: 100% 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .6px rgba(58, 26, 4, .85);
+    paint-order: stroke fill;
+    filter: url(#ef-hamster);
+    animation: dt-hamster-rueda 1.4s steps(6, end) infinite,
+               dt-hamster-late 2.8s ease-in-out infinite;
+}
+.ef-hamster:hover,
+.ef-hamster:focus-visible {
+    animation-duration: .6s, 1.2s;
+}
+.ef-hamster-mini {
+    color: #ffe6c2;
+    background:
+        repeating-conic-gradient(from 0deg at 50% 50%,
+            rgba(58, 26, 4, .9) 0 5deg, rgba(58,26,4,0) 5deg 30deg),
+        linear-gradient(174deg,
+            #fffaf0 0%, #ffe6c2 34%, #e8a44a 68%, #5a2c06 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-hamster-mini);
+    animation: dt-hamster-rueda 1.4s steps(6, end) infinite,
+               dt-hamster-late 2.8s ease-in-out infinite;
+}
+.ef-hamster-mini:hover,
+.ef-hamster-mini:focus-visible {
+    animation-duration: .6s, 1.2s;
+}
+
+/* los radios giran a saltos y la sombra late con la vuelta */
+@keyframes dt-hamster-rueda {
+    0%   { background-size: 100% 100%, 100% 100%; }
+    100% { background-size: 300% 300%, 100% 100%; }
+}
+@keyframes dt-hamster-late {
+    0%, 100% { text-shadow: 0 0 .4em rgba(232, 164, 74, .7); }
+    50%      { text-shadow: 0 0 1.3em rgba(255, 230, 194, 1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-hamster,
+    .ef-hamster-mini {
+        animation: none;
+        background-size: 100% 100%, 100% 100%;
+        text-shadow: 0 0 .7em rgba(232, 164, 74, .8);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-hamster,
+    .ef-hamster-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

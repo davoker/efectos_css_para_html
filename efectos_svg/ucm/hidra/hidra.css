@@ -22,6 +22,7 @@
     .ef-hidra-mini — serpentear por desplazamiento + sesgo
    ============================================================= */
 .ef-hidra {
+    display: inline-block;
     color: #4be08a;                     /* respaldo si no hay clip */
     background:
         repeating-linear-gradient(126deg,
@@ -43,6 +44,7 @@
     animation-duration: 2.2s, 1.4s;
 }
 .ef-hidra-mini {
+    display: inline-block;
     color: #4be08a;
     background:
         repeating-linear-gradient(126deg,

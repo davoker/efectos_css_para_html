@@ -1,0 +1,103 @@
+/* =============================================================
+   SYD (SVG) · Ecualizador de la banda
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-syd.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-syd,
+    .ef-syd-mini — vúmetros que suben + compás que abre
+   ============================================================= */
+.ef-syd {
+    color: #9fe4ff;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(2, 18, 34, .85) 0 6px, rgba(2,18,34,0) 6px 14px),
+        repeating-linear-gradient(90deg,
+            rgba(159, 228, 255, .5) 0 3px, rgba(159,228,255,0) 3px 9px),
+        linear-gradient(174deg,
+            #eefaff 0%, #9fe4ff 34%, #2b7fd6 68%, #03203a 100%);
+    background-size: 100% 14px, 9px 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-syd);
+    animation: mn-syd-vu 3.2s steps(4, end) infinite,
+               mn-syd-compas 1.6s ease-in-out infinite;
+}
+.ef-syd:hover,
+.ef-syd:focus-visible {
+    animation-duration: 1.4s, .7s;
+}
+.ef-syd-mini {
+    color: #9fe4ff;
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(2, 18, 34, .8) 0 4px, rgba(2,18,34,0) 4px 10px),
+        repeating-linear-gradient(90deg,
+            rgba(159, 228, 255, .45) 0 2px, rgba(159,228,255,0) 2px 7px),
+        linear-gradient(174deg,
+            #eefaff 0%, #9fe4ff 34%, #2b7fd6 68%, #03203a 100%);
+    background-size: 100% 10px, 7px 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-syd-mini);
+    animation: mn-syd-vu 3.2s steps(4, end) infinite,
+               mn-syd-compas 1.6s ease-in-out infinite;
+}
+.ef-syd-mini:hover,
+.ef-syd-mini:focus-visible {
+    animation-duration: 1.4s, .7s;
+}
+
+/* las barras suben por escalones y el compás abre la frase */
+@keyframes mn-syd-vu {
+    0%   { background-size: 100% 6px, 9px 100%, 100% 100%; }
+    25%  { background-size: 100% 22px, 9px 100%, 100% 100%; }
+    50%  { background-size: 100% 11px, 9px 100%, 100% 100%; }
+    75%  { background-size: 100% 30px, 9px 100%, 100% 100%; }
+    100% { background-size: 100% 6px, 9px 100%, 100% 100%; }
+}
+@keyframes mn-syd-compas {
+    0%, 100% { word-spacing: .02em; }
+    50%      { word-spacing: .3em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-syd,
+    .ef-syd-mini {
+        animation: none;
+        word-spacing: .02em;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-syd,
+    .ef-syd-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

@@ -1,0 +1,96 @@
+/* =============================================================
+   RAZOR (SVG) · Grito de cantante punk
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-razor.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-razor,
+    .ef-razor-mini — coro que se abre + luces que giran
+   ============================================================= */
+.ef-razor {
+    color: #ff5c7a;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(122deg,
+            rgba(44, 4, 14, .7) 0 5px, rgba(44,4,14,0) 5px 15px),
+        linear-gradient(168deg,
+            #fff0f3 0%, #ff5c7a 34%, #a3123f 68%, #2b0410 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-razor) hue-rotate(0deg) saturate(1);
+    animation: mn-razor-coro 5s ease-in-out infinite,
+               mn-razor-luces 3.6s ease-in-out infinite;
+}
+.ef-razor:hover,
+.ef-razor:focus-visible {
+    animation-duration: 2.2s, 1.6s;
+}
+.ef-razor-mini {
+    color: #ff5c7a;
+    background:
+        repeating-linear-gradient(122deg,
+            rgba(44, 4, 14, .65) 0 3px, rgba(44,4,14,0) 3px 11px),
+        linear-gradient(168deg,
+            #fff0f3 0%, #ff5c7a 34%, #a3123f 68%, #2b0410 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-razor-mini) hue-rotate(0deg) saturate(1);
+    animation: mn-razor-coro 5s ease-in-out infinite,
+               mn-razor-luces 3.6s ease-in-out infinite;
+}
+.ef-razor-mini:hover,
+.ef-razor-mini:focus-visible {
+    animation-duration: 2.2s, 1.6s;
+}
+
+/* el coro se abre y las luces giran */
+@keyframes mn-razor-coro {
+    0%, 100% { word-spacing: 0em; }
+    50%      { word-spacing: .36em; }
+}
+@keyframes mn-razor-luces {
+    0%, 100% { filter: url(#ef-razor) hue-rotate(0deg) saturate(1); }
+    33%      { filter: url(#ef-razor) hue-rotate(78deg) saturate(1.5); }
+    66%      { filter: url(#ef-razor) hue-rotate(-92deg) saturate(1.3); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-razor,
+    .ef-razor-mini {
+        animation: none;
+        word-spacing: 0em;
+        filter: url(#ef-razor) hue-rotate(0deg) saturate(1.2);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-razor,
+    .ef-razor-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

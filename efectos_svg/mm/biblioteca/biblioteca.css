@@ -1,0 +1,84 @@
+/* =============================================================
+   BIBLIOTECA (SVG) · El pasadizo secreto
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-biblioteca.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-biblioteca,
+    .ef-biblioteca-mini — cuero que se vuelve piedra
+   ============================================================= */
+.ef-biblioteca {
+    color: #d8a05a;                     /* cuero de las lomos */
+    -webkit-text-stroke: 1px rgba(24, 12, 4, .9);
+    paint-order: stroke fill;
+    filter: url(#ef-biblioteca);
+    animation: mn-biblioteca-cuero 5.6s ease-in-out infinite,
+               mn-biblioteca-marco 5.6s ease-in-out infinite;
+}
+.ef-biblioteca:hover,
+.ef-biblioteca:focus-visible {
+    animation-duration: 2.4s, 2.4s;
+}
+.ef-biblioteca-mini {
+    color: #d8a05a;
+    -webkit-text-stroke: .5px rgba(24, 12, 4, .85);
+    paint-order: stroke fill;
+    filter: url(#ef-biblioteca-mini);
+    animation: mn-biblioteca-cuero 5.6s ease-in-out infinite,
+               mn-biblioteca-marco 5.6s ease-in-out infinite;
+}
+.ef-biblioteca-mini:hover,
+.ef-biblioteca-mini:focus-visible {
+    animation-duration: 2.4s, 2.4s;
+}
+
+/* el cuero se enfría a piedra y el marco se abre */
+@keyframes mn-biblioteca-cuero {
+    0%, 100% { color: #d8a05a; }
+    50%      { color: #b9c2c8; }
+}
+@keyframes mn-biblioteca-marco {
+    0%, 100% { -webkit-text-stroke-width: 1px; text-stroke-width: 1px; }
+    50%      { -webkit-text-stroke-width: 3.2px; text-stroke-width: 3.2px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-biblioteca,
+    .ef-biblioteca-mini {
+        animation: none;
+        color: #d8a05a;
+        -webkit-text-stroke-width: 1px;
+        text-stroke-width: 1px;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-biblioteca,
+    .ef-biblioteca-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

@@ -1,0 +1,107 @@
+/* =============================================================
+   DOMINAR (SVG) · Retícula del planeta que se recorre
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-dominar.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-dominar,
+    .ef-dominar-mini — meridianos que corren + proclama que titila
+   ============================================================= */
+.ef-dominar {
+    color: #ff7ab8;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, .75) 0 3px, rgba(0,0,0,0) 3px 16px),
+        repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, .65) 0 3px, rgba(0,0,0,0) 3px 22px),
+        linear-gradient(174deg,
+            #fff0f7 0%, #ff7ab8 32%, #c0186a 66%, #34001a 100%);
+    background-size: 100% 16px, 22px 100%, 100% 100%;
+    background-position: 0 0, 0 0, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .5px rgba(52, 0, 26, .85);
+    paint-order: stroke fill;
+    filter: url(#ef-dominar);
+    animation: dt-dominar-reticula 4.4s linear infinite,
+               dt-dominar-titila 2.2s steps(1, end) infinite;
+}
+.ef-dominar:hover,
+.ef-dominar:focus-visible {
+    animation-duration: 2s, 1s;
+}
+.ef-dominar-mini {
+    color: #ff7ab8;
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, .7) 0 2px, rgba(0,0,0,0) 2px 11px),
+        repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, .6) 0 2px, rgba(0,0,0,0) 2px 15px),
+        linear-gradient(174deg,
+            #fff0f7 0%, #ff7ab8 32%, #c0186a 66%, #34001a 100%);
+    background-size: 100% 11px, 15px 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-dominar-mini);
+    animation: dt-dominar-reticula 4.4s linear infinite,
+               dt-dominar-titila 2.2s steps(1, end) infinite;
+}
+.ef-dominar-mini:hover,
+.ef-dominar-mini:focus-visible {
+    animation-duration: 2s, 1s;
+}
+
+/* la retícula corre y la proclama titila */
+@keyframes dt-dominar-reticula {
+    0%   { background-position: 0 0, 0 0, 0 0; }
+    100% { background-position: 0 -16px, -22px 0, 0 0; }
+}
+@keyframes dt-dominar-titila {
+    0%, 100% { opacity: 1; }
+    14%      { opacity: .72; }
+    18%      { opacity: 1; }
+    56%      { opacity: .62; }
+    60%      { opacity: 1; }
+    84%      { opacity: .8; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-dominar,
+    .ef-dominar-mini {
+        animation: none;
+        opacity: 1;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-dominar,
+    .ef-dominar-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

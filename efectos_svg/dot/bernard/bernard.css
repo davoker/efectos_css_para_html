@@ -1,0 +1,101 @@
+/* =============================================================
+   BERNARD (SVG) · Corbata de moño de cómic
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-bernard.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-bernard,
+    .ef-bernard-mini — tinta de cómic que engorda
+   ============================================================= */
+.ef-bernard {
+    color: #ffe08a;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(48deg,
+            rgba(70, 40, 0, .55) 0 6px, rgba(70,40,0,0) 6px 16px),
+        linear-gradient(166deg,
+            #fffaf0 0%, #ffe08a 34%, #ff9c3f 70%, #7a3b06 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px rgba(48, 22, 0, .95);
+    paint-order: stroke fill;
+    filter: url(#ef-bernard);
+    animation: dt-bernard-engorda 3.8s steps(1, end) infinite,
+               dt-bernard-separa 4.8s ease-in-out infinite;
+}
+.ef-bernard:hover,
+.ef-bernard:focus-visible {
+    animation-duration: 1.6s, 2.2s;
+}
+.ef-bernard-mini {
+    color: #ffe08a;
+    background:
+        repeating-linear-gradient(48deg,
+            rgba(70, 40, 0, .5) 0 4px, rgba(70,40,0,0) 4px 11px),
+        linear-gradient(166deg,
+            #fffaf0 0%, #ffe08a 34%, #ff9c3f 70%, #7a3b06 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .5px rgba(48, 22, 0, .95);
+    paint-order: stroke fill;
+    filter: url(#ef-bernard-mini);
+    animation: dt-bernard-engorda 3.8s steps(1, end) infinite,
+               dt-bernard-separa 4.8s ease-in-out infinite;
+}
+.ef-bernard-mini:hover,
+.ef-bernard-mini:focus-visible {
+    animation-duration: 1.6s, 2.2s;
+}
+
+/* la tinta engorda a saltos y las palabras se apartan */
+@keyframes dt-bernard-engorda {
+    0%, 100% { -webkit-text-stroke-width: 1px; }
+    34%      { -webkit-text-stroke-width: 3.4px; }
+    46%      { -webkit-text-stroke-width: 1.4px; }
+    72%      { -webkit-text-stroke-width: 4.2px; }
+}
+@keyframes dt-bernard-separa {
+    0%, 100% { word-spacing: 0em; }
+    50%      { word-spacing: .38em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-bernard,
+    .ef-bernard-mini {
+        animation: none;
+        word-spacing: 0em;
+        -webkit-text-stroke-width: 1.4px;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-bernard,
+    .ef-bernard-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

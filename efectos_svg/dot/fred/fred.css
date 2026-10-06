@@ -1,0 +1,105 @@
+/* =============================================================
+   DR. FRED (SVG) · Chispa de laboratorio
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-fred.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-fred,
+    .ef-fred-mini — descarga a saltos + tinta que salta
+   ============================================================= */
+.ef-fred {
+    display: inline-block;
+    color: #7df3ff;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(114deg,
+            rgba(255, 255, 255, .9) 0 3px, rgba(255,255,255,0) 3px 15px),
+        linear-gradient(170deg,
+            #ffffff 0%, #7df3ff 34%, #1f7fd6 68%, #06263f 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1.2px rgba(6, 38, 63, .95);
+    paint-order: stroke fill;
+    filter: url(#ef-fred);
+    animation: dt-fred-arco 1.9s steps(1, end) infinite,
+               dt-fred-tinta 3.4s steps(1, end) infinite;
+}
+.ef-fred:hover,
+.ef-fred:focus-visible {
+    animation-duration: .8s, 1.4s;
+}
+.ef-fred-mini {
+    display: inline-block;
+    color: #7df3ff;
+    background:
+        repeating-linear-gradient(114deg,
+            rgba(255, 255, 255, .85) 0 2px, rgba(255,255,255,0) 2px 10px),
+        linear-gradient(170deg,
+            #ffffff 0%, #7df3ff 34%, #1f7fd6 68%, #06263f 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .6px rgba(6, 38, 63, .95);
+    paint-order: stroke fill;
+    filter: url(#ef-fred-mini);
+    animation: dt-fred-arco 1.9s steps(1, end) infinite,
+               dt-fred-tinta 3.4s steps(1, end) infinite;
+}
+.ef-fred-mini:hover,
+.ef-fred-mini:focus-visible {
+    animation-duration: .8s, 1.4s;
+}
+
+/* el arco salta de sitio y la tinta engorda a saltos */
+@keyframes dt-fred-arco {
+    0%, 100% { transform: translate(0, 0) skewX(0deg); }
+    25%      { transform: translate(.05em, -.04em) skewX(-4deg); }
+    50%      { transform: translate(-.06em, .03em) skewX(3deg); }
+    75%      { transform: translate(.03em, .05em) skewX(-2deg); }
+}
+@keyframes dt-fred-tinta {
+    0%, 100% { -webkit-text-stroke-width: 1.2px; }
+    30%      { -webkit-text-stroke-width: 3.2px; }
+    52%      { -webkit-text-stroke-width: .6px; }
+    78%      { -webkit-text-stroke-width: 2.6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-fred,
+    .ef-fred-mini {
+        animation: none;
+        transform: none;
+        -webkit-text-stroke-width: 1.2px;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-fred,
+    .ef-fred-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

@@ -1,0 +1,112 @@
+/* =============================================================
+   VERBO SCUMM (SVG) · La barra que salta de verbo en verbo
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-scumm.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-scumm,
+    .ef-scumm-mini — foco de verbos a saltos
+   ============================================================= */
+.ef-scumm {
+    color: #9ff7b0;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, .55) 0 2px, rgba(0,0,0,0) 2px 6px),
+        linear-gradient(90deg,
+            rgba(255, 255, 255, 0) 0 52%,
+            rgba(255, 255, 255, .85) 56% 68%,
+            rgba(255, 255, 255, 0) 72% 100%),
+        linear-gradient(174deg,
+            #f2fff6 0%, #9ff7b0 34%, #2fae5e 70%, #04301a 100%);
+    background-size: 6px 100%, 200px 100%, 100% 100%;
+    background-repeat: repeat, repeat-x, no-repeat;
+    background-position: 0 0, 0 0, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .9px rgba(4, 48, 26, .95);
+    paint-order: stroke fill;
+    filter: url(#ef-scumm);
+    animation: dt-scumm-foco 2.4s steps(4, end) infinite,
+               dt-scumm-seleccion 4.8s ease-in-out infinite;
+}
+.ef-scumm:hover,
+.ef-scumm:focus-visible {
+    animation-duration: 1s, 2.2s;
+}
+.ef-scumm-mini {
+    color: #9ff7b0;
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, .5) 0 2px, rgba(0,0,0,0) 2px 5px),
+        linear-gradient(90deg,
+            rgba(255, 255, 255, 0) 0 52%,
+            rgba(255, 255, 255, .85) 56% 68%,
+            rgba(255, 255, 255, 0) 72% 100%),
+        linear-gradient(174deg,
+            #f2fff6 0%, #9ff7b0 34%, #2fae5e 70%, #04301a 100%);
+    background-size: 5px 100%, 140px 100%, 100% 100%;
+    background-repeat: repeat, repeat-x, no-repeat;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .5px rgba(4, 48, 26, .95);
+    paint-order: stroke fill;
+    filter: url(#ef-scumm-mini);
+    animation: dt-scumm-foco 2.4s steps(4, end) infinite,
+               dt-scumm-seleccion 4.8s ease-in-out infinite;
+}
+.ef-scumm-mini:hover,
+.ef-scumm-mini:focus-visible {
+    animation-duration: 1s, 2.2s;
+}
+
+/* el foco salta una casilla y la selección engorda */
+@keyframes dt-scumm-foco {
+    0%   { background-position: 0 0, 0 0, 0 0; }
+    100% { background-position: 0 0, -200px 0, 0 0; }
+}
+@keyframes dt-scumm-seleccion {
+    0%, 100% { -webkit-text-stroke-width: .9px; }
+    46%      { -webkit-text-stroke-width: 2.8px; }
+    58%      { -webkit-text-stroke-width: 1.2px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-scumm,
+    .ef-scumm-mini {
+        animation: none;
+        -webkit-text-stroke-width: .9px;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-scumm,
+    .ef-scumm-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

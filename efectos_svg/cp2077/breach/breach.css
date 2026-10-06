@@ -36,12 +36,11 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: url(#ef-breach);
-    animation: mv-cp-breach-matriz 2.8s steps(6, end) infinite,
-               mv-cp-breach-base 4.4s steps(4, end) infinite;
+    animation: mv-cp-breach-matriz 4.4s steps(6, end) infinite;
 }
 .ef-breach:hover,
 .ef-breach:focus-visible {
-    animation-duration: 1.2s, 1.8s;
+    animation-duration: 1.8s;
 }
 .ef-breach-mini {
     color: #36f0d0;
@@ -49,31 +48,26 @@
         repeating-linear-gradient(90deg,
             rgba(6, 20, 24, .95) 0 2px, rgba(6,20,24,0) 2px 8px),
         repeating-linear-gradient(180deg,
-            rgba(54, 240, 208, .55) 0 6px, rgba(6,20,24,0) 6px 17px),
+            rgba(54, 240, 208, .55) 0 6px, rgba(6,20,24,0) 6px 13px),
         linear-gradient(174deg,
             #d8fff7 0%, #36f0d0 38%, #0d7a68 72%, #04211d 100%);
-    background-size: 100% 100%, 100% 34px, 100% 100%;
+    background-size: 100% 100%, 100% 52px, 100% 100%;
     background-position: 0 0, 0 0, 0 0;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: url(#ef-breach-mini);
-    animation: mv-cp-breach-matriz 2.8s steps(6, end) infinite,
-               mv-cp-breach-base 4.4s steps(4, end) infinite;
+    animation: mv-cp-breach-matriz 4.4s steps(6, end) infinite;
 }
 .ef-breach-mini:hover,
 .ef-breach-mini:focus-visible {
-    animation-duration: 1.2s, 1.8s;
+    animation-duration: 1.8s;
 }
 
 /* todo salta por cuadros: nunca hay fundido */
 @keyframes mv-cp-breach-matriz {
     0%   { background-position: 0 0, 0 0, 0 0; }
-    100% { background-position: 0 0, 0 -52px, 0 0; }
-}
-@keyframes mv-cp-breach-base {
-    0%   { background-position: 0 0, 0 0, 0 0; }
-    100% { background-position: 11px 0, 0 0, 0 0; }
+    100% { background-position: 11px 0, 0 -52px, 0 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

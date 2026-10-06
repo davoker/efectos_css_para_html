@@ -1,0 +1,103 @@
+/* =============================================================
+   RESIDUOS (SVG) · Fuga que sube por la letra
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-residuos.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-residuos,
+    .ef-residuos-mini — fuga que asciende + matiz que gira
+   ============================================================= */
+.ef-residuos {
+    color: #c9ff5e;                     /* respaldo si no hay clip */
+    background:
+        repeating-radial-gradient(circle at 40% 90%,
+            rgba(10, 34, 0, .7) 0 3px, rgba(10,34,0,0) 3px 13px),
+        linear-gradient(0deg,
+            #d9ff7a 0%, #7ad92e 30%, #2f7a1c 62%, #0b1e06 100%);
+    background-size: 100% 60px, 100% 220%;
+    background-position: 0 0, 0 100%;
+    background-repeat: repeat, no-repeat;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .5px rgba(11, 30, 6, .85);
+    paint-order: stroke fill;
+    filter: url(#ef-residuos) hue-rotate(0deg);
+    animation: dt-residuos-subida 6s ease-in-out infinite,
+               dt-residuos-giro 6s ease-in-out infinite;
+}
+.ef-residuos:hover,
+.ef-residuos:focus-visible {
+    animation-duration: 2.6s, 2.6s;
+}
+.ef-residuos-mini {
+    color: #c9ff5e;
+    background:
+        repeating-radial-gradient(circle at 40% 90%,
+            rgba(10, 34, 0, .65) 0 2px, rgba(10,34,0,0) 2px 9px),
+        linear-gradient(0deg,
+            #d9ff7a 0%, #7ad92e 30%, #2f7a1c 62%, #0b1e06 100%);
+    background-size: 100% 42px, 100% 220%;
+    background-position: 0 0, 0 100%;
+    background-repeat: repeat, no-repeat;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-residuos-mini) hue-rotate(0deg);
+    animation: dt-residuos-subida 6s ease-in-out infinite,
+               dt-residuos-giro 6s ease-in-out infinite;
+}
+.ef-residuos-mini:hover,
+.ef-residuos-mini:focus-visible {
+    animation-duration: 2.6s, 2.6s;
+}
+
+/* el residuo sube y el matiz gira con él */
+@keyframes dt-residuos-subida {
+    0%, 100% { background-position: 0 0, 0 100%; }
+    50%      { background-position: 0 -60px, 0 -20%; }
+}
+@keyframes dt-residuos-giro {
+    0%, 100% { filter: url(#ef-residuos) hue-rotate(-40deg); }
+    50%      { filter: url(#ef-residuos) hue-rotate(70deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-residuos,
+    .ef-residuos-mini {
+        animation: none;
+        filter: url(#ef-residuos) hue-rotate(15deg);
+        background-position: 0 0, 0 -10%;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-residuos,
+    .ef-residuos-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

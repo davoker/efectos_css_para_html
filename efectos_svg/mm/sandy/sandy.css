@@ -1,0 +1,88 @@
+/* =============================================================
+   SANDY PANTZ (SVG) · La novia a la luz de una vela
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-sandy.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-sandy,
+    .ef-sandy-mini — llama que parpadea + halo que salta
+   ============================================================= */
+.ef-sandy {
+    color: #ffe7a8;                     /* cera de la vela */
+    -webkit-text-stroke: .7px rgba(58, 26, 0, .85);
+    paint-order: stroke fill;
+    filter: url(#ef-sandy);
+    animation: mn-sandy-llama 2.8s ease-in-out infinite,
+               mn-sandy-halo 2.8s steps(1, end) infinite;
+}
+.ef-sandy:hover,
+.ef-sandy:focus-visible {
+    animation-duration: 1.2s, 1.2s;
+}
+.ef-sandy-mini {
+    color: #ffe7a8;
+    -webkit-text-stroke: .35px rgba(58, 26, 0, .8);
+    paint-order: stroke fill;
+    filter: url(#ef-sandy-mini);
+    animation: mn-sandy-llama 2.8s ease-in-out infinite,
+               mn-sandy-halo 2.8s steps(1, end) infinite;
+}
+.ef-sandy-mini:hover,
+.ef-sandy-mini:focus-visible {
+    animation-duration: 1.2s, 1.2s;
+}
+
+/* la llama apaga y enciende y el halo salta */
+@keyframes mn-sandy-llama {
+    0%, 100% { opacity: 1; }
+    24%      { opacity: .78; }
+    42%      { opacity: 1; }
+    66%      { opacity: .62; }
+    82%      { opacity: .95; }
+}
+@keyframes mn-sandy-halo {
+    0%, 100% { text-shadow: 0 0 .5em rgba(255, 190, 90, .85); }
+    30%      { text-shadow: 0 0 1.4em rgba(255, 232, 160, 1); }
+    58%      { text-shadow: 0 0 .3em rgba(255, 140, 50, .7); }
+    76%      { text-shadow: 0 0 1em rgba(255, 214, 130, .95); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-sandy,
+    .ef-sandy-mini {
+        animation: none;
+        opacity: 1;
+        text-shadow: 0 0 .9em rgba(255, 205, 120, .9);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-sandy,
+    .ef-sandy-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

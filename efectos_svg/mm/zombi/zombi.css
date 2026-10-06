@@ -1,0 +1,88 @@
+/* =============================================================
+   ZOMBIS (SVG) · La cuadrilla del patio
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-zombi.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-zombi,
+    .ef-zombi-mini — trompiezo que se desenfoca
+   ============================================================= */
+.ef-zombi {
+    color: #a6e8a0;                     /* resplandor de niebla */
+    -webkit-text-stroke: .7px rgba(10, 34, 16, .95);
+    paint-order: stroke fill;
+    filter: url(#ef-zombi) blur(0px);
+    animation: mn-zombi-tambalea 3.4s ease-in-out infinite,
+               mn-zombi-foco 3.4s ease-in-out infinite;
+}
+.ef-zombi:hover,
+.ef-zombi:focus-visible {
+    animation-duration: 1.5s, 1.5s;
+}
+.ef-zombi-mini {
+    color: #a6e8a0;
+    -webkit-text-stroke: .35px rgba(10, 34, 16, .9);
+    paint-order: stroke fill;
+    filter: url(#ef-zombi-mini) blur(0px);
+    animation: mn-zombi-tambalea 3.4s ease-in-out infinite,
+               mn-zombi-foco 3.4s ease-in-out infinite;
+}
+.ef-zombi-mini:hover,
+.ef-zombi-mini:focus-visible {
+    animation-duration: 1.5s, 1.5s;
+}
+
+/* se tambalea y pierde el foco */
+@keyframes mn-zombi-tambalea {
+    0%, 100% { opacity: 1; }
+    26%      { opacity: .58; }
+    48%      { opacity: 1; }
+    72%      { opacity: .66; }
+    88%      { opacity: .94; }
+}
+@keyframes mn-zombi-foco {
+    0%, 100% { filter: url(#ef-zombi) blur(0px); }
+    30%      { filter: url(#ef-zombi) blur(1.5px); }
+    62%      { filter: url(#ef-zombi) blur(.3px); }
+    80%      { filter: url(#ef-zombi) blur(1.1px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-zombi,
+    .ef-zombi-mini {
+        animation: none;
+        opacity: 1;
+        filter: url(#ef-zombi) blur(0px);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-zombi,
+    .ef-zombi-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

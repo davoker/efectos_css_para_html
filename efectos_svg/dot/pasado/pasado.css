@@ -1,0 +1,103 @@
+/* =============================================================
+   PASADO (SVG) · Pluma sobre pergamino
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-pasado.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-pasado,
+    .ef-pasado-mini — pluma que abre + papel que respira
+   ============================================================= */
+.ef-pasado {
+    color: #f0dcae;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(94deg,
+            rgba(92, 62, 18, .5) 0 3px, rgba(92,62,18,0) 3px 9px),
+        repeating-linear-gradient(6deg,
+            rgba(255, 246, 224, .55) 0 2px, rgba(255,246,224,0) 2px 11px),
+        linear-gradient(176deg,
+            #fffaf0 0%, #f0dcae 36%, #c9a35c 68%, #5a3c12 100%);
+    background-size: 100% 100%, 100% 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .6px rgba(60, 38, 8, .8);
+    paint-order: stroke fill;
+    filter: url(#ef-pasado);
+    animation: dt-pasado-pluma 5.4s ease-in-out infinite,
+               dt-pasado-papel 4.2s steps(3, end) infinite;
+}
+.ef-pasado:hover,
+.ef-pasado:focus-visible {
+    animation-duration: 2.4s, 1.8s;
+}
+.ef-pasado-mini {
+    color: #f0dcae;
+    background:
+        repeating-linear-gradient(94deg,
+            rgba(92, 62, 18, .45) 0 2px, rgba(92,62,18,0) 2px 7px),
+        repeating-linear-gradient(6deg,
+            rgba(255, 246, 224, .5) 0 1px, rgba(255,246,224,0) 1px 8px),
+        linear-gradient(176deg,
+            #fffaf0 0%, #f0dcae 36%, #c9a35c 68%, #5a3c12 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-pasado-mini);
+    animation: dt-pasado-pluma 5.4s ease-in-out infinite,
+               dt-pasado-papel 4.2s steps(3, end) infinite;
+}
+.ef-pasado-mini:hover,
+.ef-pasado-mini:focus-visible {
+    animation-duration: 2.4s, 1.8s;
+}
+
+/* la pluma abre el trazo y la trama cambia de escala */
+@keyframes dt-pasado-pluma {
+    0%, 100% { letter-spacing: .02em; }
+    50%      { letter-spacing: .3em; }
+}
+@keyframes dt-pasado-papel {
+    0%   { background-size: 100% 100%, 100% 100%, 100% 100%; }
+    33%  { background-size: 150% 150%, 150% 150%, 100% 100%; }
+    66%  { background-size: 240% 240%, 240% 240%, 100% 100%; }
+    100% { background-size: 100% 100%, 100% 100%, 100% 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-pasado,
+    .ef-pasado-mini {
+        animation: none;
+        letter-spacing: .02em;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-pasado,
+    .ef-pasado-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

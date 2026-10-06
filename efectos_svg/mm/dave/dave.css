@@ -1,0 +1,109 @@
+/* =============================================================
+   DAVE MILLER (SVG) · El héroe cruza la puerta
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-dave.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-dave,
+    .ef-dave-mini — linterna que barre + paso que se abre
+   ============================================================= */
+.ef-dave {
+    color: #f6ffd8;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(164deg,
+            rgba(6, 26, 14, .6) 0 4px, rgba(6,26,14,0) 4px 13px),
+        linear-gradient(172deg,
+            #fbfff0 0%, #d8ff9a 32%, #57c26a 68%, #06301a 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-mask-image: linear-gradient(102deg,
+        rgba(0, 0, 0, .62) 0 26%, #000 44% 58%, rgba(0, 0, 0, .62) 76% 100%);
+    mask-image: linear-gradient(102deg,
+        rgba(0, 0, 0, .62) 0 26%, #000 44% 58%, rgba(0, 0, 0, .62) 76% 100%);
+    -webkit-mask-size: 260% 100%;
+    mask-size: 260% 100%;
+    filter: url(#ef-dave);
+    animation: mn-dave-haz 4.6s steps(2, end) infinite,
+               mn-dave-paso 5.4s ease-in-out infinite;
+}
+.ef-dave:hover,
+.ef-dave:focus-visible {
+    animation-duration: 1.8s, 2.4s;
+}
+.ef-dave-mini {
+    color: #f6ffd8;
+    background:
+        repeating-linear-gradient(164deg,
+            rgba(6, 26, 14, .55) 0 3px, rgba(6,26,14,0) 3px 10px),
+        linear-gradient(172deg,
+            #fbfff0 0%, #d8ff9a 32%, #57c26a 68%, #06301a 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-mask-image: linear-gradient(102deg,
+        rgba(0, 0, 0, .72) 0 26%, #000 44% 58%, rgba(0, 0, 0, .72) 76% 100%);
+    mask-image: linear-gradient(102deg,
+        rgba(0, 0, 0, .72) 0 26%, #000 44% 58%, rgba(0, 0, 0, .72) 76% 100%);
+    -webkit-mask-size: 260% 100%;
+    mask-size: 260% 100%;
+    filter: url(#ef-dave-mini);
+    animation: mn-dave-haz 4.6s steps(2, end) infinite,
+               mn-dave-paso 5.4s ease-in-out infinite;
+}
+.ef-dave-mini:hover,
+.ef-dave-mini:focus-visible {
+    animation-duration: 1.8s, 2.4s;
+}
+
+/* el haz salta de tramo y el paso abre las letras */
+@keyframes mn-dave-haz {
+    0%   { -webkit-mask-size: 300% 100%; mask-size: 300% 100%; }
+    50%  { -webkit-mask-size: 150% 100%; mask-size: 150% 100%; }
+    100% { -webkit-mask-size: 300% 100%; mask-size: 300% 100%; }
+}
+@keyframes mn-dave-paso {
+    0%, 100% { letter-spacing: .01em; }
+    50%      { letter-spacing: .28em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-dave,
+    .ef-dave-mini {
+        animation: none;
+        letter-spacing: .01em;
+        -webkit-mask-size: 200% 100%;
+        mask-size: 200% 100%;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-dave,
+    .ef-dave-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

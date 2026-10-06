@@ -1,0 +1,113 @@
+/* =============================================================
+   MANSIÓN (SVG) · De noche, con las luces puestas
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-mansion.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-mansion,
+    .ef-mansion-mini — ventanas que se encienden + perfil que crece
+   ============================================================= */
+.ef-mansion {
+    color: #cfe3ff;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(6, 10, 30, .8) 0 4px, rgba(6,10,30,0) 4px 18px),
+        linear-gradient(174deg,
+            #f5f9ff 0%, #a8c8ff 34%, #38569c 68%, #060a1e 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-mask-image: repeating-linear-gradient(90deg,
+        #000 0 8px, rgba(0, 0, 0, .75) 8px 18px);
+    mask-image: repeating-linear-gradient(90deg,
+        #000 0 8px, rgba(0, 0, 0, .75) 8px 18px);
+    -webkit-mask-size: 36px 100%;
+    mask-size: 36px 100%;
+    -webkit-text-stroke: .6px rgba(6, 10, 30, .9);
+    paint-order: stroke fill;
+    filter: url(#ef-mansion);
+    animation: mn-mansion-ventanas 4.2s ease-in-out infinite,
+               mn-mansion-perfil 4.2s ease-in-out infinite;
+}
+.ef-mansion:hover,
+.ef-mansion:focus-visible {
+    animation-duration: 1.8s, 1.8s;
+}
+.ef-mansion-mini {
+    color: #cfe3ff;
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(6, 10, 30, .75) 0 3px, rgba(6,10,30,0) 3px 14px),
+        linear-gradient(174deg,
+            #f5f9ff 0%, #a8c8ff 34%, #38569c 68%, #060a1e 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-mask-image: repeating-linear-gradient(90deg,
+        #000 0 7px, rgba(0, 0, 0, .8) 7px 16px);
+    mask-image: repeating-linear-gradient(90deg,
+        #000 0 7px, rgba(0, 0, 0, .8) 7px 16px);
+    -webkit-mask-size: 32px 100%;
+    mask-size: 32px 100%;
+    -webkit-text-stroke: .3px rgba(6, 10, 30, .85);
+    paint-order: stroke fill;
+    filter: url(#ef-mansion-mini);
+    animation: mn-mansion-ventanas 4.2s ease-in-out infinite,
+               mn-mansion-perfil 4.2s ease-in-out infinite;
+}
+.ef-mansion-mini:hover,
+.ef-mansion-mini:focus-visible {
+    animation-duration: 1.8s, 1.8s;
+}
+
+/* las ventanas se aprietan y el perfil crece */
+@keyframes mn-mansion-ventanas {
+    0%, 100% { -webkit-mask-size: 36px 100%; mask-size: 36px 100%; }
+    50%      { -webkit-mask-size: 15px 100%; mask-size: 15px 100%; }
+}
+@keyframes mn-mansion-perfil {
+    0%, 100% { -webkit-text-stroke-width: .6px; text-stroke-width: .6px; }
+    50%      { -webkit-text-stroke-width: 2.8px; text-stroke-width: 2.8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-mansion,
+    .ef-mansion-mini {
+        animation: none;
+        -webkit-mask-size: 24px 100%;
+        mask-size: 24px 100%;
+        -webkit-text-stroke-width: .6px;
+        text-stroke-width: .6px;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-mansion,
+    .ef-mansion-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

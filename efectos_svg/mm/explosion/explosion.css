@@ -1,0 +1,99 @@
+/* =============================================================
+   EXPLOSIÓN (SVG) · El laboratorio se va por los aires
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-explosion.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-explosion,
+    .ef-explosion-mini — onda que abre + fogonazo que salta
+   ============================================================= */
+.ef-explosion {
+    color: #ffd88a;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(148deg,
+            rgba(66, 12, 0, .7) 0 5px, rgba(66,12,0,0) 5px 15px),
+        linear-gradient(170deg,
+            #fffdf2 0%, #ffd88a 30%, #ff6a1f 64%, #4a1000 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-explosion);
+    animation: mn-explosion-onda 3.8s ease-out infinite,
+               mn-explosion-fogonazo 3.8s ease-out infinite;
+}
+.ef-explosion:hover,
+.ef-explosion:focus-visible {
+    animation-duration: 1.6s, 1.6s;
+}
+.ef-explosion-mini {
+    color: #ffd88a;
+    background:
+        repeating-linear-gradient(148deg,
+            rgba(66, 12, 0, .65) 0 3px, rgba(66,12,0,0) 3px 11px),
+        linear-gradient(170deg,
+            #fffdf2 0%, #ffd88a 30%, #ff6a1f 64%, #4a1000 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-explosion-mini);
+    animation: mn-explosion-onda 3.8s ease-out infinite,
+               mn-explosion-fogonazo 3.8s ease-out infinite;
+}
+.ef-explosion-mini:hover,
+.ef-explosion-mini:focus-visible {
+    animation-duration: 1.6s, 1.6s;
+}
+
+/* la onda abre las palabras y el fogonazo la barre */
+@keyframes mn-explosion-onda {
+    0%, 100% { word-spacing: 0em; }
+    34%      { word-spacing: .4em; }
+    68%      { word-spacing: .12em; }
+}
+@keyframes mn-explosion-fogonazo {
+    0%, 58%, 100% { text-shadow: 0 0 0 rgba(255, 240, 200, 0); }
+    68%           { text-shadow: 0 0 .5em rgba(255, 255, 235, 1),
+                               0 0 1.6em rgba(255, 150, 40, .95); }
+    84%           { text-shadow: 0 0 .2em rgba(255, 255, 235, .55),
+                               0 0 .8em rgba(255, 150, 40, .6); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-explosion,
+    .ef-explosion-mini {
+        animation: none;
+        word-spacing: 0em;
+        text-shadow: 0 0 .8em rgba(255, 160, 60, .85);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-explosion,
+    .ef-explosion-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

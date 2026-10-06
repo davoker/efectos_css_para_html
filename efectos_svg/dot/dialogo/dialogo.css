@@ -1,0 +1,84 @@
+/* =============================================================
+   DIÁLOGO (SVG) · Tinta que cambia de personaje
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-dialogo.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-dialogo,
+    .ef-dialogo-mini — tinta que cambia de voz
+   ============================================================= */
+.ef-dialogo {
+    color: #fff4a8;                     /* tinta: se anima, sin clip */
+    -webkit-text-stroke: .8px rgba(46, 8, 62, .9);
+    paint-order: stroke fill;
+    filter: url(#ef-dialogo);
+    animation: dt-dialogo-voz 6s ease-in-out infinite,
+               dt-dialogo-escribe 5s ease-in-out infinite;
+}
+.ef-dialogo:hover,
+.ef-dialogo:focus-visible {
+    animation-duration: 2.6s, 2.2s;
+}
+.ef-dialogo-mini {
+    color: #fff4a8;
+    -webkit-text-stroke: .4px rgba(46, 8, 62, .85);
+    paint-order: stroke fill;
+    filter: url(#ef-dialogo-mini);
+    animation: dt-dialogo-voz 6s ease-in-out infinite,
+               dt-dialogo-escribe 5s ease-in-out infinite;
+}
+.ef-dialogo-mini:hover,
+.ef-dialogo-mini:focus-visible {
+    animation-duration: 2.6s, 2.2s;
+}
+
+/* la tinta pasa de voz en voz y la réplica se despliega */
+@keyframes dt-dialogo-voz {
+    0%, 100% { color: #fff4a8; }
+    33%      { color: #a6ffbe; }
+    66%      { color: #ffb4e6; }
+}
+@keyframes dt-dialogo-escribe {
+    0%, 100% { word-spacing: 0em; }
+    50%      { word-spacing: .3em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-dialogo,
+    .ef-dialogo-mini {
+        animation: none;
+        word-spacing: 0em;
+        color: #fff4a8;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-dialogo,
+    .ef-dialogo-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

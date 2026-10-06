@@ -22,6 +22,7 @@
     .ef-arasaka-mini — rendijas recortadas + tinta corporativa
    ============================================================= */
 .ef-arasaka {
+    display: inline-block;
     color: #ff2b3d;                     /* respaldo si no hay clip */
     background:
         repeating-linear-gradient(180deg,
@@ -42,6 +43,7 @@
     animation-duration: 2.4s;
 }
 .ef-arasaka-mini {
+    display: inline-block;
     color: #ff2b3d;
     background:
         repeating-linear-gradient(180deg,

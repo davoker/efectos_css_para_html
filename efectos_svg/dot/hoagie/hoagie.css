@@ -1,0 +1,105 @@
+/* =============================================================
+   HOAGIE (SVG) · Camisa de cuadros que corre
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-hoagie.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-hoagie,
+    .ef-hoagie-mini — cuadros que corren + paso pesado
+   ============================================================= */
+.ef-hoagie {
+    color: #ffc79a;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(60, 20, 8, .8) 0 3px, rgba(60,20,8,0) 3px 11px),
+        repeating-linear-gradient(0deg,
+            rgba(60, 20, 8, .8) 0 3px, rgba(60,20,8,0) 3px 11px),
+        repeating-linear-gradient(45deg,
+            rgba(255, 199, 154, .5) 0 6px, rgba(255,199,154,0) 6px 14px),
+        linear-gradient(172deg,
+            #fff3e6 0%, #ff9a4d 36%, #b6401a 70%, #40140a 100%);
+    background-size: 44px 100%, 100% 34px, 40px 40px, 100% 100%;
+    background-position: 0 0, 0 0, 0 0, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-hoagie);
+    animation: dt-hoagie-cuadros 6s linear infinite,
+               dt-hoagie-paso 4.4s ease-in-out infinite;
+}
+.ef-hoagie:hover,
+.ef-hoagie:focus-visible {
+    animation-duration: 2.6s, 2s;
+}
+.ef-hoagie-mini {
+    color: #ffc79a;
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(60, 20, 8, .75) 0 2px, rgba(60,20,8,0) 2px 8px),
+        repeating-linear-gradient(0deg,
+            rgba(60, 20, 8, .75) 0 2px, rgba(60,20,8,0) 2px 8px),
+        repeating-linear-gradient(45deg,
+            rgba(255, 199, 154, .45) 0 4px, rgba(255,199,154,0) 4px 10px),
+        linear-gradient(172deg,
+            #fff3e6 0%, #ff9a4d 36%, #b6401a 70%, #40140a 100%);
+    background-size: 30px 100%, 100% 24px, 26px 26px, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-hoagie-mini);
+    animation: dt-hoagie-cuadros 6s linear infinite,
+               dt-hoagie-paso 4.4s ease-in-out infinite;
+}
+.ef-hoagie-mini:hover,
+.ef-hoagie-mini:focus-visible {
+    animation-duration: 2.6s, 2s;
+}
+
+/* los cuadros corren y el paso se abre */
+@keyframes dt-hoagie-cuadros {
+    0%   { background-position: 0 0, 0 0, 0 0, 0 0; }
+    100% { background-position: -44px 34px, 44px -34px, -40px -40px, 0 0; }
+}
+@keyframes dt-hoagie-paso {
+    0%, 100% { word-spacing: .04em; }
+    50%      { word-spacing: .34em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-hoagie,
+    .ef-hoagie-mini {
+        animation: none;
+        word-spacing: .04em;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-hoagie,
+    .ef-hoagie-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

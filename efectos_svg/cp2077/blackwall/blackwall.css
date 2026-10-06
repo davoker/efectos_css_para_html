@@ -22,6 +22,7 @@
     .ef-blackwall-mini — estática de corrupción + inversión
    ============================================================= */
 .ef-blackwall {
+    display: inline-block;
     color: #ff3ea5;                     /* respaldo si no hay clip */
     background:
         repeating-linear-gradient(180deg,
@@ -43,6 +44,7 @@
     animation-duration: 1.3s, .5s;
 }
 .ef-blackwall-mini {
+    display: inline-block;
     color: #ff3ea5;
     background:
         repeating-linear-gradient(180deg,

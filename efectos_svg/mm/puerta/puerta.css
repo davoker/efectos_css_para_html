@@ -1,0 +1,96 @@
+/* =============================================================
+   PUERTA (SVG) · El porche de la mansión
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-puerta.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-puerta,
+    .ef-puerta-mini — hoja que se abre + luz de porche
+   ============================================================= */
+.ef-puerta {
+    color: #f6e2b8;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(44, 22, 6, .75) 0 6px, rgba(44,22,6,0) 6px 17px),
+        linear-gradient(172deg,
+            #fffaf0 0%, #f6e2b8 34%, #b98a3c 68%, #3a2208 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-puerta);
+    animation: mn-puerta-hoja 5.2s ease-in-out infinite,
+               mn-puerta-luz 3.4s ease-in-out infinite;
+}
+.ef-puerta:hover,
+.ef-puerta:focus-visible {
+    animation-duration: 2.2s, 1.5s;
+}
+.ef-puerta-mini {
+    color: #f6e2b8;
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(44, 22, 6, .7) 0 4px, rgba(44,22,6,0) 4px 13px),
+        linear-gradient(172deg,
+            #fffaf0 0%, #f6e2b8 34%, #b98a3c 68%, #3a2208 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-puerta-mini);
+    animation: mn-puerta-hoja 5.2s ease-in-out infinite,
+               mn-puerta-luz 3.4s ease-in-out infinite;
+}
+.ef-puerta-mini:hover,
+.ef-puerta-mini:focus-visible {
+    animation-duration: 2.2s, 1.5s;
+}
+
+/* la hoja abre el texto y el porche baja la luz */
+@keyframes mn-puerta-hoja {
+    0%, 100% { letter-spacing: .01em; }
+    50%      { letter-spacing: .32em; }
+}
+@keyframes mn-puerta-luz {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: .62; }
+    74%      { opacity: .94; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-puerta,
+    .ef-puerta-mini {
+        animation: none;
+        letter-spacing: .01em;
+        opacity: 1;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-puerta,
+    .ef-puerta-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

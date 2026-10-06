@@ -1,0 +1,108 @@
+/* =============================================================
+   MOTOSIERRA (SVG) · Zumbido de la sierra
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-motosierra.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-motosierra,
+    .ef-motosierra-mini — motor que vibra + dientes que corren
+   ============================================================= */
+.ef-motosierra {
+    display: inline-block;
+    color: #d7e6ff;                     /* respaldo si no hay clip */
+    background:
+        linear-gradient(178deg,
+            #ffffff 0%, #d7e6ff 30%, #4a7fd6 66%, #071733 100%);
+    -webkit-mask-image: repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, 1) 0 7px, rgba(0, 0, 0, .82) 7px 11px);
+    mask-image: repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, 1) 0 7px, rgba(0, 0, 0, .82) 7px 11px);
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-motosierra);
+    animation: mn-motosierra-zumba 3.6s linear infinite,
+               mn-motosierra-dientes 1.4s linear infinite;
+}
+.ef-motosierra:hover,
+.ef-motosierra:focus-visible {
+    animation-duration: 1.4s, .6s;
+}
+.ef-motosierra-mini {
+    display: inline-block;
+    color: #d7e6ff;
+    background:
+        linear-gradient(178deg,
+            #ffffff 0%, #d7e6ff 30%, #4a7fd6 66%, #071733 100%);
+    -webkit-mask-image: repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, 1) 0 7px, rgba(0, 0, 0, .87) 7px 11px);
+    mask-image: repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, 1) 0 7px, rgba(0, 0, 0, .87) 7px 11px);
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-motosierra-mini);
+    animation: mn-motosierra-zumba 3.6s linear infinite,
+               mn-motosierra-dientes 1.4s linear infinite;
+}
+.ef-motosierra-mini:hover,
+.ef-motosierra-mini:focus-visible {
+    animation-duration: 1.4s, .6s;
+}
+
+/* el motor vibra y los dientes corren */
+@keyframes mn-motosierra-zumba {
+    0%, 100% { transform: translateX(0); }
+    25%      { transform: translateX(.05em); }
+    50%      { transform: translateX(-.05em); }
+    75%      { transform: translateX(.03em); }
+}
+@keyframes mn-motosierra-dientes {
+    0%   { -webkit-mask-position: 0 0; mask-position: 0 0; }
+    100% { -webkit-mask-position: 18px 0; mask-position: 18px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-motosierra,
+    .ef-motosierra-mini {
+        animation: none;
+        transform: none;
+        -webkit-mask-position: 0 0;
+        mask-position: 0 0;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-motosierra,
+    .ef-motosierra-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

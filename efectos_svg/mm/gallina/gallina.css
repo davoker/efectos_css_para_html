@@ -1,0 +1,85 @@
+/* =============================================================
+   GALLINA DE GOMA (SVG) · Con polea y todo
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-gallina.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-gallina,
+    .ef-gallina-mini — goma que gira de color + chirrido
+   ============================================================= */
+.ef-gallina {
+    color: #ffe34f;                     /* goma amarilla */
+    -webkit-text-stroke: .8px rgba(70, 44, 0, .9);
+    paint-order: stroke fill;
+    filter: url(#ef-gallina) saturate(1);
+    animation: mn-gallina-color 5.6s ease-in-out infinite,
+               mn-gallina-chirrido 5.6s ease-in-out infinite;
+}
+.ef-gallina:hover,
+.ef-gallina:focus-visible {
+    animation-duration: 2.4s, 2.4s;
+}
+.ef-gallina-mini {
+    color: #ffe34f;
+    -webkit-text-stroke: .4px rgba(70, 44, 0, .85);
+    paint-order: stroke fill;
+    filter: url(#ef-gallina-mini) saturate(1);
+    animation: mn-gallina-color 5.6s ease-in-out infinite,
+               mn-gallina-chirrido 5.6s ease-in-out infinite;
+}
+.ef-gallina-mini:hover,
+.ef-gallina-mini:focus-visible {
+    animation-duration: 2.4s, 2.4s;
+}
+
+/* la goma gira de color y el filtro chirría */
+@keyframes mn-gallina-color {
+    0%, 100% { color: #ffe34f; }
+    33%      { color: #ff7a3c; }
+    66%      { color: #fffdf2; }
+}
+@keyframes mn-gallina-chirrido {
+    0%, 100% { filter: url(#ef-gallina) saturate(1); }
+    33%      { filter: url(#ef-gallina) saturate(1.9); }
+    66%      { filter: url(#ef-gallina) saturate(.45); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-gallina,
+    .ef-gallina-mini {
+        animation: none;
+        color: #ffe34f;
+        filter: url(#ef-gallina) saturate(1.2);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-gallina,
+    .ef-gallina-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

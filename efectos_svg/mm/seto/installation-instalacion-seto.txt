@@ -1,0 +1,215 @@
+================================================================
+EFECTO SETO - CÓMO APLICARLO A CUALQUIER ARCHIVO .HTML/.CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "seto.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/seto.css">
+
+Contenido del archivo:
+  · la clase ef-seto (efecto completo, ≥24px)
+  · la clase ef-seto-mini (párrafos, inline y texto pequeño)
+  · Sus transiciones y estados al interactuar
+  · Fallbacks: prefers-reduced-motion y @media print
+
+
+PASO 2 - PEGA EL BLOQUE SVG DE FILTROS (UNA VEZ)
+-------------------------------------------------
+Este efecto usa filtros SVG (hoja que crece + sombra que respira): pega el
+siguiente bloque UNA sola vez en la página que quiera usarlo
+-es el equivalente a quien pega el <style> de los efectos
+CSS. Lo tienes listo para copiar en el index.html de este
+efecto y en este mismo archivo:
+
+    <filter id="ef-seto" x="-20%" y="-65%" width="140%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".12 .2"
+                      numOctaves="3" seed="12" result="grano"/>
+        <feComposite in="grano" in2="SourceAlpha" operator="in" result="g-txt"/>
+        <feBlend in="SourceGraphic" in2="g-txt" mode="multiply" result="mata"/>
+        <feColorMatrix in="mata" type="matrix" result="verde"
+            values=".75 .35 0 0 -.06
+                    0 1.35 0 0 -.07
+                    0 .3 1.1 0 -.06
+                    0 0 0 1 0"/>
+        <feComposite in="verde" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-seto-mini" x="-12%" y="-55%" width="124%"
+            height="225%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".4 .7"
+                      numOctaves="3" seed="12" result="grano"/>
+        <feComposite in="grano" in2="SourceAlpha" operator="in" result="g-txt"/>
+        <feBlend in="SourceGraphic" in2="g-txt" mode="multiply"/>
+    </filter>
+
+Si la página usa varios de estos efectos, con UN solo bloque
+<svg> en la página vale para todos: cada efecto trae sus
+filtros dentro de <defs>.
+
+
+PASO 3 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+&lt;h1 class="ef-seto"&gt;Mi título&lt;/h1&gt;                     &lt;!-- efecto completo, ≥24px --&gt;
+&lt;p class="ef-seto-mini"&gt;Párrafo o texto pequeño.&lt;/p&gt;   &lt;!-- mini: legible hasta 13px --&gt;
+&lt;p&gt;Normal con &lt;span class="ef-seto-mini"&gt;fragmento&lt;/span&gt;.&lt;/p&gt;
+
+
+QUÉ HACE
+--------
+mask-size cambia la escala de la hoja con opacidad mínima del 74 % y opacity marca la sombra; feTurbulence da el grano de la mata y feColorMatrix fija el verde. Fuera del texto no hay seto.
+
+TÉCNICA: máscara de hoja con mask-size a steps(3) + opacity animado + filter: url(#ef-seto) (feTurbulence + feColorMatrix).
+
+
+VARIANTES Y TAMAÑO DEL TEXTO (importante)
+-----------------------------------------
+· .ef-seto — títulos grandes (≥24px): intensidad completa.
+· .ef-seto-mini — párrafos, fragmentos inline y texto pequeño:
+  versión suave, verificada legible a 13px.
+Si dudas, aplica por tamaño: completo en títulos, mini en
+el resto. Con movimiento reducido el efecto se queda en su
+estado inicial (sin desaparecer nunca el texto).
+
+
+REGLA DEL FONDO
+---------------
+El elemento con la clase no debe llevar fondo propio: el
+efecto se calcula sobre TODO lo que pinta el elemento y
+también pintaría la caja. Si tu bloque necesita fondo,
+ponlo en el PADRE y la clase en un <span> interior:
+
+    <div class="mi-caja">
+        <span class="ef-seto">efecto dentro, caja fuera</span>
+    </div>
+
+
+SELECCIÓN, IMPRESIÓN Y MOVIMIENTO
+---------------------------------
+· El texto es texto real del DOM: legible, seleccionable y
+  con los saltos de línea normales de tu página.
+· Al imprimir, @media print deja todo en negro liso sin
+  efectos (sigue siendo texto).
+· Con prefers-reduced-motion las animaciones CSS se detienen:
+  el efecto se ve en su estado inicial (sin SMIL ni JavaScript,
+  basta con esa regla).
+
+
+AJUSTES FÁCILES
+----------------
+· Intensidad: en el bloque <svg> busca el valor clave del filtro (scale, baseFrequency, stdDeviation o surfaceScale) y súbelo o bájalo a tu gusto.
+· Color: cambia los colores del gradiente y los del filtro (lighting-color, flood-color) por los de tu marca.
+· Velocidad: sube o baja la duración de los @keyframes del CSS (todas las animaciones son CSS: no hay SMIL ni JavaScript).
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+SETO EFFECT - HOW TO APPLY IT TO ANY .HTML/.CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "seto.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/seto.css">
+
+What the file contains:
+  · the ef-seto class (full effect, ≥24px)
+  · the ef-seto-mini class (paragraphs, inline and small text)
+  · Its transitions and states on interaction
+  · Fallbacks: prefers-reduced-motion and @media print
+
+
+STEP 2 - PASTE THE SVG FILTER BLOCK (ONCE)
+-------------------------------------------------
+This effect uses SVG filters (growing leaf + breathing shade): paste the
+block below just ONCE on the page that will use it -it's the
+equivalent of pasting the <style> of the CSS effects. You
+have it ready to copy into this effect's index.html and into
+this same file:
+
+    <filter id="ef-seto" x="-20%" y="-65%" width="140%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".12 .2"
+                      numOctaves="3" seed="12" result="grano"/>
+        <feComposite in="grano" in2="SourceAlpha" operator="in" result="g-txt"/>
+        <feBlend in="SourceGraphic" in2="g-txt" mode="multiply" result="mata"/>
+        <feColorMatrix in="mata" type="matrix" result="verde"
+            values=".75 .35 0 0 -.06
+                    0 1.35 0 0 -.07
+                    0 .3 1.1 0 -.06
+                    0 0 0 1 0"/>
+        <feComposite in="verde" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-seto-mini" x="-12%" y="-55%" width="124%"
+            height="225%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".4 .7"
+                      numOctaves="3" seed="12" result="grano"/>
+        <feComposite in="grano" in2="SourceAlpha" operator="in" result="g-txt"/>
+        <feBlend in="SourceGraphic" in2="g-txt" mode="multiply"/>
+    </filter>
+
+If the page uses several of these effects, with ONE single
+<svg> block on the page works for all: each effect carries
+its filters inside <defs>.
+
+
+STEP 3 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+&lt;h1 class="ef-seto"&gt;Mi título&lt;/h1&gt;                     &lt;!-- efecto completo, ≥24px --&gt;
+&lt;p class="ef-seto-mini"&gt;Párrafo o texto pequeño.&lt;/p&gt;   &lt;!-- mini: legible hasta 13px --&gt;
+&lt;p&gt;Normal con &lt;span class="ef-seto-mini"&gt;fragmento&lt;/span&gt;.&lt;/p&gt;
+
+
+WHAT IT DOES
+--------
+mask-size changes the leaf scale with 74 % minimum opacity and opacity marks the shade; feTurbulence gives the bush grain and feColorMatrix pins the green. No hedge outside the text.
+
+TECHNIQUE: stepped leaf mask with mask-size + animated opacity + filter: url(#ef-seto) (feTurbulence + feColorMatrix).
+
+
+VARIANTS AND TEXT SIZE (important)
+-----------------------------------------
+· .ef-seto — large headings (≥24px): full strength.
+· .ef-seto-mini — paragraphs, inline fragments and small text:
+  softened version, verified readable at 13px.
+If in doubt, apply by size: full on headings, mini on
+the rest. With reduced motion the effect keeps its
+initial state (the text never disappears).
+
+
+BACKGROUND RULE
+---------------
+The element with the class must not have its own background: the
+effect is computed over EVERYTHING the element paints and
+it would paint the box too. If your block needs a background,
+put it on the PARENT and the class on an inner <span>:
+
+    <div class="mi-caja">
+        <span class="ef-seto">effect inside, box outside</span>
+    </div>
+
+
+SELECTION, PRINTING AND MOTION
+---------------------------------
+· The text is real DOM text: readable, selectable and
+  with your page's normal line breaks.
+· When printing, @media print leaves everything flat black with no
+  effects (it's still text).
+· With prefers-reduced-motion the CSS animations stop: the
+  effect shows its initial state (no SMIL and no JavaScript,
+  that rule is enough).
+
+
+EASY TWEAKS
+---------------
+· Intensity: in the <svg> block look for the filter's key value (scale, baseFrequency, stdDeviation or surfaceScale) and raise or lower it as you like.
+· Color: swap the gradient colors and the filter's colors (lighting-color, flood-color) for your brand's.
+· Speed: raise or lower the duration of the CSS @keyframes (every animation is CSS: no SMIL and no JavaScript).
+
+================================================================

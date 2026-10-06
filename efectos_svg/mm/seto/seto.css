@@ -1,0 +1,111 @@
+/* =============================================================
+   SETO (SVG) · El laberinto del jardín
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-seto.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-seto,
+    .ef-seto-mini — hoja que crece + sombra que respira
+   ============================================================= */
+.ef-seto {
+    color: #b6ff7a;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(58deg,
+            rgba(8, 34, 4, .7) 0 5px, rgba(8,34,4,0) 5px 16px),
+        linear-gradient(166deg,
+            #f4ffe6 0%, #b6ff7a 34%, #3fa03a 68%, #08320a 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-mask-image: repeating-linear-gradient(122deg,
+        #000 0 9px, rgba(0, 0, 0, .74) 9px 21px);
+    mask-image: repeating-linear-gradient(122deg,
+        #000 0 9px, rgba(0, 0, 0, .74) 9px 21px);
+    -webkit-mask-size: 42px 100%;
+    mask-size: 42px 100%;
+    filter: url(#ef-seto);
+    animation: mn-seto-hojas 4.6s steps(3, end) infinite,
+               mn-seto-sombra 4.6s ease-in-out infinite;
+}
+.ef-seto:hover,
+.ef-seto:focus-visible {
+    animation-duration: 2s, 2s;
+}
+.ef-seto-mini {
+    color: #b6ff7a;
+    background:
+        repeating-linear-gradient(58deg,
+            rgba(8, 34, 4, .66) 0 3px, rgba(8,34,4,0) 3px 12px),
+        linear-gradient(166deg,
+            #f4ffe6 0%, #b6ff7a 34%, #3fa03a 68%, #08320a 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-mask-image: repeating-linear-gradient(122deg,
+        #000 0 8px, rgba(0, 0, 0, .8) 8px 18px);
+    mask-image: repeating-linear-gradient(122deg,
+        #000 0 8px, rgba(0, 0, 0, .8) 8px 18px);
+    -webkit-mask-size: 36px 100%;
+    mask-size: 36px 100%;
+    filter: url(#ef-seto-mini);
+    animation: mn-seto-hojas 4.6s steps(3, end) infinite,
+               mn-seto-sombra 4.6s ease-in-out infinite;
+}
+.ef-seto-mini:hover,
+.ef-seto-mini:focus-visible {
+    animation-duration: 2s, 2s;
+}
+
+/* la hoja crece por escalones y la sombra respira */
+@keyframes mn-seto-hojas {
+    0%   { -webkit-mask-size: 30px 100%; mask-size: 30px 100%; }
+    33%  { -webkit-mask-size: 58px 100%; mask-size: 58px 100%; }
+    66%  { -webkit-mask-size: 40px 100%; mask-size: 40px 100%; }
+    100% { -webkit-mask-size: 30px 100%; mask-size: 30px 100%; }
+}
+@keyframes mn-seto-sombra {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: .6; }
+    76%      { opacity: .92; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-seto,
+    .ef-seto-mini {
+        animation: none;
+        opacity: 1;
+        -webkit-mask-size: 34px 100%;
+        mask-size: 34px 100%;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-seto,
+    .ef-seto-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

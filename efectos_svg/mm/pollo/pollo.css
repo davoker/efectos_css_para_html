@@ -1,0 +1,106 @@
+/* =============================================================
+   WEIRD ED (SVG) · Gallinas del gallinero
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-pollo.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-pollo,
+    .ef-pollo-mini — plumaje que cambia de escala + cacareo
+   ============================================================= */
+.ef-pollo {
+    color: #ffe066;                     /* respaldo si no hay clip */
+    background:
+        radial-gradient(circle at 30% 34%,
+            rgba(70, 34, 0, .8) 0 14%, rgba(70,34,0,0) 18%),
+        radial-gradient(circle at 74% 70%,
+            rgba(255, 255, 255, .6) 0 12%, rgba(255,255,255,0) 16%),
+        linear-gradient(168deg,
+            #fffceb 0%, #ffe066 36%, #e09a1e 70%, #4a2400 100%);
+    background-size: 40px 40px, 54px 54px, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-pollo);
+    animation: mn-pollo-plumaje 3.6s steps(3, end) infinite,
+               mn-pollo-cacarea 1.8s steps(1, end) infinite;
+}
+.ef-pollo:hover,
+.ef-pollo:focus-visible {
+    animation-duration: 1.5s, .8s;
+}
+.ef-pollo-mini {
+    color: #ffe066;
+    background:
+        radial-gradient(circle at 30% 34%,
+            rgba(70, 34, 0, .75) 0 13%, rgba(70,34,0,0) 17%),
+        radial-gradient(circle at 74% 70%,
+            rgba(255, 255, 255, .55) 0 11%, rgba(255,255,255,0) 15%),
+        linear-gradient(168deg,
+            #fffceb 0%, #ffe066 36%, #e09a1e 70%, #4a2400 100%);
+    background-size: 26px 26px, 34px 34px, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-pollo-mini);
+    animation: mn-pollo-plumaje 3.6s steps(3, end) infinite,
+               mn-pollo-cacarea 1.8s steps(1, end) infinite;
+}
+.ef-pollo-mini:hover,
+.ef-pollo-mini:focus-visible {
+    animation-duration: 1.5s, .8s;
+}
+
+/* el plumaje cambia de escala y el texto cacarea */
+@keyframes mn-pollo-plumaje {
+    0%   { background-size: 30px 30px, 42px 42px, 100% 100%; }
+    33%  { background-size: 62px 62px, 84px 84px, 100% 100%; }
+    66%  { background-size: 44px 44px, 60px 60px, 100% 100%; }
+    100% { background-size: 30px 30px, 42px 42px, 100% 100%; }
+}
+@keyframes mn-pollo-cacarea {
+    0%, 100% { opacity: 1; }
+    16%      { opacity: .7; }
+    24%      { opacity: 1; }
+    56%      { opacity: .78; }
+    64%      { opacity: 1; }
+    86%      { opacity: .66; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-pollo,
+    .ef-pollo-mini {
+        animation: none;
+        opacity: 1;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-pollo,
+    .ef-pollo-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}
