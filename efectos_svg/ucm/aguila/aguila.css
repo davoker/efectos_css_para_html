@@ -1,0 +1,98 @@
+/* =============================================================
+   ÁGUILA (SVG) · Plumas de escudo
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-aguila.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-aguila,
+    .ef-aguila-mini — plumas que se abren + ala en pantalla
+   ============================================================= */
+.ef-aguila {
+    color: #f4f7ff;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(64deg,
+            rgba(255, 255, 255, .95) 0 6px, rgba(255,255,255,0) 6px 12px),
+        linear-gradient(172deg,
+            #ffffff 0%, #e9edf7 22%, #e3b23c 44%, #9a6c0e 66%,
+            #f3e3b0 84%, #4e3606 100%);
+    background-size: 46px 100%, 100% 100%;
+    background-position: 0 0, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .7px rgba(78, 54, 6, .7);
+    paint-order: stroke fill;
+    filter: url(#ef-aguila);
+    animation: mv-ucm-aguila-plumas 4.2s ease-in-out infinite,
+               mv-ucm-aguila-reflejo 5.6s ease-in-out infinite;
+}
+.ef-aguila:hover,
+.ef-aguila:focus-visible {
+    animation-duration: 2s, 2.6s;
+}
+.ef-aguila-mini {
+    color: #f4f7ff;
+    background:
+        repeating-linear-gradient(64deg,
+            rgba(255, 255, 255, .95) 0 4px, rgba(255,255,255,0) 4px 8px),
+        linear-gradient(172deg,
+            #ffffff 0%, #e9edf7 22%, #e3b23c 44%, #9a6c0e 66%,
+            #f3e3b0 84%, #4e3606 100%);
+    background-size: 30px 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-aguila-mini);
+    animation: mv-ucm-aguila-plumas 4.2s ease-in-out infinite,
+               mv-ucm-aguila-reflejo 5.6s ease-in-out infinite;
+}
+.ef-aguila-mini:hover,
+.ef-aguila-mini:focus-visible {
+    animation-duration: 2s, 2.6s;
+}
+
+/* las plumas se abren (las tiras se ensanchan) y un reflejo las barre */
+@keyframes mv-ucm-aguila-plumas {
+    0%, 100% { background-size: 46px 100%, 100% 100%; }
+    50%      { background-size: 96px 100%, 100% 100%; }
+}
+@keyframes mv-ucm-aguila-reflejo {
+    0%, 100% { filter: url(#ef-aguila) brightness(1); }
+    50%      { filter: url(#ef-aguila) brightness(1.45) contrast(1.1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-aguila,
+    .ef-aguila-mini { animation: none; background-size: 72px 100%, 100% 100%; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-aguila,
+    .ef-aguila-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

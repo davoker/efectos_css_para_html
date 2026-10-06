@@ -1,0 +1,87 @@
+/* =============================================================
+   FOTÓN (SVG) · Corriente binaria de estrellas
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-foton.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-foton,
+    .ef-foton-mini — luz difusa + halo doble
+   ============================================================= */
+.ef-foton {
+    color: #fff3c4;                     /* respaldo si no hay clip */
+    background: linear-gradient(178deg,
+        #ffffff 0%, #fff0b8 26%, #ffcc4d 52%, #ffe9a3 70%, #b87508 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-foton);
+    animation: mv-ucm-foton-halo 4.3s ease-in-out infinite;
+}
+.ef-foton:hover,
+.ef-foton:focus-visible {
+    animation-duration: 1.8s;
+}
+.ef-foton-mini {
+    color: #fff3c4;
+    background: linear-gradient(178deg,
+        #ffffff 0%, #fff0b8 26%, #ffcc4d 52%, #ffe9a3 70%, #b87508 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-foton-mini);
+    animation: mv-ucm-foton-halo 4.3s ease-in-out infinite;
+}
+.ef-foton-mini:hover,
+.ef-foton-mini:focus-visible {
+    animation-duration: 1.8s;
+}
+
+/* halo frío largo + brillo cálido corto, latiendo desfasados */
+@keyframes mv-ucm-foton-halo {
+    0%, 100% { filter: url(#ef-foton) drop-shadow(0 0 4px rgba(180,225,255,.65))
+                         drop-shadow(0 0 3px rgba(255,205,80,.75)); }
+    46%      { filter: url(#ef-foton) drop-shadow(0 0 22px rgba(210,240,255,1))
+                         drop-shadow(0 0 14px rgba(255,225,130,1)); }
+    68%      { filter: url(#ef-foton) drop-shadow(0 0 9px rgba(190,232,255,.9))
+                         drop-shadow(0 0 5px rgba(255,215,100,.9)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-foton,
+    .ef-foton-mini {
+        animation: none;
+        filter: url(#ef-foton) drop-shadow(0 0 9px rgba(220,240,255,.85));
+    }
+    .ef-foton-mini { filter: url(#ef-foton-mini) drop-shadow(0 0 7px rgba(220,240,255,.8)); }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-foton,
+    .ef-foton-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

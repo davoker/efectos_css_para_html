@@ -1,0 +1,235 @@
+================================================================
+EFECTO GEMMA - CÓMO APLICARLO A CUALQUIER ARCHIVO .HTML/.CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "gemma.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/gemma.css">
+
+Contenido del archivo:
+  · la clase ef-gemma (efecto completo, ≥24px)
+  · la clase ef-gemma-mini (párrafos, inline y texto pequeño)
+  · Sus transiciones y estados al interactuar
+  · Fallbacks: prefers-reduced-motion y @media print
+
+
+PASO 2 - PEGA EL BLOQUE SVG DE FILTROS (UNA VEZ)
+-------------------------------------------------
+Este efecto usa filtros SVG (seis colores + bisel de gema): pega el
+siguiente bloque UNA sola vez en la página que quiera usarlo
+-es el equivalente a quien pega el <style> de los efectos
+CSS. Lo tienes listo para copiar en el index.html de este
+efecto y en este mismo archivo:
+
+    <filter id="ef-gemma" x="-20%" y="-65%" width="140%"
+            height="235%" color-interpolation-filters="sRGB">
+        <feSpecularLighting in="SourceAlpha" surfaceScale="5.5"
+                            specularConstant="1.7" specularExponent="11"
+                            lighting-color="#ffffff" result="bisel">
+            <feDistantLight azimuth="238" elevation="34"/>
+        </feSpecularLighting>
+        <feComponentTransfer in="bisel" result="brillo">
+            <feFuncR type="linear" slope="1.3"/>
+            <feFuncG type="linear" slope="1.3"/>
+            <feFuncB type="linear" slope="1.3"/>
+        </feComponentTransfer>
+        <feComposite in="brillo" in2="SourceAlpha" operator="in"
+                     result="b-txt"/>
+        <feComposite in="b-txt" in2="SourceGraphic" operator="arithmetic"
+                     k1="0" k2="1" k3=".75" k4="0" result="suma"/>
+        <feComposite in="suma" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-gemma-mini" x="-12%" y="-55%" width="124%"
+            height="220%" color-interpolation-filters="sRGB">
+        <feSpecularLighting in="SourceAlpha" surfaceScale="2.4"
+                            specularConstant="1" specularExponent="20"
+                            lighting-color="#ffffff" result="bisel">
+            <feDistantLight azimuth="238" elevation="48"/>
+        </feSpecularLighting>
+        <feComposite in="bisel" in2="SourceAlpha" operator="in" result="b-txt"/>
+        <feComposite in="b-txt" in2="SourceGraphic" operator="arithmetic"
+                     k1="0" k2="1" k3=".7" k4="0" result="suma"/>
+        <feComposite in="suma" in2="SourceGraphic" operator="in"/>
+    </filter>
+
+Si la página usa varios de estos efectos, con UN solo bloque
+<svg> en la página vale para todos: cada efecto trae sus
+filtros dentro de <defs>.
+
+
+PASO 3 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+&lt;h1 class="ef-gemma"&gt;Mi título&lt;/h1&gt;                     &lt;!-- efecto completo, ≥24px --&gt;
+&lt;p class="ef-gemma-mini"&gt;Párrafo o texto pequeño.&lt;/p&gt;   &lt;!-- mini: legible hasta 13px --&gt;
+&lt;p&gt;Normal con &lt;span class="ef-gemma-mini"&gt;fragmento&lt;/span&gt;.&lt;/p&gt;
+
+
+QUÉ HACE
+--------
+Un linear-gradient de seis paradas barre dentro de las letras y feSpecularLighting con feDistantLight bajo le da el bisel de piedra preciosa. Fuera del texto no hay gemas.
+
+TÉCNICA: background-clip: text con seis colores + background-position animado + filter: url(#ef-gemma) (feSpecularLighting + feComponentTransfer de brillo).
+
+
+VARIANTES Y TAMAÑO DEL TEXTO (importante)
+-----------------------------------------
+· .ef-gemma — títulos grandes (≥24px): intensidad completa.
+· .ef-gemma-mini — párrafos, fragmentos inline y texto pequeño:
+  versión suave, verificada legible a 13px.
+Si dudas, aplica por tamaño: completo en títulos, mini en
+el resto. Con movimiento reducido el efecto se queda en su
+estado inicial (sin desaparecer nunca el texto).
+
+
+REGLA DEL FONDO
+---------------
+El elemento con la clase no debe llevar fondo propio: el
+efecto se calcula sobre TODO lo que pinta el elemento y
+también pintaría la caja. Si tu bloque necesita fondo,
+ponlo en el PADRE y la clase en un <span> interior:
+
+    <div class="mi-caja">
+        <span class="ef-gemma">efecto dentro, caja fuera</span>
+    </div>
+
+
+SELECCIÓN, IMPRESIÓN Y MOVIMIENTO
+---------------------------------
+· El texto es texto real del DOM: legible, seleccionable y
+  con los saltos de línea normales de tu página.
+· Al imprimir, @media print deja todo en negro liso sin
+  efectos (sigue siendo texto).
+· Con prefers-reduced-motion las animaciones CSS se detienen:
+  el efecto se ve en su estado inicial (sin SMIL ni JavaScript,
+  basta con esa regla).
+
+
+AJUSTES FÁCILES
+----------------
+· Intensidad: en el bloque <svg> busca el valor clave del filtro (scale, baseFrequency, stdDeviation o surfaceScale) y súbelo o bájalo a tu gusto.
+· Color: cambia los colores del gradiente y los del filtro (lighting-color, flood-color) por los de tu marca.
+· Velocidad: sube o baja la duración de los @keyframes del CSS (todas las animaciones son CSS: no hay SMIL ni JavaScript).
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+GEMMA EFFECT - HOW TO APPLY IT TO ANY .HTML/.CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "gemma.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/gemma.css">
+
+What the file contains:
+  · the ef-gemma class (full effect, ≥24px)
+  · the ef-gemma-mini class (paragraphs, inline and small text)
+  · Its transitions and states on interaction
+  · Fallbacks: prefers-reduced-motion and @media print
+
+
+STEP 2 - PASTE THE SVG FILTER BLOCK (ONCE)
+-------------------------------------------------
+This effect uses SVG filters (six colours + gem bevel): paste the
+block below just ONCE on the page that will use it -it's the
+equivalent of pasting the <style> of the CSS effects. You
+have it ready to copy into this effect's index.html and into
+this same file:
+
+    <filter id="ef-gemma" x="-20%" y="-65%" width="140%"
+            height="235%" color-interpolation-filters="sRGB">
+        <feSpecularLighting in="SourceAlpha" surfaceScale="5.5"
+                            specularConstant="1.7" specularExponent="11"
+                            lighting-color="#ffffff" result="bisel">
+            <feDistantLight azimuth="238" elevation="34"/>
+        </feSpecularLighting>
+        <feComponentTransfer in="bisel" result="brillo">
+            <feFuncR type="linear" slope="1.3"/>
+            <feFuncG type="linear" slope="1.3"/>
+            <feFuncB type="linear" slope="1.3"/>
+        </feComponentTransfer>
+        <feComposite in="brillo" in2="SourceAlpha" operator="in"
+                     result="b-txt"/>
+        <feComposite in="b-txt" in2="SourceGraphic" operator="arithmetic"
+                     k1="0" k2="1" k3=".75" k4="0" result="suma"/>
+        <feComposite in="suma" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-gemma-mini" x="-12%" y="-55%" width="124%"
+            height="220%" color-interpolation-filters="sRGB">
+        <feSpecularLighting in="SourceAlpha" surfaceScale="2.4"
+                            specularConstant="1" specularExponent="20"
+                            lighting-color="#ffffff" result="bisel">
+            <feDistantLight azimuth="238" elevation="48"/>
+        </feSpecularLighting>
+        <feComposite in="bisel" in2="SourceAlpha" operator="in" result="b-txt"/>
+        <feComposite in="b-txt" in2="SourceGraphic" operator="arithmetic"
+                     k1="0" k2="1" k3=".7" k4="0" result="suma"/>
+        <feComposite in="suma" in2="SourceGraphic" operator="in"/>
+    </filter>
+
+If the page uses several of these effects, with ONE single
+<svg> block on the page works for all: each effect carries
+its filters inside <defs>.
+
+
+STEP 3 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+&lt;h1 class="ef-gemma"&gt;Mi título&lt;/h1&gt;                     &lt;!-- efecto completo, ≥24px --&gt;
+&lt;p class="ef-gemma-mini"&gt;Párrafo o texto pequeño.&lt;/p&gt;   &lt;!-- mini: legible hasta 13px --&gt;
+&lt;p&gt;Normal con &lt;span class="ef-gemma-mini"&gt;fragmento&lt;/span&gt;.&lt;/p&gt;
+
+
+WHAT IT DOES
+--------
+A six-stop linear-gradient sweeps inside the letters and feSpecularLighting with a low feDistantLight gives the precious stone bevel. No gems outside the text.
+
+TECHNIQUE: background-clip: text with six colours + animated background-position + filter: url(#ef-gemma) (feSpecularLighting + feComponentTransfer boost).
+
+
+VARIANTS AND TEXT SIZE (important)
+-----------------------------------------
+· .ef-gemma — large headings (≥24px): full strength.
+· .ef-gemma-mini — paragraphs, inline fragments and small text:
+  softened version, verified readable at 13px.
+If in doubt, apply by size: full on headings, mini on
+the rest. With reduced motion the effect keeps its
+initial state (the text never disappears).
+
+
+BACKGROUND RULE
+---------------
+The element with the class must not have its own background: the
+effect is computed over EVERYTHING the element paints and
+it would paint the box too. If your block needs a background,
+put it on the PARENT and the class on an inner <span>:
+
+    <div class="mi-caja">
+        <span class="ef-gemma">effect inside, box outside</span>
+    </div>
+
+
+SELECTION, PRINTING AND MOTION
+---------------------------------
+· The text is real DOM text: readable, selectable and
+  with your page's normal line breaks.
+· When printing, @media print leaves everything flat black with no
+  effects (it's still text).
+· With prefers-reduced-motion the CSS animations stop: the
+  effect shows its initial state (no SMIL and no JavaScript,
+  that rule is enough).
+
+
+EASY TWEAKS
+---------------
+· Intensity: in the <svg> block look for the filter's key value (scale, baseFrequency, stdDeviation or surfaceScale) and raise or lower it as you like.
+· Color: swap the gradient colors and the filter's colors (lighting-color, flood-color) for your brand's.
+· Speed: raise or lower the duration of the CSS @keyframes (every animation is CSS: no SMIL and no JavaScript).
+
+================================================================

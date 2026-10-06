@@ -1,0 +1,100 @@
+/* =============================================================
+   LEVIATÁN (SVG) · Blindaje que respira
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-leviatan.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-leviatan,
+    .ef-leviatan-mini — ondas largas + coraza pulida
+   ============================================================= */
+.ef-leviatan {
+    display: inline-block;
+    color: #a8e4ff;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(154deg,
+            rgba(255,255,255,.55) 0 3px, rgba(10,60,90,0) 3px 17px),
+        linear-gradient(172deg,
+            #eafaff 0%, #7cc8ef 24%, #1a5f86 54%, #4fa8d4 74%,
+            #06263c 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .8px rgba(6, 38, 60, .75);
+    paint-order: stroke fill;
+    filter: url(#ef-leviatan);
+    transform-origin: 50% 50%;
+    animation: mv-ucm-leviatan-respira 5s ease-in-out infinite,
+               mv-ucm-leviatan-placas 4.4s linear infinite;
+}
+.ef-leviatan:hover,
+.ef-leviatan:focus-visible {
+    animation-duration: 2.4s, 2s;
+}
+.ef-leviatan-mini {
+    display: inline-block;
+    color: #a8e4ff;
+    background:
+        repeating-linear-gradient(154deg,
+            rgba(255,255,255,.55) 0 2px, rgba(10,60,90,0) 2px 12px),
+        linear-gradient(172deg,
+            #eafaff 0%, #7cc8ef 24%, #1a5f86 54%, #4fa8d4 74%,
+            #06263c 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-leviatan-mini);
+    transform-origin: 50% 50%;
+    animation: mv-ucm-leviatan-respira 5s ease-in-out infinite,
+               mv-ucm-leviatan-placas 4.4s linear infinite;
+}
+.ef-leviatan-mini:hover,
+.ef-leviatan-mini:focus-visible {
+    animation-duration: 2.4s, 2s;
+}
+
+/* inspira: se estira y se recoge, con las placas resbalando encima */
+@keyframes mv-ucm-leviatan-respira {
+    0%, 100% { transform: scaleX(1) scaleY(1); }
+    46%      { transform: scaleX(1.07) scaleY(.96); }
+    62%      { transform: scaleX(.985) scaleY(1.02); }
+}
+@keyframes mv-ucm-leviatan-placas {
+    0%   { background-position: 0 0, 0 0; }
+    100% { background-position: -34px 0, 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-leviatan,
+    .ef-leviatan-mini { animation: none; transform: none; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-leviatan,
+    .ef-leviatan-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

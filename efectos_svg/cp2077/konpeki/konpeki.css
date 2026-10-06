@@ -1,0 +1,92 @@
+/* =============================================================
+   KONPEKI (SVG) · Vidrio de hotel de lujo
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-konpeki.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-konpeki,
+    .ef-konpeki-mini — reflejo rasante + cristal pulido
+   ============================================================= */
+.ef-konpeki {
+    color: #aef4ff;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(255, 255, 255, .5) 0 1px, rgba(255,255,255,0) 1px 26px),
+        linear-gradient(104deg,
+            #05161c 0%, #05161c 34%, #aef4ff 44%, #ffffff 48%,
+            #ffd98a 54%, #05161c 64%, #05161c 100%);
+    background-size: 100% 100%, 300% 100%;
+    background-position: 0 0, 0% 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-konpeki);
+    animation: mv-cp-konpeki-reflejo 4.6s cubic-bezier(.4,0,.3,1) infinite;
+}
+.ef-konpeki:hover,
+.ef-konpeki:focus-visible {
+    animation-duration: 2s;
+}
+.ef-konpeki-mini {
+    color: #aef4ff;
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(255, 255, 255, .5) 0 1px, rgba(255,255,255,0) 1px 18px),
+        linear-gradient(104deg,
+            #05161c 0%, #05161c 34%, #aef4ff 44%, #ffffff 48%,
+            #ffd98a 54%, #05161c 64%, #05161c 100%);
+    background-size: 100% 100%, 300% 100%;
+    background-position: 0 0, 0% 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-konpeki-mini);
+    animation: mv-cp-konpeki-reflejo 4.6s cubic-bezier(.4,0,.3,1) infinite;
+}
+.ef-konpeki-mini:hover,
+.ef-konpeki-mini:focus-visible {
+    animation-duration: 2s;
+}
+
+/* el reflejo cruza la ventana */
+@keyframes mv-cp-konpeki-reflejo {
+    0%, 100% { background-position: 0 0, 0% 50%; }
+    50%      { background-position: 0 0, 100% 50%; }
+    62%      { background-position: 0 0, 94% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-konpeki,
+    .ef-konpeki-mini { animation: none; background-position: 0 0, 50% 50%; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-konpeki,
+    .ef-konpeki-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

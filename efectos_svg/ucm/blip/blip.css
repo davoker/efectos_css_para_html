@@ -1,0 +1,97 @@
+/* =============================================================
+   BLIP (SVG) · Se disuelve en polvo
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-blip.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-blip,
+    .ef-blip-mini — máscara que se cierra + escalonado
+   ============================================================= */
+.ef-blip {
+    color: #d9b48a;                     /* respaldo si no hay clip */
+    background: linear-gradient(170deg,
+        #f6e4cb 0%, #d9a86e 34%, #8a5f34 66%, #3a2614 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-mask-image: radial-gradient(circle at 50% 50%,
+        #000 0 70%, rgba(0,0,0,.5) 86%, transparent 100%);
+    mask-image: radial-gradient(circle at 50% 50%,
+        #000 0 70%, rgba(0,0,0,.5) 86%, transparent 100%);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    filter: url(#ef-blip);
+    animation: mv-ucm-blip-polvo 6.4s ease-in-out infinite;
+}
+.ef-blip:hover,
+.ef-blip:focus-visible {
+    animation-duration: 3s;
+}
+.ef-blip-mini {
+    color: #d9b48a;
+    background: linear-gradient(170deg,
+        #f6e4cb 0%, #d9a86e 34%, #8a5f34 66%, #3a2614 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-mask-image: radial-gradient(circle at 50% 50%,
+        #000 0 70%, rgba(0,0,0,.5) 86%, transparent 100%);
+    mask-image: radial-gradient(circle at 50% 50%,
+        #000 0 70%, rgba(0,0,0,.5) 86%, transparent 100%);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    filter: url(#ef-blip-mini);
+    animation: mv-ucm-blip-polvo 6.4s ease-in-out infinite;
+}
+.ef-blip-mini:hover,
+.ef-blip-mini:focus-visible {
+    animation-duration: 3s;
+}
+
+/* la máscara se cierra (polvo) y se vuelve a abrir */
+@keyframes mv-ucm-blip-polvo {
+    0%, 100% { -webkit-mask-size: 460% 460%; mask-size: 460% 460%; }
+    38%      { -webkit-mask-size: 82% 82%;   mask-size: 82% 82%; }
+    52%      { -webkit-mask-size: 58% 58%;   mask-size: 58% 58%; }
+    66%      { -webkit-mask-size: 92% 92%;   mask-size: 92% 92%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-blip,
+    .ef-blip-mini { animation: none; -webkit-mask-size: 460% 460%; mask-size: 460% 460%; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-blip,
+    .ef-blip-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

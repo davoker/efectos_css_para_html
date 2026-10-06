@@ -1,0 +1,87 @@
+/* =============================================================
+   DIMINUTO (SVG) · De gigante a minúsculo
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-diminuto.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-diminuto,
+    .ef-diminuto-mini — escalado + morfología
+   ============================================================= */
+.ef-diminuto {
+    display: inline-block;              /* necesario para escalar */
+    color: #bfe9ff;                     /* respaldo si no hay clip */
+    background: linear-gradient(180deg,
+        #ffffff 0%, #9adfff 34%, #1f7fd0 62%, #0b2f55 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-diminuto);
+    transform-origin: 50% 60%;
+    animation: mv-diminuto-pym 4.2s cubic-bezier(.5,0,.5,1) infinite;
+}
+.ef-diminuto:hover,
+.ef-diminuto:focus-visible {
+    filter: url(#ef-diminuto) brightness(1.3);
+    animation-duration: 1.8s;
+}
+
+.ef-diminuto-mini {
+    display: inline-block;
+    color: #bfe9ff;
+    background: linear-gradient(180deg,
+        #ffffff 0%, #9adfff 34%, #1f7fd0 62%, #0b2f55 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-diminuto-mini);
+    transform-origin: 50% 60%;
+    animation: mv-diminuto-pym 4.2s cubic-bezier(.5,0,.5,1) infinite;
+}
+.ef-diminuto-mini:hover,
+.ef-diminuto-mini:focus-visible {
+    filter: url(#ef-diminuto-mini) brightness(1.3);
+}
+
+/* la partícula de Pym: encoge, aguanta y vuelve a crecer */
+@keyframes mv-diminuto-pym {
+    0%, 100% { transform: scale(1);    letter-spacing: normal; }
+    38%      { transform: scale(.78);  letter-spacing: .04em; }
+    50%      { transform: scale(.74);  letter-spacing: .05em; }
+    74%      { transform: scale(1.06); letter-spacing: -.02em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-diminuto,
+    .ef-diminuto-mini { animation: none; transform: none; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-diminuto,
+    .ef-diminuto-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

@@ -1,0 +1,88 @@
+/* =============================================================
+   HOJA MANTIS (SVG) · Corte diagonal
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-mantis.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-mantis,
+    .ef-mantis-mini — cuña recortada + borde rasgado
+   ============================================================= */
+.ef-mantis {
+    display: inline-block;
+    color: #dff8ff;                     /* respaldo si no hay clip */
+    background:
+        linear-gradient(102deg,
+            #ffffff 0 46.5%, #7df7ff 47% 50%, #062a33 50.5% 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-mantis);
+    animation: mv-cp-mantis-corta 4.4s cubic-bezier(.6,0,.4,1) infinite;
+}
+.ef-mantis:hover,
+.ef-mantis:focus-visible {
+    animation-duration: 2s;
+}
+.ef-mantis-mini {
+    display: inline-block;
+    color: #dff8ff;
+    background:
+        linear-gradient(102deg,
+            #ffffff 0 46.5%, #7df7ff 47% 50%, #062a33 50.5% 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-mantis-mini);
+    animation: mv-cp-mantis-corta 4.4s cubic-bezier(.6,0,.4,1) infinite;
+}
+.ef-mantis-mini:hover,
+.ef-mantis-mini:focus-visible {
+    animation-duration: 2s;
+}
+
+/* la cuña se abre en diagonal y se vuelve a juntar */
+@keyframes mv-cp-mantis-corta {
+    0%, 100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+    40%      { clip-path: polygon(0 0, 100% 0, 100% 40%,
+                                  62% 52%, 100% 64%, 100% 100%, 0 100%); }
+    58%      { clip-path: polygon(0 0, 100% 0, 100% 34%,
+                                  38% 50%, 100% 68%, 100% 100%, 0 100%); }
+    76%      { clip-path: polygon(0 0, 100% 0, 100% 46%,
+                                  78% 54%, 100% 60%, 100% 100%, 0 100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-mantis,
+    .ef-mantis-mini { animation: none; clip-path: none; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-mantis,
+    .ef-mantis-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

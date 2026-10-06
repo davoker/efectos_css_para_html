@@ -1,0 +1,99 @@
+/* =============================================================
+   CORPO (SVG) · Presentación de empresa
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-corpo.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-corpo,
+    .ef-corpo-mini — papel caro + contraste que respira
+   ============================================================= */
+.ef-corpo {
+    color: #1c1c22;                     /* tinta base */
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(197, 164, 92, .55) 0 2px, rgba(197,164,92,0) 2px 26px),
+        linear-gradient(178deg,
+            #ffffff 0%, #f4f4f7 46%, #d8d8e2 74%, #8e8e9e 100%);
+    background-size: 100% 34px, 100% 100%;
+    background-position: 0 0, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .7px rgba(28, 28, 34, .8);
+    paint-order: stroke fill;
+    filter: url(#ef-corpo) contrast(1) brightness(1);
+    animation: mv-cp-corpo-contraste 6.4s ease-in-out infinite,
+               mv-cp-corpo-filete 4.8s ease-in-out infinite;
+}
+.ef-corpo:hover,
+.ef-corpo:focus-visible {
+    animation-duration: 3s, 2.2s;
+}
+.ef-corpo-mini {
+    color: #1c1c22;
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(197, 164, 92, .5) 0 1px, rgba(197,164,92,0) 1px 18px),
+        linear-gradient(178deg,
+            #ffffff 0%, #f4f4f7 46%, #d8d8e2 74%, #8e8e9e 100%);
+    background-size: 100% 24px, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-corpo-mini) contrast(1) brightness(1);
+    animation: mv-cp-corpo-contraste 6.4s ease-in-out infinite,
+               mv-cp-corpo-filete 4.8s ease-in-out infinite;
+}
+.ef-corpo-mini:hover,
+.ef-corpo-mini:focus-visible {
+    animation-duration: 3s, 2.2s;
+}
+
+/* contraste que respira + filete que se recorre */
+@keyframes mv-cp-corpo-contraste {
+    0%, 100% { filter: url(#ef-corpo) contrast(1) brightness(1); }
+    50%      { filter: url(#ef-corpo) contrast(1.6) brightness(1.08); }
+}
+@keyframes mv-cp-corpo-filete {
+    0%, 100% { background-position: 0 0, 0 0; }
+    50%      { background-position: 0 34px, 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-corpo,
+    .ef-corpo-mini {
+        animation: none;
+        filter: url(#ef-corpo) contrast(1.25) brightness(1.04);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-corpo,
+    .ef-corpo-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

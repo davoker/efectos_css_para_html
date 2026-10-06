@@ -1,0 +1,90 @@
+/* =============================================================
+   ESCUDO (SVG) · Anillos girando en el texto
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-escudo.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-escudo,
+    .ef-escudo-mini — anillos en degradado + especular
+   ============================================================= */
+.ef-escudo {
+    color: #ff4a4a;                     /* respaldo si no hay clip */
+    background: radial-gradient(circle at 50% 50%,
+        #ffffff 0 13%, #cf1f2b 13% 27%, #ffffff 27% 40%,
+        #1b3f92 40% 56%, #cf1f2b 56% 69%, #ffffff 69% 82%,
+        #1b3f92 82% 100%);
+    background-size: 260% 340%;
+    background-position: 50% 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-escudo);
+    animation: mv-escudo-giro 7s linear infinite;
+}
+.ef-escudo:hover,
+.ef-escudo:focus-visible {
+    filter: url(#ef-escudo) brightness(1.2);
+    animation-duration: 2.4s;
+}
+
+.ef-escudo-mini {
+    color: #ff4a4a;
+    background: radial-gradient(circle at 50% 50%,
+        #ffffff 0 13%, #cf1f2b 13% 27%, #ffffff 27% 40%,
+        #1b3f92 40% 56%, #cf1f2b 56% 69%, #ffffff 69% 82%,
+        #1b3f92 82% 100%);
+    background-size: 260% 340%;
+    background-position: 50% 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-escudo-mini);
+    animation: mv-escudo-giro 7s linear infinite;
+}
+.ef-escudo-mini:hover,
+.ef-escudo-mini:focus-visible {
+    filter: url(#ef-escudo-mini) brightness(1.2);
+}
+
+/* los anillos giran: el centro del escudo viaja por el texto */
+@keyframes mv-escudo-giro {
+    0%   { background-position: 14% 22%; }
+    50%  { background-position: 86% 78%; }
+    100% { background-position: 14% 22%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-escudo,
+    .ef-escudo-mini { animation: none; background-position: 50% 50%; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-escudo,
+    .ef-escudo-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

@@ -1,0 +1,103 @@
+/* =============================================================
+   KIROSHI (SVG) · Óptica escaneando
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-kiroshi.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-kiroshi,
+    .ef-kiroshi-mini — modo análisis a saltos + barrido
+   ============================================================= */
+.ef-kiroshi {
+    color: #6ff0ff;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(180deg,
+            rgba(0, 0, 0, .45) 0 1px, rgba(0,0,0,0) 1px 3px),
+        linear-gradient(180deg,
+            #042430 0%, #0a7f96 42%, #6ff0ff 50%, #0a7f96 58%,
+            #042430 100%);
+    background-size: 100% 6px, 100% 320%;
+    background-position: 0 0, 50% -110%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-kiroshi) grayscale(0);
+    animation: mv-cp-kiroshi-barrido 2.4s linear infinite,
+               mv-cp-kiroshi-analisis 5.2s steps(1, end) infinite;
+}
+.ef-kiroshi:hover,
+.ef-kiroshi:focus-visible {
+    animation-duration: 1s, 2.4s;
+}
+.ef-kiroshi-mini {
+    color: #6ff0ff;
+    background:
+        repeating-linear-gradient(180deg,
+            rgba(0, 0, 0, .4) 0 1px, rgba(0,0,0,0) 1px 3px),
+        linear-gradient(180deg,
+            #042430 0%, #0a7f96 42%, #6ff0ff 50%, #0a7f96 58%,
+            #042430 100%);
+    background-size: 100% 5px, 100% 320%;
+    background-position: 0 0, 50% -110%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-kiroshi-mini) grayscale(0);
+    animation: mv-cp-kiroshi-barrido 2.4s linear infinite,
+               mv-cp-kiroshi-analisis 5.2s steps(1, end) infinite;
+}
+.ef-kiroshi-mini:hover,
+.ef-kiroshi-mini:focus-visible {
+    animation-duration: 1s, 2.4s;
+}
+
+/* barrido + salto al modo análisis (sin fundido) */
+@keyframes mv-cp-kiroshi-barrido {
+    0%   { background-position: 0 0, 50% -110%; }
+    100% { background-position: 0 6px, 50% 210%; }
+}
+@keyframes mv-cp-kiroshi-analisis {
+    0%, 100% { filter: url(#ef-kiroshi) grayscale(0) contrast(1); }
+    30%      { filter: url(#ef-kiroshi) grayscale(1) contrast(1.9); }
+    38%      { filter: url(#ef-kiroshi) grayscale(0) contrast(1); }
+    72%      { filter: url(#ef-kiroshi) grayscale(1) contrast(2.2); }
+    78%      { filter: url(#ef-kiroshi) grayscale(0) contrast(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-kiroshi,
+    .ef-kiroshi-mini {
+        animation: none; filter: url(#ef-kiroshi) grayscale(0);
+        background-position: 0 0, 50% 50%;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-kiroshi,
+    .ef-kiroshi-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

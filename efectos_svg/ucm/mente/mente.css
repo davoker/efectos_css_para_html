@@ -1,0 +1,98 @@
+/* =============================================================
+   MENTE (SVG) · Onda psíquica amarilla
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-mente.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-mente,
+    .ef-mente-mini — luz inundada + ondas que se expanden
+   ============================================================= */
+.ef-mente {
+    color: #ffe27a;                     /* respaldo si no hay clip */
+    background:
+        repeating-radial-gradient(circle at 50% 50%,
+            rgba(255, 255, 235, .95) 0 5%, rgba(255,216,61,0) 6% 13%),
+        linear-gradient(174deg,
+            #fffdf0 0%, #ffd83d 40%, #e0a800 72%, #7a5400 100%);
+    background-size: 60% 60%, 100% 100%;
+    background-position: 50% 50%, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-mente);
+    animation: mv-ucm-mente-onda 3.4s ease-out infinite,
+               mv-ucm-mente-latido 1.7s ease-in-out infinite;
+}
+.ef-mente:hover,
+.ef-mente:focus-visible {
+    animation-duration: 1.5s, .9s;
+}
+.ef-mente-mini {
+    color: #ffe27a;
+    background:
+        repeating-radial-gradient(circle at 50% 50%,
+            rgba(255, 255, 235, .95) 0 5%, rgba(255,216,61,0) 6% 13%),
+        linear-gradient(174deg,
+            #fffdf0 0%, #ffd83d 40%, #e0a800 72%, #7a5400 100%);
+    background-size: 60% 60%, 100% 100%;
+    background-position: 50% 50%, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-mente-mini);
+    animation: mv-ucm-mente-onda 3.4s ease-out infinite,
+               mv-ucm-mente-latido 1.7s ease-in-out infinite;
+}
+.ef-mente-mini:hover,
+.ef-mente-mini:focus-visible {
+    animation-duration: 1.5s, .9s;
+}
+
+/* la onda se expande dentro del texto y el halo late con ella */
+@keyframes mv-ucm-mente-onda {
+    0%   { background-size: 44% 44%, 100% 100%; }
+    100% { background-size: 300% 300%, 100% 100%; }
+}
+@keyframes mv-ucm-mente-latido {
+    0%, 100% { text-shadow: 0 0 .35em rgba(255,216,61,.75); }
+    50%      { text-shadow: 0 0 1.1em rgba(255,235,150,1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-mente,
+    .ef-mente-mini {
+        animation: none; background-size: 150% 150%, 100% 100%;
+        text-shadow: 0 0 .6em rgba(255,216,61,.85);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-mente,
+    .ef-mente-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

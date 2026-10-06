@@ -1,0 +1,92 @@
+/* =============================================================
+   RUNA (SVG) · Círculo místico en el texto
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-runa.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-runa,
+    .ef-runa-mini — esquirlas en degradado + turbulencia
+   ============================================================= */
+.ef-runa {
+    color: #ffd27a;                     /* respaldo si no hay clip */
+    background:
+        repeating-conic-gradient(from 0deg at 50% 50%,
+            rgba(255,180,60,.95) 0 1.6deg, rgba(255,150,40,0) 1.6deg 9deg),
+        radial-gradient(circle at 50% 50%,
+            #fff6dd 0%, #ffbf55 42%, #a8470a 78%, #4a1a03 100%);
+    background-size: 100% 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-runa);
+    text-shadow: 0 0 .55em rgba(255, 150, 45, .9);
+    animation: mv-runa-respira 3.6s ease-in-out infinite;
+}
+.ef-runa:hover,
+.ef-runa:focus-visible {
+    filter: url(#ef-runa) brightness(1.22);
+    text-shadow: 0 0 1em rgba(255, 180, 70, 1);
+}
+
+.ef-runa-mini {
+    color: #ffd27a;
+    background:
+        repeating-conic-gradient(from 0deg at 50% 50%,
+            rgba(255,180,60,.95) 0 1.4deg, rgba(255,150,40,0) 1.4deg 7deg),
+        radial-gradient(circle at 50% 50%,
+            #fff6dd 0%, #ffbf55 42%, #a8470a 78%, #4a1a03 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-runa-mini);
+    text-shadow: 0 0 .3em rgba(255, 150, 45, .85);
+    animation: mv-runa-respira 3.6s ease-in-out infinite;
+}
+.ef-runa-mini:hover,
+.ef-runa-mini:focus-visible {
+    filter: url(#ef-runa-mini) brightness(1.25);
+}
+
+/* el círculo respira: el resplandor de las runas sube y baja */
+@keyframes mv-runa-respira {
+    0%, 100% { text-shadow: 0 0 .45em rgba(255,150,45,.75);
+               background-size: 100% 100%, 100% 100%; }
+    50%      { text-shadow: 0 0 1.1em rgba(255,190,80,1);
+               background-size: 116% 116%, 118% 118%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-runa,
+    .ef-runa-mini { animation: none; text-shadow: 0 0 .5em rgba(255,150,45,.85); }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-runa,
+    .ef-runa-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

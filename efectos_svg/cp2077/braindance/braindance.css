@@ -1,0 +1,102 @@
+/* =============================================================
+   BRAINDANCE (SVG) · Banda de edición
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-braindance.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-braindance,
+    .ef-braindance-mini — onda que corre + halo de edición
+   ============================================================= */
+.ef-braindance {
+    color: #6ec1ff;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, .8) 0 3px, rgba(0,0,0,0) 3px 6px),
+        repeating-linear-gradient(180deg,
+            rgba(255, 255, 255, .9) 0 2px, rgba(110,193,255,0) 2px 5px,
+            rgba(110, 193, 255, .95) 5px 9px, rgba(110,193,255,0) 9px 13px),
+        linear-gradient(174deg,
+            #f2fbff 0%, #6ec1ff 40%, #14548f 74%, #062741 100%);
+    background-size: 100% 100%, 56px 100%, 100% 100%;
+    background-position: 0 0, 0 0, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-braindance);
+    animation: mv-cp-braindance-onda 3.4s linear infinite,
+               mv-cp-braindance-halo 2.2s ease-in-out infinite;
+}
+.ef-braindance:hover,
+.ef-braindance:focus-visible {
+    animation-duration: 1.4s, 1s;
+}
+.ef-braindance-mini {
+    color: #6ec1ff;
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, .75) 0 2px, rgba(0,0,0,0) 2px 4px),
+        repeating-linear-gradient(180deg,
+            rgba(255, 255, 255, .85) 0 1px, rgba(110,193,255,0) 1px 4px,
+            rgba(110, 193, 255, .9) 4px 7px, rgba(110,193,255,0) 7px 10px),
+        linear-gradient(174deg,
+            #f2fbff 0%, #6ec1ff 40%, #14548f 74%, #062741 100%);
+    background-size: 100% 100%, 36px 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-braindance-mini);
+    animation: mv-cp-braindance-onda 3.4s linear infinite,
+               mv-cp-braindance-halo 2.2s ease-in-out infinite;
+}
+.ef-braindance-mini:hover,
+.ef-braindance-mini:focus-visible {
+    animation-duration: 1.4s, 1s;
+}
+
+/* la onda corre por la pista y el halo marca el punto */
+@keyframes mv-cp-braindance-onda {
+    0%   { background-position: 0 0, 0 0, 0 0; }
+    100% { background-position: 0 0, -56px 0, 0 0; }
+}
+@keyframes mv-cp-braindance-halo {
+    0%, 100% { text-shadow: 0 0 .4em rgba(110, 193, 255, .5); }
+    50%      { text-shadow: 0 0 1.2em rgba(180, 226, 255, 1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-braindance,
+    .ef-braindance-mini {
+        animation: none; text-shadow: 0 0 .7em rgba(110,193,255,.8);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-braindance,
+    .ef-braindance-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

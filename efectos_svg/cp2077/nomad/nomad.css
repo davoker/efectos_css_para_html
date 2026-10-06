@@ -1,0 +1,103 @@
+/* =============================================================
+   NÓMADA (SVG) · Carretera y polvo
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-nomad.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-nomad,
+    .ef-nomad-mini — grado sepia animado + polvo
+   ============================================================= */
+.ef-nomad {
+    color: #ffd9a8;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(174deg,
+            rgba(90, 52, 20, .7) 0 3px, rgba(90,52,20,0) 3px 14px),
+        repeating-linear-gradient(6deg,
+            rgba(255, 217, 168, .5) 0 2px, rgba(255,217,168,0) 2px 19px),
+        linear-gradient(176deg,
+            #ffe9cd 0%, #f0a860 34%, #9c5a22 68%, #3a1f09 100%);
+    background-size: 100% 40px, 100% 56px, 100% 100%;
+    background-position: 0 0, 0 0, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .6px rgba(58, 31, 9, .8);
+    paint-order: stroke fill;
+    filter: url(#ef-nomad) sepia(0);
+    animation: mv-cp-nomad-grado 7s ease-in-out infinite,
+               mv-cp-nomad-polvo 5.4s linear infinite;
+}
+.ef-nomad:hover,
+.ef-nomad:focus-visible {
+    animation-duration: 3s, 2.4s;
+}
+.ef-nomad-mini {
+    color: #ffd9a8;
+    background:
+        repeating-linear-gradient(174deg,
+            rgba(90, 52, 20, .65) 0 2px, rgba(90,52,20,0) 2px 10px),
+        repeating-linear-gradient(6deg,
+            rgba(255, 217, 168, .45) 0 1px, rgba(255,217,168,0) 1px 14px),
+        linear-gradient(176deg,
+            #ffe9cd 0%, #f0a860 34%, #9c5a22 68%, #3a1f09 100%);
+    background-size: 100% 28px, 100% 40px, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-nomad-mini) sepia(0);
+    animation: mv-cp-nomad-grado 7s ease-in-out infinite,
+               mv-cp-nomad-polvo 5.4s linear infinite;
+}
+.ef-nomad-mini:hover,
+.ef-nomad-mini:focus-visible {
+    animation-duration: 3s, 2.4s;
+}
+
+/* el sol entra y sale mientras el polvo cruza la carretera */
+@keyframes mv-cp-nomad-grado {
+    0%, 100% { filter: url(#ef-nomad) sepia(.15) contrast(1); }
+    50%      { filter: url(#ef-nomad) sepia(1) contrast(1.25); }
+}
+@keyframes mv-cp-nomad-polvo {
+    0%   { background-position: 0 0, 0 0, 0 0; }
+    100% { background-position: 0 -40px, 0 56px, 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-nomad,
+    .ef-nomad-mini {
+        animation: none;
+        filter: url(#ef-nomad) sepia(.7) contrast(1.1);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-nomad,
+    .ef-nomad-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

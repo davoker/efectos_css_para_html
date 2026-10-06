@@ -1,0 +1,101 @@
+/* =============================================================
+   RELIQUIA (SVG) · Chip de memoria fallando
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-relic.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-relic,
+    .ef-relic-mini — contactos + fantasma desfasado
+   ============================================================= */
+.ef-relic {
+    color: #ffd873;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(180deg,
+            rgba(30, 20, 4, .92) 0 5px, rgba(30,20,4,0) 5px 9px),
+        repeating-linear-gradient(180deg,
+            rgba(255, 244, 208, .85) 0 2px, rgba(255,244,208,0) 2px 18px),
+        linear-gradient(172deg,
+            #fffbe8 0%, #ffd873 34%, #a87a10 68%, #4a3406 100%);
+    background-size: 100% 26px, 100% 36px, 100% 100%;
+    background-position: 0 0, 0 0, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-relic);
+    animation: mv-cp-relic-contacto 3.8s linear infinite,
+               mv-cp-relic-fantasma 4.6s steps(1, end) infinite;
+}
+.ef-relic:hover,
+.ef-relic:focus-visible {
+    animation-duration: 1.6s, 2.2s;
+}
+.ef-relic-mini {
+    color: #ffd873;
+    background:
+        repeating-linear-gradient(180deg,
+            rgba(30, 20, 4, .92) 0 3px, rgba(30,20,4,0) 3px 6px),
+        repeating-linear-gradient(180deg,
+            rgba(255, 244, 208, .85) 0 1px, rgba(255,244,208,0) 1px 12px),
+        linear-gradient(172deg,
+            #fffbe8 0%, #ffd873 34%, #a87a10 68%, #4a3406 100%);
+    background-size: 100% 18px, 100% 24px, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-relic-mini);
+    animation: mv-cp-relic-contacto 3.8s linear infinite,
+               mv-cp-relic-fantasma 4.6s steps(1, end) infinite;
+}
+.ef-relic-mini:hover,
+.ef-relic-mini:focus-visible {
+    animation-duration: 1.6s, 2.2s;
+}
+
+/* los contactos bajan y el recuerdo se desdobla a saltos */
+@keyframes mv-cp-relic-contacto {
+    0%   { background-position: 0 0, 0 0, 0 0; }
+    100% { background-position: 0 0, 0 36px, 0 0; }
+}
+@keyframes mv-cp-relic-fantasma {
+    0%, 100% { filter: url(#ef-relic); opacity: 1; }
+    34%      { filter: url(#ef-relic); opacity: .55; }
+    38%      { filter: url(#ef-relic); opacity: 1; }
+    68%      { filter: url(#ef-relic); opacity: .4; }
+    72%      { filter: url(#ef-relic); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-relic,
+    .ef-relic-mini { animation: none; opacity: 1; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-relic,
+    .ef-relic-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

@@ -1,0 +1,99 @@
+/* =============================================================
+   ANILLOS (SVG) · Los diez anillos de Wenwu
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-anillos.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-anillos,
+    .ef-anillos-mini — anillos concéntricos + desenfoque
+   ============================================================= */
+.ef-anillos {
+    color: #7fdcff;                     /* respaldo si no hay clip */
+    background:
+        repeating-radial-gradient(circle at 50% 50%,
+            #eafaff 0 4px, #2ea8ff 4px 11px, rgba(10,40,90,0) 11px 18px),
+        linear-gradient(170deg, #f2fdff 0%, #6ec6ff 40%, #0b4f9c 78%,
+                        #062a55 100%);
+    background-size: 62px 62px, 100% 100%;
+    background-position: 50% 50%, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px rgba(90, 200, 255, .9);
+    paint-order: stroke fill;
+    filter: url(#ef-anillos) blur(0px);
+    animation: mv-ucm-anillos-foco 3.6s ease-in-out infinite,
+               mv-ucm-anillos-grosor 3.6s ease-in-out infinite;
+}
+.ef-anillos:hover,
+.ef-anillos:focus-visible {
+    animation-duration: 1.5s, 1.5s;
+}
+.ef-anillos-mini {
+    color: #7fdcff;
+    background:
+        repeating-radial-gradient(circle at 50% 50%,
+            #eafaff 0 3px, #2ea8ff 3px 7px, rgba(10,40,90,0) 7px 12px),
+        linear-gradient(170deg, #f2fdff 0%, #6ec6ff 40%, #0b4f9c 78%,
+                        #062a55 100%);
+    background-size: 40px 40px, 100% 100%;
+    background-position: 50% 50%, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .5px rgba(90, 200, 255, .9);
+    paint-order: stroke fill;
+    filter: url(#ef-anillos-mini) blur(0px);
+    animation: mv-ucm-anillos-foco 3.6s ease-in-out infinite,
+               mv-ucm-anillos-grosor 3.6s ease-in-out infinite;
+}
+.ef-anillos-mini:hover,
+.ef-anillos-mini:focus-visible {
+    animation-duration: 1.5s, 1.5s;
+}
+
+/* entran y salen de foco; el contorno engorda con ellos */
+@keyframes mv-ucm-anillos-foco {
+    0%, 100% { filter: url(#ef-anillos) blur(0px); }
+    50%      { filter: url(#ef-anillos) blur(2.6px); }
+}
+@keyframes mv-ucm-anillos-grosor {
+    0%, 100% { -webkit-text-stroke-width: .6px; background-size: 62px 62px, 100% 100%; }
+    50%      { -webkit-text-stroke-width: 2.4px; background-size: 44px 44px, 100% 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-anillos,
+    .ef-anillos-mini { animation: none; filter: url(#ef-anillos) blur(0px); }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-anillos,
+    .ef-anillos-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

@@ -1,0 +1,91 @@
+/* =============================================================
+   GEMMA (SVG) · Seis piedras barriendo
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-gemma.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-gemma,
+    .ef-gemma-mini — seis colores + bisel de gema
+   ============================================================= */
+.ef-gemma {
+    color: #eaeaf5;                     /* respaldo si no hay clip */
+    background: linear-gradient(96deg,
+        #9b5de5 0 16.6%,    /* espacio  */
+        #00bbf9 16.6% 33.2%, /* tiempo   */
+        #00f5d4 33.2% 49.8%, /* mente    */
+        #fee440 49.8% 66.4%, /* realidad */
+        #f15bb5 66.4% 83%,   /* poder    */
+        #ff7b00 83% 100%);   /* alma     */
+    background-size: 260% 100%;
+    background-position: 0 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-gemma);
+    animation: mv-gemma-barrido 5.6s ease-in-out infinite;
+}
+.ef-gemma:hover,
+.ef-gemma:focus-visible {
+    filter: url(#ef-gemma) brightness(1.3);
+    animation-duration: 2.4s;
+}
+
+.ef-gemma-mini {
+    color: #eaeaf5;
+    background: linear-gradient(96deg,
+        #9b5de5 0 16.6%, #00bbf9 16.6% 33.2%, #00f5d4 33.2% 49.8%,
+        #fee440 49.8% 66.4%, #f15bb5 66.4% 83%, #ff7b00 83% 100%);
+    background-size: 260% 100%;
+    background-position: 0 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-gemma-mini);
+    animation: mv-gemma-barrido 5.6s ease-in-out infinite;
+}
+.ef-gemma-mini:hover,
+.ef-gemma-mini:focus-visible {
+    filter: url(#ef-gemma-mini) brightness(1.3);
+}
+
+/* los seis colores barren el texto de un extremo a otro */
+@keyframes mv-gemma-barrido {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-gemma,
+    .ef-gemma-mini { animation: none; background-position: 50% 50%; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-gemma,
+    .ef-gemma-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

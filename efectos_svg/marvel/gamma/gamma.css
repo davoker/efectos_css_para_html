@@ -1,0 +1,88 @@
+/* =============================================================
+   GAMMA (SVG) · La furia hincha las letras
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-gamma.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-gamma,
+    .ef-gamma-mini — turbulencia + morfología
+   ============================================================= */
+.ef-gamma {
+    color: #b6ff4d;                     /* respaldo si no hay clip */
+    background: linear-gradient(0deg,
+        #0b2a06 0%, #1d5a0a 26%, #57d11a 52%, #b6ff4d 74%, #e9ffd0 100%);
+    background-size: 100% 300%;
+    background-position: 50% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-gamma);
+    animation: mv-gamma-furia 2.6s ease-in-out infinite;
+}
+.ef-gamma:hover,
+.ef-gamma:focus-visible {
+    filter: url(#ef-gamma) brightness(1.2);
+    animation-duration: 1.1s;
+}
+
+.ef-gamma-mini {
+    color: #b6ff4d;
+    background: linear-gradient(0deg,
+        #0b2a06 0%, #1d5a0a 26%, #57d11a 52%, #b6ff4d 74%, #e9ffd0 100%);
+    background-size: 100% 300%;
+    background-position: 50% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-gamma-mini);
+    animation: mv-gamma-furia 2.6s ease-in-out infinite;
+}
+.ef-gamma-mini:hover,
+.ef-gamma-mini:focus-visible {
+    filter: url(#ef-gamma-mini) brightness(1.2);
+}
+
+/* la furia: el verde sube por las letras y el conjunto se sacude */
+@keyframes mv-gamma-furia {
+    0%, 100% { background-position: 50% 100%; transform: translate(0, 0); }
+    40%      { background-position: 50% 0%;    transform: translate(.6px, -.4px); }
+    55%      { background-position: 50% 6%;    transform: translate(-.6px, .4px); }
+    70%      { background-position: 50% 20%;   transform: translate(.3px, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-gamma,
+    .ef-gamma-mini { animation: none; background-position: 50% 30%;
+                     transform: none; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-gamma,
+    .ef-gamma-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

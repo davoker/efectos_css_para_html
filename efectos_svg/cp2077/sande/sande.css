@@ -1,0 +1,91 @@
+/* =============================================================
+   SANDEVISTAN (SVG) · El tiempo se estira
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-sande.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-sande,
+    .ef-sande-mini — arrastre direccional + estela doble
+   ============================================================= */
+.ef-sande {
+    display: inline-block;
+    color: #eafcff;                     /* respaldo si no hay clip */
+    background: linear-gradient(96deg,
+        #ffffff 0%, #7df7ff 34%, #0aa6c9 66%, #fcee09 88%, #fcee09 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-sande);
+    animation: mv-cp-sande-dispara 3.6s cubic-bezier(.7,0,.3,1) infinite;
+}
+.ef-sande:hover,
+.ef-sande:focus-visible {
+    animation-duration: 1.5s;
+}
+.ef-sande-mini {
+    display: inline-block;
+    color: #eafcff;
+    background: linear-gradient(96deg,
+        #ffffff 0%, #7df7ff 34%, #0aa6c9 66%, #fcee09 88%, #fcee09 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-sande-mini);
+    animation: mv-cp-sande-dispara 3.6s cubic-bezier(.7,0,.3,1) infinite;
+}
+.ef-sande-mini:hover,
+.ef-sande-mini:focus-visible {
+    animation-duration: 1.5s;
+}
+
+/* se dispara, frena y vuelve; la estela va por detrás */
+@keyframes mv-cp-sande-dispara {
+    0%, 100% { transform: translateX(0);
+               text-shadow: 0 0 0 rgba(122,247,255,0),
+                            0 0 0 rgba(255,60,60,0); }
+    38%      { transform: translateX(.26em);
+               text-shadow: -.12em 0 .04em rgba(122,247,255,.95),
+                            -.24em 0 .02em rgba(255,60,60,.8); }
+    52%      { transform: translateX(.3em);
+               text-shadow: -.16em 0 .06em rgba(122,247,255,1),
+                            -.32em 0 .03em rgba(255,60,60,.9); }
+    70%      { transform: translateX(-.1em);
+               text-shadow: .08em 0 .04em rgba(122,247,255,.8),
+                            .16em 0 .02em rgba(255,60,60,.6); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-sande,
+    .ef-sande-mini { animation: none; transform: none; text-shadow: none; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-sande,
+    .ef-sande-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

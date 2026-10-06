@@ -1,0 +1,87 @@
+/* =============================================================
+   BIFRÖST (SVG) · Puente de siete franjas
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-bifrost.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-bifrost,
+    .ef-bifrost-mini — saturación al máximo + franjas
+   ============================================================= */
+.ef-bifrost {
+    color: #7ef7ff;                     /* respaldo si no hay clip */
+    background: repeating-linear-gradient(96deg,
+        #ff2d95 0 12px, #ff8a00 12px 24px, #ffe600 24px 36px,
+        #3dff8a 36px 48px, #00d4ff 48px 60px, #6a5cff 60px 72px,
+        #b026ff 72px 84px, rgba(0,0,0,0) 84px 96px);
+    background-size: 96px 100%;
+    background-position: 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-bifrost);
+    animation: mv-ucm-bifrost-cruza 3.4s linear infinite;
+}
+.ef-bifrost:hover,
+.ef-bifrost:focus-visible {
+    animation-duration: 1.3s;
+}
+.ef-bifrost-mini {
+    color: #7ef7ff;
+    background: repeating-linear-gradient(96deg,
+        #ff2d95 0 7px, #ff8a00 7px 14px, #ffe600 14px 21px,
+        #3dff8a 21px 28px, #00d4ff 28px 35px, #6a5cff 35px 42px,
+        #b026ff 42px 49px, rgba(0,0,0,0) 49px 56px);
+    background-size: 56px 100%;
+    background-position: 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-bifrost-mini);
+    animation: mv-ucm-bifrost-cruza 3.4s linear infinite;
+}
+.ef-bifrost-mini:hover,
+.ef-bifrost-mini:focus-visible {
+    animation-duration: 1.3s;
+}
+
+/* el puente cruza: las siete franjas pasan por dentro de las letras */
+@keyframes mv-ucm-bifrost-cruza {
+    0%   { background-position: 0 0; }
+    100% { background-position: -96px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-bifrost,
+    .ef-bifrost-mini { animation: none; background-position: 0 0; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-bifrost,
+    .ef-bifrost-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

@@ -1,0 +1,92 @@
+/* =============================================================
+   VORMIR (SVG) · Se hunde en el abismo
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-vormir.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-vormir,
+    .ef-vormir-mini — niebla por turbulencia + hundimiento
+   ============================================================= */
+.ef-vormir {
+    display: inline-block;
+    color: #ff9a4d;                     /* respaldo si no hay clip */
+    background: linear-gradient(180deg,
+        #ffd9a0 0%, #ff9a4d 26%, #a84a12 54%, #3a1608 76%, #0b0402 100%);
+    background-size: 100% 300%;
+    background-position: 50% 0%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-vormir);
+    transform-origin: 50% 0%;
+    animation: mv-ucm-vormir-hunde 5.4s cubic-bezier(.5,0,.6,1) infinite;
+}
+.ef-vormir:hover,
+.ef-vormir:focus-visible {
+    animation-duration: 2.6s;
+}
+.ef-vormir-mini {
+    display: inline-block;
+    color: #ff9a4d;
+    background: linear-gradient(180deg,
+        #ffd9a0 0%, #ff9a4d 26%, #a84a12 54%, #3a1608 76%, #0b0402 100%);
+    background-size: 100% 300%;
+    background-position: 50% 0%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-vormir-mini);
+    transform-origin: 50% 0%;
+    animation: mv-ucm-vormir-hunde 5.4s cubic-bezier(.5,0,.6,1) infinite;
+}
+.ef-vormir-mini:hover,
+.ef-vormir-mini:focus-visible {
+    animation-duration: 2.6s;
+}
+
+/* cae al vacío y vuelve a subir, siempre visible */
+@keyframes mv-ucm-vormir-hunde {
+    0%, 100% { transform: translateY(-.14em) scale(1);    opacity: 1;
+               background-position: 50% 0%; }
+    44%      { transform: translateY(.3em) scale(.94);    opacity: .45;
+               background-position: 50% 100%; }
+    58%      { transform: translateY(.34em) scale(.92);   opacity: .3; }
+    76%      { transform: translateY(.1em) scale(.98);    opacity: .8;
+               background-position: 50% 40%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-vormir,
+    .ef-vormir-mini { animation: none; transform: none; opacity: 1; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-vormir,
+    .ef-vormir-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

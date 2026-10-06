@@ -1,0 +1,96 @@
+/* =============================================================
+   QUICKHACK (SVG) · Subida al 100 %
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-quickhack.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-quickhack,
+    .ef-quickhack-mini — carga por tamaño de fondo
+   ============================================================= */
+.ef-quickhack {
+    display: inline-block;
+    color: #4d5f70;                     /* relleno pendiente */
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, .55) 0 1px, rgba(0,0,0,0) 1px 12px),
+        linear-gradient(90deg,
+            #0a1a26 0 30%, #36f0d0 30% 100%);
+    background-size: 100% 100%, 0% 100%;
+    background-repeat: no-repeat, no-repeat;
+    background-position: 0 0, left center;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-quickhack);
+    animation: mv-cp-quickhack-sube 4.4s cubic-bezier(.6,0,.3,1) infinite;
+}
+.ef-quickhack:hover,
+.ef-quickhack:focus-visible {
+    animation-duration: 2s;
+}
+.ef-quickhack-mini {
+    display: inline-block;
+    color: #4d5f70;
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, .5) 0 1px, rgba(0,0,0,0) 1px 8px),
+        linear-gradient(90deg,
+            #0a1a26 0 30%, #36f0d0 30% 100%);
+    background-size: 100% 100%, 0% 100%;
+    background-repeat: no-repeat, no-repeat;
+    background-position: 0 0, left center;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-quickhack-mini);
+    animation: mv-cp-quickhack-sube 4.4s cubic-bezier(.6,0,.3,1) infinite;
+}
+.ef-quickhack-mini:hover,
+.ef-quickhack-mini:focus-visible {
+    animation-duration: 2s;
+}
+
+/* la carga entra por la izquierda y vuelve a empezar */
+@keyframes mv-cp-quickhack-sube {
+    0%, 8%   { background-size: 100% 100%, 0% 100%; }
+    62%      { background-size: 100% 100%, 100% 100%; }
+    82%      { background-size: 100% 100%, 100% 100%; }
+    88%      { background-size: 100% 100%, 0% 100%; }
+    100%     { background-size: 100% 100%, 0% 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-quickhack,
+    .ef-quickhack-mini { animation: none; background-size: 100% 100%, 100% 100%; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-quickhack,
+    .ef-quickhack-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

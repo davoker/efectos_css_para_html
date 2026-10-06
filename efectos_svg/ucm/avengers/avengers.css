@@ -1,0 +1,94 @@
+/* =============================================================
+   VENGADORES (SVG) · Se ensamblan las letras
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-avengers.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-avengers,
+    .ef-avengers-mini — erosión + espaciado que se cierra
+   ============================================================= */
+.ef-avengers {
+    color: #c8102e;                     /* tinta del contorno */
+    background: linear-gradient(176deg,
+        #ffffff 0%, #f2f2f7 30%, #c8102e 66%, #6d0a1b 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1.6px #0d0d14;
+    paint-order: stroke fill;
+    filter: url(#ef-avengers);
+    word-spacing: normal;
+    letter-spacing: .34em;
+    animation: mv-ucm-avengers-ensambla 5.6s cubic-bezier(.4,0,.2,1) infinite;
+}
+.ef-avengers:hover,
+.ef-avengers:focus-visible {
+    animation-duration: 2.6s;
+}
+.ef-avengers-mini {
+    color: #c8102e;
+    background: linear-gradient(176deg,
+        #ffffff 0%, #f2f2f7 30%, #c8102e 66%, #6d0a1b 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .7px #0d0d14;
+    paint-order: stroke fill;
+    filter: url(#ef-avengers-mini);
+    word-spacing: normal;
+    letter-spacing: .22em;
+    animation: mv-ucm-avengers-ensambla 5.6s cubic-bezier(.4,0,.2,1) infinite;
+}
+.ef-avengers-mini:hover,
+.ef-avengers-mini:focus-visible {
+    animation-duration: 2.6s;
+}
+
+/* los agujeros se juntan: de hilo suelto a equipo formado */
+@keyframes mv-ucm-avengers-ensambla {
+    0%, 100% { letter-spacing: .34em; word-spacing: .7em;
+               -webkit-text-stroke-width: .4px; }
+    42%      { letter-spacing: .01em; word-spacing: 0em;
+               -webkit-text-stroke-width: 2.6px; }
+    58%      { letter-spacing: .04em; word-spacing: .1em;
+               -webkit-text-stroke-width: 2.2px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-avengers,
+    .ef-avengers-mini {
+        animation: none; letter-spacing: 0; word-spacing: 0;
+        -webkit-text-stroke-width: 2px;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-avengers,
+    .ef-avengers-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

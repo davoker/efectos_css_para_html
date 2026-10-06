@@ -1,0 +1,101 @@
+/* =============================================================
+   MILITECH (SVG) · Estarcido militar
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-militech.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-militech,
+    .ef-militech-mini — erosión de plantilla + oliva
+   ============================================================= */
+.ef-militech {
+    color: #c6cf86;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(114deg,
+            rgba(24, 30, 10, .95) 0 6px, rgba(24,30,10,0) 6px 15px),
+        repeating-linear-gradient(0deg,
+            rgba(198, 207, 134, .45) 0 2px, rgba(198,207,134,0) 2px 7px),
+        linear-gradient(176deg,
+            #eef2cc 0%, #c6cf86 30%, #5b6630 66%, #1d2210 100%);
+    background-size: 78px 100%, 100% 14px, 100% 100%;
+    background-position: 0 0, 0 0, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .6px rgba(29, 34, 16, .85);
+    paint-order: stroke fill;
+    filter: url(#ef-militech);
+    animation: mv-cp-militech-estarcido 3.6s ease-in-out infinite,
+               mv-cp-militech-trama 6s linear infinite;
+}
+.ef-militech:hover,
+.ef-militech:focus-visible {
+    animation-duration: 1.6s, 3s;
+}
+.ef-militech-mini {
+    color: #c6cf86;
+    background:
+        repeating-linear-gradient(114deg,
+            rgba(24, 30, 10, .95) 0 4px, rgba(24,30,10,0) 4px 10px),
+        repeating-linear-gradient(0deg,
+            rgba(198, 207, 134, .4) 0 1px, rgba(198,207,134,0) 1px 5px),
+        linear-gradient(176deg,
+            #eef2cc 0%, #c6cf86 30%, #5b6630 66%, #1d2210 100%);
+    background-size: 52px 100%, 100% 10px, 100% 100%;
+    background-position: 0 0, 0 0, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-militech-mini);
+    animation: mv-cp-militech-estarcido 3.6s ease-in-out infinite,
+               mv-cp-militech-trama 6s linear infinite;
+}
+.ef-militech-mini:hover,
+.ef-militech-mini:focus-visible {
+    animation-duration: 1.6s, 3s;
+}
+
+/* las muescas se ensanchan y la trama baja por el casco */
+@keyframes mv-cp-militech-estarcido {
+    0%, 100% { background-size: 78px 100%, 100% 14px, 100% 100%; }
+    50%      { background-size: 130px 100%, 100% 24px, 100% 100%; }
+}
+@keyframes mv-cp-militech-trama {
+    0%   { background-position: 0 0, 0 0, 0 0; }
+    100% { background-position: 0 0, 0 42px, 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-militech,
+    .ef-militech-mini { animation: none; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-militech,
+    .ef-militech-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

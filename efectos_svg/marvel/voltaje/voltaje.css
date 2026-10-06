@@ -1,0 +1,92 @@
+/* =============================================================
+   VOLTAJE (SVG) · Descarga estriada
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-voltaje.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-voltaje,
+    .ef-voltaje-mini — turbulencia estriada + umbral
+   ============================================================= */
+.ef-voltaje {
+    color: #cfe9ff;                     /* respaldo si no hay clip */
+    background: linear-gradient(96deg,
+        #ffffff 0%, #7fd4ff 22%, #0b63d6 46%, #d8f4ff 54%,
+        #1668e0 76%, #ffffff 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-voltaje);
+    animation: mv-voltaje-destello 1.9s steps(1, end) infinite;
+}
+.ef-voltaje:hover,
+.ef-voltaje:focus-visible {
+    filter: url(#ef-voltaje) brightness(1.6) saturate(1.4);
+    animation-duration: .7s;
+}
+
+.ef-voltaje-mini {
+    color: #cfe9ff;
+    background: linear-gradient(96deg,
+        #ffffff 0%, #7fd4ff 22%, #0b63d6 46%, #d8f4ff 54%,
+        #1668e0 76%, #ffffff 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-voltaje-mini);
+    animation: mv-voltaje-destello 1.9s steps(1, end) infinite;
+}
+.ef-voltaje-mini:hover,
+.ef-voltaje-mini:focus-visible {
+    filter: url(#ef-voltaje-mini) brightness(1.6) saturate(1.4);
+}
+
+/* destellos secos de descarga: sin fundido */
+@keyframes mv-voltaje-destello {
+    0%, 100% { text-shadow: 0 0 0 rgba(160,230,255,0); }
+    10%      { text-shadow: 0 0 .7em rgba(200,245,255,1),
+                            .04em 0 0 rgba(120,255,255,.8); }
+    13%      { text-shadow: 0 0 0 rgba(160,230,255,0); }
+    30%      { text-shadow: 0 0 .5em rgba(160,235,255,.95),
+                            -.05em 0 0 rgba(180,140,255,.8); }
+    34%      { text-shadow: 0 0 0 rgba(160,230,255,0); }
+    62%      { text-shadow: 0 0 .8em rgba(255,255,255,1),
+                            .03em .03em 0 rgba(120,255,255,.9); }
+    66%      { text-shadow: 0 0 0 rgba(160,230,255,0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-voltaje,
+    .ef-voltaje-mini { animation: none;
+                       text-shadow: 0 0 .5em rgba(160,235,255,.8); }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-voltaje,
+    .ef-voltaje-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

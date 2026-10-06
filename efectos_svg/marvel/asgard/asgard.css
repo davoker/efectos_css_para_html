@@ -1,0 +1,92 @@
+/* =============================================================
+   ASGARD (SVG) · Rayo sobre oro
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-asgard.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-asgard,
+    .ef-asgard-mini — turbulencia quebrada + oro pulido
+   ============================================================= */
+.ef-asgard {
+    color: #ffe9a8;                     /* respaldo si no hay clip */
+    background: linear-gradient(178deg,
+        #fff8dc 0%, #ffd45c 26%, #a9761a 46%, #ffebad 58%,
+        #c8901f 76%, #fff5cf 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-asgard);
+    animation: mv-asgard-trueno 3.6s steps(1, end) infinite;
+}
+.ef-asgard:hover,
+.ef-asgard:focus-visible {
+    filter: url(#ef-asgard) brightness(1.4);
+    animation-duration: 1.6s;
+}
+
+.ef-asgard-mini {
+    color: #ffe9a8;
+    background: linear-gradient(178deg,
+        #fff8dc 0%, #ffd45c 26%, #a9761a 46%, #ffebad 58%,
+        #c8901f 76%, #fff5cf 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-asgard-mini);
+    animation: mv-asgard-trueno 3.6s steps(1, end) infinite;
+}
+.ef-asgard-mini:hover,
+.ef-asgard-mini:focus-visible {
+    filter: url(#ef-asgard-mini) brightness(1.4);
+}
+
+/* el trueno: destellos secos, sin fundido */
+@keyframes mv-asgard-trueno {
+    0%, 100% { text-shadow: 0 0 0 rgba(255,255,255,0);
+               letter-spacing: normal; }
+    14%      { text-shadow: 0 0 .9em rgba(255,255,240,1),
+                               0 0 2em rgba(255,215,90,.9);
+               letter-spacing: .06em; }
+    18%      { text-shadow: 0 0 0 rgba(255,255,255,0);
+               letter-spacing: normal; }
+    22%      { text-shadow: 0 0 .6em rgba(255,255,240,.9);
+               letter-spacing: .03em; }
+    26%      { text-shadow: 0 0 0 rgba(255,255,255,0);
+               letter-spacing: normal; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-asgard,
+    .ef-asgard-mini { animation: none; text-shadow: 0 0 .6em rgba(255,215,90,.7); }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-asgard,
+    .ef-asgard-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

@@ -1,0 +1,97 @@
+/* =============================================================
+   MULTIVERSO (SVG) · Copia CMYK desfasada
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-multiverso.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-multiverso,
+    .ef-multiverso-mini — sombras CMY + realce de cantos
+   ============================================================= */
+.ef-multiverso {
+    color: #101014;                     /* tinta base */
+    background: linear-gradient(180deg, #14141c 0%, #3a3a48 60%, #101014 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow:
+        .09em -.05em 0 rgba(0, 200, 255, .85),
+        -.09em .05em 0 rgba(255, 0, 170, .85),
+        .05em .09em 0 rgba(255, 220, 0, .85);
+    filter: url(#ef-multiverso);
+    animation: mv-multiverso-desfase 4.4s ease-in-out infinite;
+}
+.ef-multiverso:hover,
+.ef-multiverso:focus-visible {
+    filter: url(#ef-multiverso) brightness(1.25);
+    animation-duration: 1.8s;
+}
+
+.ef-multiverso-mini {
+    color: #101014;
+    background: linear-gradient(180deg, #14141c 0%, #3a3a48 60%, #101014 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow:
+        .06em -.03em 0 rgba(0, 200, 255, .85),
+        -.06em .03em 0 rgba(255, 0, 170, .85),
+        .03em .06em 0 rgba(255, 220, 0, .85);
+    filter: url(#ef-multiverso-mini);
+    animation: mv-multiverso-desfase 4.4s ease-in-out infinite;
+}
+.ef-multiverso-mini:hover,
+.ef-multiverso-mini:focus-visible {
+    filter: url(#ef-multiverso-mini) brightness(1.25);
+}
+
+/* los tres desfases se separan y vuelven a encajar */
+@keyframes mv-multiverso-desfase {
+    0%, 100% { text-shadow:
+                   .09em -.05em 0 rgba(0,200,255,.85),
+                   -.09em .05em 0 rgba(255,0,170,.85),
+                   .05em .09em 0 rgba(255,220,0,.85); }
+    42%      { text-shadow:
+                   .22em -.12em 0 rgba(0,200,255,.9),
+                   -.22em .12em 0 rgba(255,0,170,.9),
+                   .13em .22em 0 rgba(255,220,0,.9); }
+    58%      { text-shadow:
+                   -.14em .1em 0 rgba(0,200,255,.9),
+                   .14em -.1em 0 rgba(255,0,170,.9),
+                   -.1em -.14em 0 rgba(255,220,0,.9); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-multiverso,
+    .ef-multiverso-mini { animation: none; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-multiverso,
+    .ef-multiverso-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

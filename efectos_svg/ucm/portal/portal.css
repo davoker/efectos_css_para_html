@@ -1,0 +1,96 @@
+/* =============================================================
+   PORTAL (SVG) · Anillo de sling ring
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-portal.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-portal,
+    .ef-portal-mini — giro de matiz + rayos cónicos
+   ============================================================= */
+.ef-portal {
+    color: #ff8a3d;                     /* respaldo si no hay clip */
+    background:
+        repeating-conic-gradient(from 0deg at 50% 50%,
+            rgba(255, 235, 200, .95) 0 3deg, rgba(255, 110, 20, 0) 3deg 11deg),
+        radial-gradient(circle at 50% 50%,
+            #fff2d6 0%, #ffab4d 30%, #ff5e1a 62%, #7a1d00 100%);
+    background-size: 200% 200%, 100% 100%;
+    background-position: 50% 50%, 50% 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-portal) hue-rotate(0deg);
+    animation: mv-ucm-portal-giro 6s linear infinite,
+               mv-ucm-portal-matiz 9s linear infinite;
+}
+.ef-portal:hover,
+.ef-portal:focus-visible {
+    animation-duration: 2.4s, 3s;
+}
+.ef-portal-mini {
+    color: #ff8a3d;
+    background:
+        repeating-conic-gradient(from 0deg at 50% 50%,
+            rgba(255, 235, 200, .95) 0 3deg, rgba(255, 110, 20, 0) 3deg 11deg),
+        radial-gradient(circle at 50% 50%,
+            #fff2d6 0%, #ffab4d 30%, #ff5e1a 62%, #7a1d00 100%);
+    background-size: 200% 200%, 100% 100%;
+    background-position: 50% 50%, 50% 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-portal-mini) hue-rotate(0deg);
+    animation: mv-ucm-portal-giro 6s linear infinite,
+               mv-ucm-portal-matiz 9s linear infinite;
+}
+.ef-portal-mini:hover,
+.ef-portal-mini:focus-visible {
+    animation-duration: 2.4s, 3s;
+}
+
+/* el anillo gira... y el color gira con él */
+@keyframes mv-ucm-portal-giro {
+    0%   { background-position: 50% 50%, 50% 50%; }
+    100% { background-position: -200% -200%, 50% 50%; }
+}
+@keyframes mv-ucm-portal-matiz {
+    0%   { filter: url(#ef-portal) hue-rotate(0deg); }
+    100% { filter: url(#ef-portal) hue-rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-portal,
+    .ef-portal-mini { animation: none; filter: url(#ef-portal) hue-rotate(18deg); }
+    .ef-portal-mini { filter: url(#ef-portal-mini) hue-rotate(18deg); }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-portal,
+    .ef-portal-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

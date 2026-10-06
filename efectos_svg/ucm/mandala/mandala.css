@@ -1,0 +1,103 @@
+/* =============================================================
+   MANDALA (SVG) · Círculo tao girando
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-mandala.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-mandala,
+    .ef-mandala-mini — luz puntual + corona que se inclina
+   ============================================================= */
+.ef-mandala {
+    display: inline-block;
+    color: #ffde8a;                     /* respaldo si no hay clip */
+    background:
+        repeating-conic-gradient(from 8deg at 50% 50%,
+            rgba(255, 244, 210, .98) 0 5deg, rgba(255,190,70,0) 5deg 16deg),
+        repeating-radial-gradient(circle at 50% 50%,
+            rgba(255, 226, 150, .9) 0 3%, rgba(255,190,70,0) 3% 9%),
+        linear-gradient(160deg, #fff6da 0%, #ffc94d 40%, #a96d0c 78%,
+                        #ffeab5 100%);
+    background-size: 260% 260%, 100% 100%, 100% 100%;
+    background-position: 50% 50%, 0 0, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-mandala);
+    transform-origin: 50% 50%;
+    animation: mv-ucm-mandala-inclina 7s ease-in-out infinite,
+               mv-ucm-mandala-glifo 5s linear infinite;
+}
+.ef-mandala:hover,
+.ef-mandala:focus-visible {
+    animation-duration: 3s, 2s;
+}
+.ef-mandala-mini {
+    display: inline-block;
+    color: #ffde8a;
+    background:
+        repeating-conic-gradient(from 8deg at 50% 50%,
+            rgba(255, 244, 210, .98) 0 5deg, rgba(255,190,70,0) 5deg 16deg),
+        repeating-radial-gradient(circle at 50% 50%,
+            rgba(255, 226, 150, .9) 0 3%, rgba(255,190,70,0) 3% 9%),
+        linear-gradient(160deg, #fff6da 0%, #ffc94d 40%, #a96d0c 78%,
+                        #ffeab5 100%);
+    background-size: 260% 260%, 100% 100%, 100% 100%;
+    background-position: 50% 50%, 0 0, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-mandala-mini);
+    transform-origin: 50% 50%;
+    animation: mv-ucm-mandala-inclina 7s ease-in-out infinite,
+               mv-ucm-mandala-glifo 5s linear infinite;
+}
+.ef-mandala-mini:hover,
+.ef-mandala-mini:focus-visible {
+    animation-duration: 3s, 2s;
+}
+
+/* la corona se inclina y los tramos giran dentro de las letras */
+@keyframes mv-ucm-mandala-inclina {
+    0%, 100% { transform: rotate(-4deg) scale(1); }
+    50%      { transform: rotate(4deg) scale(1.03); }
+}
+@keyframes mv-ucm-mandala-glifo {
+    0%   { background-position: 50% 50%, 0 0, 0 0; }
+    100% { background-position: -260% -260%, 0 0, 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-mandala,
+    .ef-mandala-mini { animation: none; transform: none; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-mandala,
+    .ef-mandala-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

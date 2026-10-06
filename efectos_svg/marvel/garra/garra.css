@@ -1,0 +1,111 @@
+/* =============================================================
+   GARRA (SVG) · Tres tajos de adamantio
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-garra.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-garra,
+    .ef-garra-mini — máscara de tajos + especular
+   ============================================================= */
+.ef-garra {
+    color: #cfd8e2;                     /* respaldo si no hay clip */
+    background: linear-gradient(166deg,
+        #ffffff 4%, #b9c6d4 18%, #5d6a78 34%, #eef4fa 50%,
+        #7f8b99 66%, #d9e3ed 84%, #ffffff 96%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* tres tajos: la máscara recorta franjas diagonales del texto */
+    -webkit-mask-image: linear-gradient(104deg,
+        #000 0 16%, transparent 16% 19.5%,
+        #000 19.5% 46%, transparent 46% 49%,
+        #000 49% 77%, transparent 77% 80.5%,
+        #000 80.5% 100%);
+    mask-image: linear-gradient(104deg,
+        #000 0 16%, transparent 16% 19.5%,
+        #000 19.5% 46%, transparent 46% 49%,
+        #000 49% 77%, transparent 77% 80.5%,
+        #000 80.5% 100%);
+    filter: url(#ef-garra);
+    transition: filter .2s ease;
+    animation: mv-garra-abrir 5.2s ease-in-out infinite;
+}
+.ef-garra:hover,
+.ef-garra:focus-visible {
+    filter: url(#ef-garra) brightness(1.25);
+    animation-duration: 2.4s;
+    -webkit-mask-image: linear-gradient(104deg,
+        #000 0 14%, transparent 14% 21%,
+        #000 21% 44%, transparent 44% 50.5%,
+        #000 50.5% 75%, transparent 75% 82%,
+        #000 82% 100%);
+    mask-image: linear-gradient(104deg,
+        #000 0 14%, transparent 14% 21%,
+        #000 21% 44%, transparent 44% 50.5%,
+        #000 50.5% 75%, transparent 75% 82%,
+        #000 82% 100%);
+}
+
+.ef-garra-mini {
+    color: #cfd8e2;
+    background: linear-gradient(166deg,
+        #ffffff 4%, #b9c6d4 18%, #5d6a78 34%, #eef4fa 50%,
+        #7f8b99 66%, #d9e3ed 84%, #ffffff 96%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-mask-image: linear-gradient(104deg,
+        #000 0 17%, transparent 17% 18.6%,
+        #000 18.6% 47%, transparent 47% 48.6%,
+        #000 48.6% 78%, transparent 78% 79.6%,
+        #000 79.6% 100%);
+    mask-image: linear-gradient(104deg,
+        #000 0 17%, transparent 17% 18.6%,
+        #000 18.6% 47%, transparent 47% 48.6%,
+        #000 48.6% 78%, transparent 78% 79.6%,
+        #000 79.6% 100%);
+    filter: url(#ef-garra-mini);
+    animation: mv-garra-abrir 5.2s ease-in-out infinite;
+}
+
+/* los tajos se abren y se cierran: la herida respira */
+@keyframes mv-garra-abrir {
+    0%, 100% { -webkit-mask-position: 0 0; mask-position: 0 0; }
+    50%      { -webkit-mask-position: 7px 3px; mask-position: 7px 3px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-garra,
+    .ef-garra-mini { animation: none; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-garra,
+    .ef-garra-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

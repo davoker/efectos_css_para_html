@@ -1,0 +1,207 @@
+================================================================
+EFECTO QUINJET - CÓMO APLICARLO A CUALQUIER ARCHIVO .HTML/.CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "quinjet.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/quinjet.css">
+
+Contenido del archivo:
+  · la clase ef-quinjet (efecto completo, ≥24px)
+  · la clase ef-quinjet-mini (párrafos, inline y texto pequeño)
+  · Sus transiciones y estados al interactuar
+  · Fallbacks: prefers-reduced-motion y @media print
+
+
+PASO 2 - PEGA EL BLOQUE SVG DE FILTROS (UNA VEZ)
+-------------------------------------------------
+Este efecto usa filtros SVG (desenfoque direccional + estelas): pega el
+siguiente bloque UNA sola vez en la página que quiera usarlo
+-es el equivalente a quien pega el <style> de los efectos
+CSS. Lo tienes listo para copiar en el index.html de este
+efecto y en este mismo archivo:
+
+    <filter id="ef-quinjet" x="-30%" y="-55%" width="160%"
+            height="215%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="6 0" result="arrastra"/>
+        <feComponentTransfer in="arrastra" result="nítido">
+            <feFuncA type="linear" slope="1.5" intercept="-.15"/>
+        </feComponentTransfer>
+        <feComposite in="nítido" in2="SourceGraphic" operator="over"/>
+    </filter>
+    <filter id="ef-quinjet-mini" x="-22%" y="-50%" width="144%"
+            height="205%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="2.2 0" result="arrastra"/>
+        <feComponentTransfer in="arrastra" result="nítido">
+            <feFuncA type="linear" slope="1.4" intercept="-.1"/>
+        </feComponentTransfer>
+        <feComposite in="nítido" in2="SourceGraphic" operator="over"/>
+    </filter>
+
+Si la página usa varios de estos efectos, con UN solo bloque
+<svg> en la página vale para todos: cada efecto trae sus
+filtros dentro de <defs>.
+
+
+PASO 3 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+&lt;h1 class="ef-quinjet"&gt;Mi título&lt;/h1&gt;                     &lt;!-- efecto completo, ≥24px --&gt;
+&lt;p class="ef-quinjet-mini"&gt;Párrafo o texto pequeño.&lt;/p&gt;   &lt;!-- mini: legible hasta 13px --&gt;
+&lt;p&gt;Normal con &lt;span class="ef-quinjet-mini"&gt;fragmento&lt;/span&gt;.&lt;/p&gt;
+
+
+QUÉ HACE
+--------
+feGaussianBlur con stdDeviation desigual (sólo en horizontal) da el arrastre sin tocar la altura de la línea; las estelas son un repeating-linear-gradient que corre con background-position y letter-spacing se abre con la velocidad. Fuera del texto no hay estelas.
+
+TÉCNICA: filter: url(#ef-quinjet) con blur direccional + background-clip: text con estelas y background-position/ letter-spacing animados.
+
+
+VARIANTES Y TAMAÑO DEL TEXTO (importante)
+-----------------------------------------
+· .ef-quinjet — títulos grandes (≥24px): intensidad completa.
+· .ef-quinjet-mini — párrafos, fragmentos inline y texto pequeño:
+  versión suave, verificada legible a 13px.
+Si dudas, aplica por tamaño: completo en títulos, mini en
+el resto. Con movimiento reducido el efecto se queda en su
+estado inicial (sin desaparecer nunca el texto).
+
+
+REGLA DEL FONDO
+---------------
+El elemento con la clase no debe llevar fondo propio: el
+efecto se calcula sobre TODO lo que pinta el elemento y
+también pintaría la caja. Si tu bloque necesita fondo,
+ponlo en el PADRE y la clase en un <span> interior:
+
+    <div class="mi-caja">
+        <span class="ef-quinjet">efecto dentro, caja fuera</span>
+    </div>
+
+
+SELECCIÓN, IMPRESIÓN Y MOVIMIENTO
+---------------------------------
+· El texto es texto real del DOM: legible, seleccionable y
+  con los saltos de línea normales de tu página.
+· Al imprimir, @media print deja todo en negro liso sin
+  efectos (sigue siendo texto).
+· Con prefers-reduced-motion las animaciones CSS se detienen:
+  el efecto se ve en su estado inicial (sin SMIL ni JavaScript,
+  basta con esa regla).
+
+
+AJUSTES FÁCILES
+----------------
+· Intensidad: en el bloque <svg> busca el valor clave del filtro (scale, baseFrequency, stdDeviation o surfaceScale) y súbelo o bájalo a tu gusto.
+· Color: cambia los colores del gradiente y los del filtro (lighting-color, flood-color) por los de tu marca.
+· Velocidad: sube o baja la duración de los @keyframes del CSS (todas las animaciones son CSS: no hay SMIL ni JavaScript).
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+QUINJET EFFECT - HOW TO APPLY IT TO ANY .HTML/.CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "quinjet.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/quinjet.css">
+
+What the file contains:
+  · the ef-quinjet class (full effect, ≥24px)
+  · the ef-quinjet-mini class (paragraphs, inline and small text)
+  · Its transitions and states on interaction
+  · Fallbacks: prefers-reduced-motion and @media print
+
+
+STEP 2 - PASTE THE SVG FILTER BLOCK (ONCE)
+-------------------------------------------------
+This effect uses SVG filters (directional blur + contrails): paste the
+block below just ONCE on the page that will use it -it's the
+equivalent of pasting the <style> of the CSS effects. You
+have it ready to copy into this effect's index.html and into
+this same file:
+
+    <filter id="ef-quinjet" x="-30%" y="-55%" width="160%"
+            height="215%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="6 0" result="arrastra"/>
+        <feComponentTransfer in="arrastra" result="nítido">
+            <feFuncA type="linear" slope="1.5" intercept="-.15"/>
+        </feComponentTransfer>
+        <feComposite in="nítido" in2="SourceGraphic" operator="over"/>
+    </filter>
+    <filter id="ef-quinjet-mini" x="-22%" y="-50%" width="144%"
+            height="205%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="2.2 0" result="arrastra"/>
+        <feComponentTransfer in="arrastra" result="nítido">
+            <feFuncA type="linear" slope="1.4" intercept="-.1"/>
+        </feComponentTransfer>
+        <feComposite in="nítido" in2="SourceGraphic" operator="over"/>
+    </filter>
+
+If the page uses several of these effects, with ONE single
+<svg> block on the page works for all: each effect carries
+its filters inside <defs>.
+
+
+STEP 3 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+&lt;h1 class="ef-quinjet"&gt;Mi título&lt;/h1&gt;                     &lt;!-- efecto completo, ≥24px --&gt;
+&lt;p class="ef-quinjet-mini"&gt;Párrafo o texto pequeño.&lt;/p&gt;   &lt;!-- mini: legible hasta 13px --&gt;
+&lt;p&gt;Normal con &lt;span class="ef-quinjet-mini"&gt;fragmento&lt;/span&gt;.&lt;/p&gt;
+
+
+WHAT IT DOES
+--------
+feGaussianBlur with unequal stdDeviation (horizontal only) gives the drag without touching line height; the contrails are a repeating-linear-gradient running with background-position and letter-spacing widens with speed. No contrails outside the text.
+
+TECHNIQUE: filter: url(#ef-quinjet) with directional blur + background-clip: text with contrails and animated background-position / letter-spacing.
+
+
+VARIANTS AND TEXT SIZE (important)
+-----------------------------------------
+· .ef-quinjet — large headings (≥24px): full strength.
+· .ef-quinjet-mini — paragraphs, inline fragments and small text:
+  softened version, verified readable at 13px.
+If in doubt, apply by size: full on headings, mini on
+the rest. With reduced motion the effect keeps its
+initial state (the text never disappears).
+
+
+BACKGROUND RULE
+---------------
+The element with the class must not have its own background: the
+effect is computed over EVERYTHING the element paints and
+it would paint the box too. If your block needs a background,
+put it on the PARENT and the class on an inner <span>:
+
+    <div class="mi-caja">
+        <span class="ef-quinjet">effect inside, box outside</span>
+    </div>
+
+
+SELECTION, PRINTING AND MOTION
+---------------------------------
+· The text is real DOM text: readable, selectable and
+  with your page's normal line breaks.
+· When printing, @media print leaves everything flat black with no
+  effects (it's still text).
+· With prefers-reduced-motion the CSS animations stop: the
+  effect shows its initial state (no SMIL and no JavaScript,
+  that rule is enough).
+
+
+EASY TWEAKS
+---------------
+· Intensity: in the <svg> block look for the filter's key value (scale, baseFrequency, stdDeviation or surfaceScale) and raise or lower it as you like.
+· Color: swap the gradient colors and the filter's colors (lighting-color, flood-color) for your brand's.
+· Speed: raise or lower the duration of the CSS @keyframes (every animation is CSS: no SMIL and no JavaScript).
+
+================================================================

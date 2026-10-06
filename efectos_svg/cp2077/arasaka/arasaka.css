@@ -1,0 +1,91 @@
+/* =============================================================
+   ARASAKA (SVG) · Torre corporativa
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-arasaka.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-arasaka,
+    .ef-arasaka-mini — rendijas recortadas + tinta corporativa
+   ============================================================= */
+.ef-arasaka {
+    color: #ff2b3d;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(180deg,
+            rgba(0, 0, 0, .9) 0 4px, rgba(0,0,0,0) 4px 13px),
+        linear-gradient(178deg,
+            #ffffff 0%, #ffe6e9 24%, #ff2b3d 54%, #7a0512 78%,
+            #120104 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .7px rgba(18, 1, 4, .85);
+    paint-order: stroke fill;
+    filter: url(#ef-arasaka);
+    animation: mv-cp-arasaka-persiana 5.2s ease-in-out infinite;
+}
+.ef-arasaka:hover,
+.ef-arasaka:focus-visible {
+    animation-duration: 2.4s;
+}
+.ef-arasaka-mini {
+    color: #ff2b3d;
+    background:
+        repeating-linear-gradient(180deg,
+            rgba(0, 0, 0, .9) 0 3px, rgba(0,0,0,0) 3px 9px),
+        linear-gradient(178deg,
+            #ffffff 0%, #ffe6e9 24%, #ff2b3d 54%, #7a0512 78%,
+            #120104 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-arasaka-mini);
+    animation: mv-cp-arasaka-persiana 5.2s ease-in-out infinite;
+}
+.ef-arasaka-mini:hover,
+.ef-arasaka-mini:focus-visible {
+    animation-duration: 2.4s;
+}
+
+/* la persiana baja: tres rendijas se cierran a la vez */
+@keyframes mv-cp-arasaka-persiana {
+    0%, 100% { clip-path: inset(0 0 0 0); }
+    40%      { clip-path: inset(0 0 46% 0); }
+    56%      { clip-path: inset(38% 0 38% 0); }
+    74%      { clip-path: inset(0 0 18% 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-arasaka,
+    .ef-arasaka-mini { animation: none; clip-path: none; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-arasaka,
+    .ef-arasaka-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

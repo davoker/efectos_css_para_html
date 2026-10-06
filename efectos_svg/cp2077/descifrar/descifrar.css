@@ -1,0 +1,104 @@
+/* =============================================================
+   DESCIFRAR (SVG) · Letras que se reordenan
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-descifrar.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-descifrar,
+    .ef-descifrar-mini — cuantificación + salto de letras
+   ============================================================= */
+.ef-descifrar {
+    display: inline-block;
+    color: #d6e2ff;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, .35) 0 1px, rgba(0,0,0,0) 1px 4px),
+        linear-gradient(172deg,
+            #ffffff 0%, #b9c9ff 34%, #5a6df0 70%, #141a52 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1.6px rgba(20, 26, 82, .9);
+    paint-order: stroke fill;
+    filter: url(#ef-descifrar);
+    animation: mv-cp-descifrar-salta 3.6s steps(1, end) infinite,
+               mv-cp-descifrar-cifra 6.2s ease-in-out infinite;
+}
+.ef-descifrar:hover,
+.ef-descifrar:focus-visible {
+    animation-duration: 1.5s, 3s;
+}
+.ef-descifrar-mini {
+    display: inline-block;
+    color: #d6e2ff;
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, .3) 0 1px, rgba(0,0,0,0) 1px 3px),
+        linear-gradient(172deg,
+            #ffffff 0%, #b9c9ff 34%, #5a6df0 70%, #141a52 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .7px rgba(20, 26, 82, .9);
+    paint-order: stroke fill;
+    filter: url(#ef-descifrar-mini);
+    animation: mv-cp-descifrar-salta 3.6s steps(1, end) infinite,
+               mv-cp-descifrar-cifra 6.2s ease-in-out infinite;
+}
+.ef-descifrar-mini:hover,
+.ef-descifrar-mini:focus-visible {
+    animation-duration: 1.5s, 3s;
+}
+
+/* salto de letras sin fundido + engrosado del cifrado */
+@keyframes mv-cp-descifrar-salta {
+    0%, 100% { transform: translate(0, 0); }
+    20%      { transform: translate(.1em, -.06em); }
+    40%      { transform: translate(-.13em, .05em); }
+    60%      { transform: translate(.06em, .08em); }
+    80%      { transform: translate(-.05em, -.04em); }
+}
+@keyframes mv-cp-descifrar-cifra {
+    0%, 100% { -webkit-text-stroke-width: 1.6px; opacity: 1; }
+    44%      { -webkit-text-stroke-width: 3.4px; opacity: .8; }
+    58%      { -webkit-text-stroke-width: .8px;  opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-descifrar,
+    .ef-descifrar-mini {
+        animation: none; transform: none;
+        -webkit-text-stroke-width: 1.2px;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-descifrar,
+    .ef-descifrar-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

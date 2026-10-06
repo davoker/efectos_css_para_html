@@ -1,0 +1,97 @@
+/* =============================================================
+   ODÍN (SVG) · Padre de todo y su ojo
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-odin.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-odin,
+    .ef-odin-mini — duotono ámbar + oleadas de brillo
+   ============================================================= */
+.ef-odin {
+    color: #ffdd8a;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(102deg,
+            rgba(255, 245, 210, .8) 0 3px, rgba(140,95,10,0) 3px 22px),
+        linear-gradient(174deg,
+            #fff8e2 0%, #ffcf5c 30%, #8a5a08 56%, #ffd985 74%,
+            #6b4405 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-odin) brightness(1) contrast(1);
+    animation: mv-ucm-odin-mirada 5.2s ease-in-out infinite;
+}
+.ef-odin:hover,
+.ef-odin:focus-visible {
+    animation-duration: 2.4s;
+}
+.ef-odin-mini {
+    color: #ffdd8a;
+    background:
+        repeating-linear-gradient(102deg,
+            rgba(255, 245, 210, .8) 0 2px, rgba(140,95,10,0) 2px 16px),
+        linear-gradient(174deg,
+            #fff8e2 0%, #ffcf5c 30%, #8a5a08 56%, #ffd985 74%,
+            #6b4405 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-odin-mini) brightness(1) contrast(1);
+    animation: mv-ucm-odin-mirada 5.2s ease-in-out infinite;
+}
+.ef-odin-mini:hover,
+.ef-odin-mini:focus-visible {
+    animation-duration: 2.4s;
+}
+
+/* oleadas de brillo: el ojo se abre y se vuelve a cerrar */
+@keyframes mv-ucm-odin-mirada {
+    0%, 100% { filter: url(#ef-odin) brightness(1) contrast(1);
+               text-shadow: 0 0 0 rgba(90,190,255,0); }
+    40%      { filter: url(#ef-odin) brightness(1.7) contrast(1.25);
+               text-shadow: 0 0 .9em rgba(90,190,255,.9); }
+    56%      { filter: url(#ef-odin) brightness(1.1) contrast(1.05);
+               text-shadow: 0 0 .4em rgba(90,190,255,.5); }
+    76%      { filter: url(#ef-odin) brightness(1.5) contrast(1.2);
+               text-shadow: 0 0 .7em rgba(120,205,255,.8); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-odin,
+    .ef-odin-mini {
+        animation: none;
+        filter: url(#ef-odin) brightness(1.25) contrast(1.1);
+        text-shadow: 0 0 .5em rgba(90,190,255,.75);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-odin,
+    .ef-odin-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

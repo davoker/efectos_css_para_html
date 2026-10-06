@@ -1,0 +1,106 @@
+/* =============================================================
+   POW (SVG) · Impacto de cómic
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-pow.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-pow,
+    .ef-pow-mini — morfología + rayos cónicos
+   ============================================================= */
+.ef-pow {
+    display: inline-block;
+    color: #111;                        /* tinta del contorno */
+    background:
+        repeating-conic-gradient(from 0deg at 50% 50%,
+            rgba(255,255,255,.9) 0 4deg, rgba(255,255,255,0) 4deg 14deg),
+        radial-gradient(circle at 50% 50%,
+            #fff6c2 0%, #ffd400 38%, #ff7a00 78%, #e02c00 100%);
+    background-size: 300% 300%, 100% 100%;
+    background-position: 50% 50%, 50% 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 3px #14100a;
+    paint-order: stroke fill;
+    filter: url(#ef-pow);
+    animation: mv-pow-impacto 2.6s cubic-bezier(.2,1.6,.4,1) infinite;
+}
+.ef-pow:hover,
+.ef-pow:focus-visible {
+    filter: url(#ef-pow) brightness(1.2);
+    -webkit-text-stroke-width: 4px;
+    animation-duration: 1.2s;
+}
+
+.ef-pow-mini {
+    display: inline-block;
+    color: #111;
+    background:
+        repeating-conic-gradient(from 0deg at 50% 50%,
+            rgba(255,255,255,.9) 0 4deg, rgba(255,255,255,0) 4deg 14deg),
+        radial-gradient(circle at 50% 50%,
+            #fff6c2 0%, #ffd400 38%, #ff7a00 78%, #e02c00 100%);
+    background-size: 300% 300%, 100% 100%;
+    background-position: 50% 50%, 50% 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1.4px #14100a;
+    paint-order: stroke fill;
+    filter: url(#ef-pow-mini);
+    animation: mv-pow-impacto 2.6s cubic-bezier(.2,1.6,.4,1) infinite;
+}
+.ef-pow-mini:hover,
+.ef-pow-mini:focus-visible {
+    filter: url(#ef-pow-mini) brightness(1.2);
+}
+
+/* el golpe: estalla, se gira un punto y vuelve */
+@keyframes mv-pow-impacto {
+    0%, 100% { transform: scale(1) rotate(0deg);
+               background-position: 50% 50%, 50% 50%; }
+    8%       { transform: scale(1.16) rotate(-2.5deg);
+               background-position: 62% 38%, 50% 50%; }
+    16%      { transform: scale(.97) rotate(1.5deg);
+               background-position: 44% 58%, 50% 50%; }
+    44%      { transform: scale(1.03) rotate(-1deg);
+               background-position: 56% 46%, 50% 50%; }
+    62%      { transform: scale(1) rotate(0deg);
+               background-position: 50% 50%, 50% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-pow,
+    .ef-pow-mini { animation: none; transform: none; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-pow,
+    .ef-pow-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

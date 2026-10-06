@@ -1,0 +1,247 @@
+================================================================
+EFECTO REPULSOR - CÓMO APLICARLO A CUALQUIER ARCHIVO .HTML/.CSS
+================================================================
+
+PASO 1 - COPIA EL CSS
+---------------------
+Copia TODO el archivo "repulsor.css" dentro de tu hoja de estilos
+(o enlázalo desde tu HTML con):
+
+    <link rel="stylesheet" href="ruta/repulsor.css">
+
+Contenido del archivo:
+  · la clase ef-repulsor (efecto completo, ≥24px)
+  · la clase ef-repulsor-mini (párrafos, inline y texto pequeño)
+  · Sus transiciones y estados al interactuar
+  · Fallbacks: prefers-reduced-motion y @media print
+
+
+PASO 2 - PEGA EL BLOQUE SVG DE FILTROS (UNA VEZ)
+-------------------------------------------------
+Este efecto usa filtros SVG (desenfoque + iluminación especular): pega el
+siguiente bloque UNA sola vez en la página que quiera usarlo
+-es el equivalente a quien pega el <style> de los efectos
+CSS. Lo tienes listo para copiar en el index.html de este
+efecto y en este mismo archivo:
+
+    <filter id="ef-repulsor" x="-32%" y="-85%" width="164%"
+            height="270%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="7" result="nube"/>
+        <feFlood flood-color="#5fe9ff" result="cian"/>
+        <feComposite in="cian" in2="nube" operator="in" result="halo"/>
+        <feSpecularLighting in="nube" surfaceScale="4.5"
+                            specularConstant="1.45" specularExponent="18"
+                            lighting-color="#ffffff" result="brillo">
+            <fePointLight x="10" y="-45" z="70"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="SourceAlpha" operator="in"
+                     result="brillo-txt"/>
+        <feMerge>
+            <feMergeNode in="halo"/>
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="brillo-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-repulsor-mini" x="-16%" y="-55%" width="132%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="2.5" result="nube"/>
+        <feFlood flood-color="#5fe9ff" result="cian"/>
+        <feComposite in="cian" in2="nube" operator="in" result="halo"/>
+        <feSpecularLighting in="nube" surfaceScale="1.6"
+                            specularConstant=".85" specularExponent="26"
+                            lighting-color="#ffffff" result="brillo">
+            <fePointLight x="10" y="-25" z="60"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="SourceAlpha" operator="in"
+                     result="brillo-txt"/>
+        <feMerge>
+            <feMergeNode in="halo"/>
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="brillo-txt"/>
+        </feMerge>
+    </filter>
+
+Si la página usa varios de estos efectos, con UN solo bloque
+<svg> en la página vale para todos: cada efecto trae sus
+filtros dentro de <defs>.
+
+
+PASO 3 - AÑADE EL TEXTO EN TU HTML
+-----------------------------------
+&lt;h1 class="ef-repulsor"&gt;Mi título&lt;/h1&gt;                     &lt;!-- efecto completo, ≥24px --&gt;
+&lt;p class="ef-repulsor-mini"&gt;Párrafo o texto pequeño.&lt;/p&gt;   &lt;!-- mini: legible hasta 13px --&gt;
+&lt;p&gt;Normal con &lt;span class="ef-repulsor-mini"&gt;fragmento&lt;/span&gt;.&lt;/p&gt;
+
+
+QUÉ HACE
+--------
+Un halo cian nace del propio texto, un núcleo blanco late al centro y un brillo especular recorre los glifos: la energía de un reactor de arco. Fuera de las letras no se pinta absolutamente nada.
+
+TÉCNICA: filter: url(#ef-repulsor) (feGaussianBlur + feFlood + feSpecularLighting + feMerge) para el halo y el brillo, y background-clip: text con degradado cian para el relleno.
+
+
+VARIANTES Y TAMAÑO DEL TEXTO (importante)
+-----------------------------------------
+· .ef-repulsor — títulos grandes (≥24px): intensidad completa.
+· .ef-repulsor-mini — párrafos, fragmentos inline y texto pequeño:
+  versión suave, verificada legible a 13px.
+Si dudas, aplica por tamaño: completo en títulos, mini en
+el resto. Con movimiento reducido el efecto se queda en su
+estado inicial (sin desaparecer nunca el texto).
+
+
+REGLA DEL FONDO
+---------------
+El elemento con la clase no debe llevar fondo propio: el
+efecto se calcula sobre TODO lo que pinta el elemento y
+también pintaría la caja. Si tu bloque necesita fondo,
+ponlo en el PADRE y la clase en un <span> interior:
+
+    <div class="mi-caja">
+        <span class="ef-repulsor">efecto dentro, caja fuera</span>
+    </div>
+
+
+SELECCIÓN, IMPRESIÓN Y MOVIMIENTO
+---------------------------------
+· El texto es texto real del DOM: legible, seleccionable y
+  con los saltos de línea normales de tu página.
+· Al imprimir, @media print deja todo en negro liso sin
+  efectos (sigue siendo texto).
+· Con prefers-reduced-motion las animaciones CSS se detienen:
+  el efecto se ve en su estado inicial (sin SMIL ni JavaScript,
+  basta con esa regla).
+
+
+AJUSTES FÁCILES
+----------------
+· Intensidad: en el bloque <svg> busca el valor clave del filtro (scale, baseFrequency, stdDeviation o surfaceScale) y súbelo o bájalo a tu gusto.
+· Color: cambia los colores del gradiente y los del filtro (lighting-color, flood-color) por los de tu marca.
+· Velocidad: sube o baja la duración de los @keyframes del CSS (todas las animaciones son CSS: no hay SMIL ni JavaScript).
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+REPULSOR EFFECT - HOW TO APPLY IT TO ANY .HTML/.CSS FILE
+================================================================
+
+STEP 1 - COPY THE CSS
+---------------------
+Copy the WHOLE file "repulsor.css" into your stylesheet
+(or link it from your HTML with):
+
+    <link rel="stylesheet" href="ruta/repulsor.css">
+
+What the file contains:
+  · the ef-repulsor class (full effect, ≥24px)
+  · the ef-repulsor-mini class (paragraphs, inline and small text)
+  · Its transitions and states on interaction
+  · Fallbacks: prefers-reduced-motion and @media print
+
+
+STEP 2 - PASTE THE SVG FILTER BLOCK (ONCE)
+-------------------------------------------------
+This effect uses SVG filters (blur + specular lighting): paste the
+block below just ONCE on the page that will use it -it's the
+equivalent of pasting the <style> of the CSS effects. You
+have it ready to copy into this effect's index.html and into
+this same file:
+
+    <filter id="ef-repulsor" x="-32%" y="-85%" width="164%"
+            height="270%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="7" result="nube"/>
+        <feFlood flood-color="#5fe9ff" result="cian"/>
+        <feComposite in="cian" in2="nube" operator="in" result="halo"/>
+        <feSpecularLighting in="nube" surfaceScale="4.5"
+                            specularConstant="1.45" specularExponent="18"
+                            lighting-color="#ffffff" result="brillo">
+            <fePointLight x="10" y="-45" z="70"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="SourceAlpha" operator="in"
+                     result="brillo-txt"/>
+        <feMerge>
+            <feMergeNode in="halo"/>
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="brillo-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-repulsor-mini" x="-16%" y="-55%" width="132%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="2.5" result="nube"/>
+        <feFlood flood-color="#5fe9ff" result="cian"/>
+        <feComposite in="cian" in2="nube" operator="in" result="halo"/>
+        <feSpecularLighting in="nube" surfaceScale="1.6"
+                            specularConstant=".85" specularExponent="26"
+                            lighting-color="#ffffff" result="brillo">
+            <fePointLight x="10" y="-25" z="60"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="SourceAlpha" operator="in"
+                     result="brillo-txt"/>
+        <feMerge>
+            <feMergeNode in="halo"/>
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="brillo-txt"/>
+        </feMerge>
+    </filter>
+
+If the page uses several of these effects, with ONE single
+<svg> block on the page works for all: each effect carries
+its filters inside <defs>.
+
+
+STEP 3 - ADD THE TEXT TO YOUR HTML
+-----------------------------------
+&lt;h1 class="ef-repulsor"&gt;Mi título&lt;/h1&gt;                     &lt;!-- efecto completo, ≥24px --&gt;
+&lt;p class="ef-repulsor-mini"&gt;Párrafo o texto pequeño.&lt;/p&gt;   &lt;!-- mini: legible hasta 13px --&gt;
+&lt;p&gt;Normal con &lt;span class="ef-repulsor-mini"&gt;fragmento&lt;/span&gt;.&lt;/p&gt;
+
+
+WHAT IT DOES
+--------
+A cyan halo born from the text itself, a white core beating at the centre and a specular highlight running across the glyphs: arc reactor energy. Nothing at all is painted outside the letters.
+
+TECHNIQUE: filter: url(#ef-repulsor) (feGaussianBlur + feFlood + feSpecularLighting + feMerge) for the halo and the highlight, and background-clip: text with a cyan gradient for the fill.
+
+
+VARIANTS AND TEXT SIZE (important)
+-----------------------------------------
+· .ef-repulsor — large headings (≥24px): full strength.
+· .ef-repulsor-mini — paragraphs, inline fragments and small text:
+  softened version, verified readable at 13px.
+If in doubt, apply by size: full on headings, mini on
+the rest. With reduced motion the effect keeps its
+initial state (the text never disappears).
+
+
+BACKGROUND RULE
+---------------
+The element with the class must not have its own background: the
+effect is computed over EVERYTHING the element paints and
+it would paint the box too. If your block needs a background,
+put it on the PARENT and the class on an inner <span>:
+
+    <div class="mi-caja">
+        <span class="ef-repulsor">effect inside, box outside</span>
+    </div>
+
+
+SELECTION, PRINTING AND MOTION
+---------------------------------
+· The text is real DOM text: readable, selectable and
+  with your page's normal line breaks.
+· When printing, @media print leaves everything flat black with no
+  effects (it's still text).
+· With prefers-reduced-motion the CSS animations stop: the
+  effect shows its initial state (no SMIL and no JavaScript,
+  that rule is enough).
+
+
+EASY TWEAKS
+---------------
+· Intensity: in the <svg> block look for the filter's key value (scale, baseFrequency, stdDeviation or surfaceScale) and raise or lower it as you like.
+· Color: swap the gradient colors and the filter's colors (lighting-color, flood-color) for your brand's.
+· Speed: raise or lower the duration of the CSS @keyframes (every animation is CSS: no SMIL and no JavaScript).
+
+================================================================

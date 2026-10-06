@@ -1,0 +1,98 @@
+/* =============================================================
+   HIDRA (SVG) · Cabeza que serpentea
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-hidra.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-hidra,
+    .ef-hidra-mini — serpentear por desplazamiento + sesgo
+   ============================================================= */
+.ef-hidra {
+    color: #4be08a;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(126deg,
+            rgba(10, 46, 26, .95) 0 10px, rgba(10,46,26,0) 10px 20px),
+        linear-gradient(150deg,
+            #d8ffe9 0%, #4be08a 30%, #0f7a45 62%, #04220f 100%);
+    background-size: 40px 100%, 100% 100%;
+    background-position: 0 0, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-hidra);
+    transform-origin: 50% 50%;
+    animation: mv-ucm-hidra-serpentea 4.8s ease-in-out infinite,
+               mv-ucm-hidra-escamas 3.2s linear infinite;
+}
+.ef-hidra:hover,
+.ef-hidra:focus-visible {
+    animation-duration: 2.2s, 1.4s;
+}
+.ef-hidra-mini {
+    color: #4be08a;
+    background:
+        repeating-linear-gradient(126deg,
+            rgba(10, 46, 26, .95) 0 6px, rgba(10,46,26,0) 6px 12px),
+        linear-gradient(150deg,
+            #d8ffe9 0%, #4be08a 30%, #0f7a45 62%, #04220f 100%);
+    background-size: 26px 100%, 100% 100%;
+    background-position: 0 0, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-hidra-mini);
+    transform-origin: 50% 50%;
+    animation: mv-ucm-hidra-serpentea 4.8s ease-in-out infinite,
+               mv-ucm-hidra-escamas 3.2s linear infinite;
+}
+.ef-hidra-mini:hover,
+.ef-hidra-mini:focus-visible {
+    animation-duration: 2.2s, 1.4s;
+}
+
+/* el cuerpo ondula (sesgo) y las escamas bajan por él */
+@keyframes mv-ucm-hidra-serpentea {
+    0%, 100% { transform: skewX(0deg) scaleY(1); }
+    25%      { transform: skewX(-3.5deg) scaleY(1.04); }
+    75%      { transform: skewX(3.5deg) scaleY(.97); }
+}
+@keyframes mv-ucm-hidra-escamas {
+    0%   { background-position: 0 0, 0 0; }
+    100% { background-position: -40px 0, 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-hidra,
+    .ef-hidra-mini { animation: none; transform: none; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-hidra,
+    .ef-hidra-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

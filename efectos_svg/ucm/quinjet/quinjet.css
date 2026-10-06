@@ -1,0 +1,98 @@
+/* =============================================================
+   QUINJET (SVG) · Estelas a toda velocidad
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-quinjet.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-quinjet,
+    .ef-quinjet-mini — desenfoque direccional + estelas
+   ============================================================= */
+.ef-quinjet {
+    color: #eaf6ff;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(255,255,255,.75) 0 2px, rgba(255,255,255,0) 2px 9px),
+        linear-gradient(98deg,
+            #ffffff 0%, #9ad8ff 26%, #1f6fb2 58%, #d8f2ff 74%,
+            #0b3a63 100%);
+    background-size: 90px 100%, 100% 100%;
+    background-position: 0 0, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-quinjet);
+    letter-spacing: 0em;
+    animation: mv-ucm-quinjet-estela 1.6s linear infinite,
+               mv-ucm-quinjet-tiron 3.2s ease-in-out infinite;
+}
+.ef-quinjet:hover,
+.ef-quinjet:focus-visible {
+    animation-duration: .7s, 1.4s;
+}
+.ef-quinjet-mini {
+    color: #eaf6ff;
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(255,255,255,.75) 0 1px, rgba(255,255,255,0) 1px 6px),
+        linear-gradient(98deg,
+            #ffffff 0%, #9ad8ff 26%, #1f6fb2 58%, #d8f2ff 74%,
+            #0b3a63 100%);
+    background-size: 60px 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-quinjet-mini);
+    letter-spacing: 0em;
+    animation: mv-ucm-quinjet-estela 1.6s linear infinite,
+               mv-ucm-quinjet-tiron 3.2s ease-in-out infinite;
+}
+.ef-quinjet-mini:hover,
+.ef-quinjet-mini:focus-visible {
+    animation-duration: .7s, 1.4s;
+}
+
+/* las estelas corren y el arrastre abre las letras */
+@keyframes mv-ucm-quinjet-estela {
+    0%   { background-position: 0 0, 0 0; }
+    100% { background-position: -90px 0, 0 0; }
+}
+@keyframes mv-ucm-quinjet-tiron {
+    0%, 100% { letter-spacing: 0em; }
+    50%      { letter-spacing: .16em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-quinjet,
+    .ef-quinjet-mini { animation: none; letter-spacing: 0; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-quinjet,
+    .ef-quinjet-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

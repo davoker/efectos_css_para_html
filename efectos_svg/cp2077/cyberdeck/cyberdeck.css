@@ -1,0 +1,104 @@
+/* =============================================================
+   CYBERDECK (SVG) · Ranuras encendiendo
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-cyberdeck.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-cyberdeck,
+    .ef-cyberdeck-mini — módulos a saltos + halo
+   ============================================================= */
+.ef-cyberdeck {
+    color: #7cf5ff;                     /* respaldo si no hay clip */
+    background:
+        repeating-conic-gradient(from 0deg at 50% 50%,
+            rgba(6, 18, 30, .95) 0 6deg, rgba(6,18,30,0) 6deg 20deg),
+        repeating-linear-gradient(90deg,
+            #7cf5ff 0 8px, #0a2a3a 8px 16px,
+            #ffcf5c 16px 24px, #0a2a3a 24px 32px),
+        linear-gradient(176deg,
+            #ffffff 0%, #7cf5ff 40%, #14607e 78%, #062230 100%);
+    background-size: 100% 100%, 64px 100%, 100% 100%;
+    background-position: 0 0, 0 0, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-cyberdeck);
+    animation: mv-cp-cyberdeck-ranura 2.8s steps(4, end) infinite,
+               mv-cp-cyberdeck-halo 5.6s ease-in-out infinite;
+}
+.ef-cyberdeck:hover,
+.ef-cyberdeck:focus-visible {
+    animation-duration: 1.2s, 2.6s;
+}
+.ef-cyberdeck-mini {
+    color: #7cf5ff;
+    background:
+        repeating-conic-gradient(from 0deg at 50% 50%,
+            rgba(6, 18, 30, .95) 0 6deg, rgba(6,18,30,0) 6deg 20deg),
+        repeating-linear-gradient(90deg,
+            #7cf5ff 0 6px, #0a2a3a 6px 12px,
+            #ffcf5c 12px 18px, #0a2a3a 18px 24px),
+        linear-gradient(176deg,
+            #ffffff 0%, #7cf5ff 40%, #14607e 78%, #062230 100%);
+    background-size: 100% 100%, 42px 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-cyberdeck-mini);
+    animation: mv-cp-cyberdeck-ranura 2.8s steps(4, end) infinite,
+               mv-cp-cyberdeck-halo 5.6s ease-in-out infinite;
+}
+.ef-cyberdeck-mini:hover,
+.ef-cyberdeck-mini:focus-visible {
+    animation-duration: 1.2s, 2.6s;
+}
+
+/* las ranuras avanzan de golpe y el halo da la vuelta */
+@keyframes mv-cp-cyberdeck-ranura {
+    0%   { background-position: 0 0, 0 0, 0 0; }
+    100% { background-position: 0 0, -64px 0, 0 0; }
+}
+@keyframes mv-cp-cyberdeck-halo {
+    0%, 100% { text-shadow: 0 0 .5em rgba(124, 245, 255, .7); }
+    25%      { text-shadow: 0 0 1.1em rgba(124, 245, 255, 1); }
+    50%      { text-shadow: 0 0 .5em rgba(255, 207, 92, .95); }
+    75%      { text-shadow: 0 0 1.1em rgba(255, 207, 92, .6); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-cyberdeck,
+    .ef-cyberdeck-mini {
+        animation: none; text-shadow: 0 0 .7em rgba(124,245,255,.85);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-cyberdeck,
+    .ef-cyberdeck-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

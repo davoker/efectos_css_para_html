@@ -177,6 +177,66 @@
     <link rel="stylesheet" href="efectos_svg/Matrix/matrix/matrix.css">
     <link rel="stylesheet" href="efectos_svg/miscelanea/mercurio/mercurio.css">
     <link rel="stylesheet" href="efectos_svg/miscelanea/glitch/glitch.css">
+<link rel="stylesheet" href="efectos_svg/marvel/repulsor/repulsor.css">
+<link rel="stylesheet" href="efectos_svg/marvel/telarana/telarana.css">
+<link rel="stylesheet" href="efectos_svg/marvel/garra/garra.css">
+<link rel="stylesheet" href="efectos_svg/marvel/escudo/escudo.css">
+<link rel="stylesheet" href="efectos_svg/marvel/gamma/gamma.css">
+<link rel="stylesheet" href="efectos_svg/marvel/runa/runa.css">
+<link rel="stylesheet" href="efectos_svg/marvel/fenix/fenix.css">
+<link rel="stylesheet" href="efectos_svg/marvel/simbionte/simbionte.css">
+<link rel="stylesheet" href="efectos_svg/marvel/kinetica/kinetica.css">
+<link rel="stylesheet" href="efectos_svg/marvel/diminuto/diminuto.css">
+<link rel="stylesheet" href="efectos_svg/marvel/nano/nano.css">
+<link rel="stylesheet" href="efectos_svg/marvel/asgard/asgard.css">
+<link rel="stylesheet" href="efectos_svg/marvel/pow/pow.css">
+<link rel="stylesheet" href="efectos_svg/marvel/semitono/semitono.css">
+<link rel="stylesheet" href="efectos_svg/marvel/multiverso/multiverso.css">
+<link rel="stylesheet" href="efectos_svg/marvel/visor/visor.css">
+<link rel="stylesheet" href="efectos_svg/marvel/fase/fase.css">
+<link rel="stylesheet" href="efectos_svg/marvel/inmortal/inmortal.css">
+<link rel="stylesheet" href="efectos_svg/marvel/voltaje/voltaje.css">
+<link rel="stylesheet" href="efectos_svg/marvel/gemma/gemma.css">
+<link rel="stylesheet" href="efectos_svg/ucm/portal/portal.css">
+<link rel="stylesheet" href="efectos_svg/ucm/foton/foton.css">
+<link rel="stylesheet" href="efectos_svg/ucm/blip/blip.css">
+<link rel="stylesheet" href="efectos_svg/ucm/avengers/avengers.css">
+<link rel="stylesheet" href="efectos_svg/ucm/cuantico/cuantico.css">
+<link rel="stylesheet" href="efectos_svg/ucm/mandala/mandala.css">
+<link rel="stylesheet" href="efectos_svg/ucm/bifrost/bifrost.css">
+<link rel="stylesheet" href="efectos_svg/ucm/hidra/hidra.css">
+<link rel="stylesheet" href="efectos_svg/ucm/aguila/aguila.css">
+<link rel="stylesheet" href="efectos_svg/ucm/odin/odin.css">
+<link rel="stylesheet" href="efectos_svg/ucm/anillos/anillos.css">
+<link rel="stylesheet" href="efectos_svg/ucm/vormir/vormir.css">
+<link rel="stylesheet" href="efectos_svg/ucm/tva/tva.css">
+<link rel="stylesheet" href="efectos_svg/ucm/leviatan/leviatan.css">
+<link rel="stylesheet" href="efectos_svg/ucm/quinjet/quinjet.css">
+<link rel="stylesheet" href="efectos_svg/ucm/aether/aether.css">
+<link rel="stylesheet" href="efectos_svg/ucm/guardianes/guardianes.css">
+<link rel="stylesheet" href="efectos_svg/ucm/mente/mente.css">
+<link rel="stylesheet" href="efectos_svg/ucm/groot/groot.css">
+<link rel="stylesheet" href="efectos_svg/ucm/sakaar/sakaar.css">
+<link rel="stylesheet" href="efectos_svg/cp2077/netrunner/netrunner.css">
+<link rel="stylesheet" href="efectos_svg/cp2077/kiroshi/kiroshi.css">
+<link rel="stylesheet" href="efectos_svg/cp2077/sande/sande.css">
+<link rel="stylesheet" href="efectos_svg/cp2077/mantis/mantis.css">
+<link rel="stylesheet" href="efectos_svg/cp2077/breach/breach.css">
+<link rel="stylesheet" href="efectos_svg/cp2077/blackwall/blackwall.css">
+<link rel="stylesheet" href="efectos_svg/cp2077/relic/relic.css">
+<link rel="stylesheet" href="efectos_svg/cp2077/konpeki/konpeki.css">
+<link rel="stylesheet" href="efectos_svg/cp2077/arasaka/arasaka.css">
+<link rel="stylesheet" href="efectos_svg/cp2077/militech/militech.css">
+<link rel="stylesheet" href="efectos_svg/cp2077/eddies/eddies.css">
+<link rel="stylesheet" href="efectos_svg/cp2077/braindance/braindance.css">
+<link rel="stylesheet" href="efectos_svg/cp2077/quickhack/quickhack.css">
+<link rel="stylesheet" href="efectos_svg/cp2077/descifrar/descifrar.css">
+<link rel="stylesheet" href="efectos_svg/cp2077/cyberdeck/cyberdeck.css">
+<link rel="stylesheet" href="efectos_svg/cp2077/nomad/nomad.css">
+<link rel="stylesheet" href="efectos_svg/cp2077/corpo/corpo.css">
+<link rel="stylesheet" href="efectos_svg/cp2077/streetkid/streetkid.css">
+<link rel="stylesheet" href="efectos_svg/cp2077/nightcity/nightcity.css">
+<link rel="stylesheet" href="efectos_svg/cp2077/danio/danio.css">
     <link rel="stylesheet" href="efectos_css/stalker/militares/militares.css">
     <link rel="stylesheet" href="efectos_css/stalker/ecologistas/ecologistas.css">
     <link rel="stylesheet" href="efectos_css/stalker/monolito/monolito.css">
@@ -942,6 +1002,31 @@
             display: none;
         }
 
+        body:has(.grupo[open]):not(:has(#g-svg-marvel[open]))
+            .seccion-svg .tarjeta-svg[data-svg="marvel"] {
+            display: none;
+        }
+
+        body:has(.grupo[open]):not(:has(#g-svg-ucm[open]))
+            .seccion-svg .tarjeta-svg[data-svg="ucm"] {
+            display: none;
+        }
+
+        body:has(.grupo[open]):not(:has(#g-svg-cp2077[open]))
+            .seccion-svg .tarjeta-svg[data-svg="cp2077"] {
+            display: none;
+        }
+
+        body:has(.grupo[open]):not(:has(#g-svg-PENDIENTE[open]))
+            .seccion-svg .tarjeta-svg[data-svg="PENDIENTE"] {
+            display: none;
+        }
+
+        body:has(.grupo[open]):not(:has(#g-svg-PENDIENTE[open]))
+            .seccion-svg .tarjeta-svg[data-svg="PENDIENTE"] {
+            display: none;
+        }
+
         body:has(.grupo[open]):not(:has(.grupo[id^="g-svg"]))
             .seccion-svg {
             display: none;
@@ -1379,6 +1464,1763 @@
                            values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
             <feBlend in="rojo" in2="cian" mode="screen"/>
         </filter>
+        <!-- repulsor · Repulsor -->
+    <filter id="ef-repulsor" x="-32%" y="-85%" width="164%"
+            height="270%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="7" result="nube"/>
+        <feFlood flood-color="#5fe9ff" result="cian"/>
+        <feComposite in="cian" in2="nube" operator="in" result="halo"/>
+        <feSpecularLighting in="nube" surfaceScale="4.5"
+                            specularConstant="1.45" specularExponent="18"
+                            lighting-color="#ffffff" result="brillo">
+            <fePointLight x="10" y="-45" z="70"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="SourceAlpha" operator="in"
+                     result="brillo-txt"/>
+        <feMerge>
+            <feMergeNode in="halo"/>
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="brillo-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-repulsor-mini" x="-16%" y="-55%" width="132%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="2.5" result="nube"/>
+        <feFlood flood-color="#5fe9ff" result="cian"/>
+        <feComposite in="cian" in2="nube" operator="in" result="halo"/>
+        <feSpecularLighting in="nube" surfaceScale="1.6"
+                            specularConstant=".85" specularExponent="26"
+                            lighting-color="#ffffff" result="brillo">
+            <fePointLight x="10" y="-25" z="60"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="SourceAlpha" operator="in"
+                     result="brillo-txt"/>
+        <feMerge>
+            <feMergeNode in="halo"/>
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="brillo-txt"/>
+        </feMerge>
+    </filter>
+        <!-- telarana · Telaraña -->
+    <filter id="ef-telarana" x="-14%" y="-45%" width="128%"
+            height="190%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".018 .05"
+                      numOctaves="2" seed="4" result="aire"
+                      stitchTiles="stitch"/>
+        <feDisplacementMap in="SourceGraphic" in2="aire" scale="4.5"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="temblor"/>
+        <feSpecularLighting in="aire" surfaceScale="2.4"
+                            specularConstant="1.1" specularExponent="22"
+                            lighting-color="#ffffff" result="seda">
+            <feDistantLight azimuth="200" elevation="62"/>
+        </feSpecularLighting>
+        <feComposite in="seda" in2="temblor" operator="in" result="seda-txt"/>
+        <feComposite in="seda-txt" in2="temblor" operator="arithmetic"
+                     k1="0" k2="1" k3=".7" k4="0" result="suma"/>
+        <feComposite in="suma" in2="temblor" operator="in"/>
+    </filter>
+    <filter id="ef-telarana-mini" x="-8%" y="-40%" width="116%"
+            height="180%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .11"
+                      numOctaves="2" seed="4" result="aire"
+                      stitchTiles="stitch"/>
+        <feDisplacementMap in="SourceGraphic" in2="aire" scale="1.6"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="temblor"/>
+        <feSpecularLighting in="aire" surfaceScale="1"
+                            specularConstant=".7" specularExponent="30"
+                            lighting-color="#ffffff" result="seda">
+            <feDistantLight azimuth="200" elevation="66"/>
+        </feSpecularLighting>
+        <feComposite in="seda" in2="temblor" operator="in" result="seda-txt"/>
+        <feComposite in="seda-txt" in2="temblor" operator="arithmetic"
+                     k1="0" k2="1" k3=".6" k4="0" result="suma"/>
+        <feComposite in="suma" in2="temblor" operator="in"/>
+    </filter>
+        <!-- garra · Garra -->
+    <filter id="ef-garra" x="-14%" y="-50%" width="128%"
+            height="200%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".03 .06"
+                      numOctaves="2" seed="9" result="borde"/>
+        <feDisplacementMap in="SourceGraphic" in2="borde" scale="2.6"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="rasgado"/>
+        <feSpecularLighting in="rasgado" surfaceScale="5"
+                            specularConstant="1.35" specularExponent="16"
+                            lighting-color="#f4fbff" result="brillo">
+            <feDistantLight azimuth="248" elevation="46"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="rasgado" operator="in"
+                     result="brillo-txt"/>
+        <feComposite in="brillo-txt" in2="rasgado" operator="arithmetic"
+                     k1="0" k2="1" k3=".85" k4="0" result="suma"/>
+        <feComposite in="suma" in2="rasgado" operator="in"/>
+    </filter>
+    <filter id="ef-garra-mini" x="-8%" y="-45%" width="116%"
+            height="190%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".07 .13"
+                      numOctaves="2" seed="9" result="borde"/>
+        <feDisplacementMap in="SourceGraphic" in2="borde" scale="1.1"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="rasgado"/>
+        <feSpecularLighting in="rasgado" surfaceScale="2"
+                            specularConstant=".8" specularExponent="24"
+                            lighting-color="#f4fbff" result="brillo">
+            <feDistantLight azimuth="248" elevation="54"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="rasgado" operator="in"
+                     result="brillo-txt"/>
+        <feComposite in="brillo-txt" in2="rasgado" operator="arithmetic"
+                     k1="0" k2="1" k3=".7" k4="0" result="suma"/>
+        <feComposite in="suma" in2="rasgado" operator="in"/>
+    </filter>
+        <!-- escudo · Escudo -->
+    <filter id="ef-escudo" x="-22%" y="-70%" width="144%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feSpecularLighting in="SourceAlpha" surfaceScale="6"
+                            specularConstant="1.5" specularExponent="14"
+                            lighting-color="#ffffff" result="brillo">
+            <feDistantLight azimuth="230" elevation="42"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="SourceAlpha" operator="in"
+                     result="brillo-txt"/>
+        <feComposite in="brillo-txt" in2="SourceGraphic" operator="arithmetic"
+                     k1="0" k2="1" k3=".8" k4="0" result="suma"/>
+        <feComposite in="suma" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-escudo-mini" x="-12%" y="-55%" width="124%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feSpecularLighting in="SourceAlpha" surfaceScale="2.4"
+                            specularConstant=".95" specularExponent="22"
+                            lighting-color="#ffffff" result="brillo">
+            <feDistantLight azimuth="230" elevation="52"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="SourceAlpha" operator="in"
+                     result="brillo-txt"/>
+        <feComposite in="brillo-txt" in2="SourceGraphic" operator="arithmetic"
+                     k1="0" k2="1" k3=".7" k4="0" result="suma"/>
+        <feComposite in="suma" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- gamma · Gamma -->
+    <filter id="ef-gamma" x="-16%" y="-55%" width="132%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".012 .03"
+                      numOctaves="2" seed="17" result="suelo"/>
+        <feDisplacementMap in="SourceGraphic" in2="suelo" scale="7"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="sacudido"/>
+        <feMorphology operator="dilate" radius="1.4" in="sacudido"
+                      result="hinchado"/>
+        <feComposite in="hinchado" in2="sacudido" operator="over"
+                     result="masa"/>
+        <feSpecularLighting in="masa" surfaceScale="3"
+                            specularConstant="1.1" specularExponent="20"
+                            lighting-color="#d9ffb0" result="brillo">
+            <feDistantLight azimuth="210" elevation="58"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="masa" operator="in" result="brillo-txt"/>
+        <feComposite in="brillo-txt" in2="masa" operator="arithmetic"
+                     k1="0" k2="1" k3=".75" k4="0" result="suma"/>
+        <feComposite in="suma" in2="masa" operator="in"/>
+    </filter>
+    <filter id="ef-gamma-mini" x="-9%" y="-45%" width="118%"
+            height="190%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".045 .1"
+                      numOctaves="2" seed="17" result="suelo"/>
+        <feDisplacementMap in="SourceGraphic" in2="suelo" scale="2"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="sacudido"/>
+        <feMorphology operator="dilate" radius=".5" in="sacudido"
+                      result="hinchado"/>
+        <feComposite in="hinchado" in2="sacudido" operator="over"
+                     result="masa"/>
+        <feSpecularLighting in="masa" surfaceScale="1.4"
+                            specularConstant=".7" specularExponent="26"
+                            lighting-color="#d9ffb0" result="brillo">
+            <feDistantLight azimuth="210" elevation="64"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="masa" operator="in" result="brillo-txt"/>
+        <feComposite in="brillo-txt" in2="masa" operator="arithmetic"
+                     k1="0" k2="1" k3=".6" k4="0" result="suma"/>
+        <feComposite in="suma" in2="masa" operator="in"/>
+    </filter>
+        <!-- runa · Runa -->
+    <filter id="ef-runa" x="-16%" y="-55%" width="132%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".014 .035"
+                      numOctaves="3" seed="21" result="piedra"/>
+        <feDisplacementMap in="SourceGraphic" in2="piedra" scale="5"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="quiebro"/>
+        <feTurbulence type="fractalNoise" baseFrequency=".09"
+                      numOctaves="1" seed="5" result="chispa"/>
+        <feColorMatrix in="chispa" type="matrix" result="brasas"
+            values="0 0 0 0 1
+                    0 0 0 0 .72
+                    0 0 0 0 .25
+                    1.6 0 0 0 -.72"/>
+        <feComposite in="brasas" in2="quiebro" operator="in" result="dentro"/>
+        <feMerge>
+            <feMergeNode in="quiebro"/>
+            <feMergeNode in="dentro"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-runa-mini" x="-9%" y="-45%" width="118%"
+            height="190%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .11"
+                      numOctaves="3" seed="21" result="piedra"/>
+        <feDisplacementMap in="SourceGraphic" in2="piedra" scale="1.6"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="quiebro"/>
+        <feTurbulence type="fractalNoise" baseFrequency=".28"
+                      numOctaves="1" seed="5" result="chispa"/>
+        <feColorMatrix in="chispa" type="matrix" result="brasas"
+            values="0 0 0 0 1
+                    0 0 0 0 .72
+                    0 0 0 0 .25
+                    2 0 0 0 -1.1"/>
+        <feComposite in="brasas" in2="quiebro" operator="in" result="dentro"/>
+        <feMerge>
+            <feMergeNode in="quiebro"/>
+            <feMergeNode in="dentro"/>
+        </feMerge>
+    </filter>
+        <!-- fenix · Fénix -->
+    <filter id="ef-fenix" x="-16%" y="-60%" width="132%"
+            height="230%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".006 .05"
+                      numOctaves="3" seed="13" result="lengua"/>
+        <feDisplacementMap in="SourceGraphic" in2="lengua" scale="8"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="ondea"/>
+        <feComponentTransfer in="ondea" result="quema">
+            <feFuncR type="table" tableValues="0 0.45 0.9 1 1"/>
+            <feFuncG type="table" tableValues="0 0.1 0.34 0.66 1"/>
+            <feFuncB type="table" tableValues="0 0 0.04 0.22 0.75"/>
+        </feComponentTransfer>
+        <feComposite in="quema" in2="ondea" operator="in"/>
+    </filter>
+    <filter id="ef-fenix-mini" x="-9%" y="-50%" width="118%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".03 .14"
+                      numOctaves="3" seed="13" result="lengua"/>
+        <feDisplacementMap in="SourceGraphic" in2="lengua" scale="2.4"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="ondea"/>
+        <feComponentTransfer in="ondea" result="quema">
+            <feFuncR type="table" tableValues="0 0.45 0.9 1 1"/>
+            <feFuncG type="table" tableValues="0 0.1 0.34 0.66 1"/>
+            <feFuncB type="table" tableValues="0 0 0.04 0.22 0.75"/>
+        </feComponentTransfer>
+        <feComposite in="quema" in2="ondea" operator="in"/>
+    </filter>
+        <!-- simbionte · Simbionte -->
+    <filter id="ef-simbionte" x="-18%" y="-60%" width="136%"
+            height="230%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".004 .011"
+                      numOctaves="2" seed="31" result="baba"/>
+        <feDisplacementMap in="SourceGraphic" in2="baba" scale="14"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="derrite"/>
+        <feGaussianBlur in="derrite" stdDeviation=".6" result="suave"/>
+        <feSpecularLighting in="suave" surfaceScale="7"
+                            specularConstant="1.7" specularExponent="34"
+                            lighting-color="#eaf3ff" result="humedad">
+            <feDistantLight azimuth="160" elevation="66"/>
+        </feSpecularLighting>
+        <feComposite in="humedad" in2="derrite" operator="in"
+                     result="humedad-txt"/>
+        <feMerge>
+            <feMergeNode in="derrite"/>
+            <feMergeNode in="humedad-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-simbionte-mini" x="-10%" y="-50%" width="120%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".02 .05"
+                      numOctaves="2" seed="31" result="baba"/>
+        <feDisplacementMap in="SourceGraphic" in2="baba" scale="3.4"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="derrite"/>
+        <feGaussianBlur in="derrite" stdDeviation=".35" result="suave"/>
+        <feSpecularLighting in="suave" surfaceScale="3"
+                            specularConstant="1" specularExponent="40"
+                            lighting-color="#eaf3ff" result="humedad">
+            <feDistantLight azimuth="160" elevation="70"/>
+        </feSpecularLighting>
+        <feComposite in="humedad" in2="derrite" operator="in"
+                     result="humedad-txt"/>
+        <feMerge>
+            <feMergeNode in="derrite"/>
+            <feMergeNode in="humedad-txt"/>
+        </feMerge>
+    </filter>
+        <!-- kinetica · Kinética -->
+    <filter id="ef-kinetica" x="-16%" y="-55%" width="132%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".005 .013"
+                      numOctaves="2" seed="7" result="metal"/>
+        <feDisplacementMap in="SourceGraphic" in2="metal" scale="7"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="lona"/>
+        <feColorMatrix in="lona" type="matrix" result="duotono"
+            values="0 0 0 0 .55
+                    0 0 0 0 .18
+                    0 0 0 0 .95
+                    0 0 1 0 0"/>
+        <feComponentTransfer in="duotono" result="curva">
+            <feFuncR type="gamma" exponent="1.5" amplitude="1.4"/>
+            <feFuncG type="gamma" exponent="2.2" amplitude="1.1"/>
+            <feFuncB type="gamma" exponent=".7"  amplitude="1.3"/>
+        </feComponentTransfer>
+        <feComposite in="curva" in2="lona" operator="in"/>
+    </filter>
+    <filter id="ef-kinetica-mini" x="-9%" y="-45%" width="118%"
+            height="190%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".022 .05"
+                      numOctaves="2" seed="7" result="metal"/>
+        <feDisplacementMap in="SourceGraphic" in2="metal" scale="2.2"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="lona"/>
+        <feColorMatrix in="lona" type="matrix" result="duotono"
+            values="0 0 0 0 .62
+                    0 0 0 0 .28
+                    0 0 0 0 1
+                    0 0 1 0 0"/>
+        <feComposite in="duotono" in2="lona" operator="in"/>
+    </filter>
+        <!-- diminuto · Diminuto -->
+    <filter id="ef-diminuto" x="-24%" y="-70%" width="148%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feMorphology operator="dilate" radius="0" result="peso"/>
+        <feComponentTransfer in="peso" result="contraste">
+            <feFuncA type="linear" slope="1.9" intercept="-.35"/>
+        </feComponentTransfer>
+        <feComposite in="contraste" in2="SourceGraphic" operator="in"
+                     result="recorte"/>
+        <feSpecularLighting in="recorte" surfaceScale="4"
+                            specularConstant="1.3" specularExponent="20"
+                            lighting-color="#eef7ff" result="brillo">
+            <feDistantLight azimuth="210" elevation="56"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="recorte" operator="in"
+                     result="brillo-txt"/>
+        <feMerge>
+            <feMergeNode in="recorte"/>
+            <feMergeNode in="brillo-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-diminuto-mini" x="-16%" y="-55%" width="132%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feMorphology operator="dilate" radius="0" result="peso"/>
+        <feComponentTransfer in="peso" result="contraste">
+            <feFuncA type="linear" slope="1.7" intercept="-.3"/>
+        </feComponentTransfer>
+        <feComposite in="contraste" in2="SourceGraphic" operator="in"
+                     result="recorte"/>
+        <feSpecularLighting in="recorte" surfaceScale="2"
+                            specularConstant=".8" specularExponent="28"
+                            lighting-color="#eef7ff" result="brillo">
+            <feDistantLight azimuth="210" elevation="64"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="recorte" operator="in"
+                     result="brillo-txt"/>
+        <feMerge>
+            <feMergeNode in="recorte"/>
+            <feMergeNode in="brillo-txt"/>
+        </feMerge>
+    </filter>
+        <!-- nano · Nano -->
+    <filter id="ef-nano" x="-16%" y="-55%" width="132%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feConvolveMatrix order="3" kernelMatrix="0 -1 0 -1 5 -1 0 -1 0"
+                           divisor="1" preserveAlpha="true" result="grabado"/>
+        <feSpecularLighting in="grabado" surfaceScale="3"
+                            specularConstant="1.2" specularExponent="24"
+                            lighting-color="#dff6ff" result="brillo">
+            <feDistantLight azimuth="225" elevation="58"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="grabado" operator="in" result="b-txt"/>
+        <feMerge>
+            <feMergeNode in="grabado"/>
+            <feMergeNode in="b-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-nano-mini" x="-9%" y="-45%" width="118%"
+            height="190%" color-interpolation-filters="sRGB">
+        <feConvolveMatrix order="3" kernelMatrix="0 -1 0 -1 5 -1 0 -1 0"
+                           divisor="1.35" preserveAlpha="true" result="grabado"/>
+        <feSpecularLighting in="grabado" surfaceScale="1.4"
+                            specularConstant=".8" specularExponent="30"
+                            lighting-color="#dff6ff" result="brillo">
+            <feDistantLight azimuth="225" elevation="66"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="grabado" operator="in" result="b-txt"/>
+        <feMerge>
+            <feMergeNode in="grabado"/>
+            <feMergeNode in="b-txt"/>
+        </feMerge>
+    </filter>
+        <!-- asgard · Asgard -->
+    <filter id="ef-asgard" x="-20%" y="-60%" width="140%"
+            height="230%" color-interpolation-filters="sRGB">
+        <feTurbulence type="turbulence" baseFrequency=".012 .055"
+                      numOctaves="1" seed="44" result="descarga"/>
+        <feDisplacementMap in="SourceGraphic" in2="descarga" scale="9"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="quebrado"/>
+        <feSpecularLighting in="quebrado" surfaceScale="5"
+                            specularConstant="1.6" specularExponent="12"
+                            lighting-color="#fff3c4" result="oro">
+            <feDistantLight azimuth="195" elevation="40"/>
+        </feSpecularLighting>
+        <feComposite in="oro" in2="quebrado" operator="in" result="oro-txt"/>
+        <feMerge>
+            <feMergeNode in="quebrado"/>
+            <feMergeNode in="oro-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-asgard-mini" x="-11%" y="-50%" width="122%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="turbulence" baseFrequency=".05 .16"
+                      numOctaves="1" seed="44" result="descarga"/>
+        <feDisplacementMap in="SourceGraphic" in2="descarga" scale="2.6"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="quebrado"/>
+        <feSpecularLighting in="quebrado" surfaceScale="2"
+                            specularConstant=".95" specularExponent="20"
+                            lighting-color="#fff3c4" result="oro">
+            <feDistantLight azimuth="195" elevation="52"/>
+        </feSpecularLighting>
+        <feComposite in="oro" in2="quebrado" operator="in" result="oro-txt"/>
+        <feMerge>
+            <feMergeNode in="quebrado"/>
+            <feMergeNode in="oro-txt"/>
+        </feMerge>
+    </filter>
+        <!-- pow · Pow -->
+    <filter id="ef-pow" x="-20%" y="-60%" width="140%"
+            height="230%" color-interpolation-filters="sRGB">
+        <feMorphology operator="dilate" radius="1.1" result="engorde"/>
+        <feSpecularLighting in="engorde" surfaceScale="2.5"
+                            specularConstant="1" specularExponent="30"
+                            lighting-color="#ffffff" result="brillo">
+            <feDistantLight azimuth="230" elevation="62"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="engorde" operator="in" result="b-txt"/>
+        <feMerge>
+            <feMergeNode in="engorde"/>
+            <feMergeNode in="b-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-pow-mini" x="-14%" y="-55%" width="128%"
+            height="220%" color-interpolation-filters="sRGB">
+        <feMorphology operator="dilate" radius=".45" result="engorde"/>
+        <feSpecularLighting in="engorde" surfaceScale="1.2"
+                            specularConstant=".7" specularExponent="34"
+                            lighting-color="#ffffff" result="brillo">
+            <feDistantLight azimuth="230" elevation="68"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="engorde" operator="in" result="b-txt"/>
+        <feMerge>
+            <feMergeNode in="engorde"/>
+            <feMergeNode in="b-txt"/>
+        </feMerge>
+    </filter>
+        <!-- semitono · Semitono -->
+    <filter id="ef-semitono" x="-14%" y="-50%" width="128%"
+            height="200%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" result="duo"
+            values="1.15 0 0 0 -.06
+                    0 .28 0 0 .04
+                    0 0 .72 0 .1
+                    0 0 0 1 0"/>
+        <feComponentTransfer in="duo" result="gancho">
+            <feFuncR type="gamma" exponent=".85" amplitude="1.15"/>
+            <feFuncG type="gamma" exponent="1.4" amplitude="1"/>
+            <feFuncB type="gamma" exponent="1.1" amplitude="1.1"/>
+        </feComponentTransfer>
+        <feComposite in="gancho" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-semitono-mini" x="-8%" y="-45%" width="116%"
+            height="190%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" result="duo"
+            values="1.1 0 0 0 -.04
+                    0 .3 0 0 .06
+                    0 0 .7 0 .12
+                    0 0 0 1 0"/>
+        <feComposite in="duo" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- multiverso · Multiverso -->
+    <filter id="ef-multiverso" x="-20%" y="-60%" width="140%"
+            height="230%" color-interpolation-filters="sRGB">
+        <feConvolveMatrix order="3" kernelMatrix="-1 -1 -1 -1 9 -1 -1 -1 -1"
+                           divisor="1" preserveAlpha="true" result="realza"/>
+        <feComponentTransfer in="realza" result="tinta">
+            <feFuncA type="linear" slope="1.25" intercept="-.15"/>
+        </feComponentTransfer>
+        <feComposite in="tinta" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-multiverso-mini" x="-14%" y="-55%" width="128%"
+            height="220%" color-interpolation-filters="sRGB">
+        <feConvolveMatrix order="3" kernelMatrix="0 -1 0 -1 5 -1 0 -1 0"
+                           divisor="1.4" preserveAlpha="true" result="realza"/>
+        <feComposite in="realza" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- visor · Visor -->
+    <filter id="ef-visor" x="-14%" y="-50%" width="128%"
+            height="200%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" result="cian"
+            values="0 0 0 0 .12
+                    0 0 0 0 .78
+                    0 0 0 0 .95
+                    0 .55 .9 0 0"/>
+        <feComponentTransfer in="cian" result="contraste">
+            <feFuncR type="gamma" exponent="1.6" amplitude="1.4"/>
+            <feFuncG type="gamma" exponent="1"   amplitude="1.3"/>
+            <feFuncB type="gamma" exponent=".8"  amplitude="1.3"/>
+        </feComponentTransfer>
+        <feComposite in="contraste" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-visor-mini" x="-8%" y="-45%" width="116%"
+            height="190%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" result="cian"
+            values="0 0 0 0 .12
+                    0 0 0 0 .78
+                    0 0 0 0 .95
+                    0 .6 .95 0 0"/>
+        <feComposite in="cian" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- fase · Fase -->
+    <filter id="ef-fase" x="-22%" y="-70%" width="144%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="2.4" result="aura"/>
+        <feFlood flood-color="#ffd83d" result="ambar"/>
+        <feComposite in="ambar" in2="aura" operator="in" result="glow"/>
+        <feGaussianBlur in="SourceGraphic" stdDeviation="1.1" result="suave"/>
+        <feColorMatrix in="suave" type="matrix" result="etereo"
+            values="1 0 0 0 0
+                    0 1 0 0 0
+                    0 0 1 0 0
+                    0 0 0 .82 .1"/>
+        <feMerge>
+            <feMergeNode in="glow"/>
+            <feMergeNode in="etereo"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-fase-mini" x="-14%" y="-55%" width="128%"
+            height="220%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="aura"/>
+        <feFlood flood-color="#ffd83d" result="ambar"/>
+        <feComposite in="ambar" in2="aura" operator="in" result="glow"/>
+        <feColorMatrix in="SourceGraphic" type="matrix" result="etereo"
+            values="1 0 0 0 0
+                    0 1 0 0 0
+                    0 0 1 0 0
+                    0 0 0 .9 .08"/>
+        <feMerge>
+            <feMergeNode in="glow"/>
+            <feMergeNode in="etereo"/>
+        </feMerge>
+    </filter>
+        <!-- inmortal · Inmortal -->
+    <filter id="ef-inmortal" x="-16%" y="-55%" width="132%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".01 .14"
+                      numOctaves="2" seed="63" result="rasga"/>
+        <feDisplacementMap in="SourceGraphic" in2="rasga" scale="6"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="costura"/>
+        <feColorMatrix in="costura" type="saturate" values="1.6"
+                       result="vivo"/>
+        <feComposite in="vivo" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-inmortal-mini" x="-9%" y="-45%" width="118%"
+            height="190%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .4"
+                      numOctaves="2" seed="63" result="rasga"/>
+        <feDisplacementMap in="SourceGraphic" in2="rasga" scale="1.8"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="costura"/>
+        <feColorMatrix in="costura" type="saturate" values="1.5"
+                       result="vivo"/>
+        <feComposite in="vivo" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- voltaje · Voltaje -->
+    <filter id="ef-voltaje" x="-16%" y="-55%" width="132%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="turbulence" baseFrequency=".42 .012"
+                      numOctaves="2" seed="88" result="raya"/>
+        <feColorMatrix in="raya" type="matrix" result="hilo"
+            values="0 0 0 0 .55
+                    0 0 0 0 .88
+                    0 0 0 0 1
+                    3.2 0 0 0 -2.1"/>
+        <feMerge>
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="hilo"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-voltaje-mini" x="-9%" y="-45%" width="118%"
+            height="190%" color-interpolation-filters="sRGB">
+        <feTurbulence type="turbulence" baseFrequency=".85 .03"
+                      numOctaves="1" seed="88" result="raya"/>
+        <feColorMatrix in="raya" type="matrix" result="hilo"
+            values="0 0 0 0 .55
+                    0 0 0 0 .88
+                    0 0 0 0 1
+                    3.6 0 0 0 -2.5"/>
+        <feMerge>
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="hilo"/>
+        </feMerge>
+    </filter>
+        <!-- gemma · Gemma -->
+    <filter id="ef-gemma" x="-20%" y="-65%" width="140%"
+            height="235%" color-interpolation-filters="sRGB">
+        <feSpecularLighting in="SourceAlpha" surfaceScale="5.5"
+                            specularConstant="1.7" specularExponent="11"
+                            lighting-color="#ffffff" result="bisel">
+            <feDistantLight azimuth="238" elevation="34"/>
+        </feSpecularLighting>
+        <feComponentTransfer in="bisel" result="brillo">
+            <feFuncR type="linear" slope="1.3"/>
+            <feFuncG type="linear" slope="1.3"/>
+            <feFuncB type="linear" slope="1.3"/>
+        </feComponentTransfer>
+        <feComposite in="brillo" in2="SourceAlpha" operator="in"
+                     result="b-txt"/>
+        <feComposite in="b-txt" in2="SourceGraphic" operator="arithmetic"
+                     k1="0" k2="1" k3=".75" k4="0" result="suma"/>
+        <feComposite in="suma" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-gemma-mini" x="-12%" y="-55%" width="124%"
+            height="220%" color-interpolation-filters="sRGB">
+        <feSpecularLighting in="SourceAlpha" surfaceScale="2.4"
+                            specularConstant="1" specularExponent="20"
+                            lighting-color="#ffffff" result="bisel">
+            <feDistantLight azimuth="238" elevation="48"/>
+        </feSpecularLighting>
+        <feComposite in="bisel" in2="SourceAlpha" operator="in" result="b-txt"/>
+        <feComposite in="b-txt" in2="SourceGraphic" operator="arithmetic"
+                     k1="0" k2="1" k3=".7" k4="0" result="suma"/>
+        <feComposite in="suma" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- portal · Portal -->
+    <filter id="ef-portal" x="-18%" y="-60%" width="136%"
+            height="230%" color-interpolation-filters="sRGB">
+        <feTurbulence type="turbulence" baseFrequency=".008 .02"
+                      numOctaves="2" seed="17" result="vortice"/>
+        <feDisplacementMap in="SourceGraphic" in2="vortice" scale="7"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="gira"/>
+        <feColorMatrix in="gira" type="hueRotate" values="0" result="matiz"/>
+        <feComponentTransfer in="matiz" result="brasas">
+            <feFuncR type="gamma" exponent=".9" amplitude="1.25"/>
+            <feFuncG type="gamma" exponent="1.4" amplitude="1.1"/>
+            <feFuncB type="gamma" exponent="1.6" amplitude="1.15"/>
+        </feComponentTransfer>
+        <feComposite in="brasas" in2="gira" operator="in"/>
+    </filter>
+    <filter id="ef-portal-mini" x="-10%" y="-50%" width="120%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="turbulence" baseFrequency=".035 .07"
+                      numOctaves="2" seed="17" result="vortice"/>
+        <feDisplacementMap in="SourceGraphic" in2="vortice" scale="2.2"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="gira"/>
+        <feColorMatrix in="gira" type="hueRotate" values="0" result="matiz"/>
+        <feComponentTransfer in="matiz" result="brasas">
+            <feFuncR type="gamma" exponent=".9" amplitude="1.2"/>
+            <feFuncG type="gamma" exponent="1.4" amplitude="1.1"/>
+            <feFuncB type="gamma" exponent="1.6" amplitude="1.1"/>
+        </feComponentTransfer>
+        <feComposite in="brasas" in2="gira" operator="in"/>
+    </filter>
+        <!-- foton · Fotón -->
+    <filter id="ef-foton" x="-24%" y="-70%" width="148%"
+            height="250%" color-interpolation-filters="sRGB">
+        <feDiffuseLighting in="SourceAlpha" surfaceScale="4.5"
+                           diffuseConstant="1.25" lighting-color="#fff6dc"
+                           result="forja">
+            <feDistantLight azimuth="228" elevation="62"/>
+        </feDiffuseLighting>
+        <feComposite in="forja" in2="SourceAlpha" operator="in" result="forja-txt"/>
+        <feComposite in="forja-txt" in2="SourceGraphic" operator="arithmetic"
+                     k1="0" k2=".7" k3="1" k4="0" result="suma"/>
+        <feComposite in="suma" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-foton-mini" x="-16%" y="-55%" width="132%"
+            height="230%" color-interpolation-filters="sRGB">
+        <feDiffuseLighting in="SourceAlpha" surfaceScale="2.2"
+                           diffuseConstant="1" lighting-color="#fff6dc"
+                           result="forja">
+            <feDistantLight azimuth="228" elevation="70"/>
+        </feDiffuseLighting>
+        <feComposite in="forja" in2="SourceAlpha" operator="in" result="forja-txt"/>
+        <feComposite in="forja-txt" in2="SourceGraphic" operator="arithmetic"
+                     k1="0" k2=".75" k3="1" k4="0" result="suma"/>
+        <feComposite in="suma" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- blip · Blip -->
+    <filter id="ef-blip" x="-22%" y="-70%" width="144%"
+            height="250%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".06 .09"
+                      numOctaves="2" seed="52" result="polvo"/>
+        <feDisplacementMap in="SourceGraphic" in2="polvo" scale="7"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="deshecho"/>
+        <feComponentTransfer in="deshecho" result="escala">
+            <feFuncA type="discrete" tableValues="0 .25 .5 .75 1"/>
+            <feFuncR type="discrete" tableValues=".55 .72 .86 1"/>
+            <feFuncG type="discrete" tableValues=".44 .58 .72 .86"/>
+            <feFuncB type="discrete" tableValues=".3 .4 .52 .66"/>
+        </feComponentTransfer>
+        <feComposite in="escala" in2="deshecho" operator="in"/>
+    </filter>
+    <filter id="ef-blip-mini" x="-14%" y="-55%" width="128%"
+            height="230%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".2 .28"
+                      numOctaves="2" seed="52" result="polvo"/>
+        <feDisplacementMap in="SourceGraphic" in2="polvo" scale="2.4"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="deshecho"/>
+        <feComponentTransfer in="deshecho" result="escala">
+            <feFuncA type="discrete" tableValues=".4 .7 1"/>
+            <feFuncR type="discrete" tableValues=".6 .8 1"/>
+            <feFuncG type="discrete" tableValues=".5 .68 .86"/>
+            <feFuncB type="discrete" tableValues=".34 .48 .62"/>
+        </feComponentTransfer>
+        <feComposite in="escala" in2="deshecho" operator="in"/>
+    </filter>
+        <!-- avengers · Vengadores -->
+    <filter id="ef-avengers" x="-16%" y="-55%" width="132%"
+            height="215%" color-interpolation-filters="sRGB">
+        <feMorphology operator="erode" radius="1.4" result="hilo"/>
+        <feComponentTransfer in="hilo" result="alfa">
+            <feFuncA type="linear" slope="1.6" intercept="-.2"/>
+        </feComponentTransfer>
+        <feComposite in="alfa" in2="SourceGraphic" operator="in" result="recorta"/>
+        <feSpecularLighting in="recorta" surfaceScale="2.6"
+                            specularConstant="1.1" specularExponent="26"
+                            lighting-color="#ffe7d6" result="brillo">
+            <feDistantLight azimuth="210" elevation="54"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="recorta" operator="in" result="b-txt"/>
+        <feMerge>
+            <feMergeNode in="recorta"/>
+            <feMergeNode in="b-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-avengers-mini" x="-10%" y="-45%" width="120%"
+            height="200%" color-interpolation-filters="sRGB">
+        <feMorphology operator="erode" radius=".5" result="hilo"/>
+        <feComponentTransfer in="hilo" result="alfa">
+            <feFuncA type="linear" slope="1.5" intercept="-.15"/>
+        </feComponentTransfer>
+        <feComposite in="alfa" in2="SourceGraphic" operator="in" result="recorta"/>
+        <feSpecularLighting in="recorta" surfaceScale="1.3"
+                            specularConstant=".75" specularExponent="32"
+                            lighting-color="#ffe7d6" result="brillo">
+            <feDistantLight azimuth="210" elevation="64"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="recorta" operator="in" result="b-txt"/>
+        <feMerge>
+            <feMergeNode in="recorta"/>
+            <feMergeNode in="b-txt"/>
+        </feMerge>
+    </filter>
+        <!-- cuantico · Cuántico -->
+    <filter id="ef-cuantico" x="-24%" y="-75%" width="148%"
+            height="255%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".02 .05"
+                      numOctaves="3" seed="9" result="niebla"/>
+        <feDisplacementMap in="SourceGraphic" in2="niebla" scale="5"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="tunel"/>
+        <feGaussianBlur in="tunel" stdDeviation="1.6" result="borroso"/>
+        <feColorMatrix in="borroso" type="matrix" result="violeta"
+            values="1 0 0 0 .12
+                    0 1 0 0 .04
+                    0 0 1 0 .3
+                    0 0 0 1 0"/>
+        <feComposite in="violeta" in2="tunel" operator="in"/>
+    </filter>
+    <filter id="ef-cuantico-mini" x="-16%" y="-60%" width="132%"
+            height="230%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".07 .14"
+                      numOctaves="3" seed="9" result="niebla"/>
+        <feDisplacementMap in="SourceGraphic" in2="niebla" scale="1.6"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="tunel"/>
+        <feGaussianBlur in="tunel" stdDeviation=".7" result="borroso"/>
+        <feColorMatrix in="borroso" type="matrix" result="violeta"
+            values="1 0 0 0 .12
+                    0 1 0 0 .04
+                    0 0 1 0 .3
+                    0 0 0 1 0"/>
+        <feComposite in="violeta" in2="tunel" operator="in"/>
+    </filter>
+        <!-- mandala · Mandala -->
+    <filter id="ef-mandala" x="-26%" y="-80%" width="152%"
+            height="265%" color-interpolation-filters="sRGB">
+        <feSpecularLighting in="SourceAlpha" surfaceScale="6"
+                            specularConstant="1.8" specularExponent="9"
+                            lighting-color="#fff4cc" result="dora">
+            <fePointLight x="-40" y="-70" z="70"/>
+        </feSpecularLighting>
+        <feComposite in="dora" in2="SourceAlpha" operator="in" result="dora-txt"/>
+        <feComposite in="dora-txt" in2="SourceGraphic" operator="arithmetic"
+                     k1="0" k2=".85" k3="1" k4="0" result="suma"/>
+        <feComposite in="suma" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-mandala-mini" x="-18%" y="-65%" width="136%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feSpecularLighting in="SourceAlpha" surfaceScale="2.8"
+                            specularConstant="1.1" specularExponent="18"
+                            lighting-color="#fff4cc" result="dora">
+            <fePointLight x="-30" y="-50" z="60"/>
+        </feSpecularLighting>
+        <feComposite in="dora" in2="SourceAlpha" operator="in" result="dora-txt"/>
+        <feComposite in="dora-txt" in2="SourceGraphic" operator="arithmetic"
+                     k1="0" k2=".85" k3="1" k4="0" result="suma"/>
+        <feComposite in="suma" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- bifrost · Bifröst -->
+    <filter id="ef-bifrost" x="-16%" y="-55%" width="132%"
+            height="215%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="saturate" values="2.4" result="vivo"/>
+        <feComponentTransfer in="vivo" result="realce">
+            <feFuncR type="gamma" exponent=".78" amplitude="1.25"/>
+            <feFuncG type="gamma" exponent=".82" amplitude="1.2"/>
+            <feFuncB type="gamma" exponent=".76" amplitude="1.25"/>
+        </feComponentTransfer>
+        <feComposite in="realce" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-bifrost-mini" x="-9%" y="-45%" width="118%"
+            height="200%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="saturate" values="1.8" result="vivo"/>
+        <feComponentTransfer in="vivo" result="realce">
+            <feFuncR type="gamma" exponent=".85" amplitude="1.15"/>
+            <feFuncG type="gamma" exponent=".88" amplitude="1.12"/>
+            <feFuncB type="gamma" exponent=".84" amplitude="1.15"/>
+        </feComponentTransfer>
+        <feComposite in="realce" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- hidra · Hidra -->
+    <filter id="ef-hidra" x="-22%" y="-70%" width="144%"
+            height="245%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".003 .032"
+                      numOctaves="2" seed="71" result="ola"/>
+        <feDisplacementMap in="SourceGraphic" in2="ola" scale="13"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="serpia"/>
+        <feColorMatrix in="serpia" type="matrix" result="verde"
+            values=".8 0 0 0 -.06
+                    0 1.1 0 0 -.02
+                    0 0 .72 0 -.1
+                    0 0 0 1 0"/>
+        <feComposite in="verde" in2="serpia" operator="in"/>
+    </filter>
+    <filter id="ef-hidra-mini" x="-14%" y="-55%" width="128%"
+            height="225%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".012 .11"
+                      numOctaves="2" seed="71" result="ola"/>
+        <feDisplacementMap in="SourceGraphic" in2="ola" scale="4"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="serpia"/>
+        <feColorMatrix in="serpia" type="matrix" result="verde"
+            values=".85 0 0 0 -.04
+                    0 1.05 0 0 -.02
+                    0 0 .76 0 -.08
+                    0 0 0 1 0"/>
+        <feComposite in="verde" in2="serpia" operator="in"/>
+    </filter>
+        <!-- aguila · Águila -->
+    <filter id="ef-aguila" x="-24%" y="-75%" width="148%"
+            height="255%" color-interpolation-filters="sRGB">
+        <feOffset in="SourceGraphic" dx="3" dy="-2" result="desplaz"/>
+        <feBlend in="SourceGraphic" in2="desplaz" mode="screen" result="ala"/>
+        <feSpecularLighting in="SourceAlpha" surfaceScale="3"
+                            specularConstant="1.3" specularExponent="22"
+                            lighting-color="#ffffff" result="reflejo">
+            <feDistantLight azimuth="120" elevation="48"/>
+        </feSpecularLighting>
+        <feComposite in="reflejo" in2="SourceAlpha" operator="in" result="reflejo-txt"/>
+        <feMerge>
+            <feMergeNode in="ala"/>
+            <feMergeNode in="reflejo-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-aguila-mini" x="-16%" y="-60%" width="132%"
+            height="235%" color-interpolation-filters="sRGB">
+        <feOffset in="SourceGraphic" dx="1.5" dy="-1" result="desplaz"/>
+        <feBlend in="SourceGraphic" in2="desplaz" mode="screen" result="ala"/>
+        <feSpecularLighting in="SourceAlpha" surfaceScale="1.5"
+                            specularConstant=".85" specularExponent="30"
+                            lighting-color="#ffffff" result="reflejo">
+            <feDistantLight azimuth="120" elevation="60"/>
+        </feSpecularLighting>
+        <feComposite in="reflejo" in2="SourceAlpha" operator="in" result="reflejo-txt"/>
+        <feMerge>
+            <feMergeNode in="ala"/>
+            <feMergeNode in="reflejo-txt"/>
+        </feMerge>
+    </filter>
+        <!-- odin · Odín -->
+    <filter id="ef-odin" x="-16%" y="-55%" width="132%"
+            height="215%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" result="ambar"
+            values="1.25 0 0 0 -.04
+                    0 .95 0 0 -.05
+                    0 0 .35 0 -.02
+                    0 0 0 1 0"/>
+        <feComponentTransfer in="ambar" result="veta">
+            <feFuncR type="gamma" exponent=".9" amplitude="1.15"/>
+            <feFuncG type="gamma" exponent="1.25" amplitude="1.05"/>
+            <feFuncB type="gamma" exponent="2.4" amplitude=".85"/>
+        </feComponentTransfer>
+        <feComposite in="veta" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-odin-mini" x="-9%" y="-45%" width="118%"
+            height="200%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" result="ambar"
+            values="1.15 0 0 0 -.03
+                    0 .95 0 0 -.04
+                    0 0 .4 0 -.02
+                    0 0 0 1 0"/>
+        <feComposite in="ambar" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- anillos · Anillos -->
+    <filter id="ef-anillos" x="-22%" y="-70%" width="144%"
+            height="245%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="1.4" result="suave"/>
+        <feSpecularLighting in="SourceAlpha" surfaceScale="3.5"
+                            specularConstant="1.4" specularExponent="26"
+                            lighting-color="#dff4ff" result="brillo">
+            <feDistantLight azimuth="200" elevation="52"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="SourceAlpha" operator="in" result="b-txt"/>
+        <feMerge>
+            <feMergeNode in="suave"/>
+            <feMergeNode in="b-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-anillos-mini" x="-14%" y="-55%" width="128%"
+            height="225%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation=".6" result="suave"/>
+        <feSpecularLighting in="SourceAlpha" surfaceScale="1.6"
+                            specularConstant=".9" specularExponent="32"
+                            lighting-color="#dff4ff" result="brillo">
+            <feDistantLight azimuth="200" elevation="64"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="SourceAlpha" operator="in" result="b-txt"/>
+        <feMerge>
+            <feMergeNode in="suave"/>
+            <feMergeNode in="b-txt"/>
+        </feMerge>
+    </filter>
+        <!-- vormir · Vormir -->
+    <filter id="ef-vormir" x="-24%" y="-80%" width="148%"
+            height="275%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".004 .02"
+                      numOctaves="3" seed="33" result="niebla"/>
+        <feDisplacementMap in="SourceGraphic" in2="niebla" scale="6"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="abismo"/>
+        <feColorMatrix in="abismo" type="matrix" result="cayo"
+            values=".95 0 0 0 -.05
+                    0 .72 0 0 -.08
+                    0 0 .5 0 -.06
+                    0 0 0 .92 0"/>
+        <feComposite in="cayo" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-vormir-mini" x="-16%" y="-65%" width="132%"
+            height="250%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".015 .07"
+                      numOctaves="3" seed="33" result="niebla"/>
+        <feDisplacementMap in="SourceGraphic" in2="niebla" scale="2"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="abismo"/>
+        <feColorMatrix in="abismo" type="matrix" result="cayo"
+            values=".95 0 0 0 -.04
+                    0 .74 0 0 -.06
+                    0 0 .54 0 -.05
+                    0 0 0 .95 0"/>
+        <feComposite in="cayo" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- tva · TVA -->
+    <filter id="ef-tva" x="-18%" y="-60%" width="136%"
+            height="230%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" result="tinta"
+            values="1.4 0 0 0 -.1
+                    0 .86 0 0 -.06
+                    0 0 .3 0 -.04
+                    0 0 0 1 0"/>
+        <feComponentTransfer in="tinta" result="sello">
+            <feFuncR type="table" tableValues="0 .6 1"/>
+            <feFuncG type="table" tableValues="0 .45 .85"/>
+            <feFuncB type="table" tableValues="0 .06 .2"/>
+        </feComponentTransfer>
+        <feComposite in="sello" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-tva-mini" x="-11%" y="-50%" width="122%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" result="tinta"
+            values="1.3 0 0 0 -.08
+                    0 .88 0 0 -.05
+                    0 0 .34 0 -.03
+                    0 0 0 1 0"/>
+        <feComposite in="tinta" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- leviatan · Leviatán -->
+    <filter id="ef-leviatan" x="-24%" y="-75%" width="148%"
+            height="260%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".002 .006"
+                      numOctaves="2" seed="41" result="ola"/>
+        <feDisplacementMap in="SourceGraphic" in2="ola" scale="11"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="cuerpo"/>
+        <feSpecularLighting in="cuerpo" surfaceScale="5"
+                            specularConstant="1.5" specularExponent="14"
+                            lighting-color="#e6faff" result="coraza">
+            <feDistantLight azimuth="215" elevation="36"/>
+        </feSpecularLighting>
+        <feComposite in="coraza" in2="cuerpo" operator="in" result="c-txt"/>
+        <feMerge>
+            <feMergeNode in="cuerpo"/>
+            <feMergeNode in="c-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-leviatan-mini" x="-16%" y="-60%" width="132%"
+            height="235%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".006 .02"
+                      numOctaves="2" seed="41" result="ola"/>
+        <feDisplacementMap in="SourceGraphic" in2="ola" scale="3.6"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="cuerpo"/>
+        <feSpecularLighting in="cuerpo" surfaceScale="2.2"
+                            specularConstant=".95" specularExponent="22"
+                            lighting-color="#e6faff" result="coraza">
+            <feDistantLight azimuth="215" elevation="50"/>
+        </feSpecularLighting>
+        <feComposite in="coraza" in2="cuerpo" operator="in" result="c-txt"/>
+        <feMerge>
+            <feMergeNode in="cuerpo"/>
+            <feMergeNode in="c-txt"/>
+        </feMerge>
+    </filter>
+        <!-- quinjet · Quinjet -->
+    <filter id="ef-quinjet" x="-30%" y="-55%" width="160%"
+            height="215%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="6 0" result="arrastra"/>
+        <feComponentTransfer in="arrastra" result="nítido">
+            <feFuncA type="linear" slope="1.5" intercept="-.15"/>
+        </feComponentTransfer>
+        <feComposite in="nítido" in2="SourceGraphic" operator="over"/>
+    </filter>
+    <filter id="ef-quinjet-mini" x="-22%" y="-50%" width="144%"
+            height="205%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="2.2 0" result="arrastra"/>
+        <feComponentTransfer in="arrastra" result="nítido">
+            <feFuncA type="linear" slope="1.4" intercept="-.1"/>
+        </feComponentTransfer>
+        <feComposite in="nítido" in2="SourceGraphic" operator="over"/>
+    </filter>
+        <!-- aether · Aether -->
+    <filter id="ef-aether" x="-20%" y="-65%" width="140%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".006 .03"
+                      numOctaves="3" seed="26" result="fluido"/>
+        <feDisplacementMap in="SourceGraphic" in2="fluido" scale="9"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="marea"/>
+        <feColorMatrix in="marea" type="matrix" result="rojo"
+            values="1.5 0 0 0 -.05
+                    0 .32 0 0 -.03
+                    0 0 .38 0 -.02
+                    0 0 0 1 0"/>
+        <feComposite in="rojo" in2="marea" operator="in"/>
+    </filter>
+    <filter id="ef-aether-mini" x="-12%" y="-55%" width="124%"
+            height="225%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".02 .1"
+                      numOctaves="3" seed="26" result="fluido"/>
+        <feDisplacementMap in="SourceGraphic" in2="fluido" scale="3"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="marea"/>
+        <feColorMatrix in="marea" type="matrix" result="rojo"
+            values="1.4 0 0 0 -.04
+                    0 .36 0 0 -.02
+                    0 0 .42 0 -.02
+                    0 0 0 1 0"/>
+        <feComposite in="rojo" in2="marea" operator="in"/>
+    </filter>
+        <!-- guardianes · Guardianes -->
+    <filter id="ef-guardianes" x="-16%" y="-55%" width="132%"
+            height="215%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="saturate" values="2.2" result="neon"/>
+        <feComponentTransfer in="neon" result="brillo">
+            <feFuncR type="linear" slope="1.3" intercept="-.04"/>
+            <feFuncG type="linear" slope="1.3" intercept="-.04"/>
+            <feFuncB type="linear" slope="1.3" intercept="-.04"/>
+        </feComponentTransfer>
+        <feComposite in="brillo" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-guardianes-mini" x="-9%" y="-45%" width="118%"
+            height="200%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="saturate" values="1.7" result="neon"/>
+        <feComposite in="neon" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- mente · Mente -->
+    <filter id="ef-mente" x="-30%" y="-85%" width="160%"
+            height="285%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="aura"/>
+        <feFlood flood-color="#ffd83d" result="oro"/>
+        <feComposite in="oro" in2="aura" operator="in" result="halo"/>
+        <feGaussianBlur in="SourceGraphic" stdDeviation=".8" result="suave"/>
+        <feMerge>
+            <feMergeNode in="halo"/>
+            <feMergeNode in="suave"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-mente-mini" x="-22%" y="-70%" width="144%"
+            height="250%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="2.2" result="aura"/>
+        <feFlood flood-color="#ffd83d" result="oro"/>
+        <feComposite in="oro" in2="aura" operator="in" result="halo"/>
+        <feMerge>
+            <feMergeNode in="halo"/>
+            <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+    </filter>
+        <!-- groot · Groot -->
+    <filter id="ef-groot" x="-20%" y="-65%" width="140%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".006 .06"
+                      numOctaves="3" seed="12" result="veta"/>
+        <feDisplacementMap in="SourceGraphic" in2="veta" scale="8"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="trama"/>
+        <feSpecularLighting in="trama" surfaceScale="4"
+                            specularConstant="1.1" specularExponent="16"
+                            lighting-color="#f6e6c8" result="brillo">
+            <feDistantLight azimuth="200" elevation="42"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="trama" operator="in" result="b-txt"/>
+        <feMerge>
+            <feMergeNode in="trama"/>
+            <feMergeNode in="b-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-groot-mini" x="-12%" y="-55%" width="124%"
+            height="225%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".02 .18"
+                      numOctaves="3" seed="12" result="veta"/>
+        <feDisplacementMap in="SourceGraphic" in2="veta" scale="2.6"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="trama"/>
+        <feSpecularLighting in="trama" surfaceScale="1.8"
+                            specularConstant=".7" specularExponent="24"
+                            lighting-color="#f6e6c8" result="brillo">
+            <feDistantLight azimuth="200" elevation="56"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="trama" operator="in" result="b-txt"/>
+        <feMerge>
+            <feMergeNode in="trama"/>
+            <feMergeNode in="b-txt"/>
+        </feMerge>
+    </filter>
+        <!-- sakaar · Sakaar -->
+    <filter id="ef-sakaar" x="-26%" y="-75%" width="152%"
+            height="255%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="saturate" values="2" result="neon"/>
+        <feComponentTransfer in="neon" result="alta">
+            <feFuncR type="gamma" exponent=".7" amplitude="1.4"/>
+            <feFuncG type="gamma" exponent=".75" amplitude="1.35"/>
+            <feFuncB type="gamma" exponent=".72" amplitude="1.4"/>
+        </feComponentTransfer>
+        <feComposite in="alta" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-sakaar-mini" x="-18%" y="-60%" width="136%"
+            height="235%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="saturate" values="1.6" result="neon"/>
+        <feComposite in="neon" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- netrunner · Netrunner -->
+    <filter id="ef-netrunner" x="-16%" y="-55%" width="132%"
+            height="215%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" result="amarillo"
+            values="1.5 0 0 0 -.12
+                    0 1.35 0 0 -.1
+                    0 0 .2 0 -.05
+                    0 0 0 1 0"/>
+        <feComponentTransfer in="amarillo" result="net">
+            <feFuncR type="gamma" exponent=".8" amplitude="1.2"/>
+            <feFuncG type="gamma" exponent=".85" amplitude="1.2"/>
+            <feFuncB type="gamma" exponent="2.6" amplitude=".7"/>
+        </feComponentTransfer>
+        <feComposite in="net" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-netrunner-mini" x="-9%" y="-45%" width="118%"
+            height="200%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" result="amarillo"
+            values="1.3 0 0 0 -.08
+                    0 1.2 0 0 -.07
+                    0 0 .28 0 -.04
+                    0 0 0 1 0"/>
+        <feComposite in="amarillo" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- kiroshi · Kiroshi -->
+    <filter id="ef-kiroshi" x="-16%" y="-55%" width="132%"
+            height="215%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" result="hud"
+            values=".6 0 0 0 .04
+                    0 1.25 0 0 -.02
+                    0 0 1.35 0 -.02
+                    0 0 0 1 0"/>
+        <feComponentTransfer in="hud" result="limpio">
+            <feFuncR type="gamma" exponent="1.3"/>
+            <feFuncG type="gamma" exponent=".9"/>
+            <feFuncB type="gamma" exponent=".8"/>
+        </feComponentTransfer>
+        <feComposite in="limpio" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-kiroshi-mini" x="-9%" y="-45%" width="118%"
+            height="200%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" result="hud"
+            values=".7 0 0 0 .03
+                    0 1.1 0 0 -.02
+                    0 0 1.2 0 -.02
+                    0 0 0 1 0"/>
+        <feComposite in="hud" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- sande · Sandevistan -->
+    <filter id="ef-sande" x="-34%" y="-60%" width="168%"
+            height="230%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="7 0" result="estela"/>
+        <feComponentTransfer in="estela" result="tenue">
+            <feFuncA type="linear" slope=".75" intercept="0"/>
+        </feComponentTransfer>
+        <feMerge>
+            <feMergeNode in="tenue"/>
+            <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-sande-mini" x="-26%" y="-55%" width="152%"
+            height="215%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="3 0" result="estela"/>
+        <feComponentTransfer in="estela" result="tenue">
+            <feFuncA type="linear" slope=".7" intercept="0"/>
+        </feComponentTransfer>
+        <feMerge>
+            <feMergeNode in="tenue"/>
+            <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+    </filter>
+        <!-- mantis · Hoja Mantis -->
+    <filter id="ef-mantis" x="-24%" y="-75%" width="148%"
+            height="260%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".02 .11"
+                      numOctaves="2" seed="64" result="rasga"/>
+        <feDisplacementMap in="SourceGraphic" in2="rasga" scale="7"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="herida"/>
+        <feSpecularLighting in="herida" surfaceScale="3.5"
+                            specularConstant="1.7" specularExponent="18"
+                            lighting-color="#eafcff" result="canto">
+            <feDistantLight azimuth="60" elevation="44"/>
+        </feSpecularLighting>
+        <feComposite in="canto" in2="herida" operator="in" result="c-txt"/>
+        <feMerge>
+            <feMergeNode in="herida"/>
+            <feMergeNode in="c-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-mantis-mini" x="-16%" y="-60%" width="132%"
+            height="235%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".07 .3"
+                      numOctaves="2" seed="64" result="rasga"/>
+        <feDisplacementMap in="SourceGraphic" in2="rasga" scale="2.2"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="herida"/>
+        <feSpecularLighting in="herida" surfaceScale="1.6"
+                            specularConstant="1" specularExponent="28"
+                            lighting-color="#eafcff" result="canto">
+            <feDistantLight azimuth="60" elevation="60"/>
+        </feSpecularLighting>
+        <feComposite in="canto" in2="herida" operator="in" result="c-txt"/>
+        <feMerge>
+            <feMergeNode in="herida"/>
+            <feMergeNode in="c-txt"/>
+        </feMerge>
+    </filter>
+        <!-- breach · Breach -->
+    <filter id="ef-breach" x="-16%" y="-55%" width="132%"
+            height="215%" color-interpolation-filters="sRGB">
+        <feComponentTransfer result="escalones">
+            <feFuncR type="discrete" tableValues="0 .35 .7 1"/>
+            <feFuncG type="discrete" tableValues="0 .45 .75 1"/>
+            <feFuncB type="discrete" tableValues="0 .2 .45 .8"/>
+        </feComponentTransfer>
+        <feColorMatrix in="escalones" type="matrix" result="cian"
+            values=".5 0 0 0 .02
+                    0 1.3 0 0 -.06
+                    0 0 1.4 0 -.05
+                    0 0 0 1 0"/>
+        <feComposite in="cian" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-breach-mini" x="-9%" y="-45%" width="118%"
+            height="200%" color-interpolation-filters="sRGB">
+        <feComponentTransfer result="escalones">
+            <feFuncR type="discrete" tableValues=".2 .6 1"/>
+            <feFuncG type="discrete" tableValues=".3 .7 1"/>
+            <feFuncB type="discrete" tableValues=".1 .35 .7"/>
+        </feComponentTransfer>
+        <feColorMatrix in="escalones" type="matrix" result="cian"
+            values=".6 0 0 0 .02
+                    0 1.15 0 0 -.05
+                    0 0 1.25 0 -.04
+                    0 0 0 1 0"/>
+        <feComposite in="cian" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- blackwall · Blackwall -->
+    <filter id="ef-blackwall" x="-18%" y="-60%" width="136%"
+            height="230%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".55 .12"
+                      numOctaves="1" seed="99" result="ruido"/>
+        <feDisplacementMap in="SourceGraphic" in2="ruido" scale="4.5"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="comido"/>
+        <feColorMatrix in="comido" type="matrix" result="magenta"
+            values="1.6 0 0 0 -.15
+                    0 .1 0 0 -.02
+                    0 0 1.2 0 -.05
+                    0 0 0 1 0"/>
+        <feComposite in="magenta" in2="comido" operator="in"/>
+    </filter>
+    <filter id="ef-blackwall-mini" x="-11%" y="-50%" width="122%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".9 .3"
+                      numOctaves="1" seed="99" result="ruido"/>
+        <feDisplacementMap in="SourceGraphic" in2="ruido" scale="1.6"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="comido"/>
+        <feColorMatrix in="comido" type="matrix" result="magenta"
+            values="1.4 0 0 0 -.1
+                    0 .14 0 0 -.02
+                    0 0 1.1 0 -.04
+                    0 0 0 1 0"/>
+        <feComposite in="magenta" in2="comido" operator="in"/>
+    </filter>
+        <!-- relic · Reliquia -->
+    <filter id="ef-relic" x="-24%" y="-75%" width="148%"
+            height="260%" color-interpolation-filters="sRGB">
+        <feOffset in="SourceGraphic" dx="4" dy="0" result="fantasma"/>
+        <feBlend in="SourceGraphic" in2="fantasma" mode="screen" result="doble"/>
+        <feSpecularLighting in="SourceAlpha" surfaceScale="3.5"
+                            specularConstant="1.5" specularExponent="16"
+                            lighting-color="#fff4d0" result="bisel">
+            <feDistantLight azimuth="140" elevation="40"/>
+        </feSpecularLighting>
+        <feComposite in="bisel" in2="SourceAlpha" operator="in" result="b-txt"/>
+        <feMerge>
+            <feMergeNode in="doble"/>
+            <feMergeNode in="b-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-relic-mini" x="-16%" y="-60%" width="132%"
+            height="235%" color-interpolation-filters="sRGB">
+        <feOffset in="SourceGraphic" dx="2" dy="0" result="fantasma"/>
+        <feBlend in="SourceGraphic" in2="fantasma" mode="screen" result="doble"/>
+        <feSpecularLighting in="SourceAlpha" surfaceScale="1.6"
+                            specularConstant=".9" specularExponent="26"
+                            lighting-color="#fff4d0" result="bisel">
+            <feDistantLight azimuth="140" elevation="58"/>
+        </feSpecularLighting>
+        <feComposite in="bisel" in2="SourceAlpha" operator="in" result="b-txt"/>
+        <feMerge>
+            <feMergeNode in="doble"/>
+            <feMergeNode in="b-txt"/>
+        </feMerge>
+    </filter>
+        <!-- konpeki · Konpeki -->
+    <filter id="ef-konpeki" x="-24%" y="-75%" width="148%"
+            height="260%" color-interpolation-filters="sRGB">
+        <feSpecularLighting in="SourceAlpha" surfaceScale="4"
+                            specularConstant="1.9" specularExponent="40"
+                            lighting-color="#e8fdff" result="cristal">
+            <feDistantLight azimuth="250" elevation="26"/>
+        </feSpecularLighting>
+        <feComposite in="cristal" in2="SourceAlpha" operator="in" result="c-txt"/>
+        <feColorMatrix in="c-txt" type="matrix" result="cian"
+            values=".6 0 0 0 .04
+                    0 1.2 0 0 0
+                    0 0 1.35 0 0
+                    0 0 0 1 0"/>
+        <feMerge>
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="cian"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-konpeki-mini" x="-16%" y="-60%" width="132%"
+            height="235%" color-interpolation-filters="sRGB">
+        <feSpecularLighting in="SourceAlpha" surfaceScale="2"
+                            specularConstant="1.2" specularExponent="46"
+                            lighting-color="#e8fdff" result="cristal">
+            <feDistantLight azimuth="250" elevation="40"/>
+        </feSpecularLighting>
+        <feComposite in="cristal" in2="SourceAlpha" operator="in" result="c-txt"/>
+        <feMerge>
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="c-txt"/>
+        </feMerge>
+    </filter>
+        <!-- arasaka · Arasaka -->
+    <filter id="ef-arasaka" x="-16%" y="-60%" width="132%"
+            height="230%" color-interpolation-filters="sRGB">
+        <feSpecularLighting in="SourceAlpha" surfaceScale="3"
+                            specularConstant="1.2" specularExponent="30"
+                            lighting-color="#ffd7d7" result="pulido">
+            <feDistantLight azimuth="200" elevation="34"/>
+        </feSpecularLighting>
+        <feComposite in="pulido" in2="SourceAlpha" operator="in" result="p-txt"/>
+        <feMerge>
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="p-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-arasaka-mini" x="-10%" y="-50%" width="120%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feSpecularLighting in="SourceAlpha" surfaceScale="1.4"
+                            specularConstant=".8" specularExponent="40"
+                            lighting-color="#ffd7d7" result="pulido">
+            <feDistantLight azimuth="200" elevation="52"/>
+        </feSpecularLighting>
+        <feComposite in="pulido" in2="SourceAlpha" operator="in" result="p-txt"/>
+        <feMerge>
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="p-txt"/>
+        </feMerge>
+    </filter>
+        <!-- militech · Militech -->
+    <filter id="ef-militech" x="-18%" y="-60%" width="136%"
+            height="230%" color-interpolation-filters="sRGB">
+        <feMorphology operator="erode" radius="1.2" result="mordido"/>
+        <feColorMatrix in="mordido" type="matrix" result="oliva"
+            values=".9 0 0 0 -.06
+                    0 .95 0 0 -.04
+                    0 0 .55 0 -.08
+                    0 0 0 1 0"/>
+        <feComposite in="oliva" in2="SourceGraphic" operator="in" result="o-txt"/>
+        <feSpecularLighting in="o-txt" surfaceScale="2"
+                            specularConstant=".85" specularExponent="34"
+                            lighting-color="#e8efc8" result="brillo">
+            <feDistantLight azimuth="220" elevation="58"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="o-txt" operator="in" result="b-txt"/>
+        <feMerge>
+            <feMergeNode in="o-txt"/>
+            <feMergeNode in="b-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-militech-mini" x="-11%" y="-50%" width="122%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feMorphology operator="erode" radius=".5" result="mordido"/>
+        <feColorMatrix in="mordido" type="matrix" result="oliva"
+            values=".95 0 0 0 -.04
+                    0 .98 0 0 -.03
+                    0 0 .62 0 -.06
+                    0 0 0 1 0"/>
+        <feComposite in="oliva" in2="SourceGraphic" operator="in" result="o-txt"/>
+        <feSpecularLighting in="o-txt" surfaceScale="1"
+                            specularConstant=".6" specularExponent="44"
+                            lighting-color="#e8efc8" result="brillo">
+            <feDistantLight azimuth="220" elevation="68"/>
+        </feSpecularLighting>
+        <feComposite in="brillo" in2="o-txt" operator="in" result="b-txt"/>
+        <feMerge>
+            <feMergeNode in="o-txt"/>
+            <feMergeNode in="b-txt"/>
+        </feMerge>
+    </filter>
+        <!-- eddies · Eddies -->
+    <filter id="ef-eddies" x="-24%" y="-75%" width="148%"
+            height="260%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".02 .02"
+                      numOctaves="2" seed="21" result="trama"/>
+        <feDisplacementMap in="SourceGraphic" in2="trama" scale="3.5"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="grabado"/>
+        <feSpecularLighting in="grabado" surfaceScale="3"
+                            specularConstant="1.4" specularExponent="24"
+                            lighting-color="#eaffe4" result="relieve">
+            <feDistantLight azimuth="130" elevation="46"/>
+        </feSpecularLighting>
+        <feComposite in="relieve" in2="grabado" operator="in" result="r-txt"/>
+        <feMerge>
+            <feMergeNode in="grabado"/>
+            <feMergeNode in="r-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-eddies-mini" x="-16%" y="-60%" width="132%"
+            height="235%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".08 .08"
+                      numOctaves="2" seed="21" result="trama"/>
+        <feDisplacementMap in="SourceGraphic" in2="trama" scale="1.4"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="grabado"/>
+        <feSpecularLighting in="grabado" surfaceScale="1.4"
+                            specularConstant=".9" specularExponent="34"
+                            lighting-color="#eaffe4" result="relieve">
+            <feDistantLight azimuth="130" elevation="62"/>
+        </feSpecularLighting>
+        <feComposite in="relieve" in2="grabado" operator="in" result="r-txt"/>
+        <feMerge>
+            <feMergeNode in="grabado"/>
+            <feMergeNode in="r-txt"/>
+        </feMerge>
+    </filter>
+        <!-- braindance · Braindance -->
+    <filter id="ef-braindance" x="-22%" y="-70%" width="144%"
+            height="245%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="1.1" result="suave"/>
+        <feColorMatrix in="suave" type="matrix" result="azul"
+            values=".55 0 0 0 .02
+                    0 1.1 0 0 -.02
+                    0 0 1.5 0 0
+                    0 0 0 1 0"/>
+        <feComposite in="azul" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-braindance-mini" x="-14%" y="-55%" width="128%"
+            height="225%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation=".5" result="suave"/>
+        <feColorMatrix in="suave" type="matrix" result="azul"
+            values=".6 0 0 0 .02
+                    0 1.05 0 0 -.02
+                    0 0 1.35 0 0
+                    0 0 0 1 0"/>
+        <feComposite in="azul" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- quickhack · Quickhack -->
+    <filter id="ef-quickhack" x="-16%" y="-55%" width="132%"
+            height="215%" color-interpolation-filters="sRGB">
+        <feComponentTransfer result="duro">
+            <feFuncR type="linear" slope="1.35" intercept="-.1"/>
+            <feFuncG type="linear" slope="1.35" intercept="-.1"/>
+            <feFuncB type="linear" slope="1.35" intercept="-.1"/>
+        </feComponentTransfer>
+        <feColorMatrix in="duro" type="matrix" result="cian"
+            values=".3 0 0 0 0
+                    0 1.25 0 0 -.05
+                    0 0 1.4 0 -.04
+                    0 0 0 1 0"/>
+        <feComposite in="cian" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-quickhack-mini" x="-9%" y="-45%" width="118%"
+            height="200%" color-interpolation-filters="sRGB">
+        <feComponentTransfer result="duro">
+            <feFuncR type="linear" slope="1.2" intercept="-.06"/>
+            <feFuncG type="linear" slope="1.2" intercept="-.06"/>
+            <feFuncB type="linear" slope="1.2" intercept="-.06"/>
+        </feComponentTransfer>
+        <feColorMatrix in="duro" type="matrix" result="cian"
+            values=".4 0 0 0 0
+                    0 1.1 0 0 -.04
+                    0 0 1.25 0 -.03
+                    0 0 0 1 0"/>
+        <feComposite in="cian" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- descifrar · Descifrar -->
+    <filter id="ef-descifrar" x="-24%" y="-75%" width="148%"
+            height="260%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .16"
+                      numOctaves="1" seed="5" result="ruido"/>
+        <feDisplacementMap in="SourceGraphic" in2="ruido" scale="6"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="barajado"/>
+        <feComponentTransfer in="barajado" result="cifrado">
+            <feFuncA type="discrete" tableValues=".35 .7 1 1"/>
+            <feFuncR type="discrete" tableValues="0 .4 .8 1"/>
+            <feFuncG type="discrete" tableValues="0 .3 .65 .9"/>
+            <feFuncB type="discrete" tableValues="0 .35 .7 1"/>
+        </feComponentTransfer>
+        <feComposite in="cifrado" in2="barajado" operator="in"/>
+    </filter>
+    <filter id="ef-descifrar-mini" x="-16%" y="-60%" width="132%"
+            height="235%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".16 .5"
+                      numOctaves="1" seed="5" result="ruido"/>
+        <feDisplacementMap in="SourceGraphic" in2="ruido" scale="2"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="barajado"/>
+        <feComponentTransfer in="barajado" result="cifrado">
+            <feFuncA type="discrete" tableValues=".5 1 1"/>
+            <feFuncR type="discrete" tableValues=".2 .6 1"/>
+            <feFuncG type="discrete" tableValues=".2 .55 .9"/>
+            <feFuncB type="discrete" tableValues=".25 .6 1"/>
+        </feComponentTransfer>
+        <feComposite in="cifrado" in2="barajado" operator="in"/>
+    </filter>
+        <!-- cyberdeck · Cyberdeck -->
+    <filter id="ef-cyberdeck" x="-18%" y="-60%" width="136%"
+            height="230%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" result="deck"
+            values="1.1 0 0 0 -.04
+                    0 1.1 0 0 -.04
+                    0 0 1.2 0 -.03
+                    0 0 0 1 0"/>
+        <feComponentTransfer in="deck" result="cortado">
+            <feFuncR type="table" tableValues="0 .5 1"/>
+            <feFuncG type="table" tableValues="0 .55 .95"/>
+            <feFuncB type="table" tableValues="0 .6 1"/>
+        </feComponentTransfer>
+        <feComposite in="cortado" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-cyberdeck-mini" x="-11%" y="-50%" width="122%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" result="deck"
+            values="1.05 0 0 0 -.03
+                    0 1.05 0 0 -.03
+                    0 0 1.1 0 -.02
+                    0 0 0 1 0"/>
+        <feComposite in="deck" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- nomad · Nómada -->
+    <filter id="ef-nomad" x="-20%" y="-65%" width="140%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".01 .07"
+                      numOctaves="3" seed="44" result="polvo"/>
+        <feDisplacementMap in="SourceGraphic" in2="polvo" scale="5"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="grano"/>
+        <feComponentTransfer in="grano" result="calor">
+            <feFuncR type="gamma" exponent=".85" amplitude="1.2"/>
+            <feFuncG type="gamma" exponent="1.05" amplitude="1.05"/>
+            <feFuncB type="gamma" exponent="1.5" amplitude=".9"/>
+        </feComponentTransfer>
+        <feComposite in="calor" in2="grano" operator="in"/>
+    </filter>
+    <filter id="ef-nomad-mini" x="-12%" y="-55%" width="124%"
+            height="225%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".04 .2"
+                      numOctaves="3" seed="44" result="polvo"/>
+        <feDisplacementMap in="SourceGraphic" in2="polvo" scale="1.8"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="grano"/>
+        <feColorMatrix in="grano" type="matrix" result="calor"
+            values="1.15 0 0 0 -.03
+                    0 .95 0 0 -.03
+                    0 0 .7 0 -.03
+                    0 0 0 1 0"/>
+        <feComposite in="calor" in2="grano" operator="in"/>
+    </filter>
+        <!-- corpo · Corpo -->
+    <filter id="ef-corpo" x="-16%" y="-55%" width="132%"
+            height="215%" color-interpolation-filters="sRGB">
+        <feSpecularLighting in="SourceAlpha" surfaceScale="2"
+                            specularConstant="1.1" specularExponent="60"
+                            lighting-color="#ffffff" result="papel">
+            <feDistantLight azimuth="230" elevation="70"/>
+        </feSpecularLighting>
+        <feComposite in="papel" in2="SourceAlpha" operator="in" result="p-txt"/>
+        <feMerge>
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="p-txt"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-corpo-mini" x="-9%" y="-45%" width="118%"
+            height="200%" color-interpolation-filters="sRGB">
+        <feSpecularLighting in="SourceAlpha" surfaceScale="1"
+                            specularConstant=".7" specularExponent="70"
+                            lighting-color="#ffffff" result="papel">
+            <feDistantLight azimuth="230" elevation="76"/>
+        </feSpecularLighting>
+        <feComposite in="papel" in2="SourceAlpha" operator="in" result="p-txt"/>
+        <feMerge>
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="p-txt"/>
+        </feMerge>
+    </filter>
+        <!-- streetkid · Streetkid -->
+    <filter id="ef-streetkid" x="-24%" y="-75%" width="148%"
+            height="260%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".03 .05"
+                      numOctaves="3" seed="88" result="grano"/>
+        <feDisplacementMap in="SourceGraphic" in2="grano" scale="9"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="salpicado"/>
+        <feComponentTransfer in="salpicado" result="duro">
+            <feFuncA type="linear" slope="1.7" intercept="-.3"/>
+        </feComponentTransfer>
+        <feComposite in="duro" in2="salpicado" operator="in"/>
+    </filter>
+    <filter id="ef-streetkid-mini" x="-16%" y="-60%" width="132%"
+            height="235%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".1 .14"
+                      numOctaves="3" seed="88" result="grano"/>
+        <feDisplacementMap in="SourceGraphic" in2="grano" scale="3"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="salpicado"/>
+        <feComponentTransfer in="salpicado" result="duro">
+            <feFuncA type="linear" slope="1.6" intercept="-.25"/>
+        </feComponentTransfer>
+        <feComposite in="duro" in2="salpicado" operator="in"/>
+    </filter>
+        <!-- nightcity · Night City -->
+    <filter id="ef-nightcity" x="-16%" y="-55%" width="132%"
+            height="215%" color-interpolation-filters="sRGB">
+        <feComponentTransfer result="ventanas">
+            <feFuncR type="table" tableValues=".1 .6 1"/>
+            <feFuncG type="table" tableValues=".1 .55 .95"/>
+            <feFuncB type="table" tableValues=".15 .7 1"/>
+        </feComponentTransfer>
+        <feColorMatrix in="ventanas" type="matrix" result="noche"
+            values="1.15 0 0 0 -.06
+                    0 1.05 0 0 -.05
+                    0 0 1.3 0 -.03
+                    0 0 0 1 0"/>
+        <feComposite in="noche" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-nightcity-mini" x="-9%" y="-45%" width="118%"
+            height="200%" color-interpolation-filters="sRGB">
+        <feComponentTransfer result="ventanas">
+            <feFuncR type="table" tableValues=".2 .7 1"/>
+            <feFuncG type="table" tableValues=".2 .65 .95"/>
+            <feFuncB type="table" tableValues=".25 .8 1"/>
+        </feComponentTransfer>
+        <feComposite in="ventanas" in2="SourceGraphic" operator="in"/>
+    </filter>
+        <!-- danio · Daño -->
+    <filter id="ef-danio" x="-22%" y="-70%" width="144%"
+            height="245%" color-interpolation-filters="sRGB">
+        <feComponentTransfer result="sangre">
+            <feFuncR type="gamma" exponent=".75" amplitude="1.4"/>
+            <feFuncG type="gamma" exponent="2.2" amplitude=".7"/>
+            <feFuncB type="gamma" exponent="2.4" amplitude=".65"/>
+        </feComponentTransfer>
+        <feColorMatrix in="sangre" type="matrix" result="alerta"
+            values="1.5 0 0 0 -.1
+                    0 .3 0 0 -.03
+                    0 0 .3 0 -.02
+                    0 0 0 1 0"/>
+        <feComposite in="alerta" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="ef-danio-mini" x="-14%" y="-55%" width="128%"
+            height="225%" color-interpolation-filters="sRGB">
+        <feComponentTransfer result="sangre">
+            <feFuncR type="gamma" exponent=".85" amplitude="1.3"/>
+            <feFuncG type="gamma" exponent="1.9" amplitude=".8"/>
+            <feFuncB type="gamma" exponent="2" amplitude=".75"/>
+        </feComponentTransfer>
+        <feColorMatrix in="sangre" type="matrix" result="alerta"
+            values="1.4 0 0 0 -.08
+                    0 .36 0 0 -.02
+                    0 0 .36 0 -.02
+                    0 0 0 1 0"/>
+        <feComposite in="alerta" in2="SourceGraphic" operator="in"/>
+    </filter>
     </defs>
 </svg>
 
@@ -1570,7 +3412,7 @@
         <!-- ===== EFECTOS SVG (segunda seccion del navegador) ===== -->
         <details class="seccion-indice" id="s-svg" name="secciones">
             <summary class="seccion-titulo">Efectos SVG
-                <span class="contador">3 disponibles</span></summary>
+                <span class="contador">60 disponibles</span></summary>
 
         <details class="grupo" id="g-svg-matrix" data-cat="svg-matrix">
             <summary class="grupo-titulo">Matrix (SVG) <span class="grupo-n">1</span></summary>
@@ -1584,6 +3426,96 @@
             <ol class="lista">
                 <li><a href="efectos_svg/miscelanea/mercurio/index.html">💧 Mercurio</a></li>
                 <li><a href="efectos_svg/miscelanea/glitch/index.html">📡 Glitch</a></li>
+            </ol>
+        </details>
+
+        <details class="grupo" id="g-svg-marvel" data-cat="svg-marvel">
+            <summary class="grupo-titulo">Marvel (SVG) <span class="grupo-n">20</span></summary>
+            <ol class="lista">
+                <li><a href="efectos_svg/marvel/repulsor/index.html">⚡ Repulsor</a></li>
+                <li><a href="efectos_svg/marvel/telarana/index.html">🕷️ Telaraña</a></li>
+                <li><a href="efectos_svg/marvel/garra/index.html">🦡 Garra</a></li>
+                <li><a href="efectos_svg/marvel/escudo/index.html">🛡️ Escudo</a></li>
+                <li><a href="efectos_svg/marvel/gamma/index.html">💚 Gamma</a></li>
+                <li><a href="efectos_svg/marvel/runa/index.html">🔮 Runa</a></li>
+                <li><a href="efectos_svg/marvel/fenix/index.html">🔥 Fénix</a></li>
+                <li><a href="efectos_svg/marvel/simbionte/index.html">🖤 Simbionte</a></li>
+                <li><a href="efectos_svg/marvel/kinetica/index.html">💜 Kinética</a></li>
+                <li><a href="efectos_svg/marvel/diminuto/index.html">🐜 Diminuto</a></li>
+                <li><a href="efectos_svg/marvel/nano/index.html">⚙️ Nano</a></li>
+                <li><a href="efectos_svg/marvel/asgard/index.html">⚡ Asgard</a></li>
+                <li><a href="efectos_svg/marvel/pow/index.html">💥 Pow</a></li>
+                <li><a href="efectos_svg/marvel/semitono/index.html">🔵 Semitono</a></li>
+                <li><a href="efectos_svg/marvel/multiverso/index.html">🌀 Multiverso</a></li>
+                <li><a href="efectos_svg/marvel/visor/index.html">🥽 Visor</a></li>
+                <li><a href="efectos_svg/marvel/fase/index.html">💎 Fase</a></li>
+                <li><a href="efectos_svg/marvel/inmortal/index.html">🎺 Inmortal</a></li>
+                <li><a href="efectos_svg/marvel/voltaje/index.html">🌩️ Voltaje</a></li>
+                <li><a href="efectos_svg/marvel/gemma/index.html">💎 Gemma</a></li>
+            </ol>
+        </details>
+
+        <details class="grupo" id="g-svg-ucm" data-cat="svg-ucm">
+            <summary class="grupo-titulo">UCM (Marvel) (SVG) <span class="grupo-n">20</span></summary>
+            <ol class="lista">
+                <li><a href="efectos_svg/ucm/portal/index.html">🌀 Portal</a></li>
+                <li><a href="efectos_svg/ucm/foton/index.html">✨ Fotón</a></li>
+                <li><a href="efectos_svg/ucm/blip/index.html">💨 Blip</a></li>
+                <li><a href="efectos_svg/ucm/avengers/index.html">🛡️ Vengadores</a></li>
+                <li><a href="efectos_svg/ucm/cuantico/index.html">🔬 Cuántico</a></li>
+                <li><a href="efectos_svg/ucm/mandala/index.html">⭕ Mandala</a></li>
+                <li><a href="efectos_svg/ucm/bifrost/index.html">🌈 Bifröst</a></li>
+                <li><a href="efectos_svg/ucm/hidra/index.html">🐍 Hidra</a></li>
+                <li><a href="efectos_svg/ucm/aguila/index.html">🦅 Águila</a></li>
+                <li><a href="efectos_svg/ucm/odin/index.html">👁️ Odín</a></li>
+                <li><a href="efectos_svg/ucm/anillos/index.html">💍 Anillos</a></li>
+                <li><a href="efectos_svg/ucm/vormir/index.html">⛰️ Vormir</a></li>
+                <li><a href="efectos_svg/ucm/tva/index.html">📼 TVA</a></li>
+                <li><a href="efectos_svg/ucm/leviatan/index.html">🐋 Leviatán</a></li>
+                <li><a href="efectos_svg/ucm/quinjet/index.html">🛩️ Quinjet</a></li>
+                <li><a href="efectos_svg/ucm/aether/index.html">🩸 Aether</a></li>
+                <li><a href="efectos_svg/ucm/guardianes/index.html">🌌 Guardianes</a></li>
+                <li><a href="efectos_svg/ucm/mente/index.html">🧠 Mente</a></li>
+                <li><a href="efectos_svg/ucm/groot/index.html">🌳 Groot</a></li>
+                <li><a href="efectos_svg/ucm/sakaar/index.html">🏟️ Sakaar</a></li>
+            </ol>
+        </details>
+
+        <details class="grupo" id="g-svg-cp2077" data-cat="svg-cp2077">
+            <summary class="grupo-titulo">CP2077 (SVG) <span class="grupo-n">20</span></summary>
+            <ol class="lista">
+                <li><a href="efectos_svg/cp2077/netrunner/index.html">🟨 Netrunner</a></li>
+                <li><a href="efectos_svg/cp2077/kiroshi/index.html">👁️ Kiroshi</a></li>
+                <li><a href="efectos_svg/cp2077/sande/index.html">⚡ Sandevistan</a></li>
+                <li><a href="efectos_svg/cp2077/mantis/index.html">🔪 Hoja Mantis</a></li>
+                <li><a href="efectos_svg/cp2077/breach/index.html">🧩 Breach</a></li>
+                <li><a href="efectos_svg/cp2077/blackwall/index.html">🚧 Blackwall</a></li>
+                <li><a href="efectos_svg/cp2077/relic/index.html">💾 Reliquia</a></li>
+                <li><a href="efectos_svg/cp2077/konpeki/index.html">🏢 Konpeki</a></li>
+                <li><a href="efectos_svg/cp2077/arasaka/index.html">🏢 Arasaka</a></li>
+                <li><a href="efectos_svg/cp2077/militech/index.html">🪖 Militech</a></li>
+                <li><a href="efectos_svg/cp2077/eddies/index.html">💵 Eddies</a></li>
+                <li><a href="efectos_svg/cp2077/braindance/index.html">🎧 Braindance</a></li>
+                <li><a href="efectos_svg/cp2077/quickhack/index.html">⚡ Quickhack</a></li>
+                <li><a href="efectos_svg/cp2077/descifrar/index.html">🔣 Descifrar</a></li>
+                <li><a href="efectos_svg/cp2077/cyberdeck/index.html">🖥️ Cyberdeck</a></li>
+                <li><a href="efectos_svg/cp2077/nomad/index.html">🏜️ Nómada</a></li>
+                <li><a href="efectos_svg/cp2077/corpo/index.html">👔 Corpo</a></li>
+                <li><a href="efectos_svg/cp2077/streetkid/index.html">🥷 Streetkid</a></li>
+                <li><a href="efectos_svg/cp2077/nightcity/index.html">🌃 Night City</a></li>
+                <li><a href="efectos_svg/cp2077/danio/index.html">🩸 Daño</a></li>
+            </ol>
+        </details>
+
+        <details class="grupo" id="g-svg-PENDIENTE" data-cat="svg-PENDIENTE">
+            <summary class="grupo-titulo">PENDIENTE (SVG) <span class="grupo-n">0</span></summary>
+            <ol class="lista">
+            </ol>
+        </details>
+
+        <details class="grupo" id="g-svg-PENDIENTE" data-cat="svg-PENDIENTE">
+            <summary class="grupo-titulo">PENDIENTE (SVG) <span class="grupo-n">0</span></summary>
+            <ol class="lista">
             </ol>
         </details>
         </details>
@@ -3417,7 +5349,7 @@
         <!-- ============ SECCION EFECTOS SVG ============ -->
         <section class="seccion-svg" id="efectos-svg">
             <h2 class="titulo-svg">🧬 Efectos SVG
-                <span class="contador-svg">3 con filtros SVG</span></h2>
+                <span class="contador-svg">60 con filtros SVG</span></h2>
             <p class="sub-svg">
                 Cada tarjeta es una muestra circular del efecto:
                 filtros SVG (feTurbulence, feDisplacementMap,
@@ -3461,6 +5393,606 @@
                     <h3>📡 Glitch <small>Desgarro de canales</small></h3>
                     <a class="btn" href="efectos_svg/miscelanea/glitch/index.html">Showcase completo</a>
                     <a class="btn btn-descarga" href="efectos_svg/miscelanea/glitch/glitch.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S4. REPULSOR ============ -->
+                <article class="tarjeta-svg" data-svg="marvel" id="svg-repulsor">
+                    <div class="sv-muestra">
+                        <span class="ef-repulsor">REPULSOR</span>
+                    </div>
+                    <h3>⚡ Repulsor <small>Destello del reactor</small></h3>
+                    <a class="btn" href="efectos_svg/marvel/repulsor/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/marvel/repulsor/repulsor.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S5. TELARAÑA ============ -->
+                <article class="tarjeta-svg" data-svg="marvel" id="svg-telarana">
+                    <div class="sv-muestra">
+                        <span class="ef-telarana">TELARAÑA</span>
+                    </div>
+                    <h3>🕷️ Telaraña <small>Seda que tensa el texto</small></h3>
+                    <a class="btn" href="efectos_svg/marvel/telarana/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/marvel/telarana/telarana.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S6. GARRA ============ -->
+                <article class="tarjeta-svg" data-svg="marvel" id="svg-garra">
+                    <div class="sv-muestra">
+                        <span class="ef-garra">GARRA</span>
+                    </div>
+                    <h3>🦡 Garra <small>Tres tajos de adamantio</small></h3>
+                    <a class="btn" href="efectos_svg/marvel/garra/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/marvel/garra/garra.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S7. ESCUDO ============ -->
+                <article class="tarjeta-svg" data-svg="marvel" id="svg-escudo">
+                    <div class="sv-muestra">
+                        <span class="ef-escudo">ESCUDO</span>
+                    </div>
+                    <h3>🛡️ Escudo <small>Anillos girando en el texto</small></h3>
+                    <a class="btn" href="efectos_svg/marvel/escudo/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/marvel/escudo/escudo.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S8. GAMMA ============ -->
+                <article class="tarjeta-svg" data-svg="marvel" id="svg-gamma">
+                    <div class="sv-muestra">
+                        <span class="ef-gamma">GAMMA</span>
+                    </div>
+                    <h3>💚 Gamma <small>La furia hincha las letras</small></h3>
+                    <a class="btn" href="efectos_svg/marvel/gamma/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/marvel/gamma/gamma.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S9. RUNA ============ -->
+                <article class="tarjeta-svg" data-svg="marvel" id="svg-runa">
+                    <div class="sv-muestra">
+                        <span class="ef-runa">RUNA</span>
+                    </div>
+                    <h3>🔮 Runa <small>Círculo místico en el texto</small></h3>
+                    <a class="btn" href="efectos_svg/marvel/runa/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/marvel/runa/runa.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S10. FÉNIX ============ -->
+                <article class="tarjeta-svg" data-svg="marvel" id="svg-fenix">
+                    <div class="sv-muestra">
+                        <span class="ef-fenix">FÉNIX</span>
+                    </div>
+                    <h3>🔥 Fénix <small>Llama que lame las letras</small></h3>
+                    <a class="btn" href="efectos_svg/marvel/fenix/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/marvel/fenix/fenix.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S11. SIMBIONTE ============ -->
+                <article class="tarjeta-svg" data-svg="marvel" id="svg-simbionte">
+                    <div class="sv-muestra">
+                        <span class="ef-simbionte">SIMBIONTE</span>
+                    </div>
+                    <h3>🖤 Simbionte <small>Baba negra que se derrite</small></h3>
+                    <a class="btn" href="efectos_svg/marvel/simbionte/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/marvel/simbionte/simbionte.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S12. KINÉTICA ============ -->
+                <article class="tarjeta-svg" data-svg="marvel" id="svg-kinetica">
+                    <div class="sv-muestra">
+                        <span class="ef-kinetica">KINÉTICA</span>
+                    </div>
+                    <h3>💜 Kinética <small>Onda de vibranio</small></h3>
+                    <a class="btn" href="efectos_svg/marvel/kinetica/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/marvel/kinetica/kinetica.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S13. DIMINUTO ============ -->
+                <article class="tarjeta-svg" data-svg="marvel" id="svg-diminuto">
+                    <div class="sv-muestra">
+                        <span class="ef-diminuto">DIMINUTO</span>
+                    </div>
+                    <h3>🐜 Diminuto <small>De gigante a minúsculo</small></h3>
+                    <a class="btn" href="efectos_svg/marvel/diminuto/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/marvel/diminuto/diminuto.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S14. NANO ============ -->
+                <article class="tarjeta-svg" data-svg="marvel" id="svg-nano">
+                    <div class="sv-muestra">
+                        <span class="ef-nano">NANO</span>
+                    </div>
+                    <h3>⚙️ Nano <small>Trazos de circuito</small></h3>
+                    <a class="btn" href="efectos_svg/marvel/nano/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/marvel/nano/nano.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S15. ASGARD ============ -->
+                <article class="tarjeta-svg" data-svg="marvel" id="svg-asgard">
+                    <div class="sv-muestra">
+                        <span class="ef-asgard">ASGARD</span>
+                    </div>
+                    <h3>⚡ Asgard <small>Rayo sobre oro</small></h3>
+                    <a class="btn" href="efectos_svg/marvel/asgard/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/marvel/asgard/asgard.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S16. POW ============ -->
+                <article class="tarjeta-svg" data-svg="marvel" id="svg-pow">
+                    <div class="sv-muestra">
+                        <span class="ef-pow">POW</span>
+                    </div>
+                    <h3>💥 Pow <small>Impacto de cómic</small></h3>
+                    <a class="btn" href="efectos_svg/marvel/pow/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/marvel/pow/pow.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S17. SEMITONO ============ -->
+                <article class="tarjeta-svg" data-svg="marvel" id="svg-semitono">
+                    <div class="sv-muestra">
+                        <span class="ef-semitono">SEMITONO</span>
+                    </div>
+                    <h3>🔵 Semitono <small>Trama de puntos Ben-Day</small></h3>
+                    <a class="btn" href="efectos_svg/marvel/semitono/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/marvel/semitono/semitono.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S18. MULTIVERSO ============ -->
+                <article class="tarjeta-svg" data-svg="marvel" id="svg-multiverso">
+                    <div class="sv-muestra">
+                        <span class="ef-multiverso">MULTIVERSO</span>
+                    </div>
+                    <h3>🌀 Multiverso <small>Copia CMYK desfasada</small></h3>
+                    <a class="btn" href="efectos_svg/marvel/multiverso/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/marvel/multiverso/multiverso.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S19. VISOR ============ -->
+                <article class="tarjeta-svg" data-svg="marvel" id="svg-visor">
+                    <div class="sv-muestra">
+                        <span class="ef-visor">VISOR</span>
+                    </div>
+                    <h3>🥽 Visor <small>Barrido de HUD</small></h3>
+                    <a class="btn" href="efectos_svg/marvel/visor/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/marvel/visor/visor.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S20. FASE ============ -->
+                <article class="tarjeta-svg" data-svg="marvel" id="svg-fase">
+                    <div class="sv-muestra">
+                        <span class="ef-fase">FASE</span>
+                    </div>
+                    <h3>💎 Fase <small>Densidad cambiando</small></h3>
+                    <a class="btn" href="efectos_svg/marvel/fase/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/marvel/fase/fase.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S21. INMORTAL ============ -->
+                <article class="tarjeta-svg" data-svg="marvel" id="svg-inmortal">
+                    <div class="sv-muestra">
+                        <span class="ef-inmortal">INMORTAL</span>
+                    </div>
+                    <h3>🎺 Inmortal <small>Parte roto en cuarta pared</small></h3>
+                    <a class="btn" href="efectos_svg/marvel/inmortal/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/marvel/inmortal/inmortal.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S22. VOLTAJE ============ -->
+                <article class="tarjeta-svg" data-svg="marvel" id="svg-voltaje">
+                    <div class="sv-muestra">
+                        <span class="ef-voltaje">VOLTAJE</span>
+                    </div>
+                    <h3>🌩️ Voltaje <small>Descarga estriada</small></h3>
+                    <a class="btn" href="efectos_svg/marvel/voltaje/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/marvel/voltaje/voltaje.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S23. GEMMA ============ -->
+                <article class="tarjeta-svg" data-svg="marvel" id="svg-gemma">
+                    <div class="sv-muestra">
+                        <span class="ef-gemma">GEMMA</span>
+                    </div>
+                    <h3>💎 Gemma <small>Seis piedras barriendo</small></h3>
+                    <a class="btn" href="efectos_svg/marvel/gemma/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/marvel/gemma/gemma.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S24. PORTAL ============ -->
+                <article class="tarjeta-svg" data-svg="ucm" id="svg-portal">
+                    <div class="sv-muestra">
+                        <span class="ef-portal">PORTAL</span>
+                    </div>
+                    <h3>🌀 Portal <small>Anillo de sling ring</small></h3>
+                    <a class="btn" href="efectos_svg/ucm/portal/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/ucm/portal/portal.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S25. FOTÓN ============ -->
+                <article class="tarjeta-svg" data-svg="ucm" id="svg-foton">
+                    <div class="sv-muestra">
+                        <span class="ef-foton">FOTÓN</span>
+                    </div>
+                    <h3>✨ Fotón <small>Corriente binaria de estrellas</small></h3>
+                    <a class="btn" href="efectos_svg/ucm/foton/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/ucm/foton/foton.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S26. BLIP ============ -->
+                <article class="tarjeta-svg" data-svg="ucm" id="svg-blip">
+                    <div class="sv-muestra">
+                        <span class="ef-blip">BLIP</span>
+                    </div>
+                    <h3>💨 Blip <small>Se disuelve en polvo</small></h3>
+                    <a class="btn" href="efectos_svg/ucm/blip/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/ucm/blip/blip.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S27. VENGADORES ============ -->
+                <article class="tarjeta-svg" data-svg="ucm" id="svg-avengers">
+                    <div class="sv-muestra">
+                        <span class="ef-avengers">VENGA</span>
+                    </div>
+                    <h3>🛡️ Vengadores <small>Se ensamblan las letras</small></h3>
+                    <a class="btn" href="efectos_svg/ucm/avengers/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/ucm/avengers/avengers.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S28. CUÁNTICO ============ -->
+                <article class="tarjeta-svg" data-svg="ucm" id="svg-cuantico">
+                    <div class="sv-muestra">
+                        <span class="ef-cuantico">CUÁNTICO</span>
+                    </div>
+                    <h3>🔬 Cuántico <small>Se abre la cámara del reino cuántico</small></h3>
+                    <a class="btn" href="efectos_svg/ucm/cuantico/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/ucm/cuantico/cuantico.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S29. MANDALA ============ -->
+                <article class="tarjeta-svg" data-svg="ucm" id="svg-mandala">
+                    <div class="sv-muestra">
+                        <span class="ef-mandala">MANDALA</span>
+                    </div>
+                    <h3>⭕ Mandala <small>Círculo tao girando</small></h3>
+                    <a class="btn" href="efectos_svg/ucm/mandala/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/ucm/mandala/mandala.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S30. BIFRÖST ============ -->
+                <article class="tarjeta-svg" data-svg="ucm" id="svg-bifrost">
+                    <div class="sv-muestra">
+                        <span class="ef-bifrost">BIFRÖST</span>
+                    </div>
+                    <h3>🌈 Bifröst <small>Puente de siete franjas</small></h3>
+                    <a class="btn" href="efectos_svg/ucm/bifrost/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/ucm/bifrost/bifrost.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S31. HIDRA ============ -->
+                <article class="tarjeta-svg" data-svg="ucm" id="svg-hidra">
+                    <div class="sv-muestra">
+                        <span class="ef-hidra">HIDRA</span>
+                    </div>
+                    <h3>🐍 Hidra <small>Cabeza que serpentea</small></h3>
+                    <a class="btn" href="efectos_svg/ucm/hidra/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/ucm/hidra/hidra.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S32. ÁGUILA ============ -->
+                <article class="tarjeta-svg" data-svg="ucm" id="svg-aguila">
+                    <div class="sv-muestra">
+                        <span class="ef-aguila">ÁGUILA</span>
+                    </div>
+                    <h3>🦅 Águila <small>Plumas de escudo</small></h3>
+                    <a class="btn" href="efectos_svg/ucm/aguila/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/ucm/aguila/aguila.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S33. ODÍN ============ -->
+                <article class="tarjeta-svg" data-svg="ucm" id="svg-odin">
+                    <div class="sv-muestra">
+                        <span class="ef-odin">ODÍN</span>
+                    </div>
+                    <h3>👁️ Odín <small>Padre de todo y su ojo</small></h3>
+                    <a class="btn" href="efectos_svg/ucm/odin/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/ucm/odin/odin.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S34. ANILLOS ============ -->
+                <article class="tarjeta-svg" data-svg="ucm" id="svg-anillos">
+                    <div class="sv-muestra">
+                        <span class="ef-anillos">ANILLOS</span>
+                    </div>
+                    <h3>💍 Anillos <small>Los diez anillos de Wenwu</small></h3>
+                    <a class="btn" href="efectos_svg/ucm/anillos/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/ucm/anillos/anillos.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S35. VORMIR ============ -->
+                <article class="tarjeta-svg" data-svg="ucm" id="svg-vormir">
+                    <div class="sv-muestra">
+                        <span class="ef-vormir">VORMIR</span>
+                    </div>
+                    <h3>⛰️ Vormir <small>Se hunde en el abismo</small></h3>
+                    <a class="btn" href="efectos_svg/ucm/vormir/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/ucm/vormir/vormir.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S36. TVA ============ -->
+                <article class="tarjeta-svg" data-svg="ucm" id="svg-tva">
+                    <div class="sv-muestra">
+                        <span class="ef-tva">TVA</span>
+                    </div>
+                    <h3>📼 TVA <small>Sello de burócrata</small></h3>
+                    <a class="btn" href="efectos_svg/ucm/tva/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/ucm/tva/tva.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S37. LEVIATÁN ============ -->
+                <article class="tarjeta-svg" data-svg="ucm" id="svg-leviatan">
+                    <div class="sv-muestra">
+                        <span class="ef-leviatan">LEVIATÁN</span>
+                    </div>
+                    <h3>🐋 Leviatán <small>Blindaje que respira</small></h3>
+                    <a class="btn" href="efectos_svg/ucm/leviatan/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/ucm/leviatan/leviatan.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S38. QUINJET ============ -->
+                <article class="tarjeta-svg" data-svg="ucm" id="svg-quinjet">
+                    <div class="sv-muestra">
+                        <span class="ef-quinjet">QUINJET</span>
+                    </div>
+                    <h3>🛩️ Quinjet <small>Estelas a toda velocidad</small></h3>
+                    <a class="btn" href="efectos_svg/ucm/quinjet/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/ucm/quinjet/quinjet.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S39. AETHER ============ -->
+                <article class="tarjeta-svg" data-svg="ucm" id="svg-aether">
+                    <div class="sv-muestra">
+                        <span class="ef-aether">AETHER</span>
+                    </div>
+                    <h3>🩸 Aether <small>Líquido que se mece</small></h3>
+                    <a class="btn" href="efectos_svg/ucm/aether/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/ucm/aether/aether.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S40. GUARDIANES ============ -->
+                <article class="tarjeta-svg" data-svg="ucm" id="svg-guardianes">
+                    <div class="sv-muestra">
+                        <span class="ef-guardianes">GUARDIANES</span>
+                    </div>
+                    <h3>🌌 Guardianes <small>Arca de colores perdidos</small></h3>
+                    <a class="btn" href="efectos_svg/ucm/guardianes/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/ucm/guardianes/guardianes.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S41. MENTE ============ -->
+                <article class="tarjeta-svg" data-svg="ucm" id="svg-mente">
+                    <div class="sv-muestra">
+                        <span class="ef-mente">MENTE</span>
+                    </div>
+                    <h3>🧠 Mente <small>Onda psíquica amarilla</small></h3>
+                    <a class="btn" href="efectos_svg/ucm/mente/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/ucm/mente/mente.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S42. GROOT ============ -->
+                <article class="tarjeta-svg" data-svg="ucm" id="svg-groot">
+                    <div class="sv-muestra">
+                        <span class="ef-groot">GROOT</span>
+                    </div>
+                    <h3>🌳 Groot <small>Corteza que crece</small></h3>
+                    <a class="btn" href="efectos_svg/ucm/groot/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/ucm/groot/groot.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S43. SAKAAR ============ -->
+                <article class="tarjeta-svg" data-svg="ucm" id="svg-sakaar">
+                    <div class="sv-muestra">
+                        <span class="ef-sakaar">SAKAR</span>
+                    </div>
+                    <h3>🏟️ Sakaar <small>Neón de gladiador</small></h3>
+                    <a class="btn" href="efectos_svg/ucm/sakaar/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/ucm/sakaar/sakaar.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S44. NETRUNNER ============ -->
+                <article class="tarjeta-svg" data-svg="cp2077" id="svg-netrunner">
+                    <div class="sv-muestra">
+                        <span class="ef-netrunner">NETRUNNER</span>
+                    </div>
+                    <h3>🟨 Netrunner <small>Columnas de datos cayendo</small></h3>
+                    <a class="btn" href="efectos_svg/cp2077/netrunner/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/cp2077/netrunner/netrunner.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S45. KIROSHI ============ -->
+                <article class="tarjeta-svg" data-svg="cp2077" id="svg-kiroshi">
+                    <div class="sv-muestra">
+                        <span class="ef-kiroshi">KIROSHI</span>
+                    </div>
+                    <h3>👁️ Kiroshi <small>Óptica escaneando</small></h3>
+                    <a class="btn" href="efectos_svg/cp2077/kiroshi/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/cp2077/kiroshi/kiroshi.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S46. SANDEVISTAN ============ -->
+                <article class="tarjeta-svg" data-svg="cp2077" id="svg-sande">
+                    <div class="sv-muestra">
+                        <span class="ef-sande">SANDEVISTAN</span>
+                    </div>
+                    <h3>⚡ Sandevistan <small>El tiempo se estira</small></h3>
+                    <a class="btn" href="efectos_svg/cp2077/sande/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/cp2077/sande/sande.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S47. HOJA MANTIS ============ -->
+                <article class="tarjeta-svg" data-svg="cp2077" id="svg-mantis">
+                    <div class="sv-muestra">
+                        <span class="ef-mantis">HOJA</span>
+                    </div>
+                    <h3>🔪 Hoja Mantis <small>Corte diagonal</small></h3>
+                    <a class="btn" href="efectos_svg/cp2077/mantis/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/cp2077/mantis/mantis.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S48. BREACH ============ -->
+                <article class="tarjeta-svg" data-svg="cp2077" id="svg-breach">
+                    <div class="sv-muestra">
+                        <span class="ef-breach">BREACH</span>
+                    </div>
+                    <h3>🧩 Breach <small>Protocolo de intrusión</small></h3>
+                    <a class="btn" href="efectos_svg/cp2077/breach/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/cp2077/breach/breach.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S49. BLACKWALL ============ -->
+                <article class="tarjeta-svg" data-svg="cp2077" id="svg-blackwall">
+                    <div class="sv-muestra">
+                        <span class="ef-blackwall">BLACKWALL</span>
+                    </div>
+                    <h3>🚧 Blackwall <small>Interfaz corrupta</small></h3>
+                    <a class="btn" href="efectos_svg/cp2077/blackwall/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/cp2077/blackwall/blackwall.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S50. RELIQUIA ============ -->
+                <article class="tarjeta-svg" data-svg="cp2077" id="svg-relic">
+                    <div class="sv-muestra">
+                        <span class="ef-relic">RELIQUIA</span>
+                    </div>
+                    <h3>💾 Reliquia <small>Chip de memoria fallando</small></h3>
+                    <a class="btn" href="efectos_svg/cp2077/relic/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/cp2077/relic/relic.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S51. KONPEKI ============ -->
+                <article class="tarjeta-svg" data-svg="cp2077" id="svg-konpeki">
+                    <div class="sv-muestra">
+                        <span class="ef-konpeki">KONPEKI</span>
+                    </div>
+                    <h3>🏢 Konpeki <small>Vidrio de hotel de lujo</small></h3>
+                    <a class="btn" href="efectos_svg/cp2077/konpeki/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/cp2077/konpeki/konpeki.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S52. ARASAKA ============ -->
+                <article class="tarjeta-svg" data-svg="cp2077" id="svg-arasaka">
+                    <div class="sv-muestra">
+                        <span class="ef-arasaka">ARASAKA</span>
+                    </div>
+                    <h3>🏢 Arasaka <small>Torre corporativa</small></h3>
+                    <a class="btn" href="efectos_svg/cp2077/arasaka/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/cp2077/arasaka/arasaka.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S53. MILITECH ============ -->
+                <article class="tarjeta-svg" data-svg="cp2077" id="svg-militech">
+                    <div class="sv-muestra">
+                        <span class="ef-militech">MILITECH</span>
+                    </div>
+                    <h3>🪖 Militech <small>Estarcido militar</small></h3>
+                    <a class="btn" href="efectos_svg/cp2077/militech/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/cp2077/militech/militech.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S54. EDDIES ============ -->
+                <article class="tarjeta-svg" data-svg="cp2077" id="svg-eddies">
+                    <div class="sv-muestra">
+                        <span class="ef-eddies">EDDIES</span>
+                    </div>
+                    <h3>💵 Eddies <small>Billetes con brillo</small></h3>
+                    <a class="btn" href="efectos_svg/cp2077/eddies/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/cp2077/eddies/eddies.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S55. BRAINDANCE ============ -->
+                <article class="tarjeta-svg" data-svg="cp2077" id="svg-braindance">
+                    <div class="sv-muestra">
+                        <span class="ef-braindance">BRAINDANCE</span>
+                    </div>
+                    <h3>🎧 Braindance <small>Banda de edición</small></h3>
+                    <a class="btn" href="efectos_svg/cp2077/braindance/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/cp2077/braindance/braindance.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S56. QUICKHACK ============ -->
+                <article class="tarjeta-svg" data-svg="cp2077" id="svg-quickhack">
+                    <div class="sv-muestra">
+                        <span class="ef-quickhack">QUICKHACK</span>
+                    </div>
+                    <h3>⚡ Quickhack <small>Subida al 100 %</small></h3>
+                    <a class="btn" href="efectos_svg/cp2077/quickhack/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/cp2077/quickhack/quickhack.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S57. DESCIFRAR ============ -->
+                <article class="tarjeta-svg" data-svg="cp2077" id="svg-descifrar">
+                    <div class="sv-muestra">
+                        <span class="ef-descifrar">CIFRA</span>
+                    </div>
+                    <h3>🔣 Descifrar <small>Letras que se reordenan</small></h3>
+                    <a class="btn" href="efectos_svg/cp2077/descifrar/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/cp2077/descifrar/descifrar.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S58. CYBERDECK ============ -->
+                <article class="tarjeta-svg" data-svg="cp2077" id="svg-cyberdeck">
+                    <div class="sv-muestra">
+                        <span class="ef-cyberdeck">CYBERDECK</span>
+                    </div>
+                    <h3>🖥️ Cyberdeck <small>Ranuras encendiendo</small></h3>
+                    <a class="btn" href="efectos_svg/cp2077/cyberdeck/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/cp2077/cyberdeck/cyberdeck.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S59. NÓMADA ============ -->
+                <article class="tarjeta-svg" data-svg="cp2077" id="svg-nomad">
+                    <div class="sv-muestra">
+                        <span class="ef-nomad">NÓMADA</span>
+                    </div>
+                    <h3>🏜️ Nómada <small>Carretera y polvo</small></h3>
+                    <a class="btn" href="efectos_svg/cp2077/nomad/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/cp2077/nomad/nomad.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S60. CORPO ============ -->
+                <article class="tarjeta-svg" data-svg="cp2077" id="svg-corpo">
+                    <div class="sv-muestra">
+                        <span class="ef-corpo">CORPO</span>
+                    </div>
+                    <h3>👔 Corpo <small>Presentación de empresa</small></h3>
+                    <a class="btn" href="efectos_svg/cp2077/corpo/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/cp2077/corpo/corpo.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S61. STREETKID ============ -->
+                <article class="tarjeta-svg" data-svg="cp2077" id="svg-streetkid">
+                    <div class="sv-muestra">
+                        <span class="ef-streetkid">CALLE</span>
+                    </div>
+                    <h3>🥷 Streetkid <small>Plantilla de spray</small></h3>
+                    <a class="btn" href="efectos_svg/cp2077/streetkid/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/cp2077/streetkid/streetkid.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S62. NIGHT CITY ============ -->
+                <article class="tarjeta-svg" data-svg="cp2077" id="svg-nightcity">
+                    <div class="sv-muestra">
+                        <span class="ef-nightcity">NIGHTCITY</span>
+                    </div>
+                    <h3>🌃 Night City <small>Luces de ciudad</small></h3>
+                    <a class="btn" href="efectos_svg/cp2077/nightcity/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/cp2077/nightcity/nightcity.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S63. DAÑO ============ -->
+                <article class="tarjeta-svg" data-svg="cp2077" id="svg-danio">
+                    <div class="sv-muestra">
+                        <span class="ef-danio">DAÑO</span>
+                    </div>
+                    <h3>🩸 Daño <small>Aviso de integridad</small></h3>
+                    <a class="btn" href="efectos_svg/cp2077/danio/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/cp2077/danio/danio.zip" download>Descargar efecto (.zip)</a>
                 </article>
 
             </div>

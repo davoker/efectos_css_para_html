@@ -1,0 +1,101 @@
+/* =============================================================
+   SAKAAR (SVG) · Neón de gladiador
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-sakaar.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-sakaar,
+    .ef-sakaar-mini — neón a saltos + halo cruzado
+   ============================================================= */
+.ef-sakaar {
+    color: #39ff88;                     /* respaldo si no hay clip */
+    background: repeating-linear-gradient(132deg,
+        #ff2fa0 0 12px, #ffe600 12px 24px,
+        #39ff88 24px 36px, #00e5ff 36px 48px);
+    background-size: 96px 100%;
+    background-position: 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .6px rgba(4, 6, 10, .9);
+    paint-order: stroke fill;
+    filter: url(#ef-sakaar);
+    animation: mv-ucm-sakaar-recorre 3s linear infinite,
+               mv-ucm-sakaar-neon 2.2s steps(1, end) infinite;
+}
+.ef-sakaar:hover,
+.ef-sakaar:focus-visible {
+    animation-duration: 1.2s, .9s;
+}
+.ef-sakaar-mini {
+    color: #39ff88;
+    background: repeating-linear-gradient(132deg,
+        #ff2fa0 0 8px, #ffe600 8px 16px,
+        #39ff88 16px 24px, #00e5ff 24px 32px);
+    background-size: 64px 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-sakaar-mini);
+    animation: mv-ucm-sakaar-recorre 3s linear infinite,
+               mv-ucm-sakaar-neon 2.2s steps(1, end) infinite;
+}
+.ef-sakaar-mini:hover,
+.ef-sakaar-mini:focus-visible {
+    animation-duration: 1.2s, .9s;
+}
+
+/* las rayas corren y el halo salta de color sin fundido */
+@keyframes mv-ucm-sakaar-recorre {
+    0%   { background-position: 0 0; }
+    100% { background-position: -96px 0; }
+}
+@keyframes mv-ucm-sakaar-neon {
+    0%, 100% { filter: url(#ef-sakaar);
+               text-shadow: 0 0 .7em rgba(255,47,160,.95); }
+    25%      { filter: url(#ef-sakaar);
+               text-shadow: 0 0 .7em rgba(57,255,136,.95); }
+    50%      { filter: url(#ef-sakaar);
+               text-shadow: 0 0 .7em rgba(0,229,255,.95); }
+    75%      { filter: url(#ef-sakaar);
+               text-shadow: 0 0 .7em rgba(255,230,0,.95); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-sakaar,
+    .ef-sakaar-mini {
+        animation: none;
+        text-shadow: 0 0 .6em rgba(57,255,136,.9);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-sakaar,
+    .ef-sakaar-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

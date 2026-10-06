@@ -1,0 +1,105 @@
+/* =============================================================
+   DAÑO (SVG) · Aviso de integridad
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-danio.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-danio,
+    .ef-danio-mini — torsión + alerta a saltos
+   ============================================================= */
+.ef-danio {
+    display: inline-block;
+    color: #ff5c5c;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(132deg,
+            rgba(20, 0, 4, .85) 0 7px, rgba(20,0,4,0) 7px 18px),
+        linear-gradient(178deg,
+            #ffe3e3 0%, #ff5c5c 36%, #8a0a16 70%, #1c0105 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .8px rgba(28, 1, 5, .9);
+    paint-order: stroke fill;
+    filter: url(#ef-danio);
+    animation: mv-cp-danio-tuerce 3.2s ease-in-out infinite,
+               mv-cp-danio-alerta 2.4s steps(1, end) infinite;
+}
+.ef-danio:hover,
+.ef-danio:focus-visible {
+    animation-duration: 1.4s, 1s;
+}
+.ef-danio-mini {
+    display: inline-block;
+    color: #ff5c5c;
+    background:
+        repeating-linear-gradient(132deg,
+            rgba(20, 0, 4, .8) 0 5px, rgba(20,0,4,0) 5px 13px),
+        linear-gradient(178deg,
+            #ffe3e3 0%, #ff5c5c 36%, #8a0a16 70%, #1c0105 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .5px rgba(28, 1, 5, .9);
+    paint-order: stroke fill;
+    filter: url(#ef-danio-mini);
+    animation: mv-cp-danio-tuerce 3.2s ease-in-out infinite,
+               mv-cp-danio-alerta 2.4s steps(1, end) infinite;
+}
+.ef-danio-mini:hover,
+.ef-danio-mini:focus-visible {
+    animation-duration: 1.4s, 1s;
+}
+
+/* se tuerce con la alerta y la alerta salta sin fundido */
+@keyframes mv-cp-danio-tuerce {
+    0%, 100% { transform: skewY(0deg) scaleX(1); }
+    22%      { transform: skewY(-2.6deg) scaleX(1.03); }
+    44%      { transform: skewY(2.2deg) scaleX(.97); }
+    66%      { transform: skewY(-1.6deg) scaleX(1.02); }
+    84%      { transform: skewY(1.2deg) scaleX(.99); }
+}
+@keyframes mv-cp-danio-alerta {
+    0%, 100% { text-shadow: 0 0 .5em rgba(255, 92, 92, .7); }
+    30%      { text-shadow: 0 0 1.4em rgba(255, 40, 40, 1); }
+    46%      { text-shadow: 0 0 .3em rgba(255, 92, 92, .5); }
+    70%      { text-shadow: 0 0 1.6em rgba(255, 60, 60, .95); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-danio,
+    .ef-danio-mini {
+        animation: none; transform: none;
+        text-shadow: 0 0 .7em rgba(255, 60, 60, .85);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-danio,
+    .ef-danio-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

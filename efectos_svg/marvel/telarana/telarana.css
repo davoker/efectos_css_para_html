@@ -1,0 +1,91 @@
+/* =============================================================
+   TELARAÑA (SVG) · Seda que tensa el texto
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-telarana.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-telarana,
+    .ef-telarana-mini — trama en degradado + turbulencia
+   ============================================================= */
+.ef-telarana {
+    color: #eef4fa;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(58deg,
+            rgba(255,255,255,.92) 0 1.2px, rgba(255,255,255,0) 1.2px 9px),
+        repeating-linear-gradient(-58deg,
+            rgba(198,224,255,.9) 0 1.2px, rgba(255,255,255,0) 1.2px 9px),
+        linear-gradient(180deg, #ffffff 6%, #cfdcf0 46%, #8fa6c2 74%,
+                        #f4f8ff 96%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-telarana);
+    animation: mv-telarana-tense 4.6s ease-in-out infinite;
+}
+.ef-telarana:hover,
+.ef-telarana:focus-visible {
+    filter: url(#ef-telarana) brightness(1.14);
+    animation-duration: 2.1s;
+}
+
+.ef-telarana-mini {
+    color: #eef4fa;
+    background:
+        repeating-linear-gradient(58deg,
+            rgba(255,255,255,.92) 0 1px, rgba(255,255,255,0) 1px 7px),
+        repeating-linear-gradient(-58deg,
+            rgba(198,224,255,.9) 0 1px, rgba(255,255,255,0) 1px 7px),
+        linear-gradient(180deg, #ffffff 6%, #cfdcf0 46%, #8fa6c2 74%,
+                        #f4f8ff 96%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-telarana-mini);
+    animation: mv-telarana-tense 4.6s ease-in-out infinite;
+}
+.ef-telarana-mini:hover,
+.ef-telarana-mini:focus-visible {
+    filter: url(#ef-telarana-mini) brightness(1.16);
+}
+
+/* la trama se desliza: la seda parece estirarse sobre el texto */
+@keyframes mv-telarana-tense {
+    0%, 100% { background-position: 0 0, 0 0, 50% 0%; }
+    50%      { background-position: 7px 4px, -7px -4px, 50% 0%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-telarana,
+    .ef-telarana-mini { animation: none; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-telarana,
+    .ef-telarana-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

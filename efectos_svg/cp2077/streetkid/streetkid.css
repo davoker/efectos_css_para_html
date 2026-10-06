@@ -1,0 +1,107 @@
+/* =============================================================
+   STREETKID (SVG) · Plantilla de spray
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-streetkid.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-streetkid,
+    .ef-streetkid-mini — grano de spray + trazo que salta
+   ============================================================= */
+.ef-streetkid {
+    color: #ff5bd0;                     /* respaldo si no hay clip */
+    background:
+        repeating-conic-gradient(from 14deg at 38% 56%,
+            rgba(255, 255, 255, .95) 0 4deg, rgba(255,255,255,0) 4deg 26deg),
+        repeating-linear-gradient(154deg,
+            rgba(0, 0, 0, .75) 0 5px, rgba(0,0,0,0) 5px 14px),
+        linear-gradient(170deg,
+            #ffffff 0%, #ff5bd0 32%, #7a1fa8 64%, #180425 100%);
+    background-size: 200% 200%, 100% 100%, 100% 100%;
+    background-position: 50% 50%, 0 0, 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .8px rgba(24, 4, 37, .9);
+    paint-order: stroke fill;
+    filter: url(#ef-streetkid);
+    animation: mv-cp-streetkid-mancha 4.6s ease-in-out infinite,
+               mv-cp-streetkid-brocha 3.4s steps(1, end) infinite;
+}
+.ef-streetkid:hover,
+.ef-streetkid:focus-visible {
+    animation-duration: 2.2s, 1.6s;
+}
+.ef-streetkid-mini {
+    color: #ff5bd0;
+    background:
+        repeating-conic-gradient(from 14deg at 38% 56%,
+            rgba(255, 255, 255, .95) 0 4deg, rgba(255,255,255,0) 4deg 26deg),
+        repeating-linear-gradient(154deg,
+            rgba(0, 0, 0, .7) 0 3px, rgba(0,0,0,0) 3px 10px),
+        linear-gradient(170deg,
+            #ffffff 0%, #ff5bd0 32%, #7a1fa8 64%, #180425 100%);
+    background-size: 200% 200%, 100% 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .5px rgba(24, 4, 37, .9);
+    paint-order: stroke fill;
+    filter: url(#ef-streetkid-mini);
+    animation: mv-cp-streetkid-mancha 4.6s ease-in-out infinite,
+               mv-cp-streetkid-brocha 3.4s steps(1, end) infinite;
+}
+.ef-streetkid-mini:hover,
+.ef-streetkid-mini:focus-visible {
+    animation-duration: 2.2s, 1.6s;
+}
+
+/* la mancha rueda y el trazo salta de fino a gordo */
+@keyframes mv-cp-streetkid-mancha {
+    0%   { background-position: 50% 50%, 0 0, 0 0; }
+    100% { background-position: -160% -160%, 0 0, 0 0; }
+}
+@keyframes mv-cp-streetkid-brocha {
+    0%, 100% { -webkit-text-stroke-width: .8px; }
+    34%      { -webkit-text-stroke-width: 3.6px; }
+    40%      { -webkit-text-stroke-width: 1.4px; }
+    72%      { -webkit-text-stroke-width: 4.4px; }
+    78%      { -webkit-text-stroke-width: .8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-streetkid,
+    .ef-streetkid-mini {
+        animation: none; -webkit-text-stroke-width: 1.6px;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-streetkid,
+    .ef-streetkid-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

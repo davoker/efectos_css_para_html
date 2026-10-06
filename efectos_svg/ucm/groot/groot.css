@@ -1,0 +1,104 @@
+/* =============================================================
+   GROOT (SVG) · Corteza que crece
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-groot.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-groot,
+    .ef-groot-mini — vetas arqueadas + crecimiento
+   ============================================================= */
+.ef-groot {
+    display: inline-block;
+    color: #d8c49a;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(94deg,
+            rgba(58, 36, 14, .95) 0 4px, rgba(58,36,14,0) 4px 11px),
+        repeating-linear-gradient(86deg,
+            rgba(140, 104, 52, .7) 0 7px, rgba(140,104,52,0) 7px 23px),
+        linear-gradient(176deg,
+            #f3e2c2 0%, #b98b46 30%, #5e3d18 62%, #2a1a08 100%);
+    background-size: 28px 100%, 70px 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .7px rgba(42, 26, 8, .8);
+    paint-order: stroke fill;
+    filter: url(#ef-groot);
+    transform-origin: 50% 60%;
+    animation: mv-ucm-groot-crece 5.6s ease-in-out infinite,
+               mv-ucm-groot-veta 4.2s linear infinite;
+}
+.ef-groot:hover,
+.ef-groot:focus-visible {
+    animation-duration: 2.6s, 1.8s;
+}
+.ef-groot-mini {
+    display: inline-block;
+    color: #d8c49a;
+    background:
+        repeating-linear-gradient(94deg,
+            rgba(58, 36, 14, .95) 0 3px, rgba(58,36,14,0) 3px 8px),
+        repeating-linear-gradient(86deg,
+            rgba(140, 104, 52, .7) 0 4px, rgba(140,104,52,0) 4px 16px),
+        linear-gradient(176deg,
+            #f3e2c2 0%, #b98b46 30%, #5e3d18 62%, #2a1a08 100%);
+    background-size: 18px 100%, 46px 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-groot-mini);
+    transform-origin: 50% 60%;
+    animation: mv-ucm-groot-crece 5.6s ease-in-out infinite,
+               mv-ucm-groot-veta 4.2s linear infinite;
+}
+.ef-groot-mini:hover,
+.ef-groot-mini:focus-visible {
+    animation-duration: 2.6s, 1.8s;
+}
+
+/* crece (se engorda) mientras las vetas se ensanchan */
+@keyframes mv-ucm-groot-crece {
+    0%, 100% { transform: scale(1); }
+    46%      { transform: scale(1.05, 1.1); }
+    62%      { transform: scale(.99, .98); }
+}
+@keyframes mv-ucm-groot-veta {
+    0%   { background-position: 0 0, 0 0, 0 0; }
+    100% { background-position: 28px 0, -70px 0, 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-groot,
+    .ef-groot-mini { animation: none; transform: none; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-groot,
+    .ef-groot-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

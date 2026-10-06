@@ -1,0 +1,85 @@
+/* =============================================================
+   CUÁNTICO (SVG) · Se abre la cámara del reino cuántico
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-cuantico.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-cuantico,
+    .ef-cuantico-mini — recorte circular + desenfoque turbulento
+   ============================================================= */
+.ef-cuantico {
+    display: inline-block;              /* necesario para recortar */
+    color: #b9a6ff;                     /* respaldo si no hay clip */
+    background: repeating-radial-gradient(circle at 50% 50%,
+        #f0eaff 0 4%, #8b5cf6 8%, #2b1a5e 14%, #d5c4ff 20%,
+        #6d28d9 27%, #180f33 35%, #a78bfa 43%, #241650 52%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-cuantico);
+    animation: mv-ucm-cuantico-abertura 4.6s cubic-bezier(.5,0,.3,1) infinite;
+}
+.ef-cuantico:hover,
+.ef-cuantico:focus-visible {
+    animation-duration: 2.2s;
+}
+.ef-cuantico-mini {
+    display: inline-block;
+    color: #b9a6ff;
+    background: repeating-radial-gradient(circle at 50% 50%,
+        #f0eaff 0 4%, #8b5cf6 8%, #2b1a5e 14%, #d5c4ff 20%,
+        #6d28d9 27%, #180f33 35%, #a78bfa 43%, #241650 52%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-cuantico-mini);
+    animation: mv-ucm-cuantico-abertura 4.6s cubic-bezier(.5,0,.3,1) infinite;
+}
+.ef-cuantico-mini:hover,
+.ef-cuantico-mini:focus-visible {
+    animation-duration: 2.2s;
+}
+
+/* la cámara se abre desde el centro y se vuelve a cerrar */
+@keyframes mv-ucm-cuantico-abertura {
+    0%, 100% { clip-path: circle(78% at 50% 50%); }
+    40%      { clip-path: circle(0% at 50% 50%); }
+    56%      { clip-path: circle(6% at 50% 50%); }
+    74%      { clip-path: circle(74% at 50% 50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-cuantico,
+    .ef-cuantico-mini { animation: none; clip-path: none; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-cuantico,
+    .ef-cuantico-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

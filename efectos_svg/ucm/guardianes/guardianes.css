@@ -1,0 +1,98 @@
+/* =============================================================
+   GUARDIANES (SVG) · Arca de colores perdidos
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-guardianes.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-guardianes,
+    .ef-guardianes-mini — rayas a saltos + parpadeo de tubo
+   ============================================================= */
+.ef-guardianes {
+    color: #ff4fd8;                     /* respaldo si no hay clip */
+    background: repeating-linear-gradient(176deg,
+        #ff4fd8 0 7px, #ffe600 7px 14px, #00f0ff 14px 21px,
+        #7a2bff 21px 28px, #ff6a00 28px 35px, #3dff9a 35px 42px);
+    background-size: 100% 42px;
+    background-position: 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .7px rgba(8, 8, 16, .85);
+    paint-order: stroke fill;
+    filter: url(#ef-guardianes);
+    animation: mv-ucm-guardianes-corre 2.6s steps(4, end) infinite,
+               mv-ucm-guardianes-tubo 1.9s steps(1, end) infinite;
+}
+.ef-guardianes:hover,
+.ef-guardianes:focus-visible {
+    animation-duration: 1s, .8s;
+}
+.ef-guardianes-mini {
+    color: #ff4fd8;
+    background: repeating-linear-gradient(176deg,
+        #ff4fd8 0 4px, #ffe600 4px 8px, #00f0ff 8px 12px,
+        #7a2bff 12px 16px, #ff6a00 16px 20px, #3dff9a 20px 24px);
+    background-size: 100% 24px;
+    background-position: 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-guardianes-mini);
+    animation: mv-ucm-guardianes-corre 2.6s steps(4, end) infinite,
+               mv-ucm-guardianes-tubo 1.9s steps(1, end) infinite;
+}
+.ef-guardianes-mini:hover,
+.ef-guardianes-mini:focus-visible {
+    animation-duration: 1s, .8s;
+}
+
+/* las rayas se corren a saltos y el tubo parpadea sin fundido */
+@keyframes mv-ucm-guardianes-corre {
+    0%   { background-position: 0 0; }
+    100% { background-position: 0 42px; }
+}
+@keyframes mv-ucm-guardianes-tubo {
+    0%, 100% { opacity: 1; }
+    18%      { opacity: .45; }
+    22%      { opacity: 1; }
+    57%      { opacity: .7; }
+    61%      { opacity: 1; }
+    84%      { opacity: .3; }
+    87%      { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-guardianes,
+    .ef-guardianes-mini { animation: none; opacity: 1; }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-guardianes,
+    .ef-guardianes-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}
