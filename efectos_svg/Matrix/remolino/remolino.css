@@ -1,0 +1,100 @@
+/* =============================================================
+   REMOLINO (SVG) · El texto se arremolina
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-remolino.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-remolino,
+    .ef-remolino-mini — espiral de datos que gira
+   ============================================================= */
+.ef-remolino {
+    display: inline-block;
+    color: #1a0a2e;                     /* respaldo si no hay clip */
+    background-color: #1a0a2e;
+    background-image: repeating-conic-gradient(from 0deg at 50% 50%,
+        rgba(160, 120, 255, .9) 0 20deg, rgba(160, 120, 255, .2) 20deg 30deg,
+        rgba(26, 10, 46, .9) 30deg 60deg);
+    background-size: 80px 80px;
+    background-position: 50% 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .6px #2a1a4a;
+    paint-order: stroke fill;
+    filter: url(#ef-remolino);
+    animation: mx-remolino-giro 5s linear infinite,
+               mx-remolino-estela 2.8s ease-in-out infinite;
+}
+.ef-remolino:hover,
+.ef-remolino:focus-visible {
+    animation-duration: 2.5s, 1.4s;
+}
+.ef-remolino-mini {
+    display: inline-block;
+    color: #1a0a2e;
+    background-color: #1a0a2e;
+    background-image: repeating-conic-gradient(from 0deg at 50% 50%,
+        rgba(160, 120, 255, .9) 0 20deg, rgba(160, 120, 255, .2) 20deg 30deg,
+        rgba(26, 10, 46, .9) 30deg 60deg);
+    background-size: 52px 52px;
+    background-position: 50% 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-remolino-mini);
+    animation: mx-remolino-giro 5s linear infinite,
+               mx-remolino-estela 4s ease-in-out infinite;
+}
+.ef-remolino-mini:hover,
+.ef-remolino-mini:focus-visible {
+    animation-duration: 2.5s, 2s;
+}
+
+/* la espiral gira y la estela respira */
+@keyframes mx-remolino-giro {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes mx-remolino-estela {
+    0%, 100% { background-size: 80px 80px; }
+    50%      { background-size: 110px 110px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-remolino,
+    .ef-remolino-mini {
+        animation: none;
+        transform: none;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-remolino,
+    .ef-remolino-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

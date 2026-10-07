@@ -277,6 +277,43 @@
 <link rel="stylesheet" href="efectos_svg/mm/susto/susto.css">
 <link rel="stylesheet" href="efectos_svg/mm/radio/radio.css">
 <link rel="stylesheet" href="efectos_svg/mm/seto/seto.css">
+<link rel="stylesheet" href="efectos_svg/Matrix/umbral/umbral.css">
+<link rel="stylesheet" href="efectos_svg/Matrix/llamada/llamada.css">
+<link rel="stylesheet" href="efectos_svg/Matrix/clonado/clonado.css">
+<link rel="stylesheet" href="efectos_svg/Matrix/origen/origen.css">
+<link rel="stylesheet" href="efectos_svg/Matrix/gong/gong.css">
+<link rel="stylesheet" href="efectos_svg/Matrix/bala/bala.css">
+<link rel="stylesheet" href="efectos_svg/Matrix/mosaico/mosaico.css">
+<link rel="stylesheet" href="efectos_svg/Matrix/emp/emp.css">
+<link rel="stylesheet" href="efectos_svg/Matrix/tren/tren.css">
+<link rel="stylesheet" href="efectos_svg/Matrix/llave/llave.css">
+<link rel="stylesheet" href="efectos_svg/Matrix/zion/zion.css">
+<link rel="stylesheet" href="efectos_svg/Matrix/detenido/detenido.css">
+<link rel="stylesheet" href="efectos_svg/Matrix/subida/subida.css">
+<link rel="stylesheet" href="efectos_svg/Matrix/carga/carga.css">
+<link rel="stylesheet" href="efectos_svg/Matrix/iris/iris.css">
+<link rel="stylesheet" href="efectos_svg/Matrix/remolino/remolino.css">
+<link rel="stylesheet" href="efectos_svg/Matrix/cristal/cristal.css">
+<link rel="stylesheet" href="efectos_svg/Matrix/buscar/buscar.css">
+<link rel="stylesheet" href="efectos_svg/Matrix/colmena/colmena.css">
+<link rel="stylesheet" href="efectos_svg/miscelanea/tinta/tinta.css">
+<link rel="stylesheet" href="efectos_svg/miscelanea/acuarela/acuarela.css">
+<link rel="stylesheet" href="efectos_svg/miscelanea/bordado/bordado.css">
+<link rel="stylesheet" href="efectos_svg/miscelanea/serigrafia/serigrafia.css">
+<link rel="stylesheet" href="efectos_svg/miscelanea/pastel/pastel.css">
+<link rel="stylesheet" href="efectos_svg/miscelanea/confeti/confeti.css">
+<link rel="stylesheet" href="efectos_svg/miscelanea/caramelo/caramelo.css">
+<link rel="stylesheet" href="efectos_svg/miscelanea/imantado/imantado.css">
+<link rel="stylesheet" href="efectos_svg/miscelanea/brujula/brujula.css">
+<link rel="stylesheet" href="efectos_svg/miscelanea/puzzle/puzzle.css">
+<link rel="stylesheet" href="efectos_svg/miscelanea/braille/braille.css">
+<link rel="stylesheet" href="efectos_svg/miscelanea/tornado/tornado.css">
+<link rel="stylesheet" href="efectos_svg/miscelanea/dados/dados.css">
+<link rel="stylesheet" href="efectos_svg/miscelanea/musgo/musgo.css">
+<link rel="stylesheet" href="efectos_svg/miscelanea/aurora/aurora.css">
+<link rel="stylesheet" href="efectos_svg/miscelanea/champinon/champinon.css">
+<link rel="stylesheet" href="efectos_svg/miscelanea/globo/globo.css">
+<link rel="stylesheet" href="efectos_svg/miscelanea/faro/faro.css">
     <link rel="stylesheet" href="efectos_css/stalker/militares/militares.css">
     <link rel="stylesheet" href="efectos_css/stalker/ecologistas/ecologistas.css">
     <link rel="stylesheet" href="efectos_css/stalker/monolito/monolito.css">
@@ -4323,6 +4360,677 @@
         <feComposite in="grano" in2="SourceAlpha" operator="in" result="g-txt"/>
         <feBlend in="SourceGraphic" in2="g-txt" mode="multiply"/>
     </filter>
+        <!-- umbral · Umbral -->
+    <filter id="ef-umbral" x="-20%" y="-60%" width="140%"
+            height="220%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="6" result="b"/>
+        <feSpecularLighting in="b" surfaceScale="6" specularConstant="1"
+            specularExponent="18" lighting-color="#b6ffe0" result="s">
+            <feDistantLight azimuth="235" elevation="55"/>
+        </feSpecularLighting>
+        <feComposite in="s" in2="SourceAlpha" operator="in" result="s2"/>
+        <feComposite in="SourceGraphic" in2="s2" operator="arithmetic"
+            k1="0" k2="1" k3="0.9" k4="0"/>
+    </filter>
+    <filter id="ef-umbral-mini" x="-14%" y="-45%" width="128%"
+            height="195%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="2.5" result="b"/>
+        <feSpecularLighting in="b" surfaceScale="3" specularConstant="0.9"
+            specularExponent="22" lighting-color="#d8fff0" result="s">
+            <feDistantLight azimuth="235" elevation="55"/>
+        </feSpecularLighting>
+        <feComposite in="s" in2="SourceAlpha" operator="in" result="s2"/>
+        <feComposite in="SourceGraphic" in2="s2" operator="arithmetic"
+            k1="0" k2="1" k3="0.7" k4="0"/>
+    </filter>
+        <!-- llamada · Llamada -->
+    <filter id="ef-llamada" x="-30%" y="-70%" width="160%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="g"/>
+        <feMerge>
+            <feMergeNode in="g"/>
+            <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+    </filter>
+    <filter id="ef-llamada-mini" x="-22%" y="-55%" width="144%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="g"/>
+        <feMerge>
+            <feMergeNode in="g"/>
+            <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+    </filter>
+        <!-- clonado · Clonado -->
+    <filter id="ef-clonado" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".02 .035"
+                      numOctaves="2" seed="7" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="6"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="d"/>
+        <feColorMatrix in="d" type="matrix"
+            values="1.15 0 0 0 -.02
+                    0 1.35 0 0 .02
+                    0 0 1.05 0 0
+                    0 0 0 1 0"/>
+    </filter>
+    <filter id="ef-clonado-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".055 .09"
+                      numOctaves="2" seed="7" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="2.4"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="d"/>
+        <feColorMatrix in="d" type="matrix"
+            values="1.1 0 0 0 -.02
+                    0 1.25 0 0 .02
+                    0 0 1.05 0 0
+                    0 0 0 1 0"/>
+    </filter>
+        <!-- origen · Origen -->
+    <filter id="ef-origen" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".008 .04"
+                      numOctaves="2" seed="21" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="5"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-origen-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".03 .11"
+                      numOctaves="2" seed="21" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="2"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- gong · Gong -->
+    <filter id="ef-gong" x="-30%" y="-75%" width="160%"
+            height="250%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="b"/>
+        <feSpecularLighting in="b" surfaceScale="7" specularConstant="1.1"
+            specularExponent="14" lighting-color="#ffe9a8" result="s">
+            <feDistantLight azimuth="200" elevation="60"/>
+        </feSpecularLighting>
+        <feComposite in="s" in2="SourceAlpha" operator="in" result="s2"/>
+        <feComposite in="SourceGraphic" in2="s2" operator="arithmetic"
+            k1="0" k2="1" k3="1" k4="0"/>
+    </filter>
+    <filter id="ef-gong-mini" x="-20%" y="-55%" width="140%"
+            height="215%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="b"/>
+        <feSpecularLighting in="b" surfaceScale="3.5" specularConstant="1"
+            specularExponent="18" lighting-color="#fff3cc" result="s">
+            <feDistantLight azimuth="200" elevation="60"/>
+        </feSpecularLighting>
+        <feComposite in="s" in2="SourceAlpha" operator="in" result="s2"/>
+        <feComposite in="SourceGraphic" in2="s2" operator="arithmetic"
+            k1="0" k2="1" k3=".8" k4="0"/>
+    </filter>
+        <!-- bala · Bala -->
+    <filter id="ef-bala" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".015 .045"
+                      numOctaves="2" seed="11" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="5"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="d"/>
+        <feColorMatrix in="d" type="matrix"
+            values="1.2 0 0 0 -.01
+                    0 1.1 0 0 0
+                    0 0 1.15 0 .01
+                    0 0 0 1 0"/>
+    </filter>
+    <filter id="ef-bala-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .12"
+                      numOctaves="2" seed="11" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="2.2"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="d"/>
+        <feColorMatrix in="d" type="matrix"
+            values="1.15 0 0 0 -.01
+                    0 1.05 0 0 0
+                    0 0 1.1 0 .01
+                    0 0 0 1 0"/>
+    </filter>
+        <!-- mosaico · Mosaico -->
+    <filter id="ef-mosaico" x="-20%" y="-60%" width="140%"
+            height="220%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".02 .05"
+                      numOctaves="2" seed="5" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="4"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-mosaico-mini" x="-14%" y="-45%" width="128%"
+            height="195%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".06 .14"
+                      numOctaves="2" seed="5" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="1.8"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- emp · EMP -->
+    <filter id="ef-emp" x="-20%" y="-60%" width="140%"
+            height="220%" color-interpolation-filters="sRGB">
+        <feColorMatrix in="SourceGraphic" type="matrix"
+            values="1.1 0 0 0 -.02
+                    0 1.15 0 0 .01
+                    0 0 1.2 0 .02
+                    0 0 0 1 0"/>
+    </filter>
+    <filter id="ef-emp-mini" x="-14%" y="-45%" width="128%"
+            height="195%" color-interpolation-filters="sRGB">
+        <feColorMatrix in="SourceGraphic" type="matrix"
+            values="1.05 0 0 0 -.01
+                    0 1.1 0 0 .01
+                    0 0 1.15 0 .01
+                    0 0 0 1 0"/>
+    </filter>
+        <!-- tren · Tren -->
+    <filter id="ef-tren" x="-20%" y="-60%" width="140%"
+            height="220%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".012 .04"
+                      numOctaves="2" seed="17" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="4"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-tren-mini" x="-14%" y="-45%" width="128%"
+            height="195%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".045 .12"
+                      numOctaves="2" seed="17" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="1.8"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- llave · Llave -->
+    <filter id="ef-llave" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".018 .05"
+                      numOctaves="2" seed="9" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="5"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="d"/>
+        <feColorMatrix in="d" type="matrix"
+            values="1.15 0 0 0 -.01
+                    0 1.05 0 0 0
+                    0 0 1.1 0 .01
+                    0 0 0 1 0"/>
+    </filter>
+    <filter id="ef-llave-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".06 .15"
+                      numOctaves="2" seed="9" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="2.2"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="d"/>
+        <feColorMatrix in="d" type="matrix"
+            values="1.1 0 0 0 -.01
+                    0 1.02 0 0 0
+                    0 0 1.05 0 .01
+                    0 0 0 1 0"/>
+    </filter>
+        <!-- zion · Zion -->
+    <filter id="ef-zion" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".015 .045"
+                      numOctaves="2" seed="13" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="5"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="d"/>
+        <feColorMatrix in="d" type="matrix"
+            values="1.2 0 0 0 -.02
+                    0 1.1 0 0 0
+                    0 0 1.05 0 .02
+                    0 0 0 1 0"/>
+    </filter>
+    <filter id="ef-zion-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .13"
+                      numOctaves="2" seed="13" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="2.2"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="d"/>
+        <feColorMatrix in="d" type="matrix"
+            values="1.15 0 0 0 -.01
+                    0 1.05 0 0 0
+                    0 0 1.02 0 .01
+                    0 0 0 1 0"/>
+    </filter>
+        <!-- detenido · Detenido -->
+    <filter id="ef-detenido" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".012 .04"
+                      numOctaves="2" seed="3" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="5"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="d"/>
+        <feColorMatrix in="d" type="matrix"
+            values="1.05 0 0 0 0
+                    0 1.15 0 0 .01
+                    0 0 1.3 0 .03
+                    0 0 0 1 0"/>
+    </filter>
+    <filter id="ef-detenido-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".045 .12"
+                      numOctaves="2" seed="3" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="2.2"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="d"/>
+        <feColorMatrix in="d" type="matrix"
+            values="1.02 0 0 0 0
+                    0 1.1 0 0 .01
+                    0 0 1.25 0 .02
+                    0 0 0 1 0"/>
+    </filter>
+        <!-- subida · Subida -->
+    <filter id="ef-subida" x="-20%" y="-60%" width="140%"
+            height="220%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".015 .045"
+                      numOctaves="2" seed="19" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="4"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-subida-mini" x="-14%" y="-45%" width="128%"
+            height="195%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .13"
+                      numOctaves="2" seed="19" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="1.8"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- carga · Carga -->
+    <filter id="ef-carga" x="-20%" y="-60%" width="140%"
+            height="220%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".02 .05"
+                      numOctaves="2" seed="23" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="4"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="d"/>
+        <feColorMatrix in="d" type="matrix"
+            values="1.05 0 0 0 0
+                    0 1.1 0 0 .01
+                    0 0 1.15 0 .02
+                    0 0 0 1 0"/>
+    </filter>
+    <filter id="ef-carga-mini" x="-14%" y="-45%" width="128%"
+            height="195%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".06 .14"
+                      numOctaves="2" seed="23" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="1.8"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="d"/>
+        <feColorMatrix in="d" type="matrix"
+            values="1.02 0 0 0 0
+                    0 1.05 0 0 .01
+                    0 0 1.1 0 .01
+                    0 0 0 1 0"/>
+    </filter>
+        <!-- iris · Iris -->
+    <filter id="ef-iris" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".012 .045"
+                      numOctaves="2" seed="29" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="5"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-iris-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .13"
+                      numOctaves="2" seed="29" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="2.2"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- remolino · Remolino -->
+    <filter id="ef-remolino" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".01 .04"
+                      numOctaves="2" seed="31" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="5"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="d"/>
+        <feColorMatrix in="d" type="matrix"
+            values="1.1 0 0 0 0
+                    0 1.15 0 0 .01
+                    0 0 1.25 0 .02
+                    0 0 0 1 0"/>
+    </filter>
+    <filter id="ef-remolino-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".045 .12"
+                      numOctaves="2" seed="31" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="2.2"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="d"/>
+        <feColorMatrix in="d" type="matrix"
+            values="1.05 0 0 0 0
+                    0 1.1 0 0 .01
+                    0 0 1.2 0 .02
+                    0 0 0 1 0"/>
+    </filter>
+        <!-- cristal · Cristal -->
+    <filter id="ef-cristal" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".015 .05"
+                      numOctaves="2" seed="37" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="5"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-cristal-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".055 .15"
+                      numOctaves="2" seed="37" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="2.2"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- buscar · Buscar -->
+    <filter id="ef-buscar" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".012 .045"
+                      numOctaves="2" seed="41" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="5"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-buscar-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .13"
+                      numOctaves="2" seed="41" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="2.2"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- colmena · Colmena -->
+    <filter id="ef-colmena" x="-20%" y="-60%" width="140%"
+            height="220%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".018 .05"
+                      numOctaves="2" seed="43" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="4"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-colmena-mini" x="-14%" y="-45%" width="128%"
+            height="195%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".06 .15"
+                      numOctaves="2" seed="43" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="1.8"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- tinta · Tinta -->
+    <filter id="ef-tinta" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".015 .045"
+                      numOctaves="2" seed="51" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="5"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="d"/>
+        <feColorMatrix in="d" type="matrix"
+            values="1.15 0 0 0 -.01
+                    0 1.1 0 0 0
+                    0 0 1.05 0 .01
+                    0 0 0 1 0"/>
+    </filter>
+    <filter id="ef-tinta-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .13"
+                      numOctaves="2" seed="51" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="2.2"
+                           xChannelSelector="R" yChannelSelector="G"
+                           result="d"/>
+        <feColorMatrix in="d" type="matrix"
+            values="1.1 0 0 0 -.01
+                    0 1.05 0 0 0
+                    0 0 1.02 0 .01
+                    0 0 0 1 0"/>
+    </filter>
+        <!-- acuarela · Acuarela -->
+    <filter id="ef-acuarela" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".012 .04"
+                      numOctaves="2" seed="53" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="5"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-acuarela-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".045 .12"
+                      numOctaves="2" seed="53" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="2.2"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- bordado · Bordado -->
+    <filter id="ef-bordado" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".015 .045"
+                      numOctaves="2" seed="55" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="4"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-bordado-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .13"
+                      numOctaves="2" seed="55" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="1.8"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- serigrafia · Serigrafía -->
+    <filter id="ef-serigrafia" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".012 .04"
+                      numOctaves="2" seed="57" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="5"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-serigrafia-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".045 .12"
+                      numOctaves="2" seed="57" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="2.2"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- pastel · Tiza pastel -->
+    <filter id="ef-pastel" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".018 .05"
+                      numOctaves="2" seed="59" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="4"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-pastel-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".06 .15"
+                      numOctaves="2" seed="59" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="1.8"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- confeti · Confeti -->
+    <filter id="ef-confeti" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".015 .045"
+                      numOctaves="2" seed="61" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="4"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-confeti-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .13"
+                      numOctaves="2" seed="61" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="1.8"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- caramelo · Caramelo -->
+    <filter id="ef-caramelo" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".015 .045"
+                      numOctaves="2" seed="63" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="4"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-caramelo-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .13"
+                      numOctaves="2" seed="63" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="1.8"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- imantado · Letras imantadas -->
+    <filter id="ef-imantado" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".015 .045"
+                      numOctaves="2" seed="65" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="4"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-imantado-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .13"
+                      numOctaves="2" seed="65" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="1.8"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- brujula · Brújula -->
+    <filter id="ef-brujula" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".012 .04"
+                      numOctaves="2" seed="67" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="5"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-brujula-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".045 .12"
+                      numOctaves="2" seed="67" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="2.2"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- puzzle · Puzzle -->
+    <filter id="ef-puzzle" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".015 .045"
+                      numOctaves="2" seed="69" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="4"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-puzzle-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .13"
+                      numOctaves="2" seed="69" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="1.8"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- braille · Braille -->
+    <filter id="ef-braille" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".018 .05"
+                      numOctaves="2" seed="71" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="4"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-braille-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".06 .15"
+                      numOctaves="2" seed="71" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="1.8"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- tornado · Tornado -->
+    <filter id="ef-tornado" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".012 .04"
+                      numOctaves="2" seed="73" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="5"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-tornado-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".045 .12"
+                      numOctaves="2" seed="73" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="2.2"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- dados · Dados -->
+    <filter id="ef-dados" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".015 .045"
+                      numOctaves="2" seed="75" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="4"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-dados-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .13"
+                      numOctaves="2" seed="75" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="1.8"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- musgo · Musgo -->
+    <filter id="ef-musgo" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".015 .045"
+                      numOctaves="2" seed="77" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="4"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-musgo-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .13"
+                      numOctaves="2" seed="77" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="1.8"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- aurora · Aurora -->
+    <filter id="ef-aurora" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".012 .04"
+                      numOctaves="2" seed="79" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="5"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-aurora-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".045 .12"
+                      numOctaves="2" seed="79" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="2.2"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- champinon · Champiñón -->
+    <filter id="ef-champinon" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".015 .045"
+                      numOctaves="2" seed="81" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="4"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-champinon-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .13"
+                      numOctaves="2" seed="81" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="1.8"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- globo · Globo -->
+    <filter id="ef-globo" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".015 .045"
+                      numOctaves="2" seed="83" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="4"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-globo-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .13"
+                      numOctaves="2" seed="83" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="1.8"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+        <!-- faro · Faro -->
+    <filter id="ef-faro" x="-25%" y="-70%" width="150%"
+            height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".012 .04"
+                      numOctaves="2" seed="85" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="5"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="ef-faro-mini" x="-18%" y="-55%" width="136%"
+            height="210%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".045 .12"
+                      numOctaves="2" seed="85" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="r" scale="2.2"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
     </defs>
 </svg>
 
@@ -4514,20 +5222,57 @@
         <!-- ===== EFECTOS SVG (segunda seccion del navegador) ===== -->
         <details class="seccion-indice" id="s-svg" name="secciones">
             <summary class="seccion-titulo">Efectos SVG
-                <span class="contador">103 disponibles</span></summary>
+                <span class="contador">140 disponibles</span></summary>
 
         <details class="grupo" id="g-svg-matrix" data-cat="svg-matrix">
-            <summary class="grupo-titulo">Matrix (SVG) <span class="grupo-n">1</span></summary>
+            <summary class="grupo-titulo">Matrix (SVG) <span class="grupo-n">20</span></summary>
             <ol class="lista">
                 <li><a href="efectos_svg/Matrix/matrix/index.html">🟩 Matrix</a></li>
+                <li><a href="efectos_svg/Matrix/umbral/index.html">🚪 Umbral</a></li>
+                <li><a href="efectos_svg/Matrix/llamada/index.html">📞 Llamada</a></li>
+                <li><a href="efectos_svg/Matrix/clonado/index.html">🧫 Clonado</a></li>
+                <li><a href="efectos_svg/Matrix/origen/index.html">💠 Origen</a></li>
+                <li><a href="efectos_svg/Matrix/gong/index.html">🥁 Gong</a></li>
+                <li><a href="efectos_svg/Matrix/bala/index.html">🔫 Bala</a></li>
+                <li><a href="efectos_svg/Matrix/mosaico/index.html">🟥 Mosaico</a></li>
+                <li><a href="efectos_svg/Matrix/emp/index.html">⚡ EMP</a></li>
+                <li><a href="efectos_svg/Matrix/tren/index.html">🚃 Tren</a></li>
+                <li><a href="efectos_svg/Matrix/llave/index.html">🔑 Llave</a></li>
+                <li><a href="efectos_svg/Matrix/zion/index.html">🏭 Zion</a></li>
+                <li><a href="efectos_svg/Matrix/detenido/index.html">✋ Detenido</a></li>
+                <li><a href="efectos_svg/Matrix/subida/index.html">📶 Subida</a></li>
+                <li><a href="efectos_svg/Matrix/carga/index.html">💾 Carga</a></li>
+                <li><a href="efectos_svg/Matrix/iris/index.html">👁️ Iris</a></li>
+                <li><a href="efectos_svg/Matrix/remolino/index.html">🌀 Remolino</a></li>
+                <li><a href="efectos_svg/Matrix/cristal/index.html">🪟 Cristal</a></li>
+                <li><a href="efectos_svg/Matrix/buscar/index.html">🔍 Buscar</a></li>
+                <li><a href="efectos_svg/Matrix/colmena/index.html">🐝 Colmena</a></li>
             </ol>
         </details>
 
         <details class="grupo" id="g-svg-miscelanea" data-cat="svg-miscelanea">
-            <summary class="grupo-titulo">Miscelánea (SVG) <span class="grupo-n">2</span></summary>
+            <summary class="grupo-titulo">Miscelánea (SVG) <span class="grupo-n">20</span></summary>
             <ol class="lista">
                 <li><a href="efectos_svg/miscelanea/mercurio/index.html">💧 Mercurio</a></li>
                 <li><a href="efectos_svg/miscelanea/glitch/index.html">📡 Glitch</a></li>
+                <li><a href="efectos_svg/miscelanea/tinta/index.html">🖋️ Tinta</a></li>
+                <li><a href="efectos_svg/miscelanea/acuarela/index.html">🎨 Acuarela</a></li>
+                <li><a href="efectos_svg/miscelanea/bordado/index.html">🧵 Bordado</a></li>
+                <li><a href="efectos_svg/miscelanea/serigrafia/index.html">🖼️ Serigrafía</a></li>
+                <li><a href="efectos_svg/miscelanea/pastel/index.html">🖍️ Tiza pastel</a></li>
+                <li><a href="efectos_svg/miscelanea/confeti/index.html">🎊 Confeti</a></li>
+                <li><a href="efectos_svg/miscelanea/caramelo/index.html">🍬 Caramelo</a></li>
+                <li><a href="efectos_svg/miscelanea/imantado/index.html">🧲 Letras imantadas</a></li>
+                <li><a href="efectos_svg/miscelanea/brujula/index.html">🧭 Brújula</a></li>
+                <li><a href="efectos_svg/miscelanea/puzzle/index.html">🧩 Puzzle</a></li>
+                <li><a href="efectos_svg/miscelanea/braille/index.html">⠿ Braille</a></li>
+                <li><a href="efectos_svg/miscelanea/tornado/index.html">🌪️ Tornado</a></li>
+                <li><a href="efectos_svg/miscelanea/dados/index.html">🎲 Dados</a></li>
+                <li><a href="efectos_svg/miscelanea/musgo/index.html">🌿 Musgo</a></li>
+                <li><a href="efectos_svg/miscelanea/aurora/index.html">🌌 Aurora</a></li>
+                <li><a href="efectos_svg/miscelanea/champinon/index.html">🍄 Champiñón</a></li>
+                <li><a href="efectos_svg/miscelanea/globo/index.html">🎈 Globo</a></li>
+                <li><a href="efectos_svg/miscelanea/faro/index.html">🗼 Faro</a></li>
             </ol>
         </details>
 
@@ -6491,7 +7236,7 @@
         <!-- ============ SECCION EFECTOS SVG ============ -->
         <section class="seccion-svg" id="efectos-svg">
             <h2 class="titulo-svg">🧬 Efectos SVG
-                <span class="contador-svg">103 con filtros SVG</span></h2>
+                <span class="contador-svg">140 con filtros SVG</span></h2>
             <p class="sub-svg">
                 Cada tarjeta es una muestra circular del efecto:
                 filtros SVG (feTurbulence, feDisplacementMap,
@@ -7535,6 +8280,376 @@
                     <h3>🌿 Seto <small>El laberinto del jardín</small></h3>
                     <a class="btn" href="efectos_svg/mm/seto/index.html">Showcase completo</a>
                     <a class="btn btn-descarga" href="efectos_svg/mm/seto/seto.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S104. UMBRAL ============ -->
+                <article class="tarjeta-svg" data-svg="matrix" id="svg-umbral">
+                    <div class="sv-muestra">
+                        <span class="ef-umbral">UMBRAL</span>
+                    </div>
+                    <h3>🚪 Umbral <small>La puerta de luz se abre</small></h3>
+                    <a class="btn" href="efectos_svg/Matrix/umbral/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/Matrix/umbral/umbral.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S105. LLAMADA ============ -->
+                <article class="tarjeta-svg" data-svg="matrix" id="svg-llamada">
+                    <div class="sv-muestra">
+                        <span class="ef-llamada">LLAMADA</span>
+                    </div>
+                    <h3>📞 Llamada <small>El teléfono de la Matrix suena</small></h3>
+                    <a class="btn" href="efectos_svg/Matrix/llamada/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/Matrix/llamada/llamada.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S106. CLONADO ============ -->
+                <article class="tarjeta-svg" data-svg="matrix" id="svg-clonado">
+                    <div class="sv-muestra">
+                        <span class="ef-clonado">CLONADO</span>
+                    </div>
+                    <h3>🧫 Clonado <small>La mancha se multiplica</small></h3>
+                    <a class="btn" href="efectos_svg/Matrix/clonado/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/Matrix/clonado/clonado.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S107. ORIGEN ============ -->
+                <article class="tarjeta-svg" data-svg="matrix" id="svg-origen">
+                    <div class="sv-muestra">
+                        <span class="ef-origen">ORIGEN</span>
+                    </div>
+                    <h3>💠 Origen <small>Arroyos que convergen</small></h3>
+                    <a class="btn" href="efectos_svg/Matrix/origen/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/Matrix/origen/origen.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S108. GONG ============ -->
+                <article class="tarjeta-svg" data-svg="matrix" id="svg-gong">
+                    <div class="sv-muestra">
+                        <span class="ef-gong">GONG</span>
+                    </div>
+                    <h3>🥁 Gong <small>Impacto marcial</small></h3>
+                    <a class="btn" href="efectos_svg/Matrix/gong/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/Matrix/gong/gong.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S109. BALA ============ -->
+                <article class="tarjeta-svg" data-svg="matrix" id="svg-bala">
+                    <div class="sv-muestra">
+                        <span class="ef-bala">BALA</span>
+                    </div>
+                    <h3>🔫 Bala <small>Trazadora lenta</small></h3>
+                    <a class="btn" href="efectos_svg/Matrix/bala/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/Matrix/bala/bala.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S110. MOSAICO ============ -->
+                <article class="tarjeta-svg" data-svg="matrix" id="svg-mosaico">
+                    <div class="sv-muestra">
+                        <span class="ef-mosaico">MOSAICO</span>
+                    </div>
+                    <h3>🟥 Mosaico <small>Se ensambla en bloques</small></h3>
+                    <a class="btn" href="efectos_svg/Matrix/mosaico/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/Matrix/mosaico/mosaico.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S111. EMP ============ -->
+                <article class="tarjeta-svg" data-svg="matrix" id="svg-emp">
+                    <div class="sv-muestra">
+                        <span class="ef-emp">EMP</span>
+                    </div>
+                    <h3>⚡ EMP <small>Pulso electromagnético</small></h3>
+                    <a class="btn" href="efectos_svg/Matrix/emp/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/Matrix/emp/emp.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S112. TREN ============ -->
+                <article class="tarjeta-svg" data-svg="matrix" id="svg-tren">
+                    <div class="sv-muestra">
+                        <span class="ef-tren">TREN</span>
+                    </div>
+                    <h3>🚃 Tren <small>Cruza la palabra</small></h3>
+                    <a class="btn" href="efectos_svg/Matrix/tren/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/Matrix/tren/tren.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S113. LLAVE ============ -->
+                <article class="tarjeta-svg" data-svg="matrix" id="svg-llave">
+                    <div class="sv-muestra">
+                        <span class="ef-llave">LLAVE</span>
+                    </div>
+                    <h3>🔑 Llave <small>Cerraduras que giran</small></h3>
+                    <a class="btn" href="efectos_svg/Matrix/llave/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/Matrix/llave/llave.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S114. ZION ============ -->
+                <article class="tarjeta-svg" data-svg="matrix" id="svg-zion">
+                    <div class="sv-muestra">
+                        <span class="ef-zion">ZION</span>
+                    </div>
+                    <h3>🏭 Zion <small>Ámbar industrial</small></h3>
+                    <a class="btn" href="efectos_svg/Matrix/zion/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/Matrix/zion/zion.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S115. DETENIDO ============ -->
+                <article class="tarjeta-svg" data-svg="matrix" id="svg-detenido">
+                    <div class="sv-muestra">
+                        <span class="ef-detenido">DETENIDO</span>
+                    </div>
+                    <h3>✋ Detenido <small>El tiempo se congela</small></h3>
+                    <a class="btn" href="efectos_svg/Matrix/detenido/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/Matrix/detenido/detenido.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S116. SUBIDA ============ -->
+                <article class="tarjeta-svg" data-svg="matrix" id="svg-subida">
+                    <div class="sv-muestra">
+                        <span class="ef-subida">SUBIDA</span>
+                    </div>
+                    <h3>📶 Subida <small>Barra de progreso</small></h3>
+                    <a class="btn" href="efectos_svg/Matrix/subida/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/Matrix/subida/subida.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S117. CARGA ============ -->
+                <article class="tarjeta-svg" data-svg="matrix" id="svg-carga">
+                    <div class="sv-muestra">
+                        <span class="ef-carga">CARGA</span>
+                    </div>
+                    <h3>💾 Carga <small>Pantalla del Constructor</small></h3>
+                    <a class="btn" href="efectos_svg/Matrix/carga/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/Matrix/carga/carga.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S118. IRIS ============ -->
+                <article class="tarjeta-svg" data-svg="matrix" id="svg-iris">
+                    <div class="sv-muestra">
+                        <span class="ef-iris">IRIS</span>
+                    </div>
+                    <h3>👁️ Iris <small>Escáner del ojo</small></h3>
+                    <a class="btn" href="efectos_svg/Matrix/iris/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/Matrix/iris/iris.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S119. REMOLINO ============ -->
+                <article class="tarjeta-svg" data-svg="matrix" id="svg-remolino">
+                    <div class="sv-muestra">
+                        <span class="ef-remolino">REMOLINO</span>
+                    </div>
+                    <h3>🌀 Remolino <small>El texto se arremolina</small></h3>
+                    <a class="btn" href="efectos_svg/Matrix/remolino/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/Matrix/remolino/remolino.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S120. CRISTAL ============ -->
+                <article class="tarjeta-svg" data-svg="matrix" id="svg-cristal">
+                    <div class="sv-muestra">
+                        <span class="ef-cristal">CRISTAL</span>
+                    </div>
+                    <h3>🪟 Cristal <small>Vidrio templado</small></h3>
+                    <a class="btn" href="efectos_svg/Matrix/cristal/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/Matrix/cristal/cristal.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S121. BUSCAR ============ -->
+                <article class="tarjeta-svg" data-svg="matrix" id="svg-buscar">
+                    <div class="sv-muestra">
+                        <span class="ef-buscar">BUSCAR</span>
+                    </div>
+                    <h3>🔍 Buscar <small>Barrido de resaltado</small></h3>
+                    <a class="btn" href="efectos_svg/Matrix/buscar/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/Matrix/buscar/buscar.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S122. COLMENA ============ -->
+                <article class="tarjeta-svg" data-svg="matrix" id="svg-colmena">
+                    <div class="sv-muestra">
+                        <span class="ef-colmena">COLMENA</span>
+                    </div>
+                    <h3>🐝 Colmena <small>Panal hexagonal</small></h3>
+                    <a class="btn" href="efectos_svg/Matrix/colmena/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/Matrix/colmena/colmena.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S123. TINTA ============ -->
+                <article class="tarjeta-svg" data-svg="miscelanea" id="svg-tinta">
+                    <div class="sv-muestra">
+                        <span class="ef-tinta">TINTA</span>
+                    </div>
+                    <h3>🖋️ Tinta <small>Caligrafía con plumilla</small></h3>
+                    <a class="btn" href="efectos_svg/miscelanea/tinta/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/miscelanea/tinta/tinta.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S124. ACUARELA ============ -->
+                <article class="tarjeta-svg" data-svg="miscelanea" id="svg-acuarela">
+                    <div class="sv-muestra">
+                        <span class="ef-acuarela">ACUARELA</span>
+                    </div>
+                    <h3>🎨 Acuarela <small>Lavados translúcidos</small></h3>
+                    <a class="btn" href="efectos_svg/miscelanea/acuarela/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/miscelanea/acuarela/acuarela.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S125. BORDADO ============ -->
+                <article class="tarjeta-svg" data-svg="miscelanea" id="svg-bordado">
+                    <div class="sv-muestra">
+                        <span class="ef-bordado">BORDADO</span>
+                    </div>
+                    <h3>🧵 Bordado <small>Puntadas que recorren</small></h3>
+                    <a class="btn" href="efectos_svg/miscelanea/bordado/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/miscelanea/bordado/bordado.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S126. SERIGRAFÍA ============ -->
+                <article class="tarjeta-svg" data-svg="miscelanea" id="svg-serigrafia">
+                    <div class="sv-muestra">
+                        <span class="ef-serigrafia">SERIGRAFIA</span>
+                    </div>
+                    <h3>🖼️ Serigrafía <small>Tintas superpuestas</small></h3>
+                    <a class="btn" href="efectos_svg/miscelanea/serigrafia/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/miscelanea/serigrafia/serigrafia.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S127. TIZA PASTEL ============ -->
+                <article class="tarjeta-svg" data-svg="miscelanea" id="svg-pastel">
+                    <div class="sv-muestra">
+                        <span class="ef-pastel">PASTEL</span>
+                    </div>
+                    <h3>🖍️ Tiza pastel <small>Polvo de gis</small></h3>
+                    <a class="btn" href="efectos_svg/miscelanea/pastel/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/miscelanea/pastel/pastel.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S128. CONFETI ============ -->
+                <article class="tarjeta-svg" data-svg="miscelanea" id="svg-confeti">
+                    <div class="sv-muestra">
+                        <span class="ef-confeti">CONFETI</span>
+                    </div>
+                    <h3>🎊 Confeti <small>Trocitos que saltan</small></h3>
+                    <a class="btn" href="efectos_svg/miscelanea/confeti/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/miscelanea/confeti/confeti.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S129. CARAMELO ============ -->
+                <article class="tarjeta-svg" data-svg="miscelanea" id="svg-caramelo">
+                    <div class="sv-muestra">
+                        <span class="ef-caramelo">CARAMELO</span>
+                    </div>
+                    <h3>🍬 Caramelo <small>Se derrite y gotea</small></h3>
+                    <a class="btn" href="efectos_svg/miscelanea/caramelo/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/miscelanea/caramelo/caramelo.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S130. LETRAS IMANTADAS ============ -->
+                <article class="tarjeta-svg" data-svg="miscelanea" id="svg-imantado">
+                    <div class="sv-muestra">
+                        <span class="ef-imantado">IMANTADO</span>
+                    </div>
+                    <h3>🧲 Letras imantadas <small>Piezas que se deslizan</small></h3>
+                    <a class="btn" href="efectos_svg/miscelanea/imantado/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/miscelanea/imantado/imantado.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S131. BRÚJULA ============ -->
+                <article class="tarjeta-svg" data-svg="miscelanea" id="svg-brujula">
+                    <div class="sv-muestra">
+                        <span class="ef-brujula">BRUJULA</span>
+                    </div>
+                    <h3>🧭 Brújula <small>Aguja que gira</small></h3>
+                    <a class="btn" href="efectos_svg/miscelanea/brujula/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/miscelanea/brujula/brujula.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S132. PUZZLE ============ -->
+                <article class="tarjeta-svg" data-svg="miscelanea" id="svg-puzzle">
+                    <div class="sv-muestra">
+                        <span class="ef-puzzle">PUZZLE</span>
+                    </div>
+                    <h3>🧩 Puzzle <small>Piezas que encajan</small></h3>
+                    <a class="btn" href="efectos_svg/miscelanea/puzzle/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/miscelanea/puzzle/puzzle.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S133. BRAILLE ============ -->
+                <article class="tarjeta-svg" data-svg="miscelanea" id="svg-braille">
+                    <div class="sv-muestra">
+                        <span class="ef-braille">BRAILLE</span>
+                    </div>
+                    <h3>⠿ Braille <small>Relieve de puntos</small></h3>
+                    <a class="btn" href="efectos_svg/miscelanea/braille/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/miscelanea/braille/braille.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S134. TORNADO ============ -->
+                <article class="tarjeta-svg" data-svg="miscelanea" id="svg-tornado">
+                    <div class="sv-muestra">
+                        <span class="ef-tornado">TORNADO</span>
+                    </div>
+                    <h3>🌪️ Tornado <small>El texto se arremolina</small></h3>
+                    <a class="btn" href="efectos_svg/miscelanea/tornado/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/miscelanea/tornado/tornado.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S135. DADOS ============ -->
+                <article class="tarjeta-svg" data-svg="miscelanea" id="svg-dados">
+                    <div class="sv-muestra">
+                        <span class="ef-dados">DADOS</span>
+                    </div>
+                    <h3>🎲 Dados <small>Caras que giran</small></h3>
+                    <a class="btn" href="efectos_svg/miscelanea/dados/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/miscelanea/dados/dados.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S136. MUSGO ============ -->
+                <article class="tarjeta-svg" data-svg="miscelanea" id="svg-musgo">
+                    <div class="sv-muestra">
+                        <span class="ef-musgo">MUSGO</span>
+                    </div>
+                    <h3>🌿 Musgo <small>Crece desde abajo</small></h3>
+                    <a class="btn" href="efectos_svg/miscelanea/musgo/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/miscelanea/musgo/musgo.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S137. AURORA ============ -->
+                <article class="tarjeta-svg" data-svg="miscelanea" id="svg-aurora">
+                    <div class="sv-muestra">
+                        <span class="ef-aurora">AURORA</span>
+                    </div>
+                    <h3>🌌 Aurora <small>Cortinas de luz</small></h3>
+                    <a class="btn" href="efectos_svg/miscelanea/aurora/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/miscelanea/aurora/aurora.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S138. CHAMPIÑÓN ============ -->
+                <article class="tarjeta-svg" data-svg="miscelanea" id="svg-champinon">
+                    <div class="sv-muestra">
+                        <span class="ef-champinon">CHAMPIÑÓN</span>
+                    </div>
+                    <h3>🍄 Champiñón <small>Crece y suelta esporas</small></h3>
+                    <a class="btn" href="efectos_svg/miscelanea/champinon/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/miscelanea/champinon/champinon.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S139. GLOBO ============ -->
+                <article class="tarjeta-svg" data-svg="miscelanea" id="svg-globo">
+                    <div class="sv-muestra">
+                        <span class="ef-globo">GLOBO</span>
+                    </div>
+                    <h3>🎈 Globo <small>Se infla y flota</small></h3>
+                    <a class="btn" href="efectos_svg/miscelanea/globo/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/miscelanea/globo/globo.zip" download>Descargar efecto (.zip)</a>
+                </article>
+
+                <!-- ============ S140. FARO ============ -->
+                <article class="tarjeta-svg" data-svg="miscelanea" id="svg-faro">
+                    <div class="sv-muestra">
+                        <span class="ef-faro">FARO</span>
+                    </div>
+                    <h3>🗼 Faro <small>Haz que barre</small></h3>
+                    <a class="btn" href="efectos_svg/miscelanea/faro/index.html">Showcase completo</a>
+                    <a class="btn btn-descarga" href="efectos_svg/miscelanea/faro/faro.zip" download>Descargar efecto (.zip)</a>
                 </article>
 
             </div>

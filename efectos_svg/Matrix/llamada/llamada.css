@@ -1,0 +1,100 @@
+/* =============================================================
+   LLAMADA (SVG) · El teléfono de la Matrix suena
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-llamada.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-llamada,
+    .ef-llamada-mini — anillos de timbre que laten
+   ============================================================= */
+.ef-llamada {
+    display: inline-block;
+    color: #3a2405;                     /* respaldo si no hay clip */
+    background-color: #3a2405;
+    background-image: repeating-radial-gradient(circle at 50% 50%,
+        #ffe08a 0 2px, #ffd166 2px 5px,
+        rgba(255, 209, 102, .35) 5px 9px, rgba(58, 36, 5, 0) 9px 16px);
+    background-size: 70px 70px;
+    background-position: 50% 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .6px #7a4a08;
+    paint-order: stroke fill;
+    filter: url(#ef-llamada);
+    animation: mx-llamada-timbre 1.6s ease-out infinite,
+               mx-llamada-latido .8s ease-in-out infinite;
+}
+.ef-llamada:hover,
+.ef-llamada:focus-visible {
+    animation-duration: .9s, .45s;
+}
+.ef-llamada-mini {
+    display: inline-block;
+    color: #3a2405;
+    background-color: #3a2405;
+    background-image: repeating-radial-gradient(circle at 50% 50%,
+        #ffe08a 0 2px, #ffd166 2px 5px,
+        rgba(255, 209, 102, .35) 5px 9px, rgba(58, 36, 5, 0) 9px 16px);
+    background-size: 44px 44px;
+    background-position: 50% 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-llamada-mini);
+    animation: mx-llamada-timbre 1.6s ease-out infinite,
+               mx-llamada-latido 1.6s ease-in-out infinite;
+}
+.ef-llamada-mini:hover,
+.ef-llamada-mini:focus-visible {
+    animation-duration: .9s, .9s;
+}
+
+/* los anillos se expanden (background-size) y el texto late (scale) */
+@keyframes mx-llamada-timbre {
+    0%   { background-size: 70px 70px; }
+    100% { background-size: 150px 150px; }
+}
+@keyframes mx-llamada-latido {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.045); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-llamada,
+    .ef-llamada-mini {
+        animation: none;
+        transform: none;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-llamada,
+    .ef-llamada-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

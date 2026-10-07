@@ -13493,3 +13493,2171 @@
     74%  { opacity: 1;  transform: scale(1.2) rotate(36deg); }
     100% { opacity: 0;  transform: scale(1.6) rotate(84deg); }
 }
+
+/* ============ 222. UMBRAL — La puerta de luz se abre ============
+   Escena propia del efecto "Umbral" (sección Matrix). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-umbral {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #0b2418 0%, #071309 55%, #020604 100%);
+}
+.tema-umbral::after {
+    background: linear-gradient(90deg, rgba(31,255,150,0) 45%,
+                rgba(190,255,225,.35) 50%, rgba(31,255,150,0) 55%);
+}
+.mx-umbral-marco {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 44vmin; height: 62vmin;
+    margin: -31vmin 0 0 -22vmin;
+    border: 1.2vmin solid rgba(31, 255, 150, .55);
+    box-shadow: 0 0 6vmin rgba(31, 255, 150, .35);
+    opacity: 0;
+    animation: mx-umbral-marco 1.7s ease-out both;
+}
+.mx-umbral-hueco {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 26vmin; height: 56vmin;
+    margin: -28vmin 0 0 -13vmin;
+    background: linear-gradient(90deg, #0a1a12 0 46%,
+                #eafff5 50%, #0a1a12 54% 100%);
+    opacity: 0;
+    animation: mx-umbral-hueco 1.7s ease-in-out both;
+}
+.mx-umbral-fantasma {
+    position: absolute;
+    left: 50%; top: 54%;
+    width: 30vmin; height: 46vmin;
+    margin: -23vmin 0 0 -15vmin;
+    background: radial-gradient(60% 60% at 50% 45%,
+                rgba(234, 255, 245, .8), rgba(31, 255, 150, 0) 70%);
+    opacity: 0;
+    animation: mx-umbral-fantasma 1.7s linear .25s both;
+}
+@keyframes mx-umbral-marco {
+    0%   { opacity: 0; transform: scale(.7) rotate(-4deg); }
+    40%  { opacity: 1; transform: scale(1) rotate(0deg); }
+    100% { opacity: 0; transform: scale(1.15) rotate(3deg); }
+}
+@keyframes mx-umbral-hueco {
+    0%, 100% { opacity: 0; transform: scaleX(.05); }
+    45%      { opacity: 1; transform: scaleX(1); }
+    70%      { opacity: .8; transform: scaleX(1.06); }
+}
+@keyframes mx-umbral-fantasma {
+    0%   { opacity: 0; transform: translateY(6vmin); }
+    35%  { opacity: .9; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10vmin); }
+}
+
+/* ============ 223. LLAMADA — El teléfono de la Matrix suena ============
+   Escena propia del efecto "Llamada" (sección Matrix). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-llamada {
+    background: radial-gradient(120% 110% at 50% 45%,
+                #3a2405 0%, #1c1102 55%, #070501 100%);
+}
+.tema-llamada::after {
+    background: repeating-radial-gradient(circle at 50% 50%,
+                rgba(255, 209, 102, .30) 0 2px, rgba(0,0,0,0) 2px 22px);
+}
+.mx-llamada-anillo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 40vmin; height: 40vmin;
+    margin: -20vmin 0 0 -20vmin;
+    border: .9vmin solid rgba(255, 224, 138, .9);
+    border-radius: 50%;
+    opacity: 0;
+    animation: mx-llamada-anillo 1.7s ease-out both;
+}
+.mx-llamada-golpe {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 12vmin; height: 12vmin;
+    margin: -6vmin 0 0 -6vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff4d0 0 30%,
+                rgba(255, 209, 102, 0) 72%);
+    opacity: 0;
+    animation: mx-llamada-golpe 1.7s ease-in-out both;
+}
+.mx-llamada-auricular {
+    position: absolute;
+    left: 50%; top: 24%;
+    width: 34vmin; height: 5vmin;
+    margin-left: -17vmin;
+    border-radius: 5vmin;
+    background: linear-gradient(90deg, rgba(255,209,102,0),
+                #ffd166 30%, #ffe08a 50%, #ffd166 70%,
+                rgba(255,209,102,0));
+    opacity: 0;
+    animation: mx-llamada-auricular 1.7s linear .3s both;
+}
+@keyframes mx-llamada-anillo {
+    0%   { opacity: 0; transform: scale(.15); }
+    30%  { opacity: 1; }
+    100% { opacity: 0; transform: scale(2.4); }
+}
+@keyframes mx-llamada-golpe {
+    0%, 100% { opacity: 0; transform: scale(.4); }
+    45%      { opacity: 1; transform: scale(1.6); }
+}
+@keyframes mx-llamada-auricular {
+    0%   { opacity: 0; transform: translateX(-40vmin); }
+    35%  { opacity: 1; transform: translateX(0); }
+    100% { opacity: 0; transform: translateX(40vmin); }
+}
+
+/* ============ 224. CLONADO — La mancha se multiplica ============
+   Escena propia del efecto "Clonado" (sección Matrix). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-clonado {
+    background: radial-gradient(130% 100% at 50% 60%,
+                #062618 0%, #04120b 55%, #010503 100%);
+}
+.tema-clonado::after {
+    background: radial-gradient(circle at 30% 40%,
+                rgba(125, 255, 176, .35), rgba(0,0,0,0) 60%),
+                radial-gradient(circle at 74% 66%,
+                rgba(4, 8, 6, .9), rgba(0,0,0,0) 55%);
+}
+.mx-clonado-mancha {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 46vmin; height: 46vmin;
+    margin: -23vmin 0 0 -23vmin;
+    border-radius: 44% 56% 62% 38% / 52% 40% 60% 48%;
+    background: radial-gradient(circle at 40% 40%,
+                rgba(2, 5, 4, .96) 0 55%, rgba(2, 5, 4, 0) 78%);
+    opacity: 0;
+    animation: mx-clonado-mancha 1.7s ease-in-out both;
+}
+.mx-clonado-hilo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 60vmin; height: 60vmin;
+    margin: -30vmin 0 0 -30vmin;
+    border: .6vmin dashed rgba(125, 255, 176, .85);
+    border-radius: 50%;
+    opacity: 0;
+    animation: mx-clonado-hilo 1.7s linear both;
+}
+.mx-clonado-humo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 34vmin; height: 34vmin;
+    margin: -17vmin 0 0 -17vmin;
+    background: radial-gradient(circle,
+                rgba(18, 255, 135, .55) 0 30%, rgba(18, 255, 135, 0) 70%);
+    opacity: 0;
+    animation: mx-clonado-humo 1.7s ease-out .2s both;
+}
+@keyframes mx-clonado-mancha {
+    0%   { opacity: 0; transform: scale(.2) rotate(0deg); }
+    40%  { opacity: 1; transform: scale(1) rotate(60deg); }
+    100% { opacity: 0; transform: scale(1.7) rotate(140deg); }
+}
+@keyframes mx-clonado-hilo {
+    0%   { opacity: 0; transform: rotate(0deg) scale(.5); }
+    35%  { opacity: 1; transform: rotate(180deg) scale(1); }
+    100% { opacity: 0; transform: rotate(420deg) scale(1.25); }
+}
+@keyframes mx-clonado-humo {
+    0%   { opacity: 0; transform: scale(.6); }
+    45%  { opacity: .8; transform: scale(1.1); }
+    100% { opacity: 0; transform: scale(1.6); }
+}
+
+/* ============ 225. ORIGEN — Arroyos que convergen ============
+   Escena propia del efecto "Origen" (sección Matrix). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-origen {
+    background: radial-gradient(130% 110% at 50% 50%,
+                #06283d 0%, #04121f 58%, #01060c 100%);
+}
+.tema-origen::after {
+    background: repeating-linear-gradient(90deg,
+                rgba(70, 190, 255, .22) 0 3px, rgba(0,0,0,0) 3px 20px);
+}
+.mx-origen-nodo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 22vmin; height: 22vmin;
+    margin: -11vmin 0 0 -11vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, #eafaff 0 22%,
+                rgba(70, 190, 255, .55) 40%, rgba(70, 190, 255, 0) 72%);
+    opacity: 0;
+    animation: mx-origen-nodo 1.7s ease-in-out both;
+}
+.mx-origen-rio {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 76vmin; height: 1.4vmin;
+    margin: -.7vmin 0 0 -38vmin;
+    background: linear-gradient(90deg, rgba(70,190,255,0),
+                #bfeaff 45%, #ffffff 50%, #bfeaff 55%,
+                rgba(70,190,255,0));
+    opacity: 0;
+    animation: mx-origen-rio 1.7s linear both;
+}
+.mx-origen-rio2 {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 1.4vmin; height: 76vmin;
+    margin: -38vmin 0 0 -.7vmin;
+    background: linear-gradient(180deg, rgba(70,190,255,0),
+                #bfeaff 45%, #ffffff 50%, #bfeaff 55%,
+                rgba(70,190,255,0));
+    opacity: 0;
+    animation: mx-origen-rio2 1.7s linear .18s both;
+}
+@keyframes mx-origen-nodo {
+    0%, 100% { opacity: .2; transform: scale(.7); }
+    50%      { opacity: 1; transform: scale(1.35); }
+}
+@keyframes mx-origen-rio {
+    0%   { opacity: 0; transform: scaleX(.1); }
+    40%  { opacity: 1; transform: scaleX(1); }
+    100% { opacity: 0; transform: scaleX(1.15); }
+}
+@keyframes mx-origen-rio2 {
+    0%   { opacity: 0; transform: scaleY(.1); }
+    40%  { opacity: 1; transform: scaleY(1); }
+    100% { opacity: 0; transform: scaleY(1.15); }
+}
+
+/* ============ 226. GONG — Impacto marcial ============
+   Escena propia del efecto "Gong" (sección Matrix). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-gong {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #3d2a06 0%, #1b1303 55%, #070501 100%);
+}
+.tema-gong::after {
+    background: repeating-radial-gradient(circle at 50% 50%,
+                rgba(255, 220, 120, .25) 0 3px, rgba(0,0,0,0) 3px 26px);
+}
+.mx-gong-disco {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 52vmin; height: 52vmin;
+    margin: -26vmin 0 0 -26vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%,
+                #ffe9a8 0%, #d9a52a 38%, #6b4a0c 72%, #2a1c04 100%);
+    box-shadow: 0 0 8vmin rgba(255, 196, 62, .5);
+    opacity: 0;
+    animation: mx-gong-disco 1.7s ease-out both;
+}
+.mx-gong-onda2 {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 30vmin; height: 30vmin;
+    margin: -15vmin 0 0 -15vmin;
+    border: 1vmin solid rgba(255, 233, 168, .95);
+    border-radius: 50%;
+    opacity: 0;
+    animation: mx-gong-onda2 1.7s cubic-bezier(.2, .7, .3, 1) both;
+}
+.mx-gong-maza {
+    position: absolute;
+    left: 22%; top: 50%;
+    width: 18vmin; height: 5vmin;
+    margin-top: -2.5vmin;
+    border-radius: 5vmin;
+    background: linear-gradient(90deg, #2a1c04, #6b4a0c 70%, #ffe9a8);
+    opacity: 0;
+    animation: mx-gong-maza 1.7s ease-in-out both;
+}
+@keyframes mx-gong-disco {
+    0%   { opacity: 0; transform: scale(.7) rotate(-8deg); }
+    30%  { opacity: 1; transform: scale(1) rotate(0deg); }
+    70%  { opacity: .85; transform: scale(1.04) rotate(2deg); }
+    100% { opacity: 0; transform: scale(1.1) rotate(4deg); }
+}
+@keyframes mx-kf-2 {
+    0%   { opacity: 0; transform: scale(.2); }
+    25%  { opacity: 1; }
+    100% { opacity: 0; transform: scale(2.6); }
+}
+@keyframes mx-gong-maza {
+    0%   { opacity: 0; transform: translateX(-16vmin) rotate(-24deg); }
+    30%  { opacity: 1; transform: translateX(0) rotate(0deg); }
+    45%  { opacity: 1; transform: translateX(3vmin) rotate(6deg); }
+    100% { opacity: 0; transform: translateX(-16vmin) rotate(-24deg); }
+}
+
+/* ============ 227. BALA — Trazadora lenta ============
+   Escena propia del efecto "Bala" (sección Matrix). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-bala {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #1a1d24 0%, #0d0f14 55%, #04050a 100%);
+}
+.tema-bala::after {
+    background: linear-gradient(90deg, rgba(255,120,20,0) 40%,
+                rgba(255, 180, 60, .35) 50%, rgba(255,120,20,0) 60%);
+}
+.mx-bala-estela2 {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 70vmin; height: 3vmin;
+    margin: -1.5vmin 0 0 -35vmin;
+    background: linear-gradient(90deg, rgba(255,120,20,0),
+                #ffb43c 35%, #fff2c8 50%, #ffb43c 65%,
+                rgba(255,120,20,0));
+    opacity: 0;
+    animation: mx-bala-estela2 1.7s ease-in-out both;
+}
+.mx-bala-humo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 26vmin; height: 26vmin;
+    margin: -13vmin 0 0 -13vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 180, 60, .5) 0 30%,
+                rgba(255, 120, 20, 0) 72%);
+    opacity: 0;
+    animation: mx-bala-humo 1.7s ease-out .2s both;
+}
+.mx-bala-chispa {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 10vmin; height: 10vmin;
+    margin: -5vmin 0 0 -5vmin;
+    background: radial-gradient(circle, #fff2c8 0 20%,
+                rgba(255, 180, 60, .6) 45%, rgba(255, 120, 20, 0) 75%);
+    opacity: 0;
+    animation: mx-bala-chispa 1.7s linear .35s both;
+}
+@keyframes mx-kf-4 {
+    0%   { opacity: 0; transform: translateX(-50vmin) scaleX(.3); }
+    35%  { opacity: 1; transform: translateX(0) scaleX(1); }
+    100% { opacity: 0; transform: translateX(50vmin) scaleX(1.2); }
+}
+@keyframes mx-bala-humo {
+    0%   { opacity: 0; transform: scale(.4); }
+    40%  { opacity: .8; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.8); }
+}
+@keyframes mx-bala-chispa {
+    0%   { opacity: 0; transform: scale(.2) rotate(0deg); }
+    30%  { opacity: 1; transform: scale(1.4) rotate(90deg); }
+    100% { opacity: 0; transform: scale(.6) rotate(200deg); }
+}
+
+/* ============ 228. MOSAICO — Se ensambla en bloques ============
+   Escena propia del efecto "Mosaico" (sección Matrix). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-mosaico {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #2a0a12 0%, #16050a 55%, #070203 100%);
+}
+.tema-mosaico::after {
+    background: repeating-linear-gradient(0deg,
+                rgba(255, 90, 120, .2) 0 2px, rgba(0,0,0,0) 2px 18px),
+                repeating-linear-gradient(90deg,
+                rgba(255, 90, 120, .2) 0 2px, rgba(0,0,0,0) 2px 18px);
+}
+.mx-mosaico-bloque2 {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 30vmin; height: 30vmin;
+    margin: -15vmin 0 0 -15vmin;
+    background: linear-gradient(135deg, #ff5a78 0%, #a01830 100%);
+    box-shadow: 0 0 4vmin rgba(255, 90, 120, .5);
+    opacity: 0;
+    animation: mx-mosaico-bloque2 1.7s ease-in-out both;
+}
+.mx-mosaico-grieta {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 60vmin; height: 1vmin;
+    margin: -.5vmin 0 0 -30vmin;
+    background: linear-gradient(90deg, rgba(255,90,120,0),
+                #ff5a78 50%, rgba(255,90,120,0));
+    opacity: 0;
+    animation: mx-mosaico-grieta 1.7s linear both;
+}
+.mx-mosaico-polvo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 20vmin; height: 20vmin;
+    margin: -10vmin 0 0 -10vmin;
+    background: radial-gradient(circle, rgba(255, 90, 120, .6) 0 25%,
+                rgba(160, 24, 48, 0) 70%);
+    opacity: 0;
+    animation: mx-mosaico-polvo 1.7s ease-out .25s both;
+}
+@keyframes mx-kf-6 {
+    0%   { opacity: 0; transform: scale(.3) rotate(-12deg); }
+    40%  { opacity: 1; transform: scale(1) rotate(0deg); }
+    100% { opacity: 0; transform: scale(1.3) rotate(8deg); }
+}
+@keyframes mx-mosaico-grieta {
+    0%   { opacity: 0; transform: scaleX(.1); }
+    35%  { opacity: 1; transform: scaleX(1); }
+    100% { opacity: 0; transform: scaleX(1.2); }
+}
+@keyframes mx-mosaico-polvo {
+    0%   { opacity: 0; transform: scale(.5); }
+    45%  { opacity: .8; transform: scale(1.1); }
+    100% { opacity: 0; transform: scale(1.7); }
+}
+
+/* ============ 229. EMP — Pulso electromagnético ============
+   Escena propia del efecto "EMP" (sección Matrix). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-emp {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #062a33 0%, #03161c 55%, #01080b 100%);
+}
+.tema-emp::after {
+    background: linear-gradient(90deg, rgba(230,250,255,0) 44%,
+                rgba(230, 250, 255, .4) 50%, rgba(230,250,255,0) 56%);
+}
+.mx-emp-linea {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 4vmin; height: 80vmin;
+    margin: -40vmin 0 0 -2vmin;
+    background: linear-gradient(180deg, rgba(230,250,255,0),
+                #e6faff 40%, #ffffff 50%, #e6faff 60%,
+                rgba(230,250,255,0));
+    opacity: 0;
+    animation: mx-emp-linea 1.7s ease-in-out both;
+}
+.mx-emp-chispa {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 14vmin; height: 14vmin;
+    margin: -7vmin 0 0 -7vmin;
+    background: radial-gradient(circle, #ffffff 0 15%,
+                rgba(230, 250, 255, .7) 40%, rgba(6, 42, 51, 0) 72%);
+    opacity: 0;
+    animation: mx-emp-chispa 1.7s ease-out .2s both;
+}
+.mx-emp-onda {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 24vmin; height: 24vmin;
+    margin: -12vmin 0 0 -12vmin;
+    border: .8vmin solid rgba(230, 250, 255, .9);
+    border-radius: 50%;
+    opacity: 0;
+    animation: mx-emp-onda 1.7s cubic-bezier(.2, .7, .3, 1) .3s both;
+}
+@keyframes mx-emp-linea {
+    0%   { opacity: 0; transform: translateX(-40vmin) scaleY(.4); }
+    35%  { opacity: 1; transform: translateX(0) scaleY(1); }
+    100% { opacity: 0; transform: translateX(40vmin) scaleY(1.2); }
+}
+@keyframes mx-emp-chispa {
+    0%   { opacity: 0; transform: scale(.3); }
+    40%  { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(2); }
+}
+@keyframes mx-emp-onda {
+    0%   { opacity: 0; transform: scale(.2); }
+    30%  { opacity: 1; }
+    100% { opacity: 0; transform: scale(2.4); }
+}
+
+/* ============ 230. TREN — Cruza la palabra ============
+   Escena propia del efecto "Tren" (sección Matrix). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-tren {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #0a1a2e 0%, #060f1c 55%, #02060c 100%);
+}
+.tema-tren::after {
+    background: repeating-linear-gradient(90deg,
+                rgba(255, 233, 176, .25) 0 6px, rgba(0,0,0,0) 6px 20px);
+}
+.mx-tren-convoy {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 80vmin; height: 10vmin;
+    margin: -5vmin 0 0 -40vmin;
+    background: repeating-linear-gradient(90deg,
+                #ffe9b0 0 10px, rgba(255,233,176,.3) 10px 14px,
+                rgba(10,26,46,.95) 14px 34px);
+    border-radius: 2vmin;
+    opacity: 0;
+    animation: mx-tren-convoy 1.7s ease-in-out both;
+}
+.mx-tren-sombra {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 60vmin; height: 20vmin;
+    margin: -10vmin 0 0 -30vmin;
+    background: radial-gradient(50% 50% at 50% 50%,
+                rgba(0, 0, 0, .7), rgba(0, 0, 0, 0) 70%);
+    opacity: 0;
+    animation: mx-tren-sombra 1.7s ease-out .15s both;
+}
+.mx-tren-via {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 90vmin; height: 1.2vmin;
+    margin: -.6vmin 0 0 -45vmin;
+    background: linear-gradient(90deg, rgba(255,233,176,0),
+                #ffe9b0 50%, rgba(255,233,176,0));
+    opacity: 0;
+    animation: mx-tren-via 1.7s linear .3s both;
+}
+@keyframes mx-tren-convoy {
+    0%   { opacity: 0; transform: translateX(-60vmin) scaleX(.4); }
+    35%  { opacity: 1; transform: translateX(0) scaleX(1); }
+    100% { opacity: 0; transform: translateX(60vmin) scaleX(1.2); }
+}
+@keyframes mx-tren-sombra {
+    0%   { opacity: 0; transform: scale(.6); }
+    40%  { opacity: .9; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.4); }
+}
+@keyframes mx-tren-via {
+    0%   { opacity: 0; transform: scaleX(.1); }
+    40%  { opacity: 1; transform: scaleX(1); }
+    100% { opacity: 0; transform: scaleX(1.3); }
+}
+
+/* ============ 231. LLAVE — Cerraduras que giran ============
+   Escena propia del efecto "Llave" (sección Matrix). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-llave {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #2e1f04 0%, #171002 55%, #070501 100%);
+}
+.tema-llave::after {
+    background: repeating-conic-gradient(from 0deg at 50% 50%,
+                rgba(255, 217, 122, .2) 0 10deg, rgba(0,0,0,0) 10deg 30deg);
+}
+.mx-llave-rueda {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 44vmin; height: 44vmin;
+    margin: -22vmin 0 0 -22vmin;
+    border-radius: 50%;
+    background: repeating-conic-gradient(from 0deg at 50% 50%,
+                #ffd97a 0 14deg, rgba(255,217,122,.25) 14deg 20deg,
+                rgba(46,31,4,.95) 20deg 34deg);
+    opacity: 0;
+    animation: mx-llave-rueda 1.7s ease-in-out both;
+}
+.mx-llave-diente {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 8vmin; height: 8vmin;
+    margin: -4vmin 0 0 -4vmin;
+    background: linear-gradient(135deg, #ffd97a, #4a3208);
+    opacity: 0;
+    animation: mx-llave-diente 1.7s linear .2s both;
+}
+.mx-llave-chispa {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 12vmin; height: 12vmin;
+    margin: -6vmin 0 0 -6vmin;
+    background: radial-gradient(circle, #fff3d0 0 20%,
+                rgba(255, 217, 122, .6) 45%, rgba(46, 31, 4, 0) 75%);
+    opacity: 0;
+    animation: mx-llave-chispa 1.7s ease-out .35s both;
+}
+@keyframes mx-llave-rueda {
+    0%   { opacity: 0; transform: scale(.5) rotate(0deg); }
+    40%  { opacity: 1; transform: scale(1) rotate(120deg); }
+    100% { opacity: 0; transform: scale(1.2) rotate(260deg); }
+}
+@keyframes mx-llave-diente {
+    0%   { opacity: 0; transform: scale(.3) rotate(0deg); }
+    35%  { opacity: 1; transform: scale(1.3) rotate(90deg); }
+    100% { opacity: 0; transform: scale(.7) rotate(200deg); }
+}
+@keyframes mx-llave-chispa {
+    0%   { opacity: 0; transform: scale(.4); }
+    40%  { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(1.9); }
+}
+
+/* ============ 232. ZION — Ámbar industrial ============
+   Escena propia del efecto "Zion" (sección Matrix). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-zion {
+    background: radial-gradient(130% 110% at 50% 100%,
+                #3a2208 0%, #1a0e02 55%, #070401 100%);
+}
+.tema-zion::after {
+    background: repeating-linear-gradient(45deg,
+                rgba(255, 190, 90, .18) 0 3px, rgba(0,0,0,0) 3px 16px);
+}
+.mx-zion-cordon {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 70vmin; height: 2vmin;
+    margin: -1vmin 0 0 -35vmin;
+    background: linear-gradient(90deg, rgba(255,190,90,0),
+                #ffbe5a 40%, #fff0c8 50%, #ffbe5a 60%,
+                rgba(255,190,90,0));
+    opacity: 0;
+    animation: mx-zion-cordon 1.7s ease-in-out both;
+}
+.mx-zion-chispa {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 8vmin; height: 8vmin;
+    margin: -4vmin 0 0 -4vmin;
+    background: radial-gradient(circle, #fff0c8 0 20%,
+                rgba(255, 190, 90, .7) 45%, rgba(58, 34, 8, 0) 75%);
+    opacity: 0;
+    animation: mx-zion-chispa 1.7s ease-out .2s both;
+}
+.mx-zion-placa {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 50vmin; height: 34vmin;
+    margin: -17vmin 0 0 -25vmin;
+    border: .8vmin solid rgba(255, 190, 90, .5);
+    background: linear-gradient(160deg, rgba(138, 90, 26, .5),
+                rgba(26, 14, 2, .8));
+    opacity: 0;
+    animation: mx-zion-placa 1.7s ease-out both;
+}
+@keyframes mx-zion-cordon {
+    0%   { opacity: 0; transform: translateX(-50vmin) scaleX(.3); }
+    35%  { opacity: 1; transform: translateX(0) scaleX(1); }
+    100% { opacity: 0; transform: translateX(50vmin) scaleX(1.2); }
+}
+@keyframes mx-zion-chispa {
+    0%   { opacity: 0; transform: translateY(10vmin) scale(.4); }
+    40%  { opacity: 1; transform: translateY(0) scale(1.2); }
+    100% { opacity: 0; transform: translateY(-14vmin) scale(.7); }
+}
+@keyframes mx-zion-placa {
+    0%   { opacity: 0; transform: scale(.7); }
+    40%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.15); }
+}
+
+/* ============ 233. DETENIDO — El tiempo se congela ============
+   Escena propia del efecto "Detenido" (sección Matrix). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-detenido {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #0a1a2e 0%, #060f1c 55%, #02060c 100%);
+}
+.tema-detenido::after {
+    background: repeating-radial-gradient(circle at 50% 50%,
+                rgba(160, 220, 255, .22) 0 3px, rgba(0,0,0,0) 3px 22px);
+}
+.mx-detenido-anillo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 30vmin; height: 30vmin;
+    margin: -15vmin 0 0 -15vmin;
+    border: 1vmin solid rgba(160, 220, 255, .95);
+    border-radius: 50%;
+    opacity: 0;
+    animation: mx-detenido-anillo 1.7s cubic-bezier(.2, .7, .3, 1) both;
+}
+.mx-detenido-bala {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 16vmin; height: 3vmin;
+    margin: -1.5vmin 0 0 -8vmin;
+    border-radius: 50%;
+    background: linear-gradient(90deg, rgba(160,220,255,0),
+                #a0dcff 60%, #ffffff);
+    opacity: 0;
+    animation: mx-detenido-bala 1.7s ease-in-out both;
+}
+.mx-detenido-cristal {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 40vmin; height: 40vmin;
+    margin: -20vmin 0 0 -20vmin;
+    border: .5vmin solid rgba(160, 220, 255, .6);
+    border-radius: 50%;
+    opacity: 0;
+    animation: mx-detenido-cristal 1.7s ease-out .25s both;
+}
+@keyframes mx-detenido-anillo {
+    0%   { opacity: 0; transform: scale(.2); }
+    30%  { opacity: 1; }
+    100% { opacity: 0; transform: scale(2.4); }
+}
+@keyframes mx-detenido-bala {
+    0%   { opacity: 0; transform: translateX(-40vmin); }
+    35%  { opacity: 1; transform: translateX(0); }
+    100% { opacity: 0; transform: translateX(40vmin); }
+}
+@keyframes mx-detenido-cristal {
+    0%   { opacity: 0; transform: scale(.5) rotate(0deg); }
+    40%  { opacity: .8; transform: scale(1) rotate(45deg); }
+    100% { opacity: 0; transform: scale(1.3) rotate(90deg); }
+}
+
+/* ============ 234. SUBIDA — Barra de progreso ============
+   Escena propia del efecto "Subida" (sección Matrix). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-subida {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #0a2a1a 0%, #061a10 55%, #020a06 100%);
+}
+.tema-subida::after {
+    background: linear-gradient(90deg, rgba(31,255,150,0) 40%,
+                rgba(31, 255, 150, .35) 50%, rgba(31,255,150,0) 60%);
+}
+.mx-subida-barra {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 60vmin; height: 4vmin;
+    margin: -2vmin 0 0 -30vmin;
+    background: linear-gradient(90deg, #0a2a1a 0 46%,
+                #1fff96 48%, #eafff5 50%, #1fff96 52%, #0a2a1a 54%);
+    border-radius: 2vmin;
+    opacity: 0;
+    animation: mx-subida-barra 1.7s ease-in-out both;
+}
+.mx-subida-porcentaje {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 20vmin; height: 20vmin;
+    margin: -10vmin 0 0 -10vmin;
+    border: .8vmin solid rgba(31, 255, 150, .8);
+    border-radius: 50%;
+    opacity: 0;
+    animation: mx-subida-porcentaje 1.7s ease-out .2s both;
+}
+.mx-subida-chispa {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 10vmin; height: 10vmin;
+    margin: -5vmin 0 0 -5vmin;
+    background: radial-gradient(circle, #eafff5 0 20%,
+                rgba(31, 255, 150, .6) 45%, rgba(10, 42, 26, 0) 75%);
+    opacity: 0;
+    animation: mx-subida-chispa 1.7s ease-out .35s both;
+}
+@keyframes mx-subida-barra {
+    0%   { opacity: 0; transform: translateX(-40vmin) scaleX(.3); }
+    35%  { opacity: 1; transform: translateX(0) scaleX(1); }
+    100% { opacity: 0; transform: translateX(40vmin) scaleX(1.2); }
+}
+@keyframes mx-subida-porcentaje {
+    0%   { opacity: 0; transform: scale(.4); }
+    40%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.5); }
+}
+@keyframes mx-subida-chispa {
+    0%   { opacity: 0; transform: scale(.3); }
+    40%  { opacity: 1; transform: scale(1.3); }
+    100% { opacity: 0; transform: scale(2); }
+}
+
+/* ============ 235. CARGA — Pantalla del Constructor ============
+   Escena propia del efecto "Carga" (sección Matrix). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-carga {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #e8e4d8 0%, #c8c4b8 55%, #8a867a 100%);
+}
+.tema-carga::after {
+    background: repeating-linear-gradient(90deg,
+                rgba(60, 58, 50, .25) 0 8px, rgba(0,0,0,0) 8px 20px);
+}
+.mx-carga-punto {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 12vmin; height: 12vmin;
+    margin: -6vmin 0 0 -6vmin;
+    border-radius: 50%;
+    border: 1vmin solid rgba(60, 58, 50, .8);
+    border-top-color: transparent;
+    opacity: 0;
+    animation: mx-carga-punto 1.7s linear both;
+}
+.mx-carga-barra {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 50vmin; height: 3vmin;
+    margin: -1.5vmin 0 0 -25vmin;
+    background: repeating-linear-gradient(90deg,
+                rgba(60,58,50,.9) 0 8px, rgba(60,58,50,0) 8px 16px);
+    border-radius: 2vmin;
+    opacity: 0;
+    animation: mx-carga-barra 1.7s linear .2s both;
+}
+.mx-carga-texto {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 30vmin; height: 4vmin;
+    margin: -2vmin 0 0 -15vmin;
+    background: linear-gradient(90deg, rgba(60,58,50,0),
+                rgba(60, 58, 50, .8) 50%, rgba(60,58,50,0));
+    opacity: 0;
+    animation: mx-carga-texto 1.7s ease-in-out .35s both;
+}
+@keyframes mx-carga-punto {
+    0%   { opacity: 0; transform: rotate(0deg) scale(.5); }
+    40%  { opacity: 1; transform: rotate(180deg) scale(1); }
+    100% { opacity: 0; transform: rotate(360deg) scale(1.2); }
+}
+@keyframes mx-carga-barra {
+    0%   { opacity: 0; transform: translateX(-30vmin) scaleX(.3); }
+    35%  { opacity: 1; transform: translateX(0) scaleX(1); }
+    100% { opacity: 0; transform: translateX(30vmin) scaleX(1.2); }
+}
+@keyframes mx-carga-texto {
+    0%   { opacity: 0; transform: scaleX(.2); }
+    40%  { opacity: 1; transform: scaleX(1); }
+    100% { opacity: 0; transform: scaleX(1.3); }
+}
+
+/* ============ 236. IRIS — Escáner del ojo ============
+   Escena propia del efecto "Iris" (sección Matrix). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-iris {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #2a0a0a 0%, #160505 55%, #070202 100%);
+}
+.tema-iris::after {
+    background: repeating-linear-gradient(90deg,
+                rgba(255, 120, 120, .2) 0 1px, rgba(0,0,0,0) 1px 16px);
+}
+.mx-iris-haz {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 60vmin; height: 3vmin;
+    margin: -1.5vmin 0 0 -30vmin;
+    background: linear-gradient(90deg, rgba(255,60,60,0),
+                #ff3c3c 40%, #ffd0d0 50%, #ff3c3c 60%,
+                rgba(255,60,60,0));
+    opacity: 0;
+    animation: mx-iris-haz 1.7s ease-in-out both;
+}
+.mx-iris-reticula2 {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 40vmin; height: 40vmin;
+    margin: -20vmin 0 0 -20vmin;
+    border: .6vmin solid rgba(255, 120, 120, .7);
+    border-radius: 50%;
+    opacity: 0;
+    animation: mx-iris-reticula2 1.7s ease-out .2s both;
+}
+.mx-iris-marca {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 16vmin; height: 16vmin;
+    margin: -8vmin 0 0 -8vmin;
+    background: radial-gradient(circle, rgba(255, 208, 208, .8) 0 15%,
+                rgba(255, 60, 60, .5) 40%, rgba(42, 10, 10, 0) 70%);
+    opacity: 0;
+    animation: mx-iris-marca 1.7s ease-out .35s both;
+}
+@keyframes mx-iris-haz {
+    0%   { opacity: 0; transform: translateY(-30vmin) scaleX(.4); }
+    35%  { opacity: 1; transform: translateY(0) scaleX(1); }
+    100% { opacity: 0; transform: translateY(30vmin) scaleX(1.2); }
+}
+@keyframes mx-kf-8 {
+    0%   { opacity: 0; transform: scale(.4); }
+    40%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.4); }
+}
+@keyframes mx-iris-marca {
+    0%   { opacity: 0; transform: scale(.3); }
+    40%  { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(1.8); }
+}
+
+/* ============ 237. REMOLINO — El texto se arremolina ============
+   Escena propia del efecto "Remolino" (sección Matrix). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-remolino {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #1a0a2e 0%, #0e061a 55%, #05020a 100%);
+}
+.tema-remolino::after {
+    background: repeating-conic-gradient(from 0deg at 50% 50%,
+                rgba(160, 120, 255, .2) 0 15deg, rgba(0,0,0,0) 15deg 45deg);
+}
+.mx-remolino-espiral {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 50vmin; height: 50vmin;
+    margin: -25vmin 0 0 -25vmin;
+    border-radius: 50%;
+    background: repeating-conic-gradient(from 0deg at 50% 50%,
+                rgba(160, 120, 255, .8) 0 20deg,
+                rgba(160, 120, 255, .15) 20deg 30deg,
+                rgba(26, 10, 46, .9) 30deg 60deg);
+    opacity: 0;
+    animation: mx-remolino-espiral 1.7s ease-in-out both;
+}
+.mx-remolino-anillo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 30vmin; height: 30vmin;
+    margin: -15vmin 0 0 -15vmin;
+    border: .8vmin solid rgba(160, 120, 255, .9);
+    border-radius: 50%;
+    opacity: 0;
+    animation: mx-remolino-anillo 1.7s ease-out .2s both;
+}
+.mx-remolino-nucleo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 14vmin; height: 14vmin;
+    margin: -7vmin 0 0 -7vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, #e0d0ff 0 25%,
+                rgba(160, 120, 255, .6) 50%, rgba(26, 10, 46, 0) 75%);
+    opacity: 0;
+    animation: mx-remolino-nucleo 1.7s ease-in-out .35s both;
+}
+@keyframes mx-remolino-espiral {
+    0%   { opacity: 0; transform: scale(.4) rotate(0deg); }
+    40%  { opacity: 1; transform: scale(1) rotate(120deg); }
+    100% { opacity: 0; transform: scale(1.3) rotate(260deg); }
+}
+@keyframes mx-remolino-anillo {
+    0%   { opacity: 0; transform: scale(.3); }
+    35%  { opacity: 1; }
+    100% { opacity: 0; transform: scale(2.2); }
+}
+@keyframes mx-remolino-nucleo {
+    0%   { opacity: 0; transform: scale(.5); }
+    45%  { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(1.6); }
+}
+
+/* ============ 238. CRISTAL — Vidrio templado ============
+   Escena propia del efecto "Cristal" (sección Matrix). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-cristal {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #0a2a3a 0%, #061a24 55%, #020a0e 100%);
+}
+.tema-cristal::after {
+    background: repeating-linear-gradient(60deg,
+                rgba(220, 245, 255, .2) 0 2px, rgba(0,0,0,0) 2px 16px);
+}
+.mx-cristal-grieta2 {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 70vmin; height: 2vmin;
+    margin: -1vmin 0 0 -35vmin;
+    background: linear-gradient(90deg, rgba(220,245,255,0),
+                #dcf5ff 40%, #ffffff 50%, #dcf5ff 60%,
+                rgba(220,245,255,0));
+    opacity: 0;
+    animation: mx-cristal-grieta2 1.7s ease-in-out both;
+}
+.mx-cristal-esquirla {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 10vmin; height: 10vmin;
+    margin: -5vmin 0 0 -5vmin;
+    background: linear-gradient(135deg, #ffffff 0%, #dcf5ff 100%);
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    opacity: 0;
+    animation: mx-cristal-esquirla 1.7s ease-out .2s both;
+}
+.mx-cristal-destello2 {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 20vmin; height: 20vmin;
+    margin: -10vmin 0 0 -10vmin;
+    background: radial-gradient(circle, #ffffff 0 15%,
+                rgba(220, 245, 255, .6) 40%, rgba(10, 42, 58, 0) 70%);
+    opacity: 0;
+    animation: mx-cristal-destello2 1.7s ease-out .35s both;
+}
+@keyframes mx-kf-11 {
+    0%   { opacity: 0; transform: translateX(-50vmin) scaleX(.3); }
+    35%  { opacity: 1; transform: translateX(0) scaleX(1); }
+    100% { opacity: 0; transform: translateX(50vmin) scaleX(1.2); }
+}
+@keyframes mx-cristal-esquirla {
+    0%   { opacity: 0; transform: translateY(10vmin) rotate(0deg); }
+    40%  { opacity: 1; transform: translateY(0) rotate(90deg); }
+    100% { opacity: 0; transform: translateY(-16vmin) rotate(200deg); }
+}
+@keyframes mx-kf-12 {
+    0%   { opacity: 0; transform: scale(.3); }
+    40%  { opacity: 1; transform: scale(1.3); }
+    100% { opacity: 0; transform: scale(2); }
+}
+
+/* ============ 239. BUSCAR — Barrido de resaltado ============
+   Escena propia del efecto "Buscar" (sección Matrix). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-buscar {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #1a1a2e 0%, #0e0e1a 55%, #05050a 100%);
+}
+.tema-buscar::after {
+    background: repeating-linear-gradient(90deg,
+                rgba(255, 233, 176, .2) 0 5px, rgba(0,0,0,0) 5px 18px);
+}
+.mx-buscar-lupa2 {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 24vmin; height: 24vmin;
+    margin: -12vmin 0 0 -12vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffe9b0 0 20%,
+                rgba(255, 233, 176, .5) 40%, rgba(26, 26, 46, 0) 70%);
+    opacity: 0;
+    animation: mx-buscar-lupa2 1.7s ease-in-out both;
+}
+.mx-buscar-coincidencia2 {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 40vmin; height: 6vmin;
+    margin: -3vmin 0 0 -20vmin;
+    background: repeating-linear-gradient(90deg,
+                rgba(255,233,176,.9) 0 8px, rgba(0,0,0,0) 8px 24px);
+    border-radius: 3vmin;
+    opacity: 0;
+    animation: mx-buscar-coincidencia2 1.7s ease-in-out .2s both;
+}
+.mx-buscar-marca {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 12vmin; height: 12vmin;
+    margin: -6vmin 0 0 -6vmin;
+    border: .6vmin solid rgba(255, 233, 176, .8);
+    border-radius: 50%;
+    opacity: 0;
+    animation: mx-buscar-marca 1.7s ease-out .35s both;
+}
+@keyframes mx-kf-15 {
+    0%   { opacity: 0; transform: translateX(-40vmin) scale(.5); }
+    35%  { opacity: 1; transform: translateX(0) scale(1); }
+    100% { opacity: 0; transform: translateX(40vmin) scale(1.2); }
+}
+@keyframes mx-kf-16 {
+    0%   { opacity: 0; transform: scaleX(.2); }
+    40%  { opacity: 1; transform: scaleX(1); }
+    100% { opacity: 0; transform: scaleX(1.3); }
+}
+@keyframes mx-buscar-marca {
+    0%   { opacity: 0; transform: scale(.4); }
+    40%  { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(1.8); }
+}
+
+/* ============ 240. COLMENA — Panal hexagonal ============
+   Escena propia del efecto "Colmena" (sección Matrix). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-colmena {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #2e1f04 0%, #171002 55%, #070501 100%);
+}
+.tema-colmena::after {
+    background: repeating-linear-gradient(60deg,
+                rgba(255, 217, 122, .18) 0 2px, rgba(0,0,0,0) 2px 18px);
+}
+.mx-colmena-celda2 {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 26vmin; height: 26vmin;
+    margin: -13vmin 0 0 -13vmin;
+    background: linear-gradient(135deg, #ffd97a 0%, #8a5a1a 100%);
+    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%,
+                        25% 100%, 0 50%);
+    opacity: 0;
+    animation: mx-colmena-celda2 1.7s ease-in-out both;
+}
+.mx-colmena-oleada2 {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 60vmin; height: 60vmin;
+    margin: -30vmin 0 0 -30vmin;
+    background: repeating-linear-gradient(60deg,
+                rgba(255,217,122,.5) 0 3px, rgba(0,0,0,0) 3px 24px);
+    opacity: 0;
+    animation: mx-colmena-oleada2 1.7s linear .2s both;
+}
+.mx-colmena-abeja {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 10vmin; height: 10vmin;
+    margin: -5vmin 0 0 -5vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffd97a 0 30%,
+                rgba(138, 90, 26, .8) 60%, rgba(26, 14, 2, 0) 75%);
+    opacity: 0;
+    animation: mx-colmena-abeja 1.7s ease-out .35s both;
+}
+@keyframes mx-kf-19 {
+    0%   { opacity: 0; transform: scale(.3) rotate(-20deg); }
+    40%  { opacity: 1; transform: scale(1) rotate(0deg); }
+    100% { opacity: 0; transform: scale(1.4) rotate(15deg); }
+}
+@keyframes mx-kf-20 {
+    0%   { opacity: 0; transform: scale(.5); }
+    40%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.3); }
+}
+@keyframes mx-colmena-abeja {
+    0%   { opacity: 0; transform: translateY(8vmin) scale(.4); }
+    40%  { opacity: 1; transform: translateY(0) scale(1.2); }
+    100% { opacity: 0; transform: translateY(-12vmin) scale(.7); }
+}
+
+/* ============ 241. TINTA — Caligrafía con plumilla ============
+   Escena propia del efecto "Tinta" (sección Miscelánea). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-tinta {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #f5f0e8 0%, #d8d0c0 55%, #8a7a6a 100%);
+}
+.tema-tinta::after {
+    background: linear-gradient(90deg, rgba(40,30,20,0) 40%,
+                rgba(40, 30, 20, .3) 50%, rgba(40,30,20,0) 60%);
+}
+.ms-tinta-plumilla {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 40vmin; height: 6vmin;
+    margin: -3vmin 0 0 -20vmin;
+    background: linear-gradient(90deg, rgba(40,30,20,0),
+                #281e14 30%, #1a1208 50%, #281e14 70%,
+                rgba(40,30,20,0));
+    border-radius: 3vmin;
+    opacity: 0;
+    animation: ms-tinta-plumilla 1.7s ease-in-out both;
+}
+.ms-tinta-gota {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 12vmin; height: 12vmin;
+    margin: -6vmin 0 0 -6vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, #1a1208 0 30%,
+                rgba(40, 30, 20, .5) 60%, rgba(245, 240, 232, 0) 75%);
+    opacity: 0;
+    animation: ms-tinta-gota 1.7s ease-out .2s both;
+}
+.ms-tinta-rasgo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 60vmin; height: 1.5vmin;
+    margin: -.75vmin 0 0 -30vmin;
+    background: linear-gradient(90deg, rgba(40,30,20,0),
+                #281e14 50%, rgba(40,30,20,0));
+    opacity: 0;
+    animation: ms-tinta-rasgo 1.7s linear .35s both;
+}
+@keyframes ms-tinta-plumilla {
+    0%   { opacity: 0; transform: translateX(-40vmin) rotate(-8deg); }
+    35%  { opacity: 1; transform: translateX(0) rotate(0deg); }
+    100% { opacity: 0; transform: translateX(40vmin) rotate(8deg); }
+}
+@keyframes ms-tinta-gota {
+    0%   { opacity: 0; transform: translateY(8vmin) scale(.4); }
+    40%  { opacity: 1; transform: translateY(0) scale(1.2); }
+    100% { opacity: 0; transform: translateY(-12vmin) scale(.7); }
+}
+@keyframes ms-tinta-rasgo {
+    0%   { opacity: 0; transform: scaleX(.2); }
+    40%  { opacity: 1; transform: scaleX(1); }
+    100% { opacity: 0; transform: scaleX(1.3); }
+}
+
+/* ============ 242. ACUARELA — Lavados translúcidos ============
+   Escena propia del efecto "Acuarela" (sección Miscelánea). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-acuarela {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #e8e0d0 0%, #c8c0b0 55%, #8a8070 100%);
+}
+.tema-acuarela::after {
+    background: radial-gradient(circle at 30% 40%,
+                rgba(255, 120, 100, .3), rgba(0,0,0,0) 55%),
+                radial-gradient(circle at 70% 60%,
+                rgba(100, 180, 255, .25), rgba(0,0,0,0) 50%);
+}
+.ms-acuarela-lavado-esc {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 40vmin; height: 40vmin;
+    margin: -20vmin 0 0 -20vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 120, 100, .5) 0 30%,
+                rgba(255, 120, 100, 0) 70%);
+    opacity: 0;
+    animation: ms-acuarela-lavado-esc 1.7s ease-in-out both;
+}
+.ms-acuarela-gota {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 16vmin; height: 16vmin;
+    margin: -8vmin 0 0 -8vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(100, 180, 255, .5) 0 30%,
+                rgba(100, 180, 255, 0) 70%);
+    opacity: 0;
+    animation: ms-acuarela-gota 1.7s ease-out .2s both;
+}
+.ms-acuarela-papel {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 50vmin; height: 36vmin;
+    margin: -18vmin 0 0 -25vmin;
+    background: linear-gradient(160deg, rgba(240, 232, 216, .8),
+                rgba(208, 200, 184, .9));
+    opacity: 0;
+    animation: ms-acuarela-papel 1.7s ease-out both;
+}
+@keyframes ms-acuarela-lavado-esc {
+    0%   { opacity: 0; transform: scale(.4); }
+    40%  { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 0; transform: scale(1.5); }
+}
+@keyframes ms-acuarela-gota {
+    0%   { opacity: 0; transform: translateY(6vmin) scale(.5); }
+    40%  { opacity: 1; transform: translateY(0) scale(1.2); }
+    100% { opacity: 0; transform: translateY(-10vmin) scale(.8); }
+}
+@keyframes ms-acuarela-papel {
+    0%   { opacity: 0; transform: scale(.7); }
+    40%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.2); }
+}
+
+/* ============ 243. BORDADO — Puntadas que recorren ============
+   Escena propia del efecto "Bordado" (sección Miscelánea). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-bordado {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #4a3020 0%, #2a1a10 55%, #120a05 100%);
+}
+.tema-bordado::after {
+    background: repeating-linear-gradient(90deg,
+                rgba(212, 160, 96, .25) 0 4px, rgba(0,0,0,0) 4px 14px);
+}
+.ms-bordado-hilo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 60vmin; height: 2vmin;
+    margin: -1vmin 0 0 -30vmin;
+    background: linear-gradient(90deg, rgba(212,160,96,0),
+                #d4a060 40%, #f0d0a0 50%, #d4a060 60%,
+                rgba(212,160,96,0));
+    border-radius: 2vmin;
+    opacity: 0;
+    animation: ms-bordado-hilo 1.7s ease-in-out both;
+}
+.ms-bordado-aguja {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 4vmin; height: 30vmin;
+    margin: -15vmin 0 0 -2vmin;
+    background: linear-gradient(180deg, #d4a060, #6a4a30);
+    border-radius: 2vmin;
+    opacity: 0;
+    animation: ms-bordado-aguja 1.7s ease-in-out .2s both;
+}
+.ms-bordado-tela {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 44vmin; height: 32vmin;
+    margin: -16vmin 0 0 -22vmin;
+    background: linear-gradient(160deg, rgba(74, 48, 32, .8),
+                rgba(18, 10, 5, .95));
+    opacity: 0;
+    animation: ms-bordado-tela 1.7s ease-out both;
+}
+@keyframes ms-bordado-hilo {
+    0%   { opacity: 0; transform: translateX(-40vmin) scaleX(.3); }
+    35%  { opacity: 1; transform: translateX(0) scaleX(1); }
+    100% { opacity: 0; transform: translateX(40vmin) scaleX(1.2); }
+}
+@keyframes ms-bordado-aguja {
+    0%   { opacity: 0; transform: translateY(-20vmin) rotate(-15deg); }
+    40%  { opacity: 1; transform: translateY(0) rotate(0deg); }
+    100% { opacity: 0; transform: translateY(20vmin) rotate(15deg); }
+}
+@keyframes ms-bordado-tela {
+    0%   { opacity: 0; transform: scale(.7); }
+    40%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.2); }
+}
+
+/* ============ 244. SERIGRAFÍA — Tintas superpuestas ============
+   Escena propia del efecto "Serigrafía" (sección Miscelánea). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-serigrafia {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #f0e8d8 0%, #d0c8b8 55%, #8a8070 100%);
+}
+.tema-serigrafia::after {
+    background: linear-gradient(90deg, rgba(255,60,60,.2) 0 8px,
+                rgba(0,0,0,0) 8px 16px),
+                linear-gradient(90deg, rgba(60,180,255,.15) 0 6px,
+                rgba(0,0,0,0) 6px 14px);
+}
+.ms-serigrafia-tinta-esc {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 50vmin; height: 8vmin;
+    margin: -4vmin 0 0 -25vmin;
+    background: linear-gradient(90deg, rgba(255,60,60,0),
+                #ff3c3c 30%, #ff6060 50%, #ff3c3c 70%,
+                rgba(255,60,60,0));
+    opacity: 0;
+    animation: ms-serigrafia-tinta-esc 1.7s ease-in-out both;
+}
+.ms-serigrafia-trama-esc {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 30vmin; height: 30vmin;
+    margin: -15vmin 0 0 -15vmin;
+    background: repeating-linear-gradient(90deg,
+                rgba(60, 180, 255, .4) 0 2px, rgba(0,0,0,0) 2px 12px);
+    opacity: 0;
+    animation: ms-serigrafia-trama-esc 1.7s ease-out .2s both;
+}
+.ms-serigrafia-marco {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 40vmin; height: 28vmin;
+    margin: -14vmin 0 0 -20vmin;
+    border: .8vmin solid rgba(255, 220, 60, .6);
+    background: linear-gradient(160deg, rgba(240, 232, 216, .7),
+                rgba(200, 192, 176, .85));
+    opacity: 0;
+    animation: ms-serigrafia-marco 1.7s ease-out both;
+}
+@keyframes ms-serigrafia-tinta-esc {
+    0%   { opacity: 0; transform: translateX(-40vmin) scaleX(.3); }
+    35%  { opacity: 1; transform: translateX(0) scaleX(1); }
+    100% { opacity: 0; transform: translateX(40vmin) scaleX(1.2); }
+}
+@keyframes ms-serigrafia-trama-esc {
+    0%   { opacity: 0; transform: scale(.5); }
+    40%  { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 0; transform: scale(1.4); }
+}
+@keyframes ms-serigrafia-marco {
+    0%   { opacity: 0; transform: scale(.7); }
+    40%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.2); }
+}
+
+/* ============ 245. TIZA PASTEL — Polvo de gis ============
+   Escena propia del efecto "Tiza pastel" (sección Miscelánea). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-pastel {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #2a2a3a 0%, #1a1a2a 55%, #0a0a12 100%);
+}
+.tema-pastel::after {
+    background: repeating-linear-gradient(90deg,
+                rgba(240, 240, 250, .2) 0 3px, rgba(0,0,0,0) 3px 12px);
+}
+.ms-pastel-tiza {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 30vmin; height: 4vmin;
+    margin: -2vmin 0 0 -15vmin;
+    background: linear-gradient(90deg, rgba(240,240,250,0),
+                #f0f0fa 40%, #ffffff 50%, #f0f0fa 60%,
+                rgba(240,240,250,0));
+    border-radius: 2vmin;
+    opacity: 0;
+    animation: ms-pastel-tiza 1.7s ease-in-out both;
+}
+.ms-pastel-polvo-esc {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 20vmin; height: 20vmin;
+    margin: -10vmin 0 0 -10vmin;
+    background: radial-gradient(circle, rgba(240, 240, 250, .5) 0 25%,
+                rgba(240, 240, 250, 0) 70%);
+    opacity: 0;
+    animation: ms-pastel-polvo-esc 1.7s ease-out .2s both;
+}
+.ms-pastel-pizarra {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 44vmin; height: 32vmin;
+    margin: -16vmin 0 0 -22vmin;
+    background: linear-gradient(160deg, rgba(42, 42, 58, .9),
+                rgba(10, 10, 18, .95));
+    opacity: 0;
+    animation: ms-pastel-pizarra 1.7s ease-out both;
+}
+@keyframes ms-pastel-tiza {
+    0%   { opacity: 0; transform: translateX(-30vmin) rotate(-5deg); }
+    35%  { opacity: 1; transform: translateX(0) rotate(0deg); }
+    100% { opacity: 0; transform: translateX(30vmin) rotate(5deg); }
+}
+@keyframes ms-pastel-polvo-esc {
+    0%   { opacity: 0; transform: scale(.4); }
+    40%  { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(1.6); }
+}
+@keyframes ms-pastel-pizarra {
+    0%   { opacity: 0; transform: scale(.7); }
+    40%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.2); }
+}
+
+/* ============ 246. CONFETI — Trocitos que saltan ============
+   Escena propia del efecto "Confeti" (sección Miscelánea). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-confeti {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #f5f0e8 0%, #d8d0c0 55%, #8a8070 100%);
+}
+.tema-confeti::after {
+    background: radial-gradient(circle at 20% 30%,
+                rgba(255, 90, 120, .3), rgba(0,0,0,0) 40%),
+                radial-gradient(circle at 80% 70%,
+                rgba(74, 200, 255, .25), rgba(0,0,0,0) 35%);
+}
+.ms-confeti-trozo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 12vmin; height: 12vmin;
+    margin: -6vmin 0 0 -6vmin;
+    background: linear-gradient(135deg, #ff5a78, #4ac8ff);
+    opacity: 0;
+    animation: ms-confeti-trozo 1.7s ease-in-out both;
+}
+.ms-confeti-trozo2 {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 8vmin; height: 8vmin;
+    margin: -4vmin 0 0 -4vmin;
+    background: linear-gradient(135deg, #ffd166, #ff5a78);
+    opacity: 0;
+    animation: ms-confeti-trozo2 1.7s ease-out .2s both;
+}
+.ms-confeti-trozo3 {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 10vmin; height: 10vmin;
+    margin: -5vmin 0 0 -5vmin;
+    background: linear-gradient(135deg, #4ac8ff, #ffd166);
+    opacity: 0;
+    animation: ms-confeti-trozo3 1.7s ease-out .35s both;
+}
+@keyframes ms-confeti-trozo {
+    0%   { opacity: 0; transform: translateY(10vmin) rotate(0deg); }
+    40%  { opacity: 1; transform: translateY(0) rotate(90deg); }
+    100% { opacity: 0; transform: translateY(-14vmin) rotate(200deg); }
+}
+@keyframes ms-confeti-trozo2 {
+    0%   { opacity: 0; transform: translateY(8vmin) scale(.5); }
+    40%  { opacity: 1; transform: translateY(0) scale(1.2); }
+    100% { opacity: 0; transform: translateY(-10vmin) scale(.8); }
+}
+@keyframes ms-confeti-trozo3 {
+    0%   { opacity: 0; transform: translateY(6vmin) rotate(0deg); }
+    40%  { opacity: 1; transform: translateY(0) rotate(-90deg); }
+    100% { opacity: 0; transform: translateY(-8vmin) rotate(-200deg); }
+}
+
+/* ============ 247. CARAMELO — Se derrite y gotea ============
+   Escena propia del efecto "Caramelo" (sección Miscelánea). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-caramelo {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #4a1a2a 0%, #2a0a14 55%, #12050a 100%);
+}
+.tema-caramelo::after {
+    background: repeating-linear-gradient(180deg,
+                rgba(255, 150, 180, .25) 0 5px, rgba(0,0,0,0) 5px 16px);
+}
+.ms-caramelo-gota {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 10vmin; height: 10vmin;
+    margin: -5vmin 0 0 -5vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ff96b4 0 30%,
+                rgba(255, 150, 180, .5) 60%, rgba(74, 26, 42, 0) 75%);
+    opacity: 0;
+    animation: ms-caramelo-gota 1.7s ease-in-out both;
+}
+.ms-caramelo-brillo-esc {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 24vmin; height: 24vmin;
+    margin: -12vmin 0 0 -12vmin;
+    background: radial-gradient(circle, rgba(255, 150, 180, .6) 0 25%,
+                rgba(255, 150, 180, 0) 70%);
+    opacity: 0;
+    animation: ms-caramelo-brillo-esc 1.7s ease-out .2s both;
+}
+.ms-caramelo-envoltorio {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 36vmin; height: 26vmin;
+    margin: -13vmin 0 0 -18vmin;
+    background: linear-gradient(135deg, rgba(255, 150, 180, .7),
+                rgba(74, 26, 42, .9));
+    opacity: 0;
+    animation: ms-caramelo-envoltorio 1.7s ease-out both;
+}
+@keyframes ms-caramelo-gota {
+    0%   { opacity: 0; transform: translateY(8vmin) scale(.4); }
+    40%  { opacity: 1; transform: translateY(0) scale(1.2); }
+    100% { opacity: 0; transform: translateY(-12vmin) scale(.7); }
+}
+@keyframes ms-caramelo-brillo-esc {
+    0%   { opacity: 0; transform: scale(.5); }
+    40%  { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 0; transform: scale(1.5); }
+}
+@keyframes ms-caramelo-envoltorio {
+    0%   { opacity: 0; transform: scale(.7); }
+    40%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.2); }
+}
+
+/* ============ 248. LETRAS IMANTADAS — Piezas que se deslizan ============
+   Escena propia del efecto "Letras imantadas" (sección Miscelánea). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-imantado {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #2a3a4a 0%, #1a2a3a 55%, #0a121a 100%);
+}
+.tema-imantado::after {
+    background: repeating-linear-gradient(90deg,
+                rgba(192, 208, 224, .25) 0 8px, rgba(0,0,0,0) 8px 20px);
+}
+.ms-imantado-pieza {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 16vmin; height: 16vmin;
+    margin: -8vmin 0 0 -8vmin;
+    background: linear-gradient(135deg, #c0d0e0, #4a5a6a);
+    border-radius: 2vmin;
+    opacity: 0;
+    animation: ms-imantado-pieza 1.7s ease-in-out both;
+}
+.ms-imantado-iman {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 20vmin; height: 20vmin;
+    margin: -10vmin 0 0 -10vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(192, 208, 224, .6) 0 30%,
+                rgba(192, 208, 224, 0) 70%);
+    opacity: 0;
+    animation: ms-imantado-iman 1.7s ease-out .2s both;
+}
+.ms-imantado-nevera {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 40vmin; height: 30vmin;
+    margin: -15vmin 0 0 -20vmin;
+    background: linear-gradient(160deg, rgba(42, 58, 74, .8),
+                rgba(10, 18, 26, .95));
+    opacity: 0;
+    animation: ms-imantado-nevera 1.7s ease-out both;
+}
+@keyframes ms-imantado-pieza {
+    0%   { opacity: 0; transform: translateX(-30vmin) rotate(-10deg); }
+    40%  { opacity: 1; transform: translateX(0) rotate(0deg); }
+    100% { opacity: 0; transform: translateX(30vmin) rotate(10deg); }
+}
+@keyframes ms-imantado-iman {
+    0%   { opacity: 0; transform: scale(.4); }
+    40%  { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(1.6); }
+}
+@keyframes ms-imantado-nevera {
+    0%   { opacity: 0; transform: scale(.7); }
+    40%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.2); }
+}
+
+/* ============ 249. BRÚJULA — Aguja que gira ============
+   Escena propia del efecto "Brújula" (sección Miscelánea). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-brujula {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #0a1a2e 0%, #060f1c 55%, #02060c 100%);
+}
+.tema-brujula::after {
+    background: repeating-conic-gradient(from 0deg at 50% 50%,
+                rgba(160, 220, 255, .2) 0 15deg, rgba(0,0,0,0) 15deg 45deg);
+}
+.ms-brujula-aguja {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 4vmin; height: 40vmin;
+    margin: -20vmin 0 0 -2vmin;
+    background: linear-gradient(180deg, #a0dcff 0%, #1a3a5a 100%);
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    opacity: 0;
+    animation: ms-brujula-aguja 1.7s ease-in-out both;
+}
+.ms-brujula-marca {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 30vmin; height: 30vmin;
+    margin: -15vmin 0 0 -15vmin;
+    border: .6vmin solid rgba(160, 220, 255, .7);
+    border-radius: 50%;
+    opacity: 0;
+    animation: ms-brujula-marca 1.7s ease-out .2s both;
+}
+.ms-brujula-rosa {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 44vmin; height: 44vmin;
+    margin: -22vmin 0 0 -22vmin;
+    background: repeating-conic-gradient(from 0deg at 50% 50%,
+                rgba(160, 220, 255, .3) 0 15deg, rgba(0,0,0,0) 15deg 45deg);
+    opacity: 0;
+    animation: ms-brujula-rosa 1.7s ease-out both;
+}
+@keyframes ms-brujula-aguja {
+    0%   { opacity: 0; transform: rotate(-30deg); }
+    40%  { opacity: 1; transform: rotate(0deg); }
+    100% { opacity: 0; transform: rotate(30deg); }
+}
+@keyframes ms-brujula-marca {
+    0%   { opacity: 0; transform: scale(.4); }
+    40%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.4); }
+}
+@keyframes ms-brujula-rosa {
+    0%   { opacity: 0; transform: scale(.6) rotate(0deg); }
+    40%  { opacity: 1; transform: scale(1) rotate(45deg); }
+    100% { opacity: 0; transform: scale(1.2) rotate(90deg); }
+}
+
+/* ============ 250. PUZZLE — Piezas que encajan ============
+   Escena propia del efecto "Puzzle" (sección Miscelánea). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-puzzle {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #3a2a1a 0%, #201508 55%, #0a0602 100%);
+}
+.tema-puzzle::after {
+    background: repeating-linear-gradient(90deg,
+                rgba(200, 160, 96, .25) 0 10px, rgba(0,0,0,0) 10px 24px);
+}
+.ms-puzzle-pieza {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 20vmin; height: 20vmin;
+    margin: -10vmin 0 0 -10vmin;
+    background: linear-gradient(135deg, #c8a060, #5a4a30);
+    border-radius: 2vmin;
+    opacity: 0;
+    animation: ms-puzzle-pieza 1.7s ease-in-out both;
+}
+.ms-puzzle-encaje {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 36vmin; height: 36vmin;
+    margin: -18vmin 0 0 -18vmin;
+    border: .6vmin solid rgba(200, 160, 96, .7);
+    border-radius: 50%;
+    opacity: 0;
+    animation: ms-puzzle-encaje 1.7s ease-out .2s both;
+}
+.ms-puzzle-madera {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 44vmin; height: 32vmin;
+    margin: -16vmin 0 0 -22vmin;
+    background: linear-gradient(160deg, rgba(58, 42, 26, .8),
+                rgba(10, 6, 2, .95));
+    opacity: 0;
+    animation: ms-puzzle-madera 1.7s ease-out both;
+}
+@keyframes ms-puzzle-pieza {
+    0%   { opacity: 0; transform: translateX(-30vmin) rotate(-15deg); }
+    40%  { opacity: 1; transform: translateX(0) rotate(0deg); }
+    100% { opacity: 0; transform: translateX(30vmin) rotate(15deg); }
+}
+@keyframes ms-puzzle-encaje {
+    0%   { opacity: 0; transform: scale(.4); }
+    40%  { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 0; transform: scale(1.5); }
+}
+@keyframes ms-puzzle-madera {
+    0%   { opacity: 0; transform: scale(.7); }
+    40%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.2); }
+}
+
+/* ============ 251. BRAILLE — Relieve de puntos ============
+   Escena propia del efecto "Braille" (sección Miscelánea). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-braille {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #1a1a2a 0%, #0e0e1a 55%, #05050a 100%);
+}
+.tema-braille::after {
+    background: repeating-radial-gradient(circle at 50% 50%,
+                rgba(224, 224, 240, .2) 0 3px, rgba(0,0,0,0) 3px 12px);
+}
+.ms-braille-punto-esc {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 8vmin; height: 8vmin;
+    margin: -4vmin 0 0 -4vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, #e0e0f0 0 30%,
+                rgba(224, 224, 240, 0) 70%);
+    opacity: 0;
+    animation: ms-braille-punto-esc 1.7s ease-in-out both;
+}
+.ms-braille-relieve-esc {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 28vmin; height: 28vmin;
+    margin: -14vmin 0 0 -14vmin;
+    background: radial-gradient(circle, rgba(224, 224, 240, .5) 0 25%,
+                rgba(224, 224, 240, 0) 70%);
+    opacity: 0;
+    animation: ms-braille-relieve-esc 1.7s ease-out .2s both;
+}
+.ms-braille-lector {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 40vmin; height: 30vmin;
+    margin: -15vmin 0 0 -20vmin;
+    background: linear-gradient(160deg, rgba(26, 26, 42, .9),
+                rgba(5, 5, 10, .95));
+    opacity: 0;
+    animation: ms-braille-lector 1.7s ease-out both;
+}
+@keyframes ms-braille-punto-esc {
+    0%   { opacity: 0; transform: scale(.3); }
+    40%  { opacity: 1; transform: scale(1.3); }
+    100% { opacity: 0; transform: scale(1.8); }
+}
+@keyframes ms-braille-relieve-esc {
+    0%   { opacity: 0; transform: scale(.5); }
+    40%  { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 0; transform: scale(1.5); }
+}
+@keyframes ms-braille-lector {
+    0%   { opacity: 0; transform: scale(.7); }
+    40%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.2); }
+}
+
+/* ============ 252. TORNADO — El texto se arremolina ============
+   Escena propia del efecto "Tornado" (sección Miscelánea). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-tornado {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #3a3a4a 0%, #22222e 55%, #0e0e14 100%);
+}
+.tema-tornado::after {
+    background: repeating-conic-gradient(from 0deg at 50% 50%,
+                rgba(200, 200, 220, .2) 0 15deg, rgba(0,0,0,0) 15deg 45deg);
+}
+.ms-tornado-espiral {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 46vmin; height: 46vmin;
+    margin: -23vmin 0 0 -23vmin;
+    border-radius: 50%;
+    background: repeating-conic-gradient(from 0deg at 50% 50%,
+                rgba(200, 200, 220, .7) 0 20deg,
+                rgba(200, 200, 220, .15) 20deg 30deg,
+                rgba(58, 58, 74, .9) 30deg 60deg);
+    opacity: 0;
+    animation: ms-tornado-espiral 1.7s ease-in-out both;
+}
+.ms-tornado-trozo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 10vmin; height: 10vmin;
+    margin: -5vmin 0 0 -5vmin;
+    background: linear-gradient(135deg, #c8c8dc, #5a5a6a);
+    opacity: 0;
+    animation: ms-tornado-trozo 1.7s ease-out .2s both;
+}
+.ms-tornado-polvo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 22vmin; height: 22vmin;
+    margin: -11vmin 0 0 -11vmin;
+    background: radial-gradient(circle, rgba(200, 200, 220, .5) 0 25%,
+                rgba(200, 200, 220, 0) 70%);
+    opacity: 0;
+    animation: ms-tornado-polvo 1.7s ease-out .35s both;
+}
+@keyframes ms-tornado-espiral {
+    0%   { opacity: 0; transform: scale(.4) rotate(0deg); }
+    40%  { opacity: 1; transform: scale(1) rotate(120deg); }
+    100% { opacity: 0; transform: scale(1.3) rotate(260deg); }
+}
+@keyframes ms-tornado-trozo {
+    0%   { opacity: 0; transform: translateY(8vmin) rotate(0deg); }
+    40%  { opacity: 1; transform: translateY(0) rotate(90deg); }
+    100% { opacity: 0; transform: translateY(-12vmin) rotate(200deg); }
+}
+@keyframes ms-tornado-polvo {
+    0%   { opacity: 0; transform: scale(.5); }
+    40%  { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(1.6); }
+}
+
+/* ============ 253. DADOS — Caras que giran ============
+   Escena propia del efecto "Dados" (sección Miscelánea). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-dados {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #f0e8d8 0%, #d0c8b8 55%, #8a8070 100%);
+}
+.tema-dados::after {
+    background: repeating-linear-gradient(90deg,
+                rgba(40, 30, 20, .2) 0 4px, rgba(0,0,0,0) 4px 14px);
+}
+.ms-dados-cara {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 24vmin; height: 24vmin;
+    margin: -12vmin 0 0 -12vmin;
+    background: linear-gradient(135deg, #f0e8d8, #8a7a6a);
+    border-radius: 3vmin;
+    opacity: 0;
+    animation: ms-dados-cara 1.7s ease-in-out both;
+}
+.ms-dados-punto {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 6vmin; height: 6vmin;
+    margin: -3vmin 0 0 -3vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, #281e14 0 40%,
+                rgba(40, 30, 20, 0) 70%);
+    opacity: 0;
+    animation: ms-dados-punto 1.7s ease-out .2s both;
+}
+.ms-dados-mesa {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 44vmin; height: 32vmin;
+    margin: -16vmin 0 0 -22vmin;
+    background: linear-gradient(160deg, rgba(240, 232, 216, .8),
+                rgba(208, 200, 184, .9));
+    opacity: 0;
+    animation: ms-dados-mesa 1.7s ease-out both;
+}
+@keyframes ms-dados-cara {
+    0%   { opacity: 0; transform: rotate(-20deg) scale(.5); }
+    40%  { opacity: 1; transform: rotate(0deg) scale(1.1); }
+    100% { opacity: 0; transform: rotate(20deg) scale(1.3); }
+}
+@keyframes ms-dados-punto {
+    0%   { opacity: 0; transform: scale(.3); }
+    40%  { opacity: 1; transform: scale(1.3); }
+    100% { opacity: 0; transform: scale(1.8); }
+}
+@keyframes ms-dados-mesa {
+    0%   { opacity: 0; transform: scale(.7); }
+    40%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.2); }
+}
+
+/* ============ 254. MUSGO — Crece desde abajo ============
+   Escena propia del efecto "Musgo" (sección Miscelánea). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-musgo {
+    background: radial-gradient(120% 100% at 50% 100%,
+                #2a3a1a 0%, #1a2a10 55%, #0a1208 100%);
+}
+.tema-musgo::after {
+    background: repeating-linear-gradient(0deg,
+                rgba(80, 160, 60, .25) 0 6px, rgba(0,0,0,0) 6px 18px);
+}
+.ms-musgo-mancha {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 30vmin; height: 30vmin;
+    margin: -15vmin 0 0 -15vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(80, 160, 60, .6) 0 30%,
+                rgba(80, 160, 60, 0) 70%);
+    opacity: 0;
+    animation: ms-musgo-mancha 1.7s ease-in-out both;
+}
+.ms-musgo-tallo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 4vmin; height: 40vmin;
+    margin: -20vmin 0 0 -2vmin;
+    background: linear-gradient(180deg, rgba(80,160,60,0),
+                #50a03c 60%, #2a3a1a);
+    opacity: 0;
+    animation: ms-musgo-tallo 1.7s ease-out .2s both;
+}
+.ms-musgo-tierra {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 50vmin; height: 20vmin;
+    margin: -10vmin 0 0 -25vmin;
+    background: linear-gradient(180deg, rgba(42, 58, 26, .9),
+                rgba(10, 18, 8, .95));
+    opacity: 0;
+    animation: ms-musgo-tierra 1.7s ease-out both;
+}
+@keyframes ms-musgo-mancha {
+    0%   { opacity: 0; transform: scale(.4); }
+    40%  { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 0; transform: scale(1.5); }
+}
+@keyframes ms-musgo-tallo {
+    0%   { opacity: 0; transform: scaleY(.2); }
+    40%  { opacity: 1; transform: scaleY(1); }
+    100% { opacity: 0; transform: scaleY(1.2); }
+}
+@keyframes ms-musgo-tierra {
+    0%   { opacity: 0; transform: scale(.7); }
+    40%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.2); }
+}
+
+/* ============ 255. AURORA — Cortinas de luz ============
+   Escena propia del efecto "Aurora" (sección Miscelánea). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-aurora {
+    background: radial-gradient(120% 100% at 50% 0%,
+                #0a1a2a 0%, #060f1c 55%, #02060c 100%);
+}
+.tema-aurora::after {
+    background: linear-gradient(180deg, rgba(80,255,180,.2) 0 10%,
+                rgba(0,0,0,0) 10% 20%),
+                linear-gradient(180deg, rgba(180,120,255,.15) 0 8%,
+                rgba(0,0,0,0) 8% 18%);
+}
+.ms-aurora-cortina {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 60vmin; height: 20vmin;
+    margin: -10vmin 0 0 -30vmin;
+    background: linear-gradient(180deg, rgba(80,255,180,.6) 0 40%,
+                rgba(80, 255, 180, 0) 100%);
+    opacity: 0;
+    animation: ms-aurora-cortina 1.7s ease-in-out both;
+}
+.ms-aurora-cortina2 {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 50vmin; height: 16vmin;
+    margin: -8vmin 0 0 -25vmin;
+    background: linear-gradient(180deg, rgba(180,120,255,.5) 0 40%,
+                rgba(180, 120, 255, 0) 100%);
+    opacity: 0;
+    animation: ms-aurora-cortina2 1.7s ease-out .2s both;
+}
+.ms-aurora-estrella {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 8vmin; height: 8vmin;
+    margin: -4vmin 0 0 -4vmin;
+    background: radial-gradient(circle, #ffffff 0 20%,
+                rgba(80, 255, 180, .5) 50%, rgba(10, 26, 42, 0) 75%);
+    opacity: 0;
+    animation: ms-aurora-estrella 1.7s ease-out .35s both;
+}
+@keyframes ms-aurora-cortina {
+    0%   { opacity: 0; transform: scaleY(.3); }
+    40%  { opacity: 1; transform: scaleY(1); }
+    100% { opacity: 0; transform: scaleY(1.3); }
+}
+@keyframes ms-aurora-cortina2 {
+    0%   { opacity: 0; transform: scaleY(.4); }
+    40%  { opacity: 1; transform: scaleY(1.1); }
+    100% { opacity: 0; transform: scaleY(1.4); }
+}
+@keyframes ms-aurora-estrella {
+    0%   { opacity: 0; transform: scale(.3); }
+    40%  { opacity: 1; transform: scale(1.3); }
+    100% { opacity: 0; transform: scale(1.8); }
+}
+
+/* ============ 256. CHAMPIÑÓN — Crece y suelta esporas ============
+   Escena propia del efecto "Champiñón" (sección Miscelánea). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-champinon {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #4a3a2a 0%, #2a1a10 55%, #120a05 100%);
+}
+.tema-champinon::after {
+    background: repeating-linear-gradient(90deg,
+                rgba(200, 180, 160, .25) 0 3px, rgba(0,0,0,0) 3px 12px);
+}
+.ms-champinon-sombrero {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 40vmin; height: 24vmin;
+    margin: -12vmin 0 0 -20vmin;
+    border-radius: 50% 50% 0 0;
+    background: linear-gradient(180deg, #c8b4a0 0%, #6a5a4a 100%);
+    opacity: 0;
+    animation: ms-champinon-sombrero 1.7s ease-in-out both;
+}
+.ms-champinon-espora-esc {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 6vmin; height: 6vmin;
+    margin: -3vmin 0 0 -3vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200, 180, 160, .8) 0 30%,
+                rgba(200, 180, 160, 0) 70%);
+    opacity: 0;
+    animation: ms-champinon-espora-esc 1.7s ease-out .2s both;
+}
+.ms-champinon-tallo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 8vmin; height: 30vmin;
+    margin: -15vmin 0 0 -4vmin;
+    background: linear-gradient(180deg, #c8b4a0, #2a1a10);
+    opacity: 0;
+    animation: ms-champinon-tallo 1.7s ease-out both;
+}
+@keyframes ms-champinon-sombrero {
+    0%   { opacity: 0; transform: scale(.5); }
+    40%  { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 0; transform: scale(1.3); }
+}
+@keyframes ms-champinon-espora-esc {
+    0%   { opacity: 0; transform: translateY(6vmin) scale(.4); }
+    40%  { opacity: 1; transform: translateY(0) scale(1.2); }
+    100% { opacity: 0; transform: translateY(-10vmin) scale(.8); }
+}
+@keyframes ms-champinon-tallo {
+    0%   { opacity: 0; transform: scaleY(.3); }
+    40%  { opacity: 1; transform: scaleY(1); }
+    100% { opacity: 0; transform: scaleY(1.2); }
+}
+
+/* ============ 257. GLOBO — Se infla y flota ============
+   Escena propia del efecto "Globo" (sección Miscelánea). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-globo {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #4a1a2a 0%, #2a0a14 55%, #12050a 100%);
+}
+.tema-globo::after {
+    background: repeating-linear-gradient(90deg,
+                rgba(255, 200, 220, .25) 0 5px, rgba(0,0,0,0) 5px 16px);
+}
+.ms-globo-globo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 30vmin; height: 36vmin;
+    margin: -18vmin 0 0 -15vmin;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    background: linear-gradient(135deg, #ff6080, #6a2a3a);
+    opacity: 0;
+    animation: ms-globo-globo 1.7s ease-in-out both;
+}
+.ms-globo-cuerda {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 1vmin; height: 30vmin;
+    margin: -15vmin 0 0 -.5vmin;
+    background: linear-gradient(180deg, rgba(255,200,220,0),
+                #ff6080 60%, #2a0a14);
+    opacity: 0;
+    animation: ms-globo-cuerda 1.7s ease-out .2s both;
+}
+.ms-globo-brillo {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 16vmin; height: 16vmin;
+    margin: -8vmin 0 0 -8vmin;
+    background: radial-gradient(circle, rgba(255, 200, 220, .7) 0 25%,
+                rgba(255, 200, 220, 0) 70%);
+    opacity: 0;
+    animation: ms-globo-brillo 1.7s ease-out .35s both;
+}
+@keyframes ms-globo-globo {
+    0%   { opacity: 0; transform: scale(.5); }
+    40%  { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 0; transform: scale(1.3); }
+}
+@keyframes ms-globo-cuerda {
+    0%   { opacity: 0; transform: scaleY(.3); }
+    40%  { opacity: 1; transform: scaleY(1); }
+    100% { opacity: 0; transform: scaleY(1.2); }
+}
+@keyframes ms-globo-brillo {
+    0%   { opacity: 0; transform: scale(.4); }
+    40%  { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(1.6); }
+}
+
+/* ============ 258. FARO — Haz que barre ============
+   Escena propia del efecto "Faro" (sección Miscelánea). Es la escena
+   que estalla al pulsar "Portada" dentro de su showcase. */
+.tema-faro {
+    background: radial-gradient(120% 100% at 50% 50%,
+                #0a1a2e 0%, #060f1c 55%, #02060c 100%);
+}
+.tema-faro::after {
+    background: repeating-conic-gradient(from 0deg at 50% 50%,
+                rgba(255, 240, 200, .2) 0 20deg, rgba(0,0,0,0) 20deg 60deg);
+}
+.ms-faro-haz {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 50vmin; height: 8vmin;
+    margin: -4vmin 0 0 -25vmin;
+    background: linear-gradient(90deg, rgba(255,240,200,0),
+                #fff0c8 40%, #ffffff 50%, #fff0c8 60%,
+                rgba(255,240,200,0));
+    opacity: 0;
+    animation: ms-faro-haz 1.7s ease-in-out both;
+}
+.ms-faro-torre {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 12vmin; height: 44vmin;
+    margin: -22vmin 0 0 -6vmin;
+    background: linear-gradient(180deg, #1a3a5a, #0a1a2e);
+    clip-path: polygon(30% 0, 70% 0, 100% 100%, 0 100%);
+    opacity: 0;
+    animation: ms-faro-torre 1.7s ease-out both;
+}
+.ms-faro-niebla-esc {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 36vmin; height: 36vmin;
+    margin: -18vmin 0 0 -18vmin;
+    border: .6vmin solid rgba(255, 240, 200, .6);
+    border-radius: 50%;
+    opacity: 0;
+    animation: ms-faro-niebla-esc 1.7s ease-out .2s both;
+}
+@keyframes ms-faro-haz {
+    0%   { opacity: 0; transform: translateX(-40vmin) scaleX(.3); }
+    40%  { opacity: 1; transform: translateX(0) scaleX(1); }
+    100% { opacity: 0; transform: translateX(40vmin) scaleX(1.2); }
+}
+@keyframes ms-faro-torre {
+    0%   { opacity: 0; transform: scaleY(.4); }
+    40%  { opacity: 1; transform: scaleY(1); }
+    100% { opacity: 0; transform: scaleY(1.2); }
+}
+@keyframes ms-faro-niebla-esc {
+    0%   { opacity: 0; transform: scale(.5); }
+    40%  { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 0; transform: scale(1.5); }
+}

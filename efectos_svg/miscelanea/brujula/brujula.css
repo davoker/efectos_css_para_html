@@ -1,0 +1,100 @@
+/* =============================================================
+   BRÚJULA (SVG) · Aguja que gira
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-brujula.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-brujula,
+    .ef-brujula-mini — aguja que gira + marcas cardinales
+   ============================================================= */
+.ef-brujula {
+    display: inline-block;
+    color: #0a1a2e;                     /* respaldo si no hay clip */
+    background-color: #0a1a2e;
+    background-image: repeating-conic-gradient(from 0deg at 50% 50%,
+        rgba(160, 220, 255, .8) 0 15deg, rgba(160, 220, 255, 0) 15deg 45deg);
+    background-size: 60px 60px;
+    background-position: 50% 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .5px #1a3a5a;
+    paint-order: stroke fill;
+    text-shadow: 0 0 0 rgba(160, 220, 255, 0);
+    filter: url(#ef-brujula);
+    animation: ms-brujula-gira 6s linear infinite,
+               ms-brujula-late 2.8s ease-in-out infinite;
+}
+.ef-brujula:hover,
+.ef-brujula:focus-visible {
+    animation-duration: 3s, 1.4s;
+}
+.ef-brujula-mini {
+    display: inline-block;
+    color: #0a1a2e;
+    background-color: #0a1a2e;
+    background-image: repeating-conic-gradient(from 0deg at 50% 50%,
+        rgba(160, 220, 255, .8) 0 15deg, rgba(160, 220, 255, 0) 15deg 45deg);
+    background-size: 40px 40px;
+    background-position: 50% 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-brujula-mini);
+    animation: ms-brujula-gira 6s linear infinite,
+               ms-brujula-late 4s ease-in-out infinite;
+}
+.ef-brujula-mini:hover,
+.ef-brujula-mini:focus-visible {
+    animation-duration: 3s, 2s;
+}
+
+/* la aguja gira y las marcas late */
+@keyframes ms-brujula-gira {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes ms-brujula-late {
+    0%, 100% { text-shadow: 0 0 0 rgba(160, 220, 255, 0); }
+    50%      { text-shadow: 0 0 10px rgba(160, 220, 255, .7); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-brujula,
+    .ef-brujula-mini {
+        animation: none;
+        transform: none;
+        text-shadow: 0 0 0 rgba(160, 220, 255, 0);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-brujula,
+    .ef-brujula-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

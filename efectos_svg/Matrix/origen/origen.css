@@ -1,0 +1,102 @@
+/* =============================================================
+   ORIGEN (SVG) · Arroyos que convergen
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-origen.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-origen,
+    .ef-origen-mini — arroyos de datos que convergen
+   ============================================================= */
+.ef-origen {
+    display: inline-block;
+    color: #062033;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(230, 250, 255, .95) 0 6px, rgba(230, 250, 255, 0) 6px 26px),
+        repeating-linear-gradient(90deg,
+            rgba(70, 190, 255, .8) 0 3px, rgba(70, 190, 255, 0) 3px 18px),
+        linear-gradient(180deg, #0a4a72 0%, #062033 60%, #03101c 100%);
+    background-size: 26px 100%, 18px 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .6px #062033;
+    paint-order: stroke fill;
+    filter: url(#ef-origen);
+    animation: mx-origen-corriente 2.4s linear infinite,
+               mx-origen-converge 3.6s ease-in-out infinite;
+}
+.ef-origen:hover,
+.ef-origen:focus-visible {
+    animation-duration: 1.2s, 1.8s;
+}
+.ef-origen-mini {
+    display: inline-block;
+    color: #062033;
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(230, 250, 255, .95) 0 5px, rgba(230, 250, 255, 0) 5px 18px),
+        repeating-linear-gradient(90deg,
+            rgba(70, 190, 255, .8) 0 3px, rgba(70, 190, 255, 0) 3px 13px),
+        linear-gradient(180deg, #0a4a72 0%, #062033 60%, #03101c 100%);
+    background-size: 18px 100%, 13px 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-origen-mini);
+    animation: mx-origen-corriente 2.4s linear infinite,
+               mx-origen-converge 5.2s ease-in-out infinite;
+}
+.ef-origen-mini:hover,
+.ef-origen-mini:focus-visible {
+    animation-duration: 1.2s, 2.6s;
+}
+
+/* los dos arroyos corren en sentido contrario y el fondo respira */
+@keyframes mx-origen-corriente {
+    0%   { background-position: 0 0, 0 0, 0 0; }
+    100% { background-position: -52px 0, 36px 0, 0 0; }
+}
+@keyframes mx-origen-converge {
+    0%, 100% { background-size: 26px 100%, 18px 100%, 100% 100%; }
+    50%      { background-size: 40px 100%, 27px 100%, 100% 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-origen,
+    .ef-origen-mini {
+        animation: none;
+        transform: none;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-origen,
+    .ef-origen-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

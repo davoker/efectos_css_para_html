@@ -1,0 +1,101 @@
+/* =============================================================
+   MOSAICO (SVG) · Se ensambla en bloques
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-mosaico.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-mosaico,
+    .ef-mosaico-mini — rejilla de bloques que se ensambla
+   ============================================================= */
+.ef-mosaico {
+    display: inline-block;
+    color: #2a0a12;                     /* respaldo si no hay clip */
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(255, 90, 120, .9) 0 2px, rgba(0, 0, 0, 0) 2px 22px),
+        repeating-linear-gradient(90deg,
+            rgba(255, 90, 120, .9) 0 2px, rgba(0, 0, 0, 0) 2px 22px),
+        linear-gradient(160deg, #ff5a78 0%, #a01830 55%, #3a0810 100%);
+    background-size: 22px 22px, 22px 22px, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .6px #3a0810;
+    paint-order: stroke fill;
+    filter: url(#ef-mosaico);
+    animation: mx-mosaico-rejilla 5s linear infinite,
+               mx-mosaico-bloque2 2.6s ease-in-out infinite;
+}
+.ef-mosaico:hover,
+.ef-mosaico:focus-visible {
+    animation-duration: 2.5s, 1.3s;
+}
+.ef-mosaico-mini {
+    display: inline-block;
+    color: #2a0a12;
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(255, 90, 120, .9) 0 2px, rgba(0, 0, 0, 0) 2px 15px),
+        repeating-linear-gradient(90deg,
+            rgba(255, 90, 120, .9) 0 2px, rgba(0, 0, 0, 0) 2px 15px),
+        linear-gradient(160deg, #ff5a78 0%, #a01830 55%, #3a0810 100%);
+    background-size: 15px 15px, 15px 15px, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-mosaico-mini);
+    animation: mx-mosaico-rejilla 5s linear infinite,
+               mx-mosaico-bloque2 3.8s ease-in-out infinite;
+}
+.ef-mosaico-mini:hover,
+.ef-mosaico-mini:focus-visible {
+    animation-duration: 2.5s, 1.9s;
+}
+
+/* la rejilla se desplaza y los bloques respiran */
+@keyframes mx-mosaico-rejilla {
+    0%   { background-position: 0 0, 0 0, 0 0; }
+    100% { background-position: 44px 22px, 22px 44px, 0 0; }
+}
+@keyframes mx-kf-5 {
+    0%, 100% { background-size: 22px 22px, 22px 22px, 100% 100%; }
+    50%      { background-size: 34px 34px, 34px 34px, 100% 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-mosaico,
+    .ef-mosaico-mini {
+        animation: none;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-mosaico,
+    .ef-mosaico-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

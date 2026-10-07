@@ -1,0 +1,100 @@
+/* =============================================================
+   MUSGO (SVG) · Crece desde abajo
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-musgo.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-musgo,
+    .ef-musgo-mini — manchas de musgo que trepan
+   ============================================================= */
+.ef-musgo {
+    display: inline-block;
+    color: #2a3a1a;
+    background-color: #2a3a1a;
+    background-image: repeating-linear-gradient(0deg,
+        rgba(80, 160, 60, .9) 0 8px, rgba(80, 160, 60, 0) 8px 16px),
+        repeating-linear-gradient(90deg,
+        rgba(60, 130, 45, .7) 0 4px, rgba(60, 130, 45, 0) 4px 12px);
+    background-size: 100% 16px, 12px 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .5px #3a4a2a;
+    paint-order: stroke fill;
+    text-shadow: 0 0 0 rgba(80, 160, 60, 0);
+    filter: url(#ef-musgo);
+    animation: ms-musgo-crece 3.5s ease-in-out infinite,
+               ms-musgo-trepa 2.8s ease-in-out infinite;
+}
+.ef-musgo:hover,
+.ef-musgo:focus-visible {
+    animation-duration: 1.8s, 1.4s;
+}
+.ef-musgo-mini {
+    display: inline-block;
+    color: #2a3a1a;
+    background-color: #2a3a1a;
+    background-image: repeating-linear-gradient(0deg,
+        rgba(80, 160, 60, .9) 0 6px, rgba(80, 160, 60, 0) 6px 12px),
+        repeating-linear-gradient(90deg,
+        rgba(60, 130, 45, .7) 0 3px, rgba(60, 130, 45, 0) 3px 9px);
+    background-size: 100% 12px, 9px 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-musgo-mini);
+    animation: ms-musgo-crece 3.5s ease-in-out infinite,
+               ms-musgo-trepa 4s ease-in-out infinite;
+}
+.ef-musgo-mini:hover,
+.ef-musgo-mini:focus-visible {
+    animation-duration: 1.8s, 2s;
+}
+
+@keyframes ms-musgo-crece {
+    0%   { background-position: 0 0, 0 0; }
+    100% { background-position: 0 -32px, 0 0; }
+}
+@keyframes ms-musgo-trepa {
+    0%, 100% { text-shadow: 0 0 0 rgba(80, 160, 60, 0); }
+    50%      { text-shadow: 0 0 8px rgba(80, 160, 60, .7); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-musgo,
+    .ef-musgo-mini {
+        animation: none;
+        text-shadow: 0 0 0 rgba(80, 160, 60, 0);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-musgo,
+    .ef-musgo-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

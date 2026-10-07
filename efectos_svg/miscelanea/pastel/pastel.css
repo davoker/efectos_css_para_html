@@ -1,0 +1,101 @@
+/* =============================================================
+   TIZA PASTEL (SVG) · Polvo de gis
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-pastel.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-pastel,
+    .ef-pastel-mini — polvo de gis que se difumina
+   ============================================================= */
+.ef-pastel {
+    display: inline-block;
+    color: #2a2a3a;                     /* respaldo si no hay clip */
+    background-color: #2a2a3a;
+    background-image: repeating-linear-gradient(90deg,
+        rgba(240, 240, 250, .9) 0 3px, rgba(240, 240, 250, 0) 3px 10px),
+        repeating-linear-gradient(0deg,
+        rgba(240, 240, 250, .6) 0 2px, rgba(240, 240, 250, 0) 2px 8px);
+    background-size: 10px 100%, 100% 8px;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .5px #4a4a5a;
+    paint-order: stroke fill;
+    text-shadow: 0 0 0 rgba(240, 240, 250, 0);
+    filter: url(#ef-pastel);
+    animation: ms-pastel-polvo 3s linear infinite,
+               ms-pastel-difumina 2.4s ease-in-out infinite;
+}
+.ef-pastel:hover,
+.ef-pastel:focus-visible {
+    animation-duration: 1.5s, 1.2s;
+}
+.ef-pastel-mini {
+    display: inline-block;
+    color: #2a2a3a;
+    background-color: #2a2a3a;
+    background-image: repeating-linear-gradient(90deg,
+        rgba(240, 240, 250, .9) 0 2px, rgba(240, 240, 250, 0) 2px 8px),
+        repeating-linear-gradient(0deg,
+        rgba(240, 240, 250, .6) 0 2px, rgba(240, 240, 250, 0) 2px 6px);
+    background-size: 8px 100%, 100% 6px;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-pastel-mini);
+    animation: ms-pastel-polvo 3s linear infinite,
+               ms-pastel-difumina 3.4s ease-in-out infinite;
+}
+.ef-pastel-mini:hover,
+.ef-pastel-mini:focus-visible {
+    animation-duration: 1.5s, 1.7s;
+}
+
+/* el polvo se desplaza y la tiza se difumina */
+@keyframes ms-pastel-polvo {
+    0%   { background-position: 0 0, 0 0; }
+    100% { background-position: -20px 0, 0 0; }
+}
+@keyframes ms-pastel-difumina {
+    0%, 100% { text-shadow: 0 0 0 rgba(240, 240, 250, 0); }
+    50%      { text-shadow: 0 0 10px rgba(240, 240, 250, .7); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-pastel,
+    .ef-pastel-mini {
+        animation: none;
+        text-shadow: 0 0 0 rgba(240, 240, 250, 0);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-pastel,
+    .ef-pastel-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

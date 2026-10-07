@@ -1,0 +1,98 @@
+/* =============================================================
+   CHAMPIÑÓN (SVG) · Crece y suelta esporas
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-champinon.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-champinon,
+    .ef-champinon-mini — sombrero que se infla + esporas
+   ============================================================= */
+.ef-champinon {
+    display: inline-block;
+    color: #4a3a2a;
+    background-color: #4a3a2a;
+    background-image: repeating-linear-gradient(90deg,
+        rgba(200, 180, 160, .9) 0 3px, rgba(200, 180, 160, 0) 3px 10px),
+        linear-gradient(180deg, #c8b4a0 0%, #4a3a2a 60%, #2a1a10 100%);
+    background-size: 10px 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .5px #6a5a4a;
+    paint-order: stroke fill;
+    text-shadow: 0 0 0 rgba(200, 180, 160, 0);
+    filter: url(#ef-champinon);
+    animation: ms-champinon-infla 3s ease-in-out infinite,
+               ms-champinon-espora 2.4s ease-in-out infinite;
+}
+.ef-champinon:hover,
+.ef-champinon:focus-visible {
+    animation-duration: 1.5s, 1.2s;
+}
+.ef-champinon-mini {
+    display: inline-block;
+    color: #4a3a2a;
+    background-color: #4a3a2a;
+    background-image: repeating-linear-gradient(90deg,
+        rgba(200, 180, 160, .9) 0 2px, rgba(200, 180, 160, 0) 2px 8px),
+        linear-gradient(180deg, #c8b4a0 0%, #4a3a2a 60%, #2a1a10 100%);
+    background-size: 8px 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-champinon-mini);
+    animation: ms-champinon-infla 3s ease-in-out infinite,
+               ms-champinon-espora 3.4s ease-in-out infinite;
+}
+.ef-champinon-mini:hover,
+.ef-champinon-mini:focus-visible {
+    animation-duration: 1.5s, 1.7s;
+}
+
+@keyframes ms-champinon-infla {
+    0%   { background-position: 0 0, 0 0; }
+    100% { background-position: -20px 0, 0 0; }
+}
+@keyframes ms-champinon-espora {
+    0%, 100% { text-shadow: 0 0 0 rgba(200, 180, 160, 0); }
+    50%      { text-shadow: 0 0 8px rgba(200, 180, 160, .7); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-champinon,
+    .ef-champinon-mini {
+        animation: none;
+        text-shadow: 0 0 0 rgba(200, 180, 160, 0);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-champinon,
+    .ef-champinon-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

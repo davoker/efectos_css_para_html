@@ -1,0 +1,102 @@
+/* =============================================================
+   DADOS (SVG) · Caras que giran
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-dados.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-dados,
+    .ef-dados-mini — caras de dado que giran
+   ============================================================= */
+.ef-dados {
+    display: inline-block;
+    color: #f0e8d8;                     /* respaldo si no hay clip */
+    background-color: #f0e8d8;
+    background-image: repeating-linear-gradient(90deg,
+        rgba(40, 30, 20, .9) 0 4px, rgba(40, 30, 20, 0) 4px 12px),
+        repeating-linear-gradient(0deg,
+        rgba(40, 30, 20, .7) 0 3px, rgba(40, 30, 20, 0) 3px 10px);
+    background-size: 12px 100%, 100% 10px;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .5px #8a7a6a;
+    paint-order: stroke fill;
+    text-shadow: 0 0 0 rgba(40, 30, 20, 0);
+    filter: url(#ef-dados);
+    animation: ms-dados-gira 3.2s ease-in-out infinite,
+               ms-dados-rebote 1.8s ease-in-out infinite;
+}
+.ef-dados:hover,
+.ef-dados:focus-visible {
+    animation-duration: 1.6s, .9s;
+}
+.ef-dados-mini {
+    display: inline-block;
+    color: #f0e8d8;
+    background-color: #f0e8d8;
+    background-image: repeating-linear-gradient(90deg,
+        rgba(40, 30, 20, .9) 0 3px, rgba(40, 30, 20, 0) 3px 9px),
+        repeating-linear-gradient(0deg,
+        rgba(40, 30, 20, .7) 0 2px, rgba(40, 30, 20, 0) 2px 8px);
+    background-size: 9px 100%, 100% 8px;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-dados-mini);
+    animation: ms-dados-gira 3.2s ease-in-out infinite,
+               ms-dados-rebote 2.6s ease-in-out infinite;
+}
+.ef-dados-mini:hover,
+.ef-dados-mini:focus-visible {
+    animation-duration: 1.6s, 1.3s;
+}
+
+/* las caras giran y el rebote late */
+@keyframes ms-dados-gira {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes ms-dados-rebote {
+    0%, 100% { text-shadow: 0 0 0 rgba(40, 30, 20, 0); }
+    50%      { text-shadow: 0 0 8px rgba(40, 30, 20, .6); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-dados,
+    .ef-dados-mini {
+        animation: none;
+        transform: none;
+        text-shadow: 0 0 0 rgba(40, 30, 20, 0);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-dados,
+    .ef-dados-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

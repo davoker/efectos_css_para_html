@@ -1,0 +1,100 @@
+/* =============================================================
+   CARGA (SVG) · Pantalla del Constructor
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-carga.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-carga,
+    .ef-carga-mini — barras de carga que avanzan
+   ============================================================= */
+.ef-carga {
+    display: inline-block;
+    color: #e8e4d8;                     /* respaldo si no hay clip */
+    background-color: #e8e4d8;
+    background-image: repeating-linear-gradient(90deg,
+        rgba(60, 58, 50, .9) 0 10px, rgba(60, 58, 50, 0) 10px 22px),
+        repeating-linear-gradient(0deg,
+        rgba(60, 58, 50, .5) 0 2px, rgba(60, 58, 50, 0) 2px 12px);
+    background-size: 22px 100%, 100% 12px;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .5px #8a867a;
+    paint-order: stroke fill;
+    filter: url(#ef-carga);
+    animation: mx-carga-barras 1.8s linear infinite,
+               mx-carga-giro 3.2s ease-in-out infinite;
+}
+.ef-carga:hover,
+.ef-carga:focus-visible {
+    animation-duration: .9s, 1.6s;
+}
+.ef-carga-mini {
+    display: inline-block;
+    color: #e8e4d8;
+    background-color: #e8e4d8;
+    background-image: repeating-linear-gradient(90deg,
+        rgba(60, 58, 50, .9) 0 8px, rgba(60, 58, 50, 0) 8px 16px),
+        repeating-linear-gradient(0deg,
+        rgba(60, 58, 50, .5) 0 2px, rgba(60, 58, 50, 0) 2px 9px);
+    background-size: 16px 100%, 100% 9px;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-carga-mini);
+    animation: mx-carga-barras 1.8s linear infinite,
+               mx-carga-giro 4.6s ease-in-out infinite;
+}
+.ef-carga-mini:hover,
+.ef-carga-mini:focus-visible {
+    animation-duration: .9s, 2.3s;
+}
+
+/* las barras de carga avanzan y el conjunto gira */
+@keyframes mx-carga-barras {
+    0%   { background-position: 0 0, 0 0; }
+    100% { background-position: -44px 0, 0 0; }
+}
+@keyframes mx-carga-giro {
+    0%, 100% { transform: rotate(0deg); }
+    50%      { transform: rotate(1.5deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-carga,
+    .ef-carga-mini {
+        animation: none;
+        transform: none;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-carga,
+    .ef-carga-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

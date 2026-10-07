@@ -1,0 +1,99 @@
+/* =============================================================
+   CARAMELO (SVG) · Se derrite y gotea
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-caramelo.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-caramelo,
+    .ef-caramelo-mini — gotas de caramelo que gotean
+   ============================================================= */
+.ef-caramelo {
+    display: inline-block;
+    color: #4a1a2a;                     /* respaldo si no hay clip */
+    background-color: #4a1a2a;
+    background-image: repeating-linear-gradient(180deg,
+        rgba(255, 150, 180, .9) 0 6px, rgba(255, 150, 180, 0) 6px 14px),
+        linear-gradient(180deg, #ff96b4 0%, #4a1a2a 60%, #2a0a14 100%);
+    background-size: 14px 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .5px #6a2a3a;
+    paint-order: stroke fill;
+    text-shadow: 0 0 0 rgba(255, 150, 180, 0);
+    filter: url(#ef-caramelo);
+    animation: ms-caramelo-gotea 2.4s ease-in-out infinite,
+               ms-caramelo-brillo 3.2s ease-in-out infinite;
+}
+.ef-caramelo:hover,
+.ef-caramelo:focus-visible {
+    animation-duration: 1.2s, 1.6s;
+}
+.ef-caramelo-mini {
+    display: inline-block;
+    color: #4a1a2a;
+    background-color: #4a1a2a;
+    background-image: repeating-linear-gradient(180deg,
+        rgba(255, 150, 180, .9) 0 5px, rgba(255, 150, 180, 0) 5px 11px),
+        linear-gradient(180deg, #ff96b4 0%, #4a1a2a 60%, #2a0a14 100%);
+    background-size: 11px 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-caramelo-mini);
+    animation: ms-caramelo-gotea 2.4s ease-in-out infinite,
+               ms-caramelo-brillo 4.6s ease-in-out infinite;
+}
+.ef-caramelo-mini:hover,
+.ef-caramelo-mini:focus-visible {
+    animation-duration: 1.2s, 2.3s;
+}
+
+/* las gotas gotean y el brillo late */
+@keyframes ms-caramelo-gotea {
+    0%   { background-position: 0 0, 0 0; }
+    100% { background-position: 0 -28px, 0 0; }
+}
+@keyframes ms-caramelo-brillo {
+    0%, 100% { text-shadow: 0 0 0 rgba(255, 150, 180, 0); }
+    50%      { text-shadow: 0 0 10px rgba(255, 150, 180, .8); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-caramelo,
+    .ef-caramelo-mini {
+        animation: none;
+        text-shadow: 0 0 0 rgba(255, 150, 180, 0);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-caramelo,
+    .ef-caramelo-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

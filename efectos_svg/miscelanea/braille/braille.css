@@ -1,0 +1,101 @@
+/* =============================================================
+   BRAILLE (SVG) · Relieve de puntos
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-braille.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-braille,
+    .ef-braille-mini — puntos de braille que se encienden
+   ============================================================= */
+.ef-braille {
+    display: inline-block;
+    color: #1a1a2a;                     /* respaldo si no hay clip */
+    background-color: #1a1a2a;
+    background-image: repeating-radial-gradient(circle at 50% 50%,
+        #e0e0f0 0 3px, rgba(224, 224, 240, .3) 3px 5px,
+        rgba(26, 26, 42, .9) 5px 10px);
+    background-size: 10px 10px;
+    background-position: 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .5px #3a3a5a;
+    paint-order: stroke fill;
+    text-shadow: 0 0 0 rgba(224, 224, 240, 0);
+    filter: url(#ef-braille);
+    animation: ms-braille-punto 2.8s linear infinite,
+               ms-braille-relieve 3.5s ease-in-out infinite;
+}
+.ef-braille:hover,
+.ef-braille:focus-visible {
+    animation-duration: 1.4s, 1.8s;
+}
+.ef-braille-mini {
+    display: inline-block;
+    color: #1a1a2a;
+    background-color: #1a1a2a;
+    background-image: repeating-radial-gradient(circle at 50% 50%,
+        #e0e0f0 0 2px, rgba(224, 224, 240, .3) 2px 4px,
+        rgba(26, 26, 42, .9) 4px 8px);
+    background-size: 8px 8px;
+    background-position: 0 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-braille-mini);
+    animation: ms-braille-punto 2.8s linear infinite,
+               ms-braille-relieve 5s ease-in-out infinite;
+}
+.ef-braille-mini:hover,
+.ef-braille-mini:focus-visible {
+    animation-duration: 1.4s, 2.5s;
+}
+
+/* los puntos se desplazan y el relieve late */
+@keyframes ms-braille-punto {
+    0%   { background-position: 0 0; }
+    100% { background-position: -20px 0; }
+}
+@keyframes ms-braille-relieve {
+    0%, 100% { text-shadow: 0 0 0 rgba(224, 224, 240, 0); }
+    50%      { text-shadow: 0 0 8px rgba(224, 224, 240, .7); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-braille,
+    .ef-braille-mini {
+        animation: none;
+        text-shadow: 0 0 0 rgba(224, 224, 240, 0);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-braille,
+    .ef-braille-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

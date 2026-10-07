@@ -1,0 +1,106 @@
+/* =============================================================
+   BALA (SVG) · Trazadora lenta
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-bala.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-bala,
+    .ef-bala-mini — estela incandescente + borde quemado
+   ============================================================= */
+.ef-bala {
+    display: inline-block;
+    color: #1a1d24;                     /* respaldo si no hay clip */
+    background-color: #1a1d24;
+    background-image: linear-gradient(90deg,
+        rgba(255, 120, 20, 0) 0 30%,
+        rgba(255, 180, 60, .9) 44%, #fff2c8 50%,
+        rgba(255, 180, 60, .9) 56%, rgba(255, 120, 20, 0) 70% 100%);
+    background-size: 40% 100%;
+    background-repeat: no-repeat;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .6px #3a2a1a;
+    paint-order: stroke fill;
+    text-shadow: 0 0 0 rgba(255, 140, 40, 0);
+    filter: url(#ef-bala);
+    animation: mx-bala-estela2 3.8s ease-in-out infinite,
+               mx-bala-quemado 3.8s ease-in-out infinite;
+}
+.ef-bala:hover,
+.ef-bala:focus-visible {
+    animation-duration: 1.9s, 1.9s;
+}
+.ef-bala-mini {
+    display: inline-block;
+    color: #1a1d24;
+    background-color: #1a1d24;
+    background-image: linear-gradient(90deg,
+        rgba(255, 120, 20, 0) 0 30%,
+        rgba(255, 180, 60, .9) 44%, #fff2c8 50%,
+        rgba(255, 180, 60, .9) 56%, rgba(255, 120, 20, 0) 70% 100%);
+    background-size: 40% 100%;
+    background-repeat: no-repeat;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-bala-mini);
+    animation: mx-bala-estela2 3.8s ease-in-out infinite,
+               mx-bala-quemado 5.5s ease-in-out infinite;
+}
+.ef-bala-mini:hover,
+.ef-bala-mini:focus-visible {
+    animation-duration: 1.9s, 2.8s;
+}
+
+/* la estela cruza la palabra y el calor late con ella */
+@keyframes mx-kf-3 {
+    0%, 15%  { background-position: -45% 0; }
+    55%      { background-position: 50% 0; }
+    90%, 100% { background-position: 145% 0; }
+}
+@keyframes mx-bala-quemado {
+    0%, 15%  { text-shadow: 0 0 0 rgba(255, 140, 40, 0); }
+    55%      { text-shadow: 0 0 14px rgba(255, 140, 40, .9); }
+    90%, 100% { text-shadow: 0 0 0 rgba(255, 140, 40, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-bala,
+    .ef-bala-mini {
+        animation: none;
+        text-shadow: 0 0 0 rgba(255, 140, 40, 0);
+        background-position: 50% 0;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-bala,
+    .ef-bala-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

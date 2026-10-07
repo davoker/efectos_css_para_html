@@ -1,0 +1,108 @@
+/* =============================================================
+   ACUARELA (SVG) · Lavados translúcidos
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-acuarela.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-acuarela,
+    .ef-acuarela-mini — lavados de acuarela que respiran
+   ============================================================= */
+.ef-acuarela {
+    display: inline-block;
+    color: #e8e0d0;                     /* respaldo si no hay clip */
+    background:
+        radial-gradient(circle at 30% 40%,
+            rgba(255, 120, 100, .7) 0 25%, rgba(255, 120, 100, 0) 50%),
+        radial-gradient(circle at 70% 60%,
+            rgba(100, 180, 255, .6) 0 22%, rgba(100, 180, 255, 0) 48%),
+        radial-gradient(circle at 50% 80%,
+            rgba(255, 220, 100, .5) 0 18%, rgba(255, 220, 100, 0) 44%),
+        linear-gradient(180deg, #f0e8d8 0%, #e8e0d0 60%, #d0c8b8 100%);
+    background-size: 50px 50px, 44px 44px, 38px 38px, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .5px #a09880;
+    paint-order: stroke fill;
+    text-shadow: 0 0 0 rgba(200, 180, 160, 0);
+    filter: url(#ef-acuarela);
+    animation: ms-acuarela-lavado 4.5s ease-in-out infinite,
+               ms-acuarela-respira 3s ease-in-out infinite;
+}
+.ef-acuarela:hover,
+.ef-acuarela:focus-visible {
+    animation-duration: 2.2s, 1.5s;
+}
+.ef-acuarela-mini {
+    display: inline-block;
+    color: #e8e0d0;
+    background:
+        radial-gradient(circle at 30% 40%,
+            rgba(255, 120, 100, .7) 0 25%, rgba(255, 120, 100, 0) 50%),
+        radial-gradient(circle at 70% 60%,
+            rgba(100, 180, 255, .6) 0 22%, rgba(100, 180, 255, 0) 48%),
+        radial-gradient(circle at 50% 80%,
+            rgba(255, 220, 100, .5) 0 18%, rgba(255, 220, 100, 0) 44%),
+        linear-gradient(180deg, #f0e8d8 0%, #e8e0d0 60%, #d0c8b8 100%);
+    background-size: 34px 34px, 30px 30px, 26px 26px, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-acuarela-mini);
+    animation: ms-acuarela-lavado 4.5s ease-in-out infinite,
+               ms-acuarela-respira 4.2s ease-in-out infinite;
+}
+.ef-acuarela-mini:hover,
+.ef-acuarela-mini:focus-visible {
+    animation-duration: 2.2s, 2.1s;
+}
+
+/* los lavados se mezclan y el pigmento respira */
+@keyframes ms-acuarela-lavado {
+    0%   { background-position: 0 0, 0 0, 0 0, 0 0; }
+    100% { background-position: -50px -30px, 44px 30px,
+           -38px 20px, 0 0; }
+}
+@keyframes ms-acuarela-respira {
+    0%, 100% { text-shadow: 0 0 0 rgba(200, 180, 160, 0); }
+    50%      { text-shadow: 0 0 8px rgba(200, 180, 160, .6); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-acuarela,
+    .ef-acuarela-mini {
+        animation: none;
+        text-shadow: 0 0 0 rgba(200, 180, 160, 0);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-acuarela,
+    .ef-acuarela-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

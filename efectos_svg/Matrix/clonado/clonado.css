@@ -1,0 +1,108 @@
+/* =============================================================
+   CLONADO (SVG) · La mancha se multiplica
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-clonado.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-clonado,
+    .ef-clonado-mini — manchas que se extienden + filo verde
+   ============================================================= */
+.ef-clonado {
+    display: inline-block;
+    color: #7dffb0;                     /* respaldo si no hay clip */
+    background:
+        radial-gradient(circle at 22% 38%,
+            rgba(4, 8, 6, .97) 0 22%, rgba(4, 8, 6, 0) 46%),
+        radial-gradient(circle at 68% 70%,
+            rgba(4, 8, 6, .95) 0 26%, rgba(4, 8, 6, 0) 52%),
+        radial-gradient(circle at 88% 18%,
+            rgba(4, 8, 6, .92) 0 18%, rgba(4, 8, 6, 0) 44%),
+        linear-gradient(160deg, #12ff87 0%, #0a8f52 55%, #053320 100%);
+    background-size: 46px 46px, 58px 58px, 40px 40px, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .7px #053320;
+    paint-order: stroke fill;
+    text-shadow: 0 0 6px rgba(60, 255, 150, .55);
+    filter: url(#ef-clonado);
+    animation: mx-clonado-expansion 6.5s linear infinite,
+               mx-clonado-cabecea 3.1s ease-in-out infinite;
+}
+.ef-clonado:hover,
+.ef-clonado:focus-visible {
+    animation-duration: 3.4s, 1.6s;
+}
+.ef-clonado-mini {
+    display: inline-block;
+    color: #7dffb0;
+    background:
+        radial-gradient(circle at 22% 38%,
+            rgba(4, 8, 6, .97) 0 24%, rgba(4, 8, 6, 0) 48%),
+        radial-gradient(circle at 68% 70%,
+            rgba(4, 8, 6, .95) 0 28%, rgba(4, 8, 6, 0) 54%),
+        radial-gradient(circle at 88% 18%,
+            rgba(4, 8, 6, .92) 0 20%, rgba(4, 8, 6, 0) 46%),
+        linear-gradient(160deg, #12ff87 0%, #0a8f52 55%, #053320 100%);
+    background-size: 30px 30px, 36px 36px, 26px 26px, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-clonado-mini);
+    animation: mx-clonado-expansion 6.5s linear infinite,
+               mx-clonado-cabecea 5s ease-in-out infinite;
+}
+.ef-clonado-mini:hover,
+.ef-clonado-mini:focus-visible {
+    animation-duration: 3.4s, 2.5s;
+}
+
+/* las manchas se arrastran en tres direcciones y el texto cabecea */
+@keyframes mx-clonado-expansion {
+    0%   { background-position: 0 0, 0 0, 0 0, 0 0; }
+    100% { background-position: -46px -30px, 58px 40px,
+           -40px 26px, 0 0; }
+}
+@keyframes mx-clonado-cabecea {
+    0%, 100% { transform: skewX(0deg); }
+    50%      { transform: skewX(-2.4deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-clonado,
+    .ef-clonado-mini {
+        animation: none;
+        transform: none;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-clonado,
+    .ef-clonado-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

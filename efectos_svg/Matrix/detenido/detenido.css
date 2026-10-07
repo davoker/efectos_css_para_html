@@ -1,0 +1,100 @@
+/* =============================================================
+   DETENIDO (SVG) · El tiempo se congela
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-detenido.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-detenido,
+    .ef-detenido-mini — onda congelada + inclinación
+   ============================================================= */
+.ef-detenido {
+    display: inline-block;
+    color: #0a1a2e;                     /* respaldo si no hay clip */
+    background-color: #0a1a2e;
+    background-image: repeating-radial-gradient(circle at 50% 50%,
+        rgba(160, 220, 255, .9) 0 3px, rgba(160, 220, 255, .3) 3px 8px,
+        rgba(10, 26, 46, .9) 8px 20px, rgba(10, 26, 46, .9) 20px 34px);
+    background-size: 60px 60px;
+    background-position: 50% 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .6px #1a3a5a;
+    paint-order: stroke fill;
+    filter: url(#ef-detenido);
+    animation: mx-detenido-onda 3s ease-out infinite,
+               mx-detenido-inclina 4.5s ease-in-out infinite;
+}
+.ef-detenido:hover,
+.ef-detenido:focus-visible {
+    animation-duration: 1.5s, 2.2s;
+}
+.ef-detenido-mini {
+    display: inline-block;
+    color: #0a1a2e;
+    background-color: #0a1a2e;
+    background-image: repeating-radial-gradient(circle at 50% 50%,
+        rgba(160, 220, 255, .9) 0 3px, rgba(160, 220, 255, .3) 3px 6px,
+        rgba(10, 26, 46, .9) 6px 14px, rgba(10, 26, 46, .9) 14px 24px);
+    background-size: 40px 40px;
+    background-position: 50% 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-detenido-mini);
+    animation: mx-detenido-onda 3s ease-out infinite,
+               mx-detenido-inclina 6.5s ease-in-out infinite;
+}
+.ef-detenido-mini:hover,
+.ef-detenido-mini:focus-visible {
+    animation-duration: 1.5s, 3.2s;
+}
+
+/* la onda se expande y el texto se inclina */
+@keyframes mx-detenido-onda {
+    0%   { background-size: 40px 40px; }
+    100% { background-size: 160px 160px; }
+}
+@keyframes mx-detenido-inclina {
+    0%, 100% { transform: rotate(0deg); }
+    50%      { transform: rotate(-3deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-detenido,
+    .ef-detenido-mini {
+        animation: none;
+        transform: none;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-detenido,
+    .ef-detenido-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

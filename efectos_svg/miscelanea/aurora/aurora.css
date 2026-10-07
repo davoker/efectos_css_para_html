@@ -1,0 +1,106 @@
+/* =============================================================
+   AURORA (SVG) · Cortinas de luz
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-aurora.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-aurora,
+    .ef-aurora-mini — cortinas de luz que ondulan
+   ============================================================= */
+.ef-aurora {
+    display: inline-block;
+    color: #0a1a2a;
+    background:
+        linear-gradient(180deg,
+            rgba(80, 255, 180, .8) 0 10%, rgba(80, 255, 180, 0) 10% 20%),
+        linear-gradient(180deg,
+            rgba(180, 120, 255, .7) 0 8%, rgba(180, 120, 255, 0) 8% 18%),
+        linear-gradient(180deg,
+            rgba(80, 180, 255, .6) 0 6%, rgba(80, 180, 255, 0) 6% 16%),
+        linear-gradient(180deg, #0a1a2a 0%, #060f1c 60%, #02060c 100%);
+    background-size: 100% 20%, 100% 18%, 100% 16%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .5px #1a3a4a;
+    paint-order: stroke fill;
+    text-shadow: 0 0 0 rgba(80, 255, 180, 0);
+    filter: url(#ef-aurora);
+    animation: ms-aurora-ondula 4s ease-in-out infinite,
+               ms-aurora-late 3s ease-in-out infinite;
+}
+.ef-aurora:hover,
+.ef-aurora:focus-visible {
+    animation-duration: 2s, 1.5s;
+}
+.ef-aurora-mini {
+    display: inline-block;
+    color: #0a1a2a;
+    background:
+        linear-gradient(180deg,
+            rgba(80, 255, 180, .8) 0 10%, rgba(80, 255, 180, 0) 10% 20%),
+        linear-gradient(180deg,
+            rgba(180, 120, 255, .7) 0 8%, rgba(180, 120, 255, 0) 8% 18%),
+        linear-gradient(180deg,
+            rgba(80, 180, 255, .6) 0 6%, rgba(80, 180, 255, 0) 6% 16%),
+        linear-gradient(180deg, #0a1a2a 0%, #060f1c 60%, #02060c 100%);
+    background-size: 100% 20%, 100% 18%, 100% 16%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-aurora-mini);
+    animation: ms-aurora-ondula 4s ease-in-out infinite,
+               ms-aurora-late 4.2s ease-in-out infinite;
+}
+.ef-aurora-mini:hover,
+.ef-aurora-mini:focus-visible {
+    animation-duration: 2s, 2.1s;
+}
+
+@keyframes ms-aurora-ondula {
+    0%   { background-position: 0 0, 0 0, 0 0, 0 0; }
+    100% { background-position: -40px 0, 30px 0, -20px 0, 0 0; }
+}
+@keyframes ms-aurora-late {
+    0%, 100% { text-shadow: 0 0 0 rgba(80, 255, 180, 0); }
+    50%      { text-shadow: 0 0 10px rgba(80, 255, 180, .7); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-aurora,
+    .ef-aurora-mini {
+        animation: none;
+        text-shadow: 0 0 0 rgba(80, 255, 180, 0);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-aurora,
+    .ef-aurora-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

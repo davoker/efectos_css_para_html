@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     SHOWCASE DEL EFECTO LLAVE
+     Abre este archivo con doble clic para ver el efecto en vivo.
+     · llave.css         → el efecto (portable a cualquier CSS)
+     · bloque <svg> abajo → filtros SVG: se pega UNA VEZ en la
+       página que quiera usar el efecto (está también en
+       installation-instalacion-llave.txt)
+     · <style> → solo la maquetación de ESTA página
+     ============================================================ -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efecto LLAVE - Showcase</title>
+
+    <!-- EL EFECTO (estos archivos son los que copias a tu proyecto) -->
+    <link rel="stylesheet" href="llave.css">
+
+    <!-- ============================================================
+         BLOQUE SVG DE FILTROS — se pega UNA VEZ en la página
+         (equivalente a quien pega el <style> de los efectos CSS)
+         ============================================================ -->
+    <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+        <defs>
+            <filter id="ef-llave" x="-25%" y="-70%" width="150%"
+                    height="240%" color-interpolation-filters="sRGB">
+                <feTurbulence type="fractalNoise" baseFrequency=".018 .05"
+                              numOctaves="2" seed="9" result="r"/>
+                <feDisplacementMap in="SourceGraphic" in2="r" scale="5"
+                                   xChannelSelector="R" yChannelSelector="G"
+                                   result="d"/>
+                <feColorMatrix in="d" type="matrix"
+                    values="1.15 0 0 0 -.01
+                            0 1.05 0 0 0
+                            0 0 1.1 0 .01
+                            0 0 0 1 0"/>
+            </filter>
+            <filter id="ef-llave-mini" x="-18%" y="-55%" width="136%"
+                    height="210%" color-interpolation-filters="sRGB">
+                <feTurbulence type="fractalNoise" baseFrequency=".06 .15"
+                              numOctaves="2" seed="9" result="r"/>
+                <feDisplacementMap in="SourceGraphic" in2="r" scale="2.2"
+                                   xChannelSelector="R" yChannelSelector="G"
+                                   result="d"/>
+                <feColorMatrix in="d" type="matrix"
+                    values="1.1 0 0 0 -.01
+                            0 1.02 0 0 0
+                            0 0 1.05 0 .01
+                            0 0 0 1 0"/>
+            </filter>
+        </defs>
+    </svg>
+
+    <style>
+        /* Maquetación del showcase (NO forma parte del efecto) */
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 2rem;
+            background-color: #04120a;
+            color: #dcffe9;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+        h1 { font-size: 2.6rem; margin-top: 0; color: #4dff9a; }
+        h2 {
+            color: #4dff9a;
+            border-bottom: 2px solid #123c26;
+            padding-bottom: .4rem;
+            margin-top: 2.5rem;
+        }
+        .demo {
+            background-color: #03100a;
+            border: 1px dashed #123c26;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .grande { font-size: 3rem; font-weight: 800; }
+        .mediano { font-size: 1.6rem; font-weight: 800; }
+        .peq { font-size: 1rem; font-weight: bold; color: #8fd6ae; }
+        .demo p.parrafo {
+            margin: 0 auto;
+            max-width: 62ch;
+            text-align: left;
+            font-size: 1.02rem;
+            font-weight: bold;
+        }
+        .demo p.normal { color: #8fd6ae; font-size: .98rem; }
+        pre {
+            background-color: #03100a;
+            border: 1px solid #123c26;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            color: #9dffca;
+            font-size: .95rem;
+        }
+        code { color: #9dffca; }
+        .nota { color: #4dff9a; font-weight: bold; }
+        .notas {
+            background-color: #06150d;
+            border: 1px solid #123c26;
+            border-radius: 10px;
+            padding: .4rem 1.4rem 1rem;
+        }
+        .notas li { margin: .55rem 0; }
+        .caja-ejemplo {
+            background: #081c12;
+            border: 1px solid #123c26;
+            border-radius: 10px;
+            padding: 14px 18px;
+            color: #8fd6ae;
+            margin: .7rem 0;
+        }
+
+        /* --- BOTÓN "PORTADA" (centrado arriba) ---
+           Clicable y con estado pulsado; mientras se mantiene sale el
+           destello TEMÁTICO de este efecto y, al soltar, salta a
+           transicion.html#llave: allí estalla la escena del propio
+           efecto (la elige :target) y, tras ~1,6 s de retardo (meta
+           refresh), se llega a la portada. --- */
+        nav.barra-volver { text-align: center; margin: 0 0 1.4rem; }
+        nav.barra-volver a + a { margin-left: .7rem; }
+        .btn-volver {
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+            padding: .65rem 1.7rem;
+            background-color: #0a2317;
+            border: 1px solid #123c26;
+            border-radius: 999px;
+            color: #c9ffe0;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 3px 0 #07090e, 0 6px 14px rgba(0,0,0,.45);
+            transition: transform .1s, background-color .15s, box-shadow .1s;
+        }
+        .btn-volver:hover { background-color: #0f3020; color: #ffffff; }
+        .btn-volver:active {
+            transform: translateY(3px) scale(.97);
+            background-color: #10141b;
+            box-shadow: 0 0 0 #07090e, inset 0 3px 8px rgba(0,0,0,.75);
+        }
+        .btn-volver::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 220px;
+            height: 46px;
+            margin: -23px 0 0 -110px;
+            border-radius: 3px;
+            opacity: 0;
+            pointer-events: none;
+            background: linear-gradient(90deg, rgba(60,255,150,0),
+                        rgba(160,255,200,.55) 50%, rgba(60,255,150,0));
+            transform: scale(.4) translateX(0);
+        }
+        .btn-volver:active::after { animation: btn-llave .35s ease-out infinite; }
+        @keyframes btn-llave {
+            0%   { opacity: 0;   transform: scale(.4) translateX(-10px); }
+            30%  { opacity: .95; transform: scale(.9) translateX(0); }
+            70%  { transform: scale(.92) translateX(6px); }
+            100% { opacity: 0;   transform: scale(.9) translateX(14px); }
+        }
+        /* --- INTERACCIÓN DE RATÓN (solo la página; el efecto no se
+           toca) --- A REPOSO NO SE VE NADA NUEVO: las dos capas
+           arrancan con opacity 0 y solo aparecen cuando mueves el
+           puntero. */
+        .capa-fondo, .luz-raton {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity .5s ease;
+        }
+        .capa-fondo {
+            z-index: -2;
+            background:
+                radial-gradient(48% 42% at 16% 10%, rgba(40,255,140,.13), transparent 66%),
+                radial-gradient(44% 38% at 86% 76%, rgba(200,255,120,.11), transparent 66%),
+                radial-gradient(40% 36% at 62% 34%, rgba(80,160,255,.10), transparent 66%);
+            transform: translate3d(var(--px, 0px), var(--py, 0px), 0) scale(1.1);
+        }
+        .luz-raton {
+            z-index: -1;
+            background: radial-gradient(
+                    330px 330px at var(--rx, 50%) var(--ry, 50%),
+                    rgba(var(--luz, 150, 185, 255), .22),
+                    rgba(var(--luz, 150, 185, 255), 0) 72%);
+        }
+        .moviendo .capa-fondo,
+        .moviendo .luz-raton { opacity: 1; }
+        .datos-show {
+            margin: 0 0 1.5rem;
+            font-size: .78rem;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: #8fd6ae;
+        }
+        .datos-show b { color: #4dff9a; font-weight: normal; }
+    </style>
+</head>
+<body>
+
+    <nav class="barra-volver">
+        <a class="btn-volver" href="../../../transicion.html#llave">← Portada</a>
+        <a class="btn-volver" href="llave.zip" download>Descarga</a>
+    </nav>
+
+    <h1>EFECTO LLAVE</h1>
+    <p>El texto <strong>es el mecanismo</strong>: una rueda de dientes gira dentro del relleno recortado a las letras y el conjunto cabecea como una cerradura al encajar. Efecto exclusivamente del texto: sin caja ni fondo detrás.</p>
+    <p class="datos-show">2 variantes · <b>filtros SVG</b> · sin JS</p>
+
+    <h2>1. Título grande (ef-llave, ≥24px)</h2>
+    <div class="demo">
+        <span class="grande ef-llave">LLAVE</span>
+    </div>
+
+    <h2>2. Párrafo completo (ef-llave-mini)</h2>
+    <div class="demo">
+        <p class="parrafo ef-llave-mini">Párrafo completo: las letras giran como fechillas de mecanismo hasta encajar con un clic visual de dientes.
+            Funciona igual con varias líneas: el efecto sigue cada glifo
+            con su salto de línea normal, tal y como si fuera una fuente
+            más de tu página.</p>
+    </div>
+
+    <h2>3. Inline y texto pequeño (13px)</h2>
+    <div class="demo">
+        <p class="normal">Inline, como cualquier clase: escribe lo que
+            quieras con <span class="ef-llave-mini">un fragmento
+            temático</span> en medio de un párrafo normal, o incluso
+            <span class="ef-llave-mini">varios fragmentos
+            distintos</span> en la misma línea.</p>
+        <p class="peq ef-llave-mini">Texto pequeño (13px) con
+            ef-llave-mini: legible y con vida.</p>
+    </div>
+
+    <h2>4. Varias palabras en la misma línea</h2>
+    <div class="demo">
+        <span class="mediano ef-llave">LLAVE</span>
+        <span class="mediano ef-llave">CERRADURA</span>
+        <span class="mediano ef-llave">MECANISMO</span>
+    </div>
+
+
+    <h2>Cómo aplicarlo a cualquier archivo .css</h2>
+    <p>
+        <strong>Paso 1:</strong> copia <strong>todo</strong> el contenido de
+        <code>llave.css</code> dentro de tu hoja de estilos
+        (o guárdalo como archivo y enlázalo con <code>&lt;link&gt;</code>).
+    </p>
+    <p>
+        <strong>Paso 2:</strong> pega el <strong>bloque
+        <code>&lt;svg&gt;</code> de filtros</strong> (el que está al
+        principio de ESTE archivo) <strong>una sola vez</strong> en la
+        página que quiera usar el efecto —es el equivalente a quien pega
+        el <code>&lt;style&gt;</code> de los efectos CSS.
+    </p>
+    <p><strong>Paso 3:</strong> envuelve el texto en esta etiqueta:</p>
+    <pre><code>&lt;link rel="stylesheet" href="llave.css"&gt;
+
+&lt;h1 class="ef-llave"&gt;Mi título&lt;/h1&gt;                     &lt;!-- efecto completo, ≥24px --&gt;
+&lt;p class="ef-llave-mini"&gt;Párrafo o texto pequeño.&lt;/p&gt;   &lt;!-- mini: legible hasta 13px --&gt;
+&lt;p&gt;Normal con &lt;span class="ef-llave-mini"&gt;fragmento&lt;/span&gt;.&lt;/p&gt;</code></pre>
+    <p class="nota">✓ Este efecto no necesita JavaScript: todo va en el CSS y en el bloque SVG.</p>
+    <p>
+        También tienes las instrucciones —incluido el bloque SVG para
+        copiar— en <code>installation-instalacion-llave.txt</code> de esta misma
+        carpeta.
+    </p>
+
+    <h2>Notas de uso</h2>
+    <div class="notas">
+        <ul>
+<li><b>Sin fondo propio en el elemento con la clase.</b> El efecto se calcula sobre todo lo que pinta el elemento; si la caja tuviera fondo, también lo pintaría. Si tu bloque necesita fondo, ponlo en el padre y la clase en un <code>&lt;span&gt;</code> interior:
+                <div class="caja-ejemplo">
+                    <span class="ef-llave">efecto dentro, caja fuera</span>
+                </div>
+            </li>
+<li><b>Nada se ve detrás del texto.</b> Todo lo que brilla o se deforma existe dentro de las letras: fuera del texto no se pinta absolutamente nada.</li>
+<li><b>Selección e impresión:</b> el texto es texto real del DOM; al imprimir, <code>@media print</code> deja todo en negro liso sin efectos.</li>
+<li><b>Movimiento reducido:</b> con <code>prefers-reduced-motion</code> las animaciones CSS se detienen: el efecto se ve en su estado inicial, sin parpadear. No hay SMIL ni JavaScript, así que basta con esa regla.</li>
+        </ul>
+    </div>
+
+    <script>
+        // Interacción de ratón de ESTE showcase: una luz con el color
+        // del título sigue al puntero y el fondo hace un paralaje
+        // suave. El efecto no se toca y a REPOSO las dos capas están
+        // invisibles, así que la página se ve igual que sin este guion.
+        (function () {
+            var raiz = document.documentElement;
+            var mx = 50, my = 50, lx = 50, ly = 50;
+            var px = 0, py = 0, corriendo = false, ult = 0;
+            var capa = document.createElement("div");
+            var luz = document.createElement("div");
+            capa.className = "capa-fondo";
+            luz.className = "luz-raton";
+            capa.setAttribute("aria-hidden", "true");
+            luz.setAttribute("aria-hidden", "true");
+            document.body.appendChild(capa);
+            document.body.appendChild(luz);
+
+            var h1 = document.querySelector("h1");
+            if (h1) {
+                var c = getComputedStyle(h1).color;
+                var n = c.slice(c.indexOf("(") + 1, c.indexOf(")")).split(",");
+                if (n.length >= 3
+                        && (n.length < 4 || parseFloat(n[3]) > .2)) {
+                    raiz.style.setProperty("--luz",
+                                           n[0] + "," + n[1] + "," + n[2]);
+                }
+            }
+
+            function paso(ts) {
+                var dt = ult ? Math.min(64, ts - ult) : 16;
+                ult = ts;
+                var k = Math.min(1, dt / 170);
+                lx += (mx - lx) * k;
+                ly += (my - ly) * k;
+                px += ((mx - 50) * -0.34 - px) * k;
+                py += ((my - 50) * -0.26 - py) * k;
+                raiz.style.setProperty("--rx", lx.toFixed(1) + "%");
+                raiz.style.setProperty("--ry", ly.toFixed(1) + "%");
+                raiz.style.setProperty("--px", px.toFixed(1) + "px");
+                raiz.style.setProperty("--py", py.toFixed(1) + "px");
+                if (Math.abs(mx - lx) < .05 && Math.abs(my - ly) < .05
+                        && Math.abs(px) < .1 && Math.abs(py) < .1) {
+                    corriendo = false;
+                    ult = 0;
+                    return;
+                }
+                requestAnimationFrame(paso);
+            }
+
+            document.addEventListener("mousemove", function (e) {
+                mx = e.clientX * 100 / Math.max(1, raiz.clientWidth);
+                my = e.clientY * 100 / Math.max(1, raiz.clientHeight);
+                document.body.classList.add("moviendo");
+                if (!corriendo) {
+                    corriendo = true;
+                    requestAnimationFrame(paso);
+                }
+            }, { passive: true });
+        })();
+    </script>
+<script src="../../../i18n.js"></script>
+</body>
+</html>

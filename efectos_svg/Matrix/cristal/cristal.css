@@ -1,0 +1,103 @@
+/* =============================================================
+   CRISTAL (SVG) · Vidrio templado
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-cristal.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-cristal,
+    .ef-cristal-mini — grietas de luz + esquirlas
+   ============================================================= */
+.ef-cristal {
+    display: inline-block;
+    color: #0a2a3a;                     /* respaldo si no hay clip */
+    background-color: #0a2a3a;
+    background-image: repeating-linear-gradient(60deg,
+        rgba(220, 245, 255, .95) 0 2px, rgba(220, 245, 255, 0) 2px 18px),
+        repeating-linear-gradient(-60deg,
+        rgba(220, 245, 255, .7) 0 1px, rgba(220, 245, 255, 0) 1px 14px),
+        linear-gradient(180deg, #4a9ab8 0%, #0a2a3a 60%, #041620 100%);
+    background-size: 18px 18px, 14px 14px, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .6px #1a4a5a;
+    paint-order: stroke fill;
+    text-shadow: 0 0 0 rgba(220, 245, 255, 0);
+    filter: url(#ef-cristal);
+    animation: mx-cristal-grieta2 3.2s linear infinite,
+               mx-cristal-destello2 3.2s ease-in-out infinite;
+}
+.ef-cristal:hover,
+.ef-cristal:focus-visible {
+    animation-duration: 1.6s, 1.6s;
+}
+.ef-cristal-mini {
+    display: inline-block;
+    color: #0a2a3a;
+    background-color: #0a2a3a;
+    background-image: repeating-linear-gradient(60deg,
+        rgba(220, 245, 255, .95) 0 2px, rgba(220, 245, 255, 0) 2px 13px),
+        repeating-linear-gradient(-60deg,
+        rgba(220, 245, 255, .7) 0 1px, rgba(220, 245, 255, 0) 1px 10px),
+        linear-gradient(180deg, #4a9ab8 0%, #0a2a3a 60%, #041620 100%);
+    background-size: 13px 13px, 10px 10px, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-cristal-mini);
+    animation: mx-cristal-grieta2 3.2s linear infinite,
+               mx-cristal-destello2 4.6s ease-in-out infinite;
+}
+.ef-cristal-mini:hover,
+.ef-cristal-mini:focus-visible {
+    animation-duration: 1.6s, 2.3s;
+}
+
+/* las grietas corren y el destello las sigue */
+@keyframes mx-kf-9 {
+    0%   { background-position: 0 0, 0 0, 0 0; }
+    100% { background-position: 36px 36px, -28px 28px, 0 0; }
+}
+@keyframes mx-kf-10 {
+    0%, 100% { text-shadow: 0 0 0 rgba(220, 245, 255, 0); }
+    50%      { text-shadow: 0 0 12px rgba(220, 245, 255, .9); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-cristal,
+    .ef-cristal-mini {
+        animation: none;
+        text-shadow: 0 0 0 rgba(220, 245, 255, 0);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-cristal,
+    .ef-cristal-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

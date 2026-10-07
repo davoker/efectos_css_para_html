@@ -1,0 +1,107 @@
+/* =============================================================
+   SERIGRAFÍA (SVG) · Tintas superpuestas
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-serigrafia.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-serigrafia,
+    .ef-serigrafia-mini — tintas superpuestas con desregistro
+   ============================================================= */
+.ef-serigrafia {
+    display: inline-block;
+    color: #f0e8d8;                     /* respaldo si no hay clip */
+    background:
+        linear-gradient(90deg,
+            rgba(255, 60, 60, .85) 0 8px, rgba(255, 60, 60, 0) 8px 16px),
+        linear-gradient(90deg,
+            rgba(60, 180, 255, .8) 0 6px, rgba(60, 180, 255, 0) 6px 14px),
+        linear-gradient(90deg,
+            rgba(255, 220, 60, .75) 0 5px, rgba(255, 220, 60, 0) 5px 12px),
+        linear-gradient(180deg, #f0e8d8 0%, #e0d8c8 60%, #c8c0b0 100%);
+    background-size: 16px 100%, 14px 100%, 12px 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .5px #a09880;
+    paint-order: stroke fill;
+    text-shadow: 0 0 0 rgba(200, 180, 160, 0);
+    filter: url(#ef-serigrafia);
+    animation: ms-serigrafia-tinta 3.8s ease-in-out infinite,
+               ms-serigrafia-trama 2.6s ease-in-out infinite;
+}
+.ef-serigrafia:hover,
+.ef-serigrafia:focus-visible {
+    animation-duration: 1.9s, 1.3s;
+}
+.ef-serigrafia-mini {
+    display: inline-block;
+    color: #f0e8d8;
+    background:
+        linear-gradient(90deg,
+            rgba(255, 60, 60, .85) 0 6px, rgba(255, 60, 60, 0) 6px 12px),
+        linear-gradient(90deg,
+            rgba(60, 180, 255, .8) 0 5px, rgba(60, 180, 255, 0) 5px 11px),
+        linear-gradient(90deg,
+            rgba(255, 220, 60, .75) 0 4px, rgba(255, 220, 60, 0) 4px 9px),
+        linear-gradient(180deg, #f0e8d8 0%, #e0d8c8 60%, #c8c0b0 100%);
+    background-size: 12px 100%, 11px 100%, 9px 100%, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-serigrafia-mini);
+    animation: ms-serigrafia-tinta 3.8s ease-in-out infinite,
+               ms-serigrafia-trama 3.6s ease-in-out infinite;
+}
+.ef-serigrafia-mini:hover,
+.ef-serigrafia-mini:focus-visible {
+    animation-duration: 1.9s, 1.8s;
+}
+
+/* las tintas se desalinean y la trama respira */
+@keyframes ms-serigrafia-tinta {
+    0%   { background-position: 0 0, 0 0, 0 0, 0 0; }
+    100% { background-position: -32px 0, 28px 0, -24px 0, 0 0; }
+}
+@keyframes ms-serigrafia-trama {
+    0%, 100% { text-shadow: 0 0 0 rgba(200, 180, 160, 0); }
+    50%      { text-shadow: 0 0 8px rgba(200, 180, 160, .6); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-serigrafia,
+    .ef-serigrafia-mini {
+        animation: none;
+        text-shadow: 0 0 0 rgba(200, 180, 160, 0);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-serigrafia,
+    .ef-serigrafia-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

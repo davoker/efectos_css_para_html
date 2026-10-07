@@ -1,0 +1,103 @@
+/* =============================================================
+   UMBRAL (SVG) · La puerta de luz se abre
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-umbral.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-umbral,
+    .ef-umbral-mini — puerta de luz + bisele de marco
+   ============================================================= */
+.ef-umbral {
+    display: inline-block;
+    color: #0a1a12;                     /* respaldo si no hay clip */
+    background-color: #0a1a12;
+    background-image: linear-gradient(90deg,
+        rgba(31, 255, 150, 0) 0 40%,
+        #1fff96 46%, #eafff5 50%, #1fff96 54%,
+        rgba(31, 255, 150, 0) 60% 100%);
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .7px #0f3a26;
+    paint-order: stroke fill;
+    filter: url(#ef-umbral);
+    animation: mx-umbral-luz 4.6s ease-in-out infinite,
+               mx-umbral-gira 6.2s ease-in-out infinite;
+}
+.ef-umbral:hover,
+.ef-umbral:focus-visible {
+    animation-duration: 2.2s, 3s;
+}
+.ef-umbral-mini {
+    display: inline-block;
+    color: #0a1a12;
+    background-color: #0a1a12;
+    background-image: linear-gradient(90deg,
+        rgba(31, 255, 150, 0) 0 40%,
+        #1fff96 46%, #eafff5 50%, #1fff96 54%,
+        rgba(31, 255, 150, 0) 60% 100%);
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-umbral-mini);
+    animation: mx-umbral-luz 4.6s ease-in-out infinite;
+}
+.ef-umbral-mini:hover,
+.ef-umbral-mini:focus-visible {
+    animation-duration: 2.2s;
+}
+
+/* el filete de luz abre la puerta; el marco cede un poco */
+@keyframes mx-umbral-luz {
+    0%, 12%  { background-position: -70% 0; }
+    50%      { background-position: 50% 0; }
+    88%, 100% { background-position: 170% 0; }
+}
+@keyframes mx-umbral-gira {
+    0%, 100% { transform: rotate(0deg); }
+    50%      { transform: rotate(-1.2deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-umbral,
+    .ef-umbral-mini {
+        animation: none;
+        transform: none;
+        background-position: 50% 0;
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-umbral,
+    .ef-umbral-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

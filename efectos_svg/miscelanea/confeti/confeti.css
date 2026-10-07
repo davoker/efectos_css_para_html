@@ -1,0 +1,108 @@
+/* =============================================================
+   CONFETI (SVG) · Trocitos que saltan
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-confeti.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-confeti,
+    .ef-confeti-mini — trocitos de papel que saltan
+   ============================================================= */
+.ef-confeti {
+    display: inline-block;
+    color: #f5f0e8;                     /* respaldo si no hay clip */
+    background:
+        radial-gradient(circle at 20% 30%,
+            #ff5a78 0 8%, rgba(255, 90, 120, 0) 16%),
+        radial-gradient(circle at 60% 50%,
+            #4ac8ff 0 6%, rgba(74, 200, 255, 0) 14%),
+        radial-gradient(circle at 80% 70%,
+            #ffd166 0 7%, rgba(255, 209, 102, 0) 15%),
+        linear-gradient(180deg, #f5f0e8 0%, #e8e0d0 60%, #d0c8b8 100%);
+    background-size: 30px 30px, 26px 26px, 24px 24px, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .5px #a09880;
+    paint-order: stroke fill;
+    text-shadow: 0 0 0 rgba(200, 180, 160, 0);
+    filter: url(#ef-confeti);
+    animation: ms-confeti-salta 2.8s ease-in-out infinite,
+               ms-confeti-cae 2.8s ease-in-out infinite;
+}
+.ef-confeti:hover,
+.ef-confeti:focus-visible {
+    animation-duration: 1.4s, 1.4s;
+}
+.ef-confeti-mini {
+    display: inline-block;
+    color: #f5f0e8;
+    background:
+        radial-gradient(circle at 20% 30%,
+            #ff5a78 0 8%, rgba(255, 90, 120, 0) 16%),
+        radial-gradient(circle at 60% 50%,
+            #4ac8ff 0 6%, rgba(74, 200, 255, 0) 14%),
+        radial-gradient(circle at 80% 70%,
+            #ffd166 0 7%, rgba(255, 209, 102, 0) 15%),
+        linear-gradient(180deg, #f5f0e8 0%, #e8e0d0 60%, #d0c8b8 100%);
+    background-size: 22px 22px, 20px 20px, 18px 18px, 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-confeti-mini);
+    animation: ms-confeti-salta 2.8s ease-in-out infinite,
+               ms-confeti-cae 4s ease-in-out infinite;
+}
+.ef-confeti-mini:hover,
+.ef-confeti-mini:focus-visible {
+    animation-duration: 1.4s, 2s;
+}
+
+/* los trocitos saltan y caen */
+@keyframes ms-confeti-salta {
+    0%   { background-position: 0 0, 0 0, 0 0, 0 0; }
+    100% { background-position: -30px -20px, 26px 15px,
+           -24px 10px, 0 0; }
+}
+@keyframes ms-confeti-cae {
+    0%, 100% { text-shadow: 0 0 0 rgba(200, 180, 160, 0); }
+    50%      { text-shadow: 0 0 8px rgba(200, 180, 160, .6); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-confeti,
+    .ef-confeti-mini {
+        animation: none;
+        text-shadow: 0 0 0 rgba(200, 180, 160, 0);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-confeti,
+    .ef-confeti-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}

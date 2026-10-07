@@ -1,0 +1,110 @@
+/* =============================================================
+   GONG (SVG) · Impacto marcial
+   -------------------------------------------------------------
+   Reglas de esta generación de efectos (EFECTOS SVG):
+   · El efecto es SOLO del texto: no hay caja ni fondo visible
+     detrás; el relleno, el brillo o la deformación existen
+     dentro de los glifos.
+   · Vale para cualquier texto: <h1>/<h2>, <p> completo,
+     <span> inline en medio de un párrafo, texto pequeño…
+     con saltos de línea normales.
+   · Instalación: 1) pegar el bloque <svg> de filtros UNA vez
+     en la página (está en el index.html de este efecto y en
+     installation-instalacion-gong.txt) 2) enlazar este CSS 3) poner
+     la clase. Sin JS: todo es CSS + SVG.
+   · Respetan prefers-reduced-motion y llevan fallback de
+     impresión (@media print): el texto sigue siendo texto.
+   ============================================================= */
+
+
+/* =============================================================
+       .ef-gong,
+    .ef-gong-mini — onda de choque + bronce
+   ============================================================= */
+.ef-gong {
+    display: inline-block;
+    color: #3d2a06;                     /* respaldo si no hay clip */
+    background-color: #3d2a06;
+    background-image: repeating-radial-gradient(circle at 50% 50%,
+        rgba(255, 233, 168, .95) 0 3px, rgba(255, 196, 62, .5) 3px 7px,
+        rgba(61, 42, 6, .9) 7px 16px, rgba(61, 42, 6, .9) 16px 30px);
+    background-size: 60px 60px;
+    background-position: 50% 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: .7px #6b4a0c;
+    paint-order: stroke fill;
+    text-shadow: 0 0 0 rgba(255, 220, 120, 0);
+    filter: url(#ef-gong);
+    animation: mx-gong-onda2 2.2s cubic-bezier(.2, .7, .3, 1) infinite,
+               mx-gong-impacto 2.2s ease-out infinite;
+}
+.ef-gong:hover,
+.ef-gong:focus-visible {
+    animation-duration: 1.2s, 1.2s;
+}
+.ef-gong-mini {
+    display: inline-block;
+    color: #3d2a06;
+    background-color: #3d2a06;
+    background-image: repeating-radial-gradient(circle at 50% 50%,
+        rgba(255, 233, 168, .95) 0 3px, rgba(255, 196, 62, .5) 3px 6px,
+        rgba(61, 42, 6, .9) 6px 13px, rgba(61, 42, 6, .9) 13px 24px);
+    background-size: 40px 40px;
+    background-position: 50% 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#ef-gong-mini);
+    animation: mx-gong-onda2 2.2s cubic-bezier(.2, .7, .3, 1) infinite,
+               mx-gong-impacto2 2.2s ease-out infinite;
+}
+.ef-gong-mini:hover,
+.ef-gong-mini:focus-visible {
+    animation-duration: 1.2s, 1.2s;
+}
+
+/* la onda se expande (background-size) y el golpe comprime (scaleX) */
+@keyframes mx-kf-1 {
+    0%   { background-size: 40px 40px; }
+    70%  { background-size: 190px 190px; }
+    100% { background-size: 210px 210px; }
+}
+@keyframes mx-gong-impacto {
+    0%   { transform: scaleX(1.14) scaleY(.88); }
+    18%  { transform: scaleX(.94) scaleY(1.06); }
+    40%  { transform: scaleX(1) scaleY(1); }
+    100% { transform: scaleX(1) scaleY(1); }
+}
+@keyframes mx-gong-impacto2 {
+    0%   { text-shadow: 0 0 18px rgba(255, 220, 120, .95); }
+    40%  { text-shadow: 0 0 0 rgba(255, 220, 120, 0); }
+    100% { text-shadow: 0 0 0 rgba(255, 220, 120, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-gong,
+    .ef-gong-mini {
+        animation: none;
+        transform: none;
+        text-shadow: 0 0 0 rgba(255, 220, 120, 0);
+    }
+}
+
+
+/* =============================================================
+   Fallback de impresión (y documentos de solo lectura):
+   el texto sigue siendo texto, en negro liso.
+   ============================================================= */
+@media print {
+    .ef-gong,
+    .ef-gong-mini {
+        background: none;
+        color: #000;
+        -webkit-text-fill-color: currentColor;
+        filter: none;
+        text-shadow: none;
+        -webkit-text-stroke-color: #000;
+    }
+}
