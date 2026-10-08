@@ -18,7 +18,7 @@ Contenido del archivo:
 
 PASO 2 - PEGA EL BLOQUE SVG DE FILTROS (UNA VEZ)
 -------------------------------------------------
-Este efecto usa filtros SVG (caras de dado que giran): pega el
+Este efecto usa filtros SVG (dados que caen y rebotan): pega el
 siguiente bloque UNA sola vez en la página que quiera usarlo
 -es el equivalente a quien pega el <style> de los efectos
 CSS. Lo tienes listo para copiar en el index.html de este
@@ -53,9 +53,9 @@ PASO 3 - AÑADE EL TEXTO EN TU HTML
 
 QUÉ HACE
 --------
-Un repeating-linear-gradient de puntos se desplaza con background-position sobre un relleno marfil recortado a las letras; text-shadow suave late como el rebote y feTurbulence + feDisplacementMap ondulan las caras.
+Un repeating-linear-gradient de puntos dibuja las caras sobre un relleno marfil recortado a las letras; el texto cae, rebota y se asienta con transform: translateY/scale (salto con aplastamiento, sin giro), text-shadow suave late en cada rebote y feTurbulence + feDisplacementMap ondulan las caras.
 
-TÉCNICA: background-clip: text con puntos en background-position + text-shadow + filter: url(#ef-dados) (feTurbulence + feDisplacementMap).
+TÉCNICA: background-clip: text con puntos + transform: translateY/scale (caída y rebote) + text-shadow + filter: url(#ef-dados) (feTurbulence + feDisplacementMap).
 
 
 VARIANTES Y TAMAÑO DEL TEXTO (importante)
@@ -121,7 +121,7 @@ What the file contains:
 
 STEP 2 - PASTE THE SVG FILTER BLOCK (ONCE)
 -------------------------------------------------
-This effect uses SVG filters (turning dice faces): paste the
+This effect uses SVG filters (dropping, bouncing dice): paste the
 block below just ONCE on the page that will use it -it's the
 equivalent of pasting the <style> of the CSS effects. You
 have it ready to copy into this effect's index.html and into
@@ -156,9 +156,9 @@ STEP 3 - ADD THE TEXT TO YOUR HTML
 
 WHAT IT DOES
 --------
-A repeating-linear-gradient of pips slides with background-position over an ivory fill clipped to the letters; soft text-shadow beats like the bounce and feTurbulence + feDisplacementMap wobble the faces.
+A repeating-linear-gradient of pips draws the faces over an ivory fill clipped to the letters; the text drops, bounces and settles with transform: translateY/scale (hop with squash, no spinning), soft text-shadow beats with every bounce and feTurbulence + feDisplacementMap wobble the faces.
 
-TECHNIQUE: background-clip: text with pips on background-position + text-shadow + filter: url(#ef-dados) (feTurbulence + feDisplacementMap).
+TECHNIQUE: background-clip: text with pips + transform: translateY/scale (drop and bounce) + text-shadow + filter: url(#ef-dados) (feTurbulence + feDisplacementMap).
 
 
 VARIANTS AND TEXT SIZE (important)

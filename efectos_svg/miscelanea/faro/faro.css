@@ -25,10 +25,13 @@
     display: inline-block;
     color: #0a1a2e;
     background-color: #0a1a2e;
-    background-image: repeating-conic-gradient(from 0deg at 50% 50%,
-        rgba(255, 240, 200, .9) 0 20deg, rgba(255, 240, 200, 0) 20deg 60deg);
-    background-size: 80px 80px;
-    background-position: 50% 50%;
+    background-image: linear-gradient(100deg,
+        rgba(255, 240, 200, 0) 0%, rgba(255, 240, 200, .35) 34%,
+        rgba(255, 240, 200, .95) 50%, rgba(255, 240, 200, .35) 66%,
+        rgba(255, 240, 200, 0) 100%);
+    background-size: 45% 100%;
+    background-repeat: no-repeat;
+    background-position: -110% 50%;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -36,36 +39,41 @@
     paint-order: stroke fill;
     text-shadow: 0 0 0 rgba(255, 240, 200, 0);
     filter: url(#ef-faro);
-    animation: ms-faro-gira 5s linear infinite,
+    animation: ms-faro-barrido 4.2s linear infinite,
                ms-faro-niebla 3.2s ease-in-out infinite;
 }
 .ef-faro:hover,
 .ef-faro:focus-visible {
-    animation-duration: 2.5s, 1.6s;
+    animation-duration: 2.1s, 1.6s;
 }
 .ef-faro-mini {
     display: inline-block;
     color: #0a1a2e;
     background-color: #0a1a2e;
-    background-image: repeating-conic-gradient(from 0deg at 50% 50%,
-        rgba(255, 240, 200, .9) 0 20deg, rgba(255, 240, 200, 0) 20deg 60deg);
-    background-size: 52px 52px;
-    background-position: 50% 50%;
+    background-image: linear-gradient(100deg,
+        rgba(255, 240, 200, 0) 0%, rgba(255, 240, 200, .35) 34%,
+        rgba(255, 240, 200, .95) 50%, rgba(255, 240, 200, .35) 66%,
+        rgba(255, 240, 200, 0) 100%);
+    background-size: 45% 100%;
+    background-repeat: no-repeat;
+    background-position: -110% 50%;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: url(#ef-faro-mini);
-    animation: ms-faro-gira 5s linear infinite,
+    animation: ms-faro-barrido 4.2s linear infinite,
                ms-faro-niebla 4.6s ease-in-out infinite;
 }
 .ef-faro-mini:hover,
 .ef-faro-mini:focus-visible {
-    animation-duration: 2.5s, 2.3s;
+    animation-duration: 2.1s, 2.3s;
 }
 
-@keyframes ms-faro-gira {
-    0%   { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+/* el texto no gira: el haz de luz barre los glifos de izquierda
+   a derecha y luego espera fuera de escena (bucle sin saltos) */
+@keyframes ms-faro-barrido {
+    0%, 12%   { background-position: -110% 50%; }
+    58%, 100% { background-position: 220% 50%; }
 }
 @keyframes ms-faro-niebla {
     0%, 100% { text-shadow: 0 0 0 rgba(255, 240, 200, 0); }

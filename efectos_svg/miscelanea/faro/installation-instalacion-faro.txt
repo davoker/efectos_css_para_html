@@ -53,9 +53,9 @@ PASO 3 - AÑADE EL TEXTO EN TU HTML
 
 QUÉ HACE
 --------
-Un repeating-conic-gradient de haz gira con background-position sobre un relleno azul noche recortado a las letras; text-shadow suave late como la niebla y feTurbulence + feDisplacementMap ondulan el haz.
+Un degradado lineal de haz barre el texto con background-position, de izquierda a derecha y fuera de escena, sobre un relleno azul noche recortado a las letras; text-shadow suave late como la niebla y feTurbulence + feDisplacementMap ondulan el haz.
 
-TÉCNICA: background-clip: text con haz en background-position + text-shadow + filter: url(#ef-faro) (feTurbulence + feDisplacementMap).
+TÉCNICA: background-clip: text con haz en linear-gradient + background-position animado (barrido lateral) + text-shadow + filter: url(#ef-faro) (feTurbulence + feDisplacementMap).
 
 
 VARIANTES Y TAMAÑO DEL TEXTO (importante)
@@ -156,9 +156,9 @@ STEP 3 - ADD THE TEXT TO YOUR HTML
 
 WHAT IT DOES
 --------
-A repeating-conic-gradient of beam turns with background-position over a night-blue fill clipped to the letters; soft text-shadow beats like the fog and feTurbulence + feDisplacementMap wobble the beam.
+A linear-gradient beam sweeps the text with background-position, left to right and off-stage, over a night-blue fill clipped to the letters; soft text-shadow beats like the fog and feTurbulence + feDisplacementMap wobble the beam.
 
-TECHNIQUE: background-clip: text with a beam on background-position + text-shadow + filter: url(#ef-faro) (feTurbulence + feDisplacementMap).
+TECHNIQUE: background-clip: text with a linear-gradient beam + animated background-position (side sweep) + text-shadow + filter: url(#ef-faro) (feTurbulence + feDisplacementMap).
 
 
 VARIANTS AND TEXT SIZE (important)

@@ -1,5 +1,5 @@
 /* =============================================================
-   BRÚJULA (SVG) · Aguja que gira
+   BRÚJULA (SVG) · Aguja que busca el norte
    -------------------------------------------------------------
    Reglas de esta generación de efectos (EFECTOS SVG):
    · El efecto es SOLO del texto: no hay caja ni fondo visible
@@ -19,7 +19,7 @@
 
 /* =============================================================
        .ef-brujula,
-    .ef-brujula-mini — aguja que gira + marcas cardinales
+    .ef-brujula-mini — aguja que busca el norte + marcas cardinales
    ============================================================= */
 .ef-brujula {
     display: inline-block;
@@ -36,12 +36,12 @@
     paint-order: stroke fill;
     text-shadow: 0 0 0 rgba(160, 220, 255, 0);
     filter: url(#ef-brujula);
-    animation: ms-brujula-gira 6s linear infinite,
+    animation: ms-brujula-busca 5s ease-in-out infinite,
                ms-brujula-late 2.8s ease-in-out infinite;
 }
 .ef-brujula:hover,
 .ef-brujula:focus-visible {
-    animation-duration: 3s, 1.4s;
+    animation-duration: 2.5s, 1.4s;
 }
 .ef-brujula-mini {
     display: inline-block;
@@ -55,18 +55,23 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: url(#ef-brujula-mini);
-    animation: ms-brujula-gira 6s linear infinite,
+    animation: ms-brujula-busca 5s ease-in-out infinite,
                ms-brujula-late 4s ease-in-out infinite;
 }
 .ef-brujula-mini:hover,
 .ef-brujula-mini:focus-visible {
-    animation-duration: 3s, 2s;
+    animation-duration: 2.5s, 2s;
 }
 
-/* la aguja gira y las marcas late */
-@keyframes ms-brujula-gira {
-    0%   { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+/* la aguja no da vueltas: oscila de lado a lado buscando el
+   norte (amortiguada) y las marcas laten */
+@keyframes ms-brujula-busca {
+    0%   { transform: rotate(-14deg); }
+    28%  { transform: rotate(12deg); }
+    52%  { transform: rotate(-8deg); }
+    72%  { transform: rotate(5deg); }
+    88%  { transform: rotate(-2deg); }
+    100% { transform: rotate(-14deg); }
 }
 @keyframes ms-brujula-late {
     0%, 100% { text-shadow: 0 0 0 rgba(160, 220, 255, 0); }

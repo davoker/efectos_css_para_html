@@ -18,7 +18,7 @@ Contenido del archivo:
 
 PASO 2 - PEGA EL BLOQUE SVG DE FILTROS (UNA VEZ)
 -------------------------------------------------
-Este efecto usa filtros SVG (espiral de datos que gira): pega el
+Este efecto usa filtros SVG (espiral que succiona hacia el centro): pega el
 siguiente bloque UNA sola vez en la página que quiera usarlo
 -es el equivalente a quien pega el <style> de los efectos
 CSS. Lo tienes listo para copiar en el index.html de este
@@ -65,9 +65,9 @@ PASO 3 - AÑADE EL TEXTO EN TU HTML
 
 QUÉ HACE
 --------
-Un repeating-conic-gradient de espiral se desplaza con background-position sobre un relleno índigo recortado a las letras; el elemento rota con transform: rotate y feTurbulence + feDisplacementMap ondulan la espiral.
+Un repeating-conic-gradient de espiral deriva con background-position sobre un relleno índigo recortado a las letras; el elemento respira y succiona hacia el centro con transform: scale/translate (sin giro) y feTurbulence + feDisplacementMap ondulan la espiral.
 
-TÉCNICA: background-clip: text con espiral en background-position + transform: rotate + filter: url(#ef-remolino) (feTurbulence + feDisplacementMap + feColorMatrix).
+TÉCNICA: background-clip: text con espiral en background-position + transform: scale/translate (succión) + filter: url(#ef-remolino) (feTurbulence + feDisplacementMap + feColorMatrix).
 
 
 VARIANTES Y TAMAÑO DEL TEXTO (importante)
@@ -133,7 +133,7 @@ What the file contains:
 
 STEP 2 - PASTE THE SVG FILTER BLOCK (ONCE)
 -------------------------------------------------
-This effect uses SVG filters (turning data spiral): paste the
+This effect uses SVG filters (whirlpool sucking inward): paste the
 block below just ONCE on the page that will use it -it's the
 equivalent of pasting the <style> of the CSS effects. You
 have it ready to copy into this effect's index.html and into
@@ -180,9 +180,9 @@ STEP 3 - ADD THE TEXT TO YOUR HTML
 
 WHAT IT DOES
 --------
-A repeating-conic-gradient of spiral slides with background-position over an indigo fill clipped to the letters; the element rotates with transform: rotate and feTurbulence + feDisplacementMap wobble the spiral.
+A repeating-conic-gradient of spiral drifts with background-position over an indigo fill clipped to the letters; the element breathes and pulls inward with transform: scale/translate (suction, no spinning) and feTurbulence + feDisplacementMap wobble the spiral.
 
-TECHNIQUE: background-clip: text with a spiral on background-position + transform: rotate + filter: url(#ef-remolino) (feTurbulence + feDisplacementMap + feColorMatrix).
+TECHNIQUE: background-clip: text with a spiral on background-position + transform: scale/translate (suction) + filter: url(#ef-remolino) (feTurbulence + feDisplacementMap + feColorMatrix).
 
 
 VARIANTS AND TEXT SIZE (important)

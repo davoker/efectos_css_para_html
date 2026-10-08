@@ -1,5 +1,5 @@
 /* =============================================================
-   DADOS (SVG) · Caras que giran
+   DADOS (SVG) · Dados que caen y rebotan
    -------------------------------------------------------------
    Reglas de esta generación de efectos (EFECTOS SVG):
    · El efecto es SOLO del texto: no hay caja ni fondo visible
@@ -19,7 +19,7 @@
 
 /* =============================================================
        .ef-dados,
-    .ef-dados-mini — caras de dado que giran
+    .ef-dados-mini — dados que caen y rebotan
    ============================================================= */
 .ef-dados {
     display: inline-block;
@@ -37,12 +37,12 @@
     paint-order: stroke fill;
     text-shadow: 0 0 0 rgba(40, 30, 20, 0);
     filter: url(#ef-dados);
-    animation: ms-dados-gira 3.2s ease-in-out infinite,
+    animation: ms-dados-caida 2.8s ease-in-out infinite,
                ms-dados-rebote 1.8s ease-in-out infinite;
 }
 .ef-dados:hover,
 .ef-dados:focus-visible {
-    animation-duration: 1.6s, .9s;
+    animation-duration: 1.4s, .9s;
 }
 .ef-dados-mini {
     display: inline-block;
@@ -57,18 +57,25 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: url(#ef-dados-mini);
-    animation: ms-dados-gira 3.2s ease-in-out infinite,
+    animation: ms-dados-caida 2.8s ease-in-out infinite,
                ms-dados-rebote 2.6s ease-in-out infinite;
 }
 .ef-dados-mini:hover,
 .ef-dados-mini:focus-visible {
-    animation-duration: 1.6s, 1.3s;
+    animation-duration: 1.4s, 1.3s;
 }
 
-/* las caras giran y el rebote late */
-@keyframes ms-dados-gira {
-    0%   { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+/* los dados no giran: caen, rebotan y se asientan
+   (salto con aplastamiento) y el brillo late */
+@keyframes ms-dados-caida {
+    0%          { transform: translateY(0) scale(1, 1); }
+    10%         { transform: translateY(-.16em) scale(.97, 1.05); }
+    26%         { transform: translateY(0) scale(1.07, .9); }
+    38%         { transform: translateY(-.08em) scale(.99, 1.02); }
+    50%         { transform: translateY(0) scale(1.03, .95); }
+    60%         { transform: translateY(-.03em) scale(1, 1.02); }
+    68%         { transform: translateY(0) scale(1.01, .98); }
+    76%, 100%   { transform: translateY(0) scale(1, 1); }
 }
 @keyframes ms-dados-rebote {
     0%, 100% { text-shadow: 0 0 0 rgba(40, 30, 20, 0); }

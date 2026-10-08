@@ -18,7 +18,7 @@ Contenido del archivo:
 
 PASO 2 - PEGA EL BLOQUE SVG DE FILTROS (UNA VEZ)
 -------------------------------------------------
-Este efecto usa filtros SVG (rueda de dientes que gira): pega el
+Este efecto usa filtros SVG (engranaje que se encaja con un golpe): pega el
 siguiente bloque UNA sola vez en la página que quiera usarlo
 -es el equivalente a quien pega el <style> de los efectos
 CSS. Lo tienes listo para copiar en el index.html de este
@@ -65,9 +65,9 @@ PASO 3 - AÑADE EL TEXTO EN TU HTML
 
 QUÉ HACE
 --------
-Un repeating-conic-gradient de dientes gira con background-position sobre un relleno latón recortado a las letras; el elemento rota apenas con transform: rotate y feTurbulence + feDisplacementMap desgasta los dientes.
+Un repeating-conic-gradient de dientes dibuja el engranaje sobre un relleno latón recortado a las letras; el elemento cabecea apenas con transform: rotate/translate (golpe seco de cerradura, sin vuelta completa) y feTurbulence + feDisplacementMap desgasta los dientes.
 
-TÉCNICA: background-clip: text con dientes en background-position + transform: rotate + filter: url(#ef-llave) (feTurbulence + feDisplacementMap + feColorMatrix).
+TÉCNICA: background-clip: text con dientes en repeating-conic-gradient + transform: rotate/translate (golpe seco) + filter: url(#ef-llave) (feTurbulence + feDisplacementMap + feColorMatrix).
 
 
 VARIANTES Y TAMAÑO DEL TEXTO (importante)
@@ -133,7 +133,7 @@ What the file contains:
 
 STEP 2 - PASTE THE SVG FILTER BLOCK (ONCE)
 -------------------------------------------------
-This effect uses SVG filters (turning toothed wheel): paste the
+This effect uses SVG filters (gears engaging with a jolt): paste the
 block below just ONCE on the page that will use it -it's the
 equivalent of pasting the <style> of the CSS effects. You
 have it ready to copy into this effect's index.html and into
@@ -180,9 +180,9 @@ STEP 3 - ADD THE TEXT TO YOUR HTML
 
 WHAT IT DOES
 --------
-A repeating-conic-gradient of teeth turns with background-position over a brass fill clipped to the letters; the element rotates slightly with transform: rotate and feTurbulence + feDisplacementMap wear the teeth down.
+A repeating-conic-gradient of teeth draws the gear over a brass fill clipped to the letters; the element rocks briefly with transform: rotate/translate (a sharp lock jolt, no full turn) and feTurbulence + feDisplacementMap wear the teeth down.
 
-TECHNIQUE: background-clip: text with teeth on background-position + transform: rotate + filter: url(#ef-llave) (feTurbulence + feDisplacementMap + feColorMatrix).
+TECHNIQUE: background-clip: text with teeth on a repeating-conic-gradient + transform: rotate/translate (sharp jolt) + filter: url(#ef-llave) (feTurbulence + feDisplacementMap + feColorMatrix).
 
 
 VARIANTS AND TEXT SIZE (important)

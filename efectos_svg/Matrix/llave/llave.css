@@ -1,5 +1,5 @@
 /* =============================================================
-   LLAVE (SVG) · Cerraduras que giran
+   LLAVE (SVG) · Engranaje que se encaja
    -------------------------------------------------------------
    Reglas de esta generación de efectos (EFECTOS SVG):
    · El efecto es SOLO del texto: no hay caja ni fondo visible
@@ -19,7 +19,7 @@
 
 /* =============================================================
        .ef-llave,
-    .ef-llave-mini — rueda de dientes que gira
+    .ef-llave-mini — engranaje que se encaja con un golpe
    ============================================================= */
 .ef-llave {
     display: inline-block;
@@ -36,7 +36,7 @@
     -webkit-text-stroke: .6px #4a3208;
     paint-order: stroke fill;
     filter: url(#ef-llave);
-    animation: mx-llave-giro 4.5s linear infinite,
+    animation: mx-llave-golpe 4.5s ease-in-out infinite,
                mx-llave-cabeceo 2.8s ease-in-out infinite;
 }
 .ef-llave:hover,
@@ -56,7 +56,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: url(#ef-llave-mini);
-    animation: mx-llave-giro 4.5s linear infinite,
+    animation: mx-llave-golpe 4.5s ease-in-out infinite,
                mx-llave-cabeceo 4s ease-in-out infinite;
 }
 .ef-llave-mini:hover,
@@ -64,10 +64,14 @@
     animation-duration: 2.2s, 2s;
 }
 
-/* la rueda de dientes gira y el mecanismo chasquea */
-@keyframes mx-llave-giro {
-    0%   { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+/* la llave no gira: da un golpe seco en la cerradura y el
+   engranaje se encaja (balanceo breve, sin vuelta completa) */
+@keyframes mx-llave-golpe {
+    0%, 66%  { transform: rotate(0deg) translateY(0); }
+    74%      { transform: rotate(-10deg) translateY(-4%); }
+    82%      { transform: rotate(7deg) translateY(2%); }
+    90%      { transform: rotate(-3deg) translateY(-1%); }
+    100%     { transform: rotate(0deg) translateY(0); }
 }
 @keyframes mx-llave-cabeceo {
     0%, 100% { text-shadow: 0 0 0 rgba(255, 217, 122, 0); }

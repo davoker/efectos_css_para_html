@@ -19,7 +19,7 @@
 
 /* =============================================================
        .ef-remolino,
-    .ef-remolino-mini — espiral de datos que gira
+    .ef-remolino-mini — espiral que succiona hacia el centro
    ============================================================= */
 .ef-remolino {
     display: inline-block;
@@ -36,12 +36,12 @@
     -webkit-text-stroke: .6px #2a1a4a;
     paint-order: stroke fill;
     filter: url(#ef-remolino);
-    animation: mx-remolino-giro 5s linear infinite,
+    animation: mx-remolino-deriva 6s ease-in-out infinite,
                mx-remolino-estela 2.8s ease-in-out infinite;
 }
 .ef-remolino:hover,
 .ef-remolino:focus-visible {
-    animation-duration: 2.5s, 1.4s;
+    animation-duration: 3s, 1.4s;
 }
 .ef-remolino-mini {
     display: inline-block;
@@ -56,18 +56,22 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: url(#ef-remolino-mini);
-    animation: mx-remolino-giro 5s linear infinite,
+    animation: mx-remolino-deriva 6s ease-in-out infinite,
                mx-remolino-estela 4s ease-in-out infinite;
 }
 .ef-remolino-mini:hover,
 .ef-remolino-mini:focus-visible {
-    animation-duration: 2.5s, 2s;
+    animation-duration: 3s, 2s;
 }
 
-/* la espiral gira y la estela respira */
-@keyframes mx-remolino-giro {
-    0%   { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+/* el remolino no gira: el centro de la espiral deriva en
+   círculo (succión) y la estela respira hacia dentro */
+@keyframes mx-remolino-deriva {
+    0%   { background-position: 50% 50%; transform: scale(1); }
+    25%  { background-position: calc(50% + 12px) 50%; }
+    50%  { background-position: 50% calc(50% + 12px); transform: scale(1.05); }
+    75%  { background-position: calc(50% - 12px) 50%; }
+    100% { background-position: 50% 50%; transform: scale(1); }
 }
 @keyframes mx-remolino-estela {
     0%, 100% { background-size: 80px 80px; }

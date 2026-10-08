@@ -18,7 +18,7 @@ Contenido del archivo:
 
 PASO 2 - PEGA EL BLOQUE SVG DE FILTROS (UNA VEZ)
 -------------------------------------------------
-Este efecto usa filtros SVG (aguja que gira + marcas cardinales): pega el
+Este efecto usa filtros SVG (aguja que busca el norte + marcas cardinales): pega el
 siguiente bloque UNA sola vez en la página que quiera usarlo
 -es el equivalente a quien pega el <style> de los efectos
 CSS. Lo tienes listo para copiar en el index.html de este
@@ -53,9 +53,9 @@ PASO 3 - AÑADE EL TEXTO EN TU HTML
 
 QUÉ HACE
 --------
-Un repeating-conic-gradient de marcas cardinales gira con background-position sobre un relleno azul noche recortado a las letras; text-shadow suave late como la aguja y feTurbulence + feDisplacementMap ondulan las marcas.
+Un repeating-conic-gradient de marcas cardinales rodea un relleno azul noche recortado a las letras; el texto se balancea con transform: rotate buscando el norte (oscilación amortiguada, sin vuelta completa), text-shadow suave late y feTurbulence + feDisplacementMap ondulan las marcas.
 
-TÉCNICA: background-clip: text con marcas en background-position + text-shadow + filter: url(#ef-brujula) (feTurbulence + feDisplacementMap).
+TÉCNICA: background-clip: text con marcas en background-position + transform: rotate (oscilación de aguja) + text-shadow + filter: url(#ef-brujula) (feTurbulence + feDisplacementMap).
 
 
 VARIANTES Y TAMAÑO DEL TEXTO (importante)
@@ -121,7 +121,7 @@ What the file contains:
 
 STEP 2 - PASTE THE SVG FILTER BLOCK (ONCE)
 -------------------------------------------------
-This effect uses SVG filters (turning needle + cardinal marks): paste the
+This effect uses SVG filters (needle seeking north + cardinal marks): paste the
 block below just ONCE on the page that will use it -it's the
 equivalent of pasting the <style> of the CSS effects. You
 have it ready to copy into this effect's index.html and into
@@ -156,9 +156,9 @@ STEP 3 - ADD THE TEXT TO YOUR HTML
 
 WHAT IT DOES
 --------
-A repeating-conic-gradient of cardinal marks turns with background-position over a night-blue fill clipped to the letters; soft text-shadow beats like the needle and feTurbulence + feDisplacementMap wobble the marks.
+A repeating-conic-gradient of cardinal marks frames a night-blue fill clipped to the letters; the text rocks with transform: rotate seeking north (damped swing, no full turn), soft text-shadow beats and feTurbulence + feDisplacementMap wobble the marks.
 
-TECHNIQUE: background-clip: text with marks on background-position + text-shadow + filter: url(#ef-brujula) (feTurbulence + feDisplacementMap).
+TECHNIQUE: background-clip: text with marks on background-position + transform: rotate (needle swing) + text-shadow + filter: url(#ef-brujula) (feTurbulence + feDisplacementMap).
 
 
 VARIANTS AND TEXT SIZE (important)
