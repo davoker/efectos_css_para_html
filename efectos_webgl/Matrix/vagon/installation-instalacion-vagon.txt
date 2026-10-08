@@ -1,0 +1,185 @@
+================================================================
+EFECTO VAGON - CÓMO APLICARLO A CUALQUIER ARCHIVO HTML
+================================================================
+
+PASO 1 - COPIA EL ARCHIVO DEL EFECTO
+------------------------------------
+"vagon.html" es autocontenido: CSS, JavaScript y shader GLSL
+van dentro; no hay imágenes ni ficheros externos.
+
+    cópialo a tu proyecto, por ejemplo:
+        tu-pagina/efectos/vagon.html
+
+
+PASO 2 - AÑÁDELO A TU PÁGINA
+----------------------------
+a) Como página completa, enlazándolo:
+
+       <a href="efectos/vagon.html">ver efecto</a>
+
+b) Empotrado con un iframe (recomendado dentro de tu diseño):
+
+       <iframe src="efectos/vagon.html?demo=1"
+               title="Efecto VAGON"
+               style="display:block;width:100%;height:520px;
+                      border:0;background:#07070a"></iframe>
+
+c) Como fondo de una sección: contenedor con position:relative,
+   el iframe con position:absolute; inset:0 y tu texto encima
+   (z-index mayor).
+
+
+PARÁMETROS EN LA URL
+---------------------
+    ?demo=1      la luz recorre el efecto sola (se ve sin mover
+                 el ratón)
+    ?t=VAGON      texto inicial; "+" = espacio: ?t=TEXTO LIQUIDO
+
+Dentro del efecto también hay una caja inferior para escribir
+otra palabra en caliente.
+
+
+QUÉ HACE
+--------
+Rectangulos de luz —las ventanas del vagon— se disparan de izquierda a derecha dentro del texto con reflejo intermitente, como viajar de noche en el tren.
+
+
+TÉCNICA
+-------
+· Canvas 2D: el texto se pinta dos veces (máscara nítida +
+  versión desenfocada) → mapa de altura.
+· Del mapa de altura se deriva la NORMAL (gradiente de las 4
+  muestras) y el shader la combina con su propia lógica:
+&middot; Columna periodica con <code>fract(x*3 - t*vel)</code>
+&middot; Ventana: umbral doble en X e Y con esquinas suavizadas
+&middot; Freno: <code>uClickT</code> enlentece la velocidad con amortiguacion
+· Ondas: una onda suave que sigue al ratón + un anillo del clic
+  (gaussiana viajera que se amortigua con la edad) desplazan la
+  UV de muestreo y alimentan la interacción.
+
+
+AJUSTES FÁCILES
+---------------
+· Texto por defecto: value="VAGON" en el <input> o ?t=...
+· Fuerza del ratón: la uniforme uAmp (0 = efecto en reposo,
+  1 = manda el ratón).
+· Onda del clic: la gaussiana "exp(-pow((cd - age * 0.85) * 7.0,
+  2.0))" → 7.0 es lo estrecha que es y 1.8 lo rápido que se
+  apaga.
+&middot; Nº de ventanas: el <code>3.0</code> de la escala
+&middot; Marcha: el <code>1.5</code> de la velocidad base
+
+REQUISITOS
+----------
+· Navegador con WebGL 1 (cualquier navegador actual).
+· NO necesita servidor local: el shader va dentro del HTML y no
+  se carga con fetch. Si al abrir con doble clic (file://) tu
+  navegador bloqueara algo, sirve la carpeta en local:
+
+      py -3 -m http.server 8000
+
+  y abre http://127.0.0.1:8000/vagon.html
+· Si en tu proyecto separas el shader a un fichero .glsl, AHÍ SÍ
+  necesitarías servidor local (fetch de archivos).
+
+
+ARCHIVOS
+--------
+    vagon.html                   el efecto (autocontenido)
+    index.html                 showcase (solo presentación)
+    installation-instalacion-vagon.txt  este documento
+    vagon.zip                    efecto + este documento
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+VAGON EFFECT - HOW TO APPLY IT TO ANY HTML FILE
+================================================================
+
+STEP 1 - COPY THE EFFECT FILE
+-----------------------------
+"vagon.html" is self-contained: CSS, JavaScript and GLSL shader
+go inside; there are no images or external files.
+
+    copy it to your project, for example:
+        your-page/effects/vagon.html
+
+
+STEP 2 - ADD IT TO YOUR PAGE
+----------------------------
+a) As a full page, linking to it:
+
+       <a href="efectos/vagon.html">view effect</a>
+
+b) Embedded with an iframe (recommended within your design):
+
+       <iframe src="efectos/vagon.html?demo=1"
+               title="Effect VAGON"
+               style="display:block;width:100%;height:520px;
+                      border:0;background:#07070a"></iframe>
+
+c) As a section background: container with position:relative,
+   the iframe with position:absolute; inset:0 and your text on top
+   (higher z-index).
+
+
+URL PARAMETERS
+--------------
+    ?demo=1      the light crosses the effect by itself (you can
+                 watch without moving the mouse)
+    ?t=VAGON      initial text; "+" = space: ?t=LIQUID TEXT
+
+There is also a box at the bottom to type another word on the fly.
+
+
+WHAT IT DOES
+------------
+Rectangles of light —the carriage windows— shoot from left to right inside the text with intermittent reflections, like travelling by night train.
+
+
+TECHNIQUE
+---------
+· Canvas 2D: the text is painted twice (sharp mask +
+  blurred version) -> height map.
+· From the height map comes the NORMAL (the 4-sample gradient)
+  and the shader combines it with its own logic:
+&middot; Periodic column via <code>fract(x*3 - t*speed)</code>
+&middot; Window: double X/Y threshold with softened corners
+&middot; Brake: <code>uClickT</code> slows the speed with damping
+· Waves: a soft wave that follows the mouse + a click ring
+  (a traveling Gaussian that decays with age) shift the
+  sampling UV and drive the interaction.
+
+
+EASY TWEAKS
+-----------
+· Default text: value="VAGON" in the <input> or ?t=...
+· Mouse strength: the uAmp uniform (0 = effect at rest,
+  1 = the mouse takes over).
+· Click wave: the Gaussian "exp(-pow((cd - age * 0.85) * 7.0,
+  2.0))" -> 7.0 is how narrow it is and 1.8 how fast it fades.
+&middot; Window count: the <code>3.0</code> scale
+&middot; Pace: the <code>1.5</code> base speed
+
+REQUIREMENTS
+------------
+· A browser with WebGL 1 (any current browser).
+· NO local server needed: the shader is inside the HTML and not
+  loaded with fetch. If on double-click open (file://) your
+  browser blocks something, serve the folder locally:
+
+      py -3 -m http.server 8000
+
+  and open http://127.0.0.1:8000/vagon.html
+· If your project splits the shader into a .glsl file, THEN YES
+  you'd need a local server (file fetch).
+
+
+FILES
+-----
+    vagon.html                   the effect (self-contained)
+    index.html                 showcase (presentation only)
+    installation-instalacion-vagon.txt  this document
+    vagon.zip                    effect + this document

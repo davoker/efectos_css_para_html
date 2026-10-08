@@ -15661,3 +15661,1124 @@
     40%  { opacity: 1; transform: scale(1.1); }
     100% { opacity: 0; transform: scale(1.5); }
 }
+
+/* ============ 259. ARQUITECTO — Muro de pantallas ============ */
+.tema-arquitecto {
+    background: radial-gradient(ellipse at 50% 55%,
+                #5ac8ff33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-arquitecto::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #5ac8ff59 30%,
+                #5ac8ff00 72%);
+}
+.arquitecto-aro {
+    position: absolute; left: 50%; top: 50%;
+    width: 30vmin; height: 30vmin; margin: -15vmin 0 0 -15vmin;
+    border: .9vmin solid #5ac8ff; border-radius: 50%; opacity: 0;
+    animation: arquitecto-aro 1.6s ease-out both;
+}
+.arquitecto-aro.a2 { animation-delay: 0.20s; }
+.arquitecto-aro.a3 { animation-delay: 0.40s; }
+@keyframes arquitecto-aro {
+    0%   { opacity: 0; transform: scale(.12); }
+    14%  { opacity: 1; }
+    100% { opacity: 0; transform: scale(2.7); }
+}
+.arquitecto-pal {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 13vmin; font-weight: bold; letter-spacing: .08em;
+    color: #ffffff; text-shadow: 0 0 3vmin #5ac8ff, 0 0 8vmin #5ac8ff;
+    opacity: 0; animation: arquitecto-pal 1.6s ease-out both;
+}
+@keyframes arquitecto-pal {
+    0%   { opacity: 0; transform: translate(-50%,-50%) scale(.55); }
+    25%  { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%,-50%) scale(1.2); }
+}
+/* ============ 260. SMITH — La replica se multiplica ============ */
+.tema-smith {
+    background: radial-gradient(ellipse at 50% 55%,
+                #2bff7733 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-smith::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #2bff7759 30%,
+                #2bff7700 72%);
+}
+.smith-halo {
+    position: absolute; left: 50%; top: 50%;
+    width: 44vmin; height: 44vmin; margin: -22vmin 0 0 -22vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,.9) 0%%, #2bff77 38%%, rgba(0,0,0,0) 70%%);
+    opacity: 0; animation: smith-halo 1.6s ease-in-out both;
+}
+.smith-halo2 {
+    position: absolute; left: 50%; top: 50%;
+    width: 70vmin; height: 70vmin; margin: -35vmin 0 0 -35vmin;
+    border-radius: 50%; border: .5vmin solid #2bff77;
+    opacity: 0; animation: smith-halo2 1.6s ease-in-out .18s both;
+}
+@keyframes smith-halo {
+    0%   { opacity: 0; transform: scale(.2); }
+    30%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.35); }
+}
+@keyframes smith-halo2 {
+    0%   { opacity: 0; transform: scale(.5); }
+    34%  { opacity: .8; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.6); }
+}
+.smith-pal {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 13vmin; font-weight: bold; letter-spacing: .08em;
+    color: #ffffff; text-shadow: 0 0 3vmin #2bff77, 0 0 8vmin #2bff77;
+    opacity: 0; animation: smith-pal 1.6s ease-out both;
+}
+@keyframes smith-pal {
+    0%   { opacity: 0; transform: translate(-50%,-50%) scale(.55); }
+    25%  { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%,-50%) scale(1.2); }
+}
+/* ============ 261. CONSTRUCTO — Espacio de carga ============ */
+.tema-constructo {
+    background: radial-gradient(ellipse at 50% 55%,
+                #cfe6ff33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-constructo::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #cfe6ff59 30%,
+                #cfe6ff00 72%);
+}
+.constructo-malla {
+    position: absolute; inset: -10%;
+    background:
+        repeating-linear-gradient(0deg, #cfe6ff22 0 1px, rgba(0,0,0,0) 1px 7vmin),
+        repeating-linear-gradient(90deg, #cfe6ff22 0 1px, rgba(0,0,0,0) 1px 7vmin);
+    opacity: 0; animation: constructo-malla 1.6s ease-out both;
+}
+.constructo-barrido {
+    position: absolute; left: 0; top: -10%; width: 100%; height: 16vmin;
+    background: linear-gradient(180deg, rgba(0,0,0,0), #cfe6ff55, rgba(0,0,0,0));
+    opacity: 0; animation: constructo-barrido 1.6s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes constructo-malla {
+    0%   { opacity: 0; transform: scale(1.25); }
+    22%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1); }
+}
+@keyframes constructo-barrido {
+    0%   { opacity: 0; transform: translateY(0); }
+    16%  { opacity: 1; }
+    100% { opacity: 0; transform: translateY(130vmin); }
+}
+/* ============ 262. DOJO — Descarga de kung fu ============ */
+.tema-dojo {
+    background: radial-gradient(ellipse at 50% 55%,
+                #ff5a4633 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-dojo::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #ff5a4659 30%,
+                #ff5a4600 72%);
+}
+.dojo-est{position:absolute;left:50%;top:50%;width:120vmin;height:.7vmin;margin:-.35vmin 0 0 -60vmin;background:linear-gradient(90deg,rgba(0,0,0,0),#ff5a46,rgba(0,0,0,0));opacity:0;animation:dojo-est 1.5s ease-in both;}
+.dojo-est1 { transform: rotate(20deg); animation-delay: 0.00s; }
+.dojo-est2 { transform: rotate(35deg); animation-delay: 0.12s; }
+.dojo-est3 { transform: rotate(50deg); animation-delay: 0.24s; }
+.dojo-est4 { transform: rotate(65deg); animation-delay: 0.36s; }
+.dojo-est5 { transform: rotate(80deg); animation-delay: 0.48s; }
+.dojo-est6 { transform: rotate(95deg); animation-delay: 0.60s; }
+@keyframes dojo-est {
+    0%   { opacity: 0; transform-origin: 0 50%; }
+    18%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+.dojo-pal {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 13vmin; font-weight: bold; letter-spacing: .08em;
+    color: #ffffff; text-shadow: 0 0 3vmin #ff5a46, 0 0 8vmin #ff5a46;
+    opacity: 0; animation: dojo-pal 1.6s ease-out both;
+}
+@keyframes dojo-pal {
+    0%   { opacity: 0; transform: translate(-50%,-50%) scale(.55); }
+    25%  { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%,-50%) scale(1.2); }
+}
+/* ============ 263. CABLES — Pulsos de datos ============ */
+.tema-cables {
+    background: radial-gradient(ellipse at 50% 55%,
+                #3cffc833 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-cables::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #3cffc859 30%,
+                #3cffc800 72%);
+}
+.cables-barra {
+    position: absolute; left: -34%; top: 44%;
+    width: 30%; height: 10%;
+    background: linear-gradient(90deg, transparent, #3cffc8, #ffffff, #3cffc8, transparent);
+    opacity: 0; filter: blur(.5vmin);
+    animation: cables-barra 1.55s cubic-bezier(.3,0,.2,1) both;
+}
+.cables-barra-b {
+    position: absolute; left: -34%; top: 62%;
+    width: 22%; height: 5%;
+    background: linear-gradient(90deg, transparent, #3cffc8, transparent);
+    opacity: 0; filter: blur(.4vmin);
+    animation: cables-barra 1.55s cubic-bezier(.3,0,.2,1) .28s both;
+}
+@keyframes cables-barra {
+    0%   { opacity: 0; transform: translateX(0); }
+    12%  { opacity: 1; }
+    100% { opacity: 0; transform: translateX(470%); }
+}
+/* ============ 264. TUNEL — Huida en el metro ============ */
+.tema-tunel {
+    background: radial-gradient(ellipse at 50% 55%,
+                #ffa63a33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-tunel::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #ffa63a59 30%,
+                #ffa63a00 72%);
+}
+.tunel-rayos {
+    position: absolute; left: 50%; top: 50%;
+    width: 150vmin; height: 150vmin; margin: -75vmin 0 0 -75vmin;
+    background: repeating-conic-gradient(from 0deg,
+                #ffa63a 0 5deg, rgba(0,0,0,0) 5deg 26deg);
+    opacity: 0;
+    animation: tunel-rayos 1.7s ease-out both;
+}
+.tunel-nucleo {
+    position: absolute; left: 50%; top: 50%;
+    width: 26vmin; height: 26vmin; margin: -13vmin 0 0 -13vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffffff 0%%, #ffa63a 42%%, rgba(0,0,0,0) 72%%);
+    opacity: 0;
+    animation: tunel-nucleo 1.7s ease-out both;
+}
+@keyframes tunel-rayos {
+    0%   { opacity: 0; transform: rotate(0deg) scale(.15); }
+    16%  { opacity: .9; }
+    100% { opacity: 0; transform: rotate(78deg) scale(1.35); }
+}
+@keyframes tunel-nucleo {
+    0%   { opacity: 0; transform: scale(.1); }
+    14%  { opacity: 1; }
+    100% { opacity: 0; transform: scale(1.9); }
+}
+/* ============ 265. ALARMA — Codigo rojo ============ */
+.tema-alarma {
+    background: radial-gradient(ellipse at 50% 55%,
+                #ff3b3b33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-alarma::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #ff3b3b59 30%,
+                #ff3b3b00 72%);
+}
+.alarma-chi{position:absolute;width:1.6vmin;height:1.6vmin;border-radius:50%%;background:#ff3b3b;box-shadow:0 0 2vmin #ff3b3b;opacity:0;animation:.alarma-chi 1.6s ease-out both;}
+.alarma-chi1 { left: 7%; bottom: -3%; animation-delay: 0.13s; }
+.alarma-chi2 { left: 8%; bottom: -3%; animation-delay: 0.26s; }
+.alarma-chi3 { left: 9%; bottom: -3%; animation-delay: 0.39s; }
+.alarma-chi4 { left: 10%; bottom: -3%; animation-delay: 0.52s; }
+.alarma-chi5 { left: 11%; bottom: -3%; animation-delay: 0.00s; }
+.alarma-chi6 { left: 12%; bottom: -3%; animation-delay: 0.13s; }
+.alarma-chi7 { left: 13%; bottom: -3%; animation-delay: 0.26s; }
+.alarma-chi8 { left: 14%; bottom: -3%; animation-delay: 0.39s; }
+.alarma-chi9 { left: 15%; bottom: -3%; animation-delay: 0.52s; }
+.alarma-chi10 { left: 16%; bottom: -3%; animation-delay: 0.00s; }
+.alarma-chi11 { left: 17%; bottom: -3%; animation-delay: 0.13s; }
+.alarma-chi12 { left: 18%; bottom: -3%; animation-delay: 0.26s; }
+.alarma-chi13 { left: 19%; bottom: -3%; animation-delay: 0.39s; }
+.alarma-chi14 { left: 20%; bottom: -3%; animation-delay: 0.52s; }
+@keyframes alarma-chi {
+    0%   { opacity: 0; transform: translateY(0) scale(.4); }
+    15%  { opacity: 1; }
+    100% { opacity: 0; transform: translateY(--58vmin) scale(1); }
+}
+/* ============ 266. MEROVINGIO — Filigrana dorada ============ */
+.tema-merovingio {
+    background: radial-gradient(ellipse at 50% 55%,
+                #ffc85033 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-merovingio::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #ffc85059 30%,
+                #ffc85000 72%);
+}
+.merovingio-aro {
+    position: absolute; left: 50%; top: 50%;
+    width: 30vmin; height: 30vmin; margin: -15vmin 0 0 -15vmin;
+    border: .9vmin solid #ffc850; border-radius: 50%; opacity: 0;
+    animation: merovingio-aro 1.6s ease-out both;
+}
+.merovingio-aro.a2 { animation-delay: 0.20s; }
+.merovingio-aro.a3 { animation-delay: 0.40s; }
+.merovingio-aro.a4 { animation-delay: 0.60s; }
+@keyframes merovingio-aro {
+    0%   { opacity: 0; transform: scale(.12); }
+    14%  { opacity: 1; }
+    100% { opacity: 0; transform: scale(2.7); }
+}
+/* ============ 267. GEMELOS — Fase fantasma ============ */
+.tema-gemelos {
+    background: radial-gradient(ellipse at 50% 55%,
+                #96ffd833 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-gemelos::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #96ffd859 30%,
+                #96ffd800 72%);
+}
+.gemelos-est{position:absolute;left:50%;top:50%;width:120vmin;height:.7vmin;margin:-.35vmin 0 0 -60vmin;background:linear-gradient(90deg,rgba(0,0,0,0),#96ffd8,rgba(0,0,0,0));opacity:0;animation:gemelos-est 1.5s ease-in both;}
+.gemelos-est1 { transform: rotate(60deg); animation-delay: 0.00s; }
+.gemelos-est2 { transform: rotate(82deg); animation-delay: 0.12s; }
+.gemelos-est3 { transform: rotate(105deg); animation-delay: 0.24s; }
+.gemelos-est4 { transform: rotate(128deg); animation-delay: 0.36s; }
+@keyframes gemelos-est {
+    0%   { opacity: 0; transform-origin: 0 50%; }
+    18%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+/* ============ 268. ELECCION — Rojo o azul ============ */
+.tema-eleccion {
+    background: radial-gradient(ellipse at 50% 55%,
+                #b478ff33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-eleccion::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #b478ff59 30%,
+                #b478ff00 72%);
+}
+.eleccion-halo {
+    position: absolute; left: 50%; top: 50%;
+    width: 44vmin; height: 44vmin; margin: -22vmin 0 0 -22vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,.9) 0%%, #b478ff 38%%, rgba(0,0,0,0) 70%%);
+    opacity: 0; animation: eleccion-halo 1.6s ease-in-out both;
+}
+.eleccion-halo2 {
+    position: absolute; left: 50%; top: 50%;
+    width: 70vmin; height: 70vmin; margin: -35vmin 0 0 -35vmin;
+    border-radius: 50%; border: .5vmin solid #b478ff;
+    opacity: 0; animation: eleccion-halo2 1.6s ease-in-out .18s both;
+}
+@keyframes eleccion-halo {
+    0%   { opacity: 0; transform: scale(.2); }
+    30%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.35); }
+}
+@keyframes eleccion-halo2 {
+    0%   { opacity: 0; transform: scale(.5); }
+    34%  { opacity: .8; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.6); }
+}
+.eleccion-pal {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 13vmin; font-weight: bold; letter-spacing: .08em;
+    color: #ffffff; text-shadow: 0 0 3vmin #b478ff, 0 0 8vmin #b478ff;
+    opacity: 0; animation: eleccion-pal 1.6s ease-out both;
+}
+@keyframes eleccion-pal {
+    0%   { opacity: 0; transform: translate(-50%,-50%) scale(.55); }
+    25%  { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%,-50%) scale(1.2); }
+}
+/* ============ 269. RED — Nodos y enlaces ============ */
+.tema-red {
+    background: radial-gradient(ellipse at 50% 55%,
+                #4dff9f33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-red::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #4dff9f59 30%,
+                #4dff9f00 72%);
+}
+.red-malla {
+    position: absolute; inset: -10%;
+    background:
+        repeating-linear-gradient(0deg, #4dff9f22 0 1px, rgba(0,0,0,0) 1px 7vmin),
+        repeating-linear-gradient(90deg, #4dff9f22 0 1px, rgba(0,0,0,0) 1px 7vmin);
+    opacity: 0; animation: red-malla 1.6s ease-out both;
+}
+.red-barrido {
+    position: absolute; left: 0; top: -10%; width: 100%; height: 16vmin;
+    background: linear-gradient(180deg, rgba(0,0,0,0), #4dff9f55, rgba(0,0,0,0));
+    opacity: 0; animation: red-barrido 1.6s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes red-malla {
+    0%   { opacity: 0; transform: scale(1.25); }
+    22%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1); }
+}
+@keyframes red-barrido {
+    0%   { opacity: 0; transform: translateY(0); }
+    16%  { opacity: 1; }
+    100% { opacity: 0; transform: translateY(130vmin); }
+}
+/* ============ 270. DESCARGA — El conocimiento baja ============ */
+.tema-descarga {
+    background: radial-gradient(ellipse at 50% 55%,
+                #78ff5a33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-descarga::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #78ff5a59 30%,
+                #78ff5a00 72%);
+}
+.descarga-chi{position:absolute;width:1.6vmin;height:1.6vmin;border-radius:50%%;background:#78ff5a;box-shadow:0 0 2vmin #78ff5a;opacity:0;animation:.descarga-chi 1.6s ease-out both;}
+.descarga-chi1 { left: 7%; bottom: -3%; animation-delay: 0.13s; }
+.descarga-chi2 { left: 8%; bottom: -3%; animation-delay: 0.26s; }
+.descarga-chi3 { left: 9%; bottom: -3%; animation-delay: 0.39s; }
+.descarga-chi4 { left: 10%; bottom: -3%; animation-delay: 0.52s; }
+.descarga-chi5 { left: 11%; bottom: -3%; animation-delay: 0.00s; }
+.descarga-chi6 { left: 12%; bottom: -3%; animation-delay: 0.13s; }
+.descarga-chi7 { left: 13%; bottom: -3%; animation-delay: 0.26s; }
+.descarga-chi8 { left: 14%; bottom: -3%; animation-delay: 0.39s; }
+.descarga-chi9 { left: 15%; bottom: -3%; animation-delay: 0.52s; }
+.descarga-chi10 { left: 16%; bottom: -3%; animation-delay: 0.00s; }
+.descarga-chi11 { left: 17%; bottom: -3%; animation-delay: 0.13s; }
+.descarga-chi12 { left: 18%; bottom: -3%; animation-delay: 0.26s; }
+.descarga-chi13 { left: 19%; bottom: -3%; animation-delay: 0.39s; }
+.descarga-chi14 { left: 20%; bottom: -3%; animation-delay: 0.52s; }
+.descarga-chi15 { left: 21%; bottom: -3%; animation-delay: 0.00s; }
+.descarga-chi16 { left: 22%; bottom: -3%; animation-delay: 0.13s; }
+@keyframes descarga-chi {
+    0%   { opacity: 0; transform: translateY(0) scale(.4); }
+    15%  { opacity: 1; }
+    100% { opacity: 0; transform: translateY(--58vmin) scale(1); }
+}
+/* ============ 271. HELICOPTERO — Foco de busqueda ============ */
+.tema-helicoptero {
+    background: radial-gradient(ellipse at 50% 55%,
+                #ffe68c33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-helicoptero::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #ffe68c59 30%,
+                #ffe68c00 72%);
+}
+.helicoptero-barra {
+    position: absolute; left: -34%; top: 44%;
+    width: 30%; height: 10%;
+    background: linear-gradient(90deg, transparent, #ffe68c, #ffffff, #ffe68c, transparent);
+    opacity: 0; filter: blur(.5vmin);
+    animation: helicoptero-barra 1.55s cubic-bezier(.3,0,.2,1) both;
+}
+.helicoptero-barra-b {
+    position: absolute; left: -34%; top: 62%;
+    width: 22%; height: 5%;
+    background: linear-gradient(90deg, transparent, #ffe68c, transparent);
+    opacity: 0; filter: blur(.4vmin);
+    animation: helicoptero-barra 1.55s cubic-bezier(.3,0,.2,1) .28s both;
+}
+@keyframes helicoptero-barra {
+    0%   { opacity: 0; transform: translateX(0); }
+    12%  { opacity: 1; }
+    100% { opacity: 0; transform: translateX(470%); }
+}
+/* ============ 272. VAGON — Ventanas que pasan ============ */
+.tema-vagon {
+    background: radial-gradient(ellipse at 50% 55%,
+                #ffd27833 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-vagon::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #ffd27859 30%,
+                #ffd27800 72%);
+}
+.vagon-barra {
+    position: absolute; left: -34%; top: 44%;
+    width: 30%; height: 10%;
+    background: linear-gradient(90deg, transparent, #ffd278, #ffffff, #ffd278, transparent);
+    opacity: 0; filter: blur(.5vmin);
+    animation: vagon-barra 1.55s cubic-bezier(.3,0,.2,1) both;
+}
+.vagon-barra-b {
+    position: absolute; left: -34%; top: 62%;
+    width: 22%; height: 5%;
+    background: linear-gradient(90deg, transparent, #ffd278, transparent);
+    opacity: 0; filter: blur(.4vmin);
+    animation: vagon-barra 1.55s cubic-bezier(.3,0,.2,1) .28s both;
+}
+@keyframes vagon-barra {
+    0%   { opacity: 0; transform: translateX(0); }
+    12%  { opacity: 1; }
+    100% { opacity: 0; transform: translateX(470%); }
+}
+/* ============ 273. SISTEMA — Hay un error ============ */
+.tema-sistema {
+    background: radial-gradient(ellipse at 50% 55%,
+                #ff78b433 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-sistema::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #ff78b459 30%,
+                #ff78b400 72%);
+}
+.sistema-malla {
+    position: absolute; inset: -10%;
+    background:
+        repeating-linear-gradient(0deg, #ff78b422 0 1px, rgba(0,0,0,0) 1px 7vmin),
+        repeating-linear-gradient(90deg, #ff78b422 0 1px, rgba(0,0,0,0) 1px 7vmin);
+    opacity: 0; animation: sistema-malla 1.6s ease-out both;
+}
+.sistema-barrido {
+    position: absolute; left: 0; top: -10%; width: 100%; height: 16vmin;
+    background: linear-gradient(180deg, rgba(0,0,0,0), #ff78b455, rgba(0,0,0,0));
+    opacity: 0; animation: sistema-barrido 1.6s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes sistema-malla {
+    0%   { opacity: 0; transform: scale(1.25); }
+    22%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1); }
+}
+@keyframes sistema-barrido {
+    0%   { opacity: 0; transform: translateY(0); }
+    16%  { opacity: 1; }
+    100% { opacity: 0; transform: translateY(130vmin); }
+}
+/* ============ 274. DESPERTAR — Primera luz ============ */
+.tema-despertar {
+    background: radial-gradient(ellipse at 50% 55%,
+                #ffbe7833 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-despertar::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #ffbe7859 30%,
+                #ffbe7800 72%);
+}
+.despertar-halo {
+    position: absolute; left: 50%; top: 50%;
+    width: 44vmin; height: 44vmin; margin: -22vmin 0 0 -22vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,.9) 0%%, #ffbe78 38%%, rgba(0,0,0,0) 70%%);
+    opacity: 0; animation: despertar-halo 1.6s ease-in-out both;
+}
+.despertar-halo2 {
+    position: absolute; left: 50%; top: 50%;
+    width: 70vmin; height: 70vmin; margin: -35vmin 0 0 -35vmin;
+    border-radius: 50%; border: .5vmin solid #ffbe78;
+    opacity: 0; animation: despertar-halo2 1.6s ease-in-out .18s both;
+}
+@keyframes despertar-halo {
+    0%   { opacity: 0; transform: scale(.2); }
+    30%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.35); }
+}
+@keyframes despertar-halo2 {
+    0%   { opacity: 0; transform: scale(.5); }
+    34%  { opacity: .8; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.6); }
+}
+.despertar-pal {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 13vmin; font-weight: bold; letter-spacing: .08em;
+    color: #ffffff; text-shadow: 0 0 3vmin #ffbe78, 0 0 8vmin #ffbe78;
+    opacity: 0; animation: despertar-pal 1.6s ease-out both;
+}
+@keyframes despertar-pal {
+    0%   { opacity: 0; transform: translate(-50%,-50%) scale(.55); }
+    25%  { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%,-50%) scale(1.2); }
+}
+/* ============ 275. VUELO — A ras de los tejados ============ */
+.tema-vuelo {
+    background: radial-gradient(ellipse at 50% 55%,
+                #96d2ff33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-vuelo::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #96d2ff59 30%,
+                #96d2ff00 72%);
+}
+.vuelo-est{position:absolute;left:50%;top:50%;width:120vmin;height:.7vmin;margin:-.35vmin 0 0 -60vmin;background:linear-gradient(90deg,rgba(0,0,0,0),#96d2ff,rgba(0,0,0,0));opacity:0;animation:vuelo-est 1.5s ease-in both;}
+.vuelo-est1 { transform: rotate(8deg); animation-delay: 0.00s; }
+.vuelo-est2 { transform: rotate(21deg); animation-delay: 0.12s; }
+.vuelo-est3 { transform: rotate(34deg); animation-delay: 0.24s; }
+.vuelo-est4 { transform: rotate(47deg); animation-delay: 0.36s; }
+.vuelo-est5 { transform: rotate(59deg); animation-delay: 0.48s; }
+.vuelo-est6 { transform: rotate(72deg); animation-delay: 0.60s; }
+.vuelo-est7 { transform: rotate(85deg); animation-delay: 0.72s; }
+@keyframes vuelo-est {
+    0%   { opacity: 0; transform-origin: 0 50%; }
+    18%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+/* ============ 276. MUELLE — Orillas del sistema ============ */
+.tema-muelle {
+    background: radial-gradient(ellipse at 50% 55%,
+                #5ab4ff33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-muelle::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #5ab4ff59 30%,
+                #5ab4ff00 72%);
+}
+.muelle-aro {
+    position: absolute; left: 50%; top: 50%;
+    width: 30vmin; height: 30vmin; margin: -15vmin 0 0 -15vmin;
+    border: .9vmin solid #5ab4ff; border-radius: 50%; opacity: 0;
+    animation: muelle-aro 1.6s ease-out both;
+}
+.muelle-aro.a2 { animation-delay: 0.20s; }
+.muelle-aro.a3 { animation-delay: 0.40s; }
+@keyframes muelle-aro {
+    0%   { opacity: 0; transform: scale(.12); }
+    14%  { opacity: 1; }
+    100% { opacity: 0; transform: scale(2.7); }
+}
+/* ============ 277. MEDUSA — Bioluminiscencia ============ */
+.tema-medusa {
+    background: radial-gradient(ellipse at 50% 55%,
+                #6ec2ff33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-medusa::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #6ec2ff59 30%,
+                #6ec2ff00 72%);
+}
+.medusa-halo {
+    position: absolute; left: 50%; top: 50%;
+    width: 44vmin; height: 44vmin; margin: -22vmin 0 0 -22vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,.9) 0%%, #6ec2ff 38%%, rgba(0,0,0,0) 70%%);
+    opacity: 0; animation: medusa-halo 1.6s ease-in-out both;
+}
+.medusa-halo2 {
+    position: absolute; left: 50%; top: 50%;
+    width: 70vmin; height: 70vmin; margin: -35vmin 0 0 -35vmin;
+    border-radius: 50%; border: .5vmin solid #6ec2ff;
+    opacity: 0; animation: medusa-halo2 1.6s ease-in-out .18s both;
+}
+@keyframes medusa-halo {
+    0%   { opacity: 0; transform: scale(.2); }
+    30%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.35); }
+}
+@keyframes medusa-halo2 {
+    0%   { opacity: 0; transform: scale(.5); }
+    34%  { opacity: .8; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.6); }
+}
+/* ============ 278. CORAL — Arrecife que crece ============ */
+.tema-coral {
+    background: radial-gradient(ellipse at 50% 55%,
+                #ff826833 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-coral::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #ff826859 30%,
+                #ff826800 72%);
+}
+.coral-chi{position:absolute;width:1.6vmin;height:1.6vmin;border-radius:50%%;background:#ff8268;box-shadow:0 0 2vmin #ff8268;opacity:0;animation:.coral-chi 1.6s ease-out both;}
+.coral-chi1 { left: 7%; bottom: -3%; animation-delay: 0.13s; }
+.coral-chi2 { left: 8%; bottom: -3%; animation-delay: 0.26s; }
+.coral-chi3 { left: 9%; bottom: -3%; animation-delay: 0.39s; }
+.coral-chi4 { left: 10%; bottom: -3%; animation-delay: 0.52s; }
+.coral-chi5 { left: 11%; bottom: -3%; animation-delay: 0.00s; }
+.coral-chi6 { left: 12%; bottom: -3%; animation-delay: 0.13s; }
+.coral-chi7 { left: 13%; bottom: -3%; animation-delay: 0.26s; }
+.coral-chi8 { left: 14%; bottom: -3%; animation-delay: 0.39s; }
+.coral-chi9 { left: 15%; bottom: -3%; animation-delay: 0.52s; }
+.coral-chi10 { left: 16%; bottom: -3%; animation-delay: 0.00s; }
+.coral-chi11 { left: 17%; bottom: -3%; animation-delay: 0.13s; }
+.coral-chi12 { left: 18%; bottom: -3%; animation-delay: 0.26s; }
+@keyframes coral-chi {
+    0%   { opacity: 0; transform: translateY(0) scale(.4); }
+    15%  { opacity: 1; }
+    100% { opacity: 0; transform: translateY(--58vmin) scale(1); }
+}
+/* ============ 279. HUMO — Remolinos etereos ============ */
+.tema-humo {
+    background: radial-gradient(ellipse at 50% 55%,
+                #c6c6d633 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-humo::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #c6c6d659 30%,
+                #c6c6d600 72%);
+}
+.humo-chi{position:absolute;width:1.6vmin;height:1.6vmin;border-radius:50%%;background:#c6c6d6;box-shadow:0 0 2vmin #c6c6d6;opacity:0;animation:.humo-chi 1.6s ease-out both;}
+.humo-chi1 { left: 7%; bottom: -3%; animation-delay: 0.13s; }
+.humo-chi2 { left: 8%; bottom: -3%; animation-delay: 0.26s; }
+.humo-chi3 { left: 9%; bottom: -3%; animation-delay: 0.39s; }
+.humo-chi4 { left: 10%; bottom: -3%; animation-delay: 0.52s; }
+.humo-chi5 { left: 11%; bottom: -3%; animation-delay: 0.00s; }
+.humo-chi6 { left: 12%; bottom: -3%; animation-delay: 0.13s; }
+.humo-chi7 { left: 13%; bottom: -3%; animation-delay: 0.26s; }
+.humo-chi8 { left: 14%; bottom: -3%; animation-delay: 0.39s; }
+.humo-chi9 { left: 15%; bottom: -3%; animation-delay: 0.52s; }
+.humo-chi10 { left: 16%; bottom: -3%; animation-delay: 0.00s; }
+.humo-chi11 { left: 17%; bottom: -3%; animation-delay: 0.13s; }
+.humo-chi12 { left: 18%; bottom: -3%; animation-delay: 0.26s; }
+@keyframes humo-chi {
+    0%   { opacity: 0; transform: translateY(0) scale(.4); }
+    15%  { opacity: 1; }
+    100% { opacity: 0; transform: translateY(--58vmin) scale(1); }
+}
+/* ============ 280. ESCARCHA — Cristales que trepan ============ */
+.tema-escarcha {
+    background: radial-gradient(ellipse at 50% 55%,
+                #c4ecff33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-escarcha::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #c4ecff59 30%,
+                #c4ecff00 72%);
+}
+.escarcha-aro {
+    position: absolute; left: 50%; top: 50%;
+    width: 30vmin; height: 30vmin; margin: -15vmin 0 0 -15vmin;
+    border: .9vmin solid #c4ecff; border-radius: 50%; opacity: 0;
+    animation: escarcha-aro 1.6s ease-out both;
+}
+.escarcha-aro.a2 { animation-delay: 0.20s; }
+.escarcha-aro.a3 { animation-delay: 0.40s; }
+.escarcha-aro.a4 { animation-delay: 0.60s; }
+@keyframes escarcha-aro {
+    0%   { opacity: 0; transform: scale(.12); }
+    14%  { opacity: 1; }
+    100% { opacity: 0; transform: scale(2.7); }
+}
+/* ============ 281. PRISMA — Espectro que gira ============ */
+.tema-prisma {
+    background: radial-gradient(ellipse at 50% 55%,
+                #ff9ecf33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-prisma::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #ff9ecf59 30%,
+                #ff9ecf00 72%);
+}
+.prisma-rayos {
+    position: absolute; left: 50%; top: 50%;
+    width: 150vmin; height: 150vmin; margin: -75vmin 0 0 -75vmin;
+    background: repeating-conic-gradient(from 0deg,
+                #ff9ecf 0 5deg, rgba(0,0,0,0) 5deg 26deg);
+    opacity: 0;
+    animation: prisma-rayos 1.7s ease-out both;
+}
+.prisma-nucleo {
+    position: absolute; left: 50%; top: 50%;
+    width: 26vmin; height: 26vmin; margin: -13vmin 0 0 -13vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffffff 0%%, #ff9ecf 42%%, rgba(0,0,0,0) 72%%);
+    opacity: 0;
+    animation: prisma-nucleo 1.7s ease-out both;
+}
+@keyframes prisma-rayos {
+    0%   { opacity: 0; transform: rotate(0deg) scale(.15); }
+    16%  { opacity: .9; }
+    100% { opacity: 0; transform: rotate(78deg) scale(1.35); }
+}
+@keyframes prisma-nucleo {
+    0%   { opacity: 0; transform: scale(.1); }
+    14%  { opacity: 1; }
+    100% { opacity: 0; transform: scale(1.9); }
+}
+/* ============ 282. ABISMO — Fondo marino ============ */
+.tema-abismo {
+    background: radial-gradient(ellipse at 50% 55%,
+                #468cff33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-abismo::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #468cff59 30%,
+                #468cff00 72%);
+}
+.abismo-chi{position:absolute;width:1.6vmin;height:1.6vmin;border-radius:50%%;background:#468cff;box-shadow:0 0 2vmin #468cff;opacity:0;animation:.abismo-chi 1.6s ease-out both;}
+.abismo-chi1 { left: 7%; bottom: -3%; animation-delay: 0.13s; }
+.abismo-chi2 { left: 8%; bottom: -3%; animation-delay: 0.26s; }
+.abismo-chi3 { left: 9%; bottom: -3%; animation-delay: 0.39s; }
+.abismo-chi4 { left: 10%; bottom: -3%; animation-delay: 0.52s; }
+.abismo-chi5 { left: 11%; bottom: -3%; animation-delay: 0.00s; }
+.abismo-chi6 { left: 12%; bottom: -3%; animation-delay: 0.13s; }
+.abismo-chi7 { left: 13%; bottom: -3%; animation-delay: 0.26s; }
+.abismo-chi8 { left: 14%; bottom: -3%; animation-delay: 0.39s; }
+.abismo-chi9 { left: 15%; bottom: -3%; animation-delay: 0.52s; }
+.abismo-chi10 { left: 16%; bottom: -3%; animation-delay: 0.00s; }
+.abismo-chi11 { left: 17%; bottom: -3%; animation-delay: 0.13s; }
+.abismo-chi12 { left: 18%; bottom: -3%; animation-delay: 0.26s; }
+.abismo-chi13 { left: 19%; bottom: -3%; animation-delay: 0.39s; }
+.abismo-chi14 { left: 20%; bottom: -3%; animation-delay: 0.52s; }
+@keyframes abismo-chi {
+    0%   { opacity: 0; transform: translateY(0) scale(.4); }
+    15%  { opacity: 1; }
+    100% { opacity: 0; transform: translateY(--58vmin) scale(1); }
+}
+/* ============ 283. LATIDO — Pulso que bombea ============ */
+.tema-latido {
+    background: radial-gradient(ellipse at 50% 55%,
+                #ff5a6e33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-latido::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #ff5a6e59 30%,
+                #ff5a6e00 72%);
+}
+.latido-halo {
+    position: absolute; left: 50%; top: 50%;
+    width: 44vmin; height: 44vmin; margin: -22vmin 0 0 -22vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,.9) 0%%, #ff5a6e 38%%, rgba(0,0,0,0) 70%%);
+    opacity: 0; animation: latido-halo 1.6s ease-in-out both;
+}
+.latido-halo2 {
+    position: absolute; left: 50%; top: 50%;
+    width: 70vmin; height: 70vmin; margin: -35vmin 0 0 -35vmin;
+    border-radius: 50%; border: .5vmin solid #ff5a6e;
+    opacity: 0; animation: latido-halo2 1.6s ease-in-out .18s both;
+}
+@keyframes latido-halo {
+    0%   { opacity: 0; transform: scale(.2); }
+    30%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.35); }
+}
+@keyframes latido-halo2 {
+    0%   { opacity: 0; transform: scale(.5); }
+    34%  { opacity: .8; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.6); }
+}
+/* ============ 284. LABERINTO — Paredes que giran ============ */
+.tema-laberinto {
+    background: radial-gradient(ellipse at 50% 55%,
+                #ffc85a33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-laberinto::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #ffc85a59 30%,
+                #ffc85a00 72%);
+}
+.laberinto-malla {
+    position: absolute; inset: -10%;
+    background:
+        repeating-linear-gradient(0deg, #ffc85a22 0 1px, rgba(0,0,0,0) 1px 7vmin),
+        repeating-linear-gradient(90deg, #ffc85a22 0 1px, rgba(0,0,0,0) 1px 7vmin);
+    opacity: 0; animation: laberinto-malla 1.6s ease-out both;
+}
+.laberinto-barrido {
+    position: absolute; left: 0; top: -10%; width: 100%; height: 16vmin;
+    background: linear-gradient(180deg, rgba(0,0,0,0), #ffc85a55, rgba(0,0,0,0));
+    opacity: 0; animation: laberinto-barrido 1.6s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes laberinto-malla {
+    0%   { opacity: 0; transform: scale(1.25); }
+    22%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1); }
+}
+@keyframes laberinto-barrido {
+    0%   { opacity: 0; transform: translateY(0); }
+    16%  { opacity: 1; }
+    100% { opacity: 0; transform: translateY(130vmin); }
+}
+/* ============ 285. COMETA — Estela de fuego ============ */
+.tema-cometa {
+    background: radial-gradient(ellipse at 50% 55%,
+                #ffaa5033 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-cometa::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #ffaa5059 30%,
+                #ffaa5000 72%);
+}
+.cometa-est{position:absolute;left:50%;top:50%;width:120vmin;height:.7vmin;margin:-.35vmin 0 0 -60vmin;background:linear-gradient(90deg,rgba(0,0,0,0),#ffaa50,rgba(0,0,0,0));opacity:0;animation:cometa-est 1.5s ease-in both;}
+.cometa-est1 { transform: rotate(35deg); animation-delay: 0.00s; }
+.cometa-est2 { transform: rotate(53deg); animation-delay: 0.12s; }
+.cometa-est3 { transform: rotate(71deg); animation-delay: 0.24s; }
+.cometa-est4 { transform: rotate(89deg); animation-delay: 0.36s; }
+.cometa-est5 { transform: rotate(107deg); animation-delay: 0.48s; }
+@keyframes cometa-est {
+    0%   { opacity: 0; transform-origin: 0 50%; }
+    18%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+/* ============ 286. SINGULARIDAD — Lente gravitatoria ============ */
+.tema-singularidad {
+    background: radial-gradient(ellipse at 50% 55%,
+                #be78ff33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-singularidad::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #be78ff59 30%,
+                #be78ff00 72%);
+}
+.singularidad-aro {
+    position: absolute; left: 50%; top: 50%;
+    width: 30vmin; height: 30vmin; margin: -15vmin 0 0 -15vmin;
+    border: .9vmin solid #be78ff; border-radius: 50%; opacity: 0;
+    animation: singularidad-aro 1.6s ease-out both;
+}
+.singularidad-aro.a2 { animation-delay: 0.20s; }
+.singularidad-aro.a3 { animation-delay: 0.40s; }
+.singularidad-aro.a4 { animation-delay: 0.60s; }
+@keyframes singularidad-aro {
+    0%   { opacity: 0; transform: scale(.12); }
+    14%  { opacity: 1; }
+    100% { opacity: 0; transform: scale(2.7); }
+}
+/* ============ 287. AURA — Campo que respira ============ */
+.tema-aura {
+    background: radial-gradient(ellipse at 50% 55%,
+                #dc96ff33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-aura::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #dc96ff59 30%,
+                #dc96ff00 72%);
+}
+.aura-halo {
+    position: absolute; left: 50%; top: 50%;
+    width: 44vmin; height: 44vmin; margin: -22vmin 0 0 -22vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,.9) 0%%, #dc96ff 38%%, rgba(0,0,0,0) 70%%);
+    opacity: 0; animation: aura-halo 1.6s ease-in-out both;
+}
+.aura-halo2 {
+    position: absolute; left: 50%; top: 50%;
+    width: 70vmin; height: 70vmin; margin: -35vmin 0 0 -35vmin;
+    border-radius: 50%; border: .5vmin solid #dc96ff;
+    opacity: 0; animation: aura-halo2 1.6s ease-in-out .18s both;
+}
+@keyframes aura-halo {
+    0%   { opacity: 0; transform: scale(.2); }
+    30%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.35); }
+}
+@keyframes aura-halo2 {
+    0%   { opacity: 0; transform: scale(.5); }
+    34%  { opacity: .8; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.6); }
+}
+/* ============ 288. MELODIA — Ondas sonoras ============ */
+.tema-melodia {
+    background: radial-gradient(ellipse at 50% 55%,
+                #ffa0dc33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-melodia::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #ffa0dc59 30%,
+                #ffa0dc00 72%);
+}
+.melodia-est{position:absolute;left:50%;top:50%;width:120vmin;height:.7vmin;margin:-.35vmin 0 0 -60vmin;background:linear-gradient(90deg,rgba(0,0,0,0),#ffa0dc,rgba(0,0,0,0));opacity:0;animation:melodia-est 1.5s ease-in both;}
+.melodia-est1 { transform: rotate(45deg); animation-delay: 0.00s; }
+.melodia-est2 { transform: rotate(63deg); animation-delay: 0.12s; }
+.melodia-est3 { transform: rotate(81deg); animation-delay: 0.24s; }
+.melodia-est4 { transform: rotate(99deg); animation-delay: 0.36s; }
+.melodia-est5 { transform: rotate(117deg); animation-delay: 0.48s; }
+@keyframes melodia-est {
+    0%   { opacity: 0; transform-origin: 0 50%; }
+    18%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+/* ============ 289. BURBUJA — Jabon que sube ============ */
+.tema-burbuja {
+    background: radial-gradient(ellipse at 50% 55%,
+                #96e6ff33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-burbuja::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #96e6ff59 30%,
+                #96e6ff00 72%);
+}
+.burbuja-chi{position:absolute;width:1.6vmin;height:1.6vmin;border-radius:50%%;background:#96e6ff;box-shadow:0 0 2vmin #96e6ff;opacity:0;animation:.burbuja-chi 1.6s ease-out both;}
+.burbuja-chi1 { left: 7%; bottom: -3%; animation-delay: 0.13s; }
+.burbuja-chi2 { left: 8%; bottom: -3%; animation-delay: 0.26s; }
+.burbuja-chi3 { left: 9%; bottom: -3%; animation-delay: 0.39s; }
+.burbuja-chi4 { left: 10%; bottom: -3%; animation-delay: 0.52s; }
+.burbuja-chi5 { left: 11%; bottom: -3%; animation-delay: 0.00s; }
+.burbuja-chi6 { left: 12%; bottom: -3%; animation-delay: 0.13s; }
+.burbuja-chi7 { left: 13%; bottom: -3%; animation-delay: 0.26s; }
+.burbuja-chi8 { left: 14%; bottom: -3%; animation-delay: 0.39s; }
+.burbuja-chi9 { left: 15%; bottom: -3%; animation-delay: 0.52s; }
+.burbuja-chi10 { left: 16%; bottom: -3%; animation-delay: 0.00s; }
+.burbuja-chi11 { left: 17%; bottom: -3%; animation-delay: 0.13s; }
+.burbuja-chi12 { left: 18%; bottom: -3%; animation-delay: 0.26s; }
+.burbuja-chi13 { left: 19%; bottom: -3%; animation-delay: 0.39s; }
+.burbuja-chi14 { left: 20%; bottom: -3%; animation-delay: 0.52s; }
+.burbuja-chi15 { left: 21%; bottom: -3%; animation-delay: 0.00s; }
+.burbuja-chi16 { left: 22%; bottom: -3%; animation-delay: 0.13s; }
+@keyframes burbuja-chi {
+    0%   { opacity: 0; transform: translateY(0) scale(.4); }
+    15%  { opacity: 1; }
+    100% { opacity: 0; transform: translateY(--58vmin) scale(1); }
+}
+/* ============ 290. ALGODON — Nube de azucar ============ */
+.tema-algodon {
+    background: radial-gradient(ellipse at 50% 55%,
+                #ffbee633 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-algodon::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #ffbee659 30%,
+                #ffbee600 72%);
+}
+.algodon-halo {
+    position: absolute; left: 50%; top: 50%;
+    width: 44vmin; height: 44vmin; margin: -22vmin 0 0 -22vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,.9) 0%%, #ffbee6 38%%, rgba(0,0,0,0) 70%%);
+    opacity: 0; animation: algodon-halo 1.6s ease-in-out both;
+}
+.algodon-halo2 {
+    position: absolute; left: 50%; top: 50%;
+    width: 70vmin; height: 70vmin; margin: -35vmin 0 0 -35vmin;
+    border-radius: 50%; border: .5vmin solid #ffbee6;
+    opacity: 0; animation: algodon-halo2 1.6s ease-in-out .18s both;
+}
+@keyframes algodon-halo {
+    0%   { opacity: 0; transform: scale(.2); }
+    30%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.35); }
+}
+@keyframes algodon-halo2 {
+    0%   { opacity: 0; transform: scale(.5); }
+    34%  { opacity: .8; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.6); }
+}
+/* ============ 291. NIEVE — Copos que caen ============ */
+.tema-nieve {
+    background: radial-gradient(ellipse at 50% 55%,
+                #dceeff33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-nieve::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #dceeff59 30%,
+                #dceeff00 72%);
+}
+.nieve-chi{position:absolute;width:1.6vmin;height:1.6vmin;border-radius:50%%;background:#dceeff;box-shadow:0 0 2vmin #dceeff;opacity:0;animation:.nieve-chi 1.6s ease-out both;}
+.nieve-chi1 { left: 7%; bottom: -3%; animation-delay: 0.13s; }
+.nieve-chi2 { left: 8%; bottom: -3%; animation-delay: 0.26s; }
+.nieve-chi3 { left: 9%; bottom: -3%; animation-delay: 0.39s; }
+.nieve-chi4 { left: 10%; bottom: -3%; animation-delay: 0.52s; }
+.nieve-chi5 { left: 11%; bottom: -3%; animation-delay: 0.00s; }
+.nieve-chi6 { left: 12%; bottom: -3%; animation-delay: 0.13s; }
+.nieve-chi7 { left: 13%; bottom: -3%; animation-delay: 0.26s; }
+.nieve-chi8 { left: 14%; bottom: -3%; animation-delay: 0.39s; }
+.nieve-chi9 { left: 15%; bottom: -3%; animation-delay: 0.52s; }
+.nieve-chi10 { left: 16%; bottom: -3%; animation-delay: 0.00s; }
+.nieve-chi11 { left: 17%; bottom: -3%; animation-delay: 0.13s; }
+.nieve-chi12 { left: 18%; bottom: -3%; animation-delay: 0.26s; }
+.nieve-chi13 { left: 19%; bottom: -3%; animation-delay: 0.39s; }
+.nieve-chi14 { left: 20%; bottom: -3%; animation-delay: 0.52s; }
+.nieve-chi15 { left: 21%; bottom: -3%; animation-delay: 0.00s; }
+.nieve-chi16 { left: 22%; bottom: -3%; animation-delay: 0.13s; }
+.nieve-chi17 { left: 23%; bottom: -3%; animation-delay: 0.26s; }
+.nieve-chi18 { left: 24%; bottom: -3%; animation-delay: 0.39s; }
+@keyframes nieve-chi {
+    0%   { opacity: 0; transform: translateY(0) scale(.4); }
+    15%  { opacity: 1; }
+    100% { opacity: 0; transform: translateY(--58vmin) scale(1); }
+}
+/* ============ 292. AMBAR — Resina con inclusiones ============ */
+.tema-ambar {
+    background: radial-gradient(ellipse at 50% 55%,
+                #ffb43c33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-ambar::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #ffb43c59 30%,
+                #ffb43c00 72%);
+}
+.ambar-aro {
+    position: absolute; left: 50%; top: 50%;
+    width: 30vmin; height: 30vmin; margin: -15vmin 0 0 -15vmin;
+    border: .9vmin solid #ffb43c; border-radius: 50%; opacity: 0;
+    animation: ambar-aro 1.6s ease-out both;
+}
+.ambar-aro.a2 { animation-delay: 0.20s; }
+.ambar-aro.a3 { animation-delay: 0.40s; }
+@keyframes ambar-aro {
+    0%   { opacity: 0; transform: scale(.12); }
+    14%  { opacity: 1; }
+    100% { opacity: 0; transform: scale(2.7); }
+}
+/* ============ 293. MIEL — Goteo dorado ============ */
+.tema-miel {
+    background: radial-gradient(ellipse at 50% 55%,
+                #ffc83c33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-miel::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #ffc83c59 30%,
+                #ffc83c00 72%);
+}
+.miel-chi{position:absolute;width:1.6vmin;height:1.6vmin;border-radius:50%%;background:#ffc83c;box-shadow:0 0 2vmin #ffc83c;opacity:0;animation:.miel-chi 1.6s ease-out both;}
+.miel-chi1 { left: 7%; bottom: -3%; animation-delay: 0.13s; }
+.miel-chi2 { left: 8%; bottom: -3%; animation-delay: 0.26s; }
+.miel-chi3 { left: 9%; bottom: -3%; animation-delay: 0.39s; }
+.miel-chi4 { left: 10%; bottom: -3%; animation-delay: 0.52s; }
+.miel-chi5 { left: 11%; bottom: -3%; animation-delay: 0.00s; }
+.miel-chi6 { left: 12%; bottom: -3%; animation-delay: 0.13s; }
+.miel-chi7 { left: 13%; bottom: -3%; animation-delay: 0.26s; }
+.miel-chi8 { left: 14%; bottom: -3%; animation-delay: 0.39s; }
+.miel-chi9 { left: 15%; bottom: -3%; animation-delay: 0.52s; }
+.miel-chi10 { left: 16%; bottom: -3%; animation-delay: 0.00s; }
+@keyframes miel-chi {
+    0%   { opacity: 0; transform: translateY(0) scale(.4); }
+    15%  { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-58vmin) scale(1); }
+}
+/* ============ 294. MARMOL — Vetas que fluyen ============ */
+.tema-marmol {
+    background: radial-gradient(ellipse at 50% 55%,
+                #d2d7e633 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-marmol::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #d2d7e659 30%,
+                #d2d7e600 72%);
+}
+.marmol-malla {
+    position: absolute; inset: -10%;
+    background:
+        repeating-linear-gradient(0deg, #d2d7e622 0 1px, rgba(0,0,0,0) 1px 7vmin),
+        repeating-linear-gradient(90deg, #d2d7e622 0 1px, rgba(0,0,0,0) 1px 7vmin);
+    opacity: 0; animation: marmol-malla 1.6s ease-out both;
+}
+.marmol-barrido {
+    position: absolute; left: 0; top: -10%; width: 100%; height: 16vmin;
+    background: linear-gradient(180deg, rgba(0,0,0,0), #d2d7e655, rgba(0,0,0,0));
+    opacity: 0; animation: marmol-barrido 1.6s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes marmol-malla {
+    0%   { opacity: 0; transform: scale(1.25); }
+    22%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1); }
+}
+@keyframes marmol-barrido {
+    0%   { opacity: 0; transform: translateY(0); }
+    16%  { opacity: 1; }
+    100% { opacity: 0; transform: translateY(130vmin); }
+}
+/* ============ 295. ORIGAMI — Pliegues de papel ============ */
+.tema-origami {
+    background: radial-gradient(ellipse at 50% 55%,
+                #f0ebdc33 0%, rgba(3,6,10,.6) 55%, #02040a 100%);
+}
+.tema-origami::after {
+    background: radial-gradient(circle at 50% 55%,
+                rgba(255,255,255,.55) 0%, #f0ebdc59 30%,
+                #f0ebdc00 72%);
+}
+.origami-est{position:absolute;left:50%;top:50%;width:120vmin;height:.7vmin;margin:-.35vmin 0 0 -60vmin;background:linear-gradient(90deg,rgba(0,0,0,0),#f0ebdc,rgba(0,0,0,0));opacity:0;animation:origami-est 1.5s ease-in both;}
+.origami-est1 { transform: rotate(50deg); animation-delay: 0.00s; }
+.origami-est2 { transform: rotate(65deg); animation-delay: 0.12s; }
+.origami-est3 { transform: rotate(80deg); animation-delay: 0.24s; }
+.origami-est4 { transform: rotate(95deg); animation-delay: 0.36s; }
+.origami-est5 { transform: rotate(110deg); animation-delay: 0.48s; }
+.origami-est6 { transform: rotate(125deg); animation-delay: 0.60s; }
+@keyframes origami-est {
+    0%   { opacity: 0; transform-origin: 0 50%; }
+    18%  { opacity: 1; }
+    100% { opacity: 0; }
+}

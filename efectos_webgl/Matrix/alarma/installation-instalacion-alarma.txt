@@ -1,0 +1,185 @@
+================================================================
+EFECTO ALARMA - CÓMO APLICARLO A CUALQUIER ARCHIVO HTML
+================================================================
+
+PASO 1 - COPIA EL ARCHIVO DEL EFECTO
+------------------------------------
+"alarma.html" es autocontenido: CSS, JavaScript y shader GLSL
+van dentro; no hay imágenes ni ficheros externos.
+
+    cópialo a tu proyecto, por ejemplo:
+        tu-pagina/efectos/alarma.html
+
+
+PASO 2 - AÑÁDELO A TU PÁGINA
+----------------------------
+a) Como página completa, enlazándolo:
+
+       <a href="efectos/alarma.html">ver efecto</a>
+
+b) Empotrado con un iframe (recomendado dentro de tu diseño):
+
+       <iframe src="efectos/alarma.html?demo=1"
+               title="Efecto ALARMA"
+               style="display:block;width:100%;height:520px;
+                      border:0;background:#0c0204"></iframe>
+
+c) Como fondo de una sección: contenedor con position:relative,
+   el iframe con position:absolute; inset:0 y tu texto encima
+   (z-index mayor).
+
+
+PARÁMETROS EN LA URL
+---------------------
+    ?demo=1      la luz recorre el efecto sola (se ve sin mover
+                 el ratón)
+    ?t=ALARMA      texto inicial; "+" = espacio: ?t=TEXTO LIQUIDO
+
+Dentro del efecto también hay una caja inferior para escribir
+otra palabra en caliente.
+
+
+QUÉ HACE
+--------
+Una linea de codigo rojo barre las letras de arriba abajo sin parar y las franjas diagonales de peligro laten a golpe de clic, como un sistema en alerta.
+
+
+TÉCNICA
+-------
+· Canvas 2D: el texto se pinta dos veces (máscara nítida +
+  versión desenfocada) → mapa de altura.
+· Del mapa de altura se deriva la NORMAL (gradiente de las 4
+  muestras) y el shader la combina con su propia lógica:
+&middot; Barrido: <code>fract(tuv.y - t)</code> recortado a una banda fina
+&middot; Franjas: <code>fract((x+y)*6.0)</code> con paso para rayar
+&middot; Latido: envolvente exponencial del tiempo del clic
+· Ondas: una onda suave que sigue al ratón + un anillo del clic
+  (gaussiana viajera que se amortigua con la edad) desplazan la
+  UV de muestreo y alimentan la interacción.
+
+
+AJUSTES FÁCILES
+---------------
+· Texto por defecto: value="ALARMA" en el <input> o ?t=...
+· Fuerza del ratón: la uniforme uAmp (0 = efecto en reposo,
+  1 = manda el ratón).
+· Onda del clic: la gaussiana "exp(-pow((cd - age * 0.85) * 7.0,
+  2.0))" → 7.0 es lo estrecha que es y 1.8 lo rápido que se
+  apaga.
+&middot; Nº de franjas: el <code>6.0</code> de la diagonal
+&middot; Velocidad del barrido: el <code>t*0.6</code> del fract
+
+REQUISITOS
+----------
+· Navegador con WebGL 1 (cualquier navegador actual).
+· NO necesita servidor local: el shader va dentro del HTML y no
+  se carga con fetch. Si al abrir con doble clic (file://) tu
+  navegador bloqueara algo, sirve la carpeta en local:
+
+      py -3 -m http.server 8000
+
+  y abre http://127.0.0.1:8000/alarma.html
+· Si en tu proyecto separas el shader a un fichero .glsl, AHÍ SÍ
+  necesitarías servidor local (fetch de archivos).
+
+
+ARCHIVOS
+--------
+    alarma.html                   el efecto (autocontenido)
+    index.html                 showcase (solo presentación)
+    installation-instalacion-alarma.txt  este documento
+    alarma.zip                    efecto + este documento
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+ALARMA EFFECT - HOW TO APPLY IT TO ANY HTML FILE
+================================================================
+
+STEP 1 - COPY THE EFFECT FILE
+-----------------------------
+"alarma.html" is self-contained: CSS, JavaScript and GLSL shader
+go inside; there are no images or external files.
+
+    copy it to your project, for example:
+        your-page/effects/alarma.html
+
+
+STEP 2 - ADD IT TO YOUR PAGE
+----------------------------
+a) As a full page, linking to it:
+
+       <a href="efectos/alarma.html">view effect</a>
+
+b) Embedded with an iframe (recommended within your design):
+
+       <iframe src="efectos/alarma.html?demo=1"
+               title="Effect ALARMA"
+               style="display:block;width:100%;height:520px;
+                      border:0;background:#0c0204"></iframe>
+
+c) As a section background: container with position:relative,
+   the iframe with position:absolute; inset:0 and your text on top
+   (higher z-index).
+
+
+URL PARAMETERS
+--------------
+    ?demo=1      the light crosses the effect by itself (you can
+                 watch without moving the mouse)
+    ?t=ALARMA      initial text; "+" = space: ?t=LIQUID TEXT
+
+There is also a box at the bottom to type another word on the fly.
+
+
+WHAT IT DOES
+------------
+A red code line sweeps the letters top to bottom forever and the diagonal hazard stripes pulse with every click, like a system on alert.
+
+
+TECHNIQUE
+---------
+· Canvas 2D: the text is painted twice (sharp mask +
+  blurred version) -> height map.
+· From the height map comes the NORMAL (the 4-sample gradient)
+  and the shader combines it with its own logic:
+&middot; Sweep: <code>fract(tuv.y - t)</code> clipped to a thin band
+&middot; Stripes: <code>fract((x+y)*6.0)</code> with a hard step
+&middot; Pulse: exponential envelope of the click time
+· Waves: a soft wave that follows the mouse + a click ring
+  (a traveling Gaussian that decays with age) shift the
+  sampling UV and drive the interaction.
+
+
+EASY TWEAKS
+-----------
+· Default text: value="ALARMA" in the <input> or ?t=...
+· Mouse strength: the uAmp uniform (0 = effect at rest,
+  1 = the mouse takes over).
+· Click wave: the Gaussian "exp(-pow((cd - age * 0.85) * 7.0,
+  2.0))" -> 7.0 is how narrow it is and 1.8 how fast it fades.
+&middot; Stripe count: the diagonal <code>6.0</code>
+&middot; Sweep speed: the <code>t*0.6</code> fract scroll
+
+REQUIREMENTS
+------------
+· A browser with WebGL 1 (any current browser).
+· NO local server needed: the shader is inside the HTML and not
+  loaded with fetch. If on double-click open (file://) your
+  browser blocks something, serve the folder locally:
+
+      py -3 -m http.server 8000
+
+  and open http://127.0.0.1:8000/alarma.html
+· If your project splits the shader into a .glsl file, THEN YES
+  you'd need a local server (file fetch).
+
+
+FILES
+-----
+    alarma.html                   the effect (self-contained)
+    index.html                 showcase (presentation only)
+    installation-instalacion-alarma.txt  this document
+    alarma.zip                    effect + this document

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     SHOWCASE WEBGL · AMBAR
+     Dirección de diseño: "HUD de laboratorio" (común a los
+     showcases WebGL: efecto a pantalla completa + chrome
+     flotante de vidrio esmerilado con tipografía monoespaciada).
+     ------------------------------------------------------------
+     ESTE ARCHIVO no es el efecto: el efecto es ambar.html
+     ============================================================ -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMBAR · Showcase WebGL</title>
+    <link rel="stylesheet" href="../../showcase.css">
+</head>
+<body class="showcase" data-tema="miscelanea" data-efecto="ambar"
+      style="--acento-rgb: 255, 180, 60">
+
+    <!-- EL EFECTO, A PANTALLA COMPLETA -->
+    <iframe class="escenario" src="ambar.html?demo=1"
+            title="Efecto AMBAR en marcha"></iframe>
+
+    <canvas class="ambiental" aria-hidden="true"></canvas>
+
+    <!-- ============ HUD SUPERIOR ============ -->
+    <header class="hud hud-cima">
+        <div class="placa">
+            <span class="chip"><span class="punto"></span>WebGL 1</span>
+            <div>
+                <p class="miga">efectos_webgl / ambar · temática <b>miscelanea</b></p>
+                <h1 class="titulo">AMBAR</h1>
+                <p class="descr">El texto se solidifica en ambar con inclusiones atrapadas que brillan por dentro.</p>
+            </div>
+        </div>
+        <nav class="acciones" aria-label="Navegación del showcase">
+            <a class="btn btn-primario" href="../../../transicion.html#ambar">⟵ Portada</a>
+            <a class="btn" href="ambar.zip" download>Descarga</a>
+        </nav>
+    </header>
+
+    <!-- ============ HUD INFERIOR ============ -->
+    <footer class="hud hud-pie">
+        <p class="datos">
+            <span>GLSL ES 1.00</span>
+            <span>1 pasada</span>
+            <span>resina dorada</span>
+            <span>inclusiones vivas</span>
+            <span>canvas 2D + shaders</span>
+        </p>
+        <div class="acciones">
+            <button class="btn" id="btn-instalar" type="button"
+                    aria-expanded="false" aria-controls="cajon">Instalar</button>
+        </div>
+    </footer>
+
+    <p class="atajos" aria-hidden="true">I instalar · ESC cerrar</p>
+
+    <!-- ============ CAJÓN INSTALAR ============ -->
+    <div class="velo" id="velo" hidden></div>
+    <aside class="cajon" id="cajon" aria-label="Cómo instalar el efecto">
+        <button class="btn cierra" id="cerrar-instalar" type="button">✕ esc</button>
+        <p class="miga">instalación</p>
+        <h2 class="cajon-titulo">CÓMO APLICARLO</h2>
+        <ol class="pasos">
+            <li><b>Paso 1 — copia el archivo.</b> <code>ambar.html</code> es
+                autocontenido: CSS, JavaScript y shader GLSL van dentro; no
+                hay imágenes ni ficheros externos.</li>
+            <li><b>Paso 2 — añádelo a tu página.</b> Ábrelo a pantalla
+                completa o emprétalo en un iframe:</li>
+        </ol>
+        <pre><code>&lt;iframe src="ruta/ambar.html?demo=1"
+        title="Efecto AMBAR"
+        style="display:block;width:100%;height:520px;
+               border:0;background:#05060a"&gt;&lt;/iframe&gt;</code></pre>
+        <p><b>Paso 3 — personaliza.</b> <code>?t=TU+PALABRA</code> fija el
+            palabra inicial (<code>+</code> = espacio) y <code>?demo=1</code> deja la resina curar sola. El raton la calienta y el clic atrapa una inclusion nueva.</p>
+        <p class="nota"><b>Requisitos:</b> navegador con WebGL 1.
+            <b>No necesita servidor local</b> (todo va en el HTML). Si tu
+            navegador bloqueara algo al abrir con doble clic, sirve la
+            carpeta con <code>py -3 -m http.server</code>.</p>
+        <div class="enlaces-cajon">
+            <a class="btn" href="installation-instalacion-ambar.txt">installation-instalacion-ambar.txt</a>
+            <a class="btn" href="ambar.zip" download>⬇ descargar zip</a>
+        </div>
+    </aside>
+
+    <script src="../../showcase.js"></script>
+<script src="../../../i18n.js"></script>
+</body>
+</html>

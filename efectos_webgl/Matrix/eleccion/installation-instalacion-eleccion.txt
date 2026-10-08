@@ -1,0 +1,185 @@
+================================================================
+EFECTO ELECCION - CÓMO APLICARLO A CUALQUIER ARCHIVO HTML
+================================================================
+
+PASO 1 - COPIA EL ARCHIVO DEL EFECTO
+------------------------------------
+"eleccion.html" es autocontenido: CSS, JavaScript y shader GLSL
+van dentro; no hay imágenes ni ficheros externos.
+
+    cópialo a tu proyecto, por ejemplo:
+        tu-pagina/efectos/eleccion.html
+
+
+PASO 2 - AÑÁDELO A TU PÁGINA
+----------------------------
+a) Como página completa, enlazándolo:
+
+       <a href="efectos/eleccion.html">ver efecto</a>
+
+b) Empotrado con un iframe (recomendado dentro de tu diseño):
+
+       <iframe src="efectos/eleccion.html?demo=1"
+               title="Efecto ELECCION"
+               style="display:block;width:100%;height:520px;
+                      border:0;background:#07040e"></iframe>
+
+c) Como fondo de una sección: contenedor con position:relative,
+   el iframe con position:absolute; inset:0 y tu texto encima
+   (z-index mayor).
+
+
+PARÁMETROS EN LA URL
+---------------------
+    ?demo=1      la luz recorre el efecto sola (se ve sin mover
+                 el ratón)
+    ?t=ELECCION      texto inicial; "+" = espacio: ?t=TEXTO LIQUIDO
+
+Dentro del efecto también hay una caja inferior para escribir
+otra palabra en caliente.
+
+
+QUÉ HACE
+--------
+La mitad izquierda de las letras arde en rojo y la derecha en azul, con una costura de luz blanca que serpentea entre las dos; el clic invierte las mitades.
+
+
+TÉCNICA
+-------
+· Canvas 2D: el texto se pinta dos veces (máscara nítida +
+  versión desenfocada) → mapa de altura.
+· Del mapa de altura se deriva la NORMAL (gradiente de las 4
+  muestras) y el shader la combina con su propia lógica:
+&middot; Umbral en X con ruido vertical para la costura serpenteante
+&middot; Mezcla <code>mix</code> de dos tintas con el umbral
+&middot; Giro de la costura con <code>floor(t)</code> para la moneda
+· Ondas: una onda suave que sigue al ratón + un anillo del clic
+  (gaussiana viajera que se amortigua con la edad) desplazan la
+  UV de muestreo y alimentan la interacción.
+
+
+AJUSTES FÁCILES
+---------------
+· Texto por defecto: value="ELECCION" en el <input> o ?t=...
+· Fuerza del ratón: la uniforme uAmp (0 = efecto en reposo,
+  1 = manda el ratón).
+· Onda del clic: la gaussiana "exp(-pow((cd - age * 0.85) * 7.0,
+  2.0))" → 7.0 es lo estrecha que es y 1.8 lo rápido que se
+  apaga.
+&middot; Serpenteo: el <code>7.0</code> del ruido vertical
+&middot; Giro: el <code>0.5</code> de la velocidad de la moneda
+
+REQUISITOS
+----------
+· Navegador con WebGL 1 (cualquier navegador actual).
+· NO necesita servidor local: el shader va dentro del HTML y no
+  se carga con fetch. Si al abrir con doble clic (file://) tu
+  navegador bloqueara algo, sirve la carpeta en local:
+
+      py -3 -m http.server 8000
+
+  y abre http://127.0.0.1:8000/eleccion.html
+· Si en tu proyecto separas el shader a un fichero .glsl, AHÍ SÍ
+  necesitarías servidor local (fetch de archivos).
+
+
+ARCHIVOS
+--------
+    eleccion.html                   el efecto (autocontenido)
+    index.html                 showcase (solo presentación)
+    installation-instalacion-eleccion.txt  este documento
+    eleccion.zip                    efecto + este documento
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+ELECCION EFFECT - HOW TO APPLY IT TO ANY HTML FILE
+================================================================
+
+STEP 1 - COPY THE EFFECT FILE
+-----------------------------
+"eleccion.html" is self-contained: CSS, JavaScript and GLSL shader
+go inside; there are no images or external files.
+
+    copy it to your project, for example:
+        your-page/effects/eleccion.html
+
+
+STEP 2 - ADD IT TO YOUR PAGE
+----------------------------
+a) As a full page, linking to it:
+
+       <a href="efectos/eleccion.html">view effect</a>
+
+b) Embedded with an iframe (recommended within your design):
+
+       <iframe src="efectos/eleccion.html?demo=1"
+               title="Effect ELECCION"
+               style="display:block;width:100%;height:520px;
+                      border:0;background:#07040e"></iframe>
+
+c) As a section background: container with position:relative,
+   the iframe with position:absolute; inset:0 and your text on top
+   (higher z-index).
+
+
+URL PARAMETERS
+--------------
+    ?demo=1      the light crosses the effect by itself (you can
+                 watch without moving the mouse)
+    ?t=ELECCION      initial text; "+" = space: ?t=LIQUID TEXT
+
+There is also a box at the bottom to type another word on the fly.
+
+
+WHAT IT DOES
+------------
+The left half of the letters burns red and the right half blue, with a white seam of light snaking between them; the click swaps the halves.
+
+
+TECHNIQUE
+---------
+· Canvas 2D: the text is painted twice (sharp mask +
+  blurred version) -> height map.
+· From the height map comes the NORMAL (the 4-sample gradient)
+  and the shader combines it with its own logic:
+&middot; X threshold with vertical noise for the snaking seam
+&middot; <code>mix</code> of two inks driven by the threshold
+&middot; Seam flip via <code>floor(t)</code> for the coin toss
+· Waves: a soft wave that follows the mouse + a click ring
+  (a traveling Gaussian that decays with age) shift the
+  sampling UV and drive the interaction.
+
+
+EASY TWEAKS
+-----------
+· Default text: value="ELECCION" in the <input> or ?t=...
+· Mouse strength: the uAmp uniform (0 = effect at rest,
+  1 = the mouse takes over).
+· Click wave: the Gaussian "exp(-pow((cd - age * 0.85) * 7.0,
+  2.0))" -> 7.0 is how narrow it is and 1.8 how fast it fades.
+&middot; Meander: the <code>7.0</code> vertical noise
+&middot; Flip: the <code>0.5</code> coin speed
+
+REQUIREMENTS
+------------
+· A browser with WebGL 1 (any current browser).
+· NO local server needed: the shader is inside the HTML and not
+  loaded with fetch. If on double-click open (file://) your
+  browser blocks something, serve the folder locally:
+
+      py -3 -m http.server 8000
+
+  and open http://127.0.0.1:8000/eleccion.html
+· If your project splits the shader into a .glsl file, THEN YES
+  you'd need a local server (file fetch).
+
+
+FILES
+-----
+    eleccion.html                   the effect (self-contained)
+    index.html                 showcase (presentation only)
+    installation-instalacion-eleccion.txt  this document
+    eleccion.zip                    effect + this document

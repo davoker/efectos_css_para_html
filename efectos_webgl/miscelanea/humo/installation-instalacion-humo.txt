@@ -1,0 +1,185 @@
+================================================================
+EFECTO HUMO - CÓMO APLICARLO A CUALQUIER ARCHIVO HTML
+================================================================
+
+PASO 1 - COPIA EL ARCHIVO DEL EFECTO
+------------------------------------
+"humo.html" es autocontenido: CSS, JavaScript y shader GLSL
+van dentro; no hay imágenes ni ficheros externos.
+
+    cópialo a tu proyecto, por ejemplo:
+        tu-pagina/efectos/humo.html
+
+
+PASO 2 - AÑÁDELO A TU PÁGINA
+----------------------------
+a) Como página completa, enlazándolo:
+
+       <a href="efectos/humo.html">ver efecto</a>
+
+b) Empotrado con un iframe (recomendado dentro de tu diseño):
+
+       <iframe src="efectos/humo.html?demo=1"
+               title="Efecto HUMO"
+               style="display:block;width:100%;height:520px;
+                      border:0;background:#08080a"></iframe>
+
+c) Como fondo de una sección: contenedor con position:relative,
+   el iframe con position:absolute; inset:0 y tu texto encima
+   (z-index mayor).
+
+
+PARÁMETROS EN LA URL
+---------------------
+    ?demo=1      la luz recorre el efecto sola (se ve sin mover
+                 el ratón)
+    ?t=HUMO      texto inicial; "+" = espacio: ?t=TEXTO LIQUIDO
+
+Dentro del efecto también hay una caja inferior para escribir
+otra palabra en caliente.
+
+
+QUÉ HACE
+--------
+Cintas de humo gris se enroscan y suben dentro del texto con turbulencia, diluyendose arriba; el raton las empuja y el clic abre un remolinon nuevo.
+
+
+TÉCNICA
+-------
+· Canvas 2D: el texto se pinta dos veces (máscara nítida +
+  versión desenfocada) → mapa de altura.
+· Del mapa de altura se deriva la NORMAL (gradiente de las 4
+  muestras) y el shader la combina con su propia lógica:
+&middot; Turbulencia: <code>fbm3</code> con dominio desplazado en Y
+&middot; Densidad: umbral suave del ruido multiplicado por la máscara
+&middot; Remolinon: giro de la UV alrededor del punto del clic
+· Ondas: una onda suave que sigue al ratón + un anillo del clic
+  (gaussiana viajera que se amortigua con la edad) desplazan la
+  UV de muestreo y alimentan la interacción.
+
+
+AJUSTES FÁCILES
+---------------
+· Texto por defecto: value="HUMO" en el <input> o ?t=...
+· Fuerza del ratón: la uniforme uAmp (0 = efecto en reposo,
+  1 = manda el ratón).
+· Onda del clic: la gaussiana "exp(-pow((cd - age * 0.85) * 7.0,
+  2.0))" → 7.0 es lo estrecha que es y 1.8 lo rápido que se
+  apaga.
+&middot; Ascenso: el <code>-t*0.35</code> del dominio
+&middot; Escala del humo: el <code>3.0</code> del fbm
+
+REQUISITOS
+----------
+· Navegador con WebGL 1 (cualquier navegador actual).
+· NO necesita servidor local: el shader va dentro del HTML y no
+  se carga con fetch. Si al abrir con doble clic (file://) tu
+  navegador bloqueara algo, sirve la carpeta en local:
+
+      py -3 -m http.server 8000
+
+  y abre http://127.0.0.1:8000/humo.html
+· Si en tu proyecto separas el shader a un fichero .glsl, AHÍ SÍ
+  necesitarías servidor local (fetch de archivos).
+
+
+ARCHIVOS
+--------
+    humo.html                   el efecto (autocontenido)
+    index.html                 showcase (solo presentación)
+    installation-instalacion-humo.txt  este documento
+    humo.zip                    efecto + este documento
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+HUMO EFFECT - HOW TO APPLY IT TO ANY HTML FILE
+================================================================
+
+STEP 1 - COPY THE EFFECT FILE
+-----------------------------
+"humo.html" is self-contained: CSS, JavaScript and GLSL shader
+go inside; there are no images or external files.
+
+    copy it to your project, for example:
+        your-page/effects/humo.html
+
+
+STEP 2 - ADD IT TO YOUR PAGE
+----------------------------
+a) As a full page, linking to it:
+
+       <a href="efectos/humo.html">view effect</a>
+
+b) Embedded with an iframe (recommended within your design):
+
+       <iframe src="efectos/humo.html?demo=1"
+               title="Effect HUMO"
+               style="display:block;width:100%;height:520px;
+                      border:0;background:#08080a"></iframe>
+
+c) As a section background: container with position:relative,
+   the iframe with position:absolute; inset:0 and your text on top
+   (higher z-index).
+
+
+URL PARAMETERS
+--------------
+    ?demo=1      the light crosses the effect by itself (you can
+                 watch without moving the mouse)
+    ?t=HUMO      initial text; "+" = space: ?t=LIQUID TEXT
+
+There is also a box at the bottom to type another word on the fly.
+
+
+WHAT IT DOES
+------------
+Grey smoke ribbons curl and rise inside the text with turbulence, dissolving at the top; the mouse pushes them and the click opens a new swirl.
+
+
+TECHNIQUE
+---------
+· Canvas 2D: the text is painted twice (sharp mask +
+  blurred version) -> height map.
+· From the height map comes the NORMAL (the 4-sample gradient)
+  and the shader combines it with its own logic:
+&middot; Turbulence: <code>fbm3</code> with Y-shifted domain
+&middot; Density: soft noise threshold multiplied by the mask
+&middot; Swirl: UV rotation around the click point
+· Waves: a soft wave that follows the mouse + a click ring
+  (a traveling Gaussian that decays with age) shift the
+  sampling UV and drive the interaction.
+
+
+EASY TWEAKS
+-----------
+· Default text: value="HUMO" in the <input> or ?t=...
+· Mouse strength: the uAmp uniform (0 = effect at rest,
+  1 = the mouse takes over).
+· Click wave: the Gaussian "exp(-pow((cd - age * 0.85) * 7.0,
+  2.0))" -> 7.0 is how narrow it is and 1.8 how fast it fades.
+&middot; Rise: the <code>-t*0.35</code> domain scroll
+&middot; Smoke scale: the <code>3.0</code> fbm scale
+
+REQUIREMENTS
+------------
+· A browser with WebGL 1 (any current browser).
+· NO local server needed: the shader is inside the HTML and not
+  loaded with fetch. If on double-click open (file://) your
+  browser blocks something, serve the folder locally:
+
+      py -3 -m http.server 8000
+
+  and open http://127.0.0.1:8000/humo.html
+· If your project splits the shader into a .glsl file, THEN YES
+  you'd need a local server (file fetch).
+
+
+FILES
+-----
+    humo.html                   the effect (self-contained)
+    index.html                 showcase (presentation only)
+    installation-instalacion-humo.txt  this document
+    humo.zip                    effect + this document

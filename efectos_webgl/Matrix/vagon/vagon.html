@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vagon — efecto WebGL (VAGON)</title>
+<style>
+  html, body { margin:0; height:100%; background:#07070a; overflow:hidden;
+    font-family:"Segoe UI", system-ui, sans-serif; color:#ffe9c0; }
+  #gl { position:fixed; inset:0; width:100%; height:100%; display:block; }
+  .ui { position:fixed; left:0; right:0; bottom:26px; display:flex; flex-direction:column;
+        align-items:center; gap:10px; pointer-events:none; }
+  #txt { pointer-events:auto; width:min(560px,84vw); text-align:center; font-size:17px;
+        padding:12px 18px; border-radius:999px; color:#e8f1ff; letter-spacing:.16em;
+        background:rgba(10,14,24,.55); border:1px solid rgba(255, 210, 120,.30);
+        outline:none; backdrop-filter:blur(6px); text-transform:uppercase; }
+  #txt:focus { border-color:rgba(255, 210, 120,.62); box-shadow:0 0 0 3px rgba(255, 210, 120,.16); }
+  .hint { margin:0; font-size:12.5px; letter-spacing:.06em; opacity:.7; text-align:center;
+          padding:0 16px; }
+  .err { position:fixed; inset:0; display:none; place-items:center; text-align:center; padding:40px; }
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div class="ui">
+  <input id="txt" value="VAGON" spellcheck="false" maxlength="24" autocomplete="off">
+  <p class="hint">el raton cambia de asiento &middot; clic para frenar el vagon &middot; escribe tu palabra</p>
+</div>
+<div class="err" id="err"><p>Este navegador no soporta WebGL, así que el efecto no puede mostrarse.</p></div>
+<script>
+(function(){
+"use strict";
+
+var cv  = document.getElementById('gl');
+var err = document.getElementById('err');
+var gl  = cv.getContext('webgl', {antialias:false, alpha:false, depth:false})
+       || cv.getContext('experimental-webgl', {antialias:false, alpha:false, depth:false});
+if (!gl) { err.style.display = 'grid'; return; }
+
+/* ---------------------------------------------------------------- shaders */
+
+var VS = [
+'attribute vec2 aPos;',
+'void main(){ gl_Position = vec4(aPos, 0.0, 1.0); }'
+].join('\n');
+
+var FS = [
+'',
+'#ifdef GL_FRAGMENT_PRECISION_HIGH',
+'precision highp float;',
+'#else',
+'precision mediump float;',
+'#endif',
+'uniform vec2  uRes;',
+'uniform float uTime;',
+'uniform sampler2D uText;',
+'uniform sampler2D uBlur;',
+'uniform vec2  uPlane;',
+'uniform vec2  uTexel;',
+'uniform vec2  uMouse;',
+'uniform vec2  uClickPos;',
+'uniform float uAmp;',
+'uniform float uClickT;',
+'',
+'float hash21(vec2 p){',
+'  p = fract(p * vec2(123.34, 456.21));',
+'  p += dot(p, p + 45.32);',
+'  return fract(p.x * p.y);',
+'}',
+'float vnoise(vec2 p){',
+'  vec2 i = floor(p), f = fract(p);',
+'  vec2 u = f * f * (3.0 - 2.0 * f);',
+'  float a = hash21(i);',
+'  float b = hash21(i + vec2(1.0, 0.0));',
+'  float c = hash21(i + vec2(0.0, 1.0));',
+'  float d = hash21(i + vec2(1.0, 1.0));',
+'  return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);',
+'}',
+'float fbm(vec2 p){',
+'  float v = 0.0, a = 0.5;',
+'  for (int i = 0; i < 5; i++){',
+'    v += a * vnoise(p);',
+'    p = p * 2.03 + vec2(1.7, 9.2);',
+'    a *= 0.5;',
+'  }',
+'  return v;',
+'}',
+'float fbm3(vec2 p){',
+'  float v = 0.0, a = 0.60;',
+'  for (int i = 0; i < 3; i++){',
+'    v += a * vnoise(p);',
+'    p = p * 2.03 + vec2(1.7, 9.2);',
+'    a *= 0.45;',
+'  }',
+'  return v;',
+'}',
+'float inside(vec2 uv){',
+'  return step(0.0, uv.x) * step(uv.x, 1.0) * step(0.0, uv.y) * step(uv.y, 1.0);',
+'}',
+'float maskAt(vec2 uv){',
+'  return texture2D(uText, clamp(uv, 0.0, 1.0)).a * inside(uv);',
+'}',
+'float blurAt(vec2 uv){',
+'  return texture2D(uBlur, clamp(uv, 0.0, 1.0)).a * inside(uv);',
+'}',
+'vec3 normalAt(vec2 uv){',
+'  float hL = texture2D(uBlur, clamp(uv - vec2(uTexel.x, 0.0), 0.0, 1.0)).a;',
+'  float hR = texture2D(uBlur, clamp(uv + vec2(uTexel.x, 0.0), 0.0, 1.0)).a;',
+'  float hD = texture2D(uBlur, clamp(uv - vec2(0.0, uTexel.y), 0.0, 1.0)).a;',
+'  float hU = texture2D(uBlur, clamp(uv + vec2(0.0, uTexel.y), 0.0, 1.0)).a;',
+'  return normalize(vec3((hL - hR) * 2.6, (hD - hU) * 2.6, 0.35));',
+'}',
+'float ringAt(vec2 p){',
+'  vec2 dc = p - uClickPos;',
+'  float cd = length(dc);',
+'  float age = max(uTime - uClickT, 0.0);',
+'  return exp(-pow((cd - age * 0.85) * 7.0, 2.0)) * exp(-age * 1.8);',
+'}',
+'float waveAt(vec2 p){',
+'  float md = length(p - uMouse);',
+'  return sin(md * 36.0 - uTime * 7.0) * exp(-md * 6.0) * uAmp;',
+'}',
+'',
+'void main(){',
+'  float t   = uTime;',
+'  vec2  p   = (gl_FragCoord.xy - 0.5 * uRes) / uRes.y;',
+'  vec2  tuv = 0.5 + p / (2.0 * uPlane);',
+'  float mask = maskAt(tuv);',
+'  float hb   = blurAt(tuv);',
+'  vec3  N    = normalAt(tuv);',
+'  float wave = waveAt(p);',
+'  float ring = ringAt(p);',
+'  vec2  dm   = p - uMouse;',
+'  float md   = length(dm);',
+'  float mBoost = exp(-9.0 * dot(dm, dm)) * uAmp;',
+'',
+'float frena = exp(-1.8 * max(t - uClickT, 0.0)) * step(-9000.0, uClickT);',
+'float vel = (1.5 + 1.5 * uAmp) * (1.0 - 0.85 * frena);',
+'float cx = fract(tuv.x * 3.0 - t * vel * 0.5);',
+'float cy = fract(tuv.y * 3.0 + 0.5);',
+'float win = smoothstep(0.10, 0.22, cx) * smoothstep(0.90, 0.78, cx)',
+'          * smoothstep(0.14, 0.30, cy) * smoothstep(0.86, 0.70, cy);',
+'float brillo = 0.55 + 0.45 * sin(t * 6.0 + floor(tuv.x * 3.0) * 2.3);',
+'vec3 fill = vec3(0.03, 0.03, 0.045)',
+'          + vec3(1.0, 0.86, 0.55) * win * brillo * 1.4',
+'          + vec3(0.5, 0.6, 0.8) * win * 0.10;',
+'float rim = pow(clamp(hb * (1.0 - hb) * 4.0, 0.0, 1.0), 1.5);',
+'vec3 bgc = vec3(0.018, 0.018, 0.026);',
+'vec3 col = mix(bgc, fill, mask);',
+'col += vec3(1.0, 0.85, 0.6) * rim * 0.55;',
+'col += vec3(1.0, 0.8, 0.5) * ring * 0.5;',
+'',
+'  gl_FragColor = vec4(col, 1.0);',
+'}',
+''
+].join('\n');
+
+function compile(type, src){
+  var s = gl.createShader(type);
+  gl.shaderSource(s, src);
+  gl.compileShader(s);
+  if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+    console.error(gl.getShaderInfoLog(s));
+    return null;
+  }
+  return s;
+}
+
+var vs = compile(gl.VERTEX_SHADER, VS);
+var fs = compile(gl.FRAGMENT_SHADER, FS);
+if (!vs || !fs) { err.style.display = 'grid'; err.firstElementChild.textContent = 'Error al compilar los shaders.'; return; }
+
+var prog = gl.createProgram();
+gl.attachShader(prog, vs);
+gl.attachShader(prog, fs);
+gl.bindAttribLocation(prog, 0, 'aPos');
+gl.linkProgram(prog);
+if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+  console.error(gl.getProgramInfoLog(prog));
+  err.style.display = 'grid';
+  return;
+}
+gl.useProgram(prog);
+
+var buf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+gl.enableVertexAttribArray(0);
+gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+
+var U = {};
+['uRes','uTime','uText','uBlur','uPlane','uTexel','uMouse','uClickPos','uAmp','uClickT']
+  .forEach(function(n){ U[n] = gl.getUniformLocation(prog, n); });
+
+function newTex(){
+  var t = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, t);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  return t;
+}
+var texText = newTex();
+var texBlur = newTex();
+// el lienzo 2D crece hacia abajo y el lienzo GL hacia arriba: hay que voltearlo
+gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+
+/* ------------------------------------------------------- textura del texto */
+
+var planeAspect = 4.0;   // W/H del lienzo de texto
+var texel = [1/1024, 1/256];
+
+function fontFor(size){
+  return '900 ' + size + 'px "Arial Black", "Segoe UI Black", Impact, system-ui, sans-serif';
+}
+
+function buildText(str){
+  str = (str || '').replace(/\s+/g, ' ').trim();
+  if (!str) str = 'VAGON';
+  str = str.toUpperCase();
+
+  var probe = document.createElement('canvas').getContext('2d');
+  var size = 320, tw = 0, pad = 0;
+
+  for (var k = 0; k < 4; k++){
+    probe.font = fontFor(size);
+    tw = probe.measureText(str).width;
+    pad = Math.round(size * 0.35);
+    if (tw + pad * 2 <= 2048) break;
+    size = Math.max(48, Math.floor(size * (2048 - pad * 2) / (tw + pad * 2)));
+  }
+
+  var W = Math.ceil(tw) + pad * 2;
+  var H = Math.ceil(size * 1.30) + pad * 2;
+  var baseline = pad + size * 0.98;   // aproximacion de mayusculas centradas
+
+  // -- lienzo nítido (máscara)
+  var sharp = document.createElement('canvas');
+  sharp.width = W; sharp.height = H;
+  var sc = sharp.getContext('2d');
+  sc.font = fontFor(size);
+  sc.textAlign = 'center';
+  sc.textBaseline = 'alphabetic';
+  sc.fillStyle = '#fff';
+  sc.fillText(str, W / 2, baseline);
+
+  // -- lienzo difuminado (mapa de altura para el biselado)
+  var blur = document.createElement('canvas');
+  blur.width = W; blur.height = H;
+  var bc = blur.getContext('2d');
+  bc.font = fontFor(size);
+  bc.textAlign = 'center';
+  bc.textBaseline = 'alphabetic';
+  bc.fillStyle = '#fff';
+
+  var radius = Math.max(4, Math.round(size * 0.06));
+  if (typeof bc.filter === 'string') {
+    bc.filter = 'blur(' + radius + 'px)';
+    bc.fillText(str, W / 2, baseline);
+    bc.filter = 'none';
+  } else {
+    // alternativa sin filter: varias copias desplazadas
+    bc.globalAlpha = 0.30;
+    bc.fillText(str, W / 2, baseline);
+    for (var i = 0; i < 8; i++){
+      var a = i / 8 * Math.PI * 2;
+      bc.fillText(str, W / 2 + Math.cos(a) * radius, baseline + Math.sin(a) * radius);
+    }
+    bc.globalAlpha = 1;
+  }
+
+  gl.bindTexture(gl.TEXTURE_2D, texText);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, sharp);
+  gl.bindTexture(gl.TEXTURE_2D, texBlur);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, blur);
+
+  planeAspect = W / H;
+  texel = [1 / W, 1 / H];
+  updatePlane();
+}
+
+/* ------------------------------------------------------------- geometría */
+
+var plane = [0.5, 0.125];
+
+function updatePlane(){
+  var asp = cv.width / Math.max(cv.height, 1);
+  var availX = 0.5 * asp - 0.04;
+  var h = Math.min(availX / planeAspect, 0.42);
+  plane = [h * planeAspect, h];
+}
+
+function resize(){
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var w = Math.max(1, Math.floor(cv.clientWidth * dpr));
+  var hh = Math.max(1, Math.floor(cv.clientHeight * dpr));
+  if (cv.width !== w || cv.height !== hh){
+    cv.width = w; cv.height = hh;
+    gl.viewport(0, 0, w, hh);
+  }
+  updatePlane();
+}
+window.addEventListener('resize', resize);
+
+/* ----------------------------------------------------------- interacción */
+
+var mouse = [0, 0];
+var clickPos = [0, 0];
+var clickT = -10000;
+var amp = 0, ampTarget = 0;
+var lastMove = -1e9;
+
+function toScene(x, y){
+  var w = window.innerWidth, h = window.innerHeight;
+  return [(x - w / 2) / h, (h / 2 - y) / h];
+}
+
+window.addEventListener('pointermove', function(e){
+  mouse = toScene(e.clientX, e.clientY);
+  lastMove = performance.now();
+  ampTarget = 1;
+}, {passive:true});
+
+window.addEventListener('pointerdown', function(e){
+  clickPos = toScene(e.clientX, e.clientY);
+  mouse = clickPos;
+  clickT = tSec;
+  lastMove = performance.now();
+  ampTarget = 1;
+}, {passive:true});
+
+var input = document.getElementById('txt');
+var pending = null;
+input.addEventListener('input', function(){
+  pending = input.value;
+});
+input.addEventListener('keydown', function(e){
+  if (e.key === 'Enter') { e.preventDefault(); input.blur(); }
+});
+
+// modo demo (?demo=1): recorre el ratón solo, para verlo sin mover el punter
+var demo = /[?&]demo=1/.test(location.search);
+
+// texto inicial por URL (?t=EFECTOS)
+var mText = /[?&]t=([^&]+)/.exec(location.search);
+if (mText) {
+  try {
+    var v0 = decodeURIComponent(mText[1].replace(/\+/g, ' '));
+    if (v0) { input.value = v0; input.setAttribute('value', v0); }
+  } catch (e) {}
+}
+
+/* ------------------------------------------------------------------ bucle */
+
+var t0 = performance.now();
+var tSec = 0;
+var pendingBuilt = false;
+
+function frame(now){
+  tSec = (now - t0) / 1000;
+  resize();
+
+  if (pending !== null && !pendingBuilt){
+    pendingBuilt = true;
+    var v = pending; pending = null;
+    buildText(v);
+    pendingBuilt = false;
+  }
+
+  if (now - lastMove > 2600) ampTarget = 0;
+  amp += (ampTarget - amp) * 0.07;
+
+  if (demo){
+    mouse = [0.30 * Math.sin(tSec * 0.8), 0.16 * Math.cos(tSec * 0.6)];
+    ampTarget = 1;
+    amp = 1;
+  }
+
+  gl.uniform2f(U.uRes, cv.width, cv.height);
+  gl.uniform1f(U.uTime, tSec);
+  gl.uniform2f(U.uPlane, plane[0], plane[1]);
+  gl.uniform2f(U.uTexel, texel[0], texel[1]);
+  gl.uniform2f(U.uMouse, mouse[0], mouse[1]);
+  gl.uniform2f(U.uClickPos, clickPos[0], clickPos[1]);
+  gl.uniform1f(U.uAmp, amp);
+  gl.uniform1f(U.uClickT, clickT);
+
+  gl.activeTexture(gl.TEXTURE0);
+  gl.bindTexture(gl.TEXTURE_2D, texText);
+  gl.uniform1i(U.uText, 0);
+  gl.activeTexture(gl.TEXTURE1);
+  gl.bindTexture(gl.TEXTURE_2D, texBlur);
+  gl.uniform1i(U.uBlur, 1);
+
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  requestAnimationFrame(frame);
+}
+
+gl.uniform1i(U.uText, 0);
+gl.uniform1i(U.uBlur, 1);
+resize();
+buildText(input.value);
+requestAnimationFrame(frame);
+
+window.__textoListo = true;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+================================================================
+EFECTO ORIGAMI - CÓMO APLICARLO A CUALQUIER ARCHIVO HTML
+================================================================
+
+PASO 1 - COPIA EL ARCHIVO DEL EFECTO
+------------------------------------
+"origami.html" es autocontenido: CSS, JavaScript y shader GLSL
+van dentro; no hay imágenes ni ficheros externos.
+
+    cópialo a tu proyecto, por ejemplo:
+        tu-pagina/efectos/origami.html
+
+
+PASO 2 - AÑÁDELO A TU PÁGINA
+----------------------------
+a) Como página completa, enlazándolo:
+
+       <a href="efectos/origami.html">ver efecto</a>
+
+b) Empotrado con un iframe (recomendado dentro de tu diseño):
+
+       <iframe src="efectos/origami.html?demo=1"
+               title="Efecto ORIGAMI"
+               style="display:block;width:100%;height:520px;
+                      border:0;background:#0b0a08"></iframe>
+
+c) Como fondo de una sección: contenedor con position:relative,
+   el iframe con position:absolute; inset:0 y tu texto encima
+   (z-index mayor).
+
+
+PARÁMETROS EN LA URL
+---------------------
+    ?demo=1      la luz recorre el efecto sola (se ve sin mover
+                 el ratón)
+    ?t=ORIGAMI      texto inicial; "+" = espacio: ?t=TEXTO LIQUIDO
+
+Dentro del efecto también hay una caja inferior para escribir
+otra palabra en caliente.
+
+
+QUÉ HACE
+--------
+Las letras se facetan como papel plegado: triangulos de distinto tono que cambian de sombra cuando la luz gira, con un doblez visible en cada arista.
+
+
+TÉCNICA
+-------
+· Canvas 2D: el texto se pinta dos veces (máscara nítida +
+  versión desenfocada) → mapa de altura.
+· Del mapa de altura se deriva la NORMAL (gradiente de las 4
+  muestras) y el shader la combina con su propia lógica:
+&middot; Facetado: triángulos por <code>floor</code> de la UV con hash
+&middot; Sombra: producto escalar simulado con el hash de la cara
+&middot; Luz giratoria: angulo del raton o del tiempo sobre las caras
+· Ondas: una onda suave que sigue al ratón + un anillo del clic
+  (gaussiana viajera que se amortigua con la edad) desplazan la
+  UV de muestreo y alimentan la interacción.
+
+
+AJUSTES FÁCILES
+---------------
+· Texto por defecto: value="ORIGAMI" en el <input> o ?t=...
+· Fuerza del ratón: la uniforme uAmp (0 = efecto en reposo,
+  1 = manda el ratón).
+· Onda del clic: la gaussiana "exp(-pow((cd - age * 0.85) * 7.0,
+  2.0))" → 7.0 es lo estrecha que es y 1.8 lo rápido que se
+  apaga.
+&middot; Nº de pliegues: el <code>6.0</code> de la escala
+&middot; Contraste: el rango <code>0.45, 1.0</code> del sombreado
+
+REQUISITOS
+----------
+· Navegador con WebGL 1 (cualquier navegador actual).
+· NO necesita servidor local: el shader va dentro del HTML y no
+  se carga con fetch. Si al abrir con doble clic (file://) tu
+  navegador bloqueara algo, sirve la carpeta en local:
+
+      py -3 -m http.server 8000
+
+  y abre http://127.0.0.1:8000/origami.html
+· Si en tu proyecto separas el shader a un fichero .glsl, AHÍ SÍ
+  necesitarías servidor local (fetch de archivos).
+
+
+ARCHIVOS
+--------
+    origami.html                   el efecto (autocontenido)
+    index.html                 showcase (solo presentación)
+    installation-instalacion-origami.txt  este documento
+    origami.zip                    efecto + este documento
+
+================================================================
+ENGLISH VERSION
+================================================================
+
+================================================================
+ORIGAMI EFFECT - HOW TO APPLY IT TO ANY HTML FILE
+================================================================
+
+STEP 1 - COPY THE EFFECT FILE
+-----------------------------
+"origami.html" is self-contained: CSS, JavaScript and GLSL shader
+go inside; there are no images or external files.
+
+    copy it to your project, for example:
+        your-page/effects/origami.html
+
+
+STEP 2 - ADD IT TO YOUR PAGE
+----------------------------
+a) As a full page, linking to it:
+
+       <a href="efectos/origami.html">view effect</a>
+
+b) Embedded with an iframe (recommended within your design):
+
+       <iframe src="efectos/origami.html?demo=1"
+               title="Effect ORIGAMI"
+               style="display:block;width:100%;height:520px;
+                      border:0;background:#0b0a08"></iframe>
+
+c) As a section background: container with position:relative,
+   the iframe with position:absolute; inset:0 and your text on top
+   (higher z-index).
+
+
+URL PARAMETERS
+--------------
+    ?demo=1      the light crosses the effect by itself (you can
+                 watch without moving the mouse)
+    ?t=ORIGAMI      initial text; "+" = space: ?t=LIQUID TEXT
+
+There is also a box at the bottom to type another word on the fly.
+
+
+WHAT IT DOES
+------------
+The letters facet like folded paper: triangles of different shade that change shadow as the light turns, with a visible crease on every edge.
+
+
+TECHNIQUE
+---------
+· Canvas 2D: the text is painted twice (sharp mask +
+  blurred version) -> height map.
+· From the height map comes the NORMAL (the 4-sample gradient)
+  and the shader combines it with its own logic:
+&middot; Faceting: UV <code>floor</code> triangles hashed per face
+&middot; Shade: simulated dot product from the face hash
+&middot; Turning light: mouse or time angle over the faces
+· Waves: a soft wave that follows the mouse + a click ring
+  (a traveling Gaussian that decays with age) shift the
+  sampling UV and drive the interaction.
+
+
+EASY TWEAKS
+-----------
+· Default text: value="ORIGAMI" in the <input> or ?t=...
+· Mouse strength: the uAmp uniform (0 = effect at rest,
+  1 = the mouse takes over).
+· Click wave: the Gaussian "exp(-pow((cd - age * 0.85) * 7.0,
+  2.0))" -> 7.0 is how narrow it is and 1.8 how fast it fades.
+&middot; Fold count: the <code>6.0</code> scale
+&middot; Contrast: the <code>0.45, 1.0</code> shading range
+
+REQUIREMENTS
+------------
+· A browser with WebGL 1 (any current browser).
+· NO local server needed: the shader is inside the HTML and not
+  loaded with fetch. If on double-click open (file://) your
+  browser blocks something, serve the folder locally:
+
+      py -3 -m http.server 8000
+
+  and open http://127.0.0.1:8000/origami.html
+· If your project splits the shader into a .glsl file, THEN YES
+  you'd need a local server (file fetch).
+
+
+FILES
+-----
+    origami.html                   the effect (self-contained)
+    index.html                 showcase (presentation only)
+    installation-instalacion-origami.txt  this document
+    origami.zip                    effect + this document
