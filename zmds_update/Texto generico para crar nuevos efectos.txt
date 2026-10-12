@@ -1,0 +1,22 @@
+Texto para ponerle a Open Code y crear nuevos efectos, se usan de ejemplo nombre de categorías como Matrix o Harry Potter, pero son solo eso, ejemplos, nosotros cambiaremos esos nombres para las nuevas categorías que creemos.
+
+_____________________________________________________
+
+He creado una nueva carpeta llamada matrix, ahí meteremos los nuevos efectos para texto que hagamos que irán en una nueva categoría que llamaremos: Matrix
+
+- Haz efectos nuevos en esa categoría (en Matrix) que estén basados en la saga de películas Matrix.
+- Haz entre 13 y 15 efectos, si ves viable hacer más porque veas que hay mucha variedad posible, haz lo que consideres oportunos.
+- Uno de los efectos de texto debe ser el típico código de Matrix, los unos y ceros que caen en vertical en varias líneas, este efecto debe verse en las letras como efecto de texto.
+- El resto de efectos los dejo a tu elección, simplemente haz que sea de temática de la saga Matrix.
+- Sigue la estructura de siempre del resto de categorías y efectos como hasta ahora, aplicando cualquier novedad que hayamos hecho hasta este momento.
+
+______________________
+
+Nuevos efectos para textos, he creado la carpeta: harry_potter para meter los nuevos efectos para la nueva categoría, lo que quiero:
+
+- Nueva categoría: Harry Potter.
+- Nuevos efectos basados en la temática de esta saga de películas.
+- Cuatro de los efectos deben tener de temática las 4 escuelas del colegio de Hogwarts, es decir, un efecto debe estar basado en la escuela de Gryffindor, otro en Hufflepuff, otro en Ravenclaw y el cuarto en Slytherin, que los efectos de texto de estos cuatro efectos tengan algo que sea identificable de esas escuelas, lo dejo a tu criterio el qué.
+- Haz al menos 15 efectos, si ves viable hacer hasta 20 o 25 hazlos, la idea es que los efectos sean diferentes entre si como siempre, al menos en la medida de lo posible, y que sean diferentes a los efectos existentes hechos hasta ahora en el resto de categorías.
+- Como siempre, no importa si los efectos comparten ciertos parecidos con otros efectos mientras globalmente sean diferentes, no hay vetos ni restricciones en ese sentido, si 2 efectos deben compartir algo para que globalmente sean diferentes, todo está bien entonces.
+- Sigue la estructura del resto de efectos hasta ahora.
